@@ -22,9 +22,21 @@ public class Main {
         String bk = inputFile.getCanonicalFile().getParentFile().getName();
         Document doc = Jsoup.parse(inputFile, null);
         Element wrapperDiv = new Element("div");
+        wrapperDiv.attr("id", createChapFragId(bk, chap));
         for (Element bodyChildElem : doc.body().children()) {
             if (bodyChildElem.tagName().equalsIgnoreCase("b")) {
-                wrapperDiv.appendElement("h3").text(bodyChildElem.text());
+                String chapText = bodyChildElem.text();
+                if (chap.equals("001")) {
+                    if (bk.equals("01-GEN")) {
+                        wrapperDiv.appendElement("h1").text("Old Testament");
+                    }
+                    else if (bk.equals("40-MATT")) {
+                        wrapperDiv.appendElement("h1").text("New Testament");                        
+                    }
+                    wrapperDiv.appendElement("h2").text(chapText.substring(0,
+                            chapText.lastIndexOf(" ")));
+                }
+                wrapperDiv.appendElement("h3").text(chapText);
             }
             else if (bodyChildElem.tagName().equalsIgnoreCase("dl")) {
                 // the verses. transform dl into ol.
@@ -35,7 +47,7 @@ public class Main {
                     if (dlChildElem.tagName().equalsIgnoreCase("dd")) {
                         Element verseElem = versesElem.appendElement("li");
                         // Create id before appending contents.
-                        String fragmentId = createFragId(bk, chap, verseIndex);
+                        String fragmentId = createVerseFragId(bk, chap, verseIndex);
                         verseElem.attr("id", fragmentId).append(dlChildElem.html());
                         
                         verseIndex++;
@@ -76,13 +88,17 @@ public class Main {
         FileUtils.write(outF, wrapperDiv.toString());
     }
     
-    private static String createFragId(String bk, String chap, Object verseNum) {
+    private static String createChapFragId(String bk, String chap) {
+        return String.format("%s-%s", bk, chap);
+    }
+    
+    private static String createVerseFragId(String bk, String chap, Object verseNum) {
         return String.format("%s-%s-%s", bk, chap, verseNum);
     }
 
     private static Element createVerseLink(String linkText, String bk, String chap, String verse) {
         Element a = new Element("a").attr("href", 
-                String.format("#%s", createFragId(bk, chap, verse)))
+                String.format("#%s", createVerseFragId(bk, chap, verse)))
                 .append(linkText);
         return a;
     }

@@ -17,7 +17,7 @@ public class Utils {
         String[] bookKeys = c.getResources().getStringArray(R.array.book_keys);
         String bkKey = String.format("%02d-%s", bookIndex, bookKeys[bookIndex-1]);
         String chapKey = String.format("%03d", chapterIndex);
-        String link = String.format("file:///android_asset/niv1984/%s/%s.html", bkKey, chapKey);
+        String link = String.format("http:///localhost/niv1984/%s/%s.html", bkKey, chapKey);
         return link;
     }
 

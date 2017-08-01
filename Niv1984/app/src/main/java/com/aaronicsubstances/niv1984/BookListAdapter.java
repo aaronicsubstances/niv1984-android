@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 /**
  * Created by Aaron on 6/21/2017.
@@ -62,8 +61,13 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         holder.nameTextView.setText(description);
 
         try {
+            char ch;
+            int i = 0;
+            do {
+                ch = description.toLowerCase().charAt(i++);
+            } while (i < description.length() && (ch < 'a' || ch > 'z'));
             Field f = R.drawable.class.getField("ic_subject_" +
-                description.toLowerCase().charAt(0));
+                ch);
             int resId = (int) f.get(null);
             holder.iconView.setImageResource(resId);
         }

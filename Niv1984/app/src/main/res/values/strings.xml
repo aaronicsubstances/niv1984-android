@@ -14,6 +14,7 @@
     <string name="feedback_email">aaronbaffourawuah@gmail.com</string>
     <string name="feedback_subject">&appname; Feedback</string>
     <string name="feedback_title">Your Comment</string>
+    <string name="exit_text">Press again to exit</string>
 
     <string-array name="books">
         <item>Genesis</item>

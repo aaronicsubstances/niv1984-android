@@ -16,7 +16,7 @@ import org.jsoup.nodes.Element;
  * @author Aaron
  */
 public class Main {
-    public static void transformHtml(String inputPath, String outputPath) throws Exception {
+    public static String transformHtml(String inputPath) throws Exception {
         File inputFile = new File(inputPath);
         String chap = inputFile.getName().replace(".html", "");
         String bk = inputFile.getCanonicalFile().getParentFile().getName();
@@ -33,8 +33,6 @@ public class Main {
                     else if (bk.equals("40-MATT")) {
                         wrapperDiv.appendElement("h1").text("New Testament");                        
                     }
-                    wrapperDiv.appendElement("h2").text(chapText.substring(0,
-                            chapText.lastIndexOf(" ")));
                 }
                 wrapperDiv.appendElement("h3").text(chapText);
             }
@@ -43,14 +41,19 @@ public class Main {
                 // skip dt, and transform dd into li.
                 Element versesElem = wrapperDiv.appendElement("ol");
                 int verseIndex = 1;
+                Element verseElem = null;
                 for (Element dlChildElem : bodyChildElem.children()) {
-                    if (dlChildElem.tagName().equalsIgnoreCase("dd")) {
-                        Element verseElem = versesElem.appendElement("li");
+                    if (dlChildElem.tagName().equalsIgnoreCase("dt")) {
+                        int v = Integer.parseInt(dlChildElem.text());
+                        if (verseElem == null || v != verseIndex) {
+                            verseElem = versesElem.appendElement("li");
+                            verseIndex = v;
+                        }
+                    }
+                    else if (dlChildElem.tagName().equalsIgnoreCase("dd")) {
                         // Create id before appending contents.
                         String fragmentId = createVerseFragId(bk, chap, verseIndex);
-                        verseElem.attr("id", fragmentId).append(dlChildElem.html());
-                        
-                        verseIndex++;
+                        verseElem.attr("id", fragmentId).html(dlChildElem.html());                        
                     }
                 }
             }
@@ -83,17 +86,15 @@ public class Main {
                 // ignore line breaks.
             }
         }
-        File outF = new File(outputPath);
-        outF.getParentFile().mkdirs();
-        FileUtils.write(outF, wrapperDiv.toString());
+        return wrapperDiv.toString();
     }
     
     private static String createChapFragId(String bk, String chap) {
-        return String.format("%s-%s", bk, chap);
+        return String.format("chapter-%s", chap);
     }
     
     private static String createVerseFragId(String bk, String chap, Object verseNum) {
-        return String.format("%s-%s-%s", bk, chap, verseNum);
+        return String.format("verse-%s-%s", chap, verseNum);
     }
 
     private static Element createVerseLink(String linkText, String bk, String chap, String verse) {
@@ -112,11 +113,24 @@ public class Main {
         if (args.length > 1) {
             outputDir = new File(args[1]).getCanonicalFile();
         }
-        for (File f : FileUtils.listFiles(inputDir, new String[]{"html"}, true)) {
-            String s = f.getPath().substring(inputDir.getPath().length() + 1);
-            System.out.format("Transforming %s\n...", s);
-            String outputPath = new File(outputDir, s).getPath();
-            transformHtml(f.getPath(), outputPath);
+        outputDir.mkdirs();
+        for (File bkDir : inputDir.listFiles()) {
+            if (!bkDir.isDirectory()|| !bkDir.getName().matches("\\d{2}-\\w{1,8}")) {
+                continue;
+            }
+            StringBuilder bkContents = new StringBuilder();
+            for (File chapFile : bkDir.listFiles()) {
+                if (!chapFile.isFile() || !chapFile.getName().matches("\\d{3}\\.html")) {
+                    continue;
+                }
+                System.out.format("Transforming %s\n...", chapFile);                
+                bkContents.append(transformHtml(chapFile.getPath())).append('\n');
+            }
+            String s = bkDir.getPath().substring(inputDir.getPath().length() + 1);
+            String outputPath = new File(outputDir, s + ".html").getPath();
+            File outF = new File(outputPath);
+            System.out.format("Generating %s\n...", outputPath);
+            FileUtils.write(outF, bkContents.toString());
         }
         System.out.println("Done.");
     }

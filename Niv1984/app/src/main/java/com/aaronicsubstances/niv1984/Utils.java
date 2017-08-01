@@ -9,19 +9,24 @@ import android.content.Context;
 public class Utils {
     public static final String APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id=";
 
-    public static String getBookLink(Context c, int bookIndex) {
-        return getChapterLink(c, bookIndex, 1);
-    }
-
-    public static String getChapterLink(Context c, int bookIndex, int chapterIndex) {
+    public static String getBookLink(Context c, int bookNumber) {
         String[] bookKeys = c.getResources().getStringArray(R.array.book_keys);
-        String bkKey = String.format("%02d-%s", bookIndex, bookKeys[bookIndex-1]);
-        String chapKey = String.format("%03d", chapterIndex);
-        String link = String.format("http:///localhost/niv1984/%s/%s.html", bkKey, chapKey);
+        String bkKey = String.format("%02d-%s", bookNumber, bookKeys[bookNumber-1]);
+        String link = String.format("http:///localhost/niv1984/%s.html", bkKey);
         return link;
     }
 
-    public static String getVerseLink(Context c, int bookIndex, int chapterIndex, int verseIndex) {
-        return getChapterLink(c, bookIndex, chapterIndex);
+    public static String getChapterLink(Context c, int bookNumber, int chapterNumber) {
+        String link = getBookLink(c, bookNumber);
+        String chapKey = String.format("#chapter-%03d", chapterNumber);
+        link += chapKey;
+        return link;
+    }
+
+    public static String getVerseLink(Context c, int bookNumber, int chapterNumber, int verseNumber) {
+        String link = getBookLink(c, bookNumber);
+        String verseKey = String.format("#verse-%03d-%d", chapterNumber, verseNumber);
+        link += verseKey;
+        return link;
     }
 }

@@ -1,23 +1,7 @@
 $(function(){
-    loadChapter(1);
-});
-
-function loadChapter(chapter) {
     var e = getQueryVariable('e');
-    var i = e.lastIndexOf('/');
-    e = e.substring(0, i+1);
-    i = chapter + '.html';
-    while (i.length < 8) {
-        i = '0' + i;
-    }
-    e = e + i;
-    $.ajax({ url: e, type: 'GET', dataType: 'html',
-        success: function(data){
-            $('#wrapper').append(data);
-            loadChapter(chapter+1);
-        }
-    });
-}
+    $("#wrapper").load(e);
+});
 
 function getQueryVariable(variable) {
 	if (!window.location.search) {

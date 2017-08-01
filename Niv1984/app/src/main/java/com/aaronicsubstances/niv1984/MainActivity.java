@@ -3,6 +3,7 @@ package com.aaronicsubstances.niv1984;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ShareCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -25,11 +26,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity implements RecyclerViewItemClickListener {
+public class MainActivity extends AppCompatActivity implements RecyclerViewItemClickListener,
+        ChapterSelectionDialogFragment.ChapterSelectionDialogListener {
     private static final String JS_INTERFACE_NAME = "biblei";
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
     private static final long EXIT_TIME = 2000;
@@ -239,8 +239,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     @Override
     public void onItemClicked(int adapterPosition, Object data) {
-        String link = Utils.getBookLink(this, adapterPosition+1);
-        mBrowserTitle = mBookList[adapterPosition];
+        /*DialogFragment newFragment = ChapterSelectionDialogFragment.newInstance(adapterPosition+1);
+        newFragment.show(getSupportFragmentManager(), "chapters");*/
+        onChapterSelected(null, adapterPosition+1, 1);
+    }
+
+    @Override
+    public void onChapterSelected(DialogFragment dialog, int book, int chapter) {
+        String link = Utils.getChapterLink(this, book, chapter);
+        mBrowserTitle = mBookList[book-1];
 
         Uri entryPt = new Uri.Builder().scheme("http").authority("localhost")
                 .appendPath("index.html")

@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
     <string name="action_rate">Rate &appname;</string>
     <string name="action_share">Share</string>
-    <string name="action_feedback">Comment</string>
+    <string name="action_feedback">Contact Author</string>
     <string name="share">Share &appname;</string>
     <string name="share_message">&appname; presents the 1984 revision of the NIV Bible in a user-friendly interface,
         with footnotes included and devoid of bothersome ads! Download from %s.</string>

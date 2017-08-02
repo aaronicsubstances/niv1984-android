@@ -1,6 +1,9 @@
 $(function(){
-    var e = getQueryVariable('e');
-    $("#wrapper").load(e);
+    /*var e = getQueryVariable('e');
+    if (e) {
+        $("#wrapper").load(e);
+    }*/
+    //$(window.location.hash).scrollIntoView();
 });
 
 function getQueryVariable(variable) {

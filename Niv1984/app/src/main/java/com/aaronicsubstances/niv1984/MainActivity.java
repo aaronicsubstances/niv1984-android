@@ -48,8 +48,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     private boolean mBrowserShowing = false;
     private String mBrowserUrl = null;
-    private Date lastBackPressTime;
     private String mBrowserTitle;
+
+    private Date mLastBackPressTime = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             mBrowserTitle = savedInstanceState.getString(SAVED_STATE_KEY_BROWSER_TITLE);
         }
         showBrowser(browserShowing);
-        if (mBrowserUrl != null) {
-            mBrowser.loadUrl(mBrowserUrl);
-        }
     }
 
     @Override
@@ -124,9 +122,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
 
-                // show browser here rather than at moment of url launch to avoid
-                // flickering between old and new page contents.
-                showBrowser(true);
+                if (url.startsWith("http")) {
+                }
             }
 
             @Override
@@ -239,24 +236,30 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     @Override
     public void onItemClicked(int adapterPosition, Object data) {
-        /*DialogFragment newFragment = ChapterSelectionDialogFragment.newInstance(adapterPosition+1);
-        newFragment.show(getSupportFragmentManager(), "chapters");*/
-        onChapterSelected(null, adapterPosition+1, 1);
+        int chapterCnt = getResources().getIntArray(R.array.chapter_count)[adapterPosition];
+        int book = adapterPosition+1;
+        if (chapterCnt > 1) {
+            DialogFragment newFragment = ChapterSelectionDialogFragment.newInstance(book);
+            newFragment.show(getSupportFragmentManager(), "chapters");
+        }
+        else {
+            onChapterSelected(null, book, -1);
+        }
     }
 
     @Override
     public void onChapterSelected(DialogFragment dialog, int book, int chapter) {
-        String link = Utils.getChapterLink(this, book, chapter);
+        mBrowserUrl = chapter < 1 ? Utils.getBookLink(this, book): Utils.getChapterLink(this, book, chapter);
         mBrowserTitle = mBookList[book-1];
 
-        Uri entryPt = new Uri.Builder().scheme("http").authority("localhost")
-                .appendPath("index.html")
-                .appendQueryParameter("e", link)
-                .build();
-        mBrowserUrl = entryPt.toString();
-        mBrowser.loadUrl(mBrowserUrl);
+        // to avoid problem with anchor visit overshooting or not working the first time,
+        // launch after small delay.
+        showBrowser(true);
 
-        LOGGER.info("Launched browser at {}.", mBrowserUrl);
+        // show browser here rather than at moment of url launch to avoid
+        // flickering between old and new page contents.
+
+        LOGGER.info("Launched browser at {}", mBrowserUrl);
     }
 
     private void showBrowser(boolean show) {
@@ -266,6 +269,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             mBookListView.setVisibility(View.GONE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(mBrowserTitle);
+
+            mBrowser.loadUrl(mBrowserUrl);
         }
         else {
             mBrowser.setVisibility(View.GONE);
@@ -278,17 +283,16 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     @Override
     public void onBackPressed() {
         if (mBrowserShowing) {
-            mBrowserUrl = null;
             showBrowser(false);
         }
         else {
-            if (lastBackPressTime != null &&
-                    (new Date().getTime() - lastBackPressTime.getTime() <
+            if (mLastBackPressTime != null &&
+                    (new Date().getTime() - mLastBackPressTime.getTime() <
                             EXIT_TIME)) {
                 super.onBackPressed();
             }
             else {
-                lastBackPressTime = new Date();
+                mLastBackPressTime = new Date();
                 Toast.makeText(this, R.string.exit_text, Toast.LENGTH_SHORT).show();
             }
         }

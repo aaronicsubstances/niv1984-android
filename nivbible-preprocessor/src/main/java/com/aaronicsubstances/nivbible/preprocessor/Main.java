@@ -4,9 +4,11 @@
 package com.aaronicsubstances.nivbible.preprocessor;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -105,6 +107,15 @@ public class Main {
     }
     
     public static void main(String[] args) throws Exception {
+        // Fetch index.html
+        String indexHtml;
+        try (InputStream indexStream = Main.class.getResourceAsStream(
+                "/index.html")) {
+            indexHtml = IOUtils.toString(indexStream);
+        }
+        int wrapperDivIndex = indexHtml.indexOf("</div>");
+        String indexHtmlPrefix = indexHtml.substring(0, wrapperDivIndex);
+        String indexHtmlSuffix = indexHtml.substring(wrapperDivIndex);
         File inputDir = new File(System.getProperty("user.dir"));
         if (args.length > 0) {
             inputDir = new File(args[0]).getCanonicalFile();
@@ -130,7 +141,7 @@ public class Main {
             String outputPath = new File(outputDir, s + ".html").getPath();
             File outF = new File(outputPath);
             System.out.format("Generating %s\n...", outputPath);
-            FileUtils.write(outF, bkContents.toString());
+            FileUtils.write(outF, indexHtmlPrefix + bkContents.toString() + indexHtmlSuffix);
         }
         System.out.println("Done.");
     }

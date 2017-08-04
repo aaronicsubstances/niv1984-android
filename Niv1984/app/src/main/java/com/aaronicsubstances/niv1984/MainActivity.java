@@ -2,6 +2,8 @@ package com.aaronicsubstances.niv1984;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ShareCompat;
@@ -29,7 +31,8 @@ import java.io.InputStream;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewItemClickListener,
-        ChapterSelectionDialogFragment.ChapterSelectionDialogListener {
+        ChapterSelectionDialogFragment.ChapterSelectionDialogListener,
+        AppDialogFragment.NoticeDialogListener {
     private static final String JS_INTERFACE_NAME = "biblei";
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
     private static final long EXIT_TIME = 2000;
@@ -51,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private String mBrowserTitle;
 
     private Date mLastBackPressTime = null;
+    private boolean mLaunchedBefore = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +73,91 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             mBrowserTitle = savedInstanceState.getString(SAVED_STATE_KEY_BROWSER_TITLE);
         }
         showBrowser(browserShowing);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        checkForRequiredUpgrade();
+    }
+
+    public void checkForRequiredUpgrade() {
+        if (requireUpdateIfNecessary()) return;
+
+        new AsyncTask() {
+            @Override
+            protected void onPostExecute(Object o) {
+                if (isFinishing()) return;
+                if (o instanceof Exception) {
+                    LOGGER.error("Error occurred while retrieving latest version.", (Exception)o);
+                }
+                requireUpdateIfNecessary();
+            }
+
+            @Override
+            protected Object doInBackground(Object[] params) {
+                try {
+                    String uid = Utils.getUserUid(MainActivity.this);
+                    String currentVersion = Utils.getAppVersion(MainActivity.this);
+                    String url = Utils.getApiUrl(uid, Utils.API_CURRENT_VERSION_PATH +
+                            "?v=%s", currentVersion);
+                    LOGGER.info("Checking for latest version at {}", url);
+                    String versionCheckResponse = Utils.httpGet(url);
+                    LOGGER.info("Latest version check returned: {}", versionCheckResponse);
+                    if (!versionCheckResponse.matches("^\\*?(\\w|\\.)+$")) {
+                        throw new RuntimeException("Unexpected response from version check: " +
+                                versionCheckResponse);
+                    }
+                    boolean forceUpdate = false;
+                    if (versionCheckResponse.startsWith("*")) {
+                        versionCheckResponse = versionCheckResponse.substring(1);
+                        forceUpdate = true;
+                    }
+                    Utils.cacheLatestVersion(MainActivity.this, versionCheckResponse, forceUpdate);
+                    return null;
+                }
+                catch (Exception ex) {
+                    return ex;
+                }
+            }
+        }.execute();
+    }
+
+    private boolean requireUpdateIfNecessary() {
+        try {
+            boolean updateRequired = Utils.isVersionUpdateRequired(this);
+            if (!updateRequired) {
+                return false;
+            }
+
+            String message = getResources().getString(R.string.message_update_required);
+            String updateAction = getResources().getString(R.string.action_update);
+            DialogFragment newFragment = AppDialogFragment.newInstance(message, updateAction, null);
+            newFragment.setCancelable(false);
+            newFragment.show(getSupportFragmentManager(), "update");
+            return true;
+        }
+        catch (Exception ex) {
+            LOGGER.error("Error occurred while requiring update action from user.", ex);
+            // just in case dialog fragment complains that it's not in the state/mood to operate.
+            return true;
+        }
+    }
+
+    @Override
+    public void onDialogPositiveClick(DialogFragment dialog) {
+        LOGGER.info("Starting update...");
+        dialog.dismiss();
+        Utils.openAppOnPlayStore(this);
+        finish();
+    }
+
+    @Override
+    public void onDialogNegativeClick(DialogFragment dialog) {
+        LOGGER.warn("Update cancelled.");
+        dialog.dismiss();
+        finish();
     }
 
     @Override
@@ -104,6 +193,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         webSettings.setSaveFormData(false);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSettings.setBuiltInZoomControls(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+        }
 
         mBrowser.setWebChromeClient(new WebChromeClient() {
 
@@ -121,9 +213,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-
-                if (url.startsWith("http")) {
-                }
+                showBrowserContents(true);
             }
 
             @Override
@@ -170,6 +260,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
                         else if (ext.equals("svg")) {
                             mimeType= "image/svg+xml";
                         }
+                        else if (ext.equals("woff")) {
+                            mimeType = "application/font-woff";
+                        }
+                        else if (ext.equals("eot")) {
+                            mimeType = "application/vnd.ms-fontobject";
+                        }
+                        else if (ext.equals("ttf")) {
+                            mimeType = "application/font-sfnt";
+                        }
+                        else if (ext.equals("otf")) {
+                            mimeType = "application/font-sfnt";
+                        }
                     }
                     WebResourceResponse response = new WebResourceResponse(mimeType, "utf-8",
                             assetStream);
@@ -203,13 +305,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
                 startActivity(new Intent(this, AboutActivity.class));
                 return true;
             case R.id.action_rate:
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
-                }
-                catch ( android.content.ActivityNotFoundException anfe ) {
-                    // Play Store not installed. Strange, but we retry again with online play store.
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(appUrl)));
-                }
+                Utils.openAppOnPlayStore(this);
                 return true;
             case R.id.action_share:
                 Intent shareIntent = new Intent();
@@ -265,18 +361,25 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private void showBrowser(boolean show) {
         mBrowserShowing = show;
         if (mBrowserShowing) {
-            mBrowser.setVisibility(View.VISIBLE);
             mBookListView.setVisibility(View.GONE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(mBrowserTitle);
 
             mBrowser.loadUrl(mBrowserUrl);
+            showBrowserContents(false);
         }
         else {
             mBrowser.setVisibility(View.GONE);
             mBookListView.setVisibility(View.VISIBLE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(R.string.app_name);
+        }
+    }
+
+    private void showBrowserContents(boolean show) {
+        if (!mLaunchedBefore || show) {
+            mBrowser.setVisibility(View.VISIBLE);
+            mLaunchedBefore = true;
         }
     }
 

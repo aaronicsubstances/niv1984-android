@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import sun.rmi.runtime.Log;
 
 /**
  *
@@ -25,9 +26,10 @@ public class Main {
         Document doc = Jsoup.parse(inputFile, null);
         Element wrapperDiv = new Element("div");
         wrapperDiv.attr("id", createChapFragId(bk, chap));
+        String chapTitle = null;
         for (Element bodyChildElem : doc.body().children()) {
             if (bodyChildElem.tagName().equalsIgnoreCase("b")) {
-                String chapText = bodyChildElem.text();
+                chapTitle = bodyChildElem.text().trim();
                 if (chap.equals("001")) {
                     if (bk.equals("01-GEN")) {
                         wrapperDiv.appendElement("h1").text("Old Testament");
@@ -36,7 +38,7 @@ public class Main {
                         wrapperDiv.appendElement("h1").text("New Testament");                        
                     }
                 }
-                wrapperDiv.appendElement("h3").text(chapText);
+                wrapperDiv.appendElement("h3").text(chapTitle);
             }
             else if (bodyChildElem.tagName().equalsIgnoreCase("dl")) {
                 // the verses. transform dl into ol.
@@ -50,6 +52,18 @@ public class Main {
                         if (verseElem == null || v != verseIndex) {
                             verseElem = versesElem.appendElement("li");
                             verseIndex = v;
+                        }
+                        else {
+                            // Peculiar to Psalms.
+                            String html = verseElem.html().trim();
+                            if (html.startsWith(chapTitle)) {
+                                html = html.substring(chapTitle.length()).trim();
+                            }
+                            if (html.length() > 0) {
+                                Element span= new Element("span");
+                                versesElem.before(span);
+                                span.html(html);
+                            }
                         }
                     }
                     else if (dlChildElem.tagName().equalsIgnoreCase("dd")) {

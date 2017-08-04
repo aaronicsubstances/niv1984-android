@@ -360,13 +360,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     @Override
     public void onItemClicked(int adapterPosition, Object data) {
-        int chapterCnt = getResources().getIntArray(R.array.chapter_count)[adapterPosition];
+        //int chapterCnt = getResources().getIntArray(R.array.chapter_count)[adapterPosition];
         int book = adapterPosition+1;
-        if (chapterCnt > 1) {
+        /*if (chapterCnt > 1) {
             DialogFragment newFragment = ChapterSelectionDialogFragment.newInstance(book);
             newFragment.show(getSupportFragmentManager(), "chapters");
         }
-        else {
+        else*/ {
             onChapterSelected(null, book, 1);
         }
     }
@@ -403,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     private void showBrowserContents(boolean show) {
         // to avoid problem with anchor visit overshooting or not working the first time,
-        if (!mLaunchedBefore || show) {
+        if (mBrowserShowing && (!mLaunchedBefore || show)) {
             mBrowser.setVisibility(View.VISIBLE);
             mLaunchedBefore = true;
         }
@@ -436,6 +436,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        LOGGER.warn("onNothingSelected.");
     }
 }

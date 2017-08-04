@@ -9,6 +9,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.GridView;
 
 /**
  * Created by Aaron on 8/1/2017.
@@ -70,16 +73,31 @@ public class ChapterSelectionDialogFragment extends DialogFragment {
         // Pass null as the parent view because its going in the dialog layout
         View root = inflater.inflate(R.layout.fragment_chapter_selection, null);
         builder.setView(root);
-        RecyclerView listView = (RecyclerView)root.findViewById(R.id.list);
+        //RecyclerView listView = (RecyclerView)root.findViewById(R.id.list);
         int colCount = getResources().getInteger(R.integer.grid_col_ount);
-        listView.setLayoutManager(new GridLayoutManager(getActivity(), colCount));
+        //listView.setLayoutManager(new GridLayoutManager(getActivity(), colCount));
         ChapterListAdapter listAdapter = new ChapterListAdapter(getActivity(), chapters);
-        listView.setAdapter(listAdapter);
-        listAdapter.setItemClickListener(new RecyclerViewItemClickListener() {
+        //listView.setAdapter(listAdapter);
+        /*listAdapter.setItemClickListener(new RecyclerViewItemClickListener() {
             @Override
             public void onItemClicked(int adapterPosition, Object data) {
                 if (mListener != null) {
                     mListener.onChapterSelected(ChapterSelectionDialogFragment.this, book, adapterPosition+1);
+                }
+                dismiss();
+            }
+        });*/
+        GridView gridview = (GridView) root.findViewById(R.id.gridview);
+        //gridview.setNumColumns(colCount);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_gallery_item,
+                chapters);
+        gridview.setAdapter(adapter);
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v,
+                                    int position, long id) {
+                if (mListener != null) {
+                    mListener.onChapterSelected(ChapterSelectionDialogFragment.this, book, position+1);
                 }
                 dismiss();
             }

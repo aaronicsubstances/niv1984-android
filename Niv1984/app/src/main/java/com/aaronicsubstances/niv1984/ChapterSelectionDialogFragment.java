@@ -2,10 +2,13 @@ package com.aaronicsubstances.niv1984;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 
 /**
  * Created by Aaron on 8/1/2017.
@@ -61,16 +64,28 @@ public class ChapterSelectionDialogFragment extends DialogFragment {
         for (int i = 0; i < chapters.length; i++) {
             chapters[i] = String.valueOf(i + 1);
         }
-        builder.setTitle(R.string.select_chapter)
-                .setItems(chapters, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // The 'which' argument contains the index position
-                        // of the selected item
-                        if (mListener != null) {
-                            mListener.onChapterSelected(ChapterSelectionDialogFragment.this, book, which+1);
-                        }
-                    }
-                });
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        View root = inflater.inflate(R.layout.fragment_chapter_selection, null);
+        builder.setView(root);
+        RecyclerView listView = (RecyclerView)root.findViewById(R.id.list);
+        listView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        ChapterListAdapter listAdapter = new ChapterListAdapter(getActivity(), chapters);
+        listView.setAdapter(listAdapter);
+        listAdapter.setItemClickListener(new RecyclerViewItemClickListener() {
+            @Override
+            public void onItemClicked(int adapterPosition, Object data) {
+                if (mListener != null) {
+                    mListener.onChapterSelected(ChapterSelectionDialogFragment.this, book, adapterPosition+1);
+                }
+                dismiss();
+            }
+        });
+
+        builder.setTitle(R.string.select_chapter);
+
         // 3. Get the AlertDialog from create()
         AlertDialog dialog = builder.create();
         return dialog;

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ShareCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,9 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.slf4j.Logger;
@@ -32,16 +36,16 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewItemClickListener,
         ChapterSelectionDialogFragment.ChapterSelectionDialogListener,
-        AppDialogFragment.NoticeDialogListener {
+        AppDialogFragment.NoticeDialogListener, AdapterView.OnItemSelectedListener {
     private static final String JS_INTERFACE_NAME = "biblei";
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
     private static final long EXIT_TIME = 2000;
     private static final String SAVED_STATE_KEY_BROWSER_SHOWING = MainActivity.class +
             ".browserShowing";
-    private static final String SAVED_STATE_KEY_BROWSER_URL = MainActivity.class +
-            ".browserUrl";
-    private static final String SAVED_STATE_KEY_BROWSER_TITLE = MainActivity.class +
-            ".browserTitle";
+    private static final String SAVED_STATE_KEY_BROWSER_CHAPTER = MainActivity.class +
+            ".browserChapter";
+    private static final String SAVED_STATE_KEY_BROWSER_BOOK = MainActivity.class +
+            ".browserBook";
 
     private RecyclerView mBookListView;
     private String[] mBookList;
@@ -50,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private WebView mBrowser;
 
     private boolean mBrowserShowing = false;
-    private String mBrowserUrl = null;
-    private String mBrowserTitle;
+    private int mBrowserBook;
+    private int mBrowserChapter;
 
     private Date mLastBackPressTime = null;
     private boolean mLaunchedBefore = false;
@@ -69,10 +73,19 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         boolean browserShowing = false;
         if (savedInstanceState != null) {
             browserShowing = savedInstanceState.getBoolean(SAVED_STATE_KEY_BROWSER_SHOWING, false);
-            mBrowserUrl = savedInstanceState.getString(SAVED_STATE_KEY_BROWSER_URL);
-            mBrowserTitle = savedInstanceState.getString(SAVED_STATE_KEY_BROWSER_TITLE);
+            mBrowserBook = savedInstanceState.getInt(SAVED_STATE_KEY_BROWSER_BOOK);
+            mBrowserChapter = savedInstanceState.getInt(SAVED_STATE_KEY_BROWSER_CHAPTER);
         }
         showBrowser(browserShowing);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putBoolean(SAVED_STATE_KEY_BROWSER_SHOWING, mBrowserShowing);
+        outState.putInt(SAVED_STATE_KEY_BROWSER_BOOK, mBrowserBook);
+        outState.putInt(SAVED_STATE_KEY_BROWSER_CHAPTER, mBrowserChapter);
     }
 
     @Override
@@ -158,19 +171,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         LOGGER.warn("Update cancelled.");
         dialog.dismiss();
         finish();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        outState.putBoolean(SAVED_STATE_KEY_BROWSER_SHOWING, mBrowserShowing);
-        if (mBrowserUrl != null) {
-            outState.putString(SAVED_STATE_KEY_BROWSER_URL, mBrowserUrl);
-        }
-        if (mBrowserTitle != null) {
-            outState.putString(SAVED_STATE_KEY_BROWSER_TITLE, mBrowserTitle);
-        }
     }
 
     private void setUpListView() {
@@ -289,7 +289,31 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        if (mBrowserShowing) {
+            getMenuInflater().inflate(R.menu.menu_book, menu);
+
+            MenuItem item = menu.findItem(R.id.spinner);
+            Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
+
+            int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBrowserBook-1];
+            String[] chapters = new String[chapterCount];
+            for (int i = 0; i < chapters.length; i++) {
+                chapters[i] = String.valueOf(i + 1);
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_spinner_item,
+                    chapters);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            spinner.setAdapter(adapter);
+
+            spinner.setOnItemSelectedListener(this);
+            spinner.setSelection(mBrowserChapter-1);
+        }
+        else {
+            getMenuInflater().inflate(R.menu.menu_main, menu);
+        }
 
         // Return true to display menu
         return true;
@@ -339,33 +363,29 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             newFragment.show(getSupportFragmentManager(), "chapters");
         }
         else {
-            onChapterSelected(null, book, -1);
+            onChapterSelected(null, book, 1);
         }
     }
 
     @Override
     public void onChapterSelected(DialogFragment dialog, int book, int chapter) {
-        mBrowserUrl = chapter < 1 ? Utils.getBookLink(this, book): Utils.getChapterLink(this, book, chapter);
-        mBrowserTitle = mBookList[book-1];
+        mBrowserBook = book;
+        mBrowserChapter = chapter;
 
-        // to avoid problem with anchor visit overshooting or not working the first time,
-        // launch after small delay.
         showBrowser(true);
-
-        // show browser here rather than at moment of url launch to avoid
-        // flickering between old and new page contents.
-
-        LOGGER.info("Launched browser at {}", mBrowserUrl);
     }
 
     private void showBrowser(boolean show) {
         mBrowserShowing = show;
         if (mBrowserShowing) {
+            String browserUrl = Utils.getChapterLink(this, mBrowserBook, mBrowserChapter);
+            String browserTitle = mBookList[mBrowserBook-1];
+
             mBookListView.setVisibility(View.GONE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setTitle(mBrowserTitle);
+            getSupportActionBar().setTitle(browserTitle);
 
-            mBrowser.loadUrl(mBrowserUrl);
+            mBrowser.loadUrl(browserUrl);
             showBrowserContents(false);
         }
         else {
@@ -374,9 +394,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(R.string.app_name);
         }
+        invalidateOptionsMenu();
     }
 
     private void showBrowserContents(boolean show) {
+        // to avoid problem with anchor visit overshooting or not working the first time,
         if (!mLaunchedBefore || show) {
             mBrowser.setVisibility(View.VISIBLE);
             mLaunchedBefore = true;
@@ -399,5 +421,17 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
                 Toast.makeText(this, R.string.exit_text, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mBrowserChapter = position + 1;
+        String browserUrl = Utils.getChapterLink(this, mBrowserBook, mBrowserChapter);
+        mBrowser.loadUrl(browserUrl);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

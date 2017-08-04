@@ -5,9 +5,9 @@
     android:focusable="true"
     android:clickable="true"
     android:layout_weight="1"
-    android:layout_gravity="center"
+    android:layout_gravity="fill"
     android:orientation="vertical"
-    android:layout_margin="16dp">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/text"

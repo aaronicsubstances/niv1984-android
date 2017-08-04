@@ -301,10 +301,14 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             for (int i = 0; i < chapters.length; i++) {
                 chapters[i] = String.valueOf(i + 1);
             }
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+            /*ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                     android.R.layout.simple_spinner_item,
                     chapters);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                    R.layout.spinner_item,
+                    chapters);
+            adapter.setDropDownViewResource(R.layout.dropdown_item);
 
             spinner.setAdapter(adapter);
 

@@ -71,7 +71,8 @@ public class ChapterSelectionDialogFragment extends DialogFragment {
         View root = inflater.inflate(R.layout.fragment_chapter_selection, null);
         builder.setView(root);
         RecyclerView listView = (RecyclerView)root.findViewById(R.id.list);
-        listView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+        int colCount = getResources().getInteger(R.integer.grid_col_ount);
+        listView.setLayoutManager(new GridLayoutManager(getActivity(), colCount));
         ChapterListAdapter listAdapter = new ChapterListAdapter(getActivity(), chapters);
         listView.setAdapter(listAdapter);
         listAdapter.setItemClickListener(new RecyclerViewItemClickListener() {

@@ -9,10 +9,12 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ShareCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,7 +37,6 @@ import java.io.InputStream;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements RecyclerViewItemClickListener,
-        ChapterSelectionDialogFragment.ChapterSelectionDialogListener,
         AppDialogFragment.NoticeDialogListener, AdapterView.OnItemSelectedListener {
     private static final String JS_INTERFACE_NAME = "biblei";
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private static final String SAVED_STATE_KEY_BROWSER_BOOK = MainActivity.class +
             ".browserBook";
 
+    private AppCompatSpinner mChapterSpinner;
     private RecyclerView mBookListView;
     private String[] mBookList;
     private BookListAdapter mBookListAdapter;
@@ -66,6 +68,15 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        String[] chapters = new String[]{"1", "2"};
+        mChapterSpinner = (AppCompatSpinner)findViewById(R.id.spinner);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1,
+                chapters);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mChapterSpinner.setAdapter(adapter);
 
         setUpListView();
         setUpBrowserView();
@@ -289,35 +300,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
-
-        if (mBrowserShowing) {
-            getMenuInflater().inflate(R.menu.menu_book, menu);
-
-            MenuItem item = menu.findItem(R.id.spinner);
-            Spinner spinner = (Spinner) MenuItemCompat.getActionView(item);
-
-            int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBrowserBook-1];
-            String[] chapters = new String[chapterCount];
-            for (int i = 0; i < chapters.length; i++) {
-                chapters[i] = String.valueOf(i + 1);
-            }
-            /*ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_spinner_item,
-                    chapters);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                    R.layout.spinner_item,
-                    chapters);
-            adapter.setDropDownViewResource(R.layout.dropdown_item);
-
-            spinner.setAdapter(adapter);
-
-            spinner.setOnItemSelectedListener(this);
-            spinner.setSelection(mBrowserChapter-1);
-        }
-        else {
-            getMenuInflater().inflate(R.menu.menu_main, menu);
-        }
+        getMenuInflater().inflate(R.menu.menu_main, menu);
 
         // Return true to display menu
         return true;
@@ -360,21 +343,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
 
     @Override
     public void onItemClicked(int adapterPosition, Object data) {
-        //int chapterCnt = getResources().getIntArray(R.array.chapter_count)[adapterPosition];
         int book = adapterPosition+1;
-        /*if (chapterCnt > 1) {
-            DialogFragment newFragment = ChapterSelectionDialogFragment.newInstance(book);
-            newFragment.show(getSupportFragmentManager(), "chapters");
-        }
-        else*/ {
-            onChapterSelected(null, book, 1);
-        }
-    }
-
-    @Override
-    public void onChapterSelected(DialogFragment dialog, int book, int chapter) {
         mBrowserBook = book;
-        mBrowserChapter = chapter;
+        mBrowserChapter = 1;
 
         showBrowser(true);
     }
@@ -388,6 +359,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             mBookListView.setVisibility(View.GONE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(browserTitle);
+            mChapterSpinner.setVisibility(View.VISIBLE);
+            setUpChapterSpinner();
 
             mBrowser.loadUrl(browserUrl);
             showBrowserContents(false);
@@ -397,6 +370,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             mBookListView.setVisibility(View.VISIBLE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(R.string.app_name);
+            mChapterSpinner.setVisibility(View.GONE);
         }
         invalidateOptionsMenu();
     }
@@ -425,6 +399,30 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
                 Toast.makeText(this, R.string.exit_text, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void setUpChapterSpinner() {
+        int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBrowserBook-1];
+        String[] chapters = new String[chapterCount];
+        for (int i = 0; i < chapters.length; i++) {
+            chapters[i] = String.valueOf(i + 1);
+        }
+        if (chapterCount >= 100) {
+            mChapterSpinner.setMinimumWidth(getResources().getDimensionPixelOffset(R.dimen.spinner_min_width));
+        }
+        else {
+            mChapterSpinner.setMinimumWidth(0);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                R.layout.spinner_item,
+                chapters);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        mChapterSpinner.setAdapter(adapter);
+
+        mChapterSpinner.setOnItemSelectedListener(this);
+        mChapterSpinner.setSelection(mBrowserChapter-1);
     }
 
     @Override

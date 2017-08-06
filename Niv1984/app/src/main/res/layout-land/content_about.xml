@@ -29,14 +29,22 @@
             android:maxLines="20"
             android:layout_marginBottom="@dimen/activity_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"/>
 
         <TextView
             android:id="@+id/copy_right"
             android:maxLines="20"
             android:layout_marginBottom="@dimen/activity_margin"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/credits"
+            android:maxLines="200"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorPrimaryDark"/>
+            android:textColor="@android:color/black"
+            android:text="@string/credits"/>
     </LinearLayout>
 </LinearLayout>

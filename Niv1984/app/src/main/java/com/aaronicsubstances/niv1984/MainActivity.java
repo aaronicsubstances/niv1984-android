@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private BookListAdapter mBookListAdapter;
 
     private WebView mBrowser;
-    private View mCurtain;
 
     private boolean mBrowserShowing = false;
     private int mBrowserBook;
@@ -67,8 +66,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mCurtain = findViewById(R.id.curtain);
 
         mChapterSpinner = (AppCompatSpinner)findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -224,7 +221,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
                 super.onPageFinished(view, url);
 
                 if (mBrowserShowing) {
-                    mCurtain.setVisibility(View.GONE);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                        mBookListView.setVisibility(View.GONE);
+                    }
                 }
             }
 
@@ -355,8 +354,9 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private void showBrowser(boolean show) {
         mBrowserShowing = show;
         if (mBrowserShowing) {
-            mBookListView.setVisibility(View.GONE);
-            mCurtain.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                mBookListView.setVisibility(View.GONE);
+            }
 
             String browserUrl = Utils.getChapterLink(this, mBrowserBook, mBrowserChapter);
             String browserTitle = mBookList[mBrowserBook-1];
@@ -371,7 +371,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         }
         else {
             mBookListView.setVisibility(View.VISIBLE);
-            mCurtain.setVisibility(View.GONE);
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(R.string.app_name);

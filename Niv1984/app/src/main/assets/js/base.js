@@ -3,7 +3,6 @@ $(function(){
     if (e) {
         $("#wrapper").load(e);
     }*/
-    //$(window.location.hash).scrollIntoView();
 });
 
 function getQueryVariable(variable) {
@@ -18,4 +17,29 @@ function getQueryVariable(variable) {
             return decodeURIComponent(pair[1]);
         }
     }
+}
+
+function goToChapter(chapterUrl) {
+    var hashIndex = chapterUrl.indexOf("#");
+    var hash = chapterUrl.substring(hashIndex+1);
+    console.log("got hash: " + hash);
+    document.getElementById(hash).scrollIntoView();
+}
+
+function goToBook(bookUrl) {
+    /*$("body").load(bookUrl + ' #wrapper', function(responseText, textStatus, jqXHR){
+        biblei.jsDoneLoading(textStatus);
+    });*/
+    $.ajax(bookUrl, {
+        dataType: "html",
+        success: function(data, textStatus) {
+            $('#wrapper').html(
+                $("<div>").append($.parseHTML(data)).find('#wrapper')
+            );
+            biblei.jsDoneLoading(textStatus);
+        },
+        error: function() {
+            location.href = bookUrl;
+        }
+    });
 }

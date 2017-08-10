@@ -7,18 +7,18 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.webkit.ConsoleMessage;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
@@ -26,7 +26,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.slf4j.Logger;
@@ -54,13 +53,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private BookListAdapter mBookListAdapter;
 
     private WebView mBrowser;
+    private View mCurtain;
 
     private boolean mBrowserShowing = false;
     private int mBrowserBook;
     private int mBrowserChapter;
 
     private Date mLastBackPressTime = null;
-    private boolean mLaunchedBefore = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +68,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        String[] chapters = new String[]{"1", "2"};
+        mCurtain = findViewById(R.id.curtain);
+
         mChapterSpinner = (AppCompatSpinner)findViewById(R.id.spinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
-                chapters);
+                new String[0]);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         mChapterSpinner.setAdapter(adapter);
 
         setUpListView();
@@ -220,11 +219,13 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         });
 
         mBrowser.setWebViewClient(new WebViewClient(){
-
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                showBrowserContents(true);
+
+                if (mBrowserShowing) {
+                    mCurtain.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -294,7 +295,8 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             }
         });
 
-        //mBrowser.addJavascriptInterface(this, JS_INTERFACE_NAME);
+        mBrowser.addJavascriptInterface(this, JS_INTERFACE_NAME);
+        mBrowser.loadUrl("http://localhost");
     }
 
     @Override
@@ -353,33 +355,63 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     private void showBrowser(boolean show) {
         mBrowserShowing = show;
         if (mBrowserShowing) {
+            mBookListView.setVisibility(View.GONE);
+            mCurtain.setVisibility(View.VISIBLE);
+
             String browserUrl = Utils.getChapterLink(this, mBrowserBook, mBrowserChapter);
             String browserTitle = mBookList[mBrowserBook-1];
 
-            mBookListView.setVisibility(View.GONE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(browserTitle);
             mChapterSpinner.setVisibility(View.VISIBLE);
             setUpChapterSpinner();
 
             mBrowser.loadUrl(browserUrl);
-            showBrowserContents(false);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         else {
-            mBrowser.setVisibility(View.GONE);
             mBookListView.setVisibility(View.VISIBLE);
+            mCurtain.setVisibility(View.GONE);
+
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
             getSupportActionBar().setTitle(R.string.app_name);
             mChapterSpinner.setVisibility(View.GONE);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         invalidateOptionsMenu();
     }
 
-    private void showBrowserContents(boolean show) {
-        // to avoid problem with anchor visit overshooting or not working the first time,
-        if (mBrowserShowing && (!mLaunchedBefore || show)) {
-            mBrowser.setVisibility(View.VISIBLE);
-            mLaunchedBefore = true;
+    @JavascriptInterface
+    public void jsDoneLoading(final String textStatus) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LOGGER.debug("loading completed: {}", textStatus);
+                if (mBrowserShowing) {
+                    mBookListView.setVisibility(View.GONE);
+                }
+            }
+        });
+    }
+
+    private void loadBookUrl(String bookUrl) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            String script = String.format("goToBook('%s');", bookUrl);
+            mBrowser.evaluateJavascript(script, null);
+        }
+        else {
+            mBrowser.loadUrl(bookUrl);
+            mBookListView.setVisibility(View.GONE);
+        }
+    }
+
+    private void loadChapterUrl(String chapterUrl) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            String script = String.format("goToChapter('%s');", chapterUrl);
+            mBrowser.evaluateJavascript(script, null);
+        }
+        else {
+            mBrowser.loadUrl(chapterUrl);
         }
     }
 
@@ -405,13 +437,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBrowserBook-1];
         String[] chapters = new String[chapterCount];
         for (int i = 0; i < chapters.length; i++) {
-            chapters[i] = String.valueOf(i + 1);
-        }
-        if (chapterCount >= 100) {
-            mChapterSpinner.setMinimumWidth(getResources().getDimensionPixelOffset(R.dimen.spinner_min_width));
-        }
-        else {
-            mChapterSpinner.setMinimumWidth(0);
+            chapters[i] = String.format("%3d", i + 1);
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,

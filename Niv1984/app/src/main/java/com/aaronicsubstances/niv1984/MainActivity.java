@@ -219,11 +219,11 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-
+                LOGGER.warn("onPageFinished: {}", url);
                 if (mBrowserShowing) {
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+                    //if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
                         mBookListView.setVisibility(View.GONE);
-                    }
+                    //}
                 }
             }
 
@@ -294,8 +294,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             }
         });
 
-        mBrowser.addJavascriptInterface(this, JS_INTERFACE_NAME);
-        mBrowser.loadUrl("http://localhost");
+        //mBrowser.addJavascriptInterface(this, JS_INTERFACE_NAME);
     }
 
     @Override
@@ -355,18 +354,18 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
         mBrowserShowing = show;
         if (mBrowserShowing) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                mBookListView.setVisibility(View.GONE);
+                //mBookListView.setVisibility(View.GONE);
             }
 
-            String browserUrl = Utils.getChapterLink(this, mBrowserBook, mBrowserChapter);
             String browserTitle = mBookList[mBrowserBook-1];
 
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setTitle(browserTitle);
             mChapterSpinner.setVisibility(View.VISIBLE);
+
+            // let setting up of spinner trigger page load.
             setUpChapterSpinner();
 
-            mBrowser.loadUrl(browserUrl);
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         else {
@@ -378,40 +377,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         invalidateOptionsMenu();
-    }
-
-    @JavascriptInterface
-    public void jsDoneLoading(final String textStatus) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                LOGGER.debug("loading completed: {}", textStatus);
-                if (mBrowserShowing) {
-                    mBookListView.setVisibility(View.GONE);
-                }
-            }
-        });
-    }
-
-    private void loadBookUrl(String bookUrl) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            String script = String.format("goToBook('%s');", bookUrl);
-            mBrowser.evaluateJavascript(script, null);
-        }
-        else {
-            mBrowser.loadUrl(bookUrl);
-            mBookListView.setVisibility(View.GONE);
-        }
-    }
-
-    private void loadChapterUrl(String chapterUrl) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            String script = String.format("goToChapter('%s');", chapterUrl);
-            mBrowser.evaluateJavascript(script, null);
-        }
-        else {
-            mBrowser.loadUrl(chapterUrl);
-        }
     }
 
     @Override
@@ -443,7 +408,6 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
                 R.layout.spinner_item,
                 chapters);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
         mChapterSpinner.setAdapter(adapter);
 
         mChapterSpinner.setOnItemSelectedListener(this);
@@ -454,6 +418,7 @@ public class MainActivity extends AppCompatActivity implements RecyclerViewItemC
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mBrowserChapter = position + 1;
         String browserUrl = Utils.getChapterLink(this, mBrowserBook, mBrowserChapter);
+        LOGGER.warn("onItemSelected: {}", browserUrl);
         mBrowser.loadUrl(browserUrl);
     }
 

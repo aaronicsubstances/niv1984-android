@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.text.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -115,7 +116,33 @@ public class Utils {
 
     public static boolean isVersionUpdateRequired(Context c) {
         SharedPreferences sharedPrefs = c.getSharedPreferences(SHARED_PREF_NAME, 0);
+        String latestVersion = sharedPrefs.getString(SHARED_PREF_KEY_LATEST_VERSION, getAppVersion(c));
+        //  return false if latest version is lower than installed version
+        if (CompareVersions(getAppVersion(c), latestVersion) >= 0) {
+            return false;
+        }
         return sharedPrefs.getBoolean(SHARED_PREF_KEY_UPDATE_REQUIRED, false);
+    }
+
+
+    private static int CompareVersions(String v1, String v2)
+    {
+        Long n1 = ConvertVersionToNumber(v1);
+        Long n2 = ConvertVersionToNumber(v2);
+        return n1.compareTo(n2);
+    }
+
+    private static long ConvertVersionToNumber(String v)
+    {
+        long p = 0;
+        String[] parts = v.split("\\.");
+        // assume each part cannot exceed 3 digits.
+        for (String part : parts)
+        {
+            int d = Integer.parseInt(part);
+            p = 1000 * p + d;
+        }
+        return p;
     }
 
     public static void cacheLatestVersion(Context c, String latestVersion, boolean forceUpdate) {

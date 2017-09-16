@@ -12,7 +12,6 @@ import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import sun.rmi.runtime.Log;
 
 /**
  *
@@ -42,16 +41,24 @@ public class Main {
             }
             else if (bodyChildElem.tagName().equalsIgnoreCase("dl")) {
                 // the verses. transform dl into ol.
-                // skip dt, and transform dd into li.
+                // transform dd into li.
+                // used to skip dt but due to NIV's omission of some
+                // verses such as Matthew 18:11, more care has to
+                // be taken.
                 Element versesElem = wrapperDiv.appendElement("ol");
-                int verseIndex = 1;
+                int verseIndex = 0;
                 Element verseElem = null;
                 for (Element dlChildElem : bodyChildElem.children()) {
                     if (dlChildElem.tagName().equalsIgnoreCase("dt")) {
                         int v = Integer.parseInt(dlChildElem.text());
                         if (verseElem == null || v != verseIndex) {
-                            verseElem = versesElem.appendElement("li");
-                            verseIndex = v;
+                            // may have to generate more than 1 to match
+                            // up with new verse, for example if progressing
+                            // from Matthew 18:9 to Matthew 18:11.
+                            while (verseIndex < v) {
+                                verseElem = versesElem.appendElement("li");
+                                verseIndex++;
+                            }
                         }
                         else {
                             // Peculiar to Psalms.

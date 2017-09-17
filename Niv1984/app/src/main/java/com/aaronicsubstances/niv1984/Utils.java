@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.text.TextUtils;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,16 +19,12 @@ import java.util.Date;
  * Created by Aaron on 7/31/2017.
  */
 
-public class Utils {
+public class Utils extends ConfigUtils {
     public static final String APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id=";
     public static final int COPY_BUF_SZ = 8192;
 
-    public static final String API_BASE_URL = "http://www.aaronicsubstances.com/niv1984/api";
-
     public static final String API_CURRENT_VERSION_PATH = "/v1/mobile/%s/version";
-    public static final String API_CRED = "Basic YXBwOm1hcHBwYXNz";
 
-    public static final int API_RESPONSE_CODE_SUCCESS = 0;
     public static final String DEFAULT_CHARSET = "utf-8";
     private static final String SHARED_PREF_KEY_UID = "uid";
     private static final String SHARED_PREF_NAME = "prefs";

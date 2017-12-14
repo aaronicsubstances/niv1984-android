@@ -37,7 +37,7 @@
                         <configuration>
                             <classifier>spring-boot</classifier>
                             <mainClass>
-                                com.aaronicsubstances.nivbible.preprocessor.Main
+                                com.aaronicsubstances.nivbible.preprocessor.NewMain
                             </mainClass>
                         </configuration>
                     </execution>

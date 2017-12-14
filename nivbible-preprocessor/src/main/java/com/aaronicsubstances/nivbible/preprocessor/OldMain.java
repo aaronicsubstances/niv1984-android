@@ -17,7 +17,7 @@ import org.jsoup.nodes.Element;
  *
  * @author Aaron
  */
-public class Main {
+public class OldMain {
     public static String transformHtml(String inputPath) throws Exception {
         File inputFile = new File(inputPath);
         String chap = inputFile.getName().replace(".html", "");
@@ -130,7 +130,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         // Fetch index.html
         String indexHtml;
-        try (InputStream indexStream = Main.class.getResourceAsStream(
+        try (InputStream indexStream = OldMain.class.getResourceAsStream(
                 "/index.html")) {
             indexHtml = IOUtils.toString(indexStream);
         }

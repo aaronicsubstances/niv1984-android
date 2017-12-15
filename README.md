@@ -44,15 +44,3 @@ For release builds create a **keystore.properties** file inside *Niv1984* folder
 * JDK 1.8 (Oracle VM)
 
 * Windows 8.1
-
-### Running Preprocessor
-
-At the root of the repo run
-
-```bash
-mvn -f nivbible-preprocessor\pom.xml clean package
-cd scraped
-mvn -f ..\nivbible-preprocessor\pom.xml exec:java -Dexec.mainClass=com.aaronicsubstances.nivbible.preprocessor.Main
-```
-
-to build the text of the Bible into files which are carried over to the Android app.

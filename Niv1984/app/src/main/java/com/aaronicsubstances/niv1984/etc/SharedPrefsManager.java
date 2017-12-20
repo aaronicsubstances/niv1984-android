@@ -3,6 +3,9 @@ package com.aaronicsubstances.niv1984.etc;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created by Aaron on 12/17/2017.
  */
@@ -12,11 +15,13 @@ public class SharedPrefsManager {
     public static final int BOOK_MODE_NIV = 1;
     public static final int BOOK_MODE_KJV_NIV = 2;
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
+
     private final Context mContext;
 
     private static final String SHARED_PREF_BOOKMARKS = "system_bookmarks";
     private static final String SHARED_PREF_KEY_BOOK_MODE = "book_mode";
-    private static final String SHARED_PREF_KEY_BOOK_MARK_PREFIX = "bsel-";
+    private static final String SHARED_PREF_KEY_BOOK_MARK_PREFIX = "bsel_";
 
     public SharedPrefsManager(Context context) {
         this.mContext = context;

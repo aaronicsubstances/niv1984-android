@@ -1,6 +1,15 @@
 $(function(){
     var lastCnum = -1;
-    //var mode = getQueryVariable('mode');
+    var hrefNoFrag = location.href;
+    var hashIndex = hrefNoFrag.lastIndexOf('#');
+    if (hashIndex != -1) {
+        hrefNoFrag = hrefNoFrag.substring(0, hashIndex);
+    }
+    var hyphenIndex = hrefNoFrag.lastIndexOf('-');
+    var bnum = hrefNoFrag.substring(hyphenIndex-2, hyphenIndex);
+    //console.log(bnum);
+    bnum = parseInt(bnum);
+    //console.log(bnum);
     $(window).scroll(function(){
         // Get container scroll position
         var fromTop = $(this).scrollTop();
@@ -19,7 +28,7 @@ $(function(){
         }
         if (window.biblei) {
             if (targetCnum != lastCnum) {
-                biblei.javaCacheCurrentChapter(targetCnum);
+                biblei.javaCacheCurrentChapter(bnum, targetCnum);
                 lastCnum = targetCnum;
             }
         }

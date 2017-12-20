@@ -16,16 +16,14 @@ public class BibleJs {
     private static final Logger LOGGER = LoggerFactory.getLogger(BibleJs.class);
 
     private final SharedPrefsManager mPrefMgr;
-    private final int bnum;
 
-    public BibleJs(Context context, int bnum) {
+    public BibleJs(Context context) {
         mPrefMgr = new SharedPrefsManager(context);
-        this.bnum = bnum;
     }
 
     @JavascriptInterface
-    public void javaCacheCurrentChapter(int cnum) {
-        LOGGER.debug("Saving current chapter {}...", cnum);
+    public void javaCacheCurrentChapter(int bnum, int cnum) {
+        LOGGER.debug("Saving current chapter {} for book {}...", cnum, bnum);
         mPrefMgr.setLastChapter(bnum, cnum);
     }
 }

@@ -47,6 +47,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private RadioButton nivOnly, kjvOnly, bothBibles;
 
     private SharedPrefsManager mPrefMgr;
+    private boolean mSkipRefresh;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -88,6 +89,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         bothBibles = (RadioButton)root.findViewById(R.id.bothOnly);
 
         setUpBrowserView();
+        reloadBookUrl(true);
 
         return root;
     }
@@ -121,6 +123,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         }
 
         mBookView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+                    if (!mSkipRefresh) {
+                        mBookView.setVisibility(View.VISIBLE);
+                    }
+                    mSkipRefresh = true;
+                }
+            }
 
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
@@ -131,17 +142,13 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             }
         });
 
-        mBookView.addJavascriptInterface(new BibleJs(getContext(), mBookNumber),
+        mBookView.addJavascriptInterface(new BibleJs(getContext()),
                 BibleJs.NAME);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        reloadBookUrl();
-    }
+    private void reloadBookUrl(boolean refresh) {
+        if (mBookNumber <= 0) return;
 
-    private void reloadBookUrl() {
         int lastBookMode = mPrefMgr.getLastBookMode();
         String suffix;
         switch (lastBookMode) {
@@ -163,7 +170,11 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         if (lastChapter > 0) {
             bookUrl += "#" + createChapFragId(lastChapter);
         }
-
+        LOGGER.info("Loading book url {}", bookUrl);
+        if (refresh) {
+            mBookView.setVisibility(View.INVISIBLE);
+        }
+        mSkipRefresh = !refresh;
         mBookView.loadUrl(bookUrl);
     }
 
@@ -181,10 +192,10 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                     mode = SharedPrefsManager.BOOK_MODE_KJV_NIV;
                 }
                 else if (v == kjvOnly) {
-                    mode = SharedPrefsManager.BOOK_MODE_NIV;
+                    mode = SharedPrefsManager.BOOK_MODE_KJV;
                 }
                 mPrefMgr.setLastBookMode(mode);
-                reloadBookUrl();
+                reloadBookUrl(false);
             }
         }
     }
@@ -209,7 +220,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mPrefMgr.setLastChapter(mBookNumber, position+1);
-        reloadBookUrl();
+        reloadBookUrl(false);
     }
 
     @Override
@@ -243,6 +254,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     public void setBookNumber(int bookNumber) {
         mBookNumber = bookNumber;
+        reloadBookUrl(true);
     }
 
     /**

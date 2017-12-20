@@ -6,10 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.ShareCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
@@ -17,16 +14,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 
+import com.aaronicsubstances.niv1984.R;
+import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.fragments.AppDialogFragment;
 import com.aaronicsubstances.niv1984.fragments.BookListFragment;
 import com.aaronicsubstances.niv1984.fragments.BookTextFragment;
-import com.aaronicsubstances.niv1984.R;
-import com.aaronicsubstances.niv1984.etc.Utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         BookListFragment.OnBookSelectionListener,
@@ -38,11 +33,15 @@ public class MainActivity extends AppCompatActivity implements
     private static final String SAVED_STATE_KEY_BOOK_NUMBER = MainActivity.class +
             ".bnum";
 
+    private static final String FRAG_BOOK_TEXT = MainActivity.class.getName() + ".bookText";
+
+    private static final String FRAG_BOOK_LIST = MainActivity.class.getName() + ".bookList";
+
     private AppCompatSpinner mChapterSpinner;
 
-    private int mBookNumber = 0;
-    private ViewPager mPager;
-    private MainPagerAdapter mPagerAdapter;
+    private int mBookNumber;
+    private Fragment mBookListFrag;
+    private BookTextFragment mBookTextFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,13 +61,28 @@ public class MainActivity extends AppCompatActivity implements
             mBookNumber = savedInstanceState.getInt(SAVED_STATE_KEY_BOOK_NUMBER);
         }
 
-        // Instantiate a ViewPager and a PagerAdapter.
-        mPager = (ViewPager)findViewById(R.id.pager);
-        mPagerAdapter = new MainPagerAdapter(getSupportFragmentManager());
-        mPager.setAdapter(mPagerAdapter);
+        mBookTextFrag = (BookTextFragment) getSupportFragmentManager().findFragmentByTag(
+                FRAG_BOOK_TEXT);
+        if (mBookTextFrag == null) {
+            mBookTextFrag = BookTextFragment.newInstance(mBookNumber);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, mBookTextFrag, FRAG_BOOK_TEXT)
+                    .commit();
+        }
+        mBookListFrag = getSupportFragmentManager().findFragmentByTag(FRAG_BOOK_LIST);
+        if (mBookListFrag == null) {
+            mBookListFrag = BookListFragment.newInstance(null, null);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.container, mBookListFrag, FRAG_BOOK_LIST)
+                    .commit();
+        }
 
         if (mBookNumber > 0) {
             onBookSelected(mBookNumber);
+        }
+        else {
+            getSupportFragmentManager().beginTransaction().show(mBookListFrag)
+                    .hide(mBookTextFrag).commit();
         }
     }
 
@@ -212,67 +226,13 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onBookSelected(int bookNumber) {
         mBookNumber = bookNumber;
-        List<Fragment> frags = getSupportFragmentManager().getFragments();
-        for (Fragment f : frags) {
-            if (f instanceof BookTextFragment) {
-                ((BookTextFragment)f).setBookNumber(bookNumber);
-                break;
-            }
-        }
-        mPager.setCurrentItem(1);
+        mBookTextFrag.setBookNumber(bookNumber);
+        getSupportFragmentManager().beginTransaction().show(mBookTextFrag)
+                .hide(mBookListFrag)
+                .addToBackStack(null).commit();
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mPager.getCurrentItem() > 0) {
-            mPager.setCurrentItem(0);
-            mBookNumber = 0;
-        }
-        else {
-            finish();
-        }
-    }
-
-    private class MainPagerAdapter extends FragmentPagerAdapter {
-        public MainPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            switch (position) {
-                case 0:
-                    return BookListFragment.newInstance(null, null);
-                case 1:
-                    return BookTextFragment.newInstance(mBookNumber);
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 1:
-                    if (mBookNumber > 0) {
-                        String bookName = getResources().getStringArray(R.array.books)[mBookNumber - 1];
-                        return bookName;
-                    }
-                    else {
-                        // fall through.
-                    }
-                default:
-                    return getResources().getString(R.string.app_name);
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 2;
-        }
     }
 }

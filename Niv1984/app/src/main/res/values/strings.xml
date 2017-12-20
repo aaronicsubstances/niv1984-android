@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "NIV1984"><!ENTITY author "Mr. Aaron Baffour-Awuah">]>
 <resources>
     <string name="app_name">&appname;</string>
-    <string name="title_activity_bible">NIV1984 Bible</string>
+    <string name="title_activity_bible">&appname; Bible</string>
     <string name="title_activity_about">About</string>
     <string name="action_about">About</string>
     <string name="action_settings">Settings</string>
@@ -164,4 +164,8 @@
         <item>JUDE</item>
         <item>REV</item>
     </string-array>
+    <string name="title_activity_book">BookActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

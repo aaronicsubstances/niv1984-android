@@ -10,6 +10,22 @@ def keystoreProperties = new Properties()
 // Load your keystore.properties file into the keystoreProperties object.
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def defaultPropertiesFile = project.file("app.properties")
+
+def debugProperties = new Properties()
+debugProperties.load(new FileInputStream(defaultPropertiesFile))
+def debugPropertiesFile = project.file("app-debug.properties")
+if (debugPropertiesFile.exists()) {
+    debugProperties.load(new FileInputStream(debugPropertiesFile))
+}
+
+def releaseProperties = new Properties()
+releaseProperties.load(new FileInputStream(defaultPropertiesFile))
+def releasePropertiesFile = project.file("app-release.properties")
+if (releasePropertiesFile.exists()) {
+    releaseProperties.load(new FileInputStream(releasePropertiesFile))
+}
+
 android {
     signingConfigs {
         config {
@@ -20,20 +36,30 @@ android {
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.aaronicsubstances.niv1984"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 21
-        versionName "1.4.1"
+        versionCode 200
+        versionName "2.0.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            applicationIdSuffix '.debug'
+            versionNameSuffix '-DEBUG'
+
+            buildConfigField("String", "API_BASE_URL", "\"${debugProperties['apiBaseUrl']}\"")
+            buildConfigField("String", "API_CRED", "\"${debugProperties['apiCred']}\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
+
+            buildConfigField("String", "API_BASE_URL", "\"${releaseProperties['apiBaseUrl']}\"")
+            buildConfigField("String", "API_CRED", "\"${releaseProperties['apiCred']}\"")
         }
     }
 }

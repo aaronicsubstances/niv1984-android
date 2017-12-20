@@ -1,8 +1,29 @@
 $(function(){
-    /*var e = getQueryVariable('e');
-    if (e) {
-        $("#wrapper").load(e);
-    }*/
+    var lastCnum = -1;
+    //var mode = getQueryVariable('mode');
+    $(window).scroll(function(){
+        // Get container scroll position
+        var fromTop = $(this).scrollTop();
+
+        // Get the current chapter: last hidden chapter.
+        var targetCnum = 0;
+        for (var cnum = 1; cnum <= chapterCounts.length; cnum++) {
+            var fragId = createChapFragId(cnum);
+            var offsetTop = $('#'+fragId).offset().top;
+            if (offsetTop <= fromTop) {
+                targetCnum = cnum;
+            }
+            else {
+                break;
+            }
+        }
+        if (window.biblei) {
+            if (targetCnum != lastCnum) {
+                biblei.javaCacheCurrentChapter(targetCnum);
+                lastCnum = targetCnum;
+            }
+        }
+    });
 });
 
 function getQueryVariable(variable) {
@@ -19,27 +40,6 @@ function getQueryVariable(variable) {
     }
 }
 
-function goToChapter(chapterUrl) {
-    var hashIndex = chapterUrl.indexOf("#");
-    var hash = chapterUrl.substring(hashIndex+1);
-    console.log("got hash: " + hash);
-    document.getElementById(hash).scrollIntoView();
-}
-
-function goToBook(bookUrl) {
-    /*$("body").load(bookUrl + ' #wrapper', function(responseText, textStatus, jqXHR){
-        biblei.jsDoneLoading(textStatus);
-    });*/
-    $.ajax(bookUrl, {
-        dataType: "html",
-        success: function(data, textStatus) {
-            $('#wrapper').html(
-                $("<div>").append($.parseHTML(data)).find('#wrapper')
-            );
-            biblei.jsDoneLoading(textStatus);
-        },
-        error: function() {
-            location.href = bookUrl;
-        }
-    });
+function createChapFragId(cnum) {
+    return "chapter-" + cnum;
 }

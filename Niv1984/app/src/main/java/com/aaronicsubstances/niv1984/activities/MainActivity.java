@@ -1,7 +1,6 @@
 package com.aaronicsubstances.niv1984.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -12,6 +11,8 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.aaronicsubstances.niv1984.R;
@@ -25,8 +26,9 @@ import org.slf4j.LoggerFactory;
 
 public class MainActivity extends AppCompatActivity implements
         BookListFragment.OnBookSelectionListener,
-        BookTextFragment.OnFragmentInteractionListener,
-        AppDialogFragment.NoticeDialogListener {//}, AdapterView.OnItemSelectedListener {
+        BookTextFragment.OnBookTextFragmentInteractionListener,
+        AppDialogFragment.NoticeDialogListener,
+        AdapterView.OnItemSelectedListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
 
@@ -37,11 +39,10 @@ public class MainActivity extends AppCompatActivity implements
 
     private static final String FRAG_BOOK_LIST = MainActivity.class.getName() + ".bookList";
 
-    private AppCompatSpinner mChapterSpinner;
-
     private int mBookNumber;
     private Fragment mBookListFrag;
     private BookTextFragment mBookTextFrag;
+    private AppCompatSpinner mBookDropDown;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +51,14 @@ public class MainActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mChapterSpinner = (AppCompatSpinner)findViewById(R.id.spinner);
+        mBookDropDown = (AppCompatSpinner)findViewById(R.id.bookDropDown);
+        String[] books = getResources().getStringArray(R.array.books);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1,
-                new String[0]);
+                R.layout.spinner_item,
+                books);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mChapterSpinner.setAdapter(adapter);
+        mBookDropDown.setAdapter(adapter);
 
         if (savedInstanceState != null) {
             mBookNumber = savedInstanceState.getInt(SAVED_STATE_KEY_BOOK_NUMBER);
@@ -77,12 +80,30 @@ public class MainActivity extends AppCompatActivity implements
                     .commit();
         }
 
+        updateFragments();
+    }
+
+    private void updateFragments() {
         if (mBookNumber > 0) {
-            onBookSelected(mBookNumber);
+            mBookTextFrag.setBookNumber(mBookNumber);
+            // set selection before listening to selection events.
+            mBookDropDown.setSelection(mBookNumber - 1);
+            mBookDropDown.setOnItemSelectedListener(this);
+            getSupportFragmentManager().beginTransaction().show(mBookTextFrag)
+                    .hide(mBookListFrag).commit();
+
+            getSupportActionBar().setTitle(null);
+            mBookDropDown.setVisibility(View.VISIBLE);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
         }
         else {
+            mBookDropDown.setOnItemSelectedListener(null);
             getSupportFragmentManager().beginTransaction().show(mBookListFrag)
                     .hide(mBookTextFrag).commit();
+
+            getSupportActionBar().setTitle(R.string.app_name);
+            mBookDropDown.setVisibility(View.GONE);
+            getSupportActionBar().setDisplayShowHomeEnabled(false);
         }
     }
 
@@ -215,24 +236,45 @@ public class MainActivity extends AppCompatActivity implements
                         .setChooserTitle(getString(R.string.feedback_title))
                         .startChooser();
                 return true;
-            /*case android.R.id.home:
-                showBrowser(false);
-                return true;*/
+            case android.R.id.home:
+                mBookNumber = 0;
+                updateFragments();
+                return true;
 
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onBookSelected(int bookNumber) {
-        mBookNumber = bookNumber;
-        mBookTextFrag.setBookNumber(bookNumber);
-        getSupportFragmentManager().beginTransaction().show(mBookTextFrag)
-                .hide(mBookListFrag)
-                .addToBackStack(null).commit();
+    public void onBackPressed() {
+        if (mBookNumber > 0) {
+            mBookNumber = 0;
+            updateFragments();
+        }
+        else {
+            finish();
+        }
     }
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void onBookSelected(int bookNumber) {
+        mBookNumber = bookNumber;
+        updateFragments();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        mBookNumber = position + 1;
+        updateFragments();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+    @Override
+    public void onBookTextInteraction() {
+
     }
 }

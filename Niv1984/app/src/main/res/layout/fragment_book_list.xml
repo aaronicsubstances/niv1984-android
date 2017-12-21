@@ -1,13 +1,6 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aaronicsubstances.niv1984.fragments.BookListFragment">
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:id="@+id/list"/>
-
-</FrameLayout>
+    android:id="@+id/list"
+    tools:context="com.aaronicsubstances.niv1984.fragments.BookListFragment"/>

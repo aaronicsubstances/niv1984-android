@@ -19,18 +19,19 @@
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                  android:id="@+id/bookDropDown"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
                 android:layout_alignRight="@id/toolbar"
-                android:layout_marginLeft="20sp"
-                android:minWidth="60sp"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                >
+                  android:layout_marginLeft="20sp"
+                    android:minWidth="60sp"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                           >
 
             </android.support.v7.widget.AppCompatSpinner>
 
-        </android.support.v7.widget.Toolbar>
+
+    </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 

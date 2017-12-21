@@ -1,4 +1,11 @@
 $(function(){
+    $('#wrapper').fadeIn();
+
+    var zoom = getQueryVariable('zoom');
+    if (zoom) {
+        applyTextZoom(zoom);
+    }
+
     var lastCnum = -1;
     var hrefNoFrag = location.href;
     var hashIndex = hrefNoFrag.lastIndexOf('#');
@@ -51,4 +58,8 @@ function getQueryVariable(variable) {
 
 function createChapFragId(cnum) {
     return "chapter-" + cnum;
+}
+
+function applyTextZoom(zoom) {
+    $('body').css({'font-size':zoom});
 }

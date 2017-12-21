@@ -38,7 +38,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private static final String ARG_BOOK_NUMBER = "bookNumber";
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextFragment.class);
-    private static final String[] ZOOM_LEVELS = {"100%", "150%", "200%"};
+    private static final String[] ZOOM_LEVELS = {"70%", "100%", "150%", "200%"};
+    private static final int DEFAULT_ZOOM_INDEX = 1;
 
     private int mBookNumber = -1, mChapterNumber = -1, mZoomLevelIndex = -1;
 
@@ -95,14 +96,14 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         setUpZoomSpinner();
         setUpChapterSpinner();
         setUpBrowserView();
-        reloadBookUrl();
 
         return root;
     }
 
     public void setBookNumber(int bookNumber) {
-        mBookNumber = bookNumber;
+        LOGGER.debug("setBookNumber");
         enableSpinnerListeners(false);
+        mBookNumber = bookNumber;
         reloadBookUrl();
         setUpChapterSpinner();
         enableSpinnerListeners(true);
@@ -167,7 +168,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         if (mChapterNumber > 0) {
             mChapterSpinner.setSelection(mChapterNumber - 1);
-            mChapterSpinner.setSelected(true);
         }
     }
 
@@ -181,7 +181,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         mZoomLevelIndex = mPrefMgr.getLastZoomLevelIndex();
         if (mZoomLevelIndex >= 0) {
             mZoomSpinner.setSelection(mZoomLevelIndex);
-            mZoomSpinner.setSelected(true);
         }
     }
 
@@ -202,7 +201,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 break;
         }
 
-        String zoom = ZOOM_LEVELS[mZoomLevelIndex < 0 ? 0 : mZoomLevelIndex];
+        String zoom = ZOOM_LEVELS[mZoomLevelIndex < 0 ? DEFAULT_ZOOM_INDEX : mZoomLevelIndex];
         String bookUrl = String.format("file:///android_asset/kjv-niv/%02d-%s.html?zoom=%s",
                 mBookNumber, suffix, Uri.encode(zoom));
 
@@ -211,14 +210,17 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             bookUrl += String.format("#chapter-%s", mChapterNumber);
         }
 
-        LOGGER.info("Loading book url {}", bookUrl);
         if (!bookUrl.equals(mBookView.getUrl())) {
+            LOGGER.info("Loading book url {}", bookUrl);
             mBookView.loadUrl(bookUrl);
+        }
+        else {
+            LOGGER.warn("Book url unchanged: {}", bookUrl);
         }
     }
 
     private void applyTextZoom() {
-        String zoom = ZOOM_LEVELS[mZoomLevelIndex < 0 ? 0 : mZoomLevelIndex];
+        String zoom = ZOOM_LEVELS[mZoomLevelIndex < 0 ? DEFAULT_ZOOM_INDEX : mZoomLevelIndex];
         Utils.loadJavascript(mBookView, "applyTextZoom", new String[]{ zoom });
     }
 
@@ -242,7 +244,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        LOGGER.debug("onItemSelected");
         enableSpinnerListeners(false);
         if (parent == mChapterSpinner) {
             LOGGER.debug("onItemSelected for mChapterSpinner");

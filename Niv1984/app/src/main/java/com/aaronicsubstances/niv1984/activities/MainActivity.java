@@ -264,6 +264,7 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        LOGGER.debug("onItemSelected");
         mBookNumber = position + 1;
         updateFragments();
     }

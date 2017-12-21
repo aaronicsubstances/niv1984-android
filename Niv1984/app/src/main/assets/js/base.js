@@ -1,5 +1,5 @@
 $(function(){
-    $('#wrapper').fadeIn();
+    //$('#wrapper').fadeIn();
 
     var zoom = getQueryVariable('zoom');
     if (zoom) {

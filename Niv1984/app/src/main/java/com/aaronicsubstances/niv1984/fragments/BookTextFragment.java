@@ -136,6 +136,12 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         }
 
         mBookView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress == 100) {
+
+                }
+            }
 
             @Override
             public boolean onConsoleMessage(ConsoleMessage consoleMessage) {

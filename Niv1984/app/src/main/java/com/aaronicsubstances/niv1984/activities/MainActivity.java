@@ -1,21 +1,25 @@
 package com.aaronicsubstances.niv1984.activities;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ShareCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.aaronicsubstances.niv1984.R;
+import com.aaronicsubstances.niv1984.apis.Api;
+import com.aaronicsubstances.niv1984.apis.DefaultApiRequestModel;
+import com.aaronicsubstances.niv1984.apis.VersionCheckResponse;
+import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.fragments.AppDialogFragment;
 import com.aaronicsubstances.niv1984.fragments.BookListFragment;
@@ -24,10 +28,13 @@ import com.aaronicsubstances.niv1984.fragments.BookTextFragment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MainActivity extends AppCompatActivity implements
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class MainActivity extends BaseActivity implements
         BookListFragment.OnBookSelectionListener,
         BookTextFragment.OnBookTextFragmentInteractionListener,
-        AppDialogFragment.NoticeDialogListener,
         AdapterView.OnItemSelectedListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
@@ -43,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements
     private Fragment mBookListFrag;
     private BookTextFragment mBookTextFrag;
     private AppCompatSpinner mBookDropDown;
+
+    private SharedPrefsManager mPrefM;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +89,11 @@ public class MainActivity extends AppCompatActivity implements
                     .commit();
         }
 
+        mPrefM = new SharedPrefsManager(this);
+
         updateFragments();
+
+        requireUpdateIfNecessary();
     }
 
     private void updateFragments() {
@@ -94,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements
 
             getSupportActionBar().setTitle(null);
             mBookDropDown.setVisibility(View.VISIBLE);
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
         else {
             mBookDropDown.setOnItemSelectedListener(null);
@@ -103,7 +117,8 @@ public class MainActivity extends AppCompatActivity implements
 
             getSupportActionBar().setTitle(R.string.app_name);
             mBookDropDown.setVisibility(View.GONE);
-            getSupportActionBar().setDisplayShowHomeEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 
@@ -114,90 +129,95 @@ public class MainActivity extends AppCompatActivity implements
         outState.putInt(SAVED_STATE_KEY_BOOK_NUMBER, mBookNumber);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
+    private void requireUpdateIfNecessary() {
+        String[] temp = new String[3];
+        int latestVersionCode = mPrefM.getCachedLatestVersion(temp);
+        String latestVersion = temp[0], latestVersionUpgradeRequired = temp[1],
+                latestVersionUpgradeRecommended = temp[2];
 
-        checkForRequiredUpgrade();
-    }
-
-    public void checkForRequiredUpgrade() {
-        if (requireUpdateIfNecessary()) return;
-
-        new AsyncTask() {
-            @Override
-            protected void onPostExecute(Object o) {
-                if (isFinishing()) return;
-                if (o instanceof Exception) {
-                    LOGGER.error("Error occurred while retrieving latest version.", (Exception)o);
-                }
-                requireUpdateIfNecessary();
+        // Don't require update if installed version is not lower than latest version.
+        // This solves potential problem after upgrade where upgrade required indicators
+        // are no longer meant for the now upgraded app version.
+        if (latestVersion == null ||
+                Utils.getAppVersionCode(this) >= latestVersionCode) {
+            // Get and cache latest version
+            try {
+                checkForLatestVersion();
             }
-
-            @Override
-            protected Object doInBackground(Object[] params) {
-                try {
-                    String uid = Utils.getUserUid(MainActivity.this);
-                    String currentVersion = Utils.getAppVersion(MainActivity.this);
-                    String url = Utils.getApiUrl(uid, Utils.API_CURRENT_VERSION_PATH +
-                            "?v=%s", currentVersion);
-                    LOGGER.info("Checking for latest version at {}", url);
-                    String versionCheckResponse = Utils.httpGet(url);
-                    LOGGER.info("Latest version check returned: {}", versionCheckResponse);
-                    if (!versionCheckResponse.matches("^\\*?(\\w|\\.)+$")) {
-                        throw new RuntimeException("Unexpected response from version check: " +
-                                versionCheckResponse);
-                    }
-                    boolean forceUpdate = false;
-                    if (versionCheckResponse.startsWith("*")) {
-                        versionCheckResponse = versionCheckResponse.substring(1);
-                        forceUpdate = true;
-                    }
-                    Utils.cacheLatestVersion(MainActivity.this, versionCheckResponse, forceUpdate);
-                    return null;
-                }
-                catch (Exception ex) {
-                    return ex;
-                }
+            catch (Throwable ex) {
+                LOGGER.warn("Version check failed.", ex);
             }
-        }.execute();
-    }
-
-    private boolean requireUpdateIfNecessary() {
-        if (getCacheDir() != null) return true;
-        try {
-            boolean updateRequired = Utils.isVersionUpdateRequired(this);
-            if (!updateRequired) {
-                return false;
-            }
-
-            String message = getResources().getString(R.string.message_update_required);
-            String updateAction = getResources().getString(R.string.action_update);
-            DialogFragment newFragment = AppDialogFragment.newInstance(message, updateAction, null);
-            newFragment.setCancelable(false);
-            newFragment.show(getSupportFragmentManager(), "update");
-            return true;
+            return;
         }
-        catch (Exception ex) {
-            LOGGER.error("Error occurred while requiring update action from user.", ex);
-            // just in case dialog fragment complains that it's not in the state/mood to operate.
-            return true;
+
+        String updateAction = getResources().getString(R.string.action_update);
+        String cancelAction = getResources().getString(R.string.action_cancel);
+        if (!TextUtils.isEmpty(latestVersionUpgradeRequired)) {
+            String message = latestVersionUpgradeRequired;
+            DialogFragment dialogFragment = AppDialogFragment.newInstance(message, updateAction,
+                    cancelAction);
+            showAppDialog(dialogFragment, new AppDialogFragment.NoticeDialogListener() {
+                @Override
+                public void onDialogPositiveClick(DialogFragment dialog) {
+                    Utils.openAppOnPlayStore(MainActivity.this);
+                    finish();
+                }
+
+                @Override
+                public void onDialogNegativeClick(DialogFragment dialog) {
+                    finish();
+                }
+            });
+            getSupportFragmentManager().executePendingTransactions();
+        }
+
+        else if (!TextUtils.isEmpty(latestVersionUpgradeRecommended)) {
+            String message = latestVersionUpgradeRecommended;
+            DialogFragment newFragment = AppDialogFragment.newInstance(message, updateAction,
+                    cancelAction);
+            showAppDialog(newFragment, new AppDialogFragment.NoticeDialogListener() {
+                @Override
+                public void onDialogPositiveClick(DialogFragment dialog) {
+                    Utils.openAppOnPlayStore(MainActivity.this);
+                    finish();
+                }
+
+                @Override
+                public void onDialogNegativeClick(DialogFragment dialog) {
+                    // do nothing.
+                }
+            });
+            getSupportFragmentManager().executePendingTransactions();
         }
     }
 
-    @Override
-    public void onDialogPositiveClick(DialogFragment dialog) {
-        LOGGER.info("Starting update...");
-        dialog.dismiss();
-        Utils.openAppOnPlayStore(this);
-        finish();
-    }
+    private void checkForLatestVersion() throws Exception {
+        // Set up http api client for use as needed.
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(Utils.API_BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        Api apiService = retrofit.create(Api.class);
 
-    @Override
-    public void onDialogNegativeClick(DialogFragment dialog) {
-        LOGGER.warn("Update cancelled.");
-        dialog.dismiss();
-        finish();
+        DefaultApiRequestModel versionCheckRequest = new DefaultApiRequestModel(this);
+        Response<VersionCheckResponse> httpResponse = apiService.checkLatestVersion(
+                Utils.API_CRED, versionCheckRequest).execute();
+
+        if (!httpResponse.isSuccessful()) {
+            throw new Exception(String.format("Version check returned failure response %s %s: %s",
+                    httpResponse.code(), httpResponse.message(),
+                    httpResponse.errorBody() != null ? httpResponse.errorBody().string() : ""));
+        }
+
+        VersionCheckResponse versionCheckResponse = httpResponse.body();
+
+        LOGGER.info("Successfully retrieved latest version as {}",
+                versionCheckResponse.getVersionName());
+
+        mPrefM.cacheLatestVersion(versionCheckResponse.getVersionName(),
+                versionCheckResponse.getVersionCode(),
+                versionCheckResponse.getForceUpgrade(),
+                versionCheckResponse.getRecommendUpgrade());
     }
 
     @Override

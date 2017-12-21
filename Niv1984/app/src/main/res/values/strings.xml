@@ -9,6 +9,7 @@
     <string name="action_share">Share</string>
     <string name="action_feedback">Your Comment</string>
     <string name="action_update">Update</string>
+    <string name="action_cancel">Cancel</string>
     <string name="share">Share &appname;</string>
     <string name="share_message">Free offline &appname; version of the Bible (without gender neutrality) in a user-friendly interface,
         with footnotes included and devoid of bothersome ads! Download from %s</string>

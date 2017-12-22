@@ -35,7 +35,9 @@ import org.slf4j.LoggerFactory;
  */
 public class BookTextFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener {
-    private static final String ARG_BOOK_NUMBER = "bookNumber";
+    private static final String ARG_PARAM1 = "param1";
+
+    private String mParam1;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextFragment.class);
     private static final String[] ZOOM_LEVELS = {"70%", "100%", "150%", "200%"};
@@ -51,6 +53,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private SharedPrefsManager mPrefMgr;
 
+    private boolean mViewCreated = false;
+
     public BookTextFragment() {
         // Required empty public constructor
     }
@@ -59,13 +63,13 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param bookNumber the book number
+     * @param param1 Parameter 1.
      * @return A new instance of fragment BookTextFragment.
      */
-    public static BookTextFragment newInstance(int bookNumber) {
+    public static BookTextFragment newInstance(String param1) {
         BookTextFragment fragment = new BookTextFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_BOOK_NUMBER, bookNumber);
+        args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,7 +78,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mBookNumber = getArguments().getInt(ARG_BOOK_NUMBER);
+            mParam1 = getArguments().getString(ARG_PARAM1);
         }
     }
 
@@ -93,20 +97,32 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         mPrefMgr = new SharedPrefsManager(getContext());
 
-        setUpZoomSpinner();
-        setUpChapterSpinner();
         setUpBrowserView();
+        setUpZoomSpinner();
+
+        mViewCreated = true;
+        refreshView();
 
         return root;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mViewCreated = false;
+    }
+
     public void setBookNumber(int bookNumber) {
-        LOGGER.debug("setBookNumber");
-        enableSpinnerListeners(false);
         mBookNumber = bookNumber;
+        if (mViewCreated) {
+            refreshView();
+        }
+    }
+
+    public void refreshView() {
         reloadBookUrl();
         setUpChapterSpinner();
-        enableSpinnerListeners(true);
     }
 
     private void setUpBrowserView() {
@@ -172,9 +188,13 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChapterSpinner.setAdapter(adapter);
 
+        // Disable listener before setting selection.
+        mChapterSpinner.setOnItemSelectedListener(null);
         if (mChapterNumber > 0) {
-            mChapterSpinner.setSelection(mChapterNumber - 1);
+            // Pass animate=false to force immediate firing of listeners.
+            mChapterSpinner.setSelection(mChapterNumber - 1, false);
         }
+        mChapterSpinner.setOnItemSelectedListener(this);
     }
 
     private void setUpZoomSpinner() {
@@ -186,8 +206,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         mZoomLevelIndex = mPrefMgr.getLastZoomLevelIndex();
         if (mZoomLevelIndex >= 0) {
-            mZoomSpinner.setSelection(mZoomLevelIndex);
+            mZoomSpinner.setSelection(mZoomLevelIndex, false);
         }
+        mZoomSpinner.setOnItemSelectedListener(this);
     }
 
     private void reloadBookUrl() {
@@ -216,13 +237,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             bookUrl += String.format("#chapter-%s", mChapterNumber);
         }
 
-        if (!bookUrl.equals(mBookView.getUrl())) {
-            LOGGER.info("Loading book url {}", bookUrl);
-            mBookView.loadUrl(bookUrl);
-        }
-        else {
-            LOGGER.warn("Book url unchanged: {}", bookUrl);
-        }
+        LOGGER.info("Loading book url {}", bookUrl);
+        mBookView.loadUrl(bookUrl);
     }
 
     private void applyTextZoom() {
@@ -250,40 +266,17 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        enableSpinnerListeners(false);
         if (parent == mChapterSpinner) {
-            LOGGER.debug("onItemSelected for mChapterSpinner");
             mPrefMgr.setLastChapter(mBookNumber, position+1);
             reloadBookUrl();
         }
         else if (parent == mZoomSpinner) {
-            LOGGER.debug("onItemSelected for mZoomSpinner");
             mZoomLevelIndex = position;
             mPrefMgr.setLastZoomLevelIndex(mZoomLevelIndex);
             applyTextZoom();
         }
         else {
             LOGGER.error("onItemSelected didn't match any spinner.");
-        }
-        enableSpinnerListeners(true);
-    }
-
-    private void enableSpinnerListeners(boolean enable) {
-        if (enable) {
-            if (mChapterSpinner != null) {
-                mChapterSpinner.setOnItemSelectedListener(this);
-            }
-            if (mZoomSpinner != null) {
-                mZoomSpinner.setOnItemSelectedListener(this);
-            }
-        }
-        else {
-            if (mChapterSpinner != null) {
-                mChapterSpinner.setOnItemSelectedListener(null);
-            }
-            if (mZoomSpinner != null) {
-                mZoomSpinner.setOnItemSelectedListener(null);
-            }
         }
     }
 

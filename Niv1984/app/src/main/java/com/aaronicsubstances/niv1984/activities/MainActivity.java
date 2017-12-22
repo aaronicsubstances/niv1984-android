@@ -71,18 +71,15 @@ public class MainActivity extends BaseActivity implements
 
         if (savedInstanceState != null) {
             mBookNumber = savedInstanceState.getInt(SAVED_STATE_KEY_BOOK_NUMBER);
+            mBookListFrag = getSupportFragmentManager().findFragmentByTag(FRAG_BOOK_LIST);
+            mBookTextFrag = (BookTextFragment) getSupportFragmentManager().findFragmentByTag(
+                    FRAG_BOOK_TEXT);
         }
-
-        mBookTextFrag = (BookTextFragment) getSupportFragmentManager().findFragmentByTag(
-                FRAG_BOOK_TEXT);
-        if (mBookTextFrag == null) {
-            mBookTextFrag = BookTextFragment.newInstance(mBookNumber);
+        else {
+            mBookTextFrag = BookTextFragment.newInstance(null);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, mBookTextFrag, FRAG_BOOK_TEXT)
                     .commit();
-        }
-        mBookListFrag = getSupportFragmentManager().findFragmentByTag(FRAG_BOOK_LIST);
-        if (mBookListFrag == null) {
             mBookListFrag = BookListFragment.newInstance(null, null);
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, mBookListFrag, FRAG_BOOK_LIST)
@@ -93,14 +90,16 @@ public class MainActivity extends BaseActivity implements
 
         updateFragments();
 
-        requireUpdateIfNecessary();
+        if (savedInstanceState == null) {
+            requireUpdateIfNecessary();
+        }
     }
 
     private void updateFragments() {
         if (mBookNumber > 0) {
             mBookTextFrag.setBookNumber(mBookNumber);
             // set selection before listening to selection events.
-            mBookDropDown.setSelection(mBookNumber - 1);
+            mBookDropDown.setSelection(mBookNumber - 1,false);
             mBookDropDown.setOnItemSelectedListener(this);
             getSupportFragmentManager().beginTransaction().show(mBookTextFrag)
                     .hide(mBookListFrag).commit();
@@ -284,7 +283,6 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        LOGGER.debug("onItemSelected");
         mBookNumber = position + 1;
         updateFragments();
     }

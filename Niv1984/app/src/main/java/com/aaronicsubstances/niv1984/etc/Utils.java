@@ -27,7 +27,7 @@ public class Utils {
     public static final String APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id=";
     public static final int COPY_BUF_SZ = 8192;
 
-    public static final String API_CURRENT_VERSION_PATH = "/mobile/version/latest";
+    public static final String API_CURRENT_VERSION_PATH = "/mobile/versions/latest";
 
     public static final String DEFAULT_CHARSET = "utf-8";
 

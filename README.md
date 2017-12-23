@@ -9,7 +9,7 @@ The text for the Holy Scriptures in KJV were taken from the mcb-kjv distribution
 
 ## Building Android App
 
-Create an **app-release.properties** file besides the **app-debug.properties** file for release builds in order to specify a base API endpoint and credentials for use by mobile app.
+Create **app-debug.properties** and **app-release.properties** files besides the **app.properties** file for debug and release build variants respectively in order to specify a base API endpoint and credentials for use by mobile app.
 
 Currently there's only one API involved, and that's the API for getting the latest version of the mobile app in order to force upgrades if necessary.
 

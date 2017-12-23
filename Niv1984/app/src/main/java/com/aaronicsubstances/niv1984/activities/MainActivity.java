@@ -28,6 +28,8 @@ import com.aaronicsubstances.niv1984.fragments.BookTextFragment;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -149,6 +151,8 @@ public class MainActivity extends BaseActivity implements
             return;
         }
 
+        if (isFinishing()) return;
+
         String updateAction = getResources().getString(R.string.action_update);
         String cancelAction = getResources().getString(R.string.action_cancel);
         if (!TextUtils.isEmpty(latestVersionUpgradeRequired)) {
@@ -199,24 +203,38 @@ public class MainActivity extends BaseActivity implements
         Api apiService = retrofit.create(Api.class);
 
         DefaultApiRequestModel versionCheckRequest = new DefaultApiRequestModel(this);
-        Response<VersionCheckResponse> httpResponse = apiService.checkLatestVersion(
-                Utils.API_CRED, versionCheckRequest).execute();
+        apiService.checkLatestVersion(Utils.API_CRED, versionCheckRequest)
+                .enqueue(new Callback<VersionCheckResponse>() {
+            @Override
+            public void onResponse(Call<VersionCheckResponse> call, Response<VersionCheckResponse> httpResponse) {
+                if (!httpResponse.isSuccessful()) {
+                    try {
+                        LOGGER.warn("Version check returned error response %s %s: %s",
+                                httpResponse.code(), httpResponse.message(),
+                                httpResponse.errorBody() != null ? httpResponse.errorBody().string() : "");
+                    }
+                    catch (Throwable t) {
+                        LOGGER.warn("Failed to fetch version check error response body. ", t);
+                    }
+                    return;
+                }
 
-        if (!httpResponse.isSuccessful()) {
-            throw new Exception(String.format("Version check returned failure response %s %s: %s",
-                    httpResponse.code(), httpResponse.message(),
-                    httpResponse.errorBody() != null ? httpResponse.errorBody().string() : ""));
-        }
+                VersionCheckResponse versionCheckResponse = httpResponse.body();
 
-        VersionCheckResponse versionCheckResponse = httpResponse.body();
+                LOGGER.info("Successfully retrieved latest version as {}",
+                        versionCheckResponse.getVersionName());
 
-        LOGGER.info("Successfully retrieved latest version as {}",
-                versionCheckResponse.getVersionName());
+                mPrefM.cacheLatestVersion(versionCheckResponse.getVersionName(),
+                        versionCheckResponse.getVersionCode(),
+                        versionCheckResponse.getForceUpgrade(),
+                        versionCheckResponse.getRecommendUpgrade());
+            }
 
-        mPrefM.cacheLatestVersion(versionCheckResponse.getVersionName(),
-                versionCheckResponse.getVersionCode(),
-                versionCheckResponse.getForceUpgrade(),
-                versionCheckResponse.getRecommendUpgrade());
+            @Override
+            public void onFailure(Call<VersionCheckResponse> call, Throwable t) {
+                LOGGER.warn("Version check failed. ", t);
+            }
+        });
     }
 
     @Override

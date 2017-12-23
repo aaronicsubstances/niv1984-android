@@ -9,3 +9,4 @@
 .externalNativeBuild
 /keystore.properties
 /app/app-release.properties
+/app/app-debug.properties

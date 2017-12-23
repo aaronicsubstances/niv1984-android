@@ -2,4 +2,5 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="spinner_min_width">60sp</dimen>
+    <dimen name="label_spacing">10sp</dimen>
 </resources>

@@ -92,6 +92,13 @@ public class MainActivity extends BaseActivity implements
 
         updateFragments();
 
+        // Get and cache latest version
+        try {
+            checkForLatestVersionAsync();
+        }
+        catch (Throwable ex) {
+            LOGGER.warn("Version check failed.", ex);
+        }
         if (savedInstanceState == null) {
             requireUpdateIfNecessary();
         }
@@ -141,13 +148,6 @@ public class MainActivity extends BaseActivity implements
         // are no longer meant for the now upgraded app version.
         if (latestVersion == null ||
                 Utils.getAppVersionCode(this) >= latestVersionCode) {
-            // Get and cache latest version
-            try {
-                checkForLatestVersion();
-            }
-            catch (Throwable ex) {
-                LOGGER.warn("Version check failed.", ex);
-            }
             return;
         }
 
@@ -194,7 +194,7 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    private void checkForLatestVersion() throws Exception {
+    private void checkForLatestVersionAsync() throws Exception {
         // Set up http api client for use as needed.
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Utils.API_BASE_URL)

@@ -12,28 +12,30 @@
         <TextView
             android:id="@+id/txt1"
             android:text="@string/action_chapter_selection"
-            android:layout_alignBaseline="@id/chapterDropDown"
-            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/label_spacing"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Spinner
             android:layout_toRightOf="@id/txt1"
             android:id="@+id/chapterDropDown"
             android:minWidth="@dimen/spinner_min_width"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></Spinner>
         <TextView
             android:id="@+id/txt2"
             android:layout_toLeftOf="@id/fontSizes"
-            android:layout_alignBaseline="@id/fontSizes"
-            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/label_spacing"
             android:text="@string/action_zoom"
+            android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <Spinner
             android:id="@+id/fontSizes"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_height="wrap_content"></Spinner>
     </RelativeLayout>
 

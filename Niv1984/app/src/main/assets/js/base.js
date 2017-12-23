@@ -26,7 +26,9 @@ $(function(){
         for (var cnum = 1; cnum <= chapterCounts.length; cnum++) {
             var fragId = createChapFragId(cnum);
             var offsetTop = $('#'+fragId).offset().top;
-            if (offsetTop <= fromTop) {
+            // just a little pixel off by 10 so chapter headings are rightly seen as
+            // current.
+            if (offsetTop-10 < fromTop) {
                 targetCnum = cnum;
             }
             else {

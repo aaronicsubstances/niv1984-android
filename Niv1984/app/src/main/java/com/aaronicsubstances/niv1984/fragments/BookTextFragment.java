@@ -208,6 +208,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         if (mZoomLevelIndex >= 0) {
             mZoomSpinner.setSelection(mZoomLevelIndex, false);
         }
+        else {
+            mZoomSpinner.setSelection(DEFAULT_ZOOM_INDEX, false);
+        }
         mZoomSpinner.setOnItemSelectedListener(this);
     }
 

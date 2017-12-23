@@ -88,7 +88,11 @@ public class SharedPrefsManager {
     public int getCachedLatestVersion(String[] ret) {
         SharedPreferences sharedPrefs = mContext.getSharedPreferences(SHARED_PREF_NAME, 0);
         ret[0] = sharedPrefs.getString(SHARED_PREF_KEY_LATEST_VERSION, null);
-        ret[1] = sharedPrefs.getString(SHARED_PREF_KEY_UPDATE_REQUIRED, null);
+        // used to be bool.
+        try {
+            ret[1] = sharedPrefs.getString(SHARED_PREF_KEY_UPDATE_REQUIRED, null);
+        }
+        catch (Exception ignore) {}
         ret[2] = sharedPrefs.getString(SHARED_PREF_KEY_UPDATE_RECOMMENDED, null);
         return sharedPrefs.getInt(SHARED_PREF_KEY_LATEST_VERSION_CODE, 0);
     }

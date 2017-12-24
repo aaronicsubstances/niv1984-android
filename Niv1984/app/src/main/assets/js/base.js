@@ -1,22 +1,8 @@
 $(function(){
-    //$('#wrapper').fadeIn();
-
-    var zoom = getQueryVariable('zoom');
-    if (zoom) {
-        applyTextZoom(zoom);
-    }
+    var slashIndex = location.href.lastIndexOf('/');
+    var bnum = parseInt(location.href.substring(slashIndex+1, slashIndex+3));
 
     var lastCnum = -1;
-    var hrefNoFrag = location.href;
-    var hashIndex = hrefNoFrag.lastIndexOf('#');
-    if (hashIndex != -1) {
-        hrefNoFrag = hrefNoFrag.substring(0, hashIndex);
-    }
-    var hyphenIndex = hrefNoFrag.lastIndexOf('-');
-    var bnum = hrefNoFrag.substring(hyphenIndex-2, hyphenIndex);
-    //console.log(bnum);
-    bnum = parseInt(bnum);
-    //console.log(bnum);
     $(window).scroll(function(){
         // Get container scroll position
         var fromTop = $(this).scrollTop();
@@ -24,7 +10,7 @@ $(function(){
         // Get the current chapter: last hidden chapter.
         var targetCnum = 0;
         for (var cnum = 1; cnum <= chapterCounts.length; cnum++) {
-            var fragId = createChapFragId(cnum);
+            var fragId = "chapter-" + cnum;
             var offsetTop = $('#'+fragId).offset().top;
             // just a little pixel off by 10 so chapter headings are rightly seen as
             // current.
@@ -56,12 +42,4 @@ function getQueryVariable(variable) {
             return decodeURIComponent(pair[1]);
         }
     }
-}
-
-function createChapFragId(cnum) {
-    return "chapter-" + cnum;
-}
-
-function applyTextZoom(zoom) {
-    $('body').css({'font-size':zoom});
 }

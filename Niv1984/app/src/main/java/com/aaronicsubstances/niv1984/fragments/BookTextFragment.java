@@ -19,6 +19,8 @@ import android.widget.Spinner;
 
 import com.aaronicsubstances.niv1984.R;
 import com.aaronicsubstances.niv1984.etc.BibleJs;
+import com.aaronicsubstances.niv1984.etc.BookTestViewUtils;
+import com.aaronicsubstances.niv1984.etc.CurrentChapterChangeListener;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
 
@@ -34,16 +36,15 @@ import org.slf4j.LoggerFactory;
  * create an instance of this fragment.
  */
 public class BookTextFragment extends Fragment implements View.OnClickListener,
-        AdapterView.OnItemSelectedListener {
+        AdapterView.OnItemSelectedListener,
+        CurrentChapterChangeListener {
     private static final String ARG_PARAM1 = "param1";
 
     private String mParam1;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextFragment.class);
-    private static final String[] ZOOM_LEVELS = {"70%", "100%", "150%", "200%"};
-    private static final int DEFAULT_ZOOM_INDEX = 1;
 
-    private int mBookNumber = -1, mChapterNumber = -1, mZoomLevelIndex = -1;
+    private int mBookNumber = -1;
 
     private OnBookTextFragmentInteractionListener mListener;
 
@@ -101,6 +102,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         setUpZoomSpinner();
 
         mViewCreated = true;
+        LOGGER.debug("Calling refreshView from onCreateView...");
         refreshView();
 
         return root;
@@ -114,15 +116,21 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     public void setBookNumber(int bookNumber) {
+        if (mBookNumber == bookNumber) {
+            LOGGER.warn("Book number is already set to {}.", bookNumber);
+            return;
+        }
         mBookNumber = bookNumber;
         if (mViewCreated) {
+            LOGGER.debug("Calling refreshView from setBookNumber...");
             refreshView();
         }
     }
 
     public void refreshView() {
-        reloadBookUrl();
-        setUpChapterSpinner();
+        int cnum = mPrefMgr.getLastChapter(mBookNumber);
+        reloadBookUrl(cnum);
+        setUpChapterSpinner(cnum);
     }
 
     private void setUpBrowserView() {
@@ -143,36 +151,10 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         kjvOnly.setOnClickListener(this);
         bothBibles.setOnClickListener(this);
 
-        WebSettings webSettings = mBookView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setSaveFormData(false);
-        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
-        }
-
-        mBookView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                if (newProgress == 100) {
-
-                }
-            }
-
-            @Override
-            public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-                LOGGER.error("{}: {} (at {}:{})",
-                        consoleMessage.messageLevel(), consoleMessage.message(),
-                        consoleMessage.sourceId(), consoleMessage.lineNumber());
-                return true;
-            }
-        });
-
-        mBookView.addJavascriptInterface(new BibleJs(getContext()),
-                BibleJs.NAME);
+        BookTestViewUtils.configureBrowser(getActivity(), mBookView, this);
     }
 
-    private void setUpChapterSpinner() {
+    private void setUpChapterSpinner(int selectedCnum) {
         if (mBookNumber < 1) return;
 
         int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBookNumber-1];
@@ -190,9 +172,13 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         // Disable listener before setting selection.
         mChapterSpinner.setOnItemSelectedListener(null);
-        if (mChapterNumber > 0) {
+
+        if (selectedCnum > 0) {
             // Pass animate=false to force immediate firing of listeners.
-            mChapterSpinner.setSelection(mChapterNumber - 1, false);
+            mChapterSpinner.setSelection(selectedCnum - 1, false);
+        }
+        else {
+            mChapterSpinner.setSelection(0, false);
         }
         mChapterSpinner.setOnItemSelectedListener(this);
     }
@@ -200,21 +186,22 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpZoomSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item_2,
-                ZOOM_LEVELS);
+                BookTestViewUtils.ZOOM_LEVELS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mZoomSpinner.setAdapter(adapter);
 
-        mZoomLevelIndex = mPrefMgr.getLastZoomLevelIndex();
-        if (mZoomLevelIndex >= 0) {
-            mZoomSpinner.setSelection(mZoomLevelIndex, false);
+        mZoomSpinner.setOnItemSelectedListener(null);
+        int zoomLevelIndex = mPrefMgr.getLastZoomLevelIndex();
+        if (zoomLevelIndex >= 0) {
+            mZoomSpinner.setSelection(zoomLevelIndex, false);
         }
         else {
-            mZoomSpinner.setSelection(DEFAULT_ZOOM_INDEX, false);
+            mZoomSpinner.setSelection(BookTestViewUtils.DEFAULT_ZOOM_INDEX, false);
         }
         mZoomSpinner.setOnItemSelectedListener(this);
     }
 
-    private void reloadBookUrl() {
+    private void reloadBookUrl(int cnum) {
         if (mBookNumber < 1) return;
 
         int lastBookMode = mPrefMgr.getLastBookMode();
@@ -231,22 +218,16 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 break;
         }
 
-        String zoom = ZOOM_LEVELS[mZoomLevelIndex < 0 ? DEFAULT_ZOOM_INDEX : mZoomLevelIndex];
-        String bookUrl = String.format("file:///android_asset/kjv-niv/%02d-%s.html?zoom=%s",
-                mBookNumber, suffix, Uri.encode(zoom));
+        String bookUrl = BookTestViewUtils.resolveUrl(
+                String.format("kjv-niv/%02d-%s.html",
+                mBookNumber, suffix), null);
 
-        mChapterNumber = mPrefMgr.getLastChapter(mBookNumber);
-        if (mChapterNumber > 0) {
-            bookUrl += String.format("#chapter-%s", mChapterNumber);
+        if (cnum > 0) {
+            bookUrl += String.format("#chapter-%s", cnum);
         }
 
         LOGGER.info("Loading book url {}", bookUrl);
         mBookView.loadUrl(bookUrl);
-    }
-
-    private void applyTextZoom() {
-        String zoom = ZOOM_LEVELS[mZoomLevelIndex < 0 ? DEFAULT_ZOOM_INDEX : mZoomLevelIndex];
-        Utils.loadJavascript(mBookView, "applyTextZoom", new String[]{ zoom });
     }
 
     @Override
@@ -262,21 +243,40 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                     mode = SharedPrefsManager.BOOK_MODE_KJV;
                 }
                 mPrefMgr.setLastBookMode(mode);
-                reloadBookUrl();
+                reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber));
             }
         }
     }
 
     @Override
+    public void onCurrentChapterChanged(int bnum, int cnum) {
+        if (!mViewCreated) {
+            return;
+        }
+
+        if (mBookNumber != bnum) {
+            return;
+        }
+
+        // Disable listener before setting selection.
+        mChapterSpinner.setOnItemSelectedListener(null);
+        // Pass animate=false to force immediate firing of listeners.
+        mChapterSpinner.setSelection(cnum > 0 ? cnum - 1 : 0, false);
+        mChapterSpinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mChapterSpinner) {
-            mPrefMgr.setLastChapter(mBookNumber, position+1);
-            reloadBookUrl();
+            LOGGER.debug("onItemSelected for mChapterSpinner");
+            int cnum = position+1;
+            mPrefMgr.setLastChapter(mBookNumber, cnum);
+            reloadBookUrl(cnum);
         }
         else if (parent == mZoomSpinner) {
-            mZoomLevelIndex = position;
-            mPrefMgr.setLastZoomLevelIndex(mZoomLevelIndex);
-            applyTextZoom();
+            LOGGER.debug("onItemSelected for mZoomSpinner");
+            mPrefMgr.setLastZoomLevelIndex(position);
+            reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber));
         }
         else {
             LOGGER.error("onItemSelected didn't match any spinner.");

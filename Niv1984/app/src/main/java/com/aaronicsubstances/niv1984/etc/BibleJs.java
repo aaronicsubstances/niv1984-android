@@ -1,5 +1,6 @@
 package com.aaronicsubstances.niv1984.etc;
 
+import android.app.Activity;
 import android.content.Context;
 import android.webkit.JavascriptInterface;
 
@@ -16,14 +17,26 @@ public class BibleJs {
     private static final Logger LOGGER = LoggerFactory.getLogger(BibleJs.class);
 
     private final SharedPrefsManager mPrefMgr;
+    private final Activity mContext;
+    private final CurrentChapterChangeListener mListener;
 
-    public BibleJs(Context context) {
+    public BibleJs(Context context,CurrentChapterChangeListener listener ) {
         mPrefMgr = new SharedPrefsManager(context);
+        mContext = (Activity)context;
+        mListener = listener;
     }
 
     @JavascriptInterface
-    public void javaCacheCurrentChapter(int bnum, int cnum) {
-        LOGGER.debug("Saving current chapter {} for book {}...", cnum, bnum);
+    public void javaCacheCurrentChapter(final int bnum, final int cnum) {
+        LOGGER.debug("Saving book {} current chapter {}...", bnum, cnum);
+        if (mListener != null) {
+            mContext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mListener.onCurrentChapterChanged(bnum, cnum);
+                }
+            });
+        }
         mPrefMgr.setLastChapter(bnum, cnum);
     }
 }

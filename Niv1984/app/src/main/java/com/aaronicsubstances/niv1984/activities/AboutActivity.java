@@ -50,11 +50,9 @@ public class AboutActivity extends BaseActivity {
         String[] temp = new String[3];
         sharedPrefsManager.getCachedLatestVersion(temp);
         String latestVersion = temp[0];
-        if (latestVersion != null) {
+        if (latestVersion != null && !latestVersion.equals(mCurrentVersion)) {
             mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion) + ' ' +
                 getString(R.string.latest_version, latestVersion));
-        } else {
-            LOGGER.warn("Latest version not known.");
         }
     }
 }

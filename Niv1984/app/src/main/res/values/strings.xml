@@ -11,8 +11,9 @@
     <string name="action_update">Update</string>
     <string name="action_cancel">Cancel</string>
     <string name="share">Share &appname;</string>
-    <string name="share_message">Free offline &appname; version of the Bible (without gender neutrality) in a user-friendly interface,
-        with footnotes included and devoid of bothersome ads! Download from %s</string>
+    <string name="share_message">Free offline Bible in NIV (1984 revision with footnotes)
+        and KJV, with support for reading both in parallel. No ads.
+        Download from %s</string>
     <string name="feedback_email">contact.niv1984@gmail.com</string>
     <string name="feedback_subject">&appname; Feedback</string>
     <string name="feedback_title">Your Comment</string>

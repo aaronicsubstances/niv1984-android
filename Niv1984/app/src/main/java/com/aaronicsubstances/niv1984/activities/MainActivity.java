@@ -99,9 +99,7 @@ public class MainActivity extends BaseActivity implements
         catch (Throwable ex) {
             LOGGER.warn("Version check failed.", ex);
         }
-        if (savedInstanceState == null) {
-            requireUpdateIfNecessary();
-        }
+        requireUpdateIfNecessary();
     }
 
     private void updateFragments() {
@@ -159,6 +157,7 @@ public class MainActivity extends BaseActivity implements
             String message = latestVersionUpgradeRequired;
             DialogFragment dialogFragment = AppDialogFragment.newInstance(message, updateAction,
                     cancelAction);
+            dialogFragment.setCancelable(false);
             showAppDialog(dialogFragment, new AppDialogFragment.NoticeDialogListener() {
                 @Override
                 public void onDialogPositiveClick(DialogFragment dialog) {

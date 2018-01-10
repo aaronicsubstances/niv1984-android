@@ -48,9 +48,10 @@ public class AboutActivity extends BaseActivity {
     private void updateLatestVersionView() {
         SharedPrefsManager sharedPrefsManager = new SharedPrefsManager(this);
         String[] temp = new String[3];
-        sharedPrefsManager.getCachedLatestVersion(temp);
+        int latestVersionCode = sharedPrefsManager.getCachedLatestVersion(temp);
+        int currentVersionCode = Utils.getAppVersionCode(this);
         String latestVersion = temp[0];
-        if (latestVersion != null && !latestVersion.equals(mCurrentVersion)) {
+        if (latestVersion != null && currentVersionCode < latestVersionCode) {
             mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion) + ' ' +
                 getString(R.string.latest_version, latestVersion));
         }

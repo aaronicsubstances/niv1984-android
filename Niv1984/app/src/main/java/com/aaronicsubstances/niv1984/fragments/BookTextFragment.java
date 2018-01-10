@@ -1,16 +1,11 @@
 package com.aaronicsubstances.niv1984.fragments;
 
 import android.content.Context;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.ConsoleMessage;
-import android.webkit.WebChromeClient;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,11 +13,9 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 
 import com.aaronicsubstances.niv1984.R;
-import com.aaronicsubstances.niv1984.etc.BibleJs;
-import com.aaronicsubstances.niv1984.etc.BookTestViewUtils;
+import com.aaronicsubstances.niv1984.etc.BookTextViewUtils;
 import com.aaronicsubstances.niv1984.etc.CurrentChapterChangeListener;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
-import com.aaronicsubstances.niv1984.etc.Utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +48,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private SharedPrefsManager mPrefMgr;
 
     private boolean mViewCreated = false;
+    private int mDiffSuffix = 0;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -151,7 +145,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         kjvOnly.setOnClickListener(this);
         bothBibles.setOnClickListener(this);
 
-        BookTestViewUtils.configureBrowser(getActivity(), mBookView, this);
+        BookTextViewUtils.configureBrowser(getActivity(), mBookView, this);
     }
 
     private void setUpChapterSpinner(int selectedCnum) {
@@ -186,7 +180,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpZoomSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item_2,
-                BookTestViewUtils.ZOOM_LEVELS);
+                BookTextViewUtils.ZOOM_LEVELS);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mZoomSpinner.setAdapter(adapter);
 
@@ -196,12 +190,16 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             mZoomSpinner.setSelection(zoomLevelIndex, false);
         }
         else {
-            mZoomSpinner.setSelection(BookTestViewUtils.DEFAULT_ZOOM_INDEX, false);
+            mZoomSpinner.setSelection(BookTextViewUtils.DEFAULT_ZOOM_INDEX, false);
         }
         mZoomSpinner.setOnItemSelectedListener(this);
     }
 
     private void reloadBookUrl(int cnum) {
+        reloadBookUrl(cnum, false);
+    }
+
+    private void reloadBookUrl(int cnum, boolean forceReload) {
         if (mBookNumber < 1) return;
 
         int lastBookMode = mPrefMgr.getLastBookMode();
@@ -218,9 +216,19 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 break;
         }
 
-        String bookUrl = BookTestViewUtils.resolveUrl(
-                String.format("kjv-niv/%02d-%s.html",
-                mBookNumber, suffix), null);
+        // Android 7 seems to optimize browser reloads if url is the same.
+        // so zooming was taking immediate effect.
+        // webview.reload didn't help since scrolling would have changed
+        // chapter fragment.
+        // as such artificial url change is introduced in url to force reload.
+        // only zooming requires this so far. in particular performance of
+        // chapter scrolling depends on maintaining the url during reloead.
+        if (forceReload) {
+            mDiffSuffix++;
+        }
+        String bookUrl = BookTextViewUtils.resolveUrl(
+                String.format("kjv-niv/%02d-%s.html%s",
+                mBookNumber, suffix, mDiffSuffix), null);
 
         if (cnum > 0) {
             bookUrl += String.format("#chapter-%s", cnum);
@@ -276,7 +284,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         else if (parent == mZoomSpinner) {
             LOGGER.debug("onItemSelected for mZoomSpinner");
             mPrefMgr.setLastZoomLevelIndex(position);
-            reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber));
+            reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber), true);
         }
         else {
             LOGGER.error("onItemSelected didn't match any spinner.");

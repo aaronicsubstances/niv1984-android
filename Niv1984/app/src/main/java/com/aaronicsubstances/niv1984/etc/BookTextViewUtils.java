@@ -24,12 +24,13 @@ import java.util.regex.Pattern;
  * Created by Aaron on 12/2/2017.
  */
 
-public class BookTestViewUtils {
+public class BookTextViewUtils {
     public static final String LAUNCH_URL = "http://localhost";
     public static final String[] ZOOM_LEVELS = {"70%", "100%", "150%", "200%"};
     public static final int DEFAULT_ZOOM_INDEX = 1;
+    private static final Pattern HTML_SUFFIX_PATTERN = Pattern.compile("\\.html\\d*$");
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BookTestViewUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BookTextViewUtils.class);
 
     public static void configureBrowser(final Activity context, WebView browser,
                                         CurrentChapterChangeListener listener) {
@@ -105,7 +106,16 @@ public class BookTestViewUtils {
             assetStream = new ByteArrayInputStream(new byte[0]);
         }
         else {
-            LOGGER.debug("Fetching asset '{}' ...", assetPath);
+            String prevAssetPath = assetPath;
+            assetPath = HTML_SUFFIX_PATTERN.matcher(prevAssetPath).replaceFirst(".html");
+            if (prevAssetPath.equals(assetPath))
+            {
+                LOGGER.debug("Fetching asset '{}' ...", assetPath);
+            }
+            else
+            {
+                LOGGER.debug("Fetching asset '{}' for path '{}' ...", assetPath, prevAssetPath);
+            }
             assetStream = context.getAssets().open(assetPath);
         }
 

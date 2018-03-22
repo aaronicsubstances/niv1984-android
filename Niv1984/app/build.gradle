@@ -41,8 +41,8 @@ android {
         applicationId "com.aaronicsubstances.niv1984"
         minSdkVersion 15
         targetSdkVersion 25
-        versionCode 204
-        versionName "2.0.4"
+        versionCode 205
+        versionName "2.0.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

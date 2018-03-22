@@ -16,6 +16,7 @@ import com.aaronicsubstances.niv1984.R;
 import com.aaronicsubstances.niv1984.etc.BookTextViewUtils;
 import com.aaronicsubstances.niv1984.etc.CurrentChapterChangeListener;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
+import com.aaronicsubstances.niv1984.etc.SpinnerHelper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private OnBookTextFragmentInteractionListener mListener;
 
-    private Spinner mChapterSpinner, mZoomSpinner;
+    private SpinnerHelper mChapterSpinner, mZoomSpinner;
     private WebView mBookView;
     private RadioButton nivOnly, kjvOnly, bothBibles;
 
@@ -83,8 +84,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_book_text, container, false);
 
-        mChapterSpinner = (Spinner)root.findViewById(R.id.chapterDropDown);
-        mZoomSpinner = (Spinner)root.findViewById(R.id.fontSizes);
+        mChapterSpinner = new SpinnerHelper(root.findViewById(R.id.chapterDropDown));
+        mZoomSpinner = new SpinnerHelper(root.findViewById(R.id.fontSizes));
         mBookView = (WebView)root.findViewById(R.id.bookView);
         nivOnly = (RadioButton)root.findViewById(R.id.nivOnly);
         kjvOnly = (RadioButton)root.findViewById(R.id.kjvOnly);
@@ -275,13 +276,13 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (parent == mChapterSpinner) {
+        if (parent == mChapterSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mChapterSpinner");
             int cnum = position+1;
             mPrefMgr.setLastChapter(mBookNumber, cnum);
             reloadBookUrl(cnum);
         }
-        else if (parent == mZoomSpinner) {
+        else if (parent == mZoomSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mZoomSpinner");
             mPrefMgr.setLastZoomLevelIndex(position);
             reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber), true);

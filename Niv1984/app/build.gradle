@@ -35,14 +35,14 @@ android {
             storePassword keystoreProperties['storePassword']
         }
     }
-    compileSdkVersion 25
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.aaronicsubstances.niv1984"
         minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 205
-        versionName "2.0.5"
+        targetSdkVersion 26
+        versionCode 206
+        versionName "2.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

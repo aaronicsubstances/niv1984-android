@@ -1,0 +1,160 @@
+@Grab(group='org.xerial', module='sqlite-jdbc', version='3.31.1')
+@GrabConfig(systemClassLoader=true)
+
+import groovy.sql.Sql
+
+/*
+std query:
+exact term 
+|
+inexact term
+|
+phrase
+|
+near query
+
+stuff to escape
+-AND, OR, NOT, NEAR
+-deal with parentheses
+-unary NOT '-'
+-phrase indicator '"'
+-near query forward slash '/'
+-inexact term '^' and '*'
+-field indicator ':'
+*/
+/*
+to avoid ambiguity of loosest precedence
+- no use of NOT
+- always use phrase query for AND operations.
+- specify OR explicity all the time.
+*/
+/**
+Thinking of supporting this UI:
+bible versions to search:
+range of book to search:
+include footnotes:
+query terms option 1: exact (use LIKE) or inexact
+query terms option 2: all (=> phrase/use of implicit AND) or any (=> use of OR)
+*/
+
+chapterCounts = [
+    50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150,
+    31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4,
+    28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13,
+    5, 5, 3, 5, 1, 1, 1, 22
+]
+
+scriptDir = new File(getClass().protectionDomain.codeSource.location.path).parentFile
+        
+Sql.withInstance("jdbc:sqlite:$scriptDir/app/src/main/assets/seed_data.db".replaceAll("\\\\", '/'), '', '', 'org.sqlite.JDBC') { sql ->
+    // use 'sql' instance ...
+    if (args) {
+        // standard query: lowercase so OR keyword is used, deal with '-',
+        // ':', '"', NEAR/<num>, '^', '*'
+        def sqlQuery = args.join(" ")
+        println "SQL query: $sqlQuery"
+        def results = sql.rows(sqlQuery)
+        results.each {
+            println it
+        }
+        println "${results.size()} row(s) found"
+        return
+    }
+    sql.execute("CREATE VIRTUAL TABLE bible_index_record USING FTS4(bible_version TEXT NOT NULL, book_number TEXT NOT NULL, chapter_number TEXT NOT NULL, verse_number TEXT NOT NULL, is_foot_note TEXT NOT NULL, content TEXT NOT NULL)")
+    
+    assert normalizeContent("\u025B\u0190\u0254\u0186") == "eEoO"
+    assert normalizeContent("\u2018\u2019\u201B\u201C\u201D\u201E") == "'''\"\"\""
+    assert normalizeContent("   \u025B \u0190 \u0254  \u0186   ") == "e E o O"
+    assert normalizeContent("b&#10;&#65;") == "b A"
+    
+    populateDatabase(sql)
+}
+
+def populateDatabase(db) {
+    def startTime = new Date().time
+    def bibleVersions = [ "asante2012", "niv1984", "kjv1769" ]
+    for (bibleVersion in bibleVersions) {
+        def bvStartTime = new Date().time
+        for (bookNumber in 1..chapterCounts.size()) {
+            for (chapter in 1..chapterCounts[bookNumber-1]) {
+                println "Indexing $bibleVersion $bookNumber $chapter..."
+                indexVerses(db, bibleVersion, bookNumber, chapter)
+            }
+        }
+        final bibleVersionTimeTaken = (new Date().time - bvStartTime) / 1000.0
+        println("Done indexing bible version ${bibleVersion} in ${bibleVersionTimeTaken} secs")
+    }
+    final timeTaken = (new Date().time - startTime) / 1000.0
+    println("Database population took ${timeTaken} secs")
+}
+
+def indexVerses(db, bibleVersion, bookNumber, chapter) {
+    def assetPath = String.format("%s/%02d/%03d.tvn", bibleVersion,
+        bookNumber, chapter)
+    
+    new File(scriptDir, "app/src/main/assets/$assetPath").withReader('utf-8') {
+        db.withBatch('INSERT INTO bible_index_record (bible_version, book_number, chapter_number, verse_number, is_foot_note, content) VALUES (?, ?, ?, ?, ?, ?)') { ps ->
+            def vContent = new StringBuilder()
+            def noteContentBuilder = new StringBuilder()
+            def vNum = null
+            while (true) {
+                def line = it.readLine()
+                if (!line) break
+                
+                int colonIndex = line.indexOf(':')
+                def tag = line.substring (0, colonIndex)
+                def value = line.substring (colonIndex + 1)
+                switch (tag) {
+                    case "content":
+                        vContent.append(value)
+                        break
+                    case "v_start":
+                        vNum = value
+                        vContent.setLength(0)
+                        break
+                    case "v_end":
+                        def content = normalizeContent(vContent.toString())
+
+                        def sqlParams = [bibleVersion, bookNumber, chapter, vNum, false, content]
+                        ps.addBatch(sqlParams)
+                        break
+                     case "cnote_start":
+                        vNum = 0
+                        break
+                     case "note_start":
+                        noteContentBuilder.setLength(0)
+                        break
+                     case "note_body":
+                        noteContentBuilder.append(value)
+                        break
+                     case "note_end":
+                        def noteContent = normalizeContent(noteContentBuilder.toString())
+                        
+                        def sqlParams = [bibleVersion, bookNumber, chapter, vNum, true, noteContent]
+                        ps.addBatch(sqlParams)
+                        break
+                }
+            }
+        }
+    }
+}
+
+def normalizeContent(c) {
+    def p = ~"&#(\\d+);"
+    def sb = new StringBuffer()
+    def matcher = p.matcher(c)
+    while (matcher.find()) {
+        def replacement = String.format("%c", Integer.parseInt(matcher.group(1)))
+        matcher.appendReplacement(sb, replacement)
+    }
+    matcher.appendTail(sb)
+    def normalized = sb.toString()
+
+    // remove unnecessary whitespace.
+    normalized = normalized.trim().replaceAll("\\s+", " ")
+
+    // replace twi non-English alphabets with english ones.
+    normalized = normalized.tr("\u025B\u0190\u0254\u0186\u2018\u2019\u201B\u201C\u201D\u201E", "eEoO'''\"\"\"")
+    
+    return normalized
+}

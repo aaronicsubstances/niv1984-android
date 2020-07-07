@@ -11,22 +11,29 @@ import androidx.annotation.VisibleForTesting;
 
 public class EndlessListRepository<T extends EndlessListItem> {
     private EndlessPagingRequestHelper helper;
+    private final boolean allowDsCallbackExecutionOnMainThread;
     private Logger LOG;
 
     private EndlessListRepositoryConfig config;
     private EndlessListViewModel<T> endlessListViewModel;
     private EndlessListResourceManager<T> endlessListResourceManager;
 
+    // use this field to cancel async requests by ignoring their results.
+    // always increment per lifetime of instance.
+    private int dsCallbackSeqNumber = 0;
+
     // state fields
     private List<T> currentList = Collections.emptyList();
     private boolean firstPageRequested, lastPageRequested;
 
     public EndlessListRepository() {
-        this(false);
+        this(false, false);
     }
 
     @VisibleForTesting
-    public EndlessListRepository(boolean intendedForTestingOnly) {
+    public EndlessListRepository(boolean allowDsCallbackExecutionOnMainThread,
+                                 boolean intendedForTestingOnly) {
+        this.allowDsCallbackExecutionOnMainThread = allowDsCallbackExecutionOnMainThread;
         if (intendedForTestingOnly) {
             return;
         }
@@ -177,32 +184,27 @@ public class EndlessListRepository<T extends EndlessListItem> {
 
         setTransientCurrentListWithPlaceholders(true);
 
-        // Retrieve async result id before launching async request.
-        final Object asyncResultId = endlessListViewModel.getAsyncResultValidityIdentifier();
-
+        final int dsCallbackId = ++dsCallbackSeqNumber;
         EndlessListDataSource.Callback<T> dsCallback = new EndlessListDataSource.Callback<T>() {
             @Override
             public void postDataLoadResult(final EndlessListLoadResult<T> asyncOpResult) {
-                if (isRunningOnMainThread()) {
+                if (!allowDsCallbackExecutionOnMainThread && isRunningOnMainThread()) {
                     throw new RuntimeException("Endless list datasource callback cannot be issued on main/ui thread");
                 }
                 scheduleRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        handleLoadInitialResult(asyncOpResult, asyncResultId, callback);
+                        handleLoadInitialResult(dsCallbackId, asyncOpResult, callback);
                     }
                 });
             }
         };
-        endlessListViewModel.getDataSource().fetchInitialDataAsync(asyncResultId,
-                config, initialKey, dsCallback);
+        endlessListViewModel.getDataSource().fetchInitialDataAsync(config, initialKey, dsCallback);
     }
 
     private void loadAfterAsyncInternal(final EndlessPagingRequestHelper.Request.Callback callback) {
         setTransientCurrentListWithPlaceholders(true);
 
-        // Retrieve async result id before launching async request.
-        final Object asyncResultId = endlessListViewModel.getAsyncResultValidityIdentifier();
         Object lastKey = null;
         if (!currentList.isEmpty()) {
             T lastItem = currentList.get(currentList.size() - 1);
@@ -214,29 +216,28 @@ public class EndlessListRepository<T extends EndlessListItem> {
             }
         }
 
+        final int dsCallbackId = ++dsCallbackSeqNumber;
         final EndlessListDataSource.Callback<T> dsCallback = new EndlessListDataSource.Callback<T>() {
             @Override
             public void postDataLoadResult(final EndlessListLoadResult<T> asyncOpResult) {
-                if (isRunningOnMainThread()) {
+                if (!allowDsCallbackExecutionOnMainThread && isRunningOnMainThread()) {
                     throw new RuntimeException("Endless list datasource callback cannot be issued on main/ui thread");
                 }
                 scheduleRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        handleLoadAfterResult(asyncOpResult, asyncResultId, callback);
+                        handleLoadAfterResult(dsCallbackId, asyncOpResult, callback);
                     }
                 });
             }
         };
-        endlessListViewModel.getDataSource().fetchDataAsync(asyncResultId, config,
-                lastKey, true, dsCallback);
+        endlessListViewModel.getDataSource().fetchDataAsync(config, lastKey,
+                true, dsCallback);
     }
 
     private void loadBeforeAsyncInternal(final EndlessPagingRequestHelper.Request.Callback callback) {
         setTransientCurrentListWithPlaceholders(false);
 
-        // Retrieve async result id before launching async request.
-        final Object asyncResultId = endlessListViewModel.getAsyncResultValidityIdentifier();
         Object firstKey = null;
         if (!currentList.isEmpty()) {
             T firstItem = currentList.get(0);
@@ -248,28 +249,30 @@ public class EndlessListRepository<T extends EndlessListItem> {
             }
         }
 
+        final int dsCallbackId = ++dsCallbackSeqNumber;
         EndlessListDataSource.Callback<T> dsCallback = new EndlessListDataSource.Callback<T>() {
             @Override
             public void postDataLoadResult(final EndlessListLoadResult<T> asyncOpResult) {
-                if (isRunningOnMainThread()) {
+                if (!allowDsCallbackExecutionOnMainThread && isRunningOnMainThread()) {
                     throw new RuntimeException("Endless list datasource callback cannot be issued on main/ui thread");
                 }
                 scheduleRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        handleLoadBeforeResult(asyncOpResult, asyncResultId, callback);
+                        handleLoadBeforeResult(dsCallbackId, asyncOpResult, callback);
                     }
                 });
             }
         };
-        endlessListViewModel.getDataSource().fetchDataAsync(asyncResultId, config,
-                firstKey, false, dsCallback);
+        endlessListViewModel.getDataSource().fetchDataAsync(config, firstKey,
+                false, dsCallback);
     }
 
-    private void handleLoadInitialResult(EndlessListLoadResult<T> result, Object asyncResultId,
+    private void handleLoadInitialResult(int dsCallbackId,
+                                         EndlessListLoadResult<T> result,
                                          EndlessPagingRequestHelper.Request.Callback callback) {
         try {
-            if (isAsyncResultValid(asyncResultId)) {
+            if (isAsyncResultValid(dsCallbackId)) {
                 if (result.getPagedList() != null) {
                     updateCurrentListAfter(result.getPagedList(),
                             config.initialLoadSize);
@@ -284,10 +287,11 @@ public class EndlessListRepository<T extends EndlessListItem> {
         }
     }
 
-    private void handleLoadAfterResult(EndlessListLoadResult<T> result, Object asyncResultId,
+    private void handleLoadAfterResult(int dsCallbackId,
+                                       EndlessListLoadResult<T> result,
                                        EndlessPagingRequestHelper.Request.Callback callback) {
         try {
-            if (isAsyncResultValid(asyncResultId)) {
+            if (isAsyncResultValid(dsCallbackId)) {
                 if (result.getPagedList() != null) {
                     updateCurrentListAfter(result.getPagedList(),
                             config.loadSize);
@@ -302,10 +306,11 @@ public class EndlessListRepository<T extends EndlessListItem> {
         }
     }
 
-    private void handleLoadBeforeResult(EndlessListLoadResult<T> result, Object asyncResultId,
+    private void handleLoadBeforeResult(int dsCallbackId,
+                                        EndlessListLoadResult<T> result,
                                         EndlessPagingRequestHelper.Request.Callback callback) {
         try {
-            if (isAsyncResultValid(asyncResultId)) {
+            if (isAsyncResultValid(dsCallbackId)) {
                 if (result.getPagedList() != null) {
                     updateCurrentListBefore(result.getPagedList(),
                             config.loadSize);
@@ -379,15 +384,11 @@ public class EndlessListRepository<T extends EndlessListItem> {
         return transientList;
     }
 
-    private boolean isAsyncResultValid(Object asyncResultId) {
+    private boolean isAsyncResultValid(int dsCallbackId) {
         if (endlessListViewModel == null) {
             return false;
         }
-        if (asyncResultId == null) {
-            return endlessListViewModel.getAsyncResultValidityIdentifier() == null;
-        }
-        return asyncResultId.equals(
-                endlessListViewModel.getAsyncResultValidityIdentifier());
+        return dsCallbackId == dsCallbackSeqNumber;
     }
 
     private void setLoadResult(

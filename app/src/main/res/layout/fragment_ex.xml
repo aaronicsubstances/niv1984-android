@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.aaronicsubstances.niv1984.scrollexperiment.ExFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/endless_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/eggs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eggs (100)" />
+
+    <Button
+        android:id="@+id/bottles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Bottles (1000)" />
+
+    <Button
+        android:id="@+id/sweets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sweets (10000)" />
+
+    <Button
+        android:id="@+id/jumpTo50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Jump to 50" />
+
+    <Button
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="First Item Position" />
+    <CheckBox
+        android:id="@+id/scrollToHalfOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Auto Scroll to Half"/>
+</LinearLayout>

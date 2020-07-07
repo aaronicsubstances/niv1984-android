@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        lifecycleScope.launch {
+        /*lifecycleScope.launch {
             val notes = AppDatabase.getDatabase(this@MainActivity).userNoteDao().getNotes()
             logger.warn("Notes: {}", notes)
         }
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
-        })
+        })*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

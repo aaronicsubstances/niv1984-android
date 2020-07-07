@@ -16,13 +16,6 @@ public interface EndlessListViewModel<T extends EndlessListItem> {
     void onCurrentListInvalidated();
 
     /**
-     * Used to effectively cancel async requests by making them irrelevant. Needs
-     * cooperation from datasource as well to be effective.
-     * @return
-     */
-    Object getAsyncResultValidityIdentifier();
-
-    /**
      * Creates a list item which is a placeholder in a list adapter for indicating
      * loading progress.
      * If not working with placeholders, return null or throw exception.
@@ -38,5 +31,4 @@ public interface EndlessListViewModel<T extends EndlessListItem> {
      * during loading.
      */
     T createListItemIndicatingError(Throwable error, boolean inAfterPosition);
-
 }

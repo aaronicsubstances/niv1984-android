@@ -74,8 +74,6 @@ class BookTextViewModel(application: Application) :
         lastLoadResult = data
     }
 
-    override fun getAsyncResultValidityIdentifier() = currentListDataSource
-
     override fun onCurrentListInvalidated() = throw NotImplementedError()
 
     override fun createListItemIndicatingFurtherLoading(

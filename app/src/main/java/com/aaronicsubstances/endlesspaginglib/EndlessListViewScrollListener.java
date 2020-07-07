@@ -1,5 +1,6 @@
 package com.aaronicsubstances.endlesspaginglib;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -7,6 +8,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 public class EndlessListViewScrollListener<T extends EndlessListItem> extends RecyclerView.OnScrollListener {
     final EndlessListRepository<T> repo;
     final boolean considerScrollDirectionVertical;
+
+    private int state = RecyclerView.SCROLL_STATE_IDLE;
+    private int dx, dy;
 
     public EndlessListViewScrollListener(EndlessListRepository<T> repo) {
         this(repo, true);
@@ -19,9 +23,22 @@ public class EndlessListViewScrollListener<T extends EndlessListItem> extends Re
     }
 
     @Override
-    public void onScrolled(RecyclerView recyclerView, int dx,
-                           int dy) {
-        super.onScrolled(recyclerView, dx, dy);
+    public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+        // this call has to return quickly since it happens on every scroll!
+        this.dx = dx;
+        this.dy = dy;
+    }
+
+    @Override
+    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+        if (state != RecyclerView.SCROLL_STATE_IDLE &&
+                newState == RecyclerView.SCROLL_STATE_IDLE) {
+            onScrollDebounced(recyclerView, dx, dy);
+        }
+        this.state = newState;
+    }
+
+    private void onScrollDebounced(RecyclerView recyclerView, int dx, int dy) {
         int change = considerScrollDirectionVertical ? dy : dx;
         if (change != 0) {
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
@@ -29,7 +46,7 @@ public class EndlessListViewScrollListener<T extends EndlessListItem> extends Re
             int visibleItemCount = layoutManager.getChildCount();
             int firstVisibleItemPos = findFirstVisibleItemPosition(layoutManager);
 
-            // this call has to return quickly since it happens on every scroll!
+            // this call has to return quickly since it happens every time a scroll session ends.
             repo.listScrolled(change > 0,
                     visibleItemCount, firstVisibleItemPos, totalItemCount);
         }

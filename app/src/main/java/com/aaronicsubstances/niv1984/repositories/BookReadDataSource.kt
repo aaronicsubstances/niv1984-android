@@ -35,7 +35,6 @@ class BookReadDataSource(private val context: Context,
     }
 
     override fun fetchInitialDataAsync(
-        asyncResultId: Any?,
         config: EndlessListRepositoryConfig,
         initialKey: Any?,
         dsCallback: EndlessListDataSource.Callback<BookReadItem>
@@ -43,10 +42,10 @@ class BookReadDataSource(private val context: Context,
         coroutineScope.launch(Dispatchers.IO) {
             val readItemKey = initialKey as BookReadItem.Key?
             val readItems = if (readItemKey == null) {
-                loadReadItemsAfter(null, config.initialLoadSize)
+                loadInitialReadItems(null, config.initialLoadSize)
             }
             else {
-                loadReadItemsAfter(readItemKey, config.initialLoadSize)
+                loadInitialReadItems(readItemKey, config.initialLoadSize)
             }
             val fetchResult = EndlessListLoadResult(readItems)
             dsCallback.postDataLoadResult(fetchResult)
@@ -54,7 +53,6 @@ class BookReadDataSource(private val context: Context,
     }
 
     override fun fetchDataAsync(
-        asyncResultId: Any?,
         config: EndlessListRepositoryConfig,
         exclusiveBoundaryKey: Any?,
         useInAfterPosition: Boolean,
@@ -64,7 +62,7 @@ class BookReadDataSource(private val context: Context,
             val readItemKey = exclusiveBoundaryKey as BookReadItem.Key?
             val readItems = if (readItemKey == null) {
                 if (useInAfterPosition) {
-                    loadReadItemsAfter(null, config.loadSize)
+                    loadInitialReadItems(null, config.loadSize)
                 }
                 else {
                     // loadBefore requires a key so return empty if
@@ -85,6 +83,37 @@ class BookReadDataSource(private val context: Context,
         }
     }
 
+    private fun loadInitialReadItems(inclusiveKey: BookReadItem.Key?, loadSize: Int): List<BookReadItem> {
+        val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber-1]
+        val totalReadItems = LinkedList<BookReadItem>()
+        var chapterNumber = inclusiveKey?.chapterNumber ?: 1
+        // don't take loadSize too seriously, and treat it as a minimum requirement only.
+        while (chapterNumber <= totalChapterCount && totalReadItems.size < loadSize) {
+            val chapterReadItems = loadChapter(chapterNumber)
+            if (inclusiveKey != null && chapterNumber == inclusiveKey.chapterNumber) {
+                // start adding items after content index of exclusive key.
+                var startIndex = 0
+                while (startIndex < chapterReadItems.size) {
+                    if (chapterReadItems[startIndex].key.contentIndex == inclusiveKey.contentIndex) {
+                        break
+                    }
+                    startIndex++
+                }
+                assert (startIndex < chapterReadItems.size) {
+                    "$inclusiveKey not found"
+                }
+                totalReadItems.addAll(chapterReadItems.subList(startIndex,
+                    chapterReadItems.size))
+            }
+            else {
+                totalReadItems.addAll(chapterReadItems)
+            }
+
+            chapterNumber++
+        }
+        return totalReadItems
+    }
+
     private fun loadReadItemsAfter(exclusiveKey: BookReadItem.Key?, loadSize: Int): List<BookReadItem> {
         val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber-1]
         val totalReadItems = LinkedList<BookReadItem>()
@@ -101,7 +130,7 @@ class BookReadDataSource(private val context: Context,
                     }
                     startIndex++
                 }
-                assert (startIndex <= chapterReadItems.size) {
+                assert (startIndex < chapterReadItems.size) {
                     "$exclusiveKey not found"
                 }
                 totalReadItems.addAll(chapterReadItems.subList(startIndex + 1,
@@ -124,14 +153,14 @@ class BookReadDataSource(private val context: Context,
             val chapterReadItems = loadChapter(chapterNumber)
             if (chapterNumber == exclusiveKey.chapterNumber) {
                 // start adding items before content index of exclusive key.
-                var endIndex = chapterReadItems.size - 1
-                while (endIndex >= 0) {
+                var endIndex = 0
+                while (endIndex < chapterReadItems.size) {
                     if (chapterReadItems[endIndex].key.contentIndex == exclusiveKey.contentIndex) {
                         break
                     }
-                    endIndex--
+                    endIndex++
                 }
-                assert (endIndex >= 0) {
+                assert (endIndex < chapterReadItems.size) {
                     "$exclusiveKey not found"
                 }
                 totalReadItems.addAll(0, chapterReadItems.subList(0, endIndex))

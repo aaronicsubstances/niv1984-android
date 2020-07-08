@@ -20,43 +20,9 @@ class BookReadItem(var key: Key,
         TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES
     }
 
-    class Key(val chapterNumber: Int,
-              val contentIndex: Int,
-              val bibleVersionCode: String): Comparable<Key> {
-
-        override fun compareTo(other: Key): Int {
-            var result = this.chapterNumber.compareTo(other.chapterNumber)
-            if (result == 0) {
-                result = this.contentIndex.compareTo(other.contentIndex)
-            }
-            return result
-        }
-
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
-
-            other as Key
-
-            if (chapterNumber != other.chapterNumber) return false
-            if (contentIndex != other.contentIndex) return false
-            if (bibleVersionCode != other.bibleVersionCode) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = chapterNumber
-            result = 31 * result + contentIndex
-            result = 31 * result + bibleVersionCode.hashCode()
-            return result
-        }
-
-        override fun toString(): String {
-            return "Key(chapterNumber=$chapterNumber, contentIndex=$contentIndex, " +
-                    "bibleVersionCode='$bibleVersionCode')"
-        }
-    }
+    data class Key(val chapterNumber: Int,
+                   val contentIndex: Int,
+                   val bibleVersionCode: String)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

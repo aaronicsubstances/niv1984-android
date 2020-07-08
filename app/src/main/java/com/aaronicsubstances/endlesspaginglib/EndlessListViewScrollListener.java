@@ -41,15 +41,20 @@ public class EndlessListViewScrollListener<T extends EndlessListItem> extends Re
     private void onScrollDebounced(RecyclerView recyclerView, int dx, int dy) {
         int change = considerScrollDirectionVertical ? dy : dx;
         if (change != 0) {
-            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-            int totalItemCount = layoutManager.getItemCount();
-            int visibleItemCount = layoutManager.getChildCount();
-            int firstVisibleItemPos = findFirstVisibleItemPosition(layoutManager);
-
             // this call has to return quickly since it happens every time a scroll session ends.
-            repo.listScrolled(change > 0,
-                    visibleItemCount, firstVisibleItemPos, totalItemCount);
+            notifyRepoOfScroll(recyclerView, repo, change > 0);
         }
+    }
+
+    public static <T extends EndlessListItem> void notifyRepoOfScroll(
+            RecyclerView recyclerView, EndlessListRepository<T> repo, boolean isForwardScroll
+    ) {
+        RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+        int totalItemCount = layoutManager.getItemCount();
+        int visibleItemCount = layoutManager.getChildCount();
+        int firstVisibleItemPos = findFirstVisibleItemPosition(layoutManager);
+
+        repo.listScrolled(isForwardScroll, visibleItemCount, firstVisibleItemPos, totalItemCount);
     }
 
     public static int findFirstVisibleItemPosition(RecyclerView.LayoutManager mLayoutManager) {

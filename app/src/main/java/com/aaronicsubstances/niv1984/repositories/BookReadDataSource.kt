@@ -34,6 +34,16 @@ class BookReadDataSource(private val context: Context,
         return bibleVersions.hashCode()
     }
 
+    override fun fetchPositionalDataAsync(
+        config: EndlessListRepositoryConfig,
+        inclusiveStartIndex: Int,
+        exclusiveEndIndex: Int,
+        pageNumber: Int,
+        dsCallback: EndlessListDataSource.Callback<BookReadItem>
+    ){
+        throw NotImplementedError()
+    }
+
     override fun fetchInitialDataAsync(
         config: EndlessListRepositoryConfig,
         initialKey: Any?,

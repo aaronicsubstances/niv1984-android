@@ -1,7 +1,6 @@
 package com.aaronicsubstances.niv1984.books
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -18,7 +17,7 @@ class BookTextViewModel(application: Application) :
     @Inject
     internal lateinit var endlessListConfig: EndlessListRepositoryConfig
 
-    val endlessListRepo: EndlessListRepository<BookReadItem>
+    val endlessListRepo: EndlessListRepositoryForKeyedDS<BookReadItem>
     private val _loadLiveData: MutableLiveData<List<BookReadItem>>
     val loadLiveData: LiveData<List<BookReadItem>>
         get() = _loadLiveData
@@ -29,7 +28,7 @@ class BookTextViewModel(application: Application) :
     init {
         (application as MyApplication).appComponent.inject(this)
 
-        endlessListRepo = EndlessListRepository()
+        endlessListRepo = EndlessListRepositoryForKeyedDS()
         endlessListRepo.init(endlessListConfig, this)
 
         _loadLiveData = MutableLiveData()

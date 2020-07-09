@@ -5,8 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-public abstract class LargeListViewScrollListener<T extends LargeListItem>
-        extends RecyclerView.OnScrollListener {
+public abstract class LargeListViewScrollListener extends RecyclerView.OnScrollListener {
     private final boolean isScrollDirectionVertical;
 
     private int state = RecyclerView.SCROLL_STATE_IDLE;

@@ -2,7 +2,7 @@ package com.aaronicsubstances.largelistpaging;
 
 import java.util.List;
 
-public interface PaginationEventListener<T extends LargeListItem> {
+public interface PaginationEventListener<T> {
     void dispose();
     void onInitialDataLoading(int reqId);
     void onDataLoading(int reqId, boolean isScrollInForwardDirection);

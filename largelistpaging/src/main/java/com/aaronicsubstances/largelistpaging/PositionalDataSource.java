@@ -5,7 +5,7 @@ import androidx.core.util.Consumer;
 import java.util.List;
 import java.util.Map;
 
-public interface PositionalDataSource<T extends LargeListItem> {
+public interface PositionalDataSource<T> {
 
     void loadInitialData(
             int loadRequestId, LargeListPagingConfig config, List<Integer> pageNumbers,

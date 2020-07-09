@@ -1,15 +1,13 @@
 package com.aaronicsubstances.largelistpaging;
 
-import androidx.annotation.VisibleForTesting;
 import androidx.core.util.Consumer;
 
-import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewScrollListener<T> {
+public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewScrollListener {
     private final LargeListPagingConfig config;
     private final boolean allowLoadCallbackExecutionOnMainThread;
 

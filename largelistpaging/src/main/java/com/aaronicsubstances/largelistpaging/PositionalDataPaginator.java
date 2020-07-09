@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class PositionalDataPaginator<T extends LargeListItem> extends LargeListViewScrollListener<T> {
+public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
     private final int totalCount;
     private final LargeListPagingConfig config;
     private final boolean allowLoadCallbackExecutionOnMainThread;

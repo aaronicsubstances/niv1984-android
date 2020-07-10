@@ -1,5 +1,6 @@
 package com.aaronicsubstances.niv1984.view_adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,8 @@ class BookListAdapterViewHolder(item: View,
     }
 
     init {
+        //bookIconView.letterColor = Color.parseColor("white")
+        //bookIconView.letterColor = Color.parseColor("black")
         itemView.setOnClickListener(itemClickListenerFactory.create(this))
     }
 

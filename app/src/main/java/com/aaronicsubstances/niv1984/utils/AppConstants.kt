@@ -35,7 +35,7 @@ object AppConstants {
 }
 
 interface BibleVersion {
-    fun getChapterTitle(chapterNumber: Int): String
+    fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String
 
     val code: String
     val description: String
@@ -44,8 +44,13 @@ interface BibleVersion {
 }
 
 object AsanteTwiBibleVersion: BibleVersion {
-    override fun getChapterTitle(chapterNumber: Int): String {
-        return "Ti $chapterNumber"
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
+        if (bookNumber == 19) {
+            return "Nnwom $chapterNumber"
+        }
+        else {
+            return "Ti $chapterNumber"
+        }
     }
 
     override val code = "asante2012"
@@ -84,8 +89,13 @@ object AsanteTwiBibleVersion: BibleVersion {
 }
 
 object KjvBibleVersion: BibleVersion {
-    override fun getChapterTitle(chapterNumber: Int): String {
-        return "Chapter $chapterNumber"
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
+        if (bookNumber == 19) {
+            return "Psalm $chapterNumber"
+        }
+        else {
+            return "Chapter $chapterNumber"
+        }
     }
 
     override val code = "kjv1769"
@@ -107,8 +117,13 @@ object KjvBibleVersion: BibleVersion {
 }
 
 object NivBibleVersion: BibleVersion {
-    override fun getChapterTitle(chapterNumber: Int): String {
-        return "Chapter $chapterNumber"
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
+        if (bookNumber == 19) {
+            return "Psalm $chapterNumber"
+        }
+        else {
+            return "Chapter $chapterNumber"
+        }
     }
 
     override val code = "niv1984"

@@ -10,7 +10,8 @@ data class BookDisplayItem(val bibleVersion: String,
                            var indexInChapter: Int,
                            val viewType: BookDisplayItemViewType,
                            val verseNumber: Int,
-                           val text: CharSequence)
+                           var text: String,
+                           var html: CharSequence? = null)
 
 enum class BookDisplayItemViewType {
     TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES

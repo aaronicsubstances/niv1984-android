@@ -85,7 +85,7 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     private fun onBookSelected(position: Int) {
-        val action = BookListFragmentDirections.detailAction(position)
+        val action = BookListFragmentDirections.bookLoadAction(position)
         findNavController().navigate(action)
     }
 }

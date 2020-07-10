@@ -274,7 +274,7 @@ class BookReadDataSource(private val context: Context,
     private fun createTitle(chapterNumber: Int): BookReadItem {
         val firstBibleVersionCode = bibleVersions[0]
         val titleText = AppConstants.bibleVersions.getValue(
-            firstBibleVersionCode).getChapterTitle(chapterNumber)
+            firstBibleVersionCode).getChapterTitle(bookNumber, chapterNumber)
         return BookReadItem(BookReadItem.Key(chapterNumber, 0,
             firstBibleVersionCode), BookReadItem.ViewType.TITLE, 0, titleText)
     }

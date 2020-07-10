@@ -19,7 +19,6 @@ import com.aaronicsubstances.niv1984.parsing.BookParser.NoteRef
 import com.aaronicsubstances.niv1984.parsing.BookParser.Verse
 import com.aaronicsubstances.niv1984.parsing.BookParser.WordsOfJesus
 import com.aaronicsubstances.niv1984.utils.AppConstants
-import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.KjvBibleVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -57,7 +56,7 @@ class BookLoader(private val context: Context,
 
             // add title item
             val titleText = AppConstants.bibleVersions.getValue(
-                bibleVersionCode).getChapterTitle(rawChapter.chapterNumber)
+                bibleVersionCode).getChapterTitle(bookNumber, rawChapter.chapterNumber)
             displayItems.add(
                 BookDisplayItem(
                     bibleVersionCode, rawChapter.chapterNumber,
@@ -166,9 +165,8 @@ class BookLoader(private val context: Context,
                 }
             }
         }
-        val html = AppUtils.parseHtml(out.toString())
         return BookDisplayItem(bibleVersionCode, chapterNumber, indexInChapter,
-            BookDisplayItemViewType.VERSE, rawVerse.verseNumber, html)
+            BookDisplayItemViewType.VERSE, rawVerse.verseNumber, out.toString())
     }
 
     private fun processFancyContent(rawContent: FancyContent, out: StringBuilder) {

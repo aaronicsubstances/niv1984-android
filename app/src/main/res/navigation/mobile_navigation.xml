@@ -17,8 +17,8 @@
         android:label="@string/menu_home"
         tools:layout="@layout/book_list_fragment" >
         <action
-            android:id="@+id/detailAction"
-            app:destination="@id/bookTextFragment" />
+            android:id="@+id/bookLoadAction"
+            app:destination="@id/bookLoadFragment" />
     </fragment>
 
     <fragment
@@ -58,10 +58,9 @@
         tools:layout="@layout/fragment_send" />
 
     <fragment
-        android:id="@+id/bookTextFragment"
-        android:name="com.aaronicsubstances.niv1984.books.BookTextFragment"
-        android:label="book_text_fragment"
-        tools:layout="@layout/book_text_fragment">
+        android:id="@+id/bookLoadFragment"
+        android:name="com.aaronicsubstances.niv1984.books.BookLoadFragment"
+        tools:layout="@layout/fragment_book_load">
         <argument
             android:name="bookIndex" app:argType="integer" app:nullable="false" />
     </fragment>

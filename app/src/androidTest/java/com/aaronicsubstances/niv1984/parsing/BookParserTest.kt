@@ -1,16 +1,17 @@
 package com.aaronicsubstances.niv1984.parsing
 
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.ChapterFragment
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.ChapterFragmentKind
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.FancyContent
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.FancyContentKind
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.Note
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.NoteContent
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.NoteContentKind
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.NoteKind
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.NoteRef
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.Verse
-import com.aaronicsubstances.niv1984.parsing.BibleChapterParser.WordsOfJesus
+import com.aaronicsubstances.niv1984.parsing.BookParser.Chapter
+import com.aaronicsubstances.niv1984.parsing.BookParser.ChapterFragment
+import com.aaronicsubstances.niv1984.parsing.BookParser.ChapterFragmentKind
+import com.aaronicsubstances.niv1984.parsing.BookParser.FancyContent
+import com.aaronicsubstances.niv1984.parsing.BookParser.FancyContentKind
+import com.aaronicsubstances.niv1984.parsing.BookParser.Note
+import com.aaronicsubstances.niv1984.parsing.BookParser.NoteContent
+import com.aaronicsubstances.niv1984.parsing.BookParser.NoteContentKind
+import com.aaronicsubstances.niv1984.parsing.BookParser.NoteKind
+import com.aaronicsubstances.niv1984.parsing.BookParser.NoteRef
+import com.aaronicsubstances.niv1984.parsing.BookParser.Verse
+import com.aaronicsubstances.niv1984.parsing.BookParser.WordsOfJesus
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.junit.Test
@@ -19,7 +20,7 @@ import org.junit.Assert.*
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class BibleChapterParserTest {
+class BookParserTest {
     @Test
     fun testWithEmpty() {
         runTest(::supplyEmptyTestParam)
@@ -45,22 +46,28 @@ class BibleChapterParserTest {
         runTest(::supplyTestWithEntityUsage)
     }
 
-    private fun runTest(supplier: ((MutableList<Any>) -> String)) {
-        val expectedResults = mutableListOf<Any>()
+    @Test
+    fun testMultipleChapters() {
+        runTest(::supplyTestWithMultipleChapters)
+    }
+
+    private fun runTest(supplier: ((MutableList<Chapter>) -> String)) {
+        val expectedResults = mutableListOf<Chapter>()
         val inputStream = supplier(expectedResults).byteInputStream()
-        val instance = BibleChapterParser()
+        val instance = BookParser()
         val actualResults = instance.parse(inputStream)
         assertEquals(expectedResults, actualResults)
     }
 
-    private fun supplyEmptyTestParam(results: MutableList<Any>): String {
-        return """
-        <chapter>
-        </chapter>
+    private fun supplyEmptyTestParam(book: MutableList<Chapter>): String {
+        return """<book>
+        </book>
         """
     }
 
-    private fun supplyTestParam1(results: MutableList<Any>): String {
+    private fun supplyTestParam1(book: MutableList<Chapter>): String {
+        val results = mutableListOf<Any>();
+        book.add(Chapter(1, results))
         results.add(Verse(1,
             listOf(FancyContent(FancyContentKind.NONE,
                 "In the beginning God created the heavens and the earth."))))
@@ -77,8 +84,8 @@ class BibleChapterParserTest {
                 NoteContent(NoteContentKind.EM,
                     "possibly become"))))
 
-        return """
-        <chapter>
+        return """<book>
+        <chapter num="1">
             <verse num="1">
                 <content>In the beginning God created the heavens and the earth.</content>
             </verse>
@@ -93,10 +100,12 @@ class BibleChapterParserTest {
                 <content kind="em">possibly become</content>
             </note>
         </chapter>
-        """
+        </book>"""
     }
 
-    private fun supplyTestParam2(results: MutableList<Any>): String {
+    private fun supplyTestParam2(book: MutableList<Chapter>): String {
+        val results = mutableListOf<Any>()
+        book.add(Chapter(2, results))
         results.add(ChapterFragment(ChapterFragmentKind.HEADING,
             listOf(FancyContent(FancyContentKind.NONE,
                 "Origins"))))
@@ -120,8 +129,8 @@ class BibleChapterParserTest {
                 NoteContent(NoteContentKind.EM,
                     "possibly become"))))
 
-        return """
-        <chapter>
+        return """<book>
+        <chapter num="2">
             <fragment kind="heading">
                 <content>Origins</content>
             </fragment>
@@ -142,11 +151,13 @@ class BibleChapterParserTest {
                 <content>Or </content>
                 <content kind="em">possibly become</content>
             </note>
-        </chapter>
+        </chapter></book>
         """
     }
 
-    private fun supplyTestWithKjvAndWordsOfJesus(results: MutableList<Any>): String {
+    private fun supplyTestWithKjvAndWordsOfJesus(book: MutableList<Chapter>): String {
+        val results = mutableListOf<Any>()
+        book.add(Chapter(3, results))
         results.add(Verse(13,
             listOf(FancyContent(FancyContentKind.NONE,
                     "Jesus said to"),
@@ -160,8 +171,8 @@ class BibleChapterParserTest {
         results.add(Verse(14,
             listOf(FancyContent(FancyContentKind.NONE,
                 "And his servant was healed in the selfsame hour."))))
-        return """
-        <chapter>
+        return """<book>
+        <chapter num="3">
             <verse num="13">
                 <content>Jesus said to</content>
                 <content kind="em"> the </content>
@@ -173,11 +184,13 @@ class BibleChapterParserTest {
             <verse num="14">
                 <content>And his servant was healed in the selfsame hour.</content>
             </verse>
-        </chapter>
+        </chapter></book>
         """
     }
 
-    private fun supplyTestWithEntityUsage(results: MutableList<Any>): String {
+    private fun supplyTestWithEntityUsage(book: MutableList<Chapter>): String {
+        val results = mutableListOf<Any>()
+        book.add(Chapter(4, results))
         run {
             val ei = '\u025B'
             val EI = '\u0190'
@@ -236,7 +249,8 @@ class BibleChapterParserTest {
             val oh = "&#596;"
             val OH = "&#390;"
             """
-            <chapter>
+            <book>
+            <chapter num="4">
                 <fragment>
                     <content kind="SELAH">test</content>
                     <content kind="strong_em">ing</content>
@@ -255,7 +269,30 @@ class BibleChapterParserTest {
                     <content>: Na yei y${ei} ${oh}paani bosome mmi${ei}nsa akatua.</content>
                 </note>
             </chapter>
+            </book>
             """
         }
+    }
+
+    private fun supplyTestWithMultipleChapters(book: MutableList<Chapter>): String {
+        book.add(Chapter(1, listOf(
+            Verse(4, listOf(FancyContent(FancyContentKind.NONE, "yes")))
+        )))
+        book.add(Chapter(2, listOf(
+            Verse(3, listOf(FancyContent(FancyContentKind.EM, "yes again")))
+        )))
+        return """<book>
+            <chapter num="1">
+                <verse num="4">
+                    <content>yes</content>
+                </verse>
+            </chapter>
+            <chapter num="2">
+                <verse num="3">
+                    <content kind="em">yes again</content>
+                </verse>
+            </chapter>
+        </book>
+        """
     }
 }

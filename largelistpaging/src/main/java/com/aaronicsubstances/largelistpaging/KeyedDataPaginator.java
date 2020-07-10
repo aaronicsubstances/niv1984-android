@@ -172,17 +172,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private void loadAfterAsyncInternal() {
-        Object lastKey = null;
-        if (!currentList.isEmpty()) {
-            T lastItem = currentList.get(currentList.size() - 1);
-            int rank = lastItem.getRank();
-            if (rank < 0) {
-                lastKey = lastItem.getKey();
-            }
-            else {
-                lastKey = rank;
-            }
-        }
+        final Object lastKey = currentList.isEmpty() ? null : currentList.get(currentList.size() - 1);
 
         final int loadRequestId = loadRequestIdGen++;
         Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
@@ -196,7 +186,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                handleLoadAfterResult(loadRequestId, tLoadResult);
+                                handleLoadAfterResult(loadRequestId, lastKey, tLoadResult);
                             }
                         });
                     }
@@ -213,17 +203,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private void loadBeforeAsyncInternal() {
-        Object firstKey = null;
-        if (!currentList.isEmpty()) {
-            T firstItem = currentList.get(0);
-            int rank = firstItem.getRank();
-            if (rank < 0) {
-                firstKey = firstItem.getKey();
-            }
-            else {
-                firstKey = rank;
-            }
-        }
+        final Object firstKey = currentList.isEmpty() ? null : getKey(currentList.get(0));
 
         final int loadRequestId = loadRequestIdGen++;
         Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
@@ -237,7 +217,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
-                                handleLoadBeforeResult(loadRequestId, tLoadResult);
+                                handleLoadBeforeResult(loadRequestId, firstKey, tLoadResult);
                             }
                         });
                     }
@@ -258,7 +238,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         if (isAsyncResultValid(loadRequestId)) {
             if (result.getData() != null) {
                 updateCurrentListAfter(result.getData(),
-                        config.initialLoadSize);
+                        config.initialLoadSize, null);
             }
             setLoadResult(loadRequestId, result.getError(), result.isDataValid(),true);
             loadInProgressType = null;
@@ -273,11 +253,11 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         }
     }
 
-    private void handleLoadAfterResult(final int loadRequestId,
+    private void handleLoadAfterResult(final int loadRequestId, Object boundaryKey,
                                        KeyedDataSource.LoadResult<T> result) {
         if (isAsyncResultValid(loadRequestId)) {
             if (result.getData() != null) {
-                updateCurrentListAfter(result.getData(), config.loadSize);
+                updateCurrentListAfter(result.getData(), config.loadSize, boundaryKey);
             }
             setLoadResult(loadRequestId, result.getError(), result.isDataValid(),true);
             loadInProgressType = null;
@@ -292,12 +272,11 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         }
     }
 
-    private void handleLoadBeforeResult(final int loadRequestId,
+    private void handleLoadBeforeResult(final int loadRequestId, Object boundaryKey,
                                         KeyedDataSource.LoadResult<T> result) {
         if (isAsyncResultValid(loadRequestId)) {
             if (result.getData() != null) {
-                updateCurrentListBefore(result.getData(),
-                        config.loadSize);
+                updateCurrentListBefore(result.getData(), config.loadSize, boundaryKey);
             }
             setLoadResult(loadRequestId, result.getError(), result.isDataValid(), false);
             loadInProgressType = null;
@@ -312,7 +291,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         }
     }
 
-    private void updateCurrentListAfter(List<T> newItems, int loadSize) {
+    private void updateCurrentListAfter(List<T> newItems, int loadSize, Object boundaryKey) {
         if (!newItems.isEmpty()) {
             int removeCount = currentList.size() + newItems.size() - config.maxLoadSize;
             List<T> updateDest;
@@ -324,13 +303,29 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
             else {
                 updateDest = new ArrayList<>(currentList);
             }
-            updateDest.addAll(newItems);
+            // skip over elements before and including boundary key if found.
+            int boundaryKeyIndex = -1;
+            if (boundaryKey != null) {
+                for (int i = 0; i < newItems.size(); i++) {
+                    Object key = getKey(newItems.get(i));
+                    if (boundaryKey.equals(key)) {
+                        boundaryKeyIndex = i;
+                        break;
+                    }
+                }
+            }
+            if (boundaryKeyIndex != -1) {
+                updateDest.addAll(newItems.subList(boundaryKeyIndex + 1, newItems.size()));
+            }
+            else {
+                updateDest.addAll(newItems);
+            }
             currentList = updateDest;
         }
         lastPageRequested = newItems.size() < loadSize;
     }
 
-    private void updateCurrentListBefore(List<T> newItems, int loadSize) {
+    private void updateCurrentListBefore(List<T> newItems, int loadSize, Object boundaryKey) {
         if (!newItems.isEmpty()) {
             int removeCount = currentList.size() + newItems.size() - config.maxLoadSize;
             List<T> updateDest;
@@ -342,10 +337,36 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
             else {
                 updateDest = new ArrayList<>(currentList);
             }
-            updateDest.addAll(0, newItems);
+            // skip over elements after and including boundary key if found.
+            int boundaryKeyIndex = -1;
+            if (boundaryKey != null) {
+                for (int i = newItems.size() - 1; i >= 0; i--) {
+                    Object key = getKey(newItems.get(i));
+                    if (boundaryKey.equals(key)) {
+                        boundaryKeyIndex = i;
+                        break;
+                    }
+                }
+            }
+            if (boundaryKeyIndex != -1) {
+                updateDest.addAll(0, newItems.subList(0, boundaryKeyIndex));
+            }
+            else {
+                updateDest.addAll(0, newItems);
+            }
             currentList = updateDest;
         }
         firstPageRequested = newItems.size() < loadSize;
+    }
+
+    private Object getKey(T item) {
+        int rank = item.getRank();
+        if (rank < 0) {
+            return item.getKey();
+        }
+        else {
+            return rank;
+        }
     }
 
     private boolean isAsyncResultValid(int loadRequestId) {

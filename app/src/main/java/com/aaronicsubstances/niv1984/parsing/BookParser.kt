@@ -4,7 +4,7 @@ import android.util.Xml
 import org.xmlpull.v1.XmlPullParser
 import java.io.InputStream
 
-class BibleChapterParser {
+class BookParser {
 
     enum class ChapterFragmentKind {
         NONE, HEADING
@@ -22,6 +22,11 @@ class BibleChapterParser {
     enum class FancyContentKind {
         NONE, EM, STRONG_EM, SELAH
     }
+
+    data class Chapter(
+        val chapterNumber: Int,
+        val parts: List<Any> // ChapterFragment | Verse | Note
+    )
 
     data class ChapterFragment (
         val kind: ChapterFragmentKind,
@@ -58,6 +63,7 @@ class BibleChapterParser {
     )
 
     companion object {
+        private const val TAG_BOOK = "book"
         private const val TAG_CHAPTER = "chapter"
         private const val TAG_VERSE = "verse"
         private const val TAG_CHAPTER_FRAGMENT = "fragment"
@@ -70,16 +76,13 @@ class BibleChapterParser {
         private const val TAG_NOTE_REF = "note_ref"
     }
 
-    /**
-     * results: ChapterFragment | Verse | Note
-     */
-    fun parse(inputStream: InputStream): List<Any> {
+    fun parse(inputStream: InputStream): List<Chapter> {
         val parser: XmlPullParser = Xml.newPullParser()
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
         parser.setInput(inputStream, null)
         parser.nextTag()
-        val results = mutableListOf<Any>()
-        parseChapter(parser, results)
+        val results = mutableListOf<Chapter>()
+        parseBook(parser, results)
         return results
     }
 
@@ -107,6 +110,22 @@ class BibleChapterParser {
             when (parser.next()) {
                 XmlPullParser.END_TAG -> depth--
                 XmlPullParser.START_TAG -> depth++
+            }
+        }
+    }
+
+    private fun parseBook(parser: XmlPullParser, results: MutableList<Chapter>) {
+        parseElement(parser, TAG_BOOK) {
+            when(parser.name) {
+                TAG_CHAPTER -> {
+                    val numAttr = parser.getAttributeValue(null, ATTR_NUMBER)
+                    val chapterNum = Integer.parseInt(numAttr)
+                    val chapterResults = mutableListOf<Any>();
+                    parseChapter(parser, chapterResults)
+                    results.add(Chapter(chapterNum, chapterResults))
+                    true
+                }
+                else -> false
             }
         }
     }

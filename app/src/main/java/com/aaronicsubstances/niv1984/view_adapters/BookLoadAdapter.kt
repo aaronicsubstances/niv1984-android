@@ -1,6 +1,7 @@
 package com.aaronicsubstances.niv1984.view_adapters
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,6 +85,12 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
                 item.text = "" // reduce memory load
             }
             textView.text = item.html
+            if (item.viewType == BookDisplayItemViewType.HEADER) {
+                textView.setTypeface(textView.typeface, Typeface.BOLD)
+            }
+            else {
+                textView.typeface = null
+            }
         }
     }
 }

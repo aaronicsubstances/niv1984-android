@@ -19,7 +19,6 @@ import com.aaronicsubstances.niv1984.parsing.BookParser.NoteRef
 import com.aaronicsubstances.niv1984.parsing.BookParser.Verse
 import com.aaronicsubstances.niv1984.parsing.BookParser.WordsOfJesus
 import com.aaronicsubstances.niv1984.utils.AppConstants
-import com.aaronicsubstances.niv1984.utils.KjvBibleVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -31,9 +30,9 @@ class BookLoader(private val context: Context,
 
     suspend fun load(): BookDisplay {
         return withContext(Dispatchers.IO) {
-            val rawChapters = loadRawBookAsset(KjvBibleVersion.code)
+            val rawChapters = loadRawBookAsset(bibleVersions[0])
             val chapterIndices = mutableListOf<Int>()
-            val displayItems = processChapters(KjvBibleVersion.code, rawChapters, chapterIndices)
+            val displayItems = processChapters(bibleVersions[0], rawChapters, chapterIndices)
             val book = BookDisplay(bookNumber, bibleVersions, displayItems, chapterIndices)
             book
         }
@@ -122,7 +121,27 @@ class BookLoader(private val context: Context,
         rawFragment: ChapterFragment,
         indexInChapter: Int
     ): BookDisplayItem {
-        TODO("not implemented")
+        val viewType = if (rawFragment.kind == ChapterFragmentKind.HEADING) {
+            BookDisplayItemViewType.HEADER
+        }
+        else {
+            BookDisplayItemViewType.CHAPTER_FRAGMENT
+        }
+
+        val out = StringBuilder()
+        for (part in rawFragment.parts) {
+            when (part) {
+                is NoteRef -> {
+                    processNoteRef(bibleVersionCode, chapterNumber, part, out)
+                }
+                else -> {
+                    part as FancyContent
+                    processFancyContent(part, out)
+                }
+            }
+        }
+        return BookDisplayItem(bibleVersionCode, chapterNumber, indexInChapter,
+            viewType, 0, out.toString())
     }
 
     private fun processVerse(
@@ -146,7 +165,7 @@ class BookLoader(private val context: Context,
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
-                                processNoteRef(wjPart, out)
+                                processNoteRef(bibleVersionCode, chapterNumber, wjPart, out)
                             }
                             else -> {
                                 wjPart as FancyContent
@@ -157,7 +176,7 @@ class BookLoader(private val context: Context,
                     out.append("<font>")
                 }
                 is NoteRef -> {
-                    processNoteRef(part, out)
+                    processNoteRef(bibleVersionCode, chapterNumber, part, out)
                 }
                 else -> {
                     part as FancyContent
@@ -178,28 +197,65 @@ class BookLoader(private val context: Context,
             FancyContentKind.STRONG_EM -> {
                 out.append("<strong>$escapedContent</strong>")
             }
+            FancyContentKind.PICTOGRAM -> {
+                out.append("<big>$escapedContent</big>")
+            }
             else -> {
                 out.append(escapedContent)
             }
         }
     }
 
-    private fun processNoteRef(rawNoteRef: NoteRef, out: StringBuilder) {
-        TODO("not implemented")
+    private fun processNoteRef(
+        bibleVersionCode: String,
+        chapterNumber: Int,
+        rawNoteRef: NoteRef,
+        out: StringBuilder
+    ) {
+        val lowerA = 'a'.toInt()
+        val charRef = (lowerA + rawNoteRef.noteNumber -1).toChar()
+        var text = "<sup><a href='$bibleVersionCode-$chapterNumber-${rawNoteRef.noteNumber}'>" +
+            "$charRef</a></sup>"
+        out.append(text)
     }
 
     private fun processNote(
         bibleVersionCode: String,
         chapterNumber: Int,
-        part: Note
+        rawNote: Note
     ): BookDisplayItem {
-        TODO("not implemented")
+        val viewType = if (rawNote.kind == NoteKind.CROSS_REFERENCES) {
+            BookDisplayItemViewType.CROSS_REFERENCES
+        }
+        else {
+            BookDisplayItemViewType.FOOTNOTE
+        }
+        var out = StringBuilder()
+        val lowerA = 'a'.toInt()
+        val charRef = (lowerA + rawNote.noteNumber -1).toChar()
+        out.append("<sup><b>$charRef</b></sup>")
+        for (part in rawNote.parts) {
+            val escapedContent = TextUtils.htmlEncode(part.body)
+            when (part.kind) {
+                NoteContentKind.STRONG_EM -> {
+                    out.append("<strong>$escapedContent</strong>")
+                }
+                NoteContentKind.EM, NoteContentKind.REF_VERSE, NoteContentKind.REF_VERSE_START -> {
+                    out.append("<em>$escapedContent</em>")
+                }
+                else -> {
+                    out.append(escapedContent)
+                }
+            }
+        }
+        return BookDisplayItem(bibleVersionCode, chapterNumber, 0,
+            viewType, 0, out.toString())
     }
 
     private fun compressFootNotes(footNotes: MutableList<BookDisplayItem>) {
         if (footNotes.isEmpty()) {
             return
         }
-        TODO("not implemented")
+        //TODO("not implemented")
     }
 }

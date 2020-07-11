@@ -20,7 +20,7 @@ class BookParser {
     }
 
     enum class FancyContentKind {
-        NONE, EM, STRONG_EM, SELAH
+        NONE, EM, STRONG_EM, SELAH, PICTOGRAM
     }
 
     data class Chapter(

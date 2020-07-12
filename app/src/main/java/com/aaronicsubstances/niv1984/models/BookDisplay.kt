@@ -1,5 +1,7 @@
 package com.aaronicsubstances.niv1984.models
 
+import com.aaronicsubstances.niv1984.parsing.BookParser
+
 data class BookDisplay(val bookNumber: Int,
                        val bibleVersions: List<String>,
                        val displayItems: List<BookDisplayItem>,
@@ -11,7 +13,11 @@ data class BookDisplayItem(val bibleVersion: String,
                            val viewType: BookDisplayItemViewType,
                            val verseNumber: Int,
                            var text: String,
-                           var html: CharSequence? = null)
+                           var html: CharSequence? = null,
+                           var indexInChapter2: Int?  = null,
+                           var text2: String? = null,
+                           var html2: CharSequence? = null,
+                           val blockQuoteKind: BookParser.BlockQuoteKind? = null)
 
 enum class BookDisplayItemViewType {
     TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES

@@ -2,15 +2,19 @@ package com.aaronicsubstances.niv1984.view_adapters
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.marginStart
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
+import com.aaronicsubstances.niv1984.parsing.BookParser
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
@@ -60,6 +64,7 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
             //textView.textSize = AppUtils.spToPx(24f)
             textView.setTextColor(Color.parseColor("#000000"))
             //textView.setTextColor(Color.parseColor("white"))
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 21f)
         }
 
         fun bind(item: BookDisplayItem) {
@@ -76,6 +81,7 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
             //textView.textSize = AppUtils.spToPx(14f)
             textView.setTextColor(Color.parseColor("#000000"))
             //textView.setTextColor(Color.parseColor("white"))
+            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
         }
 
         fun bind(item: BookDisplayItem) {
@@ -90,6 +96,26 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
             }
             else {
                 textView.typeface = null
+            }
+            textView.textAlignment = TextView.TEXT_ALIGNMENT_INHERIT
+            textView.setPadding(0)
+            if (item.blockQuoteKind != null) {
+                when (item.blockQuoteKind) {
+                    BookParser.BlockQuoteKind.CENTER -> {
+                        textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+                    }
+                    BookParser.BlockQuoteKind.RIGHT -> {
+                        textView.textAlignment = TextView.TEXT_ALIGNMENT_VIEW_END
+                    }
+                    BookParser.BlockQuoteKind.LEFT -> {
+                        textView.setPadding(AppUtils.dimenResToPx(
+                            R.dimen.block_quote_left, textView.context), 0, 0, 0)
+                    }
+                    BookParser.BlockQuoteKind.LEFT_INDENTED -> {
+                        textView.setPadding(AppUtils.dimenResToPx(
+                            R.dimen.block_quote_left_indent, textView.context), 0, 0, 0)
+                    }
+                }
             }
         }
     }

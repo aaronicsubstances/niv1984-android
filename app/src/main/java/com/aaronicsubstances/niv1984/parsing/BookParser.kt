@@ -6,6 +6,10 @@ import java.io.InputStream
 
 class BookParser {
 
+    enum class BlockQuoteKind {
+        LEFT, LEFT_INDENTED, RIGHT, CENTER
+    }
+
     enum class ChapterFragmentKind {
         NONE, HEADING
     }
@@ -50,6 +54,11 @@ class BookParser {
 
     data class Verse(
         val verseNumber: Int,
+        val parts: List<Any> // BlockQuote | WordsOfJesus | FancyContent | NoteRef
+    )
+
+    data class BlockQuote(
+        val kind: BlockQuoteKind,
         val parts: List<Any> // WordsOfJesus | FancyContent | NoteRef
     )
 
@@ -66,6 +75,7 @@ class BookParser {
         private const val TAG_BOOK = "book"
         private const val TAG_CHAPTER = "chapter"
         private const val TAG_VERSE = "verse"
+        private const val TAG_BLOCK_QUOTE = "block_quote"
         private const val TAG_CHAPTER_FRAGMENT = "fragment"
         private const val TAG_ELEMENT_CONTENT = "content"
         private const val TAG_WJ = "wj"
@@ -198,10 +208,48 @@ class BookParser {
                     parts.add(readNoteRef(parser))
                     true
                 }
+                TAG_BLOCK_QUOTE -> {
+                    readBlockQuote(parser, parts)
+                    true
+                }
                 else -> false
             }
         }
         results.add(Verse(verseNum, parts))
+    }
+
+    private fun readBlockQuote(parser: XmlPullParser, results: MutableList<Any>) {
+        val kindAttr = parser.getAttributeValue(null, ATTR_KIND)
+        val quoteKind = if (kindAttr == null) {
+            BlockQuoteKind.LEFT
+        }
+        else {
+            try {
+                enumValueOf<BlockQuoteKind>(kindAttr.toUpperCase())
+            }
+            catch (ex: IllegalArgumentException) {
+                BlockQuoteKind.LEFT
+            }
+        }
+        val parts = mutableListOf<Any>()
+        parseElement(parser, TAG_BLOCK_QUOTE) {
+            when (parser.name) {
+                TAG_WJ -> {
+                    readWordsOfJesus(parser, parts)
+                    true
+                }
+                TAG_ELEMENT_CONTENT -> {
+                    parts.add(readContent(parser))
+                    true
+                }
+                TAG_NOTE_REF -> {
+                    parts.add(readNoteRef(parser))
+                    true
+                }
+                else -> false
+            }
+        }
+        results.add(BlockQuote(quoteKind, parts))
     }
 
     private fun readWordsOfJesus(parser: XmlPullParser, results: MutableList<Any>) {

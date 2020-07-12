@@ -29,8 +29,6 @@ abstract class AppDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: AppDatabase? = null
 
-
-
         private val TABLE_BIBLE_INDEX_RECORD = "bible_index_record"
         private val COL_CONTENT = "content"
         private val COL_CHAPTER = "chapter_number"
@@ -51,7 +49,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "main.db"
                 )
-                    .createFromAsset("seed_data.db")
+                    //.createFromAsset("seed_data.db")
                     .build()
                 INSTANCE = instance
                 instance

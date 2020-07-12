@@ -10,7 +10,7 @@ import androidx.annotation.DimenRes
 object AppUtils {
     fun parseHtml(txt: String): Spanned {
         return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            Html.fromHtml(txt, Html.FROM_HTML_MODE_LEGACY, null, null)
+            Html.fromHtml(txt, Html.FROM_HTML_MODE_COMPACT, null, null)
         }
         else {
             Html.fromHtml(txt, null, null)

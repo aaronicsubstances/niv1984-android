@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+    <chapter num="1">
+        <verse num="1">
+            <content>The song of songs, which </content>
+            <content kind="EM">is</content>
+            <content> Solomon's.</content>
+        </verse>
+        <verse num="2">
+            <content>Let him kiss me with the kisses of his mouth: for thy love </content>
+            <content kind="EM">is</content>
+            <content> better than wine.</content>
+        </verse>
+        <verse num="3">
+            <content>Because of the savour of thy good ointments thy name </content>
+            <content kind="EM">is as</content>
+            <content> ointment poured forth, therefore do the virgins love thee.</content>
+        </verse>
+        <verse num="4">
+            <content>Draw me, we will run after thee: the king hath brought me into his chambers: we will be glad and rejoice in thee, we will remember thy love more than wine: the upright love thee.</content>
+        </verse>
+        <verse num="5">
+            <content>I </content>
+            <content kind="EM">am</content>
+            <content> black, but comely, O ye daughters of Jerusalem, as the tents of Kedar, as the curtains of Solomon.</content>
+        </verse>
+        <verse num="6">
+            <content>Look not upon me, because I </content>
+            <content kind="EM">am</content>
+            <content> black, because the sun hath looked upon me: my mother's children were angry with me; they made me the keeper of the vineyards; </content>
+            <content kind="EM">but</content>
+            <content> mine own vineyard have I not kept.</content>
+        </verse>
+        <verse num="7">
+            <content>Tell me, O thou whom my soul loveth, where thou feedest, where thou makest </content>
+            <content kind="EM">thy flock</content>
+            <content> to rest at noon: for why should I be as one that turneth aside by the flocks of thy companions?</content>
+        </verse>
+        <verse num="8">
+            <content>If thou know not, O thou fairest among women, go thy way forth by the footsteps of the flock, and feed thy kids beside the shepherds' tents.</content>
+        </verse>
+        <verse num="9">
+            <content>I have compared thee, O my love, to a company of horses in Pharaoh's chariots.</content>
+        </verse>
+        <verse num="10">
+            <content>Thy cheeks are comely with rows </content>
+            <content kind="EM">of jewels</content>
+            <content>, thy neck with chains </content>
+            <content kind="EM">of gold</content>
+            <content>.</content>
+        </verse>
+        <verse num="11">
+            <content>We will make thee borders of gold with studs of silver.</content>
+        </verse>
+        <verse num="12">
+            <content>While the king </content>
+            <content kind="EM">sitteth</content>
+            <content> at his table, my spikenard sendeth forth the smell thereof.</content>
+        </verse>
+        <verse num="13">
+            <content>A bundle of myrrh </content>
+            <content kind="EM">is</content>
+            <content> my wellbeloved unto me; he shall lie all night betwixt my breasts.</content>
+        </verse>
+        <verse num="14">
+            <content>My beloved </content>
+            <content kind="EM">is</content>
+            <content> unto me </content>
+            <content kind="EM">as</content>
+            <content> a cluster of camphire in the vineyards of Engedi.</content>
+        </verse>
+        <verse num="15">
+            <content>Behold, thou </content>
+            <content kind="EM">art</content>
+            <content> fair, my love; behold, thou </content>
+            <content kind="EM">art</content>
+            <content> fair; thou </content>
+            <content kind="EM">hast</content>
+            <content> doves' eyes.</content>
+        </verse>
+        <verse num="16">
+            <content>Behold, thou </content>
+            <content kind="EM">art</content>
+            <content> fair, my beloved, yea, pleasant: also our bed </content>
+            <content kind="EM">is</content>
+            <content> green.</content>
+        </verse>
+        <verse num="17">
+            <content>The beams of our house </content>
+            <content kind="EM">are</content>
+            <content> cedar, </content>
+            <content kind="EM">and</content>
+            <content> our rafters of fir.</content>
+        </verse>
+    </chapter>
+    <chapter num="2">
+        <verse num="1">
+            <content>I </content>
+            <content kind="EM">am</content>
+            <content> the rose of Sharon, </content>
+            <content kind="EM">and</content>
+            <content> the lily of the valleys.</content>
+        </verse>
+        <verse num="2">
+            <content>As the lily among thorns, so </content>
+            <content kind="EM">is</content>
+            <content> my love among the daughters.</content>
+        </verse>
+        <verse num="3">
+            <content>As the apple tree among the trees of the wood, so </content>
+            <content kind="EM">is</content>
+            <content> my beloved among the sons. I sat down under his shadow with great delight, and his fruit </content>
+            <content kind="EM">was</content>
+            <content> sweet to my taste.</content>
+        </verse>
+        <verse num="4">
+            <content>He brought me to the banqueting house, and his banner over me </content>
+            <content kind="EM">was</content>
+            <content> love.</content>
+        </verse>
+        <verse num="5">
+            <content>Stay me with flagons, comfort me with apples: for I </content>
+            <content kind="EM">am</content>
+            <content> sick of love.</content>
+        </verse>
+        <verse num="6">
+            <content>His left hand </content>
+            <content kind="EM">is</content>
+            <content> under my head, and his right hand doth embrace me.</content>
+        </verse>
+        <verse num="7">
+            <content>I charge you, O ye daughters of Jerusalem, by the roes, and by the hinds of the field, that ye stir not up, nor awake </content>
+            <content kind="EM">my</content>
+            <content> love, till he please.</content>
+        </verse>
+        <verse num="8">
+            <content>The voice of my beloved! behold, he cometh leaping upon the mountains, skipping upon the hills.</content>
+        </verse>
+        <verse num="9">
+            <content>My beloved is like a roe or a young hart: behold, he standeth behind our wall, he looketh forth at the windows, shewing himself through the lattice.</content>
+        </verse>
+        <verse num="10">
+            <content>My beloved spake, and said unto me, Rise up, my love, my fair one, and come away.</content>
+        </verse>
+        <verse num="11">
+            <content>For, lo, the winter is past, the rain is over </content>
+            <content kind="EM">and</content>
+            <content> gone;</content>
+        </verse>
+        <verse num="12">
+            <content>The flowers appear on the earth; the time of the singing </content>
+            <content kind="EM">of birds</content>
+            <content> is come, and the voice of the turtle is heard in our land;</content>
+        </verse>
+        <verse num="13">
+            <content>The fig tree putteth forth her green figs, and the vines </content>
+            <content kind="EM">with</content>
+            <content> the tender grape give a </content>
+            <content kind="EM">good</content>
+            <content> smell. Arise, my love, my fair one, and come away.</content>
+        </verse>
+        <verse num="14">
+            <content>O my dove, </content>
+            <content kind="EM">that art</content>
+            <content> in the clefts of the rock, in the secret </content>
+            <content kind="EM">places</content>
+            <content> of the stairs, let me see thy countenance, let me hear thy voice; for sweet </content>
+            <content kind="EM">is</content>
+            <content> thy voice, and thy countenance </content>
+            <content kind="EM">is</content>
+            <content> comely.</content>
+        </verse>
+        <verse num="15">
+            <content>Take us the foxes, the little foxes, that spoil the vines: for our vines </content>
+            <content kind="EM">have</content>
+            <content> tender grapes.</content>
+        </verse>
+        <verse num="16">
+            <content>My beloved </content>
+            <content kind="EM">is</content>
+            <content> mine, and I </content>
+            <content kind="EM">am</content>
+            <content> his: he feedeth among the lilies.</content>
+        </verse>
+        <verse num="17">
+            <content>Until the day break, and the shadows flee away, turn, my beloved, and be thou like a roe or a young hart upon the mountains of Bether.</content>
+        </verse>
+    </chapter>
+    <chapter num="3">
+        <verse num="1">
+            <content>By night on my bed I sought him whom my soul loveth: I sought him, but I found him not.</content>
+        </verse>
+        <verse num="2">
+            <content>I will rise now, and go about the city in the streets, and in the broad ways I will seek him whom my soul loveth: I sought him, but I found him not.</content>
+        </verse>
+        <verse num="3">
+            <content>The watchmen that go about the city found me: </content>
+            <content kind="EM">to whom I said</content>
+            <content>, Saw ye him whom my soul loveth?</content>
+        </verse>
+        <verse num="4">
+            <content kind="EM">It was</content>
+            <content> but a little that I passed from them, but I found him whom my soul loveth: I held him, and would not let him go, until I had brought him into my mother's house, and into the chamber of her that conceived me.</content>
+        </verse>
+        <verse num="5">
+            <content>I charge you, O ye daughters of Jerusalem, by the roes, and by the hinds of the field, that ye stir not up, nor awake </content>
+            <content kind="EM">my</content>
+            <content> love, till he please.</content>
+        </verse>
+        <verse num="6">
+            <content>Who </content>
+            <content kind="EM">is</content>
+            <content> this that cometh out of the wilderness like pillars of smoke, perfumed with myrrh and frankincense, with all powders of the merchant?</content>
+        </verse>
+        <verse num="7">
+            <content>Behold his bed, which </content>
+            <content kind="EM">is</content>
+            <content> Solomon's; threescore valiant men </content>
+            <content kind="EM">are</content>
+            <content> about it, of the valiant of Israel.</content>
+        </verse>
+        <verse num="8">
+            <content>They all hold swords, </content>
+            <content kind="EM">being</content>
+            <content> expert in war: every man </content>
+            <content kind="EM">hath</content>
+            <content> his sword upon his thigh because of fear in the night.</content>
+        </verse>
+        <verse num="9">
+            <content>King Solomon made himself a chariot of the wood of Lebanon.</content>
+        </verse>
+        <verse num="10">
+            <content>He made the pillars thereof </content>
+            <content kind="EM">of</content>
+            <content> silver, the bottom thereof </content>
+            <content kind="EM">of</content>
+            <content> gold, the covering of it </content>
+            <content kind="EM">of</content>
+            <content> purple, the midst thereof being paved </content>
+            <content kind="EM">with</content>
+            <content> love, for the daughters of Jerusalem.</content>
+        </verse>
+        <verse num="11">
+            <content>Go forth, O ye daughters of Zion, and behold king Solomon with the crown wherewith his mother crowned him in the day of his espousals, and in the day of the gladness of his heart.</content>
+        </verse>
+    </chapter>
+    <chapter num="4">
+        <verse num="1">
+            <content>Behold, thou </content>
+            <content kind="EM">art</content>
+            <content> fair, my love; behold, thou </content>
+            <content kind="EM">art</content>
+            <content> fair; thou </content>
+            <content kind="EM">hast</content>
+            <content> doves' eyes within thy locks: thy hair </content>
+            <content kind="EM">is</content>
+            <content> as a flock of goats, that appear from mount Gilead.</content>
+        </verse>
+        <verse num="2">
+            <content>Thy teeth </content>
+            <content kind="EM">are</content>
+            <content> like a flock </content>
+            <content kind="EM">of sheep that are even</content>
+            <content> shorn, which came up from the washing; whereof every one bear twins, and none </content>
+            <content kind="EM">is</content>
+            <content> barren among them.</content>
+        </verse>
+        <verse num="3">
+            <content>Thy lips </content>
+            <content kind="EM">are</content>
+            <content> like a thread of scarlet, and thy speech </content>
+            <content kind="EM">is</content>
+            <content> comely: thy temples </content>
+            <content kind="EM">are</content>
+            <content> like a piece of a pomegranate within thy locks.</content>
+        </verse>
+        <verse num="4">
+            <content>Thy neck </content>
+            <content kind="EM">is</content>
+            <content> like the tower of David builded for an armoury, whereon there hang a thousand bucklers, all shields of mighty men.</content>
+        </verse>
+        <verse num="5">
+            <content>Thy two breasts </content>
+            <content kind="EM">are</content>
+            <content> like two young roes that are twins, which feed among the lilies.</content>
+        </verse>
+        <verse num="6">
+            <content>Until the day break, and the shadows flee away, I will get me to the mountain of myrrh, and to the hill of frankincense.</content>
+        </verse>
+        <verse num="7">
+            <content>Thou </content>
+            <content kind="EM">art</content>
+            <content> all fair, my love; </content>
+            <content kind="EM">there is</content>
+            <content> no spot in thee.</content>
+        </verse>
+        <verse num="8">
+            <content>Come with me from Lebanon, </content>
+            <content kind="EM">my</content>
+            <content> spouse, with me from Lebanon: look from the top of Amana, from the top of Shenir and Hermon, from the lions' dens, from the mountains of the leopards.</content>
+        </verse>
+        <verse num="9">
+            <content>Thou hast ravished my heart, my sister, </content>
+            <content kind="EM">my</content>
+            <content> spouse; thou hast ravished my heart with one of thine eyes, with one chain of thy neck.</content>
+        </verse>
+        <verse num="10">
+            <content>How fair is thy love, my sister, </content>
+            <content kind="EM">my</content>
+            <content> spouse! how much better is thy love than wine! and the smell of thine ointments than all spices!</content>
+        </verse>
+        <verse num="11">
+            <content>Thy lips, O </content>
+            <content kind="EM">my</content>
+            <content> spouse, drop </content>
+            <content kind="EM">as</content>
+            <content> the honeycomb: honey and milk </content>
+            <content kind="EM">are</content>
+            <content> under thy tongue; and the smell of thy garments </content>
+            <content kind="EM">is</content>
+            <content> like the smell of Lebanon.</content>
+        </verse>
+        <verse num="12">
+            <content>A garden inclosed </content>
+            <content kind="EM">is</content>
+            <content> my sister, </content>
+            <content kind="EM">my</content>
+            <content> spouse; a spring shut up, a fountain sealed.</content>
+        </verse>
+        <verse num="13">
+            <content>Thy plants </content>
+            <content kind="EM">are</content>
+            <content> an orchard of pomegranates, with pleasant fruits; camphire, with spikenard,</content>
+        </verse>
+        <verse num="14">
+            <content>Spikenard and saffron; calamus and cinnamon, with all trees of frankincense; myrrh and aloes, with all the chief spices:</content>
+        </verse>
+        <verse num="15">
+            <content>A fountain of gardens, a well of living waters, and streams from Lebanon.</content>
+        </verse>
+        <verse num="16">
+            <content>Awake, O north wind; and come, thou south; blow upon my garden, </content>
+            <content kind="EM">that</content>
+            <content> the spices thereof may flow out. Let my beloved come into his garden, and eat his pleasant fruits.</content>
+        </verse>
+    </chapter>
+    <chapter num="5">
+        <verse num="1">
+            <content>I am come into my garden, my sister, </content>
+            <content kind="EM">my</content>
+            <content> spouse: I have gathered my myrrh with my spice; I have eaten my honeycomb with my honey; I have drunk my wine with my milk: eat, O friends; drink, yea, drink abundantly, O beloved.</content>
+        </verse>
+        <verse num="2">
+            <content>I sleep, but my heart waketh: </content>
+            <content kind="EM">it is</content>
+            <content> the voice of my beloved that knocketh, </content>
+            <content kind="EM">saying</content>
+            <content>, Open to me, my sister, my love, my dove, my undefiled: for my head is filled with dew, </content>
+            <content kind="EM">and</content>
+            <content> my locks with the drops of the night.</content>
+        </verse>
+        <verse num="3">
+            <content>I have put off my coat; how shall I put it on? I have washed my feet; how shall I defile them?</content>
+        </verse>
+        <verse num="4">
+            <content>My beloved put in his hand by the hole </content>
+            <content kind="EM">of the door</content>
+            <content>, and my bowels were moved for him.</content>
+        </verse>
+        <verse num="5">
+            <content>I rose up to open to my beloved; and my hands dropped </content>
+            <content kind="EM">with</content>
+            <content> myrrh, and my fingers </content>
+            <content kind="EM">with</content>
+            <content> sweet smelling myrrh, upon the handles of the lock.</content>
+        </verse>
+        <verse num="6">
+            <content>I opened to my beloved; but my beloved had withdrawn himself, </content>
+            <content kind="EM">and</content>
+            <content> was gone: my soul failed when he spake: I sought him, but I could not find him; I called him, but he gave me no answer.</content>
+        </verse>
+        <verse num="7">
+            <content>The watchmen that went about the city found me, they smote me, they wounded me; the keepers of the walls took away my veil from me.</content>
+        </verse>
+        <verse num="8">
+            <content>I charge you, O daughters of Jerusalem, if ye find my beloved, that ye tell him, that I </content>
+            <content kind="EM">am</content>
+            <content> sick of love.</content>
+        </verse>
+        <verse num="9">
+            <content>What </content>
+            <content kind="EM">is</content>
+            <content> thy beloved more than </content>
+            <content kind="EM">another</content>
+            <content> beloved, O thou fairest among women? what </content>
+            <content kind="EM">is</content>
+            <content> thy beloved more than </content>
+            <content kind="EM">another</content>
+            <content> beloved, that thou dost so charge us?</content>
+        </verse>
+        <verse num="10">
+            <content>My beloved </content>
+            <content kind="EM">is</content>
+            <content> white and ruddy, the chiefest among ten thousand.</content>
+        </verse>
+        <verse num="11">
+            <content>His head </content>
+            <content kind="EM">is as</content>
+            <content> the most fine gold, his locks </content>
+            <content kind="EM">are</content>
+            <content> bushy, </content>
+            <content kind="EM">and</content>
+            <content> black as a raven.</content>
+        </verse>
+        <verse num="12">
+            <content>His eyes </content>
+            <content kind="EM">are</content>
+            <content> as </content>
+            <content kind="EM">the eyes</content>
+            <content> of doves by the rivers of waters, washed with milk, </content>
+            <content kind="EM">and</content>
+            <content> fitly set.</content>
+        </verse>
+        <verse num="13">
+            <content>His cheeks </content>
+            <content kind="EM">are</content>
+            <content> as a bed of spices, </content>
+            <content kind="EM">as</content>
+            <content> sweet flowers: his lips </content>
+            <content kind="EM">like</content>
+            <content> lilies, dropping sweet smelling myrrh.</content>
+        </verse>
+        <verse num="14">
+            <content>His hands </content>
+            <content kind="EM">are as</content>
+            <content> gold rings set with the beryl: his belly </content>
+            <content kind="EM">is as</content>
+            <content> bright ivory overlaid </content>
+            <content kind="EM">with</content>
+            <content> sapphires.</content>
+        </verse>
+        <verse num="15">
+            <content>His legs </content>
+            <content kind="EM">are as</content>
+            <content> pillars of marble, set upon sockets of fine gold: his countenance </content>
+            <content kind="EM">is</content>
+            <content> as Lebanon, excellent as the cedars.</content>
+        </verse>
+        <verse num="16">
+            <content>His mouth </content>
+            <content kind="EM">is</content>
+            <content> most sweet: yea, he </content>
+            <content kind="EM">is</content>
+            <content> altogether lovely. This </content>
+            <content kind="EM">is</content>
+            <content> my beloved, and this </content>
+            <content kind="EM">is</content>
+            <content> my friend, O daughters of Jerusalem.</content>
+        </verse>
+    </chapter>
+    <chapter num="6">
+        <verse num="1">
+            <content>Whither is thy beloved gone, O thou fairest among women? whither is thy beloved turned aside? that we may seek him with thee.</content>
+        </verse>
+        <verse num="2">
+            <content>My beloved is gone down into his garden, to the beds of spices, to feed in the gardens, and to gather lilies.</content>
+        </verse>
+        <verse num="3">
+            <content>I </content>
+            <content kind="EM">am</content>
+            <content> my beloved's, and my beloved </content>
+            <content kind="EM">is</content>
+            <content> mine: he feedeth among the lilies.</content>
+        </verse>
+        <verse num="4">
+            <content>Thou </content>
+            <content kind="EM">art</content>
+            <content> beautiful, O my love, as Tirzah, comely as Jerusalem, terrible as </content>
+            <content kind="EM">an army</content>
+            <content> with banners.</content>
+        </verse>
+        <verse num="5">
+            <content>Turn away thine eyes from me, for they have overcome me: thy hair </content>
+            <content kind="EM">is</content>
+            <content> as a flock of goats that appear from Gilead.</content>
+        </verse>
+        <verse num="6">
+            <content>Thy teeth </content>
+            <content kind="EM">are</content>
+            <content> as a flock of sheep which go up from the washing, whereof every one beareth twins, and </content>
+            <content kind="EM">there is</content>
+            <content> not one barren among them.</content>
+        </verse>
+        <verse num="7">
+            <content>As a piece of a pomegranate </content>
+            <content kind="EM">are</content>
+            <content> thy temples within thy locks.</content>
+        </verse>
+        <verse num="8">
+            <content>There are threescore queens, and fourscore concubines, and virgins without number.</content>
+        </verse>
+        <verse num="9">
+            <content>My dove, my undefiled is </content>
+            <content kind="EM">but</content>
+            <content> one; she </content>
+            <content kind="EM">is</content>
+            <content> the </content>
+            <content kind="EM">only</content>
+            <content> one of her mother, she </content>
+            <content kind="EM">is</content>
+            <content> the choice </content>
+            <content kind="EM">one</content>
+            <content> of her that bare her. The daughters saw her, and blessed her; </content>
+            <content kind="EM">yea</content>
+            <content>, the queens and the concubines, and they praised her.</content>
+        </verse>
+        <verse num="10">
+            <content>Who </content>
+            <content kind="EM">is</content>
+            <content> she </content>
+            <content kind="EM">that</content>
+            <content> looketh forth as the morning, fair as the moon, clear as the sun, </content>
+            <content kind="EM">and</content>
+            <content> terrible as </content>
+            <content kind="EM">an army</content>
+            <content> with banners?</content>
+        </verse>
+        <verse num="11">
+            <content>I went down into the garden of nuts to see the fruits of the valley, </content>
+            <content kind="EM">and</content>
+            <content> to see whether the vine flourished, </content>
+            <content kind="EM">and</content>
+            <content> the pomegranates budded.</content>
+        </verse>
+        <verse num="12">
+            <content>Or ever I was aware, my soul made me </content>
+            <content kind="EM">like</content>
+            <content> the chariots of Amminadib.</content>
+        </verse>
+        <verse num="13">
+            <content>Return, return, O Shulamite; return, return, that we may look upon thee. What will ye see in the Shulamite? As it were the company of two armies.</content>
+        </verse>
+    </chapter>
+    <chapter num="7">
+        <verse num="1">
+            <content>How beautiful are thy feet with shoes, O prince's daughter! the joints of thy thighs </content>
+            <content kind="EM">are</content>
+            <content> like jewels, the work of the hands of a cunning workman.</content>
+        </verse>
+        <verse num="2">
+            <content>Thy navel </content>
+            <content kind="EM">is like</content>
+            <content> a round goblet, </content>
+            <content kind="EM">which</content>
+            <content> wanteth not liquor: thy belly </content>
+            <content kind="EM">is like</content>
+            <content> an heap of wheat set about with lilies.</content>
+        </verse>
+        <verse num="3">
+            <content>Thy two breasts </content>
+            <content kind="EM">are</content>
+            <content> like two young roes </content>
+            <content kind="EM">that are</content>
+            <content> twins.</content>
+        </verse>
+        <verse num="4">
+            <content>Thy neck </content>
+            <content kind="EM">is</content>
+            <content> as a tower of ivory; thine eyes </content>
+            <content kind="EM">like</content>
+            <content> the fishpools in Heshbon, by the gate of Bathrabbim: thy nose </content>
+            <content kind="EM">is</content>
+            <content> as the tower of Lebanon which looketh toward Damascus.</content>
+        </verse>
+        <verse num="5">
+            <content>Thine head upon thee </content>
+            <content kind="EM">is</content>
+            <content> like Carmel, and the hair of thine head like purple; the king </content>
+            <content kind="EM">is</content>
+            <content> held in the galleries.</content>
+        </verse>
+        <verse num="6">
+            <content>How fair and how pleasant art thou, O love, for delights!</content>
+        </verse>
+        <verse num="7">
+            <content>This thy stature is like to a palm tree, and thy breasts to clusters </content>
+            <content kind="EM">of grapes</content>
+            <content>.</content>
+        </verse>
+        <verse num="8">
+            <content>I said, I will go up to the palm tree, I will take hold of the boughs thereof: now also thy breasts shall be as clusters of the vine, and the smell of thy nose like apples;</content>
+        </verse>
+        <verse num="9">
+            <content>And the roof of thy mouth like the best wine for my beloved, that goeth </content>
+            <content kind="EM">down</content>
+            <content> sweetly, causing the lips of those that are asleep to speak.</content>
+        </verse>
+        <verse num="10">
+            <content>I </content>
+            <content kind="EM">am</content>
+            <content> my beloved's, and his desire </content>
+            <content kind="EM">is</content>
+            <content> toward me.</content>
+        </verse>
+        <verse num="11">
+            <content>Come, my beloved, let us go forth into the field; let us lodge in the villages.</content>
+        </verse>
+        <verse num="12">
+            <content>Let us get up early to the vineyards; let us see if the vine flourish, </content>
+            <content kind="EM">whether</content>
+            <content> the tender grape appear, </content>
+            <content kind="EM">and</content>
+            <content> the pomegranates bud forth: there will I give thee my loves.</content>
+        </verse>
+        <verse num="13">
+            <content>The mandrakes give a smell, and at our gates </content>
+            <content kind="EM">are</content>
+            <content> all manner of pleasant </content>
+            <content kind="EM">fruits</content>
+            <content>, new and old, </content>
+            <content kind="EM">which</content>
+            <content> I have laid up for thee, O my beloved.</content>
+        </verse>
+    </chapter>
+    <chapter num="8">
+        <verse num="1">
+            <content>O that thou </content>
+            <content kind="EM">wert</content>
+            <content> as my brother, that sucked the breasts of my mother! </content>
+            <content kind="EM">when</content>
+            <content> I should find thee without, I would kiss thee; yea, I should not be despised.</content>
+        </verse>
+        <verse num="2">
+            <content>I would lead thee, </content>
+            <content kind="EM">and</content>
+            <content> bring thee into my mother's house, </content>
+            <content kind="EM">who</content>
+            <content> would instruct me: I would cause thee to drink of spiced wine of the juice of my pomegranate.</content>
+        </verse>
+        <verse num="3">
+            <content>His left hand </content>
+            <content kind="EM">should be</content>
+            <content> under my head, and his right hand should embrace me.</content>
+        </verse>
+        <verse num="4">
+            <content>I charge you, O daughters of Jerusalem, that ye stir not up, nor awake </content>
+            <content kind="EM">my</content>
+            <content> love, until he please.</content>
+        </verse>
+        <verse num="5">
+            <content>Who </content>
+            <content kind="EM">is</content>
+            <content> this that cometh up from the wilderness, leaning upon her beloved? I raised thee up under the apple tree: there thy mother brought thee forth: there she brought thee forth </content>
+            <content kind="EM">that</content>
+            <content> bare thee.</content>
+        </verse>
+        <verse num="6">
+            <content>Set me as a seal upon thine heart, as a seal upon thine arm: for love </content>
+            <content kind="EM">is</content>
+            <content> strong as death; jealousy </content>
+            <content kind="EM">is</content>
+            <content> cruel as the grave: the coals thereof </content>
+            <content kind="EM">are</content>
+            <content> coals of fire, </content>
+            <content kind="EM">which hath a</content>
+            <content> most vehement flame.</content>
+        </verse>
+        <verse num="7">
+            <content>Many waters cannot quench love, neither can the floods drown it: if </content>
+            <content kind="EM">a</content>
+            <content> man would give all the substance of his house for love, it would utterly be contemned.</content>
+        </verse>
+        <verse num="8">
+            <content>We have a little sister, and she hath no breasts: what shall we do for our sister in the day when she shall be spoken for?</content>
+        </verse>
+        <verse num="9">
+            <content>If she </content>
+            <content kind="EM">be</content>
+            <content> a wall, we will build upon her a palace of silver: and if she </content>
+            <content kind="EM">be</content>
+            <content> a door, we will inclose her with boards of cedar.</content>
+        </verse>
+        <verse num="10">
+            <content>I </content>
+            <content kind="EM">am</content>
+            <content> a wall, and my breasts like towers: then was I in his eyes as one that found favour.</content>
+        </verse>
+        <verse num="11">
+            <content>Solomon had a vineyard at Baalhamon; he let out the vineyard unto keepers; every one for the fruit thereof was to bring a thousand </content>
+            <content kind="EM">pieces</content>
+            <content> of silver.</content>
+        </verse>
+        <verse num="12">
+            <content>My vineyard, which </content>
+            <content kind="EM">is</content>
+            <content> mine, </content>
+            <content kind="EM">is</content>
+            <content> before me: thou, O Solomon, </content>
+            <content kind="EM">must have</content>
+            <content> a thousand, and those that keep the fruit thereof two hundred.</content>
+        </verse>
+        <verse num="13">
+            <content>Thou that dwellest in the gardens, the companions hearken to thy voice: cause me to hear </content>
+            <content kind="EM">it</content>
+            <content>.</content>
+        </verse>
+        <verse num="14">
+            <content>Make haste, my beloved, and be thou like to a roe or to a young hart upon the mountains of spices.</content>
+        </verse>
+    </chapter>
+</book>

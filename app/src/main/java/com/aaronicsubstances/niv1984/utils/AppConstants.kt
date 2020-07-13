@@ -6,7 +6,7 @@ import androidx.preference.PreferenceManager
 object AppConstants {
     val PREF_KEY_BIBLE_VERSIONS = "bible_versions"
     val BIBLE_BOOK_COUNT = 66
-    val DEFAULT_BIBLE_VERSIONS = listOf(KjvBibleVersion.code, NivBibleVersion.code)
+    val DEFAULT_BIBLE_VERSIONS = listOf(NivBibleVersion.code, KjvBibleVersion.code)
 
     val BIBLE_BOOK_CHAPTER_COUNT = listOf(
         50, 40, 27, 36, 34, 24, 21, 4, 31, 24, 22, 25, 29, 36, 10, 13, 10, 42, 150,

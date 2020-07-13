@@ -83,6 +83,8 @@ dependencies {
 
     implementation 'com.github.ivbaranov:materiallettericon:0.2.3'
 
+    implementation 'com.google.code.gson:gson:2.8.6'
+
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

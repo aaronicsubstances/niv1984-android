@@ -1,13 +1,13 @@
 package com.aaronicsubstances.niv1984.books
 
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
@@ -15,11 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
+import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
 import com.aaronicsubstances.niv1984.utils.AppConstants
 
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass.
@@ -35,6 +38,14 @@ class BookLoadFragment : Fragment() {
     private lateinit var adapter: BookLoadAdapter
 
     private var bookNumber: Int = 0
+
+    @Inject
+    internal lateinit var sharedPrefMgr: SharedPrefManager
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as MyApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,34 +70,37 @@ class BookLoadFragment : Fragment() {
         bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
 
         val safeArgs: BookLoadFragmentArgs by navArgs()
-        val bookIndex = safeArgs.bookIndex
+        bookNumber = safeArgs.bookIndex + 1
 
-        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[0]).bookNames[bookIndex]
+        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[0]).bookNames[bookNumber - 1]
         (requireActivity() as MainActivity).title = bookDescription
 
         bookReadView.layoutManager = LinearLayoutManager(activity)
         adapter = BookLoadAdapter()
         bookReadView.adapter = adapter
 
-        bookNumber = bookIndex + 1
-
         viewModel = ViewModelProvider(this).get(BookLoadViewModel::class.java)
 
         firstPrefRadio.setOnClickListener {
-            openBookForReading(listOf(bibleVersions[0]))
+            openBookForReading(bibleVersions, 0)
         }
         secondPrefRadio.setOnClickListener {
-            openBookForReading(listOf(bibleVersions[1]))
+            openBookForReading(bibleVersions, 1)
         }
         bothPrefRadio.setOnClickListener {
-            openBookForReading(bibleVersions)
+            openBookForReading(bibleVersions, 2)
         }
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
-            Observer<List<BookDisplayItem>> { adapter.submitList(it) })
-
-        firstPrefRadio.isChecked = true
-        openBookForReading(listOf(bibleVersions[0]))
+            Observer<List<BookDisplayItem>> {data ->
+                adapter.submitList(data)
+                viewModel.bookLoadAftermath?.let {
+                    // don't just scroll to item for it to be visible,
+                    // but force it to appear at the top.
+                    (bookReadView.layoutManager as LinearLayoutManager)
+                        .scrollToPositionWithOffset(it.particularPos, 0)
+                }
+            })
 
         bookReadView.addOnScrollListener(object: LargeListViewScrollListener() {
             override fun listScrolled(
@@ -95,20 +109,55 @@ class BookLoadFragment : Fragment() {
                 firstVisibleItemPos: Int,
                 totalItemCount: Int
             ) {
-                val commonItemPos = locateCommonViewTypePos(adapter.currentList,
+                val commonItemPos = locateEquivalentViewTypePos(adapter.currentList,
                     firstVisibleItemPos)
                 val commonVisibleItem = adapter.currentList[commonItemPos]
 
-                viewModel.lastScrollItemPos = firstVisibleItemPos
+                viewModel.updateSystemBookmarks(commonVisibleItem.chapterNumber,
+                    commonVisibleItem.verseNumber, commonVisibleItem.viewType,
+                    firstVisibleItemPos)
             }
         })
+
+        // kickstart actual bible reading
+        openBookForReading(bibleVersions, null)
     }
 
-    private fun openBookForReading(bibleVersions: List<String>) {
-        viewModel.loadBook(bookNumber, bibleVersions)
+    private fun openBookForReading(bibleVersions: List<String>, radioIndex: Int?) {
+        var index = radioIndex
+        if (radioIndex == null) {
+            index = sharedPrefMgr.loadPrefInt(
+                SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION, 0)
+        }
+        else {
+            sharedPrefMgr.savePrefInt(SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION,
+                radioIndex)
+        }
+
+        val bibleVersionsToUse = when (index) {
+            2 -> {
+                if (radioIndex == null) {
+                    bothPrefRadio.isChecked = true
+                }
+                bibleVersions
+            }
+            1 -> {
+                if (radioIndex == null) {
+                    secondPrefRadio.isChecked = true
+                }
+                bibleVersions.subList(1, 2)
+            }
+            else -> {
+                if (radioIndex == null) {
+                    firstPrefRadio.isChecked = true
+                }
+                bibleVersions.subList(0, 1)
+            }
+        }
+        viewModel.loadBook(bookNumber, bibleVersionsToUse)
     }
 
-    private fun locateCommonViewTypePos(
+    private fun locateEquivalentViewTypePos(
         currentList: List<BookDisplayItem>,
         firstVisibleItemPos: Int
     ): Int {

@@ -13,8 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
+import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.utils.AppConstants
 
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
@@ -85,9 +87,51 @@ class BookLoadFragment : Fragment() {
 
         firstPrefRadio.isChecked = true
         openBookForReading(listOf(bibleVersions[0]))
+
+        bookReadView.addOnScrollListener(object: LargeListViewScrollListener() {
+            override fun listScrolled(
+                isScrollInForwardDirection: Boolean,
+                visibleItemCount: Int,
+                firstVisibleItemPos: Int,
+                totalItemCount: Int
+            ) {
+                val commonItemPos = locateCommonViewTypePos(adapter.currentList,
+                    firstVisibleItemPos)
+                val commonVisibleItem = adapter.currentList[commonItemPos]
+
+                viewModel.lastScrollItemPos = firstVisibleItemPos
+            }
+        })
     }
 
     private fun openBookForReading(bibleVersions: List<String>) {
-        viewModel.loadBook(bookNumber, bibleVersions, null)
+        viewModel.loadBook(bookNumber, bibleVersions)
+    }
+
+    private fun locateCommonViewTypePos(
+        currentList: List<BookDisplayItem>,
+        firstVisibleItemPos: Int
+    ): Int {
+        val firstVisibleItem = currentList[firstVisibleItemPos]
+        var i = firstVisibleItemPos
+        // look for title, verse or divider (first or last).
+        loopFwd@ while (i >= 0) {
+            if (currentList[i].chapterNumber != firstVisibleItem.chapterNumber) {
+                break
+            }
+            when (currentList[i].viewType) {
+                BookDisplayItemViewType.TITLE -> {
+                    break@loopFwd
+                }
+                BookDisplayItemViewType.VERSE -> {
+                    break@loopFwd
+                }
+                BookDisplayItemViewType.DIVIDER -> {
+                    break@loopFwd
+                }
+            }
+            i--
+        }
+        return i
     }
 }

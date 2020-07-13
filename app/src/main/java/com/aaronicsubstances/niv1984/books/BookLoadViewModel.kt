@@ -1,6 +1,7 @@
 package com.aaronicsubstances.niv1984.books
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -19,13 +20,25 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     private var lastLoadResult: BookDisplay? = null
 
-    fun loadBook(bookNumber: Int, bibleVersions: List<String>,
-                 initialItemPos: String?) {
+    private val _scrollRecords = mutableMapOf<String, Int>()
+
+    var lastScrollItemPos: Int?
+        get() {
+            val key = lastLoadResult?.bibleVersions?.joinToString("-")
+            return _scrollRecords[key]
+        }
+        set(value) {
+            val key = lastLoadResult!!.bibleVersions.joinToString("-")
+            _scrollRecords[key] = value!!
+        }
+
+    fun loadBook(bookNumber: Int, bibleVersions: List<String>) {
         if (lastLoadResult?.bibleVersions == bibleVersions) {
             //live data will do this automatically when it is subscribed to.
         }
         else {
             val context = (getApplication() as MyApplication).applicationContext
+            loadScrollRecords(context, bibleVersions)
             viewModelScope.launch {
                 val bookLoader = BookLoader(context, bookNumber, bibleVersions)
                 val model = bookLoader.load()
@@ -33,5 +46,18 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 _loadLiveData.value = model.displayItems
             }
         }
+    }
+
+    private fun loadScrollRecords(context: Context, bibleVersions: List<String>) {
+
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        saveScrollRecords((getApplication() as MyApplication).applicationContext)
+    }
+
+    private fun saveScrollRecords(context: Context) {
+
     }
 }

@@ -443,751 +443,29 @@
             <content> </content>
         </verse>
         <verse num="24">
-            <content> </content>
-            <content kind="EM">Wɔnante</content>
-            <content> </content>
-            <note_ref>1</note_ref>
-            <content> </content>
-            <content kind="EM">fefaa gyaframa no mu a wɔreto dwom ma Onyankopɔn na wɔrehyira Awurade.</content>
-            <content> </content>
-        </verse>
-        <verse num="25">
-            <content kind="EM">Afei Asaria gyinaa ogya no mu dinn na ɔde ɛnne a ɛgyegyeɛ bɔɔ mpaeɛ sɛ:</content>
-        </verse>
-        <verse num="26">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nhyira ne wo, O Awurade, yɛn agyanom Nyankopɔn, na wofata ayeyie;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na animuonyam nka wo din daa!</content>
-            </block_quote>
-        </verse>
-        <verse num="27">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ɛfiri sɛ wotene wɔ deɛ woayɛ nyinaa mu;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">wo nnwuma nyinaa yɛ nokorɛ na w’akwan tene,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na w’atemmuo nyinaa yɛ torodoo.</content>
-            </block_quote>
-        </verse>
-        <verse num="28">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Woabu atɛn pa wɔ deɛ wode aba yɛn</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne yɛn agyanom kuro kronkron Yerusalem soɔ no ho;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">wonam nokorɛ atemmuo so de yeinom nyinaa aba yɛn so ɛsiane yɛn bɔne nti.</content>
-            </block_quote>
-        </verse>
-        <verse num="29">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ɛfiri sɛ yɛayɛ bɔne na yɛabu wo mmara so sɛ yɛadane afiri wo nkyɛn;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛayɛ bɔne kɛseɛ wɔ biribiara mu.</content>
-            </block_quote>
-        </verse>
-        <verse num="30">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Yɛanni wo mmara so,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛankura mu ɛnna nso yɛanyɛ deɛ woahyɛ yɛn wɔ yɛn ara ankasa yie ho.</content>
-            </block_quote>
-        </verse>
-        <verse num="31">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Saa nti, deɛ wode baa yɛn soɔ nyinaa,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne deɛ woayɛ yɛn nyinaa no,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ɛyɛ nokorɛ atemmuo na woabuo.</content>
-            </block_quote>
-        </verse>
-        <verse num="32">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Woadane yɛn ama yɛn atamfoɔ, mmaratofoɔ atuatefoɔ a wɔtane wɔn,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne ɔhene sisifoɔ, deɛ ne tirim yɛ den pa ara wɔ wiase mu nyinaa.</content>
-            </block_quote>
-        </verse>
-        <verse num="33">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Seesei deɛ yɛntumi mmue yɛn ano;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛn, wo nkoa a yɛsom wo no adane aniwuo ne ahohora.</content>
-            </block_quote>
-        </verse>
-        <verse num="34">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Wo din no nti, nnyae yɛn mma daa,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na ntwa w’apam mu.</content>
-            </block_quote>
-        </verse>
-        <verse num="35">
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">Nyi wo mmɔborɔhunu mfiri yɛn so,</content>
-            </block_quote>
-            <block_quote>
-                <content> </content>
-                <content kind="EM">ɛsiane wo dɔfo Abraham nti,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne w’akoa Isak</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne wo kronkronni Israel nti,</content>
-            </block_quote>
-        </verse>
-        <verse num="36">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">wɔn a wohyɛɛ wɔn bɔ</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">sɛ wobɛma wɔn asefoɔ adɔre sɛ ɔsoro nsoromma</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne mpoano anwea no.</content>
-            </block_quote>
-        </verse>
-        <verse num="37">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">O Awurade, afei, yɛabɛyɛ ketewa asene aman afoforɔ,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na ɛnnɛ da yi wɔabrɛ yɛn ase wɔ wiase mu ɛsiane yɛn bɔne nti.</content>
-            </block_quote>
-        </verse>
-        <verse num="38">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Yɛnni sodifoɔ, anaasɛ odiyifoɔ, anaasɛ ɔkannifoɔ biara wɔ yɛn berɛ mu,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛnni ɔhyeɛ afɔrebɔ biara, anaasɛ afɔrebɔ, anaasɛ akyɛdeɛ, anaasɛ aduhwam,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛnni beaeɛ biara a yɛbɛbɔ afɔdeɛ de anya w’anim adom.</content>
-            </block_quote>
-        </verse>
-        <verse num="39">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nanso ahonu akoma ne ahobrɛaseɛ honhom na wɔde bɛgye yɛn,</content>
-            </block_quote>
-        </verse>
-        <verse num="40">
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">te sɛ deɛ ɛka nnwennini ne anantwinini afɔdeɛ ho,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">anaasɛ ɛka nnwammaa sradeɛ mpem du du ho;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">saa ara na yɛn afɔdeɛ bɛyɛ wɔ w’ani so nnɛ,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na yɛmmfa yɛn akoma nyinaa nni w’akyi,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ɛfiri sɛ animguaseɛ rento wɔn a wɔde wɔn werɛ hyɛ wo mu no.</content>
-            </block_quote>
-        </verse>
-        <verse num="41">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Na seesei yɛde yɛn akoma nyinaa bɛdi w’akyi;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛsuro wo na yɛbɛhwehwɛ w’anim.</content>
-            </block_quote>
-        </verse>
-        <verse num="42">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mma yɛn ani nwu,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na mmom ɛnne yɛn nni no wo boasetɔ</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ne wo mmɔborɔhunu so.</content>
-            </block_quote>
-        </verse>
-        <verse num="43">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Gye yɛn sɛdeɛ w’anwanwa nnwuma teɛ,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na fa animuonyam ma wo din, O Awurade.</content>
-            </block_quote>
-        </verse>
-        <verse num="44">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ma wɔn a wɔyɛ wo nkoa bɔne no nyinaa ani nwu;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ma wɔn anim ngu ase na gye tumi nyinaa firi wɔn nsam,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na bubu wɔn ahoɔden mu.</content>
-            </block_quote>
-        </verse>
-        <verse num="45">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ma wɔn nhunu sɛ wo nko ara ne Awurade Nyankopɔn,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">a w’animuonyam wɔ wiase nyinaa.</content>
-                <content> </content>
-            </block_quote>
-        </verse>
-        <verse num="46">
-            <content> </content>
-            <content kind="EM">Afei ɔhene nkoa a wɔtoo wɔn guu mu no kɔɔ so ara de nafta ngo, ɛhyɛ, mmabaa, ne mmabowa guu fononoo no mu.</content>
-            <content> </content>
-        </verse>
-        <verse num="47">
-            <content kind="EM">Na ogyaframa no dɛre traa fononoo no so basafa aduonu nnan ne fa,</content>
-            <content> </content>
-        </verse>
-        <verse num="48">
-            <content kind="EM">ɛtrɛe na ɛhyee Kaldeafoɔ a na wɔbɛn fononoo no.</content>
-            <content> </content>
-        </verse>
-        <verse num="49">
-            <content kind="EM">Nanso Awurade bɔfoɔ siane baa fononoo no mu bɛkaa Asaria ne n’ayɔnkofoɔ no ho, na ɔpamoo ogya a ɛredɛre no firii fononoo no mu,</content>
-            <content> </content>
-        </verse>
-        <verse num="50">
-            <content kind="EM">na ɔmaa fononoo no mu yɛɛ sɛdeɛ mframa nwununwunu rebɔ fa hɔ. Ogya no anka wɔn koraa na amma wɔn baabiara anyɛ wɔn ya anaasɛ anha wɔn.</content>
-            <content> </content>
-        </verse>
-        <verse num="51">
-            <content> </content>
-            <content kind="EM">Ɛnna afei nnipa mmiɛnsa no boom yii Onyankopɔn ayɛ, hyɛɛ no animuonyam hyiraa no sɛ:</content>
-        </verse>
-        <verse num="52">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">O Awurade, yɛn agyanom Nyankopɔn, nhyira nka wo,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛyi wo ayɛ kɛseɛ na yɛama wo so daa;</content>
-            </block_quote>
-            <block_quote>
-                <content> </content>
-                <content kind="EM">yɛbɛhyira w’animuonyam din no,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛyi wo ayɛ kɛse na yɛama wo so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="53">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nhyira nka wo wɔ w’asɔrefie a w’animuonyam kronkron no wɔ,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛkamfo wo na yɛahyɛ wo animuonyam kɛse daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="54">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nhyira nka wo wɔ w’ahennie adwa so,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛkamfo wo na yɛama wo so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="55">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nhyira ne wo a wohwɛ ebunu mu firi w’ahennwa a ɛsi kerubim soɔ no,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛyi wo ayɛ na yɛama wo so kɛse daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="56">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nhyira nka wo wɔ ɔsoro ntrɛmu hɔ,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">yɛbɛto dwom na yɛahyɛ wo animuonyam daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="57">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Monhyira Awurade, mo Awurade nnwuma nyinaa;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so kɛse daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="58">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo ɔsorofoɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="59">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo Awurade abɔfoɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="60">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo asuo a mowɔ ɔsoro;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="61">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo Awurade atumfoɔ nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="62">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Owia ne ɔsrane, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="63">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ɔsoro nsoromma, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no, na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="64">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nsuo a ɛtɔ ne bosuo nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="65">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mframa nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="66">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ogya ne ɔhyeɛ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="67">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Awɔ berɛ mu awɔ ne ahuhuro berɛ mu ahuhuro, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="68">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Bosuo ne sukyerɛmma a ɛretɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="69">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nsukyeneeɛ ne awɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="70">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nsukyeneeɛ ne nsukyerɛmma, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="71">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Adesaeɛ ne adekyeeɛ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="72">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Hann ne esum, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="73">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Anyinam ne mununkum, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="74">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ma asase nhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="75">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mmepɔ ne nkokoɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="76">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Deɛ ɛnyini wɔ fam nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="77">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo nsuwa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="78">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ɛpo ahodoɔ ne nsubɔntene, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="79">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo bonsu ne deɛ ɛnante nsuo mu nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="80">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nnomaa a ɛwɔ wiem nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="81">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Wiram mmoadoma ne anantwie nyinaa;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="82">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Nnipa a mowɔ asase so nyinaa, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="83">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">O Israel, hyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">to ayeyie dwom ma no na ma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="84">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo Awurade asɔfoɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="85">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo Awurade asomfoɔ, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="86">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ateneneefoɔ ahonhom ne akra, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="87">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo a moyɛ kronkron na mobrɛ mo ho aseɛ akoma mu, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote>
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="88">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Hanania, Asaria ne Misael, monhyira Awurade;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na momma no so daa.</content>
-            </block_quote>
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Ɛfiri sɛ wagye yɛn afiri Asamando na wagye yɛn afiri owuo tumi</content>
-                <content> </content>
-                <note_ref>2</note_ref>
-                <content> </content>
-                <content kind="EM">mu,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na wagye yɛn afiri ogya fononoo hyehyeɛ no mu;</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">ogya mfinimfini na wagye yɛn afiri.</content>
-            </block_quote>
-        </verse>
-        <verse num="89">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Monna Awurade ase, na ɔyɛ</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na n’adɔeɛ wɔ hɔ daa.</content>
-            </block_quote>
-        </verse>
-        <verse num="90">
-            <block_quote>
-                <content> </content>
-                <content kind="EM">Mo a mosɔre Awurade nyinaa, monhyira anyame mu Nyame no,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">monto ayeyie dwom ma no na monna no ase,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content> </content>
-                <content kind="EM">na n’adɔeɛ wɔ hɔ daa.</content>
-                <content> </content>
-            </block_quote>
-        </verse>
-        <verse num="91">
             <content>Ɛnna Ɔhene Nebukadnessar ho dwirii no, na ɔsɔre ntɛmntɛm, na ɔbisaa n’agyinatufoɔ no sɛ: Ɛnyɛ mmarima baasa na yɛkyekyeree wɔn guu ogya no mu? Wɔbuaa ɔhene no sɛ: Ampa, ɔhene. </content>
         </verse>
-        <verse num="92">
+        <verse num="25">
             <content> Ɔkaa sɛ: Hwɛ, mehunu mmarima baanan a wɔasane wɔn sɛ wɔnenam ogya no mu, na wɔn ho ntɔɔ kyema, na deɛ ɔtɔ so nnan no tebea te sɛ anyame ba bi.</content>
             <content> </content>
         </verse>
-        <verse num="93">
+        <verse num="26">
             <content>Ɛnna Nebukadnessar bɛn ogya a ɛrefranam fononoo no mu no ano na ɔkaa sɛ: Sadrak, Mesak ne Abed-Nego, ɔsorosoro Nyankopɔn nkoa, momfiri adi mmra! Ɛnna Sadrak, Mesak ne Abed-Nego firii adi firii ogya no mu. </content>
         </verse>
-        <verse num="94">
+        <verse num="27">
             <content> Na amantam ahemfo, mmakoma ne amradofoɔ ne ɔhene agyinatufoɔ hyia bɛhwɛɛ mmarima yi, sɛ ogya annya wɔn honam so tumi, na wɔn tiri so nwi anhyeɛ, na wɔn ntwontwo ansakyera, na ogya no ho hwa amfa wɔn ho.</content>
             <content> </content>
         </verse>
-        <verse num="95">
+        <verse num="28">
             <content> </content>
             <content> Nebukadnessar kaa sɛ: Nhyira ne Sadrak, Mesak ne Abed-Nego Nyankopɔn a wasoma ne bɔfoɔ, na wabɛyi ne nkoa a wɔde wɔn ho too ne soɔ na wɔsakyeraa ɔhene asɛm na wɔde wɔn honam maeɛ, deɛ ɛbɛyɛ na wɔrensom na wɔrensɔre anyame biara sɛ wɔn Nyankopɔn. </content>
         </verse>
-        <verse num="96">
+        <verse num="29">
             <content> Ne saa nti, mehyɛ mmara sɛ ɔman, nkurɔfoɔ ne kasa ahodoɔ nyinaa mu biara a ɔka Sadrak, Mesak ne Abed-Nego Nyankopɔn ho abususɛm no, wɔbɛtwitwa no asinasini, na wɔama ne fie adane amamfo, ɛfiri sɛ onyame biara nni hɔ a ɔbɛtumi agye onipa seyie. </content>
         </verse>
-        <verse num="97">
+        <verse num="30">
             <content>Ɛnna ɔhene maa Sadrak, Mesak ne Abed-Nego dii yie Babel asase soɔ.</content>
             <content> </content>
-        </verse>
-        <verse num="98">
-            <content>Ɔhene Nebukadnessar de yei kɔmaa aman, nkurɔfoɔ ne kasa ahodoɔ nyinaa a wɔte asase nyinaa soɔ: Ɛnsi mo yie mmoroso! </content>
-        </verse>
-        <verse num="99">
-            <content>Nsɛnkyerɛnneɛ ne anwanwadeɛ a ɔsorosoro Nyankopɔn ayɛ me no, ayɛ me fɛ sɛ mɛka makyerɛ.</content>
-        </verse>
-        <verse num="100">
-            <block_quote>
-                <content> </content>
-                <content> Sɛdeɛ ne nsɛnkyerɛnneɛ si soso fa!</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content>na n’anwanwadeɛ sɛdeɛ ɛsi yɛ den fa!</content>
-            </block_quote>
-            <block_quote>
-                <content>N’ahennie yɛ daa ahennie,</content>
-            </block_quote>
-            <block_quote kind="LEFT_INDENTED">
-                <content>na ne tumi wɔ awoɔ ntoatoasoɔ nyinaa so.</content>
-            </block_quote>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">10</content>
@@ -1209,59 +487,64 @@
             <content kind="REF_VERSE_START">18</content>
             <content>: Eks 20.3-5</content>
         </note>
-        <note num="1">
-            <content kind="REF_VERSE_START">24</content>
-            <content> </content>
-            <content> </content>
-            <content>Hanania, Misael ne Asaria (Dan 2.17), yɛ edin a kane no na anka wɔde frɛ Sadrak, Mesak ne Abednego (Dan 1.6-7).</content>
-            <content> </content>
-        </note>
-        <note num="2">
-            <content kind="REF_VERSE_START">88</content>
-            <content> </content>
-            <content>Hela: Nsa.</content>
-        </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">92</content>
+            <content kind="REF_VERSE_START">25</content>
             <content>: Yes 43.2; Dan 3.28</content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">94</content>
+            <content kind="REF_VERSE_START">27</content>
             <content>: Heb 11.34</content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">95</content>
+            <content kind="REF_VERSE_START">28</content>
             <content>: Dan 6.22 </content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">96</content>
+            <content kind="REF_VERSE_START">29</content>
             <content>: Dan 2.47</content>
-        </note>
-        <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">100</content>
-            <content>: Dan 6.26 </content>
         </note>
     </chapter>
     <chapter num="4">
         <verse num="1">
-            <content>Me, Nebukadnessar, mete me fie dwoodwoo, na me ho tɔ me wɔ m’aban mu; </content>
+            <content>Ɔhene Nebukadnessar de yei kɔmaa aman, nkurɔfoɔ ne kasa ahodoɔ nyinaa a wɔte asase nyinaa soɔ: Ɛnsi mo yie mmoroso! </content>
         </verse>
         <verse num="2">
-            <content>na mesoo daeɛ bi a ɛyii me hu, na me mpa so adwene ne m’anisoadehunu haa me. </content>
+            <content>Nsɛnkyerɛnneɛ ne anwanwadeɛ a ɔsorosoro Nyankopɔn ayɛ me no, ayɛ me fɛ sɛ mɛka makyerɛ.</content>
         </verse>
         <verse num="3">
-            <content>Enti mehyɛɛ mmara sɛ wɔmfa Babel anyansafoɔ mmra m’anim, na wɔmmɛkyerɛ me daeɛ no ase. </content>
+            <block_quote>
+                <content> </content>
+                <content> Sɛdeɛ ne nsɛnkyerɛnneɛ si soso fa!</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na n’anwanwadeɛ sɛdeɛ ɛsi yɛ den fa!</content>
+            </block_quote>
+            <block_quote>
+                <content>N’ahennie yɛ daa ahennie,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na ne tumi wɔ awoɔ ntoatoasoɔ nyinaa so.</content>
+            </block_quote>
         </verse>
         <verse num="4">
-            <content> Ɛnna nkonyaayifoɔ, pɛadeahunufoɔ, Kaldeafoɔ ne nyankonnekyerɛfoɔ baeɛ, na meyii daeɛ no kyerɛɛ wɔn, nanso wɔantumi ankyerɛ me aseɛ. </content>
+            <content>Me, Nebukadnessar, mete me fie dwoodwoo, na me ho tɔ me wɔ m’aban mu; </content>
         </verse>
         <verse num="5">
-            <content> Na akyire yi no, Daniel a wɔfrɛ no Beltesasar, sɛ me nyame no din teɛ no, na anyame kronkron honhom wɔ ne mu no baa m’anim, na meyii daeɛ no kyerɛɛ no: </content>
+            <content>na mesoo daeɛ bi a ɛyii me hu, na me mpa so adwene ne m’anisoadehunu haa me. </content>
         </verse>
         <verse num="6">
-            <content> Beltesasar, nkonyaayifoɔ panin, sɛ menim sɛ anyame kronkron honhom wɔ wo mu na ahuntasɛm biara nyɛ wo den nti, ka me daeɛ mu adehunu a mehunuiɛ ne ne nkyerɛaseɛ kyerɛ me.</content>
+            <content>Enti mehyɛɛ mmara sɛ wɔmfa Babel anyansafoɔ mmra m’anim, na wɔmmɛkyerɛ me daeɛ no ase. </content>
         </verse>
         <verse num="7">
+            <content> Ɛnna nkonyaayifoɔ, pɛadeahunufoɔ, Kaldeafoɔ ne nyankonnekyerɛfoɔ baeɛ, na meyii daeɛ no kyerɛɛ wɔn, nanso wɔantumi ankyerɛ me aseɛ. </content>
+        </verse>
+        <verse num="8">
+            <content> Na akyire yi no, Daniel a wɔfrɛ no Beltesasar, sɛ me nyame no din teɛ no, na anyame kronkron honhom wɔ ne mu no baa m’anim, na meyii daeɛ no kyerɛɛ no: </content>
+        </verse>
+        <verse num="9">
+            <content> Beltesasar, nkonyaayifoɔ panin, sɛ menim sɛ anyame kronkron honhom wɔ wo mu na ahuntasɛm biara nyɛ wo den nti, ka me daeɛ mu adehunu a mehunuiɛ ne ne nkyerɛaseɛ kyerɛ me.</content>
+        </verse>
+        <verse num="10">
             <block_quote>
                 <content> </content>
                 <content> Na m’anisoadeɛ a mehunuu no me mpa soɔ no nie:</content>
@@ -1273,7 +556,7 @@
                 <content>a ɛware tenteenten.</content>
             </block_quote>
         </verse>
-        <verse num="8">
+        <verse num="11">
             <block_quote>
                 <content>Dua no nyini yɛɛ kɛseɛ na ɛyɛɛ den,</content>
             </block_quote>
@@ -1284,7 +567,7 @@
                 <content>na wɔhunu no asase so baabiara;</content>
             </block_quote>
         </verse>
-        <verse num="9">
+        <verse num="12">
             <block_quote>
                 <content> </content>
                 <content> ɛso ahahan yɛ fɛ,</content>
@@ -1306,10 +589,10 @@
                 <content> </content>
             </block_quote>
         </verse>
-        <verse num="10">
+        <verse num="13">
             <content>Mehunuu wɔ m’anisoadeɛ wɔ me mpa soɔ no mu sɛ, ɔwɛmfoɔ kronkron bi firi soro durui. </content>
         </verse>
-        <verse num="11">
+        <verse num="14">
             <content> Ɔteaa mu denden na ɔkaa sɛ:</content>
             <block_quote>
                 <content>Mommu dua no ntwitwa ne mman.</content>
@@ -1324,7 +607,7 @@
                 <content>na nnomaa mfiri ne mman so.</content>
             </block_quote>
         </verse>
-        <verse num="12">
+        <verse num="15">
             <block_quote>
                 <content>Nanso monnya ne dunsini asase mu,</content>
             </block_quote>
@@ -1344,7 +627,7 @@
                 <content>nni asase so ahahan.</content>
             </block_quote>
         </verse>
-        <verse num="13">
+        <verse num="16">
             <block_quote>
                 <content> </content>
                 <content> N’adwene nsakyera na anyɛ onipa deɛ bio,</content>
@@ -1356,7 +639,7 @@
                 <content>na mfeɛ nson ntwa ne tiri so.</content>
             </block_quote>
         </verse>
-        <verse num="14">
+        <verse num="17">
             <block_quote>
                 <content> </content>
                 <content> Awɛmfoɔ kronkron yi agyina so na asɛm yi nam,</content>
@@ -1378,59 +661,59 @@
                 <content> </content>
             </block_quote>
         </verse>
-        <verse num="15">
+        <verse num="18">
             <content>Daeɛ yi na me, Ɔhene Nebukadnessar, mehunuiɛ. Na afei wo, Beltesasar, ka ne nkyerɛaseɛ, ɛfiri sɛ m’ahennie mu anyansafoɔ nyinaa ntumi nkyerɛ me aseɛ, na wo deɛ, ɛsiane sɛ anyame kronkron honhom wɔ wo mu nti, wobɛtumi.</content>
             <content> </content>
         </verse>
-        <verse num="16">
+        <verse num="19">
             <content>Ɛnna Daniel a ne din de Beltesasar no ho dwirii no kakra ara sann, na n’adwene haa no. Ɔhene ka kyerɛɛ no sɛ: Beltesasar, mma daeɛ no ne ne nkyerɛaseɛ nnha wo. Beltesasar kaa sɛ: Me wura, anka ma daeɛ no mfa wɔn a wɔkyiri woɔ ho, na ne nkyerɛaseɛ mfa w’atamfoɔ ho. </content>
         </verse>
-        <verse num="17">
+        <verse num="20">
             <content>Dua a wohunuiɛ a ɛso na ɛyɛ den a ne tentene kɔpem soro na wɔhu no asase nyinaa soɔ, </content>
         </verse>
-        <verse num="18">
+        <verse num="21">
             <content>na n’ahahan yɛ fɛ na ɛso aba dɔɔso na aduane wɔ mu ma nnipa nyinaa, na wiram mmoa tete aseɛ na ewiem nnomaa sisi ne mman soɔ no, </content>
         </verse>
-        <verse num="19">
+        <verse num="22">
             <content>ɛne wo, ɔhene a woso na woyɛ den na wo kɛseyɛ dɔɔso kɔduru soro na wo tumidie duru asase ano no. </content>
         </verse>
-        <verse num="20">
+        <verse num="23">
             <content>Na sɛ ɔhene hunuu ɔwɛmfoɔ kronkron bi sɛ ɔfiri ɔsoro duru bɛkaa sɛ: Mommu dua no nsɛe no, nanso monnya ne dunsini asase mu, dadeɛ ne kɔbere mfrafraeɛ mpokyerɛ mu, petee so wira mu, na ɔsoro bosuo mfɔ no, na ɔne wiram mmoa nnidi nkɔsi sɛ mfeɛ nson bɛtwa ne tiri soɔ: </content>
         </verse>
-        <verse num="21">
+        <verse num="24">
             <content>Ɔhene, nkyerɛaseɛ no nie, na ɔsorosoroni asotwe a ɛbɛba me wura ɔhene soɔ nie: </content>
         </verse>
-        <verse num="22">
+        <verse num="25">
             <content>Wɔbɛtu wo afiri nnipa mu, na wo ne wiram mmoa atena, na wɔama woawe ewira sɛ anantwie, na ɔsoro bosuo afɔ wo, na mfeɛ nson atwa wo tiri so, akɔsi sɛ wobɛhunu sɛ ɔsorosoroni no di nnipa ahennie so tumi, na ɔde ma obiara a ɔpɛ. </content>
         </verse>
-        <verse num="23">
+        <verse num="26">
             <content>Na sɛdeɛ wɔkaa sɛ wɔnnya dua no dunsini no, sɛ wonya hunu sɛ ɔsoro na ɛdi tumi no a, w’ahennie bɛgyina ama wo. </content>
         </verse>
-        <verse num="24">
+        <verse num="27">
             <content> Enti, ɔhene, ma m’afotuo nyɛ wo fɛ, na fa tenenee ka wo bɔne gu, na fa ahiafoɔ ayɛyɛ sesa w’amumuyɛ, sɛ ebia ɛbɛma wo yiedie akyɛ.</content>
             <content> </content>
         </verse>
-        <verse num="25">
+        <verse num="28">
             <content>Yeinom nyinaa baa Ɔhene Nebukadnessar so. </content>
         </verse>
-        <verse num="26">
+        <verse num="29">
             <content>Abosome dummienu wiee duro no, da bi na ɔnenam Babel ahennie aban so; </content>
         </verse>
-        <verse num="27">
+        <verse num="30">
             <content> ɔhene no kaa sɛ: Ɛnyɛ Babel kɛseɛ a makyekyere mayɛ ahennie gyinabea, me tumi denyɛ so na m’animuonyam agye no ni anaa?</content>
             <content> </content>
         </verse>
-        <verse num="28">
+        <verse num="31">
             <content>Asɛm no da so wɔ ɔhene anomu no, ɛnne bi firi soro baa sɛ: Wo, Ɔhene Nebukadnessar, wɔka kyerɛ wo sɛ: Ahennie no atu afiri wo nsam. </content>
         </verse>
-        <verse num="29">
+        <verse num="32">
             <content> Na wɔbɛpamo wo afiri nnipa mu, na wo ne wiram mmoa akɔtena, na wɔama woawe ewira sɛ anantwie na mfeɛ nson atwa wo tiri so, de akɔsi sɛ wobɛhunu sɛ ɔsorosoroni no na ɔdi nnipa ahennie so tumi, na ɔde ma deɛ ɔpɛ no. </content>
         </verse>
-        <verse num="30">
+        <verse num="33">
             <content>Dɔn no mu ara na asɛm no baa mu Nebukadnessar ho, na wɔpamm no firii nnipa mu, na ɔwee ewira sɛ anantwie, na ɔsoro bosuo fɔɔ ne honam, de kɔsii sɛ ne nwi fuu sɛ ɔkɔdeɛ ntakra, na ne bɔwerɛ yɛɛ sɛ nnomaa deɛ.</content>
             <content> </content>
         </verse>
-        <verse num="31">
+        <verse num="34">
             <content> </content>
             <content> Na nna no akyiri no, me, Nebukadnessar, memaa m’ani so mehwɛɛ ɔsoro, na m’adwene sane ba maa me,</content>
             <block_quote>
@@ -1446,7 +729,7 @@
                 <content>na n’ahennie wɔ awoɔ ntoatoasoɔ nyinaa soɔ;</content>
             </block_quote>
         </verse>
-        <verse num="32">
+        <verse num="35">
             <block_quote>
                 <content>na asase sotefoɔ nyinaa, wɔmmu wɔn hwee,</content>
             </block_quote>
@@ -1464,10 +747,10 @@
                 <content> </content>
             </block_quote>
         </verse>
-        <verse num="33">
+        <verse num="36">
             <content>Ɛberɛ no mu ara na m’adwene sane baa me mu, na deɛ ɛbɛyɛ na m’ahennie agye din bio nti, m’animuonyam ne me haran sane baa me so, na m’agyinatufoɔ ne m’aberempɔn bɛpɛɛ me, na wɔde me sii m’ahennie so bio, na wɔde tumi a ɛsene kane deɛ no maa me. </content>
         </verse>
-        <verse num="34">
+        <verse num="37">
             <content> Afei me, Nebukadnessar, mekamfo ɔsoro hene mema no so meyi no ayɛ,</content>
             <block_quote>
                 <content>sɛ ne nneyɛɛ nyinaa yɛ nokorɛ,</content>
@@ -1483,55 +766,59 @@
             </block_quote>
         </verse>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">4</content>
-            <content>: Dan 2.2</content>
-        </note>
-        <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">5</content>
-            <content>: Dan 5.11, 14</content>
-        </note>
-        <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">6</content>
-            <content>: Hes 28.3</content>
+            <content kind="REF_VERSE_START">3</content>
+            <content>: Dan 6.26 </content>
         </note>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">7</content>
-            <content>: Hes 31.3-14 </content>
+            <content>: Dan 2.2</content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">8</content>
+            <content>: Dan 5.11, 14</content>
         </note>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">9</content>
-            <content>: Dan 4.21; Hes 17.23 </content>
+            <content>: Hes 28.3</content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">10</content>
+            <content>: Hes 31.3-14 </content>
         </note>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">11</content>
-            <content>: Dan 4.23</content>
-        </note>
-        <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">13</content>
-            <content>: Dan 7.25 </content>
+            <content>: Dan 4.24; Hes 17.23 </content>
         </note>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">14</content>
+            <content>: Dan 4.26</content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">16</content>
+            <content>: Dan 7.25 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">17</content>
             <content>: Dan 2.21 </content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">24</content>
+            <content kind="REF_VERSE_START">27</content>
             <content>: Mmb 19.17; Mat 5.7; 19.21</content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">27</content>
+            <content kind="REF_VERSE_START">30</content>
             <content>: Mmb 16.18; Aso 12.23</content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">29</content>
+            <content kind="REF_VERSE_START">32</content>
             <content>: Dan 5.21</content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">31</content>
-            <content>: Dan 4.3; 6.26 </content>
+            <content kind="REF_VERSE_START">34</content>
+            <content>: Dan 4.6; 6.26 </content>
         </note>
         <note kind="CROSS_REFERENCES">
-            <content kind="REF_VERSE_START">34</content>
+            <content kind="REF_VERSE_START">37</content>
             <content>: Dan 5.20; Luka 1.51; 18.14</content>
         </note>
     </chapter>
@@ -2514,14 +1801,10 @@
         </verse>
         <verse num="20">
             <content> Na ɔse: Wonim deɛ enti a mebaa wo nkyɛn? </content>
-        </verse>
-        <verse num="21">
-            <content>Nanso merekyerɛ wo deɛ wɔakurukyire no nokorɛ nwoma mu, </content>
-        </verse>
-        <verse num="20">
             <content>Na afei na mɛsane me ne Persia bapɔmma no akɔko; na merebɛfiri makɔ a, hwɛ, Hela bapɔmma no bɛba, </content>
         </verse>
         <verse num="21">
+            <content>Nanso merekyerɛ wo deɛ wɔakurukyire no nokorɛ nwoma mu, </content>
             <content>na obiara nni hɔ a ɔbɛgyina asɔ me mu atia yeinom gye Mikael.</content>
         </verse>
         <note kind="CROSS_REFERENCES">

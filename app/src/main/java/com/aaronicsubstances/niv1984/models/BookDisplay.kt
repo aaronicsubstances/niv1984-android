@@ -14,10 +14,9 @@ data class BookDisplayItem(val bibleVersion: String,
                            val verseNumber: Int,
                            var text: String,
                            var html: CharSequence? = null,
-                           var indexInChapter2: Int?  = null,
-                           var text2: String? = null,
-                           var html2: CharSequence? = null,
-                           val blockQuoteKind: BookParser.BlockQuoteKind? = null)
+                           var pairedItem: BookDisplayItem? = null,
+                           val blockQuoteKind: BookParser.BlockQuoteKind? = null,
+                           val isFirstDivider: Boolean = false)
 
 enum class BookDisplayItemViewType {
     TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES

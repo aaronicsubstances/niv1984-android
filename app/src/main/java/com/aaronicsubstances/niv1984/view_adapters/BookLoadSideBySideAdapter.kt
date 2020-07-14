@@ -16,7 +16,7 @@ import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.parsing.BookParser
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
+class BookLoadSideBySideAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).viewType.ordinal
@@ -31,12 +31,12 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
             }
             BookDisplayItemViewType.TITLE.ordinal -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(
-                        R.layout.book_load_item_title, parent, false)
+                    R.layout.book_load_item_title_split, parent, false)
                 return TitleViewHolder(itemView)
             }
             BookDisplayItemViewType.VERSE.ordinal -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(
-                    R.layout.book_load_item_verse, parent, false)
+                    R.layout.book_load_item_verse_split, parent, false)
                 return VerseViewHolder(itemView)
             }
             else -> {
@@ -94,13 +94,16 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
 
     class TitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
+        private val textView2 = itemView.findViewById<TextView>(R.id.text2)
 
         init {
             initSpecific(textView)
+            initSpecific(textView2)
         }
 
         fun bind(item: BookDisplayItem) {
             bindSpecific(item, textView)
+            bindSpecific(item.pairedItem!!, textView2)
         }
 
         companion object {
@@ -119,13 +122,16 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
 
     class VerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
+        private val textView2 = this.itemView.findViewById<TextView>(R.id.text2)
 
         init {
             initSpecific(textView)
+            initSpecific(textView2)
         }
 
         fun bind(item: BookDisplayItem) {
             bindSpecific(item, textView)
+            bindSpecific(item.pairedItem!!, textView2)
         }
 
         companion object {

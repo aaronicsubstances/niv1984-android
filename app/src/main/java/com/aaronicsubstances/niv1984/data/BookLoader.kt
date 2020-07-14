@@ -22,12 +22,13 @@ import com.aaronicsubstances.niv1984.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.AssertionError
+import kotlin.math.min
 
 class BookLoader(private val context: Context,
                  private val bookNumber: Int,
-                 var bibleVersions: List<String>) {
-
-    private val wjColor = "red"
+                 val bibleVersions: List<String>,
+                 private val wjColor: String = "red",
+                 private val displayMultipleSideBySide: Boolean = false) {
 
     suspend fun load(): BookDisplay {
         return withContext(Dispatchers.IO) {
@@ -52,7 +53,7 @@ class BookLoader(private val context: Context,
                         cEndIdx1 = chapterIndices[it + 1]
                         cEndIdx2 = chapterIndices2[it + 1]
                     }
-                    mergeVersions(combinedDisplayItems, displayItems, cIdx1, cEndIdx1,
+                    mergeVersions(it + 1, combinedDisplayItems, displayItems, cIdx1, cEndIdx1,
                         displayItems2, cIdx2, cEndIdx2)
                 }
                 BookDisplay(bookNumber, bibleVersions, combinedDisplayItems, combinedChapterIndices)
@@ -65,6 +66,7 @@ class BookLoader(private val context: Context,
     }
 
     private fun mergeVersions(
+        chapterNumber: Int,
         combinedDisplayItems: MutableList<BookDisplayItem>,
         displayItems1: List<BookDisplayItem>,
         cIdx1: Int, cEndIdx1: Int,
@@ -83,6 +85,9 @@ class BookLoader(private val context: Context,
 
         // select title of first bible version to represent combination.
         combinedDisplayItems.add(displayItems1[pt1 - 1])
+        if (displayMultipleSideBySide) {
+            combinedDisplayItems[combinedDisplayItems.size - 1].pairedItem = displayItems2[pt2 - 1]
+        }
 
         var vNum = 1
         while (true) {
@@ -92,15 +97,41 @@ class BookLoader(private val context: Context,
             if (verseRange == null) {
                 break
             }
-            combinedDisplayItems.addAll(displayItems1.subList(verseRange[0], verseRange[1]))
+            val subList1 = displayItems1.subList(verseRange[0], verseRange[1])
             pt1 = verseRange[1]
 
             verseRange = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
             if (verseRange == null) {
                 break
             }
-            combinedDisplayItems.addAll(displayItems2.subList(verseRange[0], verseRange[1]))
+            val subList2 = displayItems2.subList(verseRange[0], verseRange[1])
             pt2 = verseRange[1]
+
+            if (displayMultipleSideBySide) {
+                val commonSize = min(subList1.size, subList2.size)
+                (0 until commonSize).forEach {
+                    val commonItem = subList1[it]
+                    commonItem.pairedItem = subList2[it]
+                    combinedDisplayItems.add(commonItem)
+                }
+                if (subList1.size > subList2.size) {
+                    combinedDisplayItems.addAll(subList1.subList(commonSize, subList1.size).map {
+                        it.pairedItem = BookDisplayItem(bibleVersions[1], chapterNumber, 0,
+                            BookDisplayItemViewType.VERSE, vNum, "")
+                        it
+                    })
+                }
+                else if (subList2.size > subList1.size) {
+                    combinedDisplayItems.addAll(subList2.subList(commonSize, subList2.size).map {
+                        BookDisplayItem(bibleVersions[0], chapterNumber, 0,
+                            BookDisplayItemViewType.VERSE, vNum, "", pairedItem = it)
+                    })
+                }
+            }
+            else {
+                combinedDisplayItems.addAll(subList1)
+                combinedDisplayItems.addAll(subList2)
+            }
 
             vNum++
         }
@@ -188,8 +219,12 @@ class BookLoader(private val context: Context,
             chapterIndices.add(displayItems.size)
 
             // add title item
-            val titleText = AppConstants.bibleVersions.getValue(
-                bibleVersionCode).getChapterTitle(bookNumber, rawChapter.chapterNumber)
+            val bibleVersionInst = AppConstants.bibleVersions.getValue(
+                bibleVersionCode)
+            var titleText = bibleVersionInst.getChapterTitle(bookNumber, rawChapter.chapterNumber)
+            if (bibleVersions.size > 1 && displayMultipleSideBySide) {
+                titleText = "(${bibleVersionInst.abbreviation}) " + titleText
+            }
             displayItems.add(
                 BookDisplayItem(
                     bibleVersionCode, rawChapter.chapterNumber,
@@ -222,8 +257,8 @@ class BookLoader(private val context: Context,
             displayItems.add(
                 BookDisplayItem(
                     bibleVersionCode, rawChapter.chapterNumber,
-                    0, BookDisplayItemViewType.DIVIDER, 0, ""
-                )
+                    0, BookDisplayItemViewType.DIVIDER, 0, "",
+                    isFirstDivider = true)
             )
 
             displayItems.addAll(compressFootNotes(footNotes))
@@ -275,7 +310,7 @@ class BookLoader(private val context: Context,
         var prependText: String? = ""
         val selectedBibleVersion = AppConstants.bibleVersions.getValue(
             bibleVersionCode)
-        if (bibleVersions.size > 1) {
+        if (bibleVersions.size > 1 && !displayMultipleSideBySide) {
             prependText += "<strong>(${selectedBibleVersion.abbreviation}) </strong>"
         }
         prependText += "${rawVerse.verseNumber}. "

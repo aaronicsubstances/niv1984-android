@@ -18,7 +18,7 @@ import javax.inject.Inject
 
 class BookLoadViewModel(application: Application): AndroidViewModel(application) {
 
-    private val _loadLiveData: MutableLiveData<List<BookDisplayItem>> = MutableLiveData()
+    private val _loadLiveData: MutableLiveData<BookDisplay> = MutableLiveData()
     private var lastLoadResult: BookDisplay? = null
     private var lastJob: Job? = null
 
@@ -71,13 +71,13 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    val loadLiveData: LiveData<List<BookDisplayItem>>
+    val loadLiveData: LiveData<BookDisplay>
         get() = _loadLiveData
 
     var bookLoadAftermath: BookLoadAftermath? = null
         private set
 
-    fun loadBook(bookNumber: Int, bibleVersions: List<String>) {
+    fun loadBook(bookNumber: Int, bibleVersions: List<String>, displayMultipleSideBySide: Boolean) {
         bookLoadAftermath = null
         if (lastLoadResult?.bibleVersions == bibleVersions) {
             //live data will do this automatically when it is subscribed to.
@@ -86,7 +86,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             val context = (getApplication() as MyApplication).applicationContext
             lastJob?.cancel()
             lastJob = viewModelScope.launch {
-                val bookLoader = BookLoader(context, bookNumber, bibleVersions)
+                val bookLoader = BookLoader(context, bookNumber, bibleVersions,
+                    displayMultipleSideBySide = displayMultipleSideBySide)
                 val model = bookLoader.load()
 
                 // only request scroll to a particular position if
@@ -104,7 +105,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 bookLoadAftermath = BookLoadAftermath(systemBookmarks.particularViewItemPos)
 
                 lastLoadResult = model
-                _loadLiveData.value = model.displayItems
+                _loadLiveData.value = model
             }
         }
     }

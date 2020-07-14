@@ -13,15 +13,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aaronicsubstances.largelistpaging.FiniteListAdapter
 import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
 import com.aaronicsubstances.niv1984.utils.AppConstants
 
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
+import com.aaronicsubstances.niv1984.view_adapters.BookLoadSideBySideAdapter
 import javax.inject.Inject
 
 /**
@@ -35,9 +38,9 @@ class BookLoadFragment : Fragment() {
     private lateinit var bookReadView: RecyclerView
 
     private lateinit var viewModel: BookLoadViewModel
-    private lateinit var adapter: BookLoadAdapter
 
     private var bookNumber: Int = 0
+    private var displayMultipleSideBySide = false
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -76,8 +79,9 @@ class BookLoadFragment : Fragment() {
         (requireActivity() as MainActivity).title = bookDescription
 
         bookReadView.layoutManager = LinearLayoutManager(activity)
-        adapter = BookLoadAdapter()
-        bookReadView.adapter = adapter
+
+        // read from settings.
+        displayMultipleSideBySide = true
 
         viewModel = ViewModelProvider(this).get(BookLoadViewModel::class.java)
 
@@ -92,8 +96,10 @@ class BookLoadFragment : Fragment() {
         }
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
-            Observer<List<BookDisplayItem>> {data ->
-                adapter.submitList(data)
+            Observer<BookDisplay> { data ->
+                createBookLoadAdapter(displayMultipleSideBySide &&
+                        (data.bibleVersions.size > 1))
+                (bookReadView.adapter as FiniteListAdapter<BookDisplayItem, *>).submitList(data.displayItems)
                 viewModel.bookLoadAftermath?.let {
                     // don't just scroll to item for it to be visible,
                     // but force it to appear at the top.
@@ -109,9 +115,10 @@ class BookLoadFragment : Fragment() {
                 firstVisibleItemPos: Int,
                 totalItemCount: Int
             ) {
-                val commonItemPos = locateEquivalentViewTypePos(adapter.currentList,
+                val currentList = (bookReadView.adapter as FiniteListAdapter<BookDisplayItem, *>).currentList
+                val commonItemPos = locateEquivalentViewTypePos(currentList,
                     firstVisibleItemPos)
-                val commonVisibleItem = adapter.currentList[commonItemPos]
+                val commonVisibleItem = currentList[commonItemPos]
 
                 viewModel.updateSystemBookmarks(commonVisibleItem.chapterNumber,
                     commonVisibleItem.verseNumber, commonVisibleItem.viewType,
@@ -121,6 +128,17 @@ class BookLoadFragment : Fragment() {
 
         // kickstart actual bible reading
         openBookForReading(bibleVersions, null)
+    }
+
+    private fun createBookLoadAdapter(displayMultipleSideBySide: Boolean) {
+        if (displayMultipleSideBySide && bookReadView.adapter is BookLoadSideBySideAdapter) {
+            return
+        }
+        if (!displayMultipleSideBySide && bookReadView.adapter is BookLoadAdapter) {
+            return
+        }
+        bookReadView.adapter = if (displayMultipleSideBySide) BookLoadSideBySideAdapter() else
+            BookLoadAdapter()
     }
 
     private fun openBookForReading(bibleVersions: List<String>, radioIndex: Int?) {
@@ -154,7 +172,7 @@ class BookLoadFragment : Fragment() {
                 bibleVersions.subList(0, 1)
             }
         }
-        viewModel.loadBook(bookNumber, bibleVersionsToUse)
+        viewModel.loadBook(bookNumber, bibleVersionsToUse, displayMultipleSideBySide)
     }
 
     private fun locateEquivalentViewTypePos(

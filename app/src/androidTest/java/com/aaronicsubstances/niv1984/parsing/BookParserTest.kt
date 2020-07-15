@@ -1,5 +1,7 @@
 package com.aaronicsubstances.niv1984.parsing
 
+import com.aaronicsubstances.niv1984.parsing.BookParser.BlockQuote
+import com.aaronicsubstances.niv1984.parsing.BookParser.BlockQuoteKind
 import com.aaronicsubstances.niv1984.parsing.BookParser.Chapter
 import com.aaronicsubstances.niv1984.parsing.BookParser.ChapterFragment
 import com.aaronicsubstances.niv1984.parsing.BookParser.ChapterFragmentKind
@@ -49,6 +51,11 @@ class BookParserTest {
     @Test
     fun testMultipleChapters() {
         runTest(::supplyTestWithMultipleChapters)
+    }
+
+    @Test
+    fun testEmptyContentAndBlockQuote() {
+        runTest(::supplyTestWithEmptyContentAndBlockQuote)
     }
 
     private fun runTest(supplier: ((MutableList<Chapter>) -> String)) {
@@ -294,5 +301,34 @@ class BookParserTest {
             </chapter>
         </book>
         """
+    }
+
+    private fun supplyTestWithEmptyContentAndBlockQuote(book: MutableList<Chapter>): String {
+        book.add(Chapter(17, listOf(
+            Verse(21, listOf(FancyContent(FancyContentKind.NONE, "")))
+        )))
+        book.add(Chapter(25, listOf(
+            Verse(20, listOf(
+                BlockQuote(BlockQuoteKind.LEFT_INDENTED, listOf(
+                    WordsOfJesus(listOf(FancyContent(FancyContentKind.NONE, "He"))),
+                    FancyContent(FancyContentKind.NONE, " that is separated")))))
+        )))
+        return """<book>
+            <chapter num="17">
+                <verse num="21">
+                    <content/>
+                </verse>
+            </chapter>
+            <chapter num="25">
+                <verse num="20">
+                    <block_quote kind="left_indented">
+                        <wj>
+                            <content>He</content>
+                        </wj>
+                        <content> that is separated</content>
+                    </block_quote>
+                </verse>
+            </chapter>
+        </book>"""
     }
 }

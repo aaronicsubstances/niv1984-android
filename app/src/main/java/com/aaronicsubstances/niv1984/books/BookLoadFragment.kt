@@ -1,6 +1,5 @@
 package com.aaronicsubstances.niv1984.books
 
-
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -76,12 +76,12 @@ class BookLoader(private val context: Context,
         // skip all but verses, dividers and footnotes
 
         var locInfo = locateDividersForMerge(cIdx1, cEndIdx1, displayItems1)
-        val dividerIdx1 = locInfo[0]
-        var pt1 = locInfo[1]
+        var pt1 = locInfo[0]
+        val dividerIdx1 = locInfo[1]
 
         locInfo = locateDividersForMerge(cIdx2, cEndIdx2, displayItems2)
-        val dividerIdx2 = locInfo[0]
-        var pt2 = locInfo[1]
+        var pt2 = locInfo[0]
+        val dividerIdx2 = locInfo[1]
 
         // select title of first bible version to represent combination.
         combinedDisplayItems.add(displayItems1[pt1 - 1])
@@ -136,10 +136,10 @@ class BookLoader(private val context: Context,
             vNum++
         }
         if (pt1 != dividerIdx1) {
-            throw AssertionError("$pt1 != $dividerIdx1")
+            throw AssertionError("$chapterNumber.$vNum: $pt1 != $dividerIdx1")
         }
         if (pt2 != dividerIdx2) {
-            throw AssertionError("$pt2 != $dividerIdx2")
+            throw AssertionError("$chapterNumber.$vNum: $pt2 != $dividerIdx2")
         }
 
         // add footnotes as one, for each bible version.
@@ -170,7 +170,7 @@ class BookLoader(private val context: Context,
             throw AssertionError("${displayItems[pt].viewType} != TITLE")
         }
 
-        return intArrayOf(dividerIdx, pt + 1)
+        return intArrayOf(pt + 1, dividerIdx)
     }
 
     private fun getVerseRange(
@@ -183,7 +183,7 @@ class BookLoader(private val context: Context,
         while (pt < dividerIdx) {
             val item = displayItems[pt]
             if (item.viewType == BookDisplayItemViewType.VERSE &&
-                item.verseNumber == vNum) {
+                    item.verseNumber == vNum) {
                 break
             }
             pt++
@@ -363,7 +363,9 @@ class BookLoader(private val context: Context,
             }
         }
 
-        if (out.isNotEmpty()) {
+        // to deal with omitted niv verses such as matt 17:21,
+        // ensure verse items is not empty.
+        if (out.isNotEmpty() || verseItems.isEmpty()) {
             if (prependText != null) {
                 out.insert(0, prependText)
             }

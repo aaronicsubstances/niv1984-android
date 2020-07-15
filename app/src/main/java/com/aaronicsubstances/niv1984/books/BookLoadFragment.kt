@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.FiniteListAdapter
 import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
@@ -23,7 +22,6 @@ import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
 import com.aaronicsubstances.niv1984.utils.AppConstants
 
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
-import com.aaronicsubstances.niv1984.view_adapters.BookLoadSideBySideAdapter
 import javax.inject.Inject
 
 /**
@@ -79,6 +77,8 @@ class BookLoadFragment : Fragment() {
 
         bookReadView.layoutManager = LinearLayoutManager(activity)
 
+        bookReadView.adapter = BookLoadAdapter(bibleVersions)
+
         // read from settings.
         displayMultipleSideBySide = true
 
@@ -96,9 +96,10 @@ class BookLoadFragment : Fragment() {
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
             Observer<BookDisplay> { data ->
-                createBookLoadAdapter(displayMultipleSideBySide &&
-                        (data.bibleVersions.size > 1))
-                (bookReadView.adapter as FiniteListAdapter<BookDisplayItem, *>).submitList(data.displayItems)
+                val adapter = bookReadView.adapter as BookLoadAdapter
+                adapter.multipleDisplay = data.bibleVersions.size > 1
+                adapter.displaySidebySide = adapter.multipleDisplay && displayMultipleSideBySide
+                adapter.submitList(data.displayItems)
                 viewModel.bookLoadAftermath?.let {
                     // don't just scroll to item for it to be visible,
                     // but force it to appear at the top.
@@ -114,7 +115,7 @@ class BookLoadFragment : Fragment() {
                 firstVisibleItemPos: Int,
                 totalItemCount: Int
             ) {
-                val currentList = (bookReadView.adapter as FiniteListAdapter<BookDisplayItem, *>).currentList
+                val currentList = (bookReadView.adapter as BookLoadAdapter).currentList
                 val commonItemPos = locateEquivalentViewTypePos(currentList,
                     firstVisibleItemPos)
                 val commonVisibleItem = currentList[commonItemPos]
@@ -127,17 +128,6 @@ class BookLoadFragment : Fragment() {
 
         // kickstart actual bible reading
         openBookForReading(bibleVersions, null)
-    }
-
-    private fun createBookLoadAdapter(displayMultipleSideBySide: Boolean) {
-        if (displayMultipleSideBySide && bookReadView.adapter is BookLoadSideBySideAdapter) {
-            return
-        }
-        if (!displayMultipleSideBySide && bookReadView.adapter is BookLoadAdapter) {
-            return
-        }
-        bookReadView.adapter = if (displayMultipleSideBySide) BookLoadSideBySideAdapter() else
-            BookLoadAdapter()
     }
 
     private fun openBookForReading(bibleVersions: List<String>, radioIndex: Int?) {

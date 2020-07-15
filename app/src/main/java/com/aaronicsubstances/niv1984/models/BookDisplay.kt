@@ -7,16 +7,19 @@ data class BookDisplay(val bookNumber: Int,
                        val displayItems: List<BookDisplayItem>,
                        val chapterIndices: List<Int>)
 
-data class BookDisplayItem(val bibleVersion: String,
+
+data class BookDisplayItem(val viewType: BookDisplayItemViewType,
                            val chapterNumber: Int,
-                           var indexInChapter: Int,
-                           val viewType: BookDisplayItemViewType,
                            val verseNumber: Int,
-                           var text: String,
-                           var html: CharSequence? = null,
-                           var pairedItem: BookDisplayItem? = null,
-                           val blockQuoteKind: BookParser.BlockQuoteKind? = null,
-                           val isFirstDivider: Boolean = false)
+                           val fullContent: BookDisplayItemContent,
+                           var firstPartialContent: List<BookDisplayItemContent>? = null,
+                           var secondPartialContent: List<BookDisplayItemContent>? = null)
+
+data class BookDisplayItemContent(val bibleVersionIndex: Int,
+                                  var text: String,
+                                  val blockQuoteKind: BookParser.BlockQuoteKind? = null,
+                                  var html: CharSequence? = null,
+                                  val isFirstDivider: Boolean = false)
 
 enum class BookDisplayItemViewType {
     TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES

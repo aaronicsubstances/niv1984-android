@@ -13,24 +13,37 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"/>
 
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout
+        android:id="@+id/firstSideVerse"
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/verse_margin"
         android:layout_marginRight="@dimen/verse_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/gl_vertical_line50"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/text2"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/secondSideVerse"
+        android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/verse_margin"
         android:layout_marginRight="@dimen/verse_margin"
         app:layout_constraintStart_toEndOf="@id/gl_vertical_line50"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

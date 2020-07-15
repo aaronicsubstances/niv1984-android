@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.TextUtils
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
+import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.parsing.BookParser
 import com.aaronicsubstances.niv1984.parsing.BookParser.BlockQuote
@@ -22,7 +23,6 @@ import com.aaronicsubstances.niv1984.utils.AppConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.AssertionError
-import kotlin.math.min
 
 class BookLoader(private val context: Context,
                  private val bookNumber: Int,
@@ -30,16 +30,20 @@ class BookLoader(private val context: Context,
                  private val wjColor: String = "red",
                  private val displayMultipleSideBySide: Boolean = false) {
 
+    companion object {
+        private val DUMMY_CONTENT = BookDisplayItemContent(-1, "")
+    }
+
     suspend fun load(): BookDisplay {
         return withContext(Dispatchers.IO) {
             val rawChapters = loadRawBookAsset(bibleVersions[0])
             val chapterIndices = mutableListOf<Int>()
-            val displayItems = processChapters(bibleVersions[0], rawChapters, chapterIndices)
+            val displayItems = processChapters(0, rawChapters, chapterIndices)
 
             val book = if (bibleVersions.size > 1) {
                 val rawChapters2 = loadRawBookAsset(bibleVersions[1])
                 val chapterIndices2 = mutableListOf<Int>()
-                val displayItems2 = processChapters(bibleVersions[1], rawChapters2, chapterIndices2)
+                val displayItems2 = processChapters(1, rawChapters2, chapterIndices2)
                 val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
                 val combinedDisplayItems = mutableListOf<BookDisplayItem>()
                 val combinedChapterIndices = mutableListOf<Int>()
@@ -83,10 +87,18 @@ class BookLoader(private val context: Context,
         var pt2 = locInfo[0]
         val dividerIdx2 = locInfo[1]
 
-        // select title of first bible version to represent combination.
-        combinedDisplayItems.add(displayItems1[pt1 - 1])
+        // set title for combination.
         if (displayMultipleSideBySide) {
-            combinedDisplayItems[combinedDisplayItems.size - 1].pairedItem = displayItems2[pt2 - 1]
+            val firstPart = displayItems1[pt1 - 1]
+            val secondPart = displayItems2[pt2 - 1]
+            combinedDisplayItems.add(BookDisplayItem(BookDisplayItemViewType.TITLE,
+                chapterNumber, 0, DUMMY_CONTENT,
+                firstPartialContent = listOf(firstPart.fullContent),
+                secondPartialContent = listOf(secondPart.fullContent)))
+        }
+        else {
+            // select title of first bible version to represent combination.
+            combinedDisplayItems.add(displayItems1[pt1 - 1])
         }
 
         var vNum = 1
@@ -108,25 +120,10 @@ class BookLoader(private val context: Context,
             pt2 = verseRange[1]
 
             if (displayMultipleSideBySide) {
-                val commonSize = min(subList1.size, subList2.size)
-                (0 until commonSize).forEach {
-                    val commonItem = subList1[it]
-                    commonItem.pairedItem = subList2[it]
-                    combinedDisplayItems.add(commonItem)
-                }
-                if (subList1.size > subList2.size) {
-                    combinedDisplayItems.addAll(subList1.subList(commonSize, subList1.size).map {
-                        it.pairedItem = BookDisplayItem(bibleVersions[1], chapterNumber, 0,
-                            BookDisplayItemViewType.VERSE, vNum, "")
-                        it
-                    })
-                }
-                else if (subList2.size > subList1.size) {
-                    combinedDisplayItems.addAll(subList2.subList(commonSize, subList2.size).map {
-                        BookDisplayItem(bibleVersions[0], chapterNumber, 0,
-                            BookDisplayItemViewType.VERSE, vNum, "", pairedItem = it)
-                    })
-                }
+                combinedDisplayItems.add(BookDisplayItem(BookDisplayItemViewType.VERSE,
+                    chapterNumber, vNum, DUMMY_CONTENT,
+                    firstPartialContent = subList1.map { it.fullContent },
+                    secondPartialContent = subList2.map { it.fullContent }))
             }
             else {
                 combinedDisplayItems.addAll(subList1)
@@ -211,7 +208,7 @@ class BookLoader(private val context: Context,
         }
     }
 
-    private fun processChapters(bibleVersionCode: String,
+    private fun processChapters(bibleVersionIndex: Int,
                                 rawChapters: List<Chapter>,
                                 chapterIndices: MutableList<Int>): List<BookDisplayItem> {
         val displayItems = mutableListOf<BookDisplayItem>()
@@ -220,15 +217,15 @@ class BookLoader(private val context: Context,
 
             // add title item
             val bibleVersionInst = AppConstants.bibleVersions.getValue(
-                bibleVersionCode)
+                bibleVersions[bibleVersionIndex])
             var titleText = bibleVersionInst.getChapterTitle(bookNumber, rawChapter.chapterNumber)
             if (bibleVersions.size > 1 && displayMultipleSideBySide) {
                 titleText = "(${bibleVersionInst.abbreviation}) " + titleText
             }
             displayItems.add(
-                BookDisplayItem(
-                    bibleVersionCode, rawChapter.chapterNumber,
-                    0, BookDisplayItemViewType.TITLE, 0, titleText))
+                BookDisplayItem(BookDisplayItemViewType.TITLE,
+                    rawChapter.chapterNumber, 0,
+                    BookDisplayItemContent(bibleVersionIndex, titleText)))
 
             val footNotes = mutableListOf<BookDisplayItem>()
 
@@ -236,46 +233,42 @@ class BookLoader(private val context: Context,
                 when (part) {
                     is ChapterFragment -> {
                         val item = processChapterFragment(
-                            bibleVersionCode, rawChapter.chapterNumber,
+                            bibleVersionIndex, rawChapter.chapterNumber,
                             part)
                         displayItems.add(item)
                     }
                     is Verse -> {
                         val items = processVerse(
-                            bibleVersionCode, rawChapter.chapterNumber,
+                            bibleVersionIndex, rawChapter.chapterNumber,
                             part)
                         displayItems.addAll(items)
                     }
                     else -> {
                         part as Note
-                        val footNoteItem = processNote(bibleVersionCode, rawChapter.chapterNumber,
+                        val footNoteItem = processNote(bibleVersionIndex, rawChapter.chapterNumber,
                             part)
                         footNotes.add(footNoteItem)
                     }
                 }
             }
+
             displayItems.add(
-                BookDisplayItem(
-                    bibleVersionCode, rawChapter.chapterNumber,
-                    0, BookDisplayItemViewType.DIVIDER, 0, "",
-                    isFirstDivider = true)
-            )
+                BookDisplayItem(BookDisplayItemViewType.DIVIDER,
+                    rawChapter.chapterNumber,0,
+                    BookDisplayItemContent(bibleVersionIndex, "", isFirstDivider = true)
+                ))
 
             displayItems.addAll(compressFootNotes(footNotes))
             displayItems.add(
-                BookDisplayItem(bibleVersionCode, rawChapter.chapterNumber,
-                    0, BookDisplayItemViewType.DIVIDER, 0, ""))
-
-            // assign index in chapter.
-            displayItems.forEachIndexed { idx, item ->
-                item.indexInChapter = idx
-            }
+                BookDisplayItem(BookDisplayItemViewType.DIVIDER,
+                    rawChapter.chapterNumber,0,
+                    BookDisplayItemContent(bibleVersionIndex, "")))
         }
         return displayItems
     }
 
     private fun processChapterFragment(
-        bibleVersionCode: String,
+        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawFragment: ChapterFragment
     ): BookDisplayItem {
@@ -290,7 +283,7 @@ class BookLoader(private val context: Context,
         for (part in rawFragment.parts) {
             when (part) {
                 is NoteRef -> {
-                    processNoteRef(bibleVersionCode, chapterNumber, part, out)
+                    processNoteRef(bibleVersionIndex, chapterNumber, part, out)
                 }
                 else -> {
                     part as FancyContent
@@ -298,18 +291,18 @@ class BookLoader(private val context: Context,
                 }
             }
         }
-        return BookDisplayItem(bibleVersionCode, chapterNumber, 0,
-            viewType, 0, out.toString())
+        return BookDisplayItem(viewType, chapterNumber, 0,
+            BookDisplayItemContent(bibleVersionIndex, out.toString()))
     }
 
     private fun processVerse(
-        bibleVersionCode: String,
+        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawVerse: Verse
     ): List<BookDisplayItem> {
         var prependText: String? = ""
         val selectedBibleVersion = AppConstants.bibleVersions.getValue(
-            bibleVersionCode)
+            bibleVersions[bibleVersionIndex])
         if (bibleVersions.size > 1 && !displayMultipleSideBySide) {
             prependText += "<strong>(${selectedBibleVersion.abbreviation}) </strong>"
         }
@@ -324,7 +317,7 @@ class BookLoader(private val context: Context,
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
-                                processNoteRef(bibleVersionCode, chapterNumber, wjPart, out)
+                                processNoteRef(bibleVersionIndex, chapterNumber, wjPart, out)
                             }
                             else -> {
                                 wjPart as FancyContent
@@ -340,21 +333,22 @@ class BookLoader(private val context: Context,
                             out.insert(0, prependText)
                             prependText = null
                         }
-                        val currItem = BookDisplayItem(bibleVersionCode, chapterNumber, 0,
-                            BookDisplayItemViewType.VERSE, rawVerse.verseNumber, out.toString())
+                        val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
+                            chapterNumber, rawVerse.verseNumber,
+                            BookDisplayItemContent(bibleVersionIndex, out.toString()))
                         verseItems.add(currItem)
                         out.clear()
                     }
-                    val nextItem = processBlockQuote(bibleVersionCode, chapterNumber,
+                    val nextItem = processBlockQuote(bibleVersionIndex, chapterNumber,
                         part, rawVerse.verseNumber)
                     if (prependText != null) {
-                        nextItem.text = prependText + nextItem.text
+                        nextItem.fullContent.text = prependText + nextItem.fullContent.text
                         prependText = null
                     }
                     verseItems.add(nextItem)
                 }
                 is NoteRef -> {
-                    processNoteRef(bibleVersionCode, chapterNumber, part, out)
+                    processNoteRef(bibleVersionIndex, chapterNumber, part, out)
                 }
                 else -> {
                     part as FancyContent
@@ -369,8 +363,9 @@ class BookLoader(private val context: Context,
             if (prependText != null) {
                 out.insert(0, prependText)
             }
-            val currItem = BookDisplayItem(bibleVersionCode, chapterNumber, 0,
-                BookDisplayItemViewType.VERSE, rawVerse.verseNumber, out.toString())
+            val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
+                chapterNumber, rawVerse.verseNumber,
+                BookDisplayItemContent(bibleVersionIndex, out.toString()))
             verseItems.add(currItem)
         }
 
@@ -378,7 +373,7 @@ class BookLoader(private val context: Context,
     }
 
     private fun processBlockQuote(
-        bibleVersionCode: String,
+        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawQuote: BlockQuote,
         verseNumber: Int
@@ -391,7 +386,7 @@ class BookLoader(private val context: Context,
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
-                                processNoteRef(bibleVersionCode, chapterNumber, wjPart, out)
+                                processNoteRef(bibleVersionIndex, chapterNumber, wjPart, out)
                             }
                             else -> {
                                 wjPart as FancyContent
@@ -402,7 +397,7 @@ class BookLoader(private val context: Context,
                     out.append("</font>")
                 }
                 is NoteRef -> {
-                    processNoteRef(bibleVersionCode, chapterNumber, part, out)
+                    processNoteRef(bibleVersionIndex, chapterNumber, part, out)
                 }
                 else -> {
                     part as FancyContent
@@ -410,9 +405,8 @@ class BookLoader(private val context: Context,
                 }
             }
         }
-        return BookDisplayItem(bibleVersionCode, chapterNumber, 0,
-            BookDisplayItemViewType.VERSE, verseNumber, out.toString(),
-            blockQuoteKind = rawQuote.kind)
+        return BookDisplayItem(BookDisplayItemViewType.VERSE, chapterNumber, verseNumber,
+            BookDisplayItemContent(bibleVersionIndex, out.toString(), rawQuote.kind))
     }
 
     private fun processFancyContent(rawContent: FancyContent, out: StringBuilder) {
@@ -434,20 +428,20 @@ class BookLoader(private val context: Context,
     }
 
     private fun processNoteRef(
-        bibleVersionCode: String,
+        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawNoteRef: NoteRef,
         out: StringBuilder
     ) {
         val lowerA = 'a'.toInt()
         val charRef = (lowerA + rawNoteRef.noteNumber -1).toChar()
-        var text = "<sup><a href='$bibleVersionCode-$chapterNumber-${rawNoteRef.noteNumber}'>" +
+        var text = "<sup><a href='${bibleVersions[bibleVersionIndex]}-$chapterNumber-${rawNoteRef.noteNumber}'>" +
             "$charRef</a></sup>"
         out.append(text)
     }
 
     private fun processNote(
-        bibleVersionCode: String,
+        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawNote: Note
     ): BookDisplayItem {
@@ -485,8 +479,8 @@ class BookLoader(private val context: Context,
                 }
             }
         }
-        return BookDisplayItem(bibleVersionCode, chapterNumber, 0,
-            viewType, 0, out.toString())
+        return BookDisplayItem(viewType, chapterNumber, 0,
+            BookDisplayItemContent(bibleVersionIndex, out.toString()))
     }
 
     private fun compressFootNotes(footNotes: List<BookDisplayItem>): List<BookDisplayItem> {
@@ -497,7 +491,7 @@ class BookLoader(private val context: Context,
             if (f.viewType == BookDisplayItemViewType.FOOTNOTE) {
                 compressed.add(f)
                 if (combined != null) {
-                    combined.text = buf.toString()
+                    combined.fullContent.text = buf.toString()
                     combined = null
                     buf.clear()
                 }
@@ -507,11 +501,11 @@ class BookLoader(private val context: Context,
                     compressed.add(f)
                     combined = f
                 }
-                buf.append(f.text).append(" ")
+                buf.append(f.fullContent.text).append(" ")
             }
         }
         if (combined != null) {
-            combined.text = buf.toString()
+            combined.fullContent.text = buf.toString()
         }
         return compressed
     }

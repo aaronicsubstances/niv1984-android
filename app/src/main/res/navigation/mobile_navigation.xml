@@ -21,24 +21,6 @@
             app:destination="@id/bookLoadFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.aaronicsubstances.niv1984.scrollexperiment.ExFragment"
-        android:label="Scroll Experiment"
-        tools:layout="@layout/fragment_ex" />
-
-    <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.aaronicsubstances.niv1984.scrollexperiment.ExPosFragment"
-        android:label="Scroll Experiment with Total Size"
-        tools:layout="@layout/fragment_slideshow" />
-
-    <!--<fragment
-        android:id="@+id/nav_tools"
-        android:name="com.aaronicsubstances.niv1984.books.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />-->
-
     <activity
         android:id="@+id/nav_tools"
         android:name="com.aaronicsubstances.niv1984.settings.SettingsActivity"
@@ -60,7 +42,7 @@
     <fragment
         android:id="@+id/bookLoadFragment"
         android:name="com.aaronicsubstances.niv1984.books.BookLoadFragment"
-        tools:layout="@layout/fragment_book_load">
+        tools:layout="@layout/book_load_fragment">
         <argument
             android:name="bookIndex" app:argType="integer" app:nullable="false" />
     </fragment>

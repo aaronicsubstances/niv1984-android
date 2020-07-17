@@ -19,18 +19,20 @@ import com.aaronicsubstances.niv1984.parsing.BookParser
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class BookLoadAdapter(private val bibleVersions: List<String>):
-        FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
+class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
 
+    var bibleVersions = listOf<String>()
     var multipleDisplay: Boolean = false
-    var displaySidebySide: Boolean = false
+    var displayMultipleSidebySide: Boolean = false
+    var zoomLevel: Int = 100
+    var isNightMode: Boolean = false
 
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal
         // split viewType to positive or negative depending on displaySideBySide.
         // since zero cannot have different signs, increment by 1.
         viewType += 1
-        if (displaySidebySide) {
+        if (multipleDisplay && displayMultipleSidebySide) {
             viewType *= -1
         }
         return viewType
@@ -39,7 +41,7 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         when (Math.abs(viewType) - 1) {
             BookDisplayItemViewType.TITLE.ordinal -> {
-                if (displaySidebySide) {
+                if (viewType < 0) {
                     val itemView = LayoutInflater.from(parent.context).inflate(
                         R.layout.book_load_item_title_split, parent, false)
                     return SplitTitleViewHolder(itemView)
@@ -51,7 +53,7 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
                 }
             }
             BookDisplayItemViewType.VERSE.ordinal -> {
-                if (displaySidebySide) {
+                if (viewType < 0) {
                     val itemView = LayoutInflater.from(parent.context).inflate(
                         R.layout.book_load_item_verse_split, parent, false
                     )
@@ -67,7 +69,7 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
             BookDisplayItemViewType.DIVIDER.ordinal -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(
                     R.layout.book_load_item_divider, parent, false)
-                return DividerViewHolder(itemView, bibleVersions)
+                return DividerViewHolder(itemView)
             }
             else -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(
@@ -81,23 +83,23 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
         val item = getItem(position)
         when (item.viewType) {
             BookDisplayItemViewType.TITLE -> {
-                if (displaySidebySide) {
-                    (holder as SplitTitleViewHolder).bind(item)
+                if (holder is SplitTitleViewHolder) {
+                    holder.bind(item)
                 }
                 else {
                     (holder as TitleViewHolder).bind(item)
                 }
             }
             BookDisplayItemViewType.VERSE -> {
-                if (displaySidebySide) {
-                    (holder as SplitVerseViewHolder).bind(item)
+                if (holder is SplitVerseViewHolder) {
+                    holder.bind(item)
                 }
                 else {
                     (holder as VerseViewHolder).bind(item)
                 }
             }
             BookDisplayItemViewType.DIVIDER -> {
-                (holder as DividerViewHolder).bind(item, multipleDisplay)
+                (holder as DividerViewHolder).bind(item)
             }
             else -> {
                 (holder as DefaultViewHolder).bind(item)
@@ -105,42 +107,79 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
         }
     }
 
-    class DefaultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    fun initDefault(textView: TextView, isForTitle: Boolean) {
+        val textColor = if (isNightMode) "white" else "black"
+        textView.setTextColor(Color.parseColor(textColor))
+
+        val textSize = (if (isForTitle) 21f else 18f) * zoomLevel / 100
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+    }
+
+    fun bindDefault(item: BookDisplayItemContent, textView: TextView) {
+        // cache html parse result
+        if (item.html == null) {
+            item.html = AppUtils.parseHtml(item.text)
+            item.text = "" // reduce memory load
+        }
+        textView.text = item.html
+
+        textView.textAlignment = TextView.TEXT_ALIGNMENT_INHERIT
+        textView.setPadding(0)
+        if (item.blockQuoteKind != null) {
+            when (item.blockQuoteKind) {
+                BookParser.BlockQuoteKind.CENTER -> {
+                    textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+                }
+                BookParser.BlockQuoteKind.RIGHT -> {
+                    textView.textAlignment = TextView.TEXT_ALIGNMENT_VIEW_END
+                }
+                BookParser.BlockQuoteKind.LEFT -> {
+                    textView.setPadding(
+                        AppUtils.dimenResToPx(
+                            R.dimen.block_quote_left, textView.context
+                        ), 0, 0, 0
+                    )
+                }
+                BookParser.BlockQuoteKind.LEFT_INDENTED -> {
+                    textView.setPadding(
+                        AppUtils.dimenResToPx(
+                            R.dimen.block_quote_left_indent, textView.context
+                        ), 0, 0, 0
+                    )
+                }
+            }
+        }
+    }
+
+    inner class DefaultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
 
         init {
-            //textView.textSize = AppUtils.spToPx(14f)
-            textView.setTextColor(Color.parseColor("#000000"))
-            //textView.setTextColor(Color.parseColor("white"))
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+            initDefault(textView, false)
         }
 
         fun bind(item: BookDisplayItem) {
             if (item.viewType == BookDisplayItemViewType.HEADER) {
                 textView.setTypeface(textView.typeface, Typeface.BOLD)
-            } else {
+            }
+            else {
                 textView.typeface = null
             }
-            // cache html parse result
-            if (item.fullContent.html == null) {
-                item.fullContent.html = AppUtils.parseHtml(item.fullContent.text)
-                item.fullContent.text = "" // reduce memory load
-            }
-            textView.text = item.fullContent.html
+            bindDefault(item.fullContent, textView)
         }
     }
 
-    class DividerViewHolder(itemView: View, private val bibleVersions: List<String>):
+    inner class DividerViewHolder(itemView: View):
             RecyclerView.ViewHolder(itemView) {
         private val topRule = itemView.findViewById<View>(R.id.topRule)
         private val bottomRule = itemView.findViewById<View>(R.id.bottomRule)
         private val textView = topRule.findViewById<TextView>(R.id.text)
 
         init {
-            VerseViewHolder.initSpecific(textView)
+            initDefault(textView, false)
         }
 
-        fun bind(item: BookDisplayItem, multipleDisplay: Boolean) {
+        fun bind(item: BookDisplayItem) {
             if (!item.fullContent.isFirstDivider) {
                 bottomRule.visibility = View.VISIBLE
                 topRule.visibility = View.GONE
@@ -161,112 +200,55 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
         }
     }
 
-    class TitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class TitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
 
         init {
-            initSpecific(textView)
+            initDefault(textView, true)
         }
 
         fun bind(item: BookDisplayItem) {
-            bindSpecific(item.fullContent, textView)
-        }
-
-        companion object {
-            fun initSpecific(textView: TextView) {
-                //textView.textSize = AppUtils.spToPx(24f)
-                textView.setTextColor(Color.parseColor("#000000"))
-                //textView.setTextColor(Color.parseColor("white"))
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 21f)
-            }
-
-            fun bindSpecific(item: BookDisplayItemContent, textView: TextView) {
-                textView.text = item.text
-            }
+            bindDefault(item.fullContent, textView)
         }
     }
 
-    class VerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class VerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
         init {
-            initSpecific(textView)
+            initDefault(textView, false)
         }
 
         fun bind(item: BookDisplayItem) {
-            bindSpecific(item.fullContent, textView)
-        }
-
-        companion object {
-            fun initSpecific(textView: TextView) {
-                //textView.textSize = AppUtils.spToPx(14f)
-                textView.setTextColor(Color.parseColor("#000000"))
-                //textView.setTextColor(Color.parseColor("white"))
-                textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
-            }
-
-            fun bindSpecific(item: BookDisplayItemContent, textView: TextView) {
-                // cache html parse result
-                if (item.html == null) {
-                    item.html = AppUtils.parseHtml(item.text)
-                    item.text = "" // reduce memory load
-                }
-                textView.text = item.html
-                textView.textAlignment = TextView.TEXT_ALIGNMENT_INHERIT
-                textView.setPadding(0)
-                if (item.blockQuoteKind != null) {
-                    when (item.blockQuoteKind) {
-                        BookParser.BlockQuoteKind.CENTER -> {
-                            textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-                        }
-                        BookParser.BlockQuoteKind.RIGHT -> {
-                            textView.textAlignment = TextView.TEXT_ALIGNMENT_VIEW_END
-                        }
-                        BookParser.BlockQuoteKind.LEFT -> {
-                            textView.setPadding(
-                                AppUtils.dimenResToPx(
-                                    R.dimen.block_quote_left, textView.context
-                                ), 0, 0, 0
-                            )
-                        }
-                        BookParser.BlockQuoteKind.LEFT_INDENTED -> {
-                            textView.setPadding(
-                                AppUtils.dimenResToPx(
-                                    R.dimen.block_quote_left_indent, textView.context
-                                ), 0, 0, 0
-                            )
-                        }
-                    }
-                }
-            }
+            bindDefault(item.fullContent, textView)
         }
     }
 
-    class SplitTitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class SplitTitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
         private val textView2 = itemView.findViewById<TextView>(R.id.text2)
 
         init {
-            TitleViewHolder.initSpecific(textView)
-            TitleViewHolder.initSpecific(textView2)
+            initDefault(textView, true)
+            initDefault(textView2, true)
         }
 
         fun bind(item: BookDisplayItem) {
-            TitleViewHolder.bindSpecific(item.firstPartialContent!![0], textView)
-            TitleViewHolder.bindSpecific(item.secondPartialContent!![0], textView2)
+            bindDefault(item.firstPartialContent!![0], textView)
+            bindDefault(item.secondPartialContent!![0], textView2)
         }
     }
 
-    class SplitVerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class SplitVerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val firstSideVerse = itemView.findViewById<ViewGroup>(R.id.firstSideVerse)
         private val secondSideVerse = itemView.findViewById<ViewGroup>(R.id.secondSideVerse)
 
         init {
             (0 until firstSideVerse.childCount).forEach {
-                VerseViewHolder.initSpecific(firstSideVerse.getChildAt(it) as TextView)
+                initDefault(firstSideVerse.getChildAt(it) as TextView, false)
             }
             (0 until secondSideVerse.childCount).forEach {
-                VerseViewHolder.initSpecific(secondSideVerse.getChildAt(it) as TextView)
+                initDefault(secondSideVerse.getChildAt(it) as TextView, false)
             }
         }
 
@@ -275,33 +257,30 @@ class BookLoadAdapter(private val bibleVersions: List<String>):
             bindSpecific(item.secondPartialContent!!, secondSideVerse)
         }
 
-        companion object {
+        private fun bindSpecific(items: List<BookDisplayItemContent>, textViewGroup: ViewGroup) {
+            // ensure enough text views.
+            while (textViewGroup.childCount < items.size) {
+                val tv = TextView(textViewGroup.context)
 
-            private fun bindSpecific(items: List<BookDisplayItemContent>, textViewGroup: ViewGroup) {
-                // ensure enough text views.
-                while (textViewGroup.childCount < items.size) {
-                    val tv = TextView(textViewGroup.context)
+                // Create a LayoutParams for TextView
+                val lp = LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT)
+                tv.layoutParams = lp
 
-                    // Create a LayoutParams for TextView
-                    val lp = LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.MATCH_PARENT,
-                        LinearLayout.LayoutParams.WRAP_CONTENT)
-                    tv.layoutParams = lp
+                initDefault(tv, false)
+                textViewGroup.addView(tv)
+            }
 
-                    VerseViewHolder.initSpecific(tv)
-                    textViewGroup.addView(tv)
-                }
+            // reset all views
+            (0 until textViewGroup.childCount).forEach {
+                textViewGroup.getChildAt(it).visibility = View.GONE
+            }
 
-                // reset all views
-                (0 until textViewGroup.childCount).forEach {
-                    textViewGroup.getChildAt(it).visibility = View.GONE
-                }
-
-                items.forEachIndexed { i, item ->
-                    val textView = textViewGroup.getChildAt(i) as TextView
-                    textView.visibility = View.VISIBLE
-                    VerseViewHolder.bindSpecific(item, textView)
-                }
+            items.forEachIndexed { i, item ->
+                val textView = textViewGroup.getChildAt(i) as TextView
+                textView.visibility = View.VISIBLE
+                bindDefault(item, textView)
             }
         }
     }

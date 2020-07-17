@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 
 object AppConstants {
-    val PREF_KEY_BIBLE_VERSIONS = "bible_versions"
     val BIBLE_BOOK_COUNT = 66
     val DEFAULT_BIBLE_VERSIONS = listOf(NivBibleVersion.code, KjvBibleVersion.code)
 
@@ -20,18 +19,6 @@ object AppConstants {
                 KjvBibleVersion.code to KjvBibleVersion,
                 NivBibleVersion.code to NivBibleVersion)
         }
-
-    fun getPreferredBibleVersions(context: Context): List<String> {
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
-        val persistedValue = preferenceManager.getString(PREF_KEY_BIBLE_VERSIONS, "") as String
-        val codes = persistedValue.splitToSequence(" ").filter {
-            it.isNotEmpty()
-        }.toList()
-        if (codes.size < DEFAULT_BIBLE_VERSIONS.size) {
-            return DEFAULT_BIBLE_VERSIONS
-        }
-        return codes
-    }
 }
 
 interface BibleVersion {

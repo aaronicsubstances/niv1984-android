@@ -26,9 +26,11 @@ import java.lang.AssertionError
 
 class BookLoader(private val context: Context,
                  private val bookNumber: Int,
-                 val bibleVersions: List<String>,
-                 private val wjColor: String = "red",
-                 private val displayMultipleSideBySide: Boolean = false) {
+                 private val bibleVersions: List<String>,
+                 private val displayMultipleSideBySide: Boolean,
+                 private val isNightMode: Boolean) {
+
+    private val wjColor: String = if (isNightMode) "green" else "red"
 
     companion object {
         private val DUMMY_CONTENT = BookDisplayItemContent(-1, "")
@@ -60,10 +62,17 @@ class BookLoader(private val context: Context,
                     mergeVersions(it + 1, combinedDisplayItems, displayItems, cIdx1, cEndIdx1,
                         displayItems2, cIdx2, cEndIdx2)
                 }
-                BookDisplay(bookNumber, bibleVersions, combinedDisplayItems, combinedChapterIndices)
+                BookDisplay(
+                    bookNumber,
+                    bibleVersions,
+                    combinedDisplayItems,
+                    combinedChapterIndices,
+                    displayMultipleSideBySide,
+                    isNightMode)
             }
             else {
-                BookDisplay(bookNumber, bibleVersions, displayItems, chapterIndices)
+                BookDisplay(bookNumber, bibleVersions, displayItems, chapterIndices,
+                    displayMultipleSideBySide, isNightMode)
             }
             book
         }

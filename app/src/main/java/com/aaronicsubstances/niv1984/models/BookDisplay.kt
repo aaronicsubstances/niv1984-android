@@ -2,10 +2,14 @@ package com.aaronicsubstances.niv1984.models
 
 import com.aaronicsubstances.niv1984.parsing.BookParser
 
-data class BookDisplay(val bookNumber: Int,
-                       val bibleVersions: List<String>,
-                       val displayItems: List<BookDisplayItem>,
-                       val chapterIndices: List<Int>)
+data class BookDisplay(
+    val bookNumber: Int,
+    val bibleVersions: List<String>,
+    val displayItems: List<BookDisplayItem>,
+    val chapterIndices: List<Int>,
+    val displayMultipleSideBySide: Boolean,
+    val isNightMode: Boolean
+)
 
 
 data class BookDisplayItem(val viewType: BookDisplayItemViewType,

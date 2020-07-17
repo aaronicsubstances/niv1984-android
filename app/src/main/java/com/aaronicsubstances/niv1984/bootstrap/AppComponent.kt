@@ -1,10 +1,7 @@
 package com.aaronicsubstances.niv1984.bootstrap
 
 import android.content.Context
-import com.aaronicsubstances.niv1984.books.BookLoadFragment
-import com.aaronicsubstances.niv1984.books.BookLoadViewModel
-import com.aaronicsubstances.niv1984.books.BookTextViewModel
-import com.aaronicsubstances.niv1984.books.MainActivity
+import com.aaronicsubstances.niv1984.books.*
 import javax.inject.Singleton
 import dagger.BindsInstance
 import dagger.Component
@@ -20,7 +17,7 @@ interface AppComponent {
     }
 
     fun inject(activity: MainActivity)
-    fun inject(viewModel: BookTextViewModel)
-    fun inject(bookLoadViewModel: BookLoadViewModel)
-    fun inject(bookLoadFragment: BookLoadFragment)
+    fun inject(fragment: BookListFragment)
+    fun inject(viewModel: BookLoadViewModel)
+    fun inject(fragment: BookLoadFragment)
 }

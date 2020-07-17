@@ -1,5 +1,6 @@
 package com.aaronicsubstances.niv1984.books
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.endlesspaginglib.EndlessListItemClickListener
 import com.aaronicsubstances.niv1984.R
-import com.aaronicsubstances.niv1984.utils.AppConstants
+import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
 import com.aaronicsubstances.niv1984.view_adapters.BookListAdapter
+import javax.inject.Inject
 
 class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -27,6 +30,14 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
     private lateinit var mListViewAdapter: BookListAdapter
 
     private lateinit var mListView: RecyclerView
+
+    @Inject
+    internal lateinit var sharedPrefMgr: SharedPrefManager
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context.applicationContext as MyApplication).appComponent.inject(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,17 +54,8 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
         preferenceManager.registerOnSharedPreferenceChangeListener(this)
 
-        val bibleVersionCode = AppConstants.getPreferredBibleVersions(requireContext())[0]
+        val bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
 
-        /*val onItemClickListenerFactory = object: EndlessListItemClickListener.Factory<Any>{
-            override fun create(viewHolder: RecyclerView.ViewHolder?): EndlessListItemClickListener<Any> {
-                return object: EndlessListItemClickListener<Any>(viewHolder) {
-                    override fun onClick(v: View?) {
-                        onBookSelected(itemPosition)
-                    }
-                }
-            }
-        }*/
         val onItemClickListenerFactory =
             EndlessListItemClickListener.Factory<Any> { viewHolder ->
                 object: EndlessListItemClickListener<Any>(viewHolder) {
@@ -73,8 +75,8 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == AppConstants.PREF_KEY_BIBLE_VERSIONS) {
-            mListViewAdapter.bibleVersionCode = AppConstants.getPreferredBibleVersions(requireContext())[0]
+        if (key == SharedPrefManager.PREF_KEY_BIBLE_VERSIONS) {
+            mListViewAdapter.bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
         }
     }
 

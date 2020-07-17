@@ -1,49 +1,29 @@
-<!--
-  ~ Copyright 2018 The app Open Source Project
-  ~
-  ~ Licensed under the Apache License, Version 2.0 (the "License");
-  ~ you may not use this file except in compliance with the License.
-  ~ You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~ Unless required by applicable law or agreed to in writing, software
-  ~ distributed under the License is distributed on an "AS IS" BASIS,
-  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~ See the License for the specific language governing permissions and
-  ~ limitations under the License.
-  -->
-
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference
-        app:key="signature"
-        app:title="@string/signature_title"
+    <ListPreference
+        app:key="multiple_version_display"
+        app:defaultValue="0"
+        app:entries="@array/multiple_version_display_entries"
+        app:entryValues="@array/multiple_version_display_values"
+        app:title="@string/multiple_version_display_title"
         app:useSimpleSummaryProvider="true" />
 
     <ListPreference
-        app:defaultValue="reply"
-        app:entries="@array/reply_entries"
-        app:entryValues="@array/reply_values"
-        app:key="reply"
-        app:title="@string/reply_title"
+        app:key="zoom"
+        app:defaultValue="100"
+        app:entries="@array/zoom_entries"
+        app:entryValues="@array/zoom_values"
+        app:title="@string/zoom_title"
         app:useSimpleSummaryProvider="true" />
 
     <SwitchPreferenceCompat
-        app:key="sync"
-        app:title="@string/sync_title" />
-
-    <SwitchPreferenceCompat
-        app:dependency="sync"
-        app:key="attachment"
-        app:summaryOff="@string/attachment_summary_off"
-        app:summaryOn="@string/attachment_summary_on"
-        app:title="@string/attachment_title" />
+        app:key="night_mode"
+        app:title="@string/night_mode_title" />
 
     <com.aaronicsubstances.niv1984.settings.TimePreference
-        android:key="key4"
-        android:title="Time Preference"
+        android:key="wake_lock_period"
+        android:title="Period of Time to Keep Screen on during Reading"
         android:defaultValue="90"
         android:positiveButtonText="ok"
         android:negativeButtonText="cancel"
@@ -52,7 +32,7 @@
     <com.aaronicsubstances.niv1984.settings.DisplayBookPreference
         android:key="bible_versions"
         android:title="Preferred Bible Versions"
-        android:defaultValue="kjv1769 niv1984"
+        android:defaultValue="niv1984 kjv1769"
         android:positiveButtonText="ok"
         android:negativeButtonText="cancel"
         app:useSimpleSummaryProvider="true"/>

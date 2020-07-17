@@ -62,18 +62,24 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     var bookLoadAftermath: BookLoadAftermath? = null
         private set
 
-    fun loadBook(bookNumber: Int, bibleVersions: List<String>, displayMultipleSideBySide: Boolean) {
+    fun loadBook(bookNumber: Int, bibleVersions: List<String>, displayMultipleSideBySide: Boolean,
+                 isNightMode: Boolean) {
         bookLoadAftermath = null
-        if (lastLoadResult?.bibleVersions == bibleVersions) {
-            //live data will republish lastLoadResult automatically when it is subscribed to.
-            return
+        if (lastLoadResult != null) {
+            val temp = lastLoadResult!!
+            if (temp.bibleVersions == bibleVersions &&
+                    temp.displayMultipleSideBySide == displayMultipleSideBySide &&
+                    temp.isNightMode == isNightMode) {
+                //live data will republish lastLoadResult automatically when it is subscribed to.
+                return
+            }
         }
 
         val context = (getApplication() as MyApplication).applicationContext
         lastJob?.cancel()
         lastJob = viewModelScope.launch {
             val bookLoader = BookLoader(context, bookNumber, bibleVersions,
-                displayMultipleSideBySide = displayMultipleSideBySide)
+                displayMultipleSideBySide, isNightMode)
             val model = bookLoader.load()
 
             loadSystemBookmarks(bookNumber)

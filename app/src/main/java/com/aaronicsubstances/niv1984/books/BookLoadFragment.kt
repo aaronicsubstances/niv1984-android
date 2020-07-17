@@ -1,6 +1,7 @@
 package com.aaronicsubstances.niv1984.books
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -27,17 +28,20 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class BookLoadFragment : Fragment() {
+class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var firstPrefRadio: RadioButton
     private lateinit var secondPrefRadio: RadioButton
     private lateinit var bothPrefRadio: RadioButton
-    private lateinit var bookReadView: RecyclerView
+    private lateinit var bookContentView: RecyclerView
 
     private lateinit var viewModel: BookLoadViewModel
+    private lateinit var bookContentAdapter: BookLoadAdapter
 
     private var bookNumber: Int = 0
     private var displayMultipleSideBySide = false
+    private var isNightMode = false
+    private lateinit var bibleVersions: List<String>
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -51,12 +55,16 @@ class BookLoadFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_book_load, container, false)
+        val root = inflater.inflate(R.layout.book_load_fragment, container, false)
 
-        bookReadView = root.findViewById(R.id.bookReadView)
+        bookContentView = root.findViewById(R.id.bookReadView)
         firstPrefRadio = root.findViewById(R.id.firstPreferredVersion)
         secondPrefRadio = root.findViewById(R.id.secondPreferredVersion)
         bothPrefRadio = root.findViewById(R.id.bothVersions)
+
+        bookContentView.layoutManager = LinearLayoutManager(activity)
+        bookContentAdapter = BookLoadAdapter()
+        bookContentView.adapter = bookContentAdapter
 
         return root
     }
@@ -64,58 +72,50 @@ class BookLoadFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val bibleVersions = AppConstants.getPreferredBibleVersions(requireContext())
-        firstPrefRadio.text = AppConstants.bibleVersions.getValue(bibleVersions[0]).abbreviation
-        secondPrefRadio.text = AppConstants.bibleVersions.getValue(bibleVersions[1]).abbreviation
-        bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
-
         val safeArgs: BookLoadFragmentArgs by navArgs()
         bookNumber = safeArgs.bookIndex + 1
 
-        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[0]).bookNames[bookNumber - 1]
-        (requireActivity() as MainActivity).title = bookDescription
+        bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+        displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
+        isNightMode = sharedPrefMgr.getIsNightMode()
 
-        bookReadView.layoutManager = LinearLayoutManager(activity)
-
-        bookReadView.adapter = BookLoadAdapter(bibleVersions)
-
-        // read from settings.
-        displayMultipleSideBySide = true
+        resetViewForBibleVersions()
+        bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
 
         viewModel = ViewModelProvider(this).get(BookLoadViewModel::class.java)
 
         firstPrefRadio.setOnClickListener {
-            openBookForReading(bibleVersions, 0)
+            openBookForReading(0)
         }
         secondPrefRadio.setOnClickListener {
-            openBookForReading(bibleVersions, 1)
+            openBookForReading(1)
         }
         bothPrefRadio.setOnClickListener {
-            openBookForReading(bibleVersions, 2)
+            openBookForReading(2)
         }
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
             Observer<BookDisplay> { data ->
-                val adapter = bookReadView.adapter as BookLoadAdapter
-                adapter.multipleDisplay = data.bibleVersions.size > 1
-                adapter.displaySidebySide = adapter.multipleDisplay && displayMultipleSideBySide
-                adapter.submitList(data.displayItems)
+                bookContentAdapter.multipleDisplay = data.bibleVersions.size > 1
+                bookContentAdapter.displayMultipleSidebySide = data.displayMultipleSideBySide
+                bookContentAdapter.isNightMode = data.isNightMode
+                bookContentAdapter.submitList(data.displayItems)
                 viewModel.bookLoadAftermath?.let {
                     // don't just scroll to item for it to be visible,
                     // but force it to appear at the top.
-                    (bookReadView.layoutManager as LinearLayoutManager)
+                    (bookContentView.layoutManager as LinearLayoutManager)
                         .scrollToPositionWithOffset(it.particularPos, 0)
                 }
             })
 
-        bookReadView.addOnScrollListener(object: LargeListViewScrollListener() {
+        bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {
             override fun listScrolled(
                 isScrollInForwardDirection: Boolean,
                 visibleItemCount: Int,
                 firstVisibleItemPos: Int,
                 totalItemCount: Int
             ) {
-                val currentList = (bookReadView.adapter as BookLoadAdapter).currentList
+                val currentList = bookContentAdapter.currentList
                 val commonItemPos = locateEquivalentViewTypePos(currentList,
                     firstVisibleItemPos)
                 val commonVisibleItem = currentList[commonItemPos]
@@ -127,10 +127,21 @@ class BookLoadFragment : Fragment() {
         })
 
         // kickstart actual bible reading
-        openBookForReading(bibleVersions, null)
+        openBookForReading(null)
     }
 
-    private fun openBookForReading(bibleVersions: List<String>, radioIndex: Int?) {
+    private fun resetViewForBibleVersions() {
+        firstPrefRadio.text = AppConstants.bibleVersions.getValue(bibleVersions[0]).abbreviation
+        secondPrefRadio.text = AppConstants.bibleVersions.getValue(bibleVersions[1]).abbreviation
+        bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
+
+        bookContentAdapter.bibleVersions = bibleVersions
+
+        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[0]).bookNames[bookNumber - 1]
+        (requireActivity() as MainActivity).title = bookDescription
+    }
+
+    private fun openBookForReading(radioIndex: Int?) {
         var index = radioIndex
         if (radioIndex == null) {
             index = sharedPrefMgr.loadPrefInt(
@@ -161,7 +172,7 @@ class BookLoadFragment : Fragment() {
                 bibleVersions.subList(0, 1)
             }
         }
-        viewModel.loadBook(bookNumber, bibleVersionsToUse, displayMultipleSideBySide)
+        viewModel.loadBook(bookNumber, bibleVersionsToUse, displayMultipleSideBySide, isNightMode)
     }
 
     private fun locateEquivalentViewTypePos(
@@ -185,9 +196,37 @@ class BookLoadFragment : Fragment() {
                 BookDisplayItemViewType.DIVIDER -> {
                     break@loopFwd
                 }
+                else -> {
+                    // continue
+                }
             }
             i--
         }
         return i
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        when (key) {
+            SharedPrefManager.PREF_KEY_BIBLE_VERSIONS -> {
+                bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+                resetViewForBibleVersions()
+                openBookForReading(null)
+            }
+            SharedPrefManager.PREF_KEY_MULTIPLE_DISPLAY_OPTION -> {
+                displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
+                if (bothPrefRadio.isChecked) {
+                    openBookForReading(2)
+                }
+            }
+            SharedPrefManager.PREF_KEY_ZOOM -> {
+                bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
+                // no need to reread book, just refresh contents.
+                bookContentAdapter.notifyDataSetChanged()
+            }
+            SharedPrefManager.PREF_KEY_NIGHT_MODE -> {
+                isNightMode = sharedPrefMgr.getIsNightMode()
+                openBookForReading(null)
+            }
+        }
     }
 }

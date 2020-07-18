@@ -20,7 +20,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     private val _loadLiveData: MutableLiveData<Pair<BookDisplay, BookLoadAftermath>> = MutableLiveData()
     var lastLoadResult: BookDisplay? = null
         private set
-    
+
     private var lastJob: Job? = null
 
     private var systemBookmarks = ScrollPosPref(0, 0, 0, 0,

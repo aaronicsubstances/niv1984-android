@@ -1,5 +1,9 @@
-@Grab(group='org.xerial', module='sqlite-jdbc', version='3.31.1')
 @GrabConfig(systemClassLoader=true)
+@Grab(group='xom', module='xom', version='1.3.5')
+@Grab(group='org.xerial', module='sqlite-jdbc', version='3.31.1')
+@GrabExclude('xml-apis:xml-apis')
+
+import nu.xom.*
 
 import groovy.sql.Sql
 
@@ -65,7 +69,6 @@ Sql.withInstance("jdbc:sqlite:$scriptDir/app/src/main/assets/seed_data.db".repla
     assert normalizeContent("\u025B\u0190\u0254\u0186") == "eEoO"
     assert normalizeContent("\u2018\u2019\u201B\u201C\u201D\u201E") == "'''\"\"\""
     assert normalizeContent("   \u025B \u0190 \u0254  \u0186   ") == "e E o O"
-    assert normalizeContent("b&#10;&#65;") == "b A"
     
     populateDatabase(sql)
 }
@@ -74,12 +77,11 @@ def populateDatabase(db) {
     def startTime = new Date().time
     def bibleVersions = [ "asante2012", "niv1984", "kjv1769" ]
     for (bibleVersion in bibleVersions) {
+        println "Indexing $bibleVersion..."
         def bvStartTime = new Date().time
-        for (bookNumber in 1..chapterCounts.size()) {
-            for (chapter in 1..chapterCounts[bookNumber-1]) {
-                println "Indexing $bibleVersion $bookNumber $chapter..."
-                indexVerses(db, bibleVersion, bookNumber, chapter)
-            }
+        for (bookNumber in 1..66) {
+            println "Indexing $bibleVersion book $bookNumber..."
+            indexVerses(db, bibleVersion, bookNumber)
         }
         final bibleVersionTimeTaken = (new Date().time - bvStartTime) / 1000.0
         println("Done indexing bible version ${bibleVersion} in ${bibleVersionTimeTaken} secs")
@@ -88,67 +90,67 @@ def populateDatabase(db) {
     println("Database population took ${timeTaken} secs")
 }
 
-def indexVerses(db, bibleVersion, bookNumber, chapter) {
-    def assetPath = String.format("%s/%02d/%03d.tvn", bibleVersion,
-        bookNumber, chapter)
-    
-    new File(scriptDir, "app/src/main/assets/$assetPath").withReader('utf-8') {
+def indexVerses(db, bibleVersion, bookNumber) {
+    db.withTransaction { // solved hanging problem with db.withBatch
         db.withBatch('INSERT INTO bible_index_record (bible_version, book_number, chapter_number, verse_number, is_foot_note, content) VALUES (?, ?, ?, ?, ?, ?)') { ps ->
-            def vContent = new StringBuilder()
-            def noteContentBuilder = new StringBuilder()
-            def vNum = null
-            while (true) {
-                def line = it.readLine()
-                if (!line) break
-                
-                int colonIndex = line.indexOf(':')
-                def tag = line.substring (0, colonIndex)
-                def value = line.substring (colonIndex + 1)
-                switch (tag) {
-                    case "content":
-                        vContent.append(value)
-                        break
-                    case "v_start":
-                        vNum = value
-                        vContent.setLength(0)
-                        break
-                    case "v_end":
-                        def content = normalizeContent(vContent.toString())
-
-                        def sqlParams = [bibleVersion, bookNumber, chapter, vNum, false, content]
-                        ps.addBatch(sqlParams)
-                        break
-                     case "cnote_start":
-                        vNum = 0
-                        break
-                     case "note_start":
-                        noteContentBuilder.setLength(0)
-                        break
-                     case "note_body":
-                        noteContentBuilder.append(value)
-                        break
-                     case "note_end":
-                        def noteContent = normalizeContent(noteContentBuilder.toString())
-                        
-                        def sqlParams = [bibleVersion, bookNumber, chapter, vNum, true, noteContent]
-                        ps.addBatch(sqlParams)
-                        break
+        
+            def parser = new Builder()
+            def assetPath = String.format("%s/%02d.xml", bibleVersion, bookNumber)
+            def doc = parser.build(new File(scriptDir, "app/src/main/assets/$assetPath"))        
+            def root = doc.rootElement
+            assert root.localName == "book"
+            for (chapter in root.getChildElements("chapter")) {
+                def chapterNumber = chapter.getAttributeValue("num")
+                //println "Indexing $bibleVersion book $bookNumber chapter $chapterNumber..."
+                for (verse in chapter.getChildElements("verse")) {
+                    def vNum = verse.getAttributeValue("num")
+                    def allVerseText = grabRelevantText(verse)
+                    def sqlParams = [bibleVersion, bookNumber, chapterNumber, vNum, false, allVerseText]
+                    ps.addBatch(sqlParams)
+                }
+                for (note in chapter.getChildElements("note")) {
+                    def kind = note.getAttributeValue("kind")
+                    if (kind ==~ /(?i)CROSS_REFERENCES/){
+                        continue
+                    }
+                    def allNoteText = grabRelevantText(note)
+                    def sqlParams = [bibleVersion, bookNumber, chapterNumber, 0, true, allNoteText]
+                    ps.addBatch(sqlParams)
                 }
             }
         }
     }
 }
 
-def normalizeContent(c) {
-    def p = ~"&#(\\d+);"
-    def sb = new StringBuffer()
-    def matcher = p.matcher(c)
-    while (matcher.find()) {
-        def replacement = String.format("%c", Integer.parseInt(matcher.group(1)))
-        matcher.appendReplacement(sb, replacement)
+def grabRelevantText(el) {
+    // first remove irrelevant elements
+    removeIrrelevantElements(el)
+    return normalizeContent(el.value)
+}
+
+def removeIrrelevantElements(el) {
+    def toRemove = []
+    for (c in el.getChildElements()) {
+        if (c.localName == "note_ref") {
+            toRemove << c
+        }
+        else {
+            def kind = c.getAttributeValue("kind")
+            if (kind ==~ /(?i)REF_VERSE_START/) {
+                toRemove << c
+            }
+        }
     }
-    matcher.appendTail(sb)
-    def normalized = sb.toString()
+    toRemove.each {
+        el.removeChild(it)
+    }
+    for (c in el.getChildElements()) {
+        removeIrrelevantElements(c)
+    }
+}
+
+def normalizeContent(c) {
+    def normalized = c
 
     // remove unnecessary whitespace.
     normalized = normalized.trim().replaceAll("\\s+", " ")

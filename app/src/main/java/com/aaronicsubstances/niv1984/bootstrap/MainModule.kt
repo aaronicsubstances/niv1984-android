@@ -1,6 +1,6 @@
 package com.aaronicsubstances.niv1984.bootstrap
 
-import com.aaronicsubstances.endlesspaginglib.EndlessListRepositoryConfig
+import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,7 +12,7 @@ abstract class MainModule {
 
         @Singleton
         @Provides
-        fun provideEndlessListRepositoryConfig(): EndlessListRepositoryConfig =
-            EndlessListRepositoryConfig.Builder().setLoadSize(10).build()
+        fun provideLargeListPagingConfig(): LargeListPagingConfig =
+            LargeListPagingConfig.Builder().setLoadSize(10).build()
     }
 }

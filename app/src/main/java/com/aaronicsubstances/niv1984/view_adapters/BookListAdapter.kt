@@ -1,6 +1,5 @@
 package com.aaronicsubstances.niv1984.view_adapters
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import androidx.core.content.ContextCompat
-import com.aaronicsubstances.endlesspaginglib.EndlessListItemClickListener
-import com.aaronicsubstances.endlesspaginglib.FiniteListAdapter
+import com.aaronicsubstances.largelistpaging.FiniteListAdapter
+import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.github.ivbaranov.mli.MaterialLetterIcon
 import org.slf4j.LoggerFactory
 
 class BookListAdapter(bibleVersionCode: String,
-                      private val onItemClickListenerFactory: EndlessListItemClickListener.Factory<Any>)
+                      private val onItemClickListenerFactory: LargeListViewClickListener.Factory<Any>)
         : FiniteListAdapter<Any, BookListAdapterViewHolder>(null) {
 
     var bibleVersionCode: String = bibleVersionCode
@@ -44,7 +43,7 @@ class BookListAdapter(bibleVersionCode: String,
 }
 
 class BookListAdapterViewHolder(item: View,
-                                itemClickListenerFactory: EndlessListItemClickListener.Factory<Any>)
+                                itemClickListenerFactory: LargeListViewClickListener.Factory<Any>)
         : RecyclerView.ViewHolder(item) {
 
     private val bookTitleView: TextView = item.findViewById(R.id.bookTitle)

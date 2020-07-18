@@ -13,7 +13,7 @@ import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.endlesspaginglib.EndlessListItemClickListener
+import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
@@ -57,8 +57,8 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
         val bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
 
         val onItemClickListenerFactory =
-            EndlessListItemClickListener.Factory<Any> { viewHolder ->
-                object: EndlessListItemClickListener<Any>(viewHolder) {
+            LargeListViewClickListener.Factory<Any> { viewHolder ->
+                object: LargeListViewClickListener<Any>(viewHolder) {
                     override fun onClick(v: View?) {
                         onBookSelected(itemPosition)
                     }

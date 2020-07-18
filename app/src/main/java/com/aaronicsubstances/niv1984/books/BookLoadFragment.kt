@@ -11,8 +11,10 @@ import android.widget.RadioButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
@@ -23,6 +25,7 @@ import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
 import com.aaronicsubstances.niv1984.utils.AppConstants
 
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
+import com.aaronicsubstances.niv1984.view_adapters.ChapterWidgetAdapter
 import javax.inject.Inject
 
 /**
@@ -34,9 +37,11 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
     private lateinit var secondPrefRadio: RadioButton
     private lateinit var bothPrefRadio: RadioButton
     private lateinit var bookContentView: RecyclerView
+    private lateinit var chapterView: RecyclerView
 
     private lateinit var viewModel: BookLoadViewModel
     private lateinit var bookContentAdapter: BookLoadAdapter
+    private lateinit var chapterAdapter: ChapterWidgetAdapter
 
     private var bookNumber: Int = 0
     private var displayMultipleSideBySide = false
@@ -58,6 +63,7 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
         val root = inflater.inflate(R.layout.book_load_fragment, container, false)
 
         bookContentView = root.findViewById(R.id.bookReadView)
+        chapterView = root.findViewById(R.id.chapterView)
         firstPrefRadio = root.findViewById(R.id.firstPreferredVersion)
         secondPrefRadio = root.findViewById(R.id.secondPreferredVersion)
         bothPrefRadio = root.findViewById(R.id.bothVersions)
@@ -74,6 +80,20 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
 
         val safeArgs: BookLoadFragmentArgs by navArgs()
         bookNumber = safeArgs.bookIndex + 1
+
+        chapterView.layoutManager = LinearLayoutManager(activity,
+            LinearLayoutManager.HORIZONTAL, false)
+        //chapterView.addItemDecoration(DividerItemDecoration(activity,
+        //    (chapterView.layoutManager as LinearLayoutManager).orientation))
+        chapterAdapter = ChapterWidgetAdapter(AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1],
+            LargeListViewClickListener.Factory<Int> { viewHolder ->
+                object: LargeListViewClickListener<Int>(viewHolder) {
+                    override fun onClick(v: View) {
+                        goToChapter(viewHolder.adapterPosition)
+                    }
+                }
+            })
+        chapterView.adapter = chapterAdapter
 
         bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
         displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
@@ -95,16 +115,15 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
         }
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
-            Observer<BookDisplay> { data ->
+            Observer<Pair<BookDisplay, BookLoadAftermath>> { (data, bookLoadAftermath) ->
                 bookContentAdapter.multipleDisplay = data.bibleVersions.size > 1
                 bookContentAdapter.displayMultipleSidebySide = data.displayMultipleSideBySide
                 bookContentAdapter.isNightMode = data.isNightMode
                 bookContentAdapter.submitList(data.displayItems)
-                viewModel.bookLoadAftermath?.let {
-                    // don't just scroll to item for it to be visible,
-                    // but force it to appear at the top.
-                    (bookContentView.layoutManager as LinearLayoutManager)
-                        .scrollToPositionWithOffset(it.particularPos, 0)
+                syncChapterWidget(bookLoadAftermath.chapterNumber - 1, true)
+                // skip scroll if layout is responding to configuration change.
+                if (bookLoadAftermath.particularPos != -1) {
+                    scrollBook(bookLoadAftermath.particularPos)
                 }
             })
 
@@ -123,6 +142,21 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
                 viewModel.updateSystemBookmarks(commonVisibleItem.chapterNumber,
                     commonVisibleItem.verseNumber, commonVisibleItem.viewType,
                     firstVisibleItemPos)
+            }
+        })
+
+        bookContentView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val firstVisibleItemPos = LargeListViewScrollListener.findFirstVisibleItemPosition(
+                    recyclerView.layoutManager)
+                val currentList = bookContentAdapter.currentList
+                val commonItemPos = locateEquivalentViewTypePos(currentList,
+                    firstVisibleItemPos)
+                val commonVisibleItem = currentList[commonItemPos]
+
+                if (commonVisibleItem.chapterNumber - 1 != chapterAdapter.selectedIndex) {
+                    syncChapterWidget(commonVisibleItem.chapterNumber - 1, true)
+                }
             }
         })
 
@@ -173,6 +207,30 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
             }
         }
         viewModel.loadBook(bookNumber, bibleVersionsToUse, displayMultipleSideBySide, isNightMode)
+    }
+
+    private fun goToChapter(chapterIdx: Int) {
+        viewModel.lastLoadResult?.let {
+            val chapterStartPos = it.chapterIndices[chapterIdx]
+            scrollBook(chapterStartPos)
+            syncChapterWidget(chapterIdx, true)
+            viewModel.updateSystemBookmarks(chapterIdx + 1, 0,
+                BookDisplayItemViewType.TITLE, chapterStartPos)
+        }
+    }
+
+    private fun scrollBook(pos: Int) {
+        // don't just scroll to item for it to be visible,
+        // but force it to appear at the top.
+        (bookContentView.layoutManager as LinearLayoutManager)
+            .scrollToPositionWithOffset(pos, 0)
+    }
+
+    private fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
+        chapterAdapter.selectedIndex = chapterIdx
+        if (scroll) {
+            chapterView.scrollToPosition(chapterIdx)
+        }
     }
 
     private fun locateEquivalentViewTypePos(

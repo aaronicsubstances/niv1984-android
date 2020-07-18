@@ -14,4 +14,6 @@
     <dimen name="bible_reading_font_size_default">14sp</dimen>
     <dimen name="block_quote_left">16sp</dimen>
     <dimen name="block_quote_left_indent">32sp</dimen>
+    <dimen name="appbar_padding">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
 </resources>

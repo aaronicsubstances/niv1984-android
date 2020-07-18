@@ -17,12 +17,14 @@ import javax.inject.Inject
 
 class BookLoadViewModel(application: Application): AndroidViewModel(application) {
 
-    private val _loadLiveData: MutableLiveData<BookDisplay> = MutableLiveData()
-    private var lastLoadResult: BookDisplay? = null
+    private val _loadLiveData: MutableLiveData<Pair<BookDisplay, BookLoadAftermath>> = MutableLiveData()
+    var lastLoadResult: BookDisplay? = null
+        private set
+    
     private var lastJob: Job? = null
 
     private var systemBookmarks = ScrollPosPref(0, 0, 0, 0,
-        listOf(), BookDisplayItemViewType.CHAPTER_FRAGMENT)
+            listOf(), BookDisplayItemViewType.CHAPTER_FRAGMENT)
 
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
@@ -56,21 +58,19 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    val loadLiveData: LiveData<BookDisplay>
+    val loadLiveData: LiveData<Pair<BookDisplay, BookLoadAftermath>>
         get() = _loadLiveData
-
-    var bookLoadAftermath: BookLoadAftermath? = null
-        private set
 
     fun loadBook(bookNumber: Int, bibleVersions: List<String>, displayMultipleSideBySide: Boolean,
                  isNightMode: Boolean) {
-        bookLoadAftermath = null
         if (lastLoadResult != null) {
             val temp = lastLoadResult!!
             if (temp.bibleVersions == bibleVersions &&
                     temp.displayMultipleSideBySide == displayMultipleSideBySide &&
                     temp.isNightMode == isNightMode) {
                 //live data will republish lastLoadResult automatically when it is subscribed to.
+                _loadLiveData.value = Pair(temp, BookLoadAftermath(-1,
+                    systemBookmarks.chapterNumber))
                 return
             }
         }
@@ -87,14 +87,16 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             // update system bookmarks in response to version switch, except
             // if loaded system bookmarks has same version as current request.
             // (which can only happen on the very first request).
-            if (bibleVersions != systemBookmarks.particularBibleVersions) {
+            if (bibleVersions != systemBookmarks.particularBibleVersions ||
+                    displayMultipleSideBySide != lastLoadResult?.displayMultipleSideBySide) {
                 updateSystemBookmarksInternally(model)
             }
 
-            bookLoadAftermath = BookLoadAftermath(systemBookmarks.particularViewItemPos)
+            val bookLoadAftermath = BookLoadAftermath(systemBookmarks.particularViewItemPos,
+                systemBookmarks.chapterNumber)
 
             lastLoadResult = model
-            _loadLiveData.value = model
+            _loadLiveData.value = Pair(model, bookLoadAftermath)
         }
     }
 
@@ -126,4 +128,5 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     }
 }
 
-data class BookLoadAftermath(val particularPos: Int)
+data class BookLoadAftermath(val particularPos: Int,
+                             val chapterNumber: Int)

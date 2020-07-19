@@ -20,6 +20,7 @@ import com.aaronicsubstances.niv1984.parsing.BookParser.NoteRef
 import com.aaronicsubstances.niv1984.parsing.BookParser.Verse
 import com.aaronicsubstances.niv1984.parsing.BookParser.WordsOfJesus
 import com.aaronicsubstances.niv1984.utils.AppConstants
+import com.aaronicsubstances.niv1984.utils.AsanteTwiBibleVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.lang.AssertionError
@@ -114,19 +115,21 @@ class BookLoader(private val context: Context,
         while (true) {
             // copy over items with given verse number for each version
 
-            var verseRange = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
-            if (verseRange == null) {
+            var verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
+            if (verseRange1 == null) {
                 break
             }
-            val subList1 = displayItems1.subList(verseRange[0], verseRange[1])
-            pt1 = verseRange[1]
 
-            verseRange = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
-            if (verseRange == null) {
+            var verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
+            if (verseRange2 == null) {
                 break
             }
-            val subList2 = displayItems2.subList(verseRange[0], verseRange[1])
-            pt2 = verseRange[1]
+
+            val subList1 = displayItems1.subList(verseRange1[0], verseRange1[1])
+            pt1 = verseRange1[1]
+
+            val subList2 = displayItems2.subList(verseRange2[0], verseRange2[1])
+            pt2 = verseRange2[1]
 
             if (displayMultipleSideBySide) {
                 combinedDisplayItems.add(BookDisplayItem(BookDisplayItemViewType.VERSE,
@@ -141,6 +144,57 @@ class BookLoader(private val context: Context,
 
             vNum++
         }
+
+        if (permitAsymmetricVerseCounts(chapterNumber)) {
+            while (true) {
+
+                var verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
+                if (verseRange1 == null) {
+                    break
+                }
+
+                val subList1 = displayItems1.subList(verseRange1[0], verseRange1[1])
+                pt1 = verseRange1[1]
+
+                if (displayMultipleSideBySide) {
+                    combinedDisplayItems.add(
+                        BookDisplayItem(BookDisplayItemViewType.VERSE,
+                            chapterNumber, vNum, DUMMY_CONTENT,
+                            firstPartialContent = subList1.map { it.fullContent },
+                            secondPartialContent = subList1.map { BookDisplayItemContent(1, "") })
+                    )
+                } else {
+                    combinedDisplayItems.addAll(subList1)
+                }
+
+                vNum++
+            }
+
+            while (true) {
+
+                var verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
+                if (verseRange2 == null) {
+                    break
+                }
+
+                val subList2 = displayItems2.subList(verseRange2[0], verseRange2[1])
+                pt2 = verseRange2[1]
+
+                if (displayMultipleSideBySide) {
+                    combinedDisplayItems.add(
+                        BookDisplayItem(BookDisplayItemViewType.VERSE,
+                            chapterNumber, vNum, DUMMY_CONTENT,
+                            firstPartialContent = subList2.map { BookDisplayItemContent(0, "") },
+                            secondPartialContent = subList2.map { it.fullContent })
+                    )
+                } else {
+                    combinedDisplayItems.addAll(subList2)
+                }
+
+                vNum++
+
+            }
+        }
         if (pt1 != dividerIdx1) {
             throw AssertionError("$chapterNumber.$vNum: $pt1 != $dividerIdx1")
         }
@@ -151,6 +205,20 @@ class BookLoader(private val context: Context,
         // add footnotes as one, for each bible version.
         combinedDisplayItems.addAll(displayItems1.subList(dividerIdx1, cEndIdx1))
         combinedDisplayItems.addAll(displayItems2.subList(dividerIdx2, cEndIdx2))
+    }
+
+    private fun permitAsymmetricVerseCounts(chapterNumber: Int): Boolean {
+        if (bibleVersions.contains(AsanteTwiBibleVersion.code)) {
+            // Revelation 12
+            if (bookNumber == 66 && chapterNumber == 12) {
+                return true
+            }
+            // 3 John
+            if (bookNumber == 64) {
+                return true
+            }
+        }
+        return false
     }
 
     private fun locateDividersForMerge(

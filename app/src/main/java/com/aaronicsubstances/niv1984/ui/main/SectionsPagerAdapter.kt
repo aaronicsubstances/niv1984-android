@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 /**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
+ * A [FragmentStateAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
 class SectionsPagerAdapter(private val context: AppCompatActivity) :
-    FragmentStateAdapter(context) {
+        FragmentStateAdapter(context) {
 
     override fun createFragment(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
@@ -20,5 +20,13 @@ class SectionsPagerAdapter(private val context: AppCompatActivity) :
     override fun getItemCount(): Int {
         // Show 2 total pages.
         return 2
+    }
+
+    override fun containsItem(itemId: Long): Boolean {
+        return itemId < itemCount
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 }

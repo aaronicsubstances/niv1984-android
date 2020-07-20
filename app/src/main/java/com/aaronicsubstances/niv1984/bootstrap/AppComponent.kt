@@ -18,6 +18,9 @@ interface AppComponent {
 
     fun inject(activity: MainActivity)
     fun inject(fragment: BookListFragment)
+    fun inject(viewModel: com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment)
+    fun inject(viewModel: com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment)
+    fun inject(viewModel: com.aaronicsubstances.niv1984.ui.book_reading.BookLoadViewModel)
     fun inject(viewModel: BookLoadViewModel)
     fun inject(fragment: BookLoadFragment)
 }

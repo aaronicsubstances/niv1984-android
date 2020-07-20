@@ -1,0 +1,38 @@
+package com.aaronicsubstances.niv1984.ui.search
+
+import android.content.Context
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+
+import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.ui.MyMainViewPagerFragment
+
+class SearchRequestFragment : Fragment(), MyMainViewPagerFragment {
+
+    override fun getItemId() = 1L
+
+    companion object {
+
+        @JvmStatic
+        fun newInstance() =
+            SearchRequestFragment().apply {
+                arguments = Bundle().apply {
+                }
+            }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_search_request, container, false)
+    }
+}

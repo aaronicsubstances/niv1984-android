@@ -18,7 +18,18 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         const val PREF_KEY_ZOOM = "zoom"
         const val PREF_KEY_MULTIPLE_DISPLAY_OPTION = "multiple_version_display"
         const val PREF_KEY_NIGHT_MODE = "night_mode"
-        const val PREF_KEY_WAKE_LOCK_PERIOD = "wake_lock_period"
+        const val PREF_KEY_SCREEN_WAKE = "screen_wake_option"
+        const val WAKE_LOCK_PERIOD = 10 * 60 * 1000L // 10 minutes
+    }
+
+    fun getZoomLevel(): Int {
+        val opt = loadPrefString(PREF_KEY_ZOOM, "100")
+        try {
+            return Integer.parseInt(opt)
+        }
+        catch (ex: NumberFormatException) {
+            return 100
+        }
     }
 
     fun getPreferredBibleVersions(): List<String> {
@@ -41,21 +52,12 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         return context.resources.getString(R.string.multiple_version_display_default_value) == "2"
     }
 
-    fun getZoomLevel(): Int {
-        val opt = loadPrefString(PREF_KEY_ZOOM, "100")
-        try {
-            return Integer.parseInt(opt)
-        }
-        catch (ex: NumberFormatException) {
-            return 100
-        }
-    }
-
     fun getIsNightMode(): Boolean {
-        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        val prefNightMode = sharedPref.getBoolean(PREF_KEY_NIGHT_MODE, false)
-        // TODO: implement auto option to pick system setting for night mode.
-        return prefNightMode
+        val opt = loadPrefString(PREF_KEY_NIGHT_MODE, "2")
+        if (opt != "2") {
+            return opt == "1"
+        }
+        return context.resources.getString(R.string.night_mode_book_display_default_value) == "1"
     }
 
     fun <T> loadPrefItem(key: String, cls: Class<T>): T? {

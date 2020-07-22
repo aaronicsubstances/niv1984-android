@@ -8,11 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.aaronicsubstances.niv1984.R
-import com.aaronicsubstances.niv1984.ui.MyMainViewPagerFragment
 
-class SearchRequestFragment : Fragment(), MyMainViewPagerFragment {
-
-    override fun getItemId() = 1L
+class SearchRequestFragment : Fragment() {
 
     companion object {
 

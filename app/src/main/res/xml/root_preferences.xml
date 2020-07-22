@@ -2,14 +2,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ListPreference
-        app:key="multiple_version_display"
-        app:defaultValue="0"
-        app:entries="@array/multiple_version_display_entries"
-        app:entryValues="@array/multiple_version_display_values"
-        app:title="@string/multiple_version_display_title"
-        app:useSimpleSummaryProvider="true" />
-
-    <ListPreference
         app:key="zoom"
         app:defaultValue="100"
         app:entries="@array/zoom_entries"
@@ -17,17 +9,13 @@
         app:title="@string/zoom_title"
         app:useSimpleSummaryProvider="true" />
 
-    <SwitchPreferenceCompat
+    <ListPreference
         app:key="night_mode"
-        app:title="@string/night_mode_title" />
-
-    <com.aaronicsubstances.niv1984.settings.TimePreference
-        android:key="wake_lock_period"
-        android:title="Period of Time to Keep Screen on during Reading"
-        android:defaultValue="90"
-        android:positiveButtonText="ok"
-        android:negativeButtonText="cancel"
-        app:useSimpleSummaryProvider="true"/>
+        app:defaultValue="2"
+        app:entries="@array/night_mode_display_entries"
+        app:entryValues="@array/night_mode_display_values"
+        app:title="@string/night_mode_title"
+        app:useSimpleSummaryProvider="true" />
 
     <com.aaronicsubstances.niv1984.settings.DisplayBookPreference
         android:key="bible_versions"
@@ -36,4 +24,17 @@
         android:positiveButtonText="ok"
         android:negativeButtonText="cancel"
         app:useSimpleSummaryProvider="true"/>
+
+    <ListPreference
+        app:key="multiple_version_display"
+        app:defaultValue="0"
+        app:entries="@array/multiple_version_display_entries"
+        app:entryValues="@array/multiple_version_display_values"
+        app:title="@string/multiple_version_display_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <SwitchPreferenceCompat
+        android:key="screen_wake_option"
+        android:title="@string/screen_wake_option_title"
+        android:defaultValue="true"/>
 </PreferenceScreen>

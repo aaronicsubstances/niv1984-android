@@ -2,7 +2,7 @@
     <!-- Zoom Preference -->
     <string-array name="zoom_entries">
         <item>70%</item>
-        <item>100%</item>
+        <item>Default (100%)</item>
         <item>150%</item>
         <item>200%</item>
     </string-array>
@@ -16,7 +16,7 @@
 
     <!-- Multiple Book Version Display Preference -->
     <string-array name="multiple_version_display_entries">
-        <item>Auto (single column in portrait, two columns in landscape)</item>
+        <item>Default (single column in portrait/narrow widths, two columns in landscape/wide widths)</item>
         <item>Single Column (one after another)</item>
         <item>Two Columns (side by side)</item>
     </string-array>
@@ -25,5 +25,18 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+    </string-array>
+
+    <!-- -->
+    <string-array name="night_mode_display_entries">
+        <item>Default (follows system night mode setting)</item>
+        <item>Off</item>
+        <item>On</item>
+    </string-array>
+
+    <string-array name="night_mode_display_values">
+        <item>2</item>
+        <item>0</item>
+        <item>1</item>
     </string-array>
 </resources>

@@ -62,9 +62,13 @@ class DisplayBookPreference: DialogPreference, Preference.OnPreferenceChangeList
             summary = "Not set"
         }
         else {
-            summary = t.splitToSequence(" ").map {
+            val codes = t.splitToSequence(" ").toList()
+            summary = codes.map {
                 AppConstants.bibleVersions[it]?.description
             }.joinToString(", ")
+            if (codes == AppConstants.DEFAULT_BIBLE_VERSIONS) {
+                summary = "Default: $summary"
+            }
         }
     }
 }

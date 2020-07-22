@@ -10,8 +10,6 @@ import androidx.core.view.get
 import androidx.preference.PreferenceDialogFragmentCompat
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.utils.AppConstants
-import com.aaronicsubstances.niv1984.utils.KjvBibleVersion
-import com.aaronicsubstances.niv1984.utils.NivBibleVersion
 
 class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), View.OnClickListener {
 
@@ -28,6 +26,7 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
     private lateinit var mRadioGroup: RadioGroup
     private lateinit var moveUpBtn: Button
     private lateinit var moveDownBtn: Button
+    private lateinit var resetToDefault: Button
 
     private var selectedRadioIndex = -1
 
@@ -78,9 +77,12 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
         moveUpBtn.setOnClickListener { processMoveUpAction() }
         moveDownBtn = view.findViewById(R.id.moveDown)
         moveDownBtn.setOnClickListener { processMoveDownAction() }
+        resetToDefault = view.findViewById(R.id.reset)
+        resetToDefault.setOnClickListener { resetToDefault() }
 
+        // select/check first.
+        (mRadioGroup[0] as RadioButton).isChecked = true
         moveUpBtn.isEnabled = false
-        moveDownBtn.isEnabled = false
     }
 
     override fun onClick(v: View?) {
@@ -119,6 +121,19 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
         radio1.tag = Pair(idx1, (radio2.tag as Pair<Int, String>).second)
         radio2.text = tempText
         radio2.tag = Pair(idx2, tempTag)
+    }
+
+    private fun resetToDefault() {
+        dialog?.dismiss()
+        val preferredSequence = AppConstants.DEFAULT_BIBLE_VERSIONS.joinToString(" ")
+        val preference = preference
+        if (preference is DisplayBookPreference) {
+            // This allows the client to ignore the user value.
+            if (preference.callChangeListener(preferredSequence)) {
+                // Save the value
+                preference.preferredSequence = preferredSequence
+            }
+        }
     }
 
     override fun onDialogClosed(positiveResult: Boolean) {

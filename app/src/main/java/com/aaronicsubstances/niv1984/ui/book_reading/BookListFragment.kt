@@ -15,15 +15,11 @@ import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
-import com.aaronicsubstances.niv1984.ui.MyMainViewPagerFragment
 import com.aaronicsubstances.niv1984.view_adapters.BookListAdapter
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
-class BookListFragment : Fragment(), MyMainViewPagerFragment,
-    SharedPreferences.OnSharedPreferenceChangeListener {
-
-    override fun getItemId() = 0L
+class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     companion object {
         fun newInstance() = BookListFragment()

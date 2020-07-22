@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
@@ -23,7 +24,6 @@ import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
-import com.aaronicsubstances.niv1984.ui.MyMainViewPagerFragment
 import com.aaronicsubstances.niv1984.utils.AppConstants
 
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
@@ -33,9 +33,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class BookLoadFragment : Fragment(), MyMainViewPagerFragment,
-        SharedPreferences.OnSharedPreferenceChangeListener {
-    override fun getItemId() = 2L
+class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var firstPrefRadio: RadioButton
     private lateinit var secondPrefRadio: RadioButton
@@ -113,6 +111,9 @@ class BookLoadFragment : Fragment(), MyMainViewPagerFragment,
                 }
             })
         chapterView.adapter = chapterAdapter
+
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
+        preferenceManager.registerOnSharedPreferenceChangeListener(this)
 
         bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
         displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()

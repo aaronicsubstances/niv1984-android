@@ -19,11 +19,11 @@ import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
+import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
 import com.aaronicsubstances.niv1984.utils.AppConstants
-import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
-import com.aaronicsubstances.niv1984.view_adapters.ChapterWidgetAdapter
+import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
+import com.aaronicsubstances.niv1984.ui.view_adapters.ChapterWidgetAdapter
 import javax.inject.Inject
 
 /**
@@ -195,7 +195,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION, 0)
         }
         else {
-            sharedPrefMgr.savePrefInt(SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION,
+            sharedPrefMgr.savePrefInt(
+                SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION,
                 radioIndex)
         }
 

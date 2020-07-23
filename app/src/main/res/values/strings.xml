@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Niv1984</string>
+    <string name="app_name">NIV1984 Plus</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -23,7 +23,7 @@
     <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
     <string name="multiple_version_display_default_value">1</string>
     <string name="night_mode_book_display_default_value">0</string>
-    <string name="night_mode_title">Night Mode</string>
+    <string name="night_mode_title">Bible Reading Night Mode Option</string>
     <string name="action_move_up">Move Up</string>
     <string name="action_move_down">Move Down</string>
     <string name="display_book_pref_instruction">Select a book version and use up/down buttons to push
@@ -31,10 +31,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
     <string name="tab_text_1">Home</string>
     <string name="tab_text_2">Search</string>
     <string name="chapter_widget_title">Chapters:</string>
     <string name="screen_wake_option_title">Keep screen on during reading</string>
     <string name="action_reset_to_default">Reset to Default</string>
+    <string name="label_query">Search Box</string>
+    <string name="label_search">Search</string>
 </resources>

@@ -1,6 +1,6 @@
 package com.aaronicsubstances.niv1984.models
 
-import com.aaronicsubstances.niv1984.parsing.BookParser
+import com.aaronicsubstances.niv1984.utils.BookParser
 
 data class BookDisplay(
     val bookNumber: Int,

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
-import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
+import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
-import com.aaronicsubstances.niv1984.view_adapters.BookListAdapter
+import com.aaronicsubstances.niv1984.ui.view_adapters.BookListAdapter
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 

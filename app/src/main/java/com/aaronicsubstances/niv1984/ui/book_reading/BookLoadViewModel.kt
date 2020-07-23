@@ -10,7 +10,7 @@ import com.aaronicsubstances.niv1984.data.BookLoader
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.models.ScrollPosPref
-import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
+import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject

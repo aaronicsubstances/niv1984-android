@@ -17,7 +17,7 @@
         app:title="@string/night_mode_title"
         app:useSimpleSummaryProvider="true" />
 
-    <com.aaronicsubstances.niv1984.settings.DisplayBookPreference
+    <com.aaronicsubstances.niv1984.ui.settings.DisplayBookPreference
         android:key="bible_versions"
         android:title="Preferred Bible Versions"
         android:defaultValue="niv1984 kjv1769"

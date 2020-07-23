@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.aaronicsubstances.niv1984.books.BookLoadFragment">
+    tools:context="com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment">
 
     <TextView
         android:id="@+id/bookDescription"

@@ -29,9 +29,20 @@ data class BibleIndexRecord(
 
 @Dao
 interface BibleIndexRecordDao {
+
     @Query(
         """SELECT rowId, bible_version, book_number, chapter_number, verse_number, 
                         is_foot_note, content FROM bible_index_record 
-                 WHERE content MATCH :term AND rowId > :lastRowId""")
-    suspend fun search(term: String, lastRowId: Int): List<BibleIndexRecord>
+                 WHERE content MATCH :term AND rowId BETWEEN :minRowId AND :maxRowId
+                 LIMIT :limit""")
+    suspend fun searchFuzzy(term: String, minRowId: Int, maxRowId: Int, limit: Int)
+            : List<BibleIndexRecord>
+
+    @Query(
+        """SELECT rowId, bible_version, book_number, chapter_number, verse_number, 
+                        is_foot_note, content FROM bible_index_record 
+                 WHERE content LIKE :term ESCAPE '+' AND rowId BETWEEN :minRowId AND :maxRowId
+                 LIMIT :limit""")
+    suspend fun searchExact(term: String, minRowId: Int, maxRowId: Int, limit: Int)
+            : List<BibleIndexRecord>
 }

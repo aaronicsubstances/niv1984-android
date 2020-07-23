@@ -24,7 +24,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
 
             <EditText
-                android:id="@+id/query"
+                android:id="@+id/searchBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

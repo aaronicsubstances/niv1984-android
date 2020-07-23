@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.text.Html
 import android.text.Spanned
 import android.util.TypedValue
+import android.widget.Toast
 import androidx.annotation.DimenRes
 
 object AppUtils {
@@ -31,5 +32,9 @@ object AppUtils {
 
     fun dimenResToPx(@DimenRes dimenRes: Int, context: Context): Int {
         return context.resources.getDimensionPixelOffset(dimenRes)
+    }
+
+    fun showShortToast(context: Context?, s: String) {
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
     }
 }

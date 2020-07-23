@@ -6,6 +6,7 @@ import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadViewModel
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
+import com.aaronicsubstances.niv1984.ui.search.SearchViewModel
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -25,4 +26,5 @@ interface AppComponent {
     fun inject(viewModel: BookLoadViewModel)
     fun inject(fragment: BookLoadFragment)
     fun inject(fragment: SearchRequestFragment)
+    fun inject(viewModel: SearchViewModel)
 }

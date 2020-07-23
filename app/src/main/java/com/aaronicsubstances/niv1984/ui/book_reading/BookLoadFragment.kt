@@ -1,19 +1,15 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
@@ -24,8 +20,8 @@ import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
+import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
 import com.aaronicsubstances.niv1984.utils.AppConstants
-
 import com.aaronicsubstances.niv1984.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.view_adapters.ChapterWidgetAdapter
 import javax.inject.Inject
@@ -33,7 +29,7 @@ import javax.inject.Inject
 /**
  * A simple [Fragment] subclass.
  */
-class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class BookLoadFragment : Fragment(), PrefListenerFragment {
 
     private lateinit var firstPrefRadio: RadioButton
     private lateinit var secondPrefRadio: RadioButton
@@ -111,9 +107,6 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
                 }
             })
         chapterView.adapter = chapterAdapter
-
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
-        preferenceManager.registerOnSharedPreferenceChangeListener(this)
 
         bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
         displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
@@ -283,28 +276,30 @@ class BookLoadFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
         return i
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        when (key) {
-            SharedPrefManager.PREF_KEY_BIBLE_VERSIONS -> {
-                bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
-                resetViewForBibleVersions()
-                openBookForReading(null)
-            }
-            SharedPrefManager.PREF_KEY_MULTIPLE_DISPLAY_OPTION -> {
-                displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
-                if (bothPrefRadio.isChecked) {
-                    openBookForReading(2)
-                }
-            }
-            SharedPrefManager.PREF_KEY_ZOOM -> {
-                bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
-                // no need to reread book, just refresh contents.
-                bookContentAdapter.notifyDataSetChanged()
-            }
-            SharedPrefManager.PREF_KEY_NIGHT_MODE -> {
-                isNightMode = sharedPrefMgr.getIsNightMode()
-                openBookForReading(null)
-            }
+    override fun onPrefBibleVersionsChanged(bibleVersions: List<String>) {
+        this.bibleVersions = bibleVersions
+        resetViewForBibleVersions()
+        openBookForReading(null)
+    }
+
+    override fun onPrefZoomLevelChanged(zoomLevel: Int) {
+        bookContentAdapter.zoomLevel = zoomLevel
+        // no need to reread book, just refresh contents.
+        bookContentAdapter.notifyDataSetChanged()
+    }
+
+    override fun onPrefNightModeChanged(isNightMode: Boolean) {
+        this.isNightMode = isNightMode
+        openBookForReading(null)
+    }
+
+    override fun onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide: Boolean) {
+        this.displayMultipleSideBySide = displayMultipleSideBySide
+        if (bothPrefRadio.isChecked) {
+            openBookForReading(2)
         }
+    }
+
+    override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
     }
 }

@@ -2,6 +2,7 @@ package com.aaronicsubstances.niv1984.bootstrap
 
 import android.content.Context
 import com.aaronicsubstances.niv1984.books.*
+import com.aaronicsubstances.niv1984.ui.Main2Activity
 import javax.inject.Singleton
 import dagger.BindsInstance
 import dagger.Component
@@ -17,6 +18,7 @@ interface AppComponent {
     }
 
     fun inject(activity: MainActivity)
+    fun inject(activity: Main2Activity)
     fun inject(fragment: BookListFragment)
     fun inject(viewModel: com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment)
     fun inject(viewModel: com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment)

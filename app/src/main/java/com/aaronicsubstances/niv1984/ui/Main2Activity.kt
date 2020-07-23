@@ -1,21 +1,29 @@
 package com.aaronicsubstances.niv1984.ui
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
 import com.aaronicsubstances.niv1984.settings.SettingsActivity
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
 import com.google.android.material.tabs.TabLayout
+import javax.inject.Inject
 
-class Main2Activity : AppCompatActivity(), BookListFragment.BookSelectionListener {
+class Main2Activity : AppCompatActivity(),
+        SharedPreferences.OnSharedPreferenceChangeListener,
+        BookListFragment.BookSelectionListener {
 
     companion object {
         private const val FRAG_ID_BOOK_LIST = "MainActivity.bookList"
@@ -27,7 +35,12 @@ class Main2Activity : AppCompatActivity(), BookListFragment.BookSelectionListene
 
     private lateinit var tabs: TabLayout
 
+    @Inject
+    internal lateinit var sharedPrefMgr: SharedPrefManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as MyApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
 
@@ -45,7 +58,8 @@ class Main2Activity : AppCompatActivity(), BookListFragment.BookSelectionListene
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                dealWithTabSwitch(tab?.position == 0, null, null)
+                val isHomeTab = tab?.position == 0
+                dealWithTabSwitch(isHomeTab, null, null)
             }
         })
 
@@ -57,12 +71,24 @@ class Main2Activity : AppCompatActivity(), BookListFragment.BookSelectionListene
             tabs.getTabAt(tabPos)?.select()
         }
 
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+        preferenceManager.registerOnSharedPreferenceChangeListener(this)
+
         /*val fab: FloatingActionButton = findViewById(R.id.fab)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
+    }
+
+    /**
+     * Fragments would have been restored by this time since onRestoreInstanceState
+     * is called between onStart and onPostCreate
+     */
+    override fun onPostCreate(b: Bundle?) {
+        super.onPostCreate(b)
+        keepScreenOnOrOff(null, null)
     }
 
     private fun createInitialFragments() {
@@ -121,6 +147,25 @@ class Main2Activity : AppCompatActivity(), BookListFragment.BookSelectionListene
             }
             commit()
         }
+        keepScreenOnOrOff(isHomeTab, bookLoadFrag != null)
+    }
+
+    private fun keepScreenOnOrOff(homeTabSelected: Boolean?, bookLoaded: Boolean?) {
+        val bookLoaded = bookLoaded ?: (
+                supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD) != null)
+        val keepScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
+        if (!bookLoaded || !keepScreenOn) {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            return
+        }
+
+        var homeTabSelected = homeTabSelected ?: (tabs.selectedTabPosition == 0)
+        if (homeTabSelected) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        else {
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
     }
 
     override fun onBookSelected(bookNumber: Int) {
@@ -167,5 +212,56 @@ class Main2Activity : AppCompatActivity(), BookListFragment.BookSelectionListene
             else -> super.onOptionsItemSelected(item)
         }
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
+        preferenceManager.unregisterOnSharedPreferenceChangeListener(this)
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        val bookListFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LIST) as PrefListenerFragment
+
+        val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD) as PrefListenerFragment?
+        //val searchResFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_RESPONSE) as PrefListenerFragment?
+
+        val interestedFrags = mutableListOf(bookListFrag)
+        bookLoadFrag?.let { interestedFrags.add(it) }
+        //searchResFrag?.let { interestedFrags.add(it) }
+
+        when (key) {
+            SharedPrefManager.PREF_KEY_BIBLE_VERSIONS -> {
+                val bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+                interestedFrags.forEach {
+                    it.onPrefBibleVersionsChanged(bibleVersions)
+                }
+            }
+            SharedPrefManager.PREF_KEY_MULTIPLE_DISPLAY_OPTION -> {
+                val displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
+                interestedFrags.forEach {
+                    it.onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide)
+                }
+            }
+            SharedPrefManager.PREF_KEY_ZOOM -> {
+                val zoomLevel = sharedPrefMgr.getZoomLevel()
+                interestedFrags.forEach {
+                    it.onPrefZoomLevelChanged(zoomLevel)
+                }
+            }
+            SharedPrefManager.PREF_KEY_NIGHT_MODE -> {
+                val isNightMode = sharedPrefMgr.getIsNightMode()
+                interestedFrags.forEach {
+                    it.onPrefNightModeChanged(isNightMode)
+                }
+            }
+            SharedPrefManager.PREF_KEY_SCREEN_WAKE -> {
+                val isScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
+                interestedFrags.forEach {
+                    it.onPrefKeepScreenOnDuringReadingChanged(isScreenOn)
+                }
+                keepScreenOnOrOff(null, null)
+            }
+        }
     }
 }

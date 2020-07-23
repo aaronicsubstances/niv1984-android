@@ -60,6 +60,11 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         return context.resources.getString(R.string.night_mode_book_display_default_value) == "1"
     }
 
+    fun getShouldKeepScreenOn(): Boolean {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        return sharedPref.getBoolean(PREF_KEY_SCREEN_WAKE, true)
+    }
+
     fun <T> loadPrefItem(key: String, cls: Class<T>): T? {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val serializedStr = sharedPref.getString(key, null) ?: return null

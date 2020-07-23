@@ -1,13 +1,11 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,11 +13,12 @@ import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.persistence.SharedPrefManager
+import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
 import com.aaronicsubstances.niv1984.view_adapters.BookListAdapter
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
-class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeListener {
+class BookListFragment : Fragment(), PrefListenerFragment {
 
     companion object {
         fun newInstance() = BookListFragment()
@@ -63,9 +62,6 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
 
         mListView = requireView().findViewById(R.id.book_list_view)
 
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
-        preferenceManager.registerOnSharedPreferenceChangeListener(this)
-
         val bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
 
         val onItemClickListenerFactory =
@@ -83,19 +79,23 @@ class BookListFragment : Fragment(), SharedPreferences.OnSharedPreferenceChangeL
         mListView.adapter = mListViewAdapter
     }
 
-    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        if (key == SharedPrefManager.PREF_KEY_BIBLE_VERSIONS) {
-            mListViewAdapter.bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
-        }
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
-        preferenceManager.unregisterOnSharedPreferenceChangeListener(this)
-    }
-
     private fun fireOnBookSelected(position: Int) {
         bookSelectionListener?.onBookSelected(position + 1)
+    }
+
+    override fun onPrefBibleVersionsChanged(bibleVersions: List<String>) {
+        mListViewAdapter.bibleVersionCode = bibleVersions[0]
+    }
+
+    override fun onPrefZoomLevelChanged(zoomLevel: Int) {
+    }
+
+    override fun onPrefNightModeChanged(isNightMode: Boolean) {
+    }
+
+    override fun onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide: Boolean) {
+    }
+
+    override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
     }
 }

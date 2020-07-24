@@ -37,4 +37,23 @@ object AppUtils {
     fun showShortToast(context: Context?, s: String) {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
     }
+
+    fun getAllBooks(topBooks: List<String>): ArrayList<String> {
+        val allBooks = ArrayList(AppConstants.bibleVersions.keys)
+
+        // Ensure top books appear on top.
+        for (i in topBooks.indices) {
+            // find ith top book in allBooks and swap it with
+            // ith position in allBooks
+            val idx = allBooks.indexOf(topBooks[i])
+            assert(idx != -1) {
+                "Could not find book ${topBooks[i]}"
+            }
+            val temp = allBooks[i]
+            allBooks[i] = topBooks[i]
+            allBooks[idx] = temp
+        }
+
+        return allBooks
+    }
 }

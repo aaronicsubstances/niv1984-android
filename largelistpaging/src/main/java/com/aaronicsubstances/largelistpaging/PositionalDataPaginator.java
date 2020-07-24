@@ -164,7 +164,7 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
     private void loadPageAsyncInternal(
             final boolean isInitialLoad, final boolean isScrollInForwardDirection,
             int startIndex, int exclusiveEndIndex) {
-        final int loadRequestId = loadRequestIdGen++;
+        final int loadRequestId = ++loadRequestIdGen;
         final PositionalDataSource<T> dataSourceUsed = dataSource;
         final List<Integer> pageNumbers = new ArrayList<>();
         final Consumer<PositionalDataSource.LoadResult<T>> loadCallback =

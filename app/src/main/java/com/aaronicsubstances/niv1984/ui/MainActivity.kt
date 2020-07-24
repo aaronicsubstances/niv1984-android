@@ -16,13 +16,15 @@ import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
+import com.aaronicsubstances.niv1984.ui.search.SearchResponseFragment
 import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(),
         SharedPreferences.OnSharedPreferenceChangeListener,
-        BookListFragment.BookSelectionListener {
+        BookListFragment.BookSelectionListener,
+        SearchRequestFragment.SearchRequestListener {
 
     companion object {
         private const val FRAG_ID_BOOK_LIST = "MainActivity.bookList"
@@ -153,6 +155,12 @@ class MainActivity : AppCompatActivity(),
         dealWithTabSwitch(true, ft, mapOf(FRAG_ID_BOOK_LOAD to bookLoadFrag))
     }
 
+    override fun onProcessSearchResponse(f: SearchResponseFragment) {
+        val ft = supportFragmentManager.beginTransaction()
+        ft.add(R.id.container, f, FRAG_ID_SEARCH_RESPONSE)
+        dealWithTabSwitch(false, ft, mapOf(FRAG_ID_SEARCH_RESPONSE to f))
+    }
+
     override fun onBackPressed() {
         if (tabs.selectedTabPosition == 0) {
             val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
@@ -169,8 +177,11 @@ class MainActivity : AppCompatActivity(),
                 val ft = supportFragmentManager.beginTransaction()
                 ft.remove(searchResFrag)
                 dealWithTabSwitch(false, ft, mapOf(FRAG_ID_SEARCH_RESPONSE to null))
-                return
             }
+            else {
+                tabs.getTabAt(0)!!.select()
+            }
+            return
         }
         super.onBackPressed()
     }

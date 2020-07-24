@@ -13,16 +13,16 @@ data class BibleIndexRecord(
     var bibleVersion: String,
 
     @ColumnInfo(name = "book_number")
-    var bookNumber: String,
+    var bookNumber: Int,
 
     @ColumnInfo(name = "chapter_number")
-    var chapterNumber: String,
+    var chapterNumber: Int,
 
     @ColumnInfo(name = "verse_number")
-    var verseNumber: String,
+    var verseNumber: Int,
 
     @ColumnInfo(name = "is_foot_note")
-    var isFootNote: String,
+    var isFootNote: Boolean,
 
     var content: String
 )
@@ -31,18 +31,90 @@ data class BibleIndexRecord(
 interface BibleIndexRecordDao {
 
     @Query(
-        """SELECT rowId, bible_version, book_number, chapter_number, verse_number, 
-                        is_foot_note, content FROM bible_index_record 
-                 WHERE content MATCH :term AND rowId BETWEEN :minRowId AND :maxRowId
+        """SELECT rowid AS rowId, 
+                        bible_version AS bibleVersion, 
+                        book_number AS bookNumber,
+                        chapter_number AS chapterNumber, 
+                        verse_number AS verseNumber, 
+                        is_foot_note AS isFootNote,
+                        snippet(bible_index_record) AS text, 
+                        1 AS isHtml
+                 FROM bible_index_record 
+                 WHERE content MATCH :q
+                    AND bible_version IN (:bibleVersions)
+                    AND verse_number >= :minVerseNumber
+                    AND book_number BETWEEN :minBookNumber AND :maxBookNumber
+                    AND rowid > :minRowId
+                 ORDER BY rowid ASC
                  LIMIT :limit""")
-    suspend fun searchFuzzy(term: String, minRowId: Int, maxRowId: Int, limit: Int)
-            : List<BibleIndexRecord>
+    suspend fun searchFuzzyForward(q: String, bibleVersions: List<String>, minVerseNumber: Int,
+                            minBookNumber: Int, maxBookNumber: Int,
+                            minRowId: Int, limit: Int)
+            : List<SearchResult>
 
     @Query(
-        """SELECT rowId, bible_version, book_number, chapter_number, verse_number, 
-                        is_foot_note, content FROM bible_index_record 
-                 WHERE content LIKE :term ESCAPE '+' AND rowId BETWEEN :minRowId AND :maxRowId
+        """SELECT rowid AS rowId, 
+                        bible_version AS bibleVersion, 
+                        book_number AS bookNumber,
+                        chapter_number AS chapterNumber, 
+                        verse_number AS verseNumber, 
+                        is_foot_note AS isFootNote,
+                        snippet(bible_index_record) AS text, 
+                        1 AS isHtml
+                 FROM bible_index_record 
+                 WHERE content MATCH :q
+                    AND bible_version IN (:bibleVersions)
+                    AND verse_number >= :minVerseNumber
+                    AND book_number BETWEEN :minBookNumber AND :maxBookNumber
+                    AND rowid < :maxRowId
+                 ORDER BY rowid DESC
                  LIMIT :limit""")
-    suspend fun searchExact(term: String, minRowId: Int, maxRowId: Int, limit: Int)
-            : List<BibleIndexRecord>
+    suspend fun searchFuzzyBackward(q: String, bibleVersions: List<String>, minVerseNumber: Int,
+                                   minBookNumber: Int, maxBookNumber: Int,
+                                   maxRowId: Int, limit: Int)
+            : List<SearchResult>
+
+    @Query(
+        """SELECT rowid AS rowId, 
+                        bible_version AS bibleVersion, 
+                        book_number AS bookNumber,
+                        chapter_number AS chapterNumber, 
+                        verse_number AS verseNumber, 
+                        is_foot_note AS isFootNote,
+                        content AS text, 
+                        0 AS isHtml
+                 FROM bible_index_record 
+                 WHERE content LIKE :q ESCAPE '\'
+                    AND bible_version IN (:bibleVersions)
+                    AND verse_number >= :minVerseNumber
+                    AND book_number BETWEEN :minBookNumber AND :maxBookNumber
+                    AND rowid > :minRowId
+                 ORDER BY rowid ASC
+                 LIMIT :limit""")
+    suspend fun searchExactForward(q: String, bibleVersions: List<String>, minVerseNumber: Int,
+                                   minBookNumber: Int, maxBookNumber: Int,
+                                   minRowId: Int, limit: Int)
+            : List<SearchResult>
+
+    @Query(
+        """SELECT rowid AS rowId, 
+                        bible_version AS bibleVersion, 
+                        book_number AS bookNumber,
+                        chapter_number AS chapterNumber, 
+                        verse_number AS verseNumber, 
+                        is_foot_note AS isFootNote,
+                        content AS text, 
+                        0 AS isHtml
+                 FROM bible_index_record 
+                 WHERE content LIKE :q ESCAPE '\'
+                    AND bible_version IN (:bibleVersions)
+                    AND verse_number >= :minVerseNumber
+                    AND book_number BETWEEN :minBookNumber AND :maxBookNumber
+                    AND rowid < :maxRowId
+                 ORDER BY rowid DESC
+                 LIMIT :limit""")
+    suspend fun searchExactBackward(q: String, bibleVersions: List<String>, minVerseNumber: Int,
+                                    minBookNumber: Int, maxBookNumber: Int,
+                                    maxRowId: Int, limit: Int)
+            : List<SearchResult>
 }

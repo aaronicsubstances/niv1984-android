@@ -143,7 +143,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         firstPageRequested = false;
         lastPageRequested = false;
 
-        final int loadRequestId = loadRequestIdGen++;
+        final int loadRequestId = ++loadRequestIdGen;
         Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
                 new Consumer<KeyedDataSource.LoadResult<T>>() {
                     @Override
@@ -172,9 +172,9 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private void loadAfterAsyncInternal() {
-        final Object lastKey = currentList.isEmpty() ? null : currentList.get(currentList.size() - 1);
+        final Object lastKey = currentList.isEmpty() ? null : getKey(currentList.get(currentList.size() - 1));
 
-        final int loadRequestId = loadRequestIdGen++;
+        final int loadRequestId = ++loadRequestIdGen;
         Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
                 new Consumer<KeyedDataSource.LoadResult<T>>() {
                     @Override
@@ -205,7 +205,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     private void loadBeforeAsyncInternal() {
         final Object firstKey = currentList.isEmpty() ? null : getKey(currentList.get(0));
 
-        final int loadRequestId = loadRequestIdGen++;
+        final int loadRequestId = ++loadRequestIdGen;
         Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
                 new Consumer<KeyedDataSource.LoadResult<T>>() {
                     @Override

@@ -64,7 +64,7 @@ Sql.withInstance("jdbc:sqlite:$scriptDir/app/src/main/assets/seed_data.db".repla
         println "${results.size()} row(s) found"
         return
     }
-    sql.execute("CREATE VIRTUAL TABLE bible_index_record USING FTS4(bible_version TEXT NOT NULL, book_number TEXT NOT NULL, chapter_number TEXT NOT NULL, verse_number TEXT NOT NULL, is_foot_note TEXT NOT NULL, content TEXT NOT NULL)")
+    sql.execute("CREATE VIRTUAL TABLE bible_index_record USING FTS4(bible_version TEXT NOT NULL, book_number INT NOT NULL, chapter_number INT NOT NULL, verse_number INT NOT NULL, is_foot_note INT NOT NULL, content TEXT NOT NULL)")
     
     assert normalizeContent("\u025B\u0190\u0254\u0186") == "eEoO"
     assert normalizeContent("\u2018\u2019\u201B\u201C\u201D\u201E") == "'''\"\"\""

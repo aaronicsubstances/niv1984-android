@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0671a6c07c6518aed9d4a356b54f2d13",
+    "identityHash": "8832d583151190a3a5211984f6b96d26",
     "entities": [
       {
         "tableName": "user_note",
@@ -111,7 +111,7 @@
         },
         "contentSyncTriggers": [],
         "tableName": "bible_index_record",
-        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`bible_version` TEXT NOT NULL, `book_number` TEXT NOT NULL, `chapter_number` TEXT NOT NULL, `verse_number` TEXT NOT NULL, `is_foot_note` TEXT NOT NULL, `content` TEXT NOT NULL)",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`bible_version` TEXT NOT NULL, `book_number` INTEGER NOT NULL, `chapter_number` INTEGER NOT NULL, `verse_number` INTEGER NOT NULL, `is_foot_note` INTEGER NOT NULL, `content` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "rowId",
@@ -128,25 +128,25 @@
           {
             "fieldPath": "bookNumber",
             "columnName": "book_number",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "chapterNumber",
             "columnName": "chapter_number",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "verseNumber",
             "columnName": "verse_number",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "isFootNote",
             "columnName": "is_foot_note",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -169,7 +169,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0671a6c07c6518aed9d4a356b54f2d13')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8832d583151190a3a5211984f6b96d26')"
     ]
   }
 }

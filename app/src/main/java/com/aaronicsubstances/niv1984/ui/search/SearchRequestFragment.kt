@@ -5,12 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Spinner
+import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
@@ -24,19 +20,35 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     companion object {
 
         @JvmStatic
-        fun newInstance() =
-            SearchRequestFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
+        fun newInstance() = SearchRequestFragment()
+
+        private const val STATE_KEY_ADV_PANEL_VISIBLE = "SearchRequestFragment.advPanelVisible"
     }
+
+    interface SearchRequestListener {
+        fun onProcessSearchResponse(f: SearchResponseFragment)
+    }
+
+    private var searchRequestListener: SearchRequestListener? = null
 
     private lateinit var bookStartRangeSpinner: Spinner
     private lateinit var bookEndRangeSpinner: Spinner
-    private lateinit var searchBtn: Button
     private lateinit var searchBox: EditText
+    private lateinit var prefBibleVersionTextView: TextView
 
-    private lateinit var viewModel: SearchViewModel
+    private lateinit var quickSearchBtn: Button
+    private lateinit var quickSearchOldBtn: Button
+    private lateinit var quickSearchNewBtn: Button
+    private lateinit var advSearchBtn: Button
+    private lateinit var bibleVersionCheckBoxes: LinearLayout
+
+    private lateinit var quickActionPanel: ViewGroup
+    private lateinit var advancedOptionPanel: ViewGroup
+    private lateinit var advPanelToggle: CheckBox
+
+    private lateinit var includeFootnotesCheck: CheckBox
+    private lateinit var treatSearchAsContainsCheck: CheckBox
+    private lateinit var treatQueryAsAlternativesCheck: CheckBox
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -46,32 +58,114 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         (context.applicationContext as MyApplication).appComponent.inject(this)
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        searchRequestListener = null
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         val root = inflater.inflate(R.layout.search_request_fragment, container, false)
+
         bookStartRangeSpinner = root.findViewById(R.id.startBibleBook)
         bookEndRangeSpinner = root.findViewById(R.id.endBibleBook)
-        searchBtn = root.findViewById(R.id.action_search)
         searchBox = root.findViewById(R.id.searchBox)
+        prefBibleVersionTextView = root.findViewById(R.id.prefBibleVersion)
+
+        quickSearchBtn = root.findViewById(R.id.searchWholeBible)
+        quickSearchOldBtn = root.findViewById(R.id.searchOT)
+        quickSearchNewBtn = root.findViewById(R.id.searchNT)
+        advSearchBtn = root.findViewById(R.id.advSearch)
+
+        bibleVersionCheckBoxes = root.findViewById(R.id.bibleVersionCheckBoxes)
+        advPanelToggle = root.findViewById(R.id.advancedCheck)
+        advancedOptionPanel = root.findViewById(R.id.advancedOptionPanel)
+        quickActionPanel = root.findViewById(R.id.quickActionPanel)
+
+        includeFootnotesCheck = root.findViewById(R.id.includeFootNotesCheck)
+        treatSearchAsContainsCheck = root.findViewById(R.id.isQueryExactCheck)
+        treatQueryAsAlternativesCheck = root.findViewById(R.id.runQueryAsAlternativesCheck)
+
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        val activityAsSearchReqListener = requireActivity()
+        if (activityAsSearchReqListener is SearchRequestListener) {
+            searchRequestListener = activityAsSearchReqListener
+        }
+        else {
+            throw IllegalArgumentException("${activityAsSearchReqListener.javaClass} must " +
+                    "implement ${SearchRequestListener::class}")
+        }
 
-        val bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
-        val startRangeAdapter = createBookSpinnerAdapter(bibleVersionCode)
-        val endRangeAdapter = createBookSpinnerAdapter(bibleVersionCode)
+        val topBibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+        resetAdvancedViewsRelatedToBibleVersions(topBibleVersions)
+
+        val startRangeAdapter = createBookSpinnerAdapter(topBibleVersions[0])
+        val endRangeAdapter = createBookSpinnerAdapter(topBibleVersions[0])
         bookStartRangeSpinner.adapter = startRangeAdapter
         bookEndRangeSpinner.adapter = endRangeAdapter
         bookEndRangeSpinner.setSelection(AppConstants.BIBLE_BOOK_COUNT - 1)
 
-        searchBtn.setOnClickListener { search() }
+        if (savedInstanceState?.getBoolean(STATE_KEY_ADV_PANEL_VISIBLE, false) == true) {
+            advPanelToggle.isChecked = true
+        }
+        updateAdvancedOptionsVisibility()
 
-        viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
+
+        advPanelToggle.setOnClickListener {
+            updateAdvancedOptionsVisibility()
+        }
+
+        quickSearchBtn.setOnClickListener { quickSearch(null) }
+        quickSearchOldBtn.setOnClickListener { quickSearch(true) }
+        quickSearchNewBtn.setOnClickListener { quickSearch(false) }
+        advSearchBtn.setOnClickListener { advancedSearch() }
+    }
+
+    private fun resetAdvancedViewsRelatedToBibleVersions(topBibleVersions: List<String>) {
+        prefBibleVersionTextView.text = resources.getString(
+            R.string.search_pref_bible_label,
+            AppConstants.bibleVersions.getValue(topBibleVersions[0]).description)
+
+        val allBooks = AppUtils.getAllBooks(topBibleVersions)
+
+        // dynamically add check boxes for each supported bible version
+        // after clearing it.
+        bibleVersionCheckBoxes.removeAllViews()
+        for (i in allBooks.indices) {
+            val checkBox = CheckBox(context)
+            if (i == 0) {
+                checkBox.isChecked = true
+            }
+            checkBox.tag = allBooks[i]
+            checkBox.text = AppConstants.bibleVersions.getValue(allBooks[i]).description
+            checkBox.id = View.generateViewId()
+            val prms = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+            bibleVersionCheckBoxes.addView(checkBox, prms)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(STATE_KEY_ADV_PANEL_VISIBLE, advPanelToggle.isChecked)
+    }
+
+    private fun updateAdvancedOptionsVisibility() {
+        if (advPanelToggle.isChecked) {
+            advancedOptionPanel.visibility = View.VISIBLE
+            quickActionPanel.visibility = View.GONE
+        }
+        else {
+            advancedOptionPanel.visibility = View.GONE
+            quickActionPanel.visibility = View.VISIBLE
+        }
     }
 
     private fun createBookSpinnerAdapter(bibleVersionCode: String): ArrayAdapter<String> {
@@ -95,11 +189,12 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     }
 
     override fun onPrefBibleVersionsChanged(bibleVersions: List<String>) {
-        val bibleVersionCode = bibleVersions[0]
+        resetAdvancedViewsRelatedToBibleVersions(bibleVersions)
+
         refreshBookSpinnerAdapter(bookStartRangeSpinner.adapter as ArrayAdapter<String>,
-            bibleVersionCode)
+            bibleVersions[0])
         refreshBookSpinnerAdapter(bookEndRangeSpinner.adapter as ArrayAdapter<String>,
-            bibleVersionCode)
+            bibleVersions[0])
     }
 
     override fun onPrefZoomLevelChanged(zoomLevel: Int) {
@@ -114,12 +209,43 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
     }
 
-    private fun search() {
+    private fun quickSearch(searchOT: Boolean?) {
         val q = (searchBox.text?.toString() ?: "").trim()
         if (q.isEmpty()) {
             AppUtils.showShortToast(context, "Please type some text into search box")
             return
         }
-        viewModel.search(q)
+        val bibleVersions = arrayListOf(bibleVersionCheckBoxes.getChildAt(0).tag as String)
+        val startBookNumber = if (searchOT == false) 40 else 1
+        val inclEndBookNumber = if (searchOT == true) 39 else 66
+        val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
+            inclEndBookNumber, true, false, false)
+        searchRequestListener?.onProcessSearchResponse(f)
+    }
+
+    private fun advancedSearch() {
+        val q = (searchBox.text?.toString() ?: "").trim()
+        if (q.isEmpty()) {
+            AppUtils.showShortToast(context, "Please type some text into search box")
+            return
+        }
+        val bibleVersions = arrayListOf<String>()
+        for (i in 0 until bibleVersionCheckBoxes.childCount) {
+            var checkBox = bibleVersionCheckBoxes.getChildAt(i) as CheckBox
+            if (checkBox.isChecked) {
+                bibleVersions.add(checkBox.tag as String)
+            }
+        }
+        if (bibleVersions.isEmpty()) {
+            AppUtils.showShortToast(context, "Please select at least one bible version")
+            return
+        }
+        val startBookNumber = bookStartRangeSpinner.selectedItemPosition + 1
+        val inclEndBookNumber = bookEndRangeSpinner.selectedItemPosition + 1
+        val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
+            inclEndBookNumber, includeFootnotesCheck.isChecked,
+            treatSearchAsContainsCheck.isChecked,
+            treatQueryAsAlternativesCheck.isChecked)
+        searchRequestListener?.onProcessSearchResponse(f)
     }
 }

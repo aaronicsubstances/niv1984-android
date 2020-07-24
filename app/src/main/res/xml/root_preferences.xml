@@ -36,5 +36,6 @@
     <SwitchPreferenceCompat
         android:key="screen_wake_option"
         android:title="@string/screen_wake_option_title"
+        android:summary="@string/screen_wake_option_summary"
         android:defaultValue="true"/>
 </PreferenceScreen>

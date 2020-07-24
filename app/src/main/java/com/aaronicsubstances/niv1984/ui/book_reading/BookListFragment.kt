@@ -42,6 +42,11 @@ class BookListFragment : Fragment(), PrefListenerFragment {
         (context.applicationContext as MyApplication).appComponent.inject(this)
     }
 
+    override fun onDetach() {
+        super.onDetach()
+        bookSelectionListener = null
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

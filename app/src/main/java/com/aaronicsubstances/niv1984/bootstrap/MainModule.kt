@@ -13,6 +13,6 @@ abstract class MainModule {
         @Singleton
         @Provides
         fun provideLargeListPagingConfig(): LargeListPagingConfig =
-            LargeListPagingConfig.Builder().setLoadSize(10).build()
+            LargeListPagingConfig.Builder().setLoadSize(100).build()
     }
 }

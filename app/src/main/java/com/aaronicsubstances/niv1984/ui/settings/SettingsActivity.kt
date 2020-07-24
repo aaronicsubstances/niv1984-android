@@ -7,16 +7,17 @@ import androidx.preference.PreferenceFragmentCompat
 import com.aaronicsubstances.niv1984.R
 import androidx.preference.Preference
 
-
 class SettingsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.settings, SettingsFragment())
-            .commit()
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(R.id.settings, SettingsFragment())
+                .commit()
+        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -28,13 +29,7 @@ class SettingsActivity : AppCompatActivity() {
         override fun onDisplayPreferenceDialog(preference: Preference) {
             // Try if the preference is one of our custom Preferences
             var dialogFragment: DialogFragment? = null
-            if (preference is TimePreference) {
-                // Create a new instance of TimePreferenceDialogFragment with the key of the related
-                // Preference
-                dialogFragment = TimePreferenceDialogFragmentCompat
-                    .newInstance(preference.getKey())
-            }
-            else if (preference is DisplayBookPreference) {
+            if (preference is DisplayBookPreference) {
                 dialogFragment = DisplayBookPreferenceDialogFragment.newInstance(preference.key)
             }
 

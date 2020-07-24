@@ -10,6 +10,7 @@ import androidx.core.view.get
 import androidx.preference.PreferenceDialogFragmentCompat
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.utils.AppConstants
+import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), View.OnClickListener {
 
@@ -28,13 +29,11 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
     private lateinit var moveDownBtn: Button
     private lateinit var resetToDefault: Button
 
-    private var selectedRadioIndex = -1
+    private var selectedRadioIndex = 0
 
     override fun onBindDialogView(view: View) {
         super.onBindDialogView(view)
         mRadioGroup = view.findViewById(R.id.radioGroup)
-
-        val allBooks = ArrayList(AppConstants.bibleVersions.keys)
 
         // Get the top books from the related Preference
         var topBooks = listOf<String>()
@@ -48,26 +47,15 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
             topBooks = AppConstants.DEFAULT_BIBLE_VERSIONS
         }
 
-        // Ensure top books appear on top.
-        for (i in topBooks.indices) {
-            // find ith top book in allBooks and swap it with
-            // ith position in allBooks
-            val idx = allBooks.indexOf(topBooks[i])
-            assert(idx != -1) {
-                "Could not find book ${topBooks[i]}"
-            }
-            val temp = allBooks[i]
-            allBooks[i] = topBooks[i]
-            allBooks[idx] = temp
-        }
+        val allBooks = AppUtils.getAllBooks(topBooks)
 
         // dynamically add radio buttons
         for (i in allBooks.indices) {
             val r = RadioButton(context)
             r.tag = Pair(i, allBooks[i])
-            r.text = AppConstants.bibleVersions[allBooks[i]]?.description
+            r.text = AppConstants.bibleVersions.getValue(allBooks[i]).description
             r.id = View.generateViewId()
-            val rprms= RadioGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+            val rprms = RadioGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
             mRadioGroup.addView(r, rprms)
             r.setOnClickListener(this)
@@ -82,6 +70,7 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
 
         // select/check first.
         (mRadioGroup[0] as RadioButton).isChecked = true
+        selectedRadioIndex = 0
         moveUpBtn.isEnabled = false
     }
 
@@ -141,13 +130,8 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
             return
         }
 
-        val topBooks = mutableListOf<String>()
-        if (mRadioGroup.childCount > 0) {
-            topBooks.add(getBibleVersionCode(mRadioGroup[0]))
-        }
-        if (mRadioGroup.childCount > 1) {
-            topBooks.add(getBibleVersionCode(mRadioGroup[1]))
-        }
+        val topBooks = listOf(getBibleVersionCode(mRadioGroup[0]),
+            getBibleVersionCode(mRadioGroup[1]))
         val preferredSequence = topBooks.joinToString(" ")
         val preference = preference
         if (preference is DisplayBookPreference) {

@@ -34,7 +34,7 @@
     <string name="tab_text_1">Home</string>
     <string name="tab_text_2">Search</string>
     <string name="chapter_widget_title">Chapters:</string>
-    <string name="screen_wake_option_title">Keep screen on during reading</string>
+    <string name="screen_wake_option_title">Keep screen on during reading (up to 5 minutes of no activity)</string>
     <string name="action_reset_to_default">Reset to Default</string>
     <string name="label_query">Search Box</string>
     <string name="label_search">Search</string>

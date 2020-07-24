@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,14 +17,14 @@ import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
-import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.ui.view_adapters.ChapterWidgetAdapter
+import com.aaronicsubstances.niv1984.utils.AppConstants
 import javax.inject.Inject
 
 /**
@@ -45,7 +46,11 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     private var bookNumber: Int = 0
     private var displayMultipleSideBySide = false
     private var isNightMode = false
+    private var keepScreenOn = false
     private lateinit var bibleVersions: List<String>
+
+    private var cancelKeepScreenOnRunnable: Runnable? = null
+    private var lastTouchTime = 0L // used for debouncing
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -96,8 +101,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
         chapterView.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.HORIZONTAL, false)
-        //chapterView.addItemDecoration(DividerItemDecoration(activity,
-        //    (chapterView.layoutManager as LinearLayoutManager).orientation))
         chapterAdapter = ChapterWidgetAdapter(AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1],
             LargeListViewClickListener.Factory<Int> { viewHolder ->
                 object: LargeListViewClickListener<Int>(viewHolder) {
@@ -111,6 +114,12 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
         displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
         isNightMode = sharedPrefMgr.getIsNightMode()
+        keepScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
+        
+        // as long as touches are occurring on root view, keep screen on
+        (view as ConstraintLayoutWithTouchIntercept).touchInterceptAction = Runnable {
+            rescheduleKeepScreenOn()
+        }
 
         resetViewForBibleVersions()
         bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
@@ -158,6 +167,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             }
         })
 
+        // Above listener debounces scroll events, which isn't fast enough
+        // for showing chapter changes. Hence use another listener.
         bookContentView.addOnScrollListener(object: RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val firstVisibleItemPos = LargeListViewScrollListener.findFirstVisibleItemPosition(
@@ -175,6 +186,24 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
         // kickstart actual bible reading
         openBookForReading(null)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onCustomPause()
+    }
+
+    fun onCustomPause() {
+        cancelKeepScreenOn()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        onCustomResume()
+    }
+
+    fun onCustomResume() {
+        scheduleKeepScreenOn()
     }
 
     private fun resetViewForBibleVersions() {
@@ -302,5 +331,61 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     }
 
     override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
+        this.keepScreenOn = keepScreenOn;
+        // since pref can only be changed when this fragment is hidden/paused,
+        // let fragment resumption handle change.
+    }
+
+    private fun scheduleKeepScreenOn() {
+        if (!keepScreenOn) {
+            return
+        }
+        if (cancelKeepScreenOnRunnable != null) {
+            return
+        }
+
+        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        cancelKeepScreenOnRunnable = Runnable {
+            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            cancelKeepScreenOnRunnable = null
+        }
+        requireView().apply {
+            removeCallbacks(cancelKeepScreenOnRunnable)
+            postDelayed(cancelKeepScreenOnRunnable, SharedPrefManager.WAKE_LOCK_PERIOD)
+        }
+    }
+
+    private fun cancelKeepScreenOn() {
+        cancelKeepScreenOnRunnable?.let {
+            requireView().removeCallbacks(it)
+            it.run()
+        }
+    }
+
+    private fun rescheduleKeepScreenOn() {
+        if (!keepScreenOn) {
+            return
+        }
+
+        if (cancelKeepScreenOnRunnable != null) {
+            // debounce to reduce frequency of rescheduling
+            val currTime = android.os.SystemClock.uptimeMillis()
+            if (currTime - lastTouchTime < 2000L) { // 2 secs
+                return
+            }
+            lastTouchTime = currTime
+        }
+        else {
+            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            cancelKeepScreenOnRunnable = Runnable {
+                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                cancelKeepScreenOnRunnable = null
+            }
+        }
+
+        requireView().apply {
+            removeCallbacks(cancelKeepScreenOnRunnable)
+            postDelayed(cancelKeepScreenOnRunnable, SharedPrefManager.WAKE_LOCK_PERIOD)
+        }
     }
 }

@@ -19,7 +19,7 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         const val PREF_KEY_MULTIPLE_DISPLAY_OPTION = "multiple_version_display"
         const val PREF_KEY_NIGHT_MODE = "night_mode"
         const val PREF_KEY_SCREEN_WAKE = "screen_wake_option"
-        const val WAKE_LOCK_PERIOD = 10 * 60 * 1000L // 10 minutes
+        const val WAKE_LOCK_PERIOD = 5 * 60 * 1000L // 5 minutes
     }
 
     fun getZoomLevel(): Int {

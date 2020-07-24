@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -14,10 +13,10 @@ import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
-import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
+import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
@@ -82,15 +81,6 @@ class MainActivity : AppCompatActivity(),
         }*/
     }
 
-    /**
-     * Fragments would have been restored by this time since onRestoreInstanceState
-     * is called between onStart and onPostCreate
-     */
-    override fun onPostCreate(b: Bundle?) {
-        super.onPostCreate(b)
-        keepScreenOnOrOff(null, null)
-    }
-
     private fun createInitialFragments() {
         val ft = supportFragmentManager.beginTransaction()
         val initialHomeFrag = BookListFragment.newInstance()
@@ -111,11 +101,11 @@ class MainActivity : AppCompatActivity(),
         val bookListFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LIST)!!
         val searchReqFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_REQUEST)!!
 
-        val bookLoadFrag = if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) == true) {
+        val bookLoadFrag = (if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) == true) {
             inFlightFragments[FRAG_ID_BOOK_LOAD]
         } else {
             supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
-        }
+        }) as BookLoadFragment?
         val searchResFrag = if (inFlightFragments?.containsKey(FRAG_ID_SEARCH_RESPONSE) == true) {
             inFlightFragments[FRAG_ID_SEARCH_RESPONSE]
         } else {
@@ -131,6 +121,10 @@ class MainActivity : AppCompatActivity(),
                 else {
                     show(bookListFrag)
                 }
+                if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) != true) {
+                    bookLoadFrag?.onCustomResume()
+                }
+
                 hide(searchReqFrag)
                 searchResFrag?.let { hide(it) }
             }
@@ -144,27 +138,11 @@ class MainActivity : AppCompatActivity(),
                 }
                 hide(bookListFrag)
                 bookLoadFrag?.let { hide(it) }
+                if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) != true) {
+                    bookLoadFrag?.onCustomPause()
+                }
             }
             commit()
-        }
-        keepScreenOnOrOff(isHomeTab, bookLoadFrag != null)
-    }
-
-    private fun keepScreenOnOrOff(homeTabSelected: Boolean?, bookLoaded: Boolean?) {
-        val bookLoaded = bookLoaded ?: (
-                supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD) != null)
-        val keepScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
-        if (!bookLoaded || !keepScreenOn) {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-            return
-        }
-
-        var homeTabSelected = homeTabSelected ?: (tabs.selectedTabPosition == 0)
-        if (homeTabSelected) {
-            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        }
-        else {
-            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         }
     }
 
@@ -265,7 +243,6 @@ class MainActivity : AppCompatActivity(),
                 interestedFrags.forEach {
                     it.onPrefKeepScreenOnDuringReadingChanged(isScreenOn)
                 }
-                keepScreenOnOrOff(null, null)
             }
         }
     }

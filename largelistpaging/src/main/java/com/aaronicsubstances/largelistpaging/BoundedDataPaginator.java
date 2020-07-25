@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
+public class BoundedDataPaginator<T> extends LargeListViewScrollListener {
     private final int totalCount;
     private final LargeListPagingConfig config;
 
@@ -20,17 +20,17 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
     private final List<T> LOADING_INDICATOR = Collections.emptyList();
 
     // state fields
-    private PositionalDataSource<T> dataSource;
+    private BoundedDataSource<T> dataSource;
     private final Map<Integer, List<T>> currentlyLoadedPages = new HashMap<>();
     private boolean disposed = false;
     private int loadRequestIdGen = 0; // uniquely identify load requests
 
-    public PositionalDataPaginator(int totalCount, LargeListPagingConfig config) {
+    public BoundedDataPaginator(int totalCount, LargeListPagingConfig config) {
         this(totalCount, config, true);
     }
 
-    public PositionalDataPaginator(int totalCount, LargeListPagingConfig config,
-                                   boolean isScrollDirectionVertical) {
+    public BoundedDataPaginator(int totalCount, LargeListPagingConfig config,
+                                boolean isScrollDirectionVertical) {
         super(isScrollDirectionVertical);
         this.totalCount = totalCount;
         this.config = config;
@@ -124,12 +124,12 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
                 loadStartIndex, loadEndIndex);
     }
 
-    public void loadInitialAsync(PositionalDataSource<T> dataSource, int initialIndex) {
+    public void loadInitialAsync(BoundedDataSource<T> dataSource, int initialIndex) {
         loadInitialAsyncInternal(dataSource, initialIndex,
                 initialIndex + config.initialLoadSize);
     }
 
-    public void loadInitialAsync(PositionalDataSource<T> dataSource,
+    public void loadInitialAsync(BoundedDataSource<T> dataSource,
                                  int startIndex, int exclusiveEndIndex) {
         if (disposed) {
             return;
@@ -148,7 +148,7 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
                 startIndex, exclusiveEndIndex);
     }
 
-    private void loadInitialAsyncInternal(PositionalDataSource<T> dataSource,
+    private void loadInitialAsyncInternal(BoundedDataSource<T> dataSource,
                                           int startIndex, int exclusiveEndIndex) {
         // initialize or reset repo state
         this.dataSource = dataSource;
@@ -162,12 +162,12 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
             final boolean isInitialLoad, final boolean isScrollInForwardDirection,
             int startIndex, int exclusiveEndIndex) {
         final int loadRequestId = ++loadRequestIdGen;
-        final PositionalDataSource<T> dataSourceUsed = dataSource;
+        final BoundedDataSource<T> dataSourceUsed = dataSource;
         final List<Integer> pageNumbers = new ArrayList<>();
-        final Consumer<PositionalDataSource.LoadResult<T>> loadCallback =
-                new Consumer<PositionalDataSource.LoadResult<T>>() {
+        final Consumer<BoundedDataSource.LoadResult<T>> loadCallback =
+                new Consumer<BoundedDataSource.LoadResult<T>>() {
                     @Override
-                    public void accept(final PositionalDataSource.LoadResult<T> loadResult) {
+                    public void accept(final BoundedDataSource.LoadResult<T> loadResult) {
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -220,8 +220,8 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
 
     private void handleLoadResult(
             final boolean isInitialLoad, final boolean isScrollInForwardDirection,
-            PositionalDataSource<T> dataSource, final int loadRequestId,
-            List<Integer> expectedPageNumbers, PositionalDataSource.LoadResult<T> result) {
+            BoundedDataSource<T> dataSource, final int loadRequestId,
+            List<Integer> expectedPageNumbers, BoundedDataSource.LoadResult<T> result) {
         if (isAsyncResultValid(dataSource)) {
             clearLoadingIndicators(expectedPageNumbers);
             if (result.getData() != null) {
@@ -291,7 +291,7 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
         }
     }
 
-    private boolean isAsyncResultValid(PositionalDataSource<T> dataSource) {
+    private boolean isAsyncResultValid(BoundedDataSource<T> dataSource) {
         if (disposed) {
             return false;
         }
@@ -307,7 +307,7 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
             final boolean isDataValid,
             final boolean isScrollInForwardDirection) {
         final List<T> data = error != null ? null :
-            new PositionalDataList<>(totalCount, config.loadSize, currentlyLoadedPages);
+            new BoundedDataList<>(totalCount, config.loadSize, currentlyLoadedPages);
         notifyEventListeners(new Consumer<PaginationEventListener<T>>() {
             @Override
             public void accept(PaginationEventListener<T> eventListener) {

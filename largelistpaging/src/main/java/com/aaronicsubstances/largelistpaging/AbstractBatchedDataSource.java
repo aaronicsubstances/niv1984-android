@@ -79,7 +79,7 @@ public abstract class AbstractBatchedDataSource<T extends ExtendedLargeListItem>
     public void loadBatchAsync(boolean isInitialLoad, String category, String batchVersion,
                                NetworkCallback<T> networkCallback,
                                Integer exclusiveBoundaryRank, boolean isScrollInForwardDirection, int loadSize,
-                               Consumer<KeyedDataSource.LoadResult<T>> uiCallback) {
+                               Consumer<UnboundedDataSource.LoadResult<T>> uiCallback) {
         int[] rankBounds = calculateRankBounds(isInitialLoad, exclusiveBoundaryRank, isScrollInForwardDirection,
                 loadSize);
         completeLoadBatchAsync(rankBounds[0], rankBounds[1], isInitialLoad, isScrollInForwardDirection,
@@ -91,12 +91,12 @@ public abstract class AbstractBatchedDataSource<T extends ExtendedLargeListItem>
                                         final boolean firstTimeLoad, final boolean isScrollInForwardDirection,
                                         final String category, final String batchVersion,
                                         final NetworkCallback<T> networkCallback,
-                                        final Consumer<KeyedDataSource.LoadResult<T>> uiCallback) {
+                                        final Consumer<UnboundedDataSource.LoadResult<T>> uiCallback) {
         CallableWithAsyncContext<T> ioCallable = new CallableWithAsyncContext<T>() {
             @Override
-            public KeyedDataSource.LoadResult<T> call(Object asyncContext) throws Exception {
+            public UnboundedDataSource.LoadResult<T> call(Object asyncContext) throws Exception {
                 if (endRank < 0) {
-                    return new KeyedDataSource.LoadResult<>(new ArrayList<T>());
+                    return new UnboundedDataSource.LoadResult<>(new ArrayList<T>());
                 }
                 if (firstTimeLoad) {
                     // wipe out all batches in category across all versions.
@@ -117,7 +117,7 @@ public abstract class AbstractBatchedDataSource<T extends ExtendedLargeListItem>
         processLoadBatchAsync(ioCallable, uiCallback);
     }
 
-    private KeyedDataSource.LoadResult<T> completeBatchLoading(
+    private UnboundedDataSource.LoadResult<T> completeBatchLoading(
             Object asyncContext, String category, String batchVersion, int startRank, int endRank,
             List<BatchedDataSourceEntity> batch, boolean listValid) throws Exception {
         if (batch == null) {
@@ -128,10 +128,10 @@ public abstract class AbstractBatchedDataSource<T extends ExtendedLargeListItem>
             T item = deserializeLargeListItem(entity.getSerializedItem());
             successResult.add(item);
         }
-        return new KeyedDataSource.LoadResult<>(successResult, null, listValid);
+        return new UnboundedDataSource.LoadResult<>(successResult, null, listValid);
     }
 
-    private KeyedDataSource.LoadResult<T> loadBatchFromNetwork(
+    private UnboundedDataSource.LoadResult<T> loadBatchFromNetwork(
             Object asyncContext, String category, String batchVersion,
             NetworkCallback<T> networkCallback, int startRank, int endRank,
             boolean isScrollInForwardDirection) throws Exception {
@@ -245,7 +245,7 @@ public abstract class AbstractBatchedDataSource<T extends ExtendedLargeListItem>
     }
 
     protected abstract void processLoadBatchAsync(CallableWithAsyncContext<T> ioCallable,
-                                                  Consumer<KeyedDataSource.LoadResult<T>> uiCallback);
+                                                  Consumer<UnboundedDataSource.LoadResult<T>> uiCallback);
 
     protected abstract BatchedDataSourceEntity createBatchedDataSourceEntity(
             Object asyncContext, long lastUpdateTimestamp, String category, String batchVersion,
@@ -271,7 +271,7 @@ public abstract class AbstractBatchedDataSource<T extends ExtendedLargeListItem>
                                            String batchVersion, List<String> itemIds);
 
     public interface CallableWithAsyncContext<T> {
-        KeyedDataSource.LoadResult<T> call(Object asyncContext) throws Exception;
+        UnboundedDataSource.LoadResult<T> call(Object asyncContext) throws Exception;
     }
 
     public interface NetworkCallback<T> {

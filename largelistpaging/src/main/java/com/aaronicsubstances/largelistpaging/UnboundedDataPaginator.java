@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewScrollListener {
+public class UnboundedDataPaginator<T extends LargeListItem> extends LargeListViewScrollListener {
     private final LargeListPagingConfig config;
 
     private final LinkedList<PaginationEventListener> eventListeners = new LinkedList<>();
@@ -17,7 +17,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     private int loadRequestIdGen = 0;
 
     // state fields
-    private KeyedDataSource<T> dataSource;
+    private UnboundedDataSource<T> dataSource;
     private List<T> currentList = Collections.emptyList();
     private boolean firstPageRequested, lastPageRequested;
     private boolean disposed = false;
@@ -27,12 +27,12 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
     private LoadingType loadInProgressType = null;
 
-    public KeyedDataPaginator(LargeListPagingConfig config) {
+    public UnboundedDataPaginator(LargeListPagingConfig config) {
         this(config, true);
     }
 
-    public KeyedDataPaginator(LargeListPagingConfig config,
-                              boolean isScrollDirectionVertical) {
+    public UnboundedDataPaginator(LargeListPagingConfig config,
+                                  boolean isScrollDirectionVertical) {
         super(isScrollDirectionVertical);
         this.config = config;
     }
@@ -89,7 +89,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         }
     }
 
-    public void loadInitialAsync(KeyedDataSource<T> dataSource, Object initialKey) {
+    public void loadInitialAsync(UnboundedDataSource<T> dataSource, Object initialKey) {
         if (disposed) {
             return;
         }
@@ -129,7 +129,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         }
     }
 
-    private void loadInitialAsyncInternal(KeyedDataSource<T> dataSource, Object initialKey) {
+    private void loadInitialAsyncInternal(UnboundedDataSource<T> dataSource, Object initialKey) {
         // initialize or reset repo state
         this.dataSource = dataSource;
         currentList = Collections.emptyList();
@@ -141,10 +141,10 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         lastPageRequested = false;
 
         final int loadRequestId = ++loadRequestIdGen;
-        Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
-                new Consumer<KeyedDataSource.LoadResult<T>>() {
+        Consumer<UnboundedDataSource.LoadResult<T>> loadCallback =
+                new Consumer<UnboundedDataSource.LoadResult<T>>() {
                     @Override
-                    public void accept(final KeyedDataSource.LoadResult<T> tLoadResult) {
+                    public void accept(final UnboundedDataSource.LoadResult<T> tLoadResult) {
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -167,10 +167,10 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         final Object lastKey = currentList.isEmpty() ? null : getKey(currentList.get(currentList.size() - 1));
 
         final int loadRequestId = ++loadRequestIdGen;
-        Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
-                new Consumer<KeyedDataSource.LoadResult<T>>() {
+        Consumer<UnboundedDataSource.LoadResult<T>> loadCallback =
+                new Consumer<UnboundedDataSource.LoadResult<T>>() {
                     @Override
-                    public void accept(final KeyedDataSource.LoadResult<T> tLoadResult) {
+                    public void accept(final UnboundedDataSource.LoadResult<T> tLoadResult) {
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -194,10 +194,10 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
         final Object firstKey = currentList.isEmpty() ? null : getKey(currentList.get(0));
 
         final int loadRequestId = ++loadRequestIdGen;
-        Consumer<KeyedDataSource.LoadResult<T>> loadCallback =
-                new Consumer<KeyedDataSource.LoadResult<T>>() {
+        Consumer<UnboundedDataSource.LoadResult<T>> loadCallback =
+                new Consumer<UnboundedDataSource.LoadResult<T>>() {
                     @Override
-                    public void accept(final KeyedDataSource.LoadResult<T> tLoadResult) {
+                    public void accept(final UnboundedDataSource.LoadResult<T> tLoadResult) {
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -218,7 +218,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private void handleLoadInitialResult(final int loadRequestId,
-                                         KeyedDataSource.LoadResult<T> result) {
+                                         UnboundedDataSource.LoadResult<T> result) {
         if (isAsyncResultValid(loadRequestId)) {
             if (result.getData() != null) {
                 updateCurrentListAfter(result.getData(),
@@ -238,7 +238,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private void handleLoadAfterResult(final int loadRequestId, Object boundaryKey,
-                                       KeyedDataSource.LoadResult<T> result) {
+                                       UnboundedDataSource.LoadResult<T> result) {
         if (isAsyncResultValid(loadRequestId)) {
             if (result.getData() != null) {
                 updateCurrentListAfter(result.getData(), config.loadSize, boundaryKey);
@@ -257,7 +257,7 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private void handleLoadBeforeResult(final int loadRequestId, Object boundaryKey,
-                                        KeyedDataSource.LoadResult<T> result) {
+                                        UnboundedDataSource.LoadResult<T> result) {
         if (isAsyncResultValid(loadRequestId)) {
             if (result.getData() != null) {
                 updateCurrentListBefore(result.getData(), config.loadSize, boundaryKey);

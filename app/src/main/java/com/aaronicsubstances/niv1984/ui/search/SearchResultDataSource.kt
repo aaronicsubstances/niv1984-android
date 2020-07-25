@@ -2,7 +2,7 @@ package com.aaronicsubstances.niv1984.ui.search
 
 import android.content.Context
 import androidx.core.util.Consumer
-import com.aaronicsubstances.largelistpaging.KeyedDataSource
+import com.aaronicsubstances.largelistpaging.UnboundedDataSource
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
 import com.aaronicsubstances.niv1984.data.AppDatabase
 import com.aaronicsubstances.niv1984.models.SearchResult
@@ -17,7 +17,8 @@ class SearchResultDataSource(private val context: Context,
                              private val inclEndBookNumber: Int,
                              includeFootnotes: Boolean,
                              private val treatSearchAsContains: Boolean,
-                             treatQueryAsAlternatives: Boolean): KeyedDataSource<SearchResult> {
+                             treatQueryAsAlternatives: Boolean):
+    UnboundedDataSource<SearchResult> {
     private val minVerseNumber = if (includeFootnotes) 0 else 1
     private val transformedQuery = processQuery(query, treatSearchAsContains, treatQueryAsAlternatives)
 
@@ -25,7 +26,7 @@ class SearchResultDataSource(private val context: Context,
         loadRequestId: Int,
         config: LargeListPagingConfig,
         initialKey: Any?,
-        loadCallback: Consumer<KeyedDataSource.LoadResult<SearchResult>>
+        loadCallback: Consumer<UnboundedDataSource.LoadResult<SearchResult>>
     ) {
         _loadData(-1, true, config.initialLoadSize, loadCallback)
     }
@@ -35,7 +36,7 @@ class SearchResultDataSource(private val context: Context,
         config: LargeListPagingConfig,
         boundaryKey: Any,
         isScrollInForwardDirection: Boolean,
-        loadCallback: Consumer<KeyedDataSource.LoadResult<SearchResult>>
+        loadCallback: Consumer<UnboundedDataSource.LoadResult<SearchResult>>
     ) {
         _loadData(boundaryKey as Int, isScrollInForwardDirection, config.loadSize, loadCallback)
     }
@@ -44,7 +45,7 @@ class SearchResultDataSource(private val context: Context,
         boundaryRowId: Int,
         isScrollInForwardDirection: Boolean,
         fetchLimit: Int,
-        loadCallback: Consumer<KeyedDataSource.LoadResult<SearchResult>>
+        loadCallback: Consumer<UnboundedDataSource.LoadResult<SearchResult>>
     ) {
 
         coroutineScope.launch {
@@ -78,7 +79,7 @@ class SearchResultDataSource(private val context: Context,
                     ).reversed().toList()
                 }
             }
-            loadCallback.accept(KeyedDataSource.LoadResult(results))
+            loadCallback.accept(UnboundedDataSource.LoadResult(results))
         }
     }
 

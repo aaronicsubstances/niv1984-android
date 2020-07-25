@@ -7,9 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.aaronicsubstances.largelistpaging.DefaultPaginationEventListener
-import com.aaronicsubstances.largelistpaging.KeyedDataPaginator
+import com.aaronicsubstances.largelistpaging.UnboundedDataPaginator
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
-import com.aaronicsubstances.largelistpaging.PaginationEventListener
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.SearchResult
@@ -17,7 +16,7 @@ import javax.inject.Inject
 
 class SearchViewModel(application: Application): AndroidViewModel(application) {
 
-    val paginator: KeyedDataPaginator<SearchResult>
+    val paginator: UnboundedDataPaginator<SearchResult>
 
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
@@ -31,7 +30,7 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
     init {
         (application as MyApplication).appComponent.inject(this)
 
-        paginator = KeyedDataPaginator(pagingConfig)
+        paginator = UnboundedDataPaginator(pagingConfig)
         paginator.addEventListener(SearchResultHelper())
     }
 

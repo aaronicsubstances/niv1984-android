@@ -9,7 +9,6 @@ import java.util.List;
 
 public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewScrollListener {
     private final LargeListPagingConfig config;
-    private final boolean allowLoadCallbackExecutionOnMainThread;
 
     private final LinkedList<PaginationEventListener> eventListeners = new LinkedList<>();
 
@@ -29,15 +28,13 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     private LoadingType loadInProgressType = null;
 
     public KeyedDataPaginator(LargeListPagingConfig config) {
-        this(config, true, false);
+        this(config, true);
     }
 
     public KeyedDataPaginator(LargeListPagingConfig config,
-                              boolean isScrollDirectionVertical,
-                              boolean allowLoadCallbackExecutionOnMainThread) {
+                              boolean isScrollDirectionVertical) {
         super(isScrollDirectionVertical);
         this.config = config;
-        this.allowLoadCallbackExecutionOnMainThread = allowLoadCallbackExecutionOnMainThread;
     }
 
     public boolean isFirstPageRequested() {
@@ -148,11 +145,6 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
                 new Consumer<KeyedDataSource.LoadResult<T>>() {
                     @Override
                     public void accept(final KeyedDataSource.LoadResult<T> tLoadResult) {
-                        if (!allowLoadCallbackExecutionOnMainThread &&
-                                PagingUtils.isRunningOnMainThread()) {
-                            throw new RuntimeException("Datasource load callback not allowed to " +
-                                    "execute on main/ui thread");
-                        }
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -179,10 +171,6 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
                 new Consumer<KeyedDataSource.LoadResult<T>>() {
                     @Override
                     public void accept(final KeyedDataSource.LoadResult<T> tLoadResult) {
-                        if (!allowLoadCallbackExecutionOnMainThread && PagingUtils.isRunningOnMainThread()) {
-                            throw new RuntimeException("Datasource load callback not allowed to " +
-                                    "execute on main/ui thread");
-                        }
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -210,10 +198,6 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
                 new Consumer<KeyedDataSource.LoadResult<T>>() {
                     @Override
                     public void accept(final KeyedDataSource.LoadResult<T> tLoadResult) {
-                        if (!allowLoadCallbackExecutionOnMainThread && PagingUtils.isRunningOnMainThread()) {
-                            throw new RuntimeException("Datasource load callback not allowed to " +
-                                    "execute on main/ui thread");
-                        }
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {
@@ -360,12 +344,11 @@ public class KeyedDataPaginator<T extends LargeListItem> extends LargeListViewSc
     }
 
     private Object getKey(T item) {
-        int rank = item.getRank();
-        if (rank < 0) {
-            return item.getKey();
+        if (item instanceof ExtendedLargeListItem) {
+            return ((ExtendedLargeListItem) item).getRank();
         }
         else {
-            return rank;
+            return item.getKey();
         }
     }
 

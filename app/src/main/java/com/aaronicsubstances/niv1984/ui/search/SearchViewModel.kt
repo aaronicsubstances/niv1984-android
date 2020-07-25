@@ -6,6 +6,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.aaronicsubstances.largelistpaging.DefaultPaginationEventListener
 import com.aaronicsubstances.largelistpaging.KeyedDataPaginator
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
 import com.aaronicsubstances.largelistpaging.PaginationEventListener
@@ -30,7 +31,7 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
     init {
         (application as MyApplication).appComponent.inject(this)
 
-        paginator = KeyedDataPaginator(pagingConfig, true, true)
+        paginator = KeyedDataPaginator(pagingConfig)
         paginator.addEventListener(SearchResultHelper())
     }
 
@@ -56,7 +57,7 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
         paginator.loadInitialAsync(dataSource, null)
     }
 
-    inner class SearchResultHelper : PaginationEventListener<SearchResult> {
+    inner class SearchResultHelper : DefaultPaginationEventListener<SearchResult>() {
 
         override fun onDataLoaded(
             reqId: Int,
@@ -66,25 +67,5 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
         ) {
             _searchResultLiveData.value = data
         }
-
-        override fun dispose() { }
-
-        override fun onInitialDataLoading(reqId: Int) { }
-
-        override fun onDataLoading(reqId: Int, isScrollInForwardDirection: Boolean) { }
-
-        override fun onDataLoadIgnored(
-            reqId: Int,
-            isInitialLoad: Boolean,
-            isScrollInForwardDirection: Boolean
-        ) { }
-
-        override fun onDataInvalidated() { }
-
-        override fun onDataLoadError(
-            reqId: Int,
-            error: Throwable,
-            isScrollInForwardDirection: Boolean
-        ) = throw error
     }
 }

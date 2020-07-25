@@ -40,6 +40,13 @@ class BookListFragment : Fragment(), PrefListenerFragment {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context.applicationContext as MyApplication).appComponent.inject(this)
+        if (context is BookSelectionListener) {
+            bookSelectionListener = context
+        }
+        else {
+            throw IllegalArgumentException("${context.javaClass} must " +
+                    "implement ${BookSelectionListener::class}")
+        }
     }
 
     override fun onDetach() {
@@ -56,14 +63,6 @@ class BookListFragment : Fragment(), PrefListenerFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val activityAsBookSelectionListener = requireActivity()
-        if (activityAsBookSelectionListener is BookSelectionListener) {
-            bookSelectionListener = activityAsBookSelectionListener
-        }
-        else {
-            throw IllegalArgumentException("${activityAsBookSelectionListener.javaClass} must " +
-                    "implement ${BookSelectionListener::class}")
-        }
 
         mListView = requireView().findViewById(R.id.book_list_view)
 

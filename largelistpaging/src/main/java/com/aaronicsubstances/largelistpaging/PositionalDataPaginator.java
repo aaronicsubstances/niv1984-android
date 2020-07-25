@@ -13,7 +13,6 @@ import java.util.Map;
 public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
     private final int totalCount;
     private final LargeListPagingConfig config;
-    private final boolean allowLoadCallbackExecutionOnMainThread;
 
     private final LinkedList<PaginationEventListener> eventListeners = new LinkedList<>();
 
@@ -27,16 +26,14 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
     private int loadRequestIdGen = 0; // uniquely identify load requests
 
     public PositionalDataPaginator(int totalCount, LargeListPagingConfig config) {
-        this(totalCount, config, true, false);
+        this(totalCount, config, true);
     }
 
     public PositionalDataPaginator(int totalCount, LargeListPagingConfig config,
-                                   boolean isScrollDirectionVertical,
-                                   boolean allowLoadCallbackExecutionOnMainThread) {
+                                   boolean isScrollDirectionVertical) {
         super(isScrollDirectionVertical);
         this.totalCount = totalCount;
         this.config = config;
-        this.allowLoadCallbackExecutionOnMainThread = allowLoadCallbackExecutionOnMainThread;
     }
 
     public int getTotalCount() {
@@ -171,10 +168,6 @@ public class PositionalDataPaginator<T> extends LargeListViewScrollListener {
                 new Consumer<PositionalDataSource.LoadResult<T>>() {
                     @Override
                     public void accept(final PositionalDataSource.LoadResult<T> loadResult) {
-                        if (!allowLoadCallbackExecutionOnMainThread && PagingUtils.isRunningOnMainThread()) {
-                            throw new RuntimeException("Datasource load callback not allowed to " +
-                                    "execute on main/ui thread");
-                        }
                         PagingUtils.mainThreadHandler.post(new Runnable() {
                             @Override
                             public void run() {

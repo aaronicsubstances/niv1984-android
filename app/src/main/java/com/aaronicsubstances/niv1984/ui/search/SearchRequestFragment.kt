@@ -56,6 +56,13 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context.applicationContext as MyApplication).appComponent.inject(this)
+        if (context is SearchRequestListener) {
+            searchRequestListener = context
+        }
+        else {
+            throw IllegalArgumentException("${context.javaClass} must " +
+                    "implement ${SearchRequestListener::class}")
+        }
     }
 
     override fun onDetach() {
@@ -94,14 +101,6 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val activityAsSearchReqListener = requireActivity()
-        if (activityAsSearchReqListener is SearchRequestListener) {
-            searchRequestListener = activityAsSearchReqListener
-        }
-        else {
-            throw IllegalArgumentException("${activityAsSearchReqListener.javaClass} must " +
-                    "implement ${SearchRequestListener::class}")
-        }
 
         val topBibleVersions = sharedPrefMgr.getPreferredBibleVersions()
         resetAdvancedViewsRelatedToBibleVersions(topBibleVersions)

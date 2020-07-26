@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8832d583151190a3a5211984f6b96d26",
+    "identityHash": "b1d08c7c4735353c9641f9ef9305df33",
     "entities": [
       {
         "tableName": "user_note",
@@ -100,21 +100,28 @@
       {
         "ftsVersion": "FTS4",
         "ftsOptions": {
-          "tokenizer": "simple",
-          "tokenizerArgs": [],
+          "tokenizer": "unicode61",
+          "tokenizerArgs": [
+            "remove_diacritics=0"
+          ],
           "contentTable": "",
           "languageIdColumnName": "",
           "matchInfo": "FTS4",
-          "notIndexedColumns": [],
+          "notIndexedColumns": [
+            "chapter_number",
+            "verse_number",
+            "bible_version",
+            "book_number"
+          ],
           "prefixSizes": [],
           "preferredOrder": "ASC"
         },
         "contentSyncTriggers": [],
         "tableName": "bible_index_record",
-        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`bible_version` TEXT NOT NULL, `book_number` INTEGER NOT NULL, `chapter_number` INTEGER NOT NULL, `verse_number` INTEGER NOT NULL, `is_foot_note` INTEGER NOT NULL, `content` TEXT NOT NULL)",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`bible_version` TEXT NOT NULL, `book_number` INTEGER NOT NULL, `chapter_number` INTEGER NOT NULL, `verse_number` INTEGER NOT NULL, `content` TEXT NOT NULL, tokenize=unicode61 `remove_diacritics=0`, notindexed=`chapter_number`, notindexed=`verse_number`, notindexed=`bible_version`, notindexed=`book_number`)",
         "fields": [
           {
-            "fieldPath": "rowId",
+            "fieldPath": "docId",
             "columnName": "rowid",
             "affinity": "INTEGER",
             "notNull": true
@@ -144,12 +151,6 @@
             "notNull": true
           },
           {
-            "fieldPath": "isFootNote",
-            "columnName": "is_foot_note",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
             "fieldPath": "content",
             "columnName": "content",
             "affinity": "TEXT",
@@ -164,12 +165,68 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "BatchedDataSourceEntityImpl",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rank` INTEGER NOT NULL, `lastUpdateTimestamp` INTEGER NOT NULL, `category` TEXT NOT NULL, `batchVersion` TEXT NOT NULL, `batchNumber` INTEGER NOT NULL, `itemKey` TEXT NOT NULL, `serializedItem` TEXT NOT NULL, PRIMARY KEY(`rank`))",
+        "fields": [
+          {
+            "fieldPath": "rank",
+            "columnName": "rank",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lastUpdateTimestamp",
+            "columnName": "lastUpdateTimestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "category",
+            "columnName": "category",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "batchVersion",
+            "columnName": "batchVersion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "batchNumber",
+            "columnName": "batchNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemKey",
+            "columnName": "itemKey",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serializedItem",
+            "columnName": "serializedItem",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "rank"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8832d583151190a3a5211984f6b96d26')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b1d08c7c4735353c9641f9ef9305df33')"
     ]
   }
 }

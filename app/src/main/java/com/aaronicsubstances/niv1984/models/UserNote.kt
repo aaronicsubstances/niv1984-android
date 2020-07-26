@@ -4,7 +4,7 @@ import androidx.room.*
 import java.sql.Timestamp
 
 @Entity(tableName = "user_note")
-class UserNote(
+data class UserNote(
 
     @PrimaryKey(autoGenerate = true)
     var id: Int,

@@ -345,10 +345,10 @@ public class UnboundedDataPaginator<T extends LargeListItem> extends LargeListVi
 
     private Object getKey(T item) {
         if (item instanceof ExtendedLargeListItem) {
-            return ((ExtendedLargeListItem) item).getRank();
+            return ((ExtendedLargeListItem) item).fetchRank();
         }
         else {
-            return item.getKey();
+            return item.fetchKey();
         }
     }
 

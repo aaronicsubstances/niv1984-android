@@ -27,7 +27,7 @@ class SearchResultAdapter: ListAdapter<SearchResult, SearchResultAdapter.ViewHol
     companion object {
         private val ITEM_COMPARATOR = object: DiffUtil.ItemCallback<SearchResult>() {
             override fun areItemsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean {
-                return oldItem.rowId == newItem.rowId
+                return oldItem.docId == newItem.docId
             }
 
             override fun areContentsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean {
@@ -45,7 +45,7 @@ class SearchResultAdapter: ListAdapter<SearchResult, SearchResultAdapter.ViewHol
 
             val bibleVersion = AppConstants.bibleVersions.getValue(searchResult.bibleVersion)
             var description = bibleVersion.bookNames[searchResult.bookNumber - 1]
-            if (searchResult.isFootNote) {
+            if (searchResult.verseNumber < 1) {
                 description += " ${searchResult.chapterNumber} footnote"
 
             } else {
@@ -54,11 +54,7 @@ class SearchResultAdapter: ListAdapter<SearchResult, SearchResultAdapter.ViewHol
             description += " (${bibleVersion.abbreviation})"
             descriptionView.text = description
 
-            val styledContent: CharSequence = if (searchResult.isHtml) {
-                AppUtils.parseHtml(searchResult.text)
-            } else {
-                searchResult.text
-            }
+            val styledContent = AppUtils.parseHtml(searchResult.text)
             textView.text = styledContent
         }
     }

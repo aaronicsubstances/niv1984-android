@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_margin"
         android:orientation="vertical">
 
         <TextView
@@ -21,68 +22,39 @@
         <EditText
             android:id="@+id/searchBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin"/>
 
-        <CheckBox
-            android:id="@+id/advancedCheck"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Advanced Search Options" />
-
+            android:text="Bible versions to include in search" />
         <LinearLayout
-            android:id="@+id/quickActionPanel"
-            android:orientation="vertical"
+            android:id="@+id/bibleVersionCheckBoxes"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/prefBibleVersion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="1st Preferred Bible Version" />
-
-            <Button
-                android:id="@+id/searchWholeBible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search Whole Bible"
-                android:checked="true"/>
-
-            <Button
-                android:id="@+id/searchOT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search Old Testament only" />
-
-            <Button
-                android:id="@+id/searchNT"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search New Testament only" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/activity_margin">
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Books to include in search" />
 
         <LinearLayout
             android:id="@+id/advancedOptionPanel"
             android:orientation="vertical"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <LinearLayout
-                android:id="@+id/bibleVersionCheckBoxes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Books to include in search" />
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -99,7 +71,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -112,31 +85,12 @@
                     android:layout_height="wrap_content"
                     android:entries="@array/multiple_version_display_entries" />
             </LinearLayout>
-
-            <CheckBox
-                android:id="@+id/includeFootNotesCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Include FootNotes" />
-
-            <CheckBox
-                android:id="@+id/isQueryExactCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search for Exact Phrase" />
-
-            <CheckBox
-                android:id="@+id/runQueryAsAlternativesCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Search for any rather than all of the words" />
-
-            <Button
-                android:id="@+id/advSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/label_search" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/advSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_search" />
     </LinearLayout>
 </ScrollView>

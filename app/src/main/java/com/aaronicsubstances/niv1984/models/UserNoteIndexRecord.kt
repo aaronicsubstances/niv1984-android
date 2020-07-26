@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "user_note_index_record")
 @Fts4(contentEntity = UserNote::class)
-class UserNoteIndexRecord(
+data class UserNoteIndexRecord(
     @PrimaryKey
     @ColumnInfo(name = "rowid")
     var rowId: Int,

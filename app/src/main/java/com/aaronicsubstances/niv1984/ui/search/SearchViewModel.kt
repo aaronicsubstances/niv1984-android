@@ -7,9 +7,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.aaronicsubstances.largelistpaging.DefaultPaginationEventListener
-import com.aaronicsubstances.largelistpaging.UnboundedDataPaginator
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
+import com.aaronicsubstances.largelistpaging.UnboundedDataPaginator
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.SearchResultDataSource
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.SearchResult
 import javax.inject.Inject
@@ -22,14 +23,19 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
     internal lateinit var sharedPrefManager: SharedPrefManager
 
     @Inject
-    internal lateinit var pagingConfig: LargeListPagingConfig
-
-    @Inject
     internal lateinit var context: Context
 
     init {
         (application as MyApplication).appComponent.inject(this)
 
+        // reduce search start up time by reducing initial load size such that
+        // only one DB trip is made initially.
+        // Also make max load size larger.
+        val pagingConfig = LargeListPagingConfig.Builder()
+            .setInitialLoadSize(SearchResultDataSource.NEW_BATCH_SIZE/ 2)
+            .setLoadSize(SearchResultDataSource.NEW_BATCH_SIZE / 2)
+            .setMaxLoadSize(SearchResultDataSource.NEW_BATCH_SIZE * 5)
+            .build()
         paginator = UnboundedDataPaginator(pagingConfig)
         paginator.addEventListener(SearchResultHelper())
     }
@@ -44,15 +50,12 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
         get() = _searchResultLiveData
 
     fun search(query: String, bibleVersions: List<String>,
-               startBookNumber: Int, inclEndBookNumber: Int,
-               includeFootnotes: Boolean, treatSearchAsContains: Boolean,
-               treatQueryAsAlternatives: Boolean) {
+               startBookNumber: Int, inclEndBookNumber: Int) {
         if (_searchResultLiveData.value != null) {
             return
         }
         val dataSource = SearchResultDataSource(context, viewModelScope, query, bibleVersions,
-            startBookNumber, inclEndBookNumber, includeFootnotes, treatSearchAsContains,
-            treatQueryAsAlternatives)
+            startBookNumber, inclEndBookNumber)
         paginator.loadInitialAsync(dataSource, null)
     }
 

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.SearchResultAdapter
 
 class SearchResponseFragment : Fragment() {
@@ -18,11 +21,11 @@ class SearchResponseFragment : Fragment() {
     private lateinit var bibleVersions: List<String>
     private var startBookNumber = 0
     private var inclEndBookNumber = 0
-    private var includeFootnotes = false
-    private var treatSearchAsContains = false
-    private var treatQueryAsAlternatives = false
 
     private lateinit var searchResultView: RecyclerView
+    private lateinit var queryTextView: TextView
+    private lateinit var emptyView: TextView
+    private lateinit var backBtn: Button
 
     private lateinit var viewModel: SearchViewModel
 
@@ -33,9 +36,6 @@ class SearchResponseFragment : Fragment() {
             bibleVersions = it.getStringArrayList(ARG_BIBLE_VERSIONS)!!
             startBookNumber = it.getInt(ARG_BOOK_RANGE_START)
             inclEndBookNumber = it.getInt(ARG_BOOK_RANGE_END)
-            includeFootnotes = it.getBoolean(ARG_INCLUDE_FOOTNOTES)
-            treatSearchAsContains = it.getBoolean(ARG_TREAT_SEARCH_AS_CONTAINS_WORD)
-            treatQueryAsAlternatives = it.getBoolean(ARG_TREAT_QUERY_AS_ALTERNATIVE_WORDS)
         }
     }
 
@@ -49,11 +49,18 @@ class SearchResponseFragment : Fragment() {
         searchResultView.layoutManager = listLayout
         searchResultView.addItemDecoration(DividerItemDecoration(context, listLayout.orientation))
 
+        emptyView = root.findViewById(R.id.emptyView)
+        queryTextView = root.findViewById(R.id.query)
+        queryTextView.text = query
+        backBtn = root.findViewById(R.id.backBtn)
+
         return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        backBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
 
         val adapter = SearchResultAdapter()
         searchResultView.adapter = adapter
@@ -63,11 +70,15 @@ class SearchResponseFragment : Fragment() {
         viewModel.searchResultLiveData.observe(viewLifecycleOwner,
             Observer { data ->
                 adapter.submitList(data)
+                if (data.isEmpty()) {
+                    emptyView.text = "No results found"
+                }
+                else {
+                    emptyView.text = ""
+                }
             })
 
-        viewModel.search(query, bibleVersions, startBookNumber,
-            inclEndBookNumber, includeFootnotes, treatSearchAsContains,
-            treatQueryAsAlternatives)
+        viewModel.search(query, bibleVersions, startBookNumber, inclEndBookNumber)
     }
 
     companion object {
@@ -75,24 +86,16 @@ class SearchResponseFragment : Fragment() {
         private const val ARG_BIBLE_VERSIONS = "bibleVersions"
         private const val ARG_BOOK_RANGE_START = "bookNumberStart"
         private const val ARG_BOOK_RANGE_END = "bookNumberEnd"
-        private const val ARG_INCLUDE_FOOTNOTES = "includeFootnotes"
-        private const val ARG_TREAT_SEARCH_AS_CONTAINS_WORD = "searchAsContains"
-        private const val ARG_TREAT_QUERY_AS_ALTERNATIVE_WORDS = "queryAsAlternatives"
 
         @JvmStatic
         fun newInstance(query: String, bibleVersions: ArrayList<String>,
-                        startBookNumber: Int, inclEndBookNumber: Int,
-                        includeFootnotes: Boolean, treatSearchAsContains: Boolean,
-                        treatQueryAsAlternatives: Boolean) =
+                        startBookNumber: Int, inclEndBookNumber: Int) =
             SearchResponseFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_QUERY, query)
                     putStringArrayList(ARG_BIBLE_VERSIONS, bibleVersions)
                     putInt(ARG_BOOK_RANGE_START, startBookNumber)
                     putInt(ARG_BOOK_RANGE_END, inclEndBookNumber)
-                    putBoolean(ARG_INCLUDE_FOOTNOTES, includeFootnotes)
-                    putBoolean(ARG_TREAT_SEARCH_AS_CONTAINS_WORD, treatSearchAsContains)
-                    putBoolean(ARG_TREAT_QUERY_AS_ALTERNATIVE_WORDS, treatQueryAsAlternatives)
                 }
             }
     }

@@ -21,8 +21,6 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
 
         @JvmStatic
         fun newInstance() = SearchRequestFragment()
-
-        private const val STATE_KEY_ADV_PANEL_VISIBLE = "SearchRequestFragment.advPanelVisible"
     }
 
     interface SearchRequestListener {
@@ -34,21 +32,8 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     private lateinit var bookStartRangeSpinner: Spinner
     private lateinit var bookEndRangeSpinner: Spinner
     private lateinit var searchBox: EditText
-    private lateinit var prefBibleVersionTextView: TextView
-
-    private lateinit var quickSearchBtn: Button
-    private lateinit var quickSearchOldBtn: Button
-    private lateinit var quickSearchNewBtn: Button
     private lateinit var advSearchBtn: Button
     private lateinit var bibleVersionCheckBoxes: LinearLayout
-
-    private lateinit var quickActionPanel: ViewGroup
-    private lateinit var advancedOptionPanel: ViewGroup
-    private lateinit var advPanelToggle: CheckBox
-
-    private lateinit var includeFootnotesCheck: CheckBox
-    private lateinit var treatSearchAsContainsCheck: CheckBox
-    private lateinit var treatQueryAsAlternativesCheck: CheckBox
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -80,21 +65,9 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         bookStartRangeSpinner = root.findViewById(R.id.startBibleBook)
         bookEndRangeSpinner = root.findViewById(R.id.endBibleBook)
         searchBox = root.findViewById(R.id.searchBox)
-        prefBibleVersionTextView = root.findViewById(R.id.prefBibleVersion)
-
-        quickSearchBtn = root.findViewById(R.id.searchWholeBible)
-        quickSearchOldBtn = root.findViewById(R.id.searchOT)
-        quickSearchNewBtn = root.findViewById(R.id.searchNT)
         advSearchBtn = root.findViewById(R.id.advSearch)
 
         bibleVersionCheckBoxes = root.findViewById(R.id.bibleVersionCheckBoxes)
-        advPanelToggle = root.findViewById(R.id.advancedCheck)
-        advancedOptionPanel = root.findViewById(R.id.advancedOptionPanel)
-        quickActionPanel = root.findViewById(R.id.quickActionPanel)
-
-        includeFootnotesCheck = root.findViewById(R.id.includeFootNotesCheck)
-        treatSearchAsContainsCheck = root.findViewById(R.id.isQueryExactCheck)
-        treatQueryAsAlternativesCheck = root.findViewById(R.id.runQueryAsAlternativesCheck)
 
         return root
     }
@@ -111,27 +84,10 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         bookEndRangeSpinner.adapter = endRangeAdapter
         bookEndRangeSpinner.setSelection(AppConstants.BIBLE_BOOK_COUNT - 1)
 
-        if (savedInstanceState?.getBoolean(STATE_KEY_ADV_PANEL_VISIBLE, false) == true) {
-            advPanelToggle.isChecked = true
-        }
-        updateAdvancedOptionsVisibility()
-
-
-        advPanelToggle.setOnClickListener {
-            updateAdvancedOptionsVisibility()
-        }
-
-        quickSearchBtn.setOnClickListener { quickSearch(null) }
-        quickSearchOldBtn.setOnClickListener { quickSearch(true) }
-        quickSearchNewBtn.setOnClickListener { quickSearch(false) }
-        advSearchBtn.setOnClickListener { advancedSearch() }
+        advSearchBtn.setOnClickListener { startSearch() }
     }
 
     private fun resetAdvancedViewsRelatedToBibleVersions(topBibleVersions: List<String>) {
-        prefBibleVersionTextView.text = resources.getString(
-            R.string.search_pref_bible_label,
-            AppConstants.bibleVersions.getValue(topBibleVersions[0]).description)
-
         val allBooks = AppUtils.getAllBooks(topBibleVersions)
 
         // dynamically add check boxes for each supported bible version
@@ -148,22 +104,6 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
             val prms = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
             bibleVersionCheckBoxes.addView(checkBox, prms)
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean(STATE_KEY_ADV_PANEL_VISIBLE, advPanelToggle.isChecked)
-    }
-
-    private fun updateAdvancedOptionsVisibility() {
-        if (advPanelToggle.isChecked) {
-            advancedOptionPanel.visibility = View.VISIBLE
-            quickActionPanel.visibility = View.GONE
-        }
-        else {
-            advancedOptionPanel.visibility = View.GONE
-            quickActionPanel.visibility = View.VISIBLE
         }
     }
 
@@ -208,21 +148,7 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
     }
 
-    private fun quickSearch(searchOT: Boolean?) {
-        val q = (searchBox.text?.toString() ?: "").trim()
-        if (q.isEmpty()) {
-            AppUtils.showShortToast(context, "Please type some text into search box")
-            return
-        }
-        val bibleVersions = arrayListOf(bibleVersionCheckBoxes.getChildAt(0).tag as String)
-        val startBookNumber = if (searchOT == false) 40 else 1
-        val inclEndBookNumber = if (searchOT == true) 39 else 66
-        val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
-            inclEndBookNumber, true, false, false)
-        searchRequestListener?.onProcessSearchResponse(f)
-    }
-
-    private fun advancedSearch() {
+    private fun startSearch() {
         val q = (searchBox.text?.toString() ?: "").trim()
         if (q.isEmpty()) {
             AppUtils.showShortToast(context, "Please type some text into search box")
@@ -242,9 +168,7 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         val startBookNumber = bookStartRangeSpinner.selectedItemPosition + 1
         val inclEndBookNumber = bookEndRangeSpinner.selectedItemPosition + 1
         val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
-            inclEndBookNumber, includeFootnotesCheck.isChecked,
-            treatSearchAsContainsCheck.isChecked,
-            treatQueryAsAlternativesCheck.isChecked)
+            inclEndBookNumber)
         searchRequestListener?.onProcessSearchResponse(f)
     }
 }

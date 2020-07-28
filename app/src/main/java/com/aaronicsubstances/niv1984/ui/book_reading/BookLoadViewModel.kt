@@ -38,6 +38,24 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         saveSystemBookmarks()
     }
 
+    fun initCurrLoc(bookNumber: Int, chapterNumber: Int, verseNumber: Int) {
+        if (systemBookmarks.bookNumber > 0) {
+            return
+        }
+        systemBookmarks.apply {
+            this.bookNumber = bookNumber
+            this.chapterNumber = chapterNumber
+            this.verseNumber = verseNumber
+            this.equivalentViewItemType = BookDisplayItemViewType.VERSE
+            if (verseNumber < 1) {
+                this.equivalentViewItemType = BookDisplayItemViewType.DIVIDER
+            }
+        }
+    }
+
+    val currLoc: Pair<Int, Int>
+        get() = Pair(systemBookmarks.chapterNumber, systemBookmarks.verseNumber)
+
     private fun loadSystemBookmarks(bookNumber: Int) {
         if (systemBookmarks.bookNumber > 0) {
             return

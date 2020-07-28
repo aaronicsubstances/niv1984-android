@@ -24,11 +24,7 @@ class BookListFragment : Fragment(), PrefListenerFragment {
         fun newInstance() = BookListFragment()
     }
 
-    interface BookSelectionListener {
-        fun onBookSelected(bookNumber: Int)
-    }
-
-    private var bookSelectionListener: BookSelectionListener? = null
+    private var bookSelectionListener: BookLoadRequestListener? = null
 
     private lateinit var mListViewAdapter: BookListAdapter
 
@@ -40,12 +36,12 @@ class BookListFragment : Fragment(), PrefListenerFragment {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context.applicationContext as MyApplication).appComponent.inject(this)
-        if (context is BookSelectionListener) {
+        if (context is BookLoadRequestListener) {
             bookSelectionListener = context
         }
         else {
             throw IllegalArgumentException("${context.javaClass} must " +
-                    "implement ${BookSelectionListener::class}")
+                    "implement ${BookLoadRequestListener::class}")
         }
     }
 
@@ -84,7 +80,7 @@ class BookListFragment : Fragment(), PrefListenerFragment {
     }
 
     private fun fireOnBookSelected(position: Int) {
-        bookSelectionListener?.onBookSelected(position + 1)
+        bookSelectionListener?.onBookLoadRequest(position + 1, 0, 0)
     }
 
     override fun onPrefBibleVersionsChanged(bibleVersions: List<String>) {

@@ -12,9 +12,12 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.SearchResultDataSource
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
+import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
+import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadRequestListener
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchResponseFragment
 import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
@@ -23,8 +26,9 @@ import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(),
         SharedPreferences.OnSharedPreferenceChangeListener,
-        BookListFragment.BookSelectionListener,
-        SearchRequestFragment.SearchRequestListener {
+        BookLoadRequestListener,
+        SearchRequestFragment.SearchRequestListener,
+        SearchResponseFragment.SearchResultSelectionListener {
 
     companion object {
         private const val FRAG_ID_BOOK_LIST = "MainActivity.bookList"
@@ -35,6 +39,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private lateinit var tabs: TabLayout
+    private lateinit var tabSelectionListener: TabLayout.OnTabSelectedListener
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -49,7 +54,7 @@ class MainActivity : AppCompatActivity(),
         setSupportActionBar(toolbar)
 
         tabs = findViewById(R.id.tabs)
-        tabs.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener {
+        tabSelectionListener = object: TabLayout.OnTabSelectedListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
                 // do nothing.
             }
@@ -62,7 +67,8 @@ class MainActivity : AppCompatActivity(),
                 val isHomeTab = tab?.position == 0
                 dealWithTabSwitch(isHomeTab, null, null)
             }
-        })
+        }
+        tabs.addOnTabSelectedListener(tabSelectionListener)
 
         if (savedInstanceState == null) {
             createInitialFragments()
@@ -148,17 +154,31 @@ class MainActivity : AppCompatActivity(),
         }
     }
 
-    override fun onBookSelected(bookNumber: Int) {
+    override fun onBookLoadRequest(bookNumber: Int, chapterNumber: Int, verseNumber: Int) {
         val ft = supportFragmentManager.beginTransaction()
-        val bookLoadFrag = BookLoadFragment.newInstance(bookNumber)
+        supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)?.let { ft.remove(it) }
+        val bookLoadFrag = BookLoadFragment.newInstance(bookNumber, chapterNumber, verseNumber)
         ft.add(R.id.container, bookLoadFrag, FRAG_ID_BOOK_LOAD)
         dealWithTabSwitch(true, ft, mapOf(FRAG_ID_BOOK_LOAD to bookLoadFrag))
     }
 
-    override fun onProcessSearchResponse(f: SearchResponseFragment) {
+    override fun onProcessSearchRequest(f: SearchResponseFragment) {
         val ft = supportFragmentManager.beginTransaction()
         ft.add(R.id.container, f, FRAG_ID_SEARCH_RESPONSE)
         dealWithTabSwitch(false, ft, mapOf(FRAG_ID_SEARCH_RESPONSE to f))
+    }
+
+    override fun onSearchResultSelected(searchResult: SearchResult) {
+        val ft = supportFragmentManager.beginTransaction()
+        supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)?.let { ft.remove(it) }
+        val bookLoadFrag = BookLoadFragment.newInstance(searchResult)
+        ft.add(R.id.container, bookLoadFrag, FRAG_ID_BOOK_LOAD)
+        dealWithTabSwitch(true, ft, mapOf(FRAG_ID_BOOK_LOAD to bookLoadFrag))
+
+        // select tab, but don't trigger dealWithTabSwitch again.
+        tabs.removeOnTabSelectedListener(tabSelectionListener)
+        tabs.getTabAt(0)!!.select()
+        tabs.addOnTabSelectedListener(tabSelectionListener)
     }
 
     override fun onBackPressed() {
@@ -200,7 +220,6 @@ class MainActivity : AppCompatActivity(),
             }
             else -> super.onOptionsItemSelected(item)
         }
-
     }
 
     override fun onDestroy() {

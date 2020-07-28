@@ -25,7 +25,7 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     }
 
     interface SearchRequestListener {
-        fun onProcessSearchResponse(f: SearchResponseFragment)
+        fun onProcessSearchRequest(f: SearchResponseFragment)
     }
 
     private var searchRequestListener: SearchRequestListener? = null
@@ -175,6 +175,6 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         val inclEndBookNumber = bookEndRangeSpinner.selectedItemPosition + 1
         val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
             inclEndBookNumber)
-        searchRequestListener?.onProcessSearchResponse(f)
+        searchRequestListener?.onProcessSearchRequest(f)
     }
 }

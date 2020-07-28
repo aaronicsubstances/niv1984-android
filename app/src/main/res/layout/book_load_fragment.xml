@@ -48,7 +48,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chapterViewPanel"
-        app:layout_constraintBottom_toTopOf="@id/bookVersionSelectionPanel"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomPanelBarrier"/>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bottomPanelBarrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="searchResultVersionDisplayPanel,bookVersionSelectionPanel"/>
+
+    <LinearLayout
+        android:id="@+id/searchResultVersionDisplayPanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/activity_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/searchResultVer"
+            android:layout_width="0dp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/switchToPref"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:text="@string/switchToPrefText"/>
+    </LinearLayout>
 
     <RadioGroup
         android:id="@+id/bookVersionSelectionPanel"

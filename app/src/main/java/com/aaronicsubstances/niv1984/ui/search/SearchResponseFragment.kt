@@ -1,5 +1,6 @@
 package com.aaronicsubstances.niv1984.ui.search
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,12 +12,20 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.SearchResultAdapter
 
 class SearchResponseFragment : Fragment() {
+
+    interface SearchResultSelectionListener {
+        fun onSearchResultSelected(searchResult: SearchResult)
+    }
+
     private lateinit var query: String
     private lateinit var bibleVersions: List<String>
     private var startBookNumber = 0
@@ -25,9 +34,26 @@ class SearchResponseFragment : Fragment() {
     private lateinit var searchResultView: RecyclerView
     private lateinit var queryTextView: TextView
     private lateinit var emptyView: TextView
-    private lateinit var backBtn: Button
+    private lateinit var editOrBackBtn: Button
 
     private lateinit var viewModel: SearchViewModel
+    private var searchResultSelectionListener: SearchResultSelectionListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is SearchResultSelectionListener) {
+            searchResultSelectionListener = context
+        }
+        else {
+            throw IllegalArgumentException("${context.javaClass} must " +
+                    "implement ${SearchResultSelectionListener::class}")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        searchResultSelectionListener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +78,7 @@ class SearchResponseFragment : Fragment() {
         emptyView = root.findViewById(R.id.emptyView)
         queryTextView = root.findViewById(R.id.query)
         queryTextView.text = query
-        backBtn = root.findViewById(R.id.backBtn)
+        editOrBackBtn = root.findViewById(R.id.editOrBackBtn)
 
         return root
     }
@@ -60,9 +86,18 @@ class SearchResponseFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        backBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
+        editOrBackBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
 
-        val adapter = SearchResultAdapter()
+        val onItemClickListenerFactory =
+            LargeListViewClickListener.Factory<SearchResult> { viewHolder ->
+                object: LargeListViewClickListener<SearchResult>(viewHolder) {
+                    override fun onClick(v: View?) {
+                        val result = getItem(searchResultView.adapter as ListAdapter<SearchResult, *>)
+                        searchResultSelectionListener?.onSearchResultSelected(result)
+                    }
+                }
+            }
+        val adapter = SearchResultAdapter(onItemClickListenerFactory)
         searchResultView.adapter = adapter
 
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)

@@ -7,12 +7,15 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class SearchResultAdapter: ListAdapter<SearchResult, SearchResultAdapter.ViewHolder>(ITEM_COMPARATOR) {
+class SearchResultAdapter(
+    private val onItemClickListenerFactory: LargeListViewClickListener.Factory<SearchResult>
+) : ListAdapter<SearchResult, SearchResultAdapter.ViewHolder>(ITEM_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
@@ -39,6 +42,10 @@ class SearchResultAdapter: ListAdapter<SearchResult, SearchResultAdapter.ViewHol
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.textView)
         private val descriptionView = itemView.findViewById<TextView>(R.id.description)
+
+        init {
+            itemView.setOnClickListener(onItemClickListenerFactory.create(this))
+        }
 
         fun bind(position: Int) {
             val searchResult = getItem(position)

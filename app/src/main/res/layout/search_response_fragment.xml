@@ -24,12 +24,12 @@
         android:layout_marginStart="@dimen/default_list_item_margin"
         android:layout_marginEnd="@dimen/default_list_item_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/backBtn"
-        app:layout_constraintBottom_toBottomOf="@+id/backBtn"
+        app:layout_constraintEnd_toStartOf="@id/editOrBackBtn"
+        app:layout_constraintBottom_toBottomOf="@+id/editOrBackBtn"
         app:layout_constraintTop_toBottomOf="@+id/title" />
     <Button
-        android:id="@+id/backBtn"
-        android:text="Back"
+        android:id="@+id/editOrBackBtn"
+        android:text="Edit"
         android:layout_marginStart="@dimen/default_list_item_margin"
         android:layout_marginEnd="@dimen/default_list_item_margin"
         android:layout_width="wrap_content"

@@ -19,7 +19,8 @@ class SearchResultDataSource(
     private val context: Context,
     private val coroutineScope: CoroutineScope,
     private val query: String,
-    private val bibleVersions: List<String>,
+    private val selectedBibleVersions: List<String>,
+    private val preferredBibleVersions: List<String>,
     private val startBookNumber: Int,
     private val inclEndBookNumber: Int
 ): AbstractBatchedDataSource<SearchResult>(SearchResult::class.java, NEW_BATCH_SIZE, Int.MAX_VALUE),
@@ -30,10 +31,7 @@ class SearchResultDataSource(
         private val GSON_INSTANCE = Gson()
         const val NEW_BATCH_SIZE = 200
 
-        internal fun transformUserQuery(
-            rawUserQuery: String, treatAsExact: Boolean,
-            splitIntoAlternatives: Boolean
-        ): String {
+        internal fun splitUserQuery(rawUserQuery: String): List<String> {
             // Replace all chars which are neither letters nor digits with space.
             var processed = StringBuilder()
             for (i in rawUserQuery.indices) {
@@ -44,13 +42,32 @@ class SearchResultDataSource(
                     processed.append(" ")
                 }
             }
+            val terms = processed.toString().split(" ").filter { it.isNotEmpty() }
+            return terms
+        }
+
+        internal fun transformUserQuery(
+            terms: List<String>, treatAsExact: Boolean, omittedTermCount: Int
+        ): String {
             if (treatAsExact) {
+                if (terms.isEmpty()) {
+                    return ""
+                }
                 // use phrase query
-                return "\"$processed\""
+                return "\"" + terms.joinToString(" ") + "\""
             } else {
-                val joinSep = if (splitIntoAlternatives) " OR " else " NEAR/3 "
-                return processed.toString().split(" ").filter { it.isNotEmpty() }
-                    .joinToString(joinSep) { "\"$it\"" }
+                val nearQueryLen = terms.size - omittedTermCount
+                if (nearQueryLen < 1) {
+                    return ""
+                }
+                val nearQueries = mutableListOf<String>()
+                for (i in 0..omittedTermCount) {
+                    // quote terms as phrases or else lowercase them to prevent clash with keywords
+                    val nearQuery = terms.subList(i, i + nearQueryLen)
+                        .joinToString(" NEAR/3 ") { "\"$it\"" }
+                    nearQueries.add(nearQuery)
+                }
+                return nearQueries.joinToString(" OR ")
             }
         }
 
@@ -69,6 +86,7 @@ class SearchResultDataSource(
     )
 
     private var lastInitialLoadRequestId: String = ""
+    private var queryTerms = listOf<String>()
     private var transformedQuery: String = ""
     private var stage = 0
 
@@ -79,9 +97,11 @@ class SearchResultDataSource(
         loadCallback: Consumer<UnboundedDataSource.LoadResult<SearchResult>>
     ) {
         // reset state
-        lastInitialLoadRequestId = "$loadRequestId"
-        transformedQuery = transformUserQuery(query, true, false)
         stage = 0
+        lastInitialLoadRequestId = "$loadRequestId"
+        queryTerms = splitUserQuery(query)
+        transformedQuery = transformUserQuery(queryTerms, true, 0)
+
         coroutineScope.launch(Dispatchers.IO) {
             val db = AppDatabase.getDatabase(context)
             val asyncContext =
@@ -120,27 +140,41 @@ class SearchResultDataSource(
     ): List<SearchResult> {
         asyncContext as HelperAsyncContext
 
+        val acrossStageResults = mutableListOf<SearchResult>()
         val exclusions = mutableListOf<Int>()
-        var result = asyncContext.ftsDao.search(
-            transformedQuery, bibleVersions, startBookNumber,
-            inclEndBookNumber, exclusions, CAT_SEARCH, lastInitialLoadRequestId, batchNumber, batchSize)
-        /*android.util.Log.e("SearchResultDataSource", "Results for batch $batchNumber" +
-            " of size ${result.size}/$batchSize at stage $stage: $result")*/
-        exclusions.addAll(result.map { it.docId })
-        while (result.size < batchSize && stage < 2) {
+        let {
+            var result = asyncContext.ftsDao.search(
+                transformedQuery,
+                selectedBibleVersions,
+                preferredBibleVersions[0], preferredBibleVersions[1],
+                startBookNumber,
+                inclEndBookNumber,
+                exclusions,
+                CAT_SEARCH,
+                lastInitialLoadRequestId,
+                batchNumber,
+                batchSize
+            )
+            if (result.size == batchSize || stage == queryTerms.size) {
+                return result
+            }
+            acrossStageResults.addAll(result)
+            exclusions.addAll(result.map { it.docId })
+        }
+        while (acrossStageResults.size < batchSize && stage < queryTerms.size) {
             // time to advance stage.
             stage++
-            transformedQuery = transformUserQuery(query, false, stage > 1)
+            transformedQuery = transformUserQuery(queryTerms, false, stage - 1)
             val rem = asyncContext.ftsDao.search(
-                transformedQuery, bibleVersions, startBookNumber,
-                inclEndBookNumber, exclusions, CAT_SEARCH, lastInitialLoadRequestId, batchNumber,
-                batchSize - result.size)
+                transformedQuery, selectedBibleVersions,
+                preferredBibleVersions[0], preferredBibleVersions[1],
+                startBookNumber, inclEndBookNumber,
+                exclusions, CAT_SEARCH, lastInitialLoadRequestId, batchNumber,
+                batchSize - acrossStageResults.size)
             exclusions.addAll(rem.map { it.docId })
-            result += rem
-            /*android.util.Log.e("SearchResultDataSource", "Results for batch $batchNumber" +
-                    " of size ${result.size}/$batchSize at stage $stage: $result")*/
+            acrossStageResults.addAll(rem)
         }
-        return result
+        return acrossStageResults
     }
 
     override suspend fun daoInsert(asyncContext: Any?, entities: List<BatchedDataSourceEntity>) {

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.aaronicsubstances.niv1984.R
@@ -149,6 +150,11 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     }
 
     private fun startSearch() {
+        // hide virtual keyboard
+        requireContext().let {
+            val imm = it.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(searchBox.windowToken, 0);
+        }
         val q = (searchBox.text?.toString() ?: "").trim()
         if (q.isEmpty()) {
             AppUtils.showShortToast(context, "Please type some text into search box")

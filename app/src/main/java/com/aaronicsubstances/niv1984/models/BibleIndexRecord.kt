@@ -37,15 +37,27 @@ interface BibleIndexRecordDao {
                         snippet(bible_index_record) AS text
                  FROM bible_index_record 
                  WHERE content MATCH :q
-                    AND bible_version IN (:bibleVersions)
+                    AND bible_version IN (:selectedBibleVersions)
                     AND book_number BETWEEN :minBookNumber AND :maxBookNumber
                     AND rowid NOT IN (:extraExclusions)
                     AND rowid NOT IN (SELECT itemKey FROM BatchedDataSourceEntityImpl b 
                         WHERE b.category = :category AND b.batchVersion = :batchVersion
                         AND b.batchNumber < :batchNumber)
-                 ORDER BY CAST(book_number AS INT), CAST(chapter_number AS INT), rowid
-                 LIMIT :limit""")
-    suspend fun search(q: String, bibleVersions: List<String>,
+                 ORDER BY CAST(book_number AS INT), CAST(chapter_number AS INT), 
+                    CASE
+                        WHEN verse_number < 1 THEN 2147483647 
+                        ELSE CAST(verse_number AS INT)
+                    END, 
+                    CASE bible_version
+                        WHEN :firstPrefVersion THEN 0 
+                        WHEN :secondPrefVersion THEN 1 
+                        ELSE 2
+                    END,
+                    rowid
+                 LIMIT :limit"""
+    )
+    suspend fun search(q: String, selectedBibleVersions: List<String>,
+                       firstPrefVersion: String, secondPrefVersion: String,
                        minBookNumber: Int, maxBookNumber: Int, extraExclusions: List<Int>,
                        category: String, batchVersion: String, batchNumber: Int, limit: Int): List<SearchResult>
 }

@@ -9,14 +9,6 @@
         app:title="@string/zoom_title"
         app:useSimpleSummaryProvider="true" />
 
-    <ListPreference
-        app:key="night_mode"
-        app:defaultValue="2"
-        app:entries="@array/night_mode_display_entries"
-        app:entryValues="@array/night_mode_display_values"
-        app:title="@string/night_mode_title"
-        app:useSimpleSummaryProvider="true" />
-
     <com.aaronicsubstances.niv1984.ui.settings.DisplayBookPreference
         android:key="bible_versions"
         android:title="Preferred Bible Versions"

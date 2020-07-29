@@ -2,6 +2,7 @@ package com.aaronicsubstances.niv1984.data
 
 import android.content.Context
 import android.text.TextUtils
+import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
@@ -20,6 +21,7 @@ import com.aaronicsubstances.niv1984.utils.BookParser.NoteRef
 import com.aaronicsubstances.niv1984.utils.BookParser.Verse
 import com.aaronicsubstances.niv1984.utils.BookParser.WordsOfJesus
 import com.aaronicsubstances.niv1984.utils.AppConstants
+import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.AsanteTwiBibleVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -32,7 +34,7 @@ class BookLoader(private val context: Context,
                  private val isNightMode: Boolean) {
 
     // use flame red by default, apricot colour in night mode
-    private val wjColor: String = if (isNightMode) "#fbceb1" else "#cf352e"
+    private val wjColor = AppUtils.colorResToString(R.color.wjColor, context)
 
     companion object {
         private val DUMMY_CONTENT = BookDisplayItemContent(-1, "")

@@ -262,12 +262,6 @@ class MainActivity : AppCompatActivity(),
                     it.onPrefZoomLevelChanged(zoomLevel)
                 }
             }
-            SharedPrefManager.PREF_KEY_NIGHT_MODE -> {
-                val isNightMode = sharedPrefMgr.getIsNightMode()
-                interestedFrags.forEach {
-                    it.onPrefNightModeChanged(isNightMode)
-                }
-            }
             SharedPrefManager.PREF_KEY_SCREEN_WAKE -> {
                 val isScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
                 interestedFrags.forEach {

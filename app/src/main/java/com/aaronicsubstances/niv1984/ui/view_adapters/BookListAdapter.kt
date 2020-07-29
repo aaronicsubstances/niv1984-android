@@ -54,8 +54,6 @@ class BookListAdapterViewHolder(item: View,
     }
 
     init {
-        //bookIconView.letterColor = Color.parseColor("white")
-        //bookIconView.letterColor = Color.parseColor("black")
         itemView.setOnClickListener(itemClickListenerFactory.create(this))
     }
 
@@ -64,6 +62,9 @@ class BookListAdapterViewHolder(item: View,
 
         val description = bibleVersion.bookNames[position]
         bookTitleView.text = description
+
+        bookIconView.letterColor = ContextCompat.getColor(itemView.context,
+            R.color.letterTextColor)
 
         // use first letter if available.
         var colorIndex = 0

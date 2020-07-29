@@ -55,10 +55,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="searchResultVersionDisplayPanel,bookVersionSelectionPanel"/>
+        app:constraint_referenced_ids="pinnedVersionDisplayPanel,bookVersionSelectionPanel"/>
 
     <LinearLayout
-        android:id="@+id/searchResultVersionDisplayPanel"
+        android:id="@+id/pinnedVersionDisplayPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -68,8 +68,15 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/searchResultVer"
+            android:text="Pinned versions:"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/pinnedVersionDescription"
             android:layout_width="0dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
             android:textStyle="bold"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -78,8 +85,6 @@
             android:id="@+id/switchToPref"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
             android:text="@string/switchToPrefText"/>
     </LinearLayout>
 

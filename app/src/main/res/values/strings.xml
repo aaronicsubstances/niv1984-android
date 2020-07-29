@@ -18,12 +18,9 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preferences -->
-    <string name="signature_title">Your signature</string>
     <string name="zoom_title">Bible Reading Text Zoom Level</string>
     <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
     <string name="multiple_version_display_default_value">1</string>
-    <string name="night_mode_book_display_default_value">0</string>
-    <string name="night_mode_title">Bible Reading Night Mode Option</string>
     <string name="action_move_up">Move Up</string>
     <string name="action_move_down">Move Down</string>
     <string name="display_book_pref_instruction">Select a book version and use up/down buttons to push

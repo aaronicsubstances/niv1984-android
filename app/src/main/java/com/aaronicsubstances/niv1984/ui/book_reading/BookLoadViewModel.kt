@@ -23,8 +23,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     private var lastJob: Job? = null
 
-    private var systemBookmarks = ScrollPosPref(0, 0, 0, 0,
-            listOf(), BookDisplayItemViewType.CHAPTER_FRAGMENT)
+    private var systemBookmark = ScrollPosPref(0, 0, 0, 0,
+            listOf(), BookDisplayItemViewType.CHAPTER_FRAGMENT, false)
 
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
@@ -38,40 +38,50 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         saveSystemBookmarks()
     }
 
-    fun initCurrLoc(bookNumber: Int, chapterNumber: Int, verseNumber: Int) {
-        if (systemBookmarks.bookNumber > 0) {
+    fun initCurrLoc(bookNumber: Int, chapterNumber: Int, verseNumber: Int,
+                    isSearchResultTriggered: Boolean) {
+        if (systemBookmark.bookNumber > 0) {
             return
         }
-        systemBookmarks.apply {
+        systemBookmark.apply {
             this.bookNumber = bookNumber
             this.chapterNumber = chapterNumber
             this.verseNumber = verseNumber
             this.equivalentViewItemType = BookDisplayItemViewType.VERSE
             if (verseNumber < 1) {
-                this.equivalentViewItemType = BookDisplayItemViewType.DIVIDER
+                this.equivalentViewItemType = if (isSearchResultTriggered) {
+                    BookDisplayItemViewType.DIVIDER
+                } else { BookDisplayItemViewType.TITLE }
             }
         }
     }
 
-    val currLoc: Pair<Int, Int>
-        get() = Pair(systemBookmarks.chapterNumber, systemBookmarks.verseNumber)
+    fun initCurrLoc(bookmark: ScrollPosPref) {
+        systemBookmark = bookmark
+    }
+
+    val currLoc: ScrollPosPref
+        get() = ScrollPosPref(systemBookmark.bookNumber, systemBookmark.chapterNumber,
+            systemBookmark.verseNumber, systemBookmark.particularViewItemPos,
+            systemBookmark.particularBibleVersions, systemBookmark.equivalentViewItemType,
+            systemBookmark.displayMultipleSideBySide)
 
     private fun loadSystemBookmarks(bookNumber: Int) {
-        if (systemBookmarks.bookNumber > 0) {
+        if (systemBookmark.bookNumber > 0) {
             return
         }
-        systemBookmarks = sharedPrefManager.loadPrefItem(
+        systemBookmark = sharedPrefManager.loadPrefItem(
             SharedPrefManager.PREF_KEY_SYSTEM_BOOKMARKS +
                     bookNumber, ScrollPosPref::class.java) ?: ScrollPosPref(
                 bookNumber, 1, 0, 0,
-                listOf(), BookDisplayItemViewType.TITLE)
+                listOf(), BookDisplayItemViewType.TITLE, false)
     }
 
     private fun saveSystemBookmarks() {
-        if (systemBookmarks.bookNumber > 0) {
+        if (systemBookmark.bookNumber > 0) {
             sharedPrefManager.savePrefItem(
-                SharedPrefManager.PREF_KEY_SYSTEM_BOOKMARKS + systemBookmarks.bookNumber,
-                systemBookmarks
+                SharedPrefManager.PREF_KEY_SYSTEM_BOOKMARKS + systemBookmark.bookNumber,
+                systemBookmark
             )
         }
     }
@@ -86,9 +96,9 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             if (temp.bibleVersions == bibleVersions &&
                     temp.displayMultipleSideBySide == displayMultipleSideBySide &&
                     temp.isNightMode == isNightMode) {
-                //live data will republish lastLoadResult automatically when it is subscribed to.
+                // reuse lastLoadResult.
                 _loadLiveData.value = Pair(temp, BookLoadAftermath(-1,
-                    systemBookmarks.chapterNumber))
+                    systemBookmark.chapterNumber))
                 return
             }
         }
@@ -105,39 +115,48 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             // update system bookmarks in response to version switch, except
             // if loaded system bookmarks has same version as current request.
             // (which can only happen on the very first request).
-            if (bibleVersions != systemBookmarks.particularBibleVersions ||
-                    displayMultipleSideBySide != lastLoadResult?.displayMultipleSideBySide) {
-                updateSystemBookmarksInternally(model)
+            var isParticularPosValid = true
+            if (bibleVersions != systemBookmark.particularBibleVersions) {
+                isParticularPosValid = false
+            }
+            else if (bibleVersions.size > 1 &&
+                    displayMultipleSideBySide != systemBookmark.displayMultipleSideBySide) {
+                isParticularPosValid = false
+            }
+            if (!isParticularPosValid) {
+                updateSystemBookmarkInternally(model)
             }
 
-            val bookLoadAftermath = BookLoadAftermath(systemBookmarks.particularViewItemPos,
-                systemBookmarks.chapterNumber)
+            val bookLoadAftermath = BookLoadAftermath(systemBookmark.particularViewItemPos,
+                systemBookmark.chapterNumber)
 
             lastLoadResult = model
             _loadLiveData.value = Pair(model, bookLoadAftermath)
         }
     }
 
-    private fun updateSystemBookmarksInternally(model: BookDisplay) {
-        systemBookmarks.particularBibleVersions = model.bibleVersions
-        var pos = model.chapterIndices[systemBookmarks.chapterNumber - 1]
+    private fun updateSystemBookmarkInternally(model: BookDisplay) {
+        systemBookmark.particularBibleVersions = model.bibleVersions
+        systemBookmark.displayMultipleSideBySide = model.displayMultipleSideBySide
+        var pos = model.chapterIndices[systemBookmark.chapterNumber - 1]
+        systemBookmark.particularViewItemPos = pos // set by default just in case none is found.
         while (pos < model.displayItems.size) {
             val displayItem = model.displayItems[pos]
-            if (displayItem.viewType == systemBookmarks.equivalentViewItemType) {
+            if (displayItem.viewType == systemBookmark.equivalentViewItemType) {
                 if (displayItem.viewType != BookDisplayItemViewType.VERSE ||
-                        displayItem.verseNumber == systemBookmarks.verseNumber) {
+                        displayItem.verseNumber == systemBookmark.verseNumber) {
+                    systemBookmark.particularViewItemPos = pos
                     break
                 }
             }
             pos++
         }
-        systemBookmarks.particularViewItemPos = pos
     }
 
     fun updateSystemBookmarks(chapterNumber: Int, verseNumber: Int,
                               equivalentViewType: BookDisplayItemViewType,
                               particularPos: Int) {
-        systemBookmarks.apply {
+        systemBookmark.apply {
             this.equivalentViewItemType = equivalentViewType
             this.particularViewItemPos = particularPos
             this.chapterNumber = chapterNumber

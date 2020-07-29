@@ -5,4 +5,5 @@ data class ScrollPosPref(var bookNumber: Int,
                          var verseNumber: Int,
                          var particularViewItemPos: Int,
                          var particularBibleVersions: List<String>,
-                         var equivalentViewItemType: BookDisplayItemViewType)
+                         var equivalentViewItemType: BookDisplayItemViewType,
+                         var displayMultipleSideBySide: Boolean)

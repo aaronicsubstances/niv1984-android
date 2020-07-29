@@ -8,24 +8,6 @@ import org.junit.Assert.*
 class SearchResultDataSourceUnitTest {
 
     @Test
-    fun testSerialization() {
-        val expected = SearchResult().apply {
-            this.bibleVersion = "bv"
-            this.bookNumber = 1
-            this.chapterNumber = 2
-            this.verseNumber = 3
-            this.docId = 4
-            this.text = "tex"
-            this.rank = 6
-            this.lastUpdateTimestamp = 7L
-        }
-        val serialized = SearchResultDataSource.serializeItem(expected)
-        //println("Serialized: $serialized")
-        val actual = SearchResultDataSource.deserializeItem(serialized)
-        assertEquals(expected, actual)
-    }
-
-    @Test
     fun testSplitUserQuery() {
         var expected = listOf("god")
         var actual = SearchResultDataSource.splitUserQuery("god")

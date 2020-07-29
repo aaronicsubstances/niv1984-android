@@ -26,17 +26,4 @@
         <item>1</item>
         <item>2</item>
     </string-array>
-
-    <!-- -->
-    <string-array name="night_mode_display_entries">
-        <item>Default (follows system night mode setting)</item>
-        <item>Off</item>
-        <item>On</item>
-    </string-array>
-
-    <string-array name="night_mode_display_values">
-        <item>2</item>
-        <item>0</item>
-        <item>1</item>
-    </string-array>
 </resources>

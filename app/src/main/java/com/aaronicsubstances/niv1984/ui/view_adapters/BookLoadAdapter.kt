@@ -1,6 +1,5 @@
 package com.aaronicsubstances.niv1984.ui.view_adapters
 
-import android.graphics.Color
 import android.graphics.Typeface
 import android.util.TypedValue
 import android.view.LayoutInflater
@@ -8,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
@@ -108,10 +108,14 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     }
 
     fun initDefault(item: BookDisplayItem, textView: TextView) {
-        val textColor = if (isNightMode) "white" else "black"
-        textView.setTextColor(Color.parseColor(textColor))
+        textView.setTextColor(ContextCompat.getColor(textView.context,
+            R.color.bibleReadingTextColor))
 
-        val textSize = (if (item.viewType == BookDisplayItemViewType.TITLE) 21f else 18f) * zoomLevel / 100
+        var textSize = textView.resources.getInteger(R.integer.bibleReadingBaseTextSize).toFloat()
+        if (item.viewType == BookDisplayItemViewType.TITLE) {
+            textSize *= 21f / 18f
+        }
+        textSize *= zoomLevel / 100f
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
         textView.typeface = null

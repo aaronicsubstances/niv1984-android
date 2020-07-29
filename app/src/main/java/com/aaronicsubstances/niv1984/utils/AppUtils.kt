@@ -1,14 +1,28 @@
 package com.aaronicsubstances.niv1984.utils
 
 import android.content.Context
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.text.Html
 import android.text.Spanned
 import android.util.TypedValue
 import android.widget.Toast
+import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
+import androidx.core.content.ContextCompat
+import com.google.gson.GsonBuilder
 
 object AppUtils {
+    private val JSON_SERIALIZER = GsonBuilder().create()
+
+    fun serializeAsJson(obj: Any): String {
+        return JSON_SERIALIZER.toJson(obj)
+    }
+
+    fun <T> deserializeFromJson(s: String, cls: Class<T>): T {
+        return JSON_SERIALIZER.fromJson(s, cls)
+    }
+
     fun parseHtml(txt: String): Spanned {
         return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
             Html.fromHtml(txt, Html.FROM_HTML_MODE_COMPACT, null, null)
@@ -33,6 +47,20 @@ object AppUtils {
     fun dimenResToPx(@DimenRes dimenRes: Int, context: Context): Int {
         return context.resources.getDimensionPixelOffset(dimenRes)
     }
+
+    fun colorResToString(@ColorRes colorRes: Int, context: Context): String {
+        val intColor = ContextCompat.getColor(context, colorRes)
+        if (intColor ushr 24 == 0xFF) {
+            return String.format("#%06X", intColor and 0xFFFFFF)
+        }
+        else {
+            return String.format("#%08X", intColor.toLong() and 0xFFFFFFFF)
+        }
+    }
+
+    fun isNightMode(context: Context): Boolean
+            = (context.resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK) == Configuration.UI_MODE_NIGHT_YES
 
     fun showShortToast(context: Context?, s: String) {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show()

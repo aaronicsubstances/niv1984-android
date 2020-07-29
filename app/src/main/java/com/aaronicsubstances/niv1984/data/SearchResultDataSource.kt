@@ -10,7 +10,7 @@ import com.aaronicsubstances.niv1984.models.BatchedDataSourceEntityDao
 import com.aaronicsubstances.niv1984.models.BatchedDataSourceEntityImpl
 import com.aaronicsubstances.niv1984.models.BibleIndexRecordDao
 import com.aaronicsubstances.niv1984.models.SearchResult
-import com.google.gson.Gson
+import com.aaronicsubstances.niv1984.utils.AppUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +28,6 @@ class SearchResultDataSource(
 
     companion object {
         private const val CAT_SEARCH = "search"
-        private val GSON_INSTANCE = Gson()
         const val NEW_BATCH_SIZE = 200
 
         internal fun splitUserQuery(rawUserQuery: String): List<String> {
@@ -69,14 +68,6 @@ class SearchResultDataSource(
                 }
                 return nearQueries.joinToString(" OR ")
             }
-        }
-
-        internal fun serializeItem(obj: SearchResult): String {
-            return GSON_INSTANCE.toJson(obj)
-        }
-
-        internal fun deserializeItem(value: String): SearchResult {
-            return GSON_INSTANCE.fromJson(value, SearchResult::class.java)
         }
     }
 
@@ -261,10 +252,10 @@ class SearchResultDataSource(
             batchNumber, itemKey.toString(), serializedItem)
 
     override fun serializeLargeListItem(obj: SearchResult): String {
-        return serializeItem(obj)
+        return AppUtils.serializeAsJson(obj)
     }
 
     override fun deserializeLargeListItem(value: String): SearchResult {
-        return deserializeItem(value)
+        return AppUtils.deserializeFromJson(value, SearchResult::class.java)
     }
 }

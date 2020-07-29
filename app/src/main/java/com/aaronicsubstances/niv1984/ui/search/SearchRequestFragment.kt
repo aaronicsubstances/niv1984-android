@@ -140,9 +140,6 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     override fun onPrefZoomLevelChanged(zoomLevel: Int) {
     }
 
-    override fun onPrefNightModeChanged(isNightMode: Boolean) {
-    }
-
     override fun onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide: Boolean) {
     }
 

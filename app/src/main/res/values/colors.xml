@@ -4,9 +4,13 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="hrColor">#ff000000</color>
+    <color name="testColor">#12345678</color>
 
-    <color name="letter_00">#000000</color>
+    <color name="dividerColor">#aaaaaa</color>
+    <color name="wjColor">#cf352e</color>
+    <color name="letterTextColor">@android:color/white</color>
+    <color name="letter_00">@android:color/black</color>
+    <color name="bibleReadingTextColor">@android:color/black</color>
 
     <!--<color name="letter_01">#d61e25</color>-->
     <color name="letter_01">#d8648b</color>

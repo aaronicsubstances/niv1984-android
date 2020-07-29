@@ -107,26 +107,33 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         }
     }
 
-    fun initDefault(textView: TextView, isForTitle: Boolean) {
+    fun initDefault(item: BookDisplayItem, textView: TextView) {
         val textColor = if (isNightMode) "white" else "black"
         textView.setTextColor(Color.parseColor(textColor))
 
-        val textSize = (if (isForTitle) 21f else 18f) * zoomLevel / 100
+        val textSize = (if (item.viewType == BookDisplayItemViewType.TITLE) 21f else 18f) * zoomLevel / 100
         textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+
+        textView.typeface = null
+        if (item.viewType == BookDisplayItemViewType.HEADER) {
+            textView.setTypeface(textView.typeface, Typeface.BOLD)
+        }
     }
 
-    fun bindDefault(item: BookDisplayItemContent, textView: TextView) {
+    fun bindDefault(item: BookDisplayItem, itemContent: BookDisplayItemContent, textView: TextView) {
+        initDefault(item, textView)
+
         // cache html parse result
-        if (item.html == null) {
-            item.html = AppUtils.parseHtml(item.text)
-            item.text = "" // reduce memory load
+        if (itemContent.html == null) {
+            itemContent.html = AppUtils.parseHtml(itemContent.text)
+            itemContent.text = "" // reduce memory load
         }
-        textView.text = item.html
+        textView.text = itemContent.html
 
         textView.textAlignment = TextView.TEXT_ALIGNMENT_INHERIT
         textView.setPadding(0)
-        if (item.blockQuoteKind != null) {
-            when (item.blockQuoteKind) {
+        if (itemContent.blockQuoteKind != null) {
+            when (itemContent.blockQuoteKind) {
                 BookParser.BlockQuoteKind.CENTER -> {
                     textView.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
                 }
@@ -154,18 +161,8 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class DefaultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
 
-        init {
-            initDefault(textView, false)
-        }
-
         fun bind(item: BookDisplayItem) {
-            if (item.viewType == BookDisplayItemViewType.HEADER) {
-                textView.setTypeface(textView.typeface, Typeface.BOLD)
-            }
-            else {
-                textView.typeface = null
-            }
-            bindDefault(item.fullContent, textView)
+            bindDefault(item, item.fullContent, textView)
         }
     }
 
@@ -175,11 +172,8 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         private val bottomRule = itemView.findViewById<View>(R.id.bottomRule)
         private val textView = topRule.findViewById<TextView>(R.id.text)
 
-        init {
-            initDefault(textView, false)
-        }
-
         fun bind(item: BookDisplayItem) {
+            initDefault(item, textView)
             if (!item.fullContent.isFirstDivider) {
                 bottomRule.visibility = View.VISIBLE
                 topRule.visibility = View.GONE
@@ -203,24 +197,16 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class TitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
 
-        init {
-            initDefault(textView, true)
-        }
-
         fun bind(item: BookDisplayItem) {
-            bindDefault(item.fullContent, textView)
+            bindDefault(item, item.fullContent, textView)
         }
     }
 
     inner class VerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
-        init {
-            initDefault(textView, false)
-        }
-
         fun bind(item: BookDisplayItem) {
-            bindDefault(item.fullContent, textView)
+            bindDefault(item, item.fullContent, textView)
         }
     }
 
@@ -228,14 +214,9 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         private val textView = itemView.findViewById<TextView>(R.id.text)
         private val textView2 = itemView.findViewById<TextView>(R.id.text2)
 
-        init {
-            initDefault(textView, true)
-            initDefault(textView2, true)
-        }
-
         fun bind(item: BookDisplayItem) {
-            bindDefault(item.firstPartialContent!![0], textView)
-            bindDefault(item.secondPartialContent!![0], textView2)
+            bindDefault(item, item.firstPartialContent!![0], textView)
+            bindDefault(item, item.secondPartialContent!![0], textView2)
         }
     }
 
@@ -243,21 +224,13 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         private val firstSideVerse = itemView.findViewById<ViewGroup>(R.id.firstSideVerse)
         private val secondSideVerse = itemView.findViewById<ViewGroup>(R.id.secondSideVerse)
 
-        init {
-            (0 until firstSideVerse.childCount).forEach {
-                initDefault(firstSideVerse.getChildAt(it) as TextView, false)
-            }
-            (0 until secondSideVerse.childCount).forEach {
-                initDefault(secondSideVerse.getChildAt(it) as TextView, false)
-            }
-        }
-
         fun bind(item: BookDisplayItem) {
-            bindSpecific(item.firstPartialContent!!, firstSideVerse)
-            bindSpecific(item.secondPartialContent!!, secondSideVerse)
+            bindSpecific(item, item.firstPartialContent!!, firstSideVerse)
+            bindSpecific(item, item.secondPartialContent!!, secondSideVerse)
         }
 
-        private fun bindSpecific(items: List<BookDisplayItemContent>, textViewGroup: ViewGroup) {
+        private fun bindSpecific(item: BookDisplayItem, items: List<BookDisplayItemContent>,
+                                 textViewGroup: ViewGroup) {
             // ensure enough text views.
             while (textViewGroup.childCount < items.size) {
                 val tv = TextView(textViewGroup.context)
@@ -268,7 +241,6 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
                     LinearLayout.LayoutParams.WRAP_CONTENT)
                 tv.layoutParams = lp
 
-                initDefault(tv, false)
                 textViewGroup.addView(tv)
             }
 
@@ -277,10 +249,10 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
                 textViewGroup.getChildAt(it).visibility = View.GONE
             }
 
-            items.forEachIndexed { i, item ->
+            items.forEachIndexed { i, itemContent ->
                 val textView = textViewGroup.getChildAt(i) as TextView
                 textView.visibility = View.VISIBLE
-                bindDefault(item, textView)
+                bindDefault(item, itemContent, textView)
             }
         }
     }

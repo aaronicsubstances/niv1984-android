@@ -31,7 +31,8 @@ class BookLoader(private val context: Context,
                  private val displayMultipleSideBySide: Boolean,
                  private val isNightMode: Boolean) {
 
-    private val wjColor: String = if (isNightMode) "green" else "red"
+    // use flame red by default, apricot colour in night mode
+    private val wjColor: String = if (isNightMode) "#fbceb1" else "#cf352e"
 
     companion object {
         private val DUMMY_CONTENT = BookDisplayItemContent(-1, "")

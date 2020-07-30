@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,91 +7,102 @@
     android:orientation="vertical"
     tools:context="com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_margin"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/label_query"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/label_query"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+        android:layout_margin="@dimen/activity_margin">
 
         <EditText
             android:id="@+id/searchBox"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_margin"/>
-
-        <TextView
+            android:layout_marginEnd="@dimen/formItemSepMargin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/advSearch"
+            app:layout_constraintBottom_toBottomOf="@+id/advSearch"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/advSearch"
+            android:text="@string/label_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bible versions to include in search" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/labelBibleVersionIncludes"
+            android:text="Bible versions to include in search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/formItemLargeSepMargin"
+            app:layout_constraintTop_toBottomOf="@id/advSearch"
+            app:layout_constraintStart_toStartOf="parent"/>
         <LinearLayout
             android:id="@+id/bibleVersionCheckBoxes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/formItemSepMargin"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/activity_margin">
+            app:layout_constraintTop_toBottomOf="@id/labelBibleVersionIncludes"
+            app:layout_constraintStart_toStartOf="parent">
         </LinearLayout>
 
         <TextView
+            android:id="@+id/labelBookIncludes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Books to include in search" />
+            android:text="Books to include in search"
+            android:layout_marginTop="@dimen/formItemLargeSepMargin"
+            app:layout_constraintTop_toBottomOf="@id/bibleVersionCheckBoxes"
+            app:layout_constraintStart_toStartOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/advancedOptionPanel"
-            android:orientation="vertical"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="From: " />
-
-                <Spinner
-                    android:id="@+id/startBibleBook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/multiple_version_display_entries" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="To: " />
-
-                <Spinner
-                    android:id="@+id/endBibleBook"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:entries="@array/multiple_version_display_entries" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/advSearch"
+        <TextView
+            android:id="@+id/labelBookStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_search" />
-    </LinearLayout>
+            android:layout_marginTop="@dimen/formItemSepMargin"
+            android:layout_marginStart="@dimen/formItemIndentMargin"
+            android:layout_marginEnd="@dimen/formItemSepMargin"
+            android:text="From: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelBookIncludes"/>
+
+        <TextView
+            android:id="@+id/labelBookEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/searchBookSepMargin"
+            android:layout_marginStart="@dimen/formItemIndentMargin"
+            android:layout_marginEnd="@dimen/formItemSepMargin"
+            android:text="To: "
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/labelBookStart" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/rangeLabelsBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="right"
+            app:constraint_referenced_ids="labelBookStart,labelBookEnd"/>
+
+        <Spinner
+            android:id="@+id/startBibleBook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/multiple_version_display_entries"
+            app:layout_constraintStart_toEndOf="@id/rangeLabelsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/labelBookStart"/>
+
+        <Spinner
+            android:id="@+id/endBibleBook"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/multiple_version_display_entries"
+            app:layout_constraintStart_toEndOf="@id/rangeLabelsBarrier"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/labelBookEnd" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </ScrollView>

@@ -63,3 +63,6 @@ class SearchResult: ExtendedLargeListItem {
         return result
     }
 }
+
+data class SearchResultAdapterItem(val viewType: Int,
+                                   val item: SearchResult)

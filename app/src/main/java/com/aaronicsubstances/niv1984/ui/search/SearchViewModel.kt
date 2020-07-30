@@ -13,6 +13,8 @@ import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SearchResultDataSource
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.SearchResult
+import com.aaronicsubstances.niv1984.models.SearchResultAdapterItem
+import com.aaronicsubstances.niv1984.utils.AppUtils
 import javax.inject.Inject
 
 class SearchViewModel(application: Application): AndroidViewModel(application) {
@@ -45,8 +47,8 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
         paginator.dispose()
     }
 
-    private val _searchResultLiveData = MutableLiveData<List<SearchResult>>()
-    val searchResultLiveData: LiveData<List<SearchResult>>
+    private val _searchResultLiveData = MutableLiveData<List<SearchResultAdapterItem>>()
+    val searchResultLiveData: LiveData<List<SearchResultAdapterItem>>
         get() = _searchResultLiveData
 
     fun search(query: String, bibleVersions: List<String>,
@@ -68,7 +70,33 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
             dataValid: Boolean,
             isScrollInForwardDirection: Boolean
         ) {
-            _searchResultLiveData.value = data
+            val adapterItems = mutableListOf<SearchResultAdapterItem>()
+            adapterItems.addAll(paginator.currentList.map{
+                SearchResultAdapterItem(0, it)
+            })
+            // add loading indicator at end if more data can be loaded, to
+            // differentiate between end of overall loading and waiting for data to be loaded.
+            if (isScrollInForwardDirection) {
+                if (!paginator.isLastPageRequested) {
+                    adapterItems.add(
+                        SearchResultAdapterItem(
+                            AppUtils.VIEW_TYPE_LOADING,
+                            SearchResult()
+                        )
+                    )
+                }
+            }
+            else {
+                if (!paginator.isFirstPageRequested) {
+                    adapterItems.add(
+                        0, SearchResultAdapterItem(
+                            AppUtils.VIEW_TYPE_LOADING,
+                            SearchResult()
+                        )
+                    )
+                }
+            }
+            _searchResultLiveData.value = adapterItems
         }
     }
 }

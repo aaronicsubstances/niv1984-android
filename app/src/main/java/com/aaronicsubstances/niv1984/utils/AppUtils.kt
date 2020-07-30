@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import com.google.gson.GsonBuilder
 
 object AppUtils {
+    const val VIEW_TYPE_LOADING = -1
+
     private val JSON_SERIALIZER = GsonBuilder().create()
 
     fun serializeAsJson(obj: Any): String {

@@ -12,11 +12,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.SearchResult
+import com.aaronicsubstances.niv1984.models.SearchResultAdapterItem
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.SearchResultAdapter
 
@@ -33,6 +33,7 @@ class SearchResponseFragment : Fragment() {
 
     private lateinit var searchResultView: RecyclerView
     private lateinit var queryTextView: TextView
+    private lateinit var loadingView: View
     private lateinit var emptyView: TextView
     private lateinit var editOrBackBtn: Button
 
@@ -75,6 +76,7 @@ class SearchResponseFragment : Fragment() {
         searchResultView.layoutManager = listLayout
         searchResultView.addItemDecoration(DividerItemDecoration(context, listLayout.orientation))
 
+        loadingView = root.findViewById(R.id.loadingView)
         emptyView = root.findViewById(R.id.emptyView)
         queryTextView = root.findViewById(R.id.query)
         queryTextView.text = query
@@ -88,16 +90,17 @@ class SearchResponseFragment : Fragment() {
 
         editOrBackBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
 
+        val adapter = SearchResultAdapter()
         val onItemClickListenerFactory =
-            LargeListViewClickListener.Factory<SearchResult> { viewHolder ->
-                object: LargeListViewClickListener<SearchResult>(viewHolder) {
+            LargeListViewClickListener.Factory<SearchResultAdapterItem> { viewHolder ->
+                object: LargeListViewClickListener<SearchResultAdapterItem>(viewHolder) {
                     override fun onClick(v: View?) {
-                        val result = getItem(searchResultView.adapter as ListAdapter<SearchResult, *>)
-                        searchResultSelectionListener?.onSearchResultSelected(result)
+                        val result = getItem(adapter)
+                        searchResultSelectionListener?.onSearchResultSelected(result.item)
                     }
                 }
             }
-        val adapter = SearchResultAdapter(onItemClickListenerFactory)
+        adapter.onItemClickListenerFactory = onItemClickListenerFactory
         searchResultView.adapter = adapter
 
         viewModel = ViewModelProvider(this).get(SearchViewModel::class.java)
@@ -105,11 +108,12 @@ class SearchResponseFragment : Fragment() {
         viewModel.searchResultLiveData.observe(viewLifecycleOwner,
             Observer { data ->
                 adapter.submitList(data)
+                loadingView.visibility = View.GONE
                 if (data.isEmpty()) {
-                    emptyView.text = "No results found"
+                    emptyView.visibility = View.VISIBLE
                 }
                 else {
-                    emptyView.text = ""
+                    searchResultView.visibility = View.VISIBLE
                 }
             })
 

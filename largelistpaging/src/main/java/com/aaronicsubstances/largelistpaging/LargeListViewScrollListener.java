@@ -32,6 +32,10 @@ public abstract class LargeListViewScrollListener extends RecyclerView.OnScrollL
                 newState == RecyclerView.SCROLL_STATE_IDLE) {
             onScrollDebounced(recyclerView, dx, dy);
         }
+        else if (state == RecyclerView.SCROLL_STATE_IDLE &&
+                newState != RecyclerView.SCROLL_STATE_IDLE) {
+            onScrollDebounced(recyclerView, dx, dy);
+        }
         this.state = newState;
     }
 

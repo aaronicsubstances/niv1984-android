@@ -9,46 +9,63 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
 import com.aaronicsubstances.niv1984.R
-import com.aaronicsubstances.niv1984.models.SearchResult
+import com.aaronicsubstances.niv1984.models.SearchResultAdapterItem
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class SearchResultAdapter(
-    private val onItemClickListenerFactory: LargeListViewClickListener.Factory<SearchResult>
-) : ListAdapter<SearchResult, SearchResultAdapter.ViewHolder>(ITEM_COMPARATOR) {
+class SearchResultAdapter: ListAdapter<SearchResultAdapterItem, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(
-            R.layout.search_result_item, parent, false)
-        return ViewHolder(itemView)
+    var onItemClickListenerFactory: LargeListViewClickListener.Factory<SearchResultAdapterItem>? = null
+
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position).viewType
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(position)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        if (viewType == AppUtils.VIEW_TYPE_LOADING) {
+            val itemView = LayoutInflater.from(parent.context).inflate(
+                R.layout.loading_spinner_item, parent, false
+            )
+            return LoadingViewHolder(itemView)
+        }
+        else {
+            val itemView = LayoutInflater.from(parent.context).inflate(
+                R.layout.search_result_item, parent, false
+            )
+            return ViewHolder(itemView)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        if (holder is ViewHolder) {
+            holder.bind(position)
+        }
     }
 
     companion object {
-        private val ITEM_COMPARATOR = object: DiffUtil.ItemCallback<SearchResult>() {
-            override fun areItemsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean {
-                return oldItem.docId == newItem.docId
+        private val ITEM_COMPARATOR = object: DiffUtil.ItemCallback<SearchResultAdapterItem>() {
+            override fun areItemsTheSame(oldItem: SearchResultAdapterItem, newItem: SearchResultAdapterItem): Boolean {
+                return oldItem.item.docId == newItem.item.docId
             }
 
-            override fun areContentsTheSame(oldItem: SearchResult, newItem: SearchResult): Boolean {
+            override fun areContentsTheSame(oldItem: SearchResultAdapterItem, newItem: SearchResultAdapterItem): Boolean {
                 return true
             }
         }
     }
+
+    class LoadingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.textView)
         private val descriptionView = itemView.findViewById<TextView>(R.id.description)
 
         init {
-            itemView.setOnClickListener(onItemClickListenerFactory.create(this))
+            onItemClickListenerFactory?.let {itemView.setOnClickListener(it.create(this)) }
         }
 
         fun bind(position: Int) {
-            val searchResult = getItem(position)
+            val searchResult = getItem(position).item
 
             val bibleVersion = AppConstants.bibleVersions.getValue(searchResult.bibleVersion)
             var description = bibleVersion.bookNames[searchResult.bookNumber - 1]

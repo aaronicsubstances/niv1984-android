@@ -16,14 +16,14 @@
 
     <!-- Multiple Book Version Display Preference -->
     <string-array name="multiple_version_display_entries">
-        <item>Default (single column in portrait/narrow widths, two columns in landscape/wide widths)</item>
+        <item>Default: Two Columns (side by side)</item>
         <item>Single Column (one after another)</item>
-        <item>Two Columns (side by side)</item>
+        <item>Single column in portrait/narrow widths, two columns in landscape/wide widths</item>
     </string-array>
 
     <string-array name="multiple_version_display_values">
-        <item>0</item>
-        <item>1</item>
         <item>2</item>
+        <item>1</item>
+        <item>0</item>
     </string-array>
 </resources>

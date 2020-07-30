@@ -44,7 +44,7 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
     }
 
     fun getShouldDisplayMultipleVersionsSideBySide(): Boolean {
-        val opt = loadPrefString(PREF_KEY_MULTIPLE_DISPLAY_OPTION, "0")
+        val opt = loadPrefString(PREF_KEY_MULTIPLE_DISPLAY_OPTION, "2")
         if (opt != "0") {
             return opt == "2"
         }

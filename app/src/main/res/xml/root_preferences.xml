@@ -19,7 +19,7 @@
 
     <ListPreference
         app:key="multiple_version_display"
-        app:defaultValue="0"
+        app:defaultValue="2"
         app:entries="@array/multiple_version_display_entries"
         app:entryValues="@array/multiple_version_display_values"
         app:title="@string/multiple_version_display_title"

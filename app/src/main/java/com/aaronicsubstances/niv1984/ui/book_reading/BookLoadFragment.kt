@@ -289,9 +289,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     private fun resetViewForBibleVersions() {
         bookContentAdapter.bibleVersions = bibleVersions
 
-        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[0]).bookNames[bookNumber - 1]
-        titleTextView.text = bookDescription
-
         if (defaultReadingMode) {
             nonDefaultBottomPanel.visibility = View.GONE
 
@@ -320,6 +317,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 radioIndex)
         }
 
+        var titleIndex = 0
         val bibleVersionsToUse = if (!defaultReadingMode) {
             bibleVersions
         }
@@ -335,6 +333,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                     if (radioIndex == null) {
                         secondPrefRadio.isChecked = true
                     }
+                    titleIndex = 1
                     bibleVersions.subList(1, 2)
                 }
                 else -> {
@@ -345,6 +344,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 }
             }
         }
+
+        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[titleIndex]).bookNames[bookNumber - 1]
+        titleTextView.text = bookDescription
+
         val isNightMode = AppUtils.isNightMode(requireContext())
         viewModel.loadBook(bookNumber, bibleVersionsToUse, displayMultipleSideBySide, isNightMode)
     }

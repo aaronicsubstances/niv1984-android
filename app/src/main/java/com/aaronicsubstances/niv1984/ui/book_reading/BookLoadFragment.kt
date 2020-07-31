@@ -2,10 +2,7 @@ package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
@@ -20,6 +17,7 @@ import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.*
+import com.aaronicsubstances.niv1984.ui.CommonMenuActionProcessor
 import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.ui.view_adapters.ChapterWidgetAdapter
@@ -99,6 +97,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         requireArguments().let {
             defaultReadingMode = it.getBoolean(ARG_DEFAULT_READING_MODE, true)
             searchResultBibleVersion = it.getString(ARG_SEARCH_RESULT_BIBLE_VERSION, "")
@@ -112,6 +111,20 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             userBookmark = it.getString(ARG_USER_BOOKMARK)?.let {
                 AppUtils.deserializeFromJson(it, ScrollPosPref::class.java)
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_settings -> {
+                CommonMenuActionProcessor.launchSettings(requireContext())
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
         }
     }
 

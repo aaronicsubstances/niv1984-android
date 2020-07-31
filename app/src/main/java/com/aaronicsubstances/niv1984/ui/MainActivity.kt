@@ -1,18 +1,19 @@
 package com.aaronicsubstances.niv1984.ui
 
-import android.content.Intent
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
-import com.aaronicsubstances.niv1984.data.SearchResultDataSource
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
@@ -20,7 +21,7 @@ import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadRequestListener
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchResponseFragment
-import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
 
@@ -38,6 +39,9 @@ class MainActivity : AppCompatActivity(),
         private const val STATE_KEY_SELECTED_TAB_POS = "MainActivity.selectedTabPosition"
     }
 
+    private lateinit var drawer: DrawerLayout
+    private lateinit var toggle: ActionBarDrawerToggle
+
     private lateinit var tabs: TabLayout
     private lateinit var tabSelectionListener: TabLayout.OnTabSelectedListener
 
@@ -52,6 +56,16 @@ class MainActivity : AppCompatActivity(),
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        drawer = findViewById(R.id.drawer_layout)
+        toggle = ActionBarDrawerToggle(this, drawer, toolbar,
+            R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeButtonEnabled(true)
+
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        navView.setNavigationItemSelectedListener(CommonMenuActionProcessor(this, drawer))
 
         tabs = findViewById(R.id.tabs)
         tabSelectionListener = object: TabLayout.OnTabSelectedListener {
@@ -182,6 +196,10 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START)
+            return
+        }
         if (tabs.selectedTabPosition == 0) {
             val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
             if (bookLoadFrag != null) {
@@ -206,20 +224,11 @@ class MainActivity : AppCompatActivity(),
         super.onBackPressed()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main, menu)
-        return true
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        if (toggle.onOptionsItemSelected(item)) {
+            return true
         }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroy() {
@@ -269,5 +278,17 @@ class MainActivity : AppCompatActivity(),
                 }
             }
         }
+    }
+
+    // remainder of navigation drawer implementation
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        toggle.syncState()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        toggle.onConfigurationChanged(newConfig)
     }
 }

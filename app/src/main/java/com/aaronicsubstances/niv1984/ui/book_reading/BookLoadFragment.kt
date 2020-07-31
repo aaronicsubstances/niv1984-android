@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.largelistpaging.LargeListViewScrollListener
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
@@ -27,7 +27,7 @@ import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class BookLoadFragment : Fragment(), PrefListenerFragment {
-    private var bookNumber: Int = 0
+    var bookNumber: Int = 0
     private var initialLoc: Pair<Int, Int>? = null
     private var defaultReadingMode = false
     private var searchResultBibleVersion = ""
@@ -46,7 +46,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     private lateinit var pinnedBibleVersionTextView: TextView
 
     private lateinit var viewModel: BookLoadViewModel
-    private lateinit var bookContentAdapter: BookLoadAdapter
+    internal lateinit var bookContentAdapter: BookLoadAdapter
     private lateinit var chapterAdapter: ChapterWidgetAdapter
 
     private var displayMultipleSideBySide = false
@@ -60,6 +60,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     internal lateinit var sharedPrefMgr: SharedPrefManager
 
     private var bookLoadRequestListener: BookLoadRequestListener? = null
+
+    private var helper: BookLoadHelper? = null
 
     companion object {
         private const val ARG_BOOK_NUMBER = "bookNumber"
@@ -122,9 +124,9 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         return when(item.itemId) {
             R.id.action_settings -> {
                 CommonMenuActionProcessor.launchSettings(requireContext())
-                return true
+                true
             }
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
@@ -182,13 +184,17 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         chapterView.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.HORIZONTAL, false)
         chapterAdapter = ChapterWidgetAdapter(AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1],
-            LargeListViewClickListener.Factory<Int> { viewHolder ->
-                object: LargeListViewClickListener<Int>(viewHolder) {
-                    override fun onClick(v: View) {
-                        goToChapter(viewHolder.adapterPosition)
-                    }
-                }
-            })
+           object: LargeListEventListenerFactory() {
+               override fun <T> create(
+                   viewHolder: RecyclerView.ViewHolder,
+                   listenerCls: Class<T>, eventContextData: Any?
+               ): T {
+                   assert(listenerCls == View.OnClickListener::class.java)
+                   return View.OnClickListener {
+                       goToChapter(getItemPosition(viewHolder))
+                   } as T
+               }
+           })
         chapterView.adapter = chapterAdapter
 
         keepScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
@@ -279,6 +285,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
         // kickstart actual bible reading
         openBookForReading(null)
+
+        helper = BookLoadHelper(this)
     }
 
     override fun onPause() {

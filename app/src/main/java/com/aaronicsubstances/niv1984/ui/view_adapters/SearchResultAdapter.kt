@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.SearchResultAdapterItem
 import com.aaronicsubstances.niv1984.utils.AppConstants
@@ -15,7 +15,7 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class SearchResultAdapter: ListAdapter<SearchResultAdapterItem, RecyclerView.ViewHolder>(ITEM_COMPARATOR) {
 
-    var onItemClickListenerFactory: LargeListViewClickListener.Factory<SearchResultAdapterItem>? = null
+    var onItemClickListenerFactory: LargeListEventListenerFactory? = null
 
     override fun getItemViewType(position: Int): Int {
         return getItem(position).viewType
@@ -61,7 +61,9 @@ class SearchResultAdapter: ListAdapter<SearchResultAdapterItem, RecyclerView.Vie
         private val descriptionView = itemView.findViewById<TextView>(R.id.description)
 
         init {
-            onItemClickListenerFactory?.let {itemView.setOnClickListener(it.create(this)) }
+            onItemClickListenerFactory?.let {
+                itemView.setOnClickListener(it.create(this, View.OnClickListener::class.java, null))
+            }
         }
 
         fun bind(position: Int) {

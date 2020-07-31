@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
@@ -26,6 +27,8 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     var displayMultipleSidebySide: Boolean = false
     var zoomLevel: Int = 100
     var isNightMode: Boolean = false
+
+    var onItemLongClickListenerFactory: LargeListEventListenerFactory? = null
 
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal
@@ -209,6 +212,13 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class VerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
+        init {
+            onItemLongClickListenerFactory?.let{
+                textView.setOnLongClickListener(it.create(this,
+                    View.OnLongClickListener::class.java, 0))
+            }
+        }
+
         fun bind(item: BookDisplayItem) {
             bindDefault(item, item.fullContent, textView)
         }
@@ -217,6 +227,15 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class SplitTitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
         private val textView2 = itemView.findViewById<TextView>(R.id.text2)
+
+        init {
+            onItemLongClickListenerFactory?.let{
+                textView.setOnLongClickListener(it.create(this,
+                    View.OnLongClickListener::class.java, 0))
+                textView2.setOnLongClickListener(it.create(this,
+                    View.OnLongClickListener::class.java, 1))
+            }
+        }
 
         fun bind(item: BookDisplayItem) {
             bindDefault(item, item.firstPartialContent!![0], textView)

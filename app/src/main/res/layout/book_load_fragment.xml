@@ -41,6 +41,31 @@
             android:layout_weight="1"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/chapterFocusView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chapterViewPanel"
+        app:layout_constraintBottom_toTopOf="@id/bottomPanelBarrier">
+
+        <TextView
+            android:id="@+id/selectedChapterTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/selectedChapterText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/bookReadView"
         android:layout_width="0dp"

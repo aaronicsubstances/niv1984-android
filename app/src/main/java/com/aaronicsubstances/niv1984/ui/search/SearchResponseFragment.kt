@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.models.SearchResultAdapterItem
@@ -91,15 +91,18 @@ class SearchResponseFragment : Fragment() {
         editOrBackBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
 
         val adapter = SearchResultAdapter()
-        val onItemClickListenerFactory =
-            LargeListViewClickListener.Factory<SearchResultAdapterItem> { viewHolder ->
-                object: LargeListViewClickListener<SearchResultAdapterItem>(viewHolder) {
-                    override fun onClick(v: View?) {
-                        val result = getItem(adapter)
-                        searchResultSelectionListener?.onSearchResultSelected(result.item)
-                    }
-                }
+        val onItemClickListenerFactory = object: LargeListEventListenerFactory() {
+            override fun <T> create(
+                viewHolder: RecyclerView.ViewHolder,
+                listenerCls: Class<T>, eventContextData: Any?
+            ): T {
+                assert(listenerCls == View.OnClickListener::class.java)
+                return View.OnClickListener {
+                    val result = getItem(viewHolder, adapter)
+                    searchResultSelectionListener?.onSearchResultSelected(result.item)
+                } as T
             }
+        }
         adapter.onItemClickListenerFactory = onItemClickListenerFactory
         searchResultView.adapter = adapter
 

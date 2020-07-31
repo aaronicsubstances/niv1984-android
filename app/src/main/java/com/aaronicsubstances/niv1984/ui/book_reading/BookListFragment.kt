@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
@@ -64,14 +64,17 @@ class BookListFragment : Fragment(), PrefListenerFragment {
 
         val bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
 
-        val onItemClickListenerFactory =
-            LargeListViewClickListener.Factory<Any> { viewHolder ->
-                object: LargeListViewClickListener<Any>(viewHolder) {
-                    override fun onClick(v: View?) {
-                        fireOnBookSelected(itemPosition)
-                    }
-                }
+        val onItemClickListenerFactory = object: LargeListEventListenerFactory() {
+            override fun <T> create(
+                viewHolder: RecyclerView.ViewHolder,
+                listenerCls: Class<T>, eventContextData: Any?
+            ): T {
+                assert(listenerCls == View.OnClickListener::class.java)
+                return View.OnClickListener {
+                    fireOnBookSelected(getItemPosition(viewHolder))
+                } as T
             }
+        }
         mListViewAdapter = BookListAdapter(bibleVersionCode, onItemClickListenerFactory)
         val layoutMgr = LinearLayoutManager(context)
         mListView.layoutManager = layoutMgr

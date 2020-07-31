@@ -151,15 +151,17 @@ public abstract class AbstractBatchedDataSourceJ<T extends ExtendedLargeListItem
         }
 
         // before returning, truncate database of batches if too many.
-        int batchCount = daoGetDistinctBatchCount(asyncContext, category, batchVersion);
-        if (batchCount > maxBatchCount) {
-            int batchNumberToDrop;
-            if (isScrollInForwardDirection) {
-                batchNumberToDrop = daoGetMinBatchNumber(asyncContext, category, batchVersion);
-            } else {
-                batchNumberToDrop = daoGetMaxBatchNumber(asyncContext, category, batchVersion);
+        if (maxBatchCount < Integer.MAX_VALUE) {
+            int batchCount = daoGetDistinctBatchCount(asyncContext, category, batchVersion);
+            if (batchCount > maxBatchCount) {
+                int batchNumberToDrop;
+                if (isScrollInForwardDirection) {
+                    batchNumberToDrop = daoGetMinBatchNumber(asyncContext, category, batchVersion);
+                } else {
+                    batchNumberToDrop = daoGetMaxBatchNumber(asyncContext, category, batchVersion);
+                }
+                daoDeleteBatch(asyncContext, category, batchVersion, batchNumberToDrop);
             }
-            daoDeleteBatch(asyncContext, category, batchVersion, batchNumberToDrop);
         }
 
         return completeBatchLoading(

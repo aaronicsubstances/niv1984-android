@@ -9,12 +9,12 @@ import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import androidx.core.content.ContextCompat
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
-import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.github.ivbaranov.mli.MaterialLetterIcon
 import org.slf4j.LoggerFactory
 
 class BookListAdapter(bibleVersionCode: String,
-                      private val onItemClickListenerFactory: LargeListViewClickListener.Factory<Any>)
+                      private val onItemClickListenerFactory: LargeListEventListenerFactory)
         : FiniteListAdapter<Any, BookListAdapterViewHolder>(null) {
 
     var bibleVersionCode: String = bibleVersionCode
@@ -43,7 +43,7 @@ class BookListAdapter(bibleVersionCode: String,
 }
 
 class BookListAdapterViewHolder(item: View,
-                                itemClickListenerFactory: LargeListViewClickListener.Factory<Any>)
+                                itemClickListenerFactory: LargeListEventListenerFactory)
         : RecyclerView.ViewHolder(item) {
 
     private val bookTitleView: TextView = item.findViewById(R.id.bookTitle)
@@ -54,7 +54,8 @@ class BookListAdapterViewHolder(item: View,
     }
 
     init {
-        itemView.setOnClickListener(itemClickListenerFactory.create(this))
+        itemView.setOnClickListener(itemClickListenerFactory.create(this,
+            View.OnClickListener::class.java, null))
     }
 
     fun bind(position: Int, bibleVersionCode: String) {

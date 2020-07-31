@@ -113,14 +113,16 @@ abstract class AbstractBatchedDataSourceK<T : ExtendedLargeListItem>(
         }
 
         // before returning, truncate database of batches if too many.
-        val batchCount = daoGetDistinctBatchCount(asyncContext, category, batchVersion)
-        if (batchCount > maxBatchCount) {
-            val batchNumberToDrop = if (isScrollInForwardDirection) {
-                daoGetMinBatchNumber(asyncContext, category, batchVersion)
-            } else {
-                daoGetMaxBatchNumber(asyncContext, category, batchVersion)
+        if (maxBatchCount < Int.MAX_VALUE) {
+            val batchCount = daoGetDistinctBatchCount(asyncContext, category, batchVersion)
+            if (batchCount > maxBatchCount) {
+                val batchNumberToDrop = if (isScrollInForwardDirection) {
+                    daoGetMinBatchNumber(asyncContext, category, batchVersion)
+                } else {
+                    daoGetMaxBatchNumber(asyncContext, category, batchVersion)
+                }
+                daoDeleteBatch(asyncContext, category, batchVersion, batchNumberToDrop)
             }
-            daoDeleteBatch(asyncContext, category, batchVersion, batchNumberToDrop)
         }
 
         return completeBatchLoading(

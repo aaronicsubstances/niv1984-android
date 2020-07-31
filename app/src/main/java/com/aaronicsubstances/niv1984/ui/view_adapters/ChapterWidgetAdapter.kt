@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.LargeListViewClickListener
+import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 
 class ChapterWidgetAdapter(private val chapterCount: Int,
-                           private val clickListenerFactory: LargeListViewClickListener.Factory<Int>):
+                           private val clickListenerFactory: LargeListEventListenerFactory):
         RecyclerView.Adapter<ChapterWidgetAdapter.ViewHolder>() {
 
     var selectedIndex: Int = 0
@@ -38,7 +38,8 @@ class ChapterWidgetAdapter(private val chapterCount: Int,
         private val defaultTextColour = textView.textColors
 
         init {
-            itemView.setOnClickListener(clickListenerFactory.create(this))
+            itemView.setOnClickListener(clickListenerFactory.create(this,
+                View.OnClickListener::class.java, null))
         }
 
         fun bind(position: Int) {

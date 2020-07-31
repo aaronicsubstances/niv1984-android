@@ -133,7 +133,6 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         // cache html parse result
         if (itemContent.html == null) {
             itemContent.html = AppUtils.parseHtml(itemContent.text)
-            itemContent.text = "" // reduce memory load
         }
         textView.text = itemContent.html
 
@@ -202,7 +201,7 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     }
 
     inner class TitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val textView = itemView.findViewById<TextView>(R.id.text)
+        private val textView = itemView.findViewById<TextView>(R.id.chapterTitle)
 
         fun bind(item: BookDisplayItem) {
             bindDefault(item, item.fullContent, textView)
@@ -212,14 +211,11 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class VerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
-        init {
+        fun bind(item: BookDisplayItem) {
             onItemLongClickListenerFactory?.let{
                 textView.setOnLongClickListener(it.create(this,
-                    View.OnLongClickListener::class.java, 0))
+                    View.OnLongClickListener::class.java, item.fullContent.bibleVersionIndex))
             }
-        }
-
-        fun bind(item: BookDisplayItem) {
             bindDefault(item, item.fullContent, textView)
         }
     }
@@ -227,15 +223,6 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class SplitTitleViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.text)
         private val textView2 = itemView.findViewById<TextView>(R.id.text2)
-
-        init {
-            onItemLongClickListenerFactory?.let{
-                textView.setOnLongClickListener(it.create(this,
-                    View.OnLongClickListener::class.java, 0))
-                textView2.setOnLongClickListener(it.create(this,
-                    View.OnLongClickListener::class.java, 1))
-            }
-        }
 
         fun bind(item: BookDisplayItem) {
             bindDefault(item, item.firstPartialContent!![0], textView)
@@ -246,6 +233,15 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class SplitVerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val firstSideVerse = itemView.findViewById<ViewGroup>(R.id.firstSideVerse)
         private val secondSideVerse = itemView.findViewById<ViewGroup>(R.id.secondSideVerse)
+
+        init {
+            onItemLongClickListenerFactory?.let{
+                firstSideVerse.setOnLongClickListener(it.create(this,
+                    View.OnLongClickListener::class.java, 0))
+                secondSideVerse.setOnLongClickListener(it.create(this,
+                    View.OnLongClickListener::class.java, 1))
+            }
+        }
 
         fun bind(item: BookDisplayItem) {
             bindSpecific(item, item.firstPartialContent!!, firstSideVerse)

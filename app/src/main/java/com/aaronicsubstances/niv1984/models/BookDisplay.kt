@@ -5,6 +5,7 @@ import com.aaronicsubstances.niv1984.utils.BookParser
 data class BookDisplay(
     val bookNumber: Int,
     val bibleVersions: List<String>,
+    val bibleVersionIndexInUI: Int?,
     val displayItems: List<BookDisplayItem>,
     val chapterIndices: List<Int>,
     val displayMultipleSideBySide: Boolean,

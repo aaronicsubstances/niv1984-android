@@ -25,12 +25,12 @@ object AppUtils {
         return JSON_SERIALIZER.fromJson(s, cls)
     }
 
-    fun parseHtml(txt: String): Spanned {
+    fun parseHtml(txt: String, tagHandler: Html.TagHandler? = null): Spanned {
         return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            Html.fromHtml(txt, Html.FROM_HTML_MODE_COMPACT, null, null)
+            Html.fromHtml(txt, Html.FROM_HTML_MODE_COMPACT, null, tagHandler)
         }
         else {
-            Html.fromHtml(txt, null, null)
+            Html.fromHtml(txt, null, tagHandler)
         }
     }
 

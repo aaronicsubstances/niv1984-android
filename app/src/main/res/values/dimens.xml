@@ -21,5 +21,6 @@
     <dimen name="formItemLargeSepMargin">12dp</dimen>
     <dimen name="formItemIndentMargin">8dp</dimen>
     <dimen name="searchBookSepMargin">24dp</dimen>
+    <dimen name="verse_padding">8sp</dimen>
     <integer name="bibleReadingBaseTextSize">18</integer>
 </resources>

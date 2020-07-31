@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -45,9 +46,9 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     private lateinit var switchToPrefBtn: Button
     private lateinit var pinnedBibleVersionTextView: TextView
 
-    private lateinit var viewModel: BookLoadViewModel
+    internal lateinit var viewModel: BookLoadViewModel
     internal lateinit var bookContentAdapter: BookLoadAdapter
-    private lateinit var chapterAdapter: ChapterWidgetAdapter
+    internal lateinit var chapterAdapter: ChapterWidgetAdapter
 
     private var displayMultipleSideBySide = false
     private var keepScreenOn = false
@@ -237,7 +238,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
             Observer<Pair<BookDisplay, BookLoadAftermath>> { (data, bookLoadAftermath) ->
-                bookContentAdapter.multipleDisplay = data.bibleVersions.size > 1
+                bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
                 bookContentAdapter.displayMultipleSidebySide = data.displayMultipleSideBySide
                 bookContentAdapter.isNightMode = data.isNightMode
                 bookContentAdapter.submitList(data.displayItems)
@@ -246,6 +247,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 if (bookLoadAftermath.particularPos != -1) {
                     scrollBook(bookLoadAftermath.particularPos)
                 }
+                helper?.cancelChapterFocusView()
             })
 
         bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {
@@ -295,6 +297,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     }
 
     fun onCustomPause() {
+        helper?.cancelChapterFocusView()
         cancelKeepScreenOn()
     }
 
@@ -338,9 +341,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 radioIndex)
         }
 
-        var titleIndex = 0
-        val bibleVersionsToUse = if (!defaultReadingMode) {
-            bibleVersions
+        val bibleVersionIndexToUse = if (!defaultReadingMode) {
+            if (bibleVersions.size > 1) null else 0
         }
         else {
             when (index) {
@@ -348,29 +350,29 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                     if (radioIndex == null) {
                         bothPrefRadio.isChecked = true
                     }
-                    bibleVersions
+                    null
                 }
                 1 -> {
                     if (radioIndex == null) {
                         secondPrefRadio.isChecked = true
                     }
-                    titleIndex = 1
-                    bibleVersions.subList(1, 2)
+                    1
                 }
                 else -> {
                     if (radioIndex == null) {
                         firstPrefRadio.isChecked = true
                     }
-                    bibleVersions.subList(0, 1)
+                    0
                 }
             }
         }
 
-        val bookDescription = AppConstants.bibleVersions.getValue(bibleVersions[titleIndex]).bookNames[bookNumber - 1]
+        val bookDescription = AppConstants.bibleVersions.getValue(
+            bibleVersions[bibleVersionIndexToUse ?: 0]).bookNames[bookNumber - 1]
         titleTextView.text = bookDescription
 
         val isNightMode = AppUtils.isNightMode(requireContext())
-        viewModel.loadBook(bookNumber, bibleVersionsToUse, displayMultipleSideBySide, isNightMode)
+        viewModel.loadBook(bookNumber, bibleVersions, bibleVersionIndexToUse, displayMultipleSideBySide, isNightMode)
     }
 
     private fun goToChapter(chapterIdx: Int) {
@@ -381,6 +383,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             viewModel.updateSystemBookmarks(chapterIdx + 1, 0,
                 BookDisplayItemViewType.TITLE, chapterStartPos)
         }
+        helper?.cancelChapterFocusView()
     }
 
     private fun scrollBook(pos: Int) {
@@ -390,7 +393,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             .scrollToPositionWithOffset(pos, 0)
     }
 
-    private fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
+    fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
         chapterAdapter.selectedIndex = chapterIdx
         if (scroll) {
             chapterView.scrollToPosition(chapterIdx)

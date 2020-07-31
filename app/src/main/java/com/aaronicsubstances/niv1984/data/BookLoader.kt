@@ -30,6 +30,7 @@ import java.lang.AssertionError
 class BookLoader(private val context: Context,
                  private val bookNumber: Int,
                  private val bibleVersions: List<String>,
+                 private val bibleVersionIndexInUI: Int?,
                  private val displayMultipleSideBySide: Boolean,
                  private val isNightMode: Boolean) {
 
@@ -42,11 +43,12 @@ class BookLoader(private val context: Context,
 
     suspend fun load(): BookDisplay {
         return withContext(Dispatchers.IO) {
-            val rawChapters = loadRawBookAsset(bibleVersions[0])
-            val chapterIndices = mutableListOf<Int>()
-            val displayItems = processChapters(0, rawChapters, chapterIndices)
 
-            val book = if (bibleVersions.size > 1) {
+            val book = if (bibleVersionIndexInUI == null) {
+                val rawChapters = loadRawBookAsset(bibleVersions[0])
+                val chapterIndices = mutableListOf<Int>()
+                val displayItems = processChapters(0, rawChapters, chapterIndices)
+
                 val rawChapters2 = loadRawBookAsset(bibleVersions[1])
                 val chapterIndices2 = mutableListOf<Int>()
                 val displayItems2 = processChapters(1, rawChapters2, chapterIndices2)
@@ -69,13 +71,17 @@ class BookLoader(private val context: Context,
                 BookDisplay(
                     bookNumber,
                     bibleVersions,
+                    bibleVersionIndexInUI,
                     combinedDisplayItems,
                     combinedChapterIndices,
                     displayMultipleSideBySide,
                     isNightMode)
             }
             else {
-                BookDisplay(bookNumber, bibleVersions, displayItems, chapterIndices,
+                val rawChapters = loadRawBookAsset(bibleVersions[bibleVersionIndexInUI])
+                val chapterIndices = mutableListOf<Int>()
+                val displayItems = processChapters(bibleVersionIndexInUI, rawChapters, chapterIndices)
+                BookDisplay(bookNumber, bibleVersions, bibleVersionIndexInUI, displayItems, chapterIndices,
                     displayMultipleSideBySide, isNightMode)
             }
             book
@@ -299,7 +305,7 @@ class BookLoader(private val context: Context,
             val bibleVersionInst = AppConstants.bibleVersions.getValue(
                 bibleVersions[bibleVersionIndex])
             var titleText = bibleVersionInst.getChapterTitle(bookNumber, rawChapter.chapterNumber)
-            if (bibleVersions.size > 1 && displayMultipleSideBySide) {
+            if (bibleVersionIndexInUI == null && displayMultipleSideBySide) {
                 titleText = "(${bibleVersionInst.abbreviation}) " + titleText
             }
             displayItems.add(
@@ -383,7 +389,7 @@ class BookLoader(private val context: Context,
         var prependText: String? = ""
         val selectedBibleVersion = AppConstants.bibleVersions.getValue(
             bibleVersions[bibleVersionIndex])
-        if (bibleVersions.size > 1 && !displayMultipleSideBySide) {
+        if (bibleVersionIndexInUI == null && !displayMultipleSideBySide) {
             prependText += "<strong>(${selectedBibleVersion.abbreviation}) </strong>"
         }
         prependText += "${rawVerse.verseNumber}. "

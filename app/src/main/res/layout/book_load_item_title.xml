@@ -9,7 +9,7 @@
     android:layout_marginTop="@dimen/activity_margin"
     android:layout_marginBottom="@dimen/activity_margin">
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/chapterTitle"
         android:layout_width="0dp"
         android:textStyle="bold"
         android:layout_height="wrap_content"

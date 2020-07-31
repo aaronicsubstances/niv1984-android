@@ -24,7 +24,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     private var lastJob: Job? = null
 
     private var systemBookmark = ScrollPosPref(0, 0, 0, 0,
-            listOf(), BookDisplayItemViewType.CHAPTER_FRAGMENT, false)
+            listOf(), null, BookDisplayItemViewType.CHAPTER_FRAGMENT, false)
 
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
@@ -63,8 +63,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     val currLoc: ScrollPosPref
         get() = ScrollPosPref(systemBookmark.bookNumber, systemBookmark.chapterNumber,
             systemBookmark.verseNumber, systemBookmark.particularViewItemPos,
-            systemBookmark.particularBibleVersions, systemBookmark.equivalentViewItemType,
-            systemBookmark.displayMultipleSideBySide)
+            systemBookmark.particularBibleVersions, systemBookmark.particularBibleVersionIndex,
+            systemBookmark.equivalentViewItemType, systemBookmark.displayMultipleSideBySide)
 
     private fun loadSystemBookmarks(bookNumber: Int) {
         if (systemBookmark.bookNumber > 0) {
@@ -74,7 +74,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             SharedPrefManager.PREF_KEY_SYSTEM_BOOKMARKS +
                     bookNumber, ScrollPosPref::class.java) ?: ScrollPosPref(
                 bookNumber, 1, 0, 0,
-                listOf(), BookDisplayItemViewType.TITLE, false)
+                listOf(), 0, BookDisplayItemViewType.TITLE, false)
     }
 
     private fun saveSystemBookmarks() {
@@ -89,11 +89,12 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     val loadLiveData: LiveData<Pair<BookDisplay, BookLoadAftermath>>
         get() = _loadLiveData
 
-    fun loadBook(bookNumber: Int, bibleVersions: List<String>, displayMultipleSideBySide: Boolean,
-                 isNightMode: Boolean) {
+    fun loadBook(bookNumber: Int, bibleVersions: List<String>, bibleVersionIndex: Int?,
+                 displayMultipleSideBySide: Boolean, isNightMode: Boolean) {
         if (lastLoadResult != null) {
             val temp = lastLoadResult!!
             if (temp.bibleVersions == bibleVersions &&
+                    temp.bibleVersionIndexInUI == bibleVersionIndex &&
                     temp.displayMultipleSideBySide == displayMultipleSideBySide &&
                     temp.isNightMode == isNightMode) {
                 // reuse lastLoadResult.
@@ -106,7 +107,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         val context = (getApplication() as MyApplication).applicationContext
         lastJob?.cancel()
         lastJob = viewModelScope.launch {
-            val bookLoader = BookLoader(context, bookNumber, bibleVersions,
+            val bookLoader = BookLoader(context, bookNumber, bibleVersions, bibleVersionIndex,
                 displayMultipleSideBySide, isNightMode)
             val model = bookLoader.load()
 
@@ -119,7 +120,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             if (bibleVersions != systemBookmark.particularBibleVersions) {
                 isParticularPosValid = false
             }
-            else if (bibleVersions.size > 1 &&
+            else if (bibleVersionIndex == null &&
                     displayMultipleSideBySide != systemBookmark.displayMultipleSideBySide) {
                 isParticularPosValid = false
             }
@@ -138,6 +139,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     private fun updateSystemBookmarkInternally(model: BookDisplay) {
         systemBookmark.particularBibleVersions = model.bibleVersions
         systemBookmark.displayMultipleSideBySide = model.displayMultipleSideBySide
+        systemBookmark.particularBibleVersionIndex = model.bibleVersionIndexInUI
         var pos = model.chapterIndices[systemBookmark.chapterNumber - 1]
         systemBookmark.particularViewItemPos = pos // set by default just in case none is found.
         while (pos < model.displayItems.size) {

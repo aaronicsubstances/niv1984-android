@@ -45,24 +45,28 @@
         android:id="@+id/chapterFocusView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="gone"
+        android:visibility="invisible"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chapterViewPanel"
         app:layout_constraintBottom_toTopOf="@id/bottomPanelBarrier">
 
-        <TextView
-            android:id="@+id/selectedChapterTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <include layout="@layout/book_load_item_title" />
 
-        <TextView
-            android:id="@+id/selectedChapterText"
-            android:layout_width="match_parent"
+        <com.aaronicsubstances.niv1984.ui.book_reading.HtmlScrollView
+            android:id="@+id/selectedChapterScroller"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:scrollbars="vertical"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+            <com.aaronicsubstances.niv1984.ui.book_reading.HtmlTextView
+                android:id="@+id/selectedChapterText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/verse_margin"
+                android:layout_marginRight="@dimen/verse_margin"
+                android:textIsSelectable="true" />
+        </com.aaronicsubstances.niv1984.ui.book_reading.HtmlScrollView>
 
     </LinearLayout>
 

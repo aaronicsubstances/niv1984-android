@@ -40,7 +40,7 @@ interface BibleIndexRecordDao {
                     AND bible_version IN (:selectedBibleVersions)
                     AND book_number BETWEEN :minBookNumber AND :maxBookNumber
                     AND rowid NOT IN (:extraExclusions)
-                    AND rowid NOT IN (SELECT itemKey FROM BatchedDataSourceEntityImpl b 
+                    AND rowid NOT IN (SELECT itemKey FROM BatchedDataSourceEntity b 
                         WHERE b.category = :category AND b.batchVersion = :batchVersion
                         AND b.batchNumber < :batchNumber)
                  ORDER BY CAST(book_number AS INT), CAST(chapter_number AS INT), 

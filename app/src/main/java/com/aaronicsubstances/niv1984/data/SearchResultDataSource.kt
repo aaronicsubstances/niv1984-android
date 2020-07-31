@@ -2,12 +2,11 @@ package com.aaronicsubstances.niv1984.data
 
 import android.content.Context
 import androidx.core.util.Consumer
-import com.aaronicsubstances.largelistpaging.AbstractBatchedDataSource
-import com.aaronicsubstances.largelistpaging.BatchedDataSourceEntity
+import com.aaronicsubstances.largelistpaging.AbstractBatchedDataSourceK
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
 import com.aaronicsubstances.largelistpaging.UnboundedDataSource
 import com.aaronicsubstances.niv1984.models.BatchedDataSourceEntityDao
-import com.aaronicsubstances.niv1984.models.BatchedDataSourceEntityImpl
+import com.aaronicsubstances.niv1984.models.BatchedDataSourceEntity
 import com.aaronicsubstances.niv1984.models.BibleIndexRecordDao
 import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.utils.AppUtils
@@ -23,7 +22,7 @@ class SearchResultDataSource(
     private val preferredBibleVersions: List<String>,
     private val startBookNumber: Int,
     private val inclEndBookNumber: Int
-): AbstractBatchedDataSource<SearchResult>(SearchResult::class.java, NEW_BATCH_SIZE, Int.MAX_VALUE),
+): AbstractBatchedDataSourceK<SearchResult>(NEW_BATCH_SIZE, Int.MAX_VALUE),
     UnboundedDataSource<SearchResult> {
 
     companion object {
@@ -32,9 +31,9 @@ class SearchResultDataSource(
 
         internal fun splitUserQuery(rawUserQuery: String): List<String> {
             // Replace all chars which are neither letters nor digits with space.
-            var processed = StringBuilder()
+            val processed = StringBuilder()
             for (i in rawUserQuery.indices) {
-                var c = rawUserQuery[i]
+                val c = rawUserQuery[i]
                 if (Character.isLetterOrDigit(c)) {
                     processed.append(c)
                 } else {
@@ -97,7 +96,7 @@ class SearchResultDataSource(
             val db = AppDatabase.getDatabase(context)
             val asyncContext =
                 HelperAsyncContext(db.batchedDataSourceDao(), db.bibleIndexRecordDao())
-            val result = loadBatchAsync(
+            val result = loadBatch(
                 true, CAT_SEARCH, lastInitialLoadRequestId, null,
                 true, config.initialLoadSize, asyncContext
             )
@@ -116,7 +115,7 @@ class SearchResultDataSource(
             val db = AppDatabase.getDatabase(context)
             val asyncContext =
                 HelperAsyncContext(db.batchedDataSourceDao(), db.bibleIndexRecordDao())
-            val result = loadBatchAsync(
+            val result = loadBatch(
                 false, CAT_SEARCH, lastInitialLoadRequestId, boundaryKey as Int,
                 isScrollInForwardDirection, config.loadSize, asyncContext
             )
@@ -134,7 +133,7 @@ class SearchResultDataSource(
         val acrossStageResults = mutableListOf<SearchResult>()
         val exclusions = mutableListOf<Int>()
         let {
-            var result = asyncContext.ftsDao.search(
+            val result = asyncContext.ftsDao.search(
                 transformedQuery,
                 selectedBibleVersions,
                 preferredBibleVersions[0], preferredBibleVersions[1],
@@ -168,10 +167,10 @@ class SearchResultDataSource(
         return acrossStageResults
     }
 
-    override suspend fun daoInsert(asyncContext: Any?, entities: List<BatchedDataSourceEntity>) {
+    override suspend fun daoInsert(asyncContext: Any?, wrappers: List<Any>) {
         asyncContext as HelperAsyncContext
-        val expectedTypedEntities = Array(entities.size) {
-            entities[it] as BatchedDataSourceEntityImpl
+        val expectedTypedEntities = Array(wrappers.size) {
+            wrappers[it] as BatchedDataSourceEntity
         }
         asyncContext.dao.insert(*expectedTypedEntities)
     }
@@ -182,9 +181,9 @@ class SearchResultDataSource(
         batchVersion: String,
         startRank: Int,
         endRank: Int
-    ): List<BatchedDataSourceEntity> {
+    ): List<Any> {
         asyncContext as HelperAsyncContext
-        return asyncContext.dao.getBatch(category, batchVersion, startRank, endRank).toMutableList()
+        return asyncContext.dao.getBatch(category, batchVersion, startRank, endRank)
     }
 
     override suspend fun daoDeleteCategory(asyncContext: Any?, category: String) {
@@ -233,29 +232,30 @@ class SearchResultDataSource(
         asyncContext: Any?,
         category: String,
         batchVersion: String,
-        itemKeys: List<String>
+        itemKeys: List<Any>
     ): Int {
         asyncContext as HelperAsyncContext
-        return asyncContext.dao.getItemCount(category, batchVersion, itemKeys)
+        return asyncContext.dao.getItemCount(category, batchVersion, itemKeys.map {"$it"})
     }
 
-    override fun createBatchedDataSourceEntity(
+    override fun createItemWrapper(
         lastUpdateTimestamp: Long,
         category: String,
         batchVersion: String,
         batchNumber: Int,
         rank: Int,
-        itemKey: Any,
-        serializedItem: String
-    ): BatchedDataSourceEntity =
-        BatchedDataSourceEntityImpl(rank, lastUpdateTimestamp, category, batchVersion,
-            batchNumber, itemKey.toString(), serializedItem)
-
-    override fun serializeLargeListItem(obj: SearchResult): String {
-        return AppUtils.serializeAsJson(obj)
+        item: SearchResult
+    ): Any {
+        val serializedItem = AppUtils.serializeAsJson(item)
+        return BatchedDataSourceEntity(
+            rank, lastUpdateTimestamp, category, batchVersion,
+            batchNumber, item.fetchKey().toString(), serializedItem
+        )
     }
 
-    override fun deserializeLargeListItem(value: String): SearchResult {
-        return AppUtils.deserializeFromJson(value, SearchResult::class.java)
+    override fun unwrapItem(wrapper: Any): SearchResult {
+        wrapper as BatchedDataSourceEntity
+        val item = AppUtils.deserializeFromJson(wrapper.serializedItem, SearchResult::class.java)
+        return item
     }
 }

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b1d08c7c4735353c9641f9ef9305df33",
+    "identityHash": "749e6161ad9c06930d7526c5cc5db75f",
     "entities": [
       {
         "tableName": "user_note",
@@ -167,7 +167,7 @@
         "foreignKeys": []
       },
       {
-        "tableName": "BatchedDataSourceEntityImpl",
+        "tableName": "BatchedDataSourceEntity",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`rank` INTEGER NOT NULL, `lastUpdateTimestamp` INTEGER NOT NULL, `category` TEXT NOT NULL, `batchVersion` TEXT NOT NULL, `batchNumber` INTEGER NOT NULL, `itemKey` TEXT NOT NULL, `serializedItem` TEXT NOT NULL, PRIMARY KEY(`rank`))",
         "fields": [
           {
@@ -226,7 +226,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b1d08c7c4735353c9641f9ef9305df33')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '749e6161ad9c06930d7526c5cc5db75f')"
     ]
   }
 }

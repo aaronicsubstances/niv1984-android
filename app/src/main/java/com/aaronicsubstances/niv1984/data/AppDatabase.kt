@@ -11,7 +11,7 @@ import kotlinx.coroutines.*
 @TypeConverters( DateTypeConverter::class, TimestampTypeConverter::class,
     UuidTypeConverter::class)
 @Database(entities = [ UserNote::class, UserNoteIndexRecord::class, BibleIndexRecord::class,
-    BatchedDataSourceEntityImpl::class ],
+    BatchedDataSourceEntity::class ],
     version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 

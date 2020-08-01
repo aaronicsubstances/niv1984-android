@@ -37,8 +37,8 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
             versePosMap[tag] = Pair(output.length, 0)
         }
         else {
-            val beginValue = versePosMap.remove(tag)
-            versePosMap[tag] = Pair(beginValue!!.first, output.length)
+            val beginValue = versePosMap.getValue(tag)
+            versePosMap[tag] = Pair(beginValue.first, output.length)
         }
     }
 

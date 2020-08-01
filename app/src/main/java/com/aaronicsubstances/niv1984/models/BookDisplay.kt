@@ -18,7 +18,8 @@ data class BookDisplayItem(val viewType: BookDisplayItemViewType,
                            val verseNumber: Int,
                            val fullContent: BookDisplayItemContent,
                            var firstPartialContent: List<BookDisplayItemContent>? = null,
-                           var secondPartialContent: List<BookDisplayItemContent>? = null)
+                           var secondPartialContent: List<BookDisplayItemContent>? = null,
+                           var isFirstVerseContent: Boolean = false)
 
 data class BookDisplayItemContent(val bibleVersionIndex: Int,
                                   var text: String,

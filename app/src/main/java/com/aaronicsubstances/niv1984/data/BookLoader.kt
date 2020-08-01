@@ -305,9 +305,6 @@ class BookLoader(private val context: Context,
             val bibleVersionInst = AppConstants.bibleVersions.getValue(
                 bibleVersions[bibleVersionIndex])
             var titleText = bibleVersionInst.getChapterTitle(bookNumber, rawChapter.chapterNumber)
-            if (bibleVersionIndexInUI == null && displayMultipleSideBySide) {
-                titleText = "(${bibleVersionInst.abbreviation}) " + titleText
-            }
             displayItems.add(
                 BookDisplayItem(BookDisplayItemViewType.TITLE,
                     rawChapter.chapterNumber, 0,
@@ -386,14 +383,7 @@ class BookLoader(private val context: Context,
         chapterNumber: Int,
         rawVerse: Verse
     ): List<BookDisplayItem> {
-        var prependText: String? = ""
-        val selectedBibleVersion = AppConstants.bibleVersions.getValue(
-            bibleVersions[bibleVersionIndex])
-        if (bibleVersionIndexInUI == null && !displayMultipleSideBySide) {
-            prependText += "<strong>(${selectedBibleVersion.abbreviation}) </strong>"
-        }
-        prependText += "${rawVerse.verseNumber}. "
-
+        var prependText: String? = "${rawVerse.verseNumber}. "
         val verseItems = mutableListOf<BookDisplayItem>()
         val out = StringBuilder()
         for (part in rawVerse.parts) {
@@ -415,13 +405,16 @@ class BookLoader(private val context: Context,
                 }
                 is BlockQuote -> {
                     if (out.isNotEmpty()) {
+                        var isFirstVerseContent = false
                         if (prependText != null) {
                             out.insert(0, prependText)
                             prependText = null
+                            isFirstVerseContent = true
                         }
                         val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                             chapterNumber, rawVerse.verseNumber,
-                            BookDisplayItemContent(bibleVersionIndex, out.toString()))
+                            BookDisplayItemContent(bibleVersionIndex, out.toString()),
+                            isFirstVerseContent = isFirstVerseContent)
                         verseItems.add(currItem)
                         out.clear()
                     }
@@ -429,6 +422,7 @@ class BookLoader(private val context: Context,
                         part, rawVerse.verseNumber)
                     if (prependText != null) {
                         nextItem.fullContent.text = prependText + nextItem.fullContent.text
+                        nextItem.isFirstVerseContent = true
                         prependText = null
                     }
                     verseItems.add(nextItem)
@@ -446,12 +440,15 @@ class BookLoader(private val context: Context,
         // to deal with omitted niv verses such as matt 17:21,
         // ensure verse items is not empty.
         if (out.isNotEmpty() || verseItems.isEmpty()) {
+            var isFirstVerseContent = false
             if (prependText != null) {
                 out.insert(0, prependText)
+                isFirstVerseContent = true
             }
             val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                 chapterNumber, rawVerse.verseNumber,
-                BookDisplayItemContent(bibleVersionIndex, out.toString()))
+                BookDisplayItemContent(bibleVersionIndex, out.toString()),
+                isFirstVerseContent = isFirstVerseContent)
             verseItems.add(currItem)
         }
 

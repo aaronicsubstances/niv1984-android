@@ -6,7 +6,6 @@ import android.view.*
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -178,7 +177,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         super.onActivityCreated(savedInstanceState)
 
         // as long as touches are occurring on root view, keep screen on
-        (view as ConstraintLayoutWithTouchIntercept).touchInterceptAction = Runnable {
+        (view as FrameLayoutWithTouchIntercept).touchInterceptAction = Runnable {
             rescheduleKeepScreenOn()
         }
 
@@ -239,7 +238,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         viewModel.loadLiveData.observe(viewLifecycleOwner,
             Observer<Pair<BookDisplay, BookLoadAftermath>> { (data, bookLoadAftermath) ->
                 bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
-                bookContentAdapter.displayMultipleSidebySide = data.displayMultipleSideBySide
+                bookContentAdapter.displayMultipleSideBySide = data.displayMultipleSideBySide
                 bookContentAdapter.isNightMode = data.isNightMode
                 bookContentAdapter.submitList(data.displayItems)
                 syncChapterWidget(bookLoadAftermath.chapterNumber - 1, true)
@@ -247,7 +246,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 if (bookLoadAftermath.particularPos != -1) {
                     scrollBook(bookLoadAftermath.particularPos)
                 }
-                helper?.cancelChapterFocusView()
             })
 
         bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {
@@ -383,7 +381,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             viewModel.updateSystemBookmarks(chapterIdx + 1, 0,
                 BookDisplayItemViewType.TITLE, chapterStartPos)
         }
-        helper?.cancelChapterFocusView()
     }
 
     private fun scrollBook(pos: Int) {
@@ -393,7 +390,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             .scrollToPositionWithOffset(pos, 0)
     }
 
-    fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
+    private fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
         chapterAdapter.selectedIndex = chapterIdx
         if (scroll) {
             chapterView.scrollToPosition(chapterIdx)

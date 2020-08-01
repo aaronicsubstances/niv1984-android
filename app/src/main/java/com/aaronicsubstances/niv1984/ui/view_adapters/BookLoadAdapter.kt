@@ -24,7 +24,7 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
 
     var bibleVersions = listOf<String>()
     var multipleDisplay: Boolean = false
-    var displayMultipleSidebySide: Boolean = false
+    var displayMultipleSideBySide: Boolean = false
     var zoomLevel: Int = 100
     var isNightMode: Boolean = false
 
@@ -35,7 +35,7 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         // split viewType to positive or negative depending on displaySideBySide.
         // since zero cannot have different signs, increment by 1.
         viewType += 1
-        if (multipleDisplay && displayMultipleSidebySide) {
+        if (multipleDisplay && displayMultipleSideBySide) {
             viewType *= -1
         }
         return viewType
@@ -132,7 +132,23 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
 
         // cache html parse result
         if (itemContent.html == null) {
-            itemContent.html = AppUtils.parseHtml(itemContent.text)
+            var prependText = ""
+            if (multipleDisplay) {
+                val selectedBibleVersion = AppConstants.bibleVersions.getValue(
+                    bibleVersions[itemContent.bibleVersionIndex]
+                )
+                if (displayMultipleSideBySide) {
+                    if (item.viewType == BookDisplayItemViewType.TITLE) {
+                        prependText = "(${selectedBibleVersion.abbreviation}) "
+                    }
+                }
+                else {
+                    if (item.viewType == BookDisplayItemViewType.VERSE && item.isFirstVerseContent) {
+                        prependText += "<strong>(${selectedBibleVersion.abbreviation}) </strong>"
+                    }
+                }
+            }
+            itemContent.html = AppUtils.parseHtml(prependText + itemContent.text)
         }
         textView.text = itemContent.html
 

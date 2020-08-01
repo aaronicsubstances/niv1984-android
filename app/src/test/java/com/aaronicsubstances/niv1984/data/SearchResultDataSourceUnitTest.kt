@@ -1,6 +1,5 @@
 package com.aaronicsubstances.niv1984.data
 
-import com.aaronicsubstances.niv1984.models.SearchResult
 import org.junit.Test
 
 import org.junit.Assert.*

@@ -8,30 +8,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
+import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class BookLoadHelper(private val fragment: BookLoadFragment) {
+    private val defaultView: View
     private val chapterFocusView: View
+    private val selectedBookTitle: TextView
     private val selectedChapterTitle: TextView
     private val selectedChapterContent: HtmlTextView
     private val selectedChapterContentScroller: HtmlScrollView
-    private val bookReadView: RecyclerView
     private val bookContentAdapter: BookLoadAdapter
 
     private val htmlViewManager: HtmlViewManager
-
-    private var chapterIdxToRestore = -1
+    private val backPressListener: OnBackPressedCallback
 
     init {
         fragment.requireView().let {
-            chapterFocusView = it.findViewById(R.id.chapterFocusView)
+            defaultView = it.findViewById(R.id.highlightOff)
+            chapterFocusView = it.findViewById(R.id.highlightOn)
+            selectedBookTitle = it.findViewById(R.id.bookDescriptionHighlighted)
             selectedChapterTitle = it.findViewById(R.id.chapterTitle)
             selectedChapterContent = it.findViewById(R.id.selectedChapterText)
             selectedChapterContentScroller = it.findViewById(R.id.selectedChapterScroller)
-            bookReadView = it.findViewById(R.id.bookReadView)
         }
         bookContentAdapter = fragment.bookContentAdapter
         htmlViewManager = HtmlViewManager(fragment.requireContext())
@@ -54,29 +56,27 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
             }
         }
         bookContentAdapter.onItemLongClickListenerFactory = onItemLongClickListenerFactory
-        fragment.requireActivity().onBackPressedDispatcher.addCallback(fragment.viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (!backPressIntercepted()){
-                        isEnabled = false
-                        fragment.requireActivity().onBackPressed()
-                    }
+
+        backPressListener = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!backPressIntercepted()) {
+                    isEnabled = false
+                    fragment.requireActivity().onBackPressed()
                 }
-        })
+            }
+        }
+        fragment.requireActivity().onBackPressedDispatcher.addCallback(fragment.viewLifecycleOwner,
+            backPressListener)
     }
 
     fun cancelChapterFocusView() {
-        bookReadView.visibility = View.VISIBLE
+        defaultView.visibility = View.VISIBLE
         chapterFocusView.visibility = View.INVISIBLE
-        if (chapterIdxToRestore != -1) {
-            fragment.syncChapterWidget(chapterIdxToRestore, true)
-            chapterIdxToRestore = -1
-        }
         selectedChapterContent.text = ""
     }
 
     private fun backPressIntercepted(): Boolean {
-        if (bookReadView.visibility == View.VISIBLE) {
+        if (chapterFocusView.visibility != View.VISIBLE) {
             return false
         }
         cancelChapterFocusView()
@@ -91,21 +91,15 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
 
         val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[bibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
+        selectedBookTitle.text = fragment.getString(R.string.highlight_mode_title,
+            bibleVersion.bookNames[fragment.bookNumber - 1])
         val chapterTitle = bibleVersion.getChapterTitle(
             fragment.bookNumber, item.chapterNumber)
         selectedChapterTitle.text = "(${bibleVersion.abbreviation}) $chapterTitle"
 
         selectedChapterContent.text = fetchChapterContent(item.chapterNumber, bibleVersionIndex)
 
-        chapterIdxToRestore = fragment.chapterAdapter.selectedIndex
-        if (item.chapterNumber - 1 != chapterIdxToRestore) {
-            fragment.syncChapterWidget(item.chapterNumber - 1, true)
-        }
-        else {
-            chapterIdxToRestore = -1
-        }
-
-        bookReadView.visibility = View.INVISIBLE
+        defaultView.visibility = View.INVISIBLE
         chapterFocusView.visibility = View.VISIBLE
 
         // delay goToVerse so htmlTextView gets the chance to redraw
@@ -113,6 +107,8 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
             htmlViewManager.goToVerse(item.verseNumber, selectedChapterContent,
                 selectedChapterContentScroller)
         }
+
+        backPressListener.isEnabled = true
     }
 
     private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int): Spanned {
@@ -128,10 +124,26 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
             if (item.chapterNumber != chapterNumber) {
                 break
             }
+            var contentByParts: List<BookDisplayItemContent>? = null
+            var fullContent: BookDisplayItemContent? = null
             if (item.viewType == BookDisplayItemViewType.VERSE) {
+                if (bookContentAdapter.multipleDisplay) {
+                    if (bookContentAdapter.displayMultipleSideBySide) {
+                        contentByParts = if (bibleVersionIndex == 0) {
+                            item.firstPartialContent
+                        } else {
+                            item.secondPartialContent
+                        }
+                    }
+                }
+                if (contentByParts == null && item.fullContent.bibleVersionIndex == bibleVersionIndex) {
+                    fullContent = item.fullContent
+                }
+            }
+            if (contentByParts != null || fullContent != null) {
                 if (lastVerseNum != item.verseNumber) {
                     if (lastVerseNum > 0) {
-                        if (!(bookContentAdapter.multipleDisplay && bookContentAdapter.displayMultipleSidebySide)) {
+                        if (contentByParts == null) {
                             chapterContent.append("<br>")
                         }
                         chapterContent.append("<br></p></${htmlViewManager.vPrefix}$lastVerseNum>")
@@ -139,19 +151,12 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
                     chapterContent.append("<${htmlViewManager.vPrefix}${item.verseNumber}><p>")
                     lastVerseNum = item.verseNumber
                 }
-                if (bookContentAdapter.multipleDisplay && bookContentAdapter.displayMultipleSidebySide) {
-                    val contentByParts = if (bibleVersionIndex == 0) {
-                        item.firstPartialContent!!
-                    } else {
-                        item.secondPartialContent!!
-                    }
-                    for (part in contentByParts) {
+                contentByParts?.let {
+                    for (part in it) {
                         chapterContent.append(part.text).append("<br>")
                     }
                 }
-                else {
-                    chapterContent.append(item.fullContent.text)
-                }
+                fullContent?.let { chapterContent.append(it.text) }
             }
             i++
         }

@@ -3,6 +3,99 @@ package com.aaronicsubstances.niv1984.data
 class VerseHighlighter {
     companion object {
         private val WS_REGEX = Regex("\\s+")
+
+        fun addHighlightRange(
+            existingRanges: List<Pair<Int, Int>>,
+            newRange: Pair<Int, Int>
+        ): List<Pair<Int, Int>> {
+            val editableRanges = clearHighlightRange(existingRanges, newRange)
+            addNewHighlightRange(editableRanges, newRange)
+            return optimizeHighlightRanges(editableRanges)
+        }
+
+        internal fun addNewHighlightRange(
+            editableRanges: MutableList<Pair<Int, Int>>,
+            newRange: Pair<Int, Int>) {
+            // PostCondition: editable ranges remain sorted
+            // assuming editableRanges is already sorted.
+
+            // look for appropriate place to insert newRange,
+            // using inner loop of insertion sort
+            var i = 0
+            while (i < editableRanges.size) {
+                if (editableRanges[i].first > newRange.first) {
+                    break
+                }
+                i++
+            }
+            editableRanges.add(i, newRange)
+        }
+
+        internal fun optimizeHighlightRanges(editableRanges: MutableList<Pair<Int, Int>>):
+                List<Pair<Int, Int>> {
+            // optimize number of ranges by merging adjacent ranges
+            val indicesToRemove = mutableListOf<Int>()
+            var i = 0
+            while (i < editableRanges.size) {
+                var (s, t) = editableRanges[i]
+                var endI = i + 1 // ensure progress at all cost to avoid endless looping
+                while (endI < editableRanges.size) {
+                    val adj = editableRanges[endI]
+                    if (t != adj.first) {
+                        break
+                    }
+                    t = adj.second
+                    endI++
+                }
+                if (endI - i > 1) {
+                    (i + 1 until endI).forEach { indicesToRemove.add(it) }
+                    editableRanges[i] = Pair(s, t)
+                }
+                i = endI
+            }
+            if (indicesToRemove.isEmpty()) {
+                return editableRanges
+            }
+            return editableRanges.filterIndexed { index, _ ->
+                !indicesToRemove.contains(index)
+            }
+        }
+
+        fun removeHighlightRange(
+            existingRanges: List<Pair<Int, Int>>,
+            rangeToClear: Pair<Int, Int>
+        ): List<Pair<Int, Int>> {
+            return clearHighlightRange(existingRanges, rangeToClear)
+        }
+
+        internal fun clearHighlightRange(
+            existingRanges: List<Pair<Int, Int>>,
+            rangeToClear: Pair<Int, Int>
+        ): MutableList<Pair<Int, Int>> {
+            // PostCondition requirement: maintain disjoint/nonoverlapping property
+            // assuming existingRanges is already disjoint.
+
+            val editableRanges = mutableListOf<Pair<Int, Int>>()
+            for (r in existingRanges) {
+                // if r is entirely outside rangeToClear, readd it
+                // if r is entirely inside rangeToClear, don't readd it.
+                // if r overlaps rangeToClear, then readd one or both of left and right portions of it.
+                if (r.second <= rangeToClear.first || r.first >= rangeToClear.second) {
+                    editableRanges.add(r)
+                }
+                else {
+                    if (r.first < rangeToClear.first) {
+                        // add left portion outside of rangeToClear
+                        editableRanges.add(Pair(r.first, rangeToClear.first))
+                    }
+                    if (r.second > rangeToClear.second) {
+                        // add right portion outside of rangeToClear
+                        editableRanges.add(Pair(rangeToClear.second, r.second))
+                    }
+                }
+            }
+            return editableRanges
+        }
     }
 
     val rawText = StringBuilder()
@@ -45,7 +138,7 @@ class VerseHighlighter {
             val diff = normalized.length - (i - startI)
             if (diff < 0) {
                 for (m in markupList) {
-                    // deletions should only adjust positions beyond i.
+                    // deletions should only adjust positions beyond deletePos.
                     if (m.pos > startI) {
                         m.pos += diff
                     }

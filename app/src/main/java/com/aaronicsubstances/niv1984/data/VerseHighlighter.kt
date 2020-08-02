@@ -100,7 +100,6 @@ class VerseHighlighter {
 
     val rawText = StringBuilder()
     val markupList = mutableListOf<Markup>()
-    private var positionAdjustment: Int = 0
 
     fun addInitText(s: String) {
         rawText.append(s)
@@ -115,40 +114,17 @@ class VerseHighlighter {
     }
 
     fun beginProcessing() {
-        positionAdjustment = 0
-
-        // look for substrings in between markup positions and normalize them as HTML would.
-        val markupPositions = markupList.map { it.pos }.toSet()
-        var i = 0
-        val originalRawTextLength = rawText.length
-        while (i < originalRawTextLength) {
-            val startI = i
-            i++ // ensure progress at all cost to avoid endless looping
-            while (i < originalRawTextLength && !markupPositions.contains(i)) {
-                i++
-            }
-
-            // now replace all contiguous whitespace with single space, don't trim,
-            // and shift all subsequent positions backwards
-            val normalized = rawText.substring(
-                startI + positionAdjustment,
-                i + positionAdjustment
-            ).replace(WS_REGEX, " ")
-            rawText.replace(startI + positionAdjustment, i + positionAdjustment, normalized)
-            val diff = normalized.length - (i - startI)
-            if (diff < 0) {
-                for (m in markupList) {
-                    // deletions should only adjust positions beyond deletePos.
-                    if (m.pos > startI) {
-                        m.pos += diff
-                    }
-                }
-                positionAdjustment += diff
-            }
+        // look for substrings in between markup positions and normalize them as HTML would,
+        // by replacing all contiguous whitespace with single space. Do not trim.
+        val normalizingFn: (s: String)->String = { it.replace(WS_REGEX, " ") }
+        val markupPositions = mutableMapOf<Int, Int?>()
+        for (m in markupList) {
+            markupPositions[m.pos] = null
         }
+        transformRawText(markupPositions, normalizingFn)
 
-        // reset position adjustment for inserting placeholders.
-        positionAdjustment = 0
+        // insert placeholders.
+        var positionAdjustment = 0
         for (m in markupList) {
             m.pos += positionAdjustment
             if (m.placeholder != null) {
@@ -156,43 +132,115 @@ class VerseHighlighter {
                 positionAdjustment += m.placeholder.length
             }
         }
-
-        // reset position adjustment for update
-        positionAdjustment = 0
     }
 
-    fun updateText(insertPos: Int, s: String, precedesSamePosMarkup: Boolean) {
+    /*
+     * Look for substrings in between markup positions and transform them.
+     */
+    private fun transformRawText(markupPositions: Map<Int, Int?>,
+                                 transformer: (s: String)->String) {
+        var positionAdjustment = 0
+        val originalRawTextLength = rawText.length
+        var i = 0
+        while (i < originalRawTextLength) {
+            val startI = i
+            i++ // ensure progress at all cost to avoid endless looping
+            while (i < originalRawTextLength && !markupPositions.containsKey(i)) {
+                i++
+            }
+
+            val transformed = transformer(rawText.substring(
+                startI + positionAdjustment,
+                i + positionAdjustment
+            ))
+            rawText.replace(startI + positionAdjustment, i + positionAdjustment, transformed)
+            val diff = transformed.length - (i - startI)
+            if (diff != 0) {
+                for (m in markupList) {
+                    // Only adjust positions beyond replacement position.
+                    if (m.pos > startI + positionAdjustment) {
+                        m.pos += diff
+                    }
+                }
+                positionAdjustment += diff
+            }
+            if (i < originalRawTextLength) {
+                val endI = markupPositions.getValue(i)
+                if (endI != null) {
+                    i = endI
+                }
+            }
+        }
+    }
+
+    /*
+     * NB: expected usage is to always call this method with different insertPos value.
+     */
+    fun updateMarkup(insertPos: Int, tag: String, precedesSamePosMarkup: Boolean) {
+        var mIdx = 0
         var samePosPlaceholderLen = 0
-        for (m in markupList) {
+        while (mIdx < markupList.size) {
+            val m = markupList[mIdx]
             // validate
             if (m.placeholder != null && insertPos > m.pos
                     && insertPos < m.pos + m.placeholder.length) {
                 throw IllegalArgumentException("Update operation invalid because it will " +
-                        "edit placeholder markup $m")
+                        "edit placeholder markup ${mIdx}. $m")
             }
-            // insertions should adjust positions beyond insertPos.
-            // if insertPos equals mark up pos, then use boolean parameter
-            // determine whether it is <s> <markups> (ie precedesSamePosMarkup = true)
+            // if insertPos equals a markup pos, then resolve duplication using boolean parameter.
+            // Determine whether it is <s> <markups> (ie precedesSamePosMarkup = true)
             // or it is <markup> <s> (ie precedesSamePosMarkup = false).
-            if (m.pos > insertPos) {
-                m.pos += s.length
+            if (insertPos < m.pos) {
+                break
             }
-            else if (m.pos == insertPos) {
+            if (insertPos == m.pos) {
                 if (precedesSamePosMarkup) {
-                    m.pos += s.length;
+                    // cannot precede another markup also added during update at same position.
+                    if (!m.addedDuringUpdate) {
+                        break
+                    }
                 }
-                else if (m.placeholder != null && m.placeholder.isNotEmpty()) {
-                    assert(samePosPlaceholderLen == 0)
-                    samePosPlaceholderLen = m.placeholder.length
+                else {
+                    // to properly follow a placeholder markup at same pos,
+                    // insert pos must be edited to point beyond it.
+                    if (m.placeholder != null) {
+                        assert(samePosPlaceholderLen == 0)
+                        samePosPlaceholderLen = m.placeholder.length
+                    }
                 }
             }
+            mIdx++
         }
-        rawText.insert(insertPos + positionAdjustment + samePosPlaceholderLen, s)
-        positionAdjustment += s.length
+        markupList.add(mIdx, Markup(
+            "",
+            insertPos + samePosPlaceholderLen,
+            tag,
+            addedDuringUpdate = true
+        ))
     }
 
-    fun finalizeProcessing() {
-        positionAdjustment = 0
+    internal fun escapeHtmlSections(escapeFn: (s: String) -> String) {
+        val markupPositions = mutableMapOf<Int, Int?>()
+        for (m in markupList) {
+            // don't overwrite placeholder positions with non-placeholder ones.
+            if (m.placeholder != null && m.placeholder.isNotEmpty()) {
+                markupPositions[m.pos] = m.pos + m.placeholder.length
+            }
+            else if (!markupPositions.containsKey(m.pos)) {
+                markupPositions[m.pos] = null
+            }
+        }
+        transformRawText(markupPositions, escapeFn)
+    }
+
+    /*
+     * NB: escapeFn is used to avoid need to mock TextUtils.htmlEncode
+     */
+    fun finalizeProcessing(escapeFn: ((s: String) -> String)? = null) {
+        escapeFn?.let{ escapeHtmlSections(it) }
+
+        // this code uses the same ideas from SourceCodeTransformer.
+        var positionAdjustment = 0
         for (m in markupList) {
             val diff: Int
             if (m.placeholder == null) {
@@ -210,5 +258,11 @@ class VerseHighlighter {
         }
     }
 
-    data class Markup(val id: String, var pos: Int, val tag: String, val placeholder: String? = null)
+    data class Markup(
+        val id: String,
+        var pos: Int,
+        val tag: String,
+        val placeholder: String? = null,
+        val addedDuringUpdate: Boolean = false
+    )
 }

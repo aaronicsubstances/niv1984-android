@@ -8,6 +8,51 @@ import org.junit.Test
 class VerseHighlighterTest {
 
     @Test
+    fun testEscapeHtmlSections1() {
+        val instance = VerseHighlighter()
+        instance.addInitMarkup("1", "<font>")
+        instance.addInitText("a  title  ")
+        instance.addInitMarkup("2", "</font>")
+
+        instance.beginProcessing()
+        assertEquals("a title ", instance.rawText.toString())
+        assertEquals(listOf(Markup("1", 0, "<font>"),
+            Markup("2", 8, "</font>")), instance.markupList)
+
+        instance.escapeHtmlSections { it + it.trim().toUpperCase() }
+        assertEquals("a title A TITLE", instance.rawText.toString())
+        assertEquals(listOf(Markup("1", 0, "<font>"),
+            Markup("2", 15, "</font>")), instance.markupList)
+    }
+
+    @Test
+    fun testEscapeHtmlSections2() {
+        val instance = VerseHighlighter()
+        instance.addInitText("  ")
+        instance.addInitMarkup("", "<p>")
+        instance.addInitMarkup("", "<font>")
+        instance.addInitMarkupWithPlaceholder("", "hr", " a  title  ")
+        instance.addInitMarkup("", "</font>")
+        instance.addInitMarkup("", "</p>")
+
+        instance.beginProcessing()
+        assertEquals("  a  title  ", instance.rawText.toString())
+        assertEquals(listOf(Markup("", 1, "<p>"),
+            Markup("", 1, "<font>"),
+            Markup("", 1, "hr", " a  title  "),
+            Markup("", 12, "</font>"),
+            Markup("", 12, "</p>")), instance.markupList)
+
+        instance.escapeHtmlSections { it.trim() }
+        assertEquals(" a  title  ", instance.rawText.toString())
+        assertEquals(listOf(Markup("", 0, "<p>"),
+            Markup("", 0, "<font>"),
+            Markup("", 0, "hr", " a  title  "),
+            Markup("", 11, "</font>"),
+            Markup("", 11, "</p>")), instance.markupList)
+    }
+
+    @Test
     fun test1() {
         val instance = VerseHighlighter()
         instance.addInitMarkup("1", "<font>")
@@ -19,10 +64,13 @@ class VerseHighlighterTest {
         assertEquals(listOf(Markup("1", 0, "<font>"),
             Markup("2", 8, "</font>")), instance.markupList)
 
+        instance.escapeHtmlSections {
+            it.replace(" ", "&#32;")
+        }
         instance.finalizeProcessing()
-        assertEquals("<font>a title </font>", instance.rawText.toString())
+        assertEquals("<font>a&#32;title&#32;</font>", instance.rawText.toString())
         assertEquals(listOf(Markup("1", 0, "<font>"),
-            Markup("2", 14, "</font>")), instance.markupList)
+            Markup("2", 22, "</font>")), instance.markupList)
     }
 
     @Test
@@ -42,12 +90,21 @@ class VerseHighlighterTest {
             Markup("", 10, "</font>"),
             Markup("", 10, "</p>")), instance.markupList)
 
-        instance.finalizeProcessing()
-        assertEquals(" <p><font> a title </font></p>", instance.rawText.toString())
-        assertEquals(listOf(Markup("", 1, "<p>"),
-            Markup("", 4, "<font>"),
-            Markup("", 19, "</font>"),
+        instance.escapeHtmlSections {
+            it.replace(" ", "&#32;")
+        }
+        assertEquals("&#32;&#32;a&#32;title&#32;", instance.rawText.toString())
+        assertEquals(listOf(Markup("", 5, "<p>"),
+            Markup("", 5, "<font>"),
+            Markup("", 26, "</font>"),
             Markup("", 26, "</p>")), instance.markupList)
+
+        instance.finalizeProcessing()
+        assertEquals("&#32;<p><font>&#32;a&#32;title&#32;</font></p>", instance.rawText.toString())
+        assertEquals(listOf(Markup("", 5, "<p>"),
+            Markup("", 8, "<font>"),
+            Markup("", 35, "</font>"),
+            Markup("", 42, "</p>")), instance.markupList)
     }
 
     @Test
@@ -68,13 +125,15 @@ class VerseHighlighterTest {
             Markup("", 12, "</font>"),
             Markup("", 12, "</p>")), instance.markupList)
 
-        instance.finalizeProcessing()
-        assertEquals(" <p><font>hr</font></p>", instance.rawText.toString())
-        assertEquals(listOf(Markup("", 1, "<p>"),
-            Markup("", 4, "<font>"),
-            Markup("", 10, "hr", " a  title  "),
-            Markup("", 12, "</font>"),
-            Markup("", 19, "</p>")), instance.markupList)
+        instance.finalizeProcessing {
+            it.replace(" ", "&#32;")
+        }
+        assertEquals("&#32;<p><font>hr</font></p>", instance.rawText.toString())
+        assertEquals(listOf(Markup("", 5, "<p>"),
+            Markup("", 8, "<font>"),
+            Markup("", 14, "hr", " a  title  "),
+            Markup("", 16, "</font>"),
+            Markup("", 23, "</p>")), instance.markupList)
     }
 
     @Test
@@ -95,27 +154,32 @@ class VerseHighlighterTest {
             Markup("", 12, "</font>"),
             Markup("", 12, "</p>")), instance.markupList)
 
-        instance.updateText(1, "<span>", false)
-        assertEquals("  a  title  <span>", instance.rawText.toString())
+        instance.updateMarkup(1, "<span>", false)
+        assertEquals("  a  title  ", instance.rawText.toString())
         assertEquals(listOf(Markup("", 1, "<p>"),
             Markup("", 1, "<font>"),
             Markup("", 1, "hr", " a  title  "),
-            Markup("", 18, "</font>"),
-            Markup("", 18, "</p>")), instance.markupList)
+            Markup("", 12, "<span>", addedDuringUpdate = true),
+            Markup("", 12, "</font>"),
+            Markup("", 12, "</p>")), instance.markupList)
 
-        instance.updateText(12, "</span>", true)
-        assertEquals("  a  title  <span></span>", instance.rawText.toString())
+        instance.updateMarkup(12, "</span>", true)
+        assertEquals("  a  title  ", instance.rawText.toString())
         assertEquals(listOf(Markup("", 1, "<p>"),
             Markup("", 1, "<font>"),
             Markup("", 1, "hr", " a  title  "),
-            Markup("", 25, "</font>"),
-            Markup("", 25, "</p>")), instance.markupList)
+            Markup("", 12, "<span>", addedDuringUpdate = true),
+            Markup("", 12, "</span>", addedDuringUpdate = true),
+            Markup("", 12, "</font>"),
+            Markup("", 12, "</p>")), instance.markupList)
 
         instance.finalizeProcessing()
         assertEquals(" <p><font>hr<span></span></font></p>", instance.rawText.toString())
         assertEquals(listOf(Markup("", 1, "<p>"),
             Markup("", 4, "<font>"),
             Markup("", 10, "hr", " a  title  "),
+            Markup("", 12, "<span>", addedDuringUpdate = true),
+            Markup("", 18, "</span>", addedDuringUpdate = true),
             Markup("", 25, "</font>"),
             Markup("", 32, "</p>")), instance.markupList)
     }
@@ -136,21 +200,26 @@ class VerseHighlighterTest {
             Markup("", 4, "<hr>", "line"),
             Markup("", 12, "</p>")), instance.markupList)
 
-        instance.updateText(1, "<span>", false)
-        assertEquals("f<span>ontlineabbr ", instance.rawText.toString())
+        instance.updateMarkup(1, "<span>", false)
+        assertEquals("fontlineabbr ", instance.rawText.toString())
         assertEquals(listOf(Markup("", 0, "<p>"),
-            Markup("", 10, "<hr>", "line"),
-            Markup("", 18, "</p>")), instance.markupList)
+            Markup("", 1, "<span>", addedDuringUpdate = true),
+            Markup("", 4, "<hr>", "line", false),
+            Markup("", 12, "</p>")), instance.markupList)
 
-        instance.updateText(4, "</span>", true)
-        assertEquals("f<span>ont</span>lineabbr ", instance.rawText.toString())
+        instance.updateMarkup(4, "</span>", true)
+        assertEquals("fontlineabbr ", instance.rawText.toString())
         assertEquals(listOf(Markup("", 0, "<p>"),
-            Markup("", 17, "<hr>", "line"),
-            Markup("", 25, "</p>")), instance.markupList)
+            Markup("", 1, "<span>", addedDuringUpdate = true),
+            Markup("", 4, "</span>", addedDuringUpdate = true),
+            Markup("", 4, "<hr>", "line"),
+            Markup("", 12, "</p>")), instance.markupList)
 
         instance.finalizeProcessing()
         assertEquals("<p>f<span>ont</span><hr>abbr</p> ", instance.rawText.toString())
         assertEquals(listOf(Markup("", 0, "<p>"),
+            Markup("", 4, "<span>", addedDuringUpdate = true),
+            Markup("", 13, "</span>", addedDuringUpdate = true),
             Markup("", 20, "<hr>", "line"),
             Markup("", 28, "</p>")), instance.markupList)
     }

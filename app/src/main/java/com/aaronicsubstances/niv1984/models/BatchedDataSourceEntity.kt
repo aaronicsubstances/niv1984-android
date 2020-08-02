@@ -4,7 +4,8 @@ import androidx.room.*
 
 @Entity
 data class BatchedDataSourceEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
     var rank: Int,
     var lastUpdateTimestamp: Long,
     var category: String,

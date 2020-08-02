@@ -247,7 +247,7 @@ class SearchResultDataSource(
         item: SearchResult
     ): Any {
         val serializedItem = AppUtils.serializeAsJson(item)
-        return BatchedDataSourceEntity(
+        return BatchedDataSourceEntity(0,
             rank, lastUpdateTimestamp, category, batchVersion,
             batchNumber, item.fetchKey().toString(), serializedItem
         )

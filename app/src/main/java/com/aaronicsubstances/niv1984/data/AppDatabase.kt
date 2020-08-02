@@ -10,12 +10,12 @@ import kotlinx.coroutines.*
 
 @TypeConverters( DateTypeConverter::class, TimestampTypeConverter::class,
     UuidTypeConverter::class)
-@Database(entities = [ UserNote::class, UserNoteIndexRecord::class, BibleIndexRecord::class,
+@Database(entities = [ HighlightRange::class, BibleIndexRecord::class,
     BatchedDataSourceEntity::class ],
     version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun userNoteDao(): UserNoteDao
+    abstract fun highlightRangeDao(): HighlightRangeDao
     abstract fun bibleIndexRecordDao(): BibleIndexRecordDao
     abstract fun batchedDataSourceDao(): BatchedDataSourceEntityDao
 

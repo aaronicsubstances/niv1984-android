@@ -2,6 +2,7 @@ package com.aaronicsubstances.niv1984.data
 
 import android.text.Html
 import android.text.TextUtils
+import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class VerseHighlighter {
@@ -11,17 +12,17 @@ class VerseHighlighter {
         private val NBSP = "\u00a0"
 
         fun addHighlightRange(
-            existingRanges: List<Pair<Int, Int>>,
-            newRange: Pair<Int, Int>
-        ): List<Pair<Int, Int>> {
+            existingRanges: List<HighlightRange>,
+            newRange: HighlightRange
+        ): List<HighlightRange> {
             val editableRanges = clearHighlightRange(existingRanges, newRange)
             addNewHighlightRange(editableRanges, newRange)
             return optimizeHighlightRanges(editableRanges)
         }
 
         internal fun addNewHighlightRange(
-            editableRanges: MutableList<Pair<Int, Int>>,
-            newRange: Pair<Int, Int>) {
+            editableRanges: MutableList<HighlightRange>,
+            newRange: HighlightRange) {
             // PostCondition: editable ranges remain sorted
             // assuming editableRanges is already sorted.
 
@@ -29,7 +30,7 @@ class VerseHighlighter {
             // using inner loop of insertion sort
             var i = 0
             while (i < editableRanges.size) {
-                if (editableRanges[i].first > newRange.first) {
+                if (editableRanges[i].startIndex > newRange.startIndex) {
                     break
                 }
                 i++
@@ -37,8 +38,8 @@ class VerseHighlighter {
             editableRanges.add(i, newRange)
         }
 
-        internal fun optimizeHighlightRanges(editableRanges: MutableList<Pair<Int, Int>>):
-                List<Pair<Int, Int>> {
+        internal fun optimizeHighlightRanges(editableRanges: MutableList<HighlightRange>):
+                List<HighlightRange> {
             // optimize number of ranges by merging adjacent ranges
             val indicesToRemove = mutableListOf<Int>()
             var i = 0
@@ -47,15 +48,15 @@ class VerseHighlighter {
                 var endI = i + 1 // ensure progress at all cost to avoid endless looping
                 while (endI < editableRanges.size) {
                     val adj = editableRanges[endI]
-                    if (t != adj.first) {
+                    if (t != adj.startIndex) {
                         break
                     }
-                    t = adj.second
+                    t = adj.endIndex
                     endI++
                 }
                 if (endI - i > 1) {
                     (i + 1 until endI).forEach { indicesToRemove.add(it) }
-                    editableRanges[i] = Pair(s, t)
+                    editableRanges[i] = HighlightRange(s, t)
                 }
                 i = endI
             }
@@ -68,35 +69,35 @@ class VerseHighlighter {
         }
 
         fun removeHighlightRange(
-            existingRanges: List<Pair<Int, Int>>,
-            rangeToClear: Pair<Int, Int>
-        ): List<Pair<Int, Int>> {
+            existingRanges: List<HighlightRange>,
+            rangeToClear: HighlightRange
+        ): List<HighlightRange> {
             return clearHighlightRange(existingRanges, rangeToClear)
         }
 
         internal fun clearHighlightRange(
-            existingRanges: List<Pair<Int, Int>>,
-            rangeToClear: Pair<Int, Int>
-        ): MutableList<Pair<Int, Int>> {
+            existingRanges: List<HighlightRange>,
+            rangeToClear: HighlightRange
+        ): MutableList<HighlightRange> {
             // PostCondition requirement: maintain disjoint/nonoverlapping property
             // assuming existingRanges is already disjoint.
 
-            val editableRanges = mutableListOf<Pair<Int, Int>>()
+            val editableRanges = mutableListOf<HighlightRange>()
             for (r in existingRanges) {
                 // if r is entirely outside rangeToClear, readd it
                 // if r is entirely inside rangeToClear, don't readd it.
                 // if r overlaps rangeToClear, then readd one or both of left and right portions of it.
-                if (r.second <= rangeToClear.first || r.first >= rangeToClear.second) {
+                if (r.endIndex <= rangeToClear.startIndex || r.startIndex >= rangeToClear.endIndex) {
                     editableRanges.add(r)
                 }
                 else {
-                    if (r.first < rangeToClear.first) {
+                    if (r.startIndex < rangeToClear.startIndex) {
                         // add left portion outside of rangeToClear
-                        editableRanges.add(Pair(r.first, rangeToClear.first))
+                        editableRanges.add(HighlightRange(r.startIndex, rangeToClear.startIndex))
                     }
-                    if (r.second > rangeToClear.second) {
+                    if (r.endIndex > rangeToClear.endIndex) {
                         // add right portion outside of rangeToClear
-                        editableRanges.add(Pair(rangeToClear.second, r.second))
+                        editableRanges.add(HighlightRange(rangeToClear.endIndex, r.endIndex))
                     }
                 }
             }

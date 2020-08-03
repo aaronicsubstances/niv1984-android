@@ -399,7 +399,7 @@ class BookLoader(private val context: Context,
             when (part) {
                 is WordsOfJesus -> {
                     if (prependText != null) {
-                        out.addInitMarkup(prependText)
+                        out.addInitText(prependText)
                         prependText = null
                     }
                     out.addInitMarkup("<font color='$wjColor'>")
@@ -434,14 +434,14 @@ class BookLoader(private val context: Context,
                 }
                 is NoteRef -> {
                     if (prependText != null) {
-                        out.addInitMarkup(prependText)
+                        out.addInitText(prependText)
                         prependText = null
                     }
                     processNoteRef(bibleVersionIndex, chapterNumber, part, out)
                 }
                 else -> {
                     if (prependText != null) {
-                        out.addInitMarkup(prependText)
+                        out.addInitText(prependText)
                         prependText = null
                     }
                     part as FancyContent
@@ -450,11 +450,11 @@ class BookLoader(private val context: Context,
             }
         }
 
-        // to deal with omitted niv verses such as matt 17:21,
+        // to deal with omitted NIV verses such as matt 17:21,
         // ensure verse items is not empty.
         if (!out.isEmpty() || verseItems.isEmpty()) {
             if (prependText != null) {
-                out.addInitMarkup(prependText)
+                out.addInitText(prependText)
                 prependText = null
             }
             val blockText = bookHighlighter.processBlockText(chapterNumber, rawVerse.verseNumber,

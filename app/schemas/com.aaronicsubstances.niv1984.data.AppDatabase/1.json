@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "61ae7c783c9de6c0149cf336e46a3514",
+    "identityHash": "69eed5b8a5c617c3422dc44e84a77a60",
     "entities": [
       {
-        "tableName": "HighlightRange",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bibleVersion` TEXT NOT NULL, `bookNumber` INTEGER NOT NULL, `chapterNumber` INTEGER NOT NULL, `verseNumber` INTEGER NOT NULL, `verseBlockIndex` INTEGER NOT NULL, `startIndex` INTEGER NOT NULL, `endIndex` INTEGER NOT NULL)",
+        "tableName": "UserHighlightData",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bibleVersion` TEXT NOT NULL, `bookNumber` INTEGER NOT NULL, `chapterNumber` INTEGER NOT NULL, `data` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -33,27 +33,9 @@
             "notNull": true
           },
           {
-            "fieldPath": "verseNumber",
-            "columnName": "verseNumber",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "verseBlockIndex",
-            "columnName": "verseBlockIndex",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "startIndex",
-            "columnName": "startIndex",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "endIndex",
-            "columnName": "endIndex",
-            "affinity": "INTEGER",
+            "fieldPath": "data",
+            "columnName": "data",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -201,7 +183,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '61ae7c783c9de6c0149cf336e46a3514')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '69eed5b8a5c617c3422dc44e84a77a60')"
     ]
   }
 }

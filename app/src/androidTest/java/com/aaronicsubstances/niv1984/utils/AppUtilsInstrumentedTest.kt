@@ -4,7 +4,9 @@ import android.text.Html
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.SearchResult
+import com.aaronicsubstances.niv1984.models.UserHighlightData
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,10 +38,16 @@ class AppUtilsInstrumentedTest {
             this.rank = 6
             this.lastUpdateTimestamp = 7L
         }
-        val serialized = AppUtils.serializeAsJson(expected)
+        var serialized = AppUtils.serializeAsJson(expected)
         //println("Serialized: $serialized")
         val actual = AppUtils.deserializeFromJson(serialized, expected.javaClass)
         assertEquals(expected, actual)
+
+        val expectedHighlight = UserHighlightData.ChapterData(1,
+            arrayOf(UserHighlightData.VerseBlockData(1, 0, arrayOf(HighlightRange(0, 1)))))
+        serialized = AppUtils.serializeAsJson(expectedHighlight)
+        val actualHighlight = AppUtils.deserializeFromJson(serialized, expectedHighlight.javaClass)
+        assertEquals(expectedHighlight, actualHighlight)
     }
 
     @Test

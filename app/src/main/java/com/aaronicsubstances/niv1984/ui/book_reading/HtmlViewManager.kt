@@ -23,7 +23,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         opening: Boolean,
         tag: String,
         output: Editable,
-        xmlReader: XMLReader?
+        xmlReader: XMLReader
     ) {
         if (tag == "hr") {
             val hrColor = ContextCompat.getColor(context, R.color.dividerColor)

@@ -1,8 +1,14 @@
 package com.aaronicsubstances.niv1984.data
 
+import android.text.Html
+import android.text.TextUtils
+import com.aaronicsubstances.niv1984.utils.AppUtils
+
 class VerseHighlighter {
     companion object {
-        private val WS_REGEX = Regex("\\s+")
+        private val TEMP_TAG_PREFIX = "t_"
+        private val WS_REGEX = Regex("\\s")
+        private val NBSP = "\u00a0"
 
         fun addHighlightRange(
             existingRanges: List<Pair<Int, Int>>,
@@ -101,24 +107,28 @@ class VerseHighlighter {
     val rawText = StringBuilder()
     val markupList = mutableListOf<Markup>()
 
-    fun addInitText(s: String) {
-        rawText.append(s)
+    fun addInitText(s: String): VerseHighlighter {
+        // for some reason Html.fromHtml() does not collapse tabs into space,
+        // so explicitly perform replacement, and allow only &nbsp; as exception
+        // to whitespace collapsing.
+        rawText.append(TextUtils.htmlEncode(s.replace(WS_REGEX) {
+            if (it.value == NBSP) NBSP else " "
+        }))
+        return this
     }
 
-    fun addInitMarkup(m: String) {
-        markupList.add(Markup("", rawText.length, m))
+    fun addInitMarkup(tag: String): VerseHighlighter {
+        return addInitMarkup(Markup(tag))
     }
 
-    fun addInitMarkup(id: String, m: String) {
-        markupList.add(Markup(id, rawText.length, m))
-    }
-
-    fun addInitMarkupWithPlaceholder(id: String, m: String, placeholder: String) {
-        markupList.add(Markup(id, rawText.length, m, placeholder))
+    fun addInitMarkup(m: Markup): VerseHighlighter {
+        rawText.append("<$TEMP_TAG_PREFIX${markupList.size} />")
+        markupList.add(m)
+        return this
     }
 
     fun isEmpty(): Boolean {
-        return rawText.isEmpty() && markupList.isEmpty()
+        return rawText.isEmpty()
     }
 
     fun clear() {
@@ -127,69 +137,42 @@ class VerseHighlighter {
     }
 
     fun beginProcessing() {
-        // look for substrings in between markup positions and normalize them as HTML would,
-        // by replacing all contiguous whitespace with single space. Do not trim.
-        val normalizingFn: (s: String)->String = { it.replace(WS_REGEX, " ") }
-        val markupPositions = mutableMapOf<Int, Int?>()
-        for (m in markupList) {
-            markupPositions[m.pos] = null
-        }
-        transformRawText(markupPositions, normalizingFn)
-
-        // insert placeholders.
-        var positionAdjustment = 0
-        for (m in markupList) {
-            m.pos += positionAdjustment
-            if (m.placeholder != null) {
-                rawText.insert(m.pos + positionAdjustment, m.placeholder)
-                positionAdjustment += m.placeholder.length
-            }
-        }
-    }
-
-    /*
-     * Look for substrings in between markup positions and transform them.
-     */
-    private fun transformRawText(markupPositions: Map<Int, Int?>,
-                                 transformer: (s: String)->String) {
-        var positionAdjustment = 0
-        val originalRawTextLength = rawText.length
-        var i = 0
-        while (i < originalRawTextLength) {
-            val startI = i
-            i++ // ensure progress at all cost to avoid endless looping
-            while (i < originalRawTextLength && !markupPositions.containsKey(i)) {
-                i++
-            }
-
-            val transformed = transformer(rawText.substring(
-                startI + positionAdjustment,
-                i + positionAdjustment
-            ))
-            rawText.replace(startI + positionAdjustment, i + positionAdjustment, transformed)
-            val diff = transformed.length - (i - startI)
-            if (diff != 0) {
-                for (m in markupList) {
-                    // Only adjust positions beyond replacement position.
-                    if (m.pos > startI + positionAdjustment) {
-                        m.pos += diff
+        val rawHtml = AppUtils.parseHtml("<body>$rawText</body>",
+            Html.TagHandler { opening, tag, output, _ ->
+                if (opening && tag.startsWith(TEMP_TAG_PREFIX)) {
+                    val idx = Integer.parseInt(tag.substring(TEMP_TAG_PREFIX.length))
+                    val m = markupList[idx]
+                    m.pos = output.length
+                    if (m.placeholder != null) {
+                        output.append(m.placeholder)
                     }
                 }
-                positionAdjustment += diff
-            }
-            if (i < originalRawTextLength) {
-                val endI = markupPositions.getValue(i)
-                if (endI != null) {
-                    i = endI
+            }).toString()
+        rawText.clear()
+        rawText.append(rawHtml)
+
+        /*
+         * NB: for some reason, Html.fromHtml() trims leading whitespace, but
+         * collapses trailing whitespace to single space character.
+         * Hence remove trailing space.
+         */
+        if (rawText.isNotEmpty() && rawText[rawText.length - 1] == ' ') {
+            var i = markupList.size - 1
+            while (i >= 0) {
+                if (markupList[i].pos != rawText.length) {
+                    break
                 }
+                markupList[i].pos--
+                i--
             }
+            rawText.setLength(rawText.length - 1)
         }
     }
 
-    /*
-     * NB: expected usage is to always call this method with different insertPos value.
-     */
     fun updateMarkup(insertPos: Int, tag: String, precedesSamePosMarkup: Boolean) {
+        if (insertPos < 0 || insertPos > rawText.length) {
+            throw IllegalArgumentException("Invalid insert position: $insertPos")
+        }
         var mIdx = 0
         var samePosPlaceholderLen = 0
         while (mIdx < markupList.size) {
@@ -198,7 +181,7 @@ class VerseHighlighter {
             if (m.placeholder != null && insertPos > m.pos
                     && insertPos < m.pos + m.placeholder.length) {
                 throw IllegalArgumentException("Update operation invalid because it will " +
-                        "edit placeholder markup ${mIdx}. $m")
+                        "edit placeholder markup at index ${mIdx}: $m")
             }
             // if insertPos equals a markup pos, then resolve duplication using boolean parameter.
             // Determine whether it is <s> <markups> (ie precedesSamePosMarkup = true)
@@ -225,32 +208,15 @@ class VerseHighlighter {
             mIdx++
         }
         markupList.add(mIdx, Markup(
-            "",
-            insertPos + samePosPlaceholderLen,
             tag,
+            insertPos + samePosPlaceholderLen,
             addedDuringUpdate = true
         ))
     }
 
-    internal fun escapeHtmlSections(escapeFn: (s: String) -> String) {
-        val markupPositions = mutableMapOf<Int, Int?>()
-        for (m in markupList) {
-            // don't overwrite placeholder positions with non-placeholder ones.
-            if (m.placeholder != null && m.placeholder.isNotEmpty()) {
-                markupPositions[m.pos] = m.pos + m.placeholder.length
-            }
-            else if (!markupPositions.containsKey(m.pos)) {
-                markupPositions[m.pos] = null
-            }
-        }
-        transformRawText(markupPositions, escapeFn)
-    }
-
-    /*
-     * NB: escapeFn is used to avoid need to mock TextUtils.htmlEncode
-     */
-    fun finalizeProcessing(escapeFn: ((s: String) -> String)? = null) {
-        escapeFn?.let{ escapeHtmlSections(it) }
+    fun finalizeProcessing() {
+        // first escape raw text in between markup positions.
+        escapeHtmlSections()
 
         // this code uses the same ideas from SourceCodeTransformer.
         var positionAdjustment = 0
@@ -271,11 +237,66 @@ class VerseHighlighter {
         }
     }
 
+    internal fun escapeHtmlSections() {
+        val markupPositions = mutableMapOf<Int, Int?>()
+        for (m in markupList) {
+            // don't overwrite placeholder positions with non-placeholder ones.
+            if (m.placeholder != null && m.placeholder.isNotEmpty()) {
+                markupPositions[m.pos] = m.pos + m.placeholder.length
+            }
+            else if (!markupPositions.containsKey(m.pos)) {
+                markupPositions[m.pos] = null
+            }
+        }
+
+        var positionAdjustment = 0
+        val originalRawTextLength = rawText.length
+        var i = 0
+        while (i < originalRawTextLength) {
+            val startI = i
+            while (i < originalRawTextLength && !markupPositions.containsKey(i)) {
+                i++
+            }
+
+            val subSection = rawText.substring(
+                startI + positionAdjustment,
+                i + positionAdjustment
+            )
+            val transformed = TextUtils.htmlEncode(subSection)
+            rawText.replace(startI + positionAdjustment, i + positionAdjustment, transformed)
+            val diff = transformed.length - (i - startI)
+            if (diff != 0) {
+                for (m in markupList) {
+                    // Only adjust positions beyond replacement position.
+                    if (m.pos > startI + positionAdjustment) {
+                        m.pos += diff
+                    }
+                }
+                positionAdjustment += diff
+            }
+            if (i < originalRawTextLength) {
+                val endI = markupPositions.getValue(i)
+                if (endI != null) {
+                    i = endI
+                }
+            }
+            // deal with empty strings, ie adjacent markup positions, and
+            // ensure progress at all cost to avoid endless looping
+            if (i == startI) {
+                i++
+            }
+        }
+    }
+
+    /*
+     * A tag or placeholder must not begin or end with whitespace to enable correct
+     * predictions of markup positions.
+     */
     data class Markup(
-        val id: String,
-        var pos: Int,
         val tag: String,
+        var pos: Int = 0,
         val placeholder: String? = null,
+        val id: String? = null,
         val addedDuringUpdate: Boolean = false
     )
 }

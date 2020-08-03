@@ -1,7 +1,6 @@
 package com.aaronicsubstances.niv1984.data
 
 import android.content.Context
-import android.text.TextUtils
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
@@ -38,9 +37,7 @@ class BookHighlighter(private val context: Context,
             source.updateMarkup(highlightRange.endIndex,
                 "</span>", true)
         }
-        source.finalizeProcessing {
-            TextUtils.htmlEncode(it)
-        }
+        source.finalizeProcessing()
         return source.rawText.toString()
     }
 }

@@ -80,6 +80,10 @@ class AppUtilsInstrumentedTest {
         actual = AppUtils.parseHtml("&lt;Amen&apos;").toString()
         assertEquals(expected, actual)
 
+        expected = "6 "
+        actual = AppUtils.parseHtml(" <b>6</b> ").toString()
+        assertEquals(expected, actual)
+
         expected = "<  \n>"
         actual = AppUtils.parseHtml("&lt;<hr1>&gt;",
             Html.TagHandler { opening, tag, output, _ ->

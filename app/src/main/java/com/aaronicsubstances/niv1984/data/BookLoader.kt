@@ -567,7 +567,7 @@ class BookLoader(private val context: Context,
         var text = "<sup><a href='${bibleVersions[bibleVersionIndex]}-$chapterNumber-${rawNoteRef.noteNumber}'>" +
             "$charRef</a></sup>"
         if (out is VerseHighlighter) {
-            out.addInitMarkup("note", text)
+            out.addInitMarkup(VerseHighlighter.Markup(text, id="note"))
         }
         else {
             out as java.lang.StringBuilder

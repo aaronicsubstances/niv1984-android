@@ -61,6 +61,18 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         lineInfoList.clear()
     }
 
+    fun getVerseNumber(loc: Int): Int {
+        var vNum = 1
+        for (e in versePosMap) {
+            if (loc >= e.value.first && loc <= e.value.second) {
+                vNum = Integer.parseInt(e.key.substring(vPrefix.length))
+                android.util.Log.e(TAG, "selection offset $loc maps to verse $vNum")
+                break
+            }
+        }
+        return vNum
+    }
+
     fun goToVerse(vNum: Int, tv: TextView, sp: ScrollView) {
         val vKey = "$vPrefix$vNum"
         if (!versePosMap.contains(vKey)) {

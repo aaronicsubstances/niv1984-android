@@ -294,9 +294,17 @@ class BookLoader(private val context: Context,
         }
     }
 
-    private fun processChapters(bibleVersionIndex: Int,
-                                rawChapters: List<Chapter>,
-                                chapterIndices: MutableList<Int>): List<BookDisplayItem> {
+    private suspend fun processChapters(
+        bibleVersionIndex: Int,
+        rawChapters: List<Chapter>,
+        chapterIndices: MutableList<Int>
+    ): List<BookDisplayItem> {
+
+        // load verse highlights.
+        val bookHighlighter = BookHighlighter(context, bookNumber,
+            bibleVersions[bibleVersionIndex])
+        bookHighlighter.load()
+
         val displayItems = mutableListOf<BookDisplayItem>()
         for (rawChapter in rawChapters) {
             chapterIndices.add(displayItems.size)
@@ -323,7 +331,7 @@ class BookLoader(private val context: Context,
                     is Verse -> {
                         val items = processVerse(
                             bibleVersionIndex, rawChapter.chapterNumber,
-                            part)
+                            part, bookHighlighter)
                         displayItems.addAll(items)
                     }
                     else -> {
@@ -381,15 +389,20 @@ class BookLoader(private val context: Context,
     private fun processVerse(
         bibleVersionIndex: Int,
         chapterNumber: Int,
-        rawVerse: Verse
+        rawVerse: Verse,
+        bookHighlighter: BookHighlighter
     ): List<BookDisplayItem> {
         var prependText: String? = "${rawVerse.verseNumber}. "
         val verseItems = mutableListOf<BookDisplayItem>()
-        val out = StringBuilder()
+        val out = VerseHighlighter()
         for (part in rawVerse.parts) {
             when (part) {
                 is WordsOfJesus -> {
-                    out.append("<font color='$wjColor'>")
+                    if (prependText != null) {
+                        out.addInitMarkup(prependText)
+                        prependText = null
+                    }
+                    out.addInitMarkup("<font color='$wjColor'>")
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
@@ -401,36 +414,36 @@ class BookLoader(private val context: Context,
                             }
                         }
                     }
-                    out.append("</font>")
+                    out.addInitMarkup("</font>")
                 }
                 is BlockQuote -> {
-                    if (out.isNotEmpty()) {
-                        var isFirstVerseContent = false
-                        if (prependText != null) {
-                            out.insert(0, prependText)
-                            prependText = null
-                            isFirstVerseContent = true
-                        }
+                    if (!out.isEmpty()) {
+                        val blockText = bookHighlighter.processBlockText(chapterNumber,
+                            rawVerse.verseNumber, verseItems.size, out)
                         val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                             chapterNumber, rawVerse.verseNumber,
-                            BookDisplayItemContent(bibleVersionIndex, out.toString()),
-                            isFirstVerseContent = isFirstVerseContent)
+                            BookDisplayItemContent(bibleVersionIndex, blockText),
+                            isFirstVerseContent = verseItems.isEmpty())
                         verseItems.add(currItem)
                         out.clear()
                     }
                     val nextItem = processBlockQuote(bibleVersionIndex, chapterNumber,
-                        part, rawVerse.verseNumber)
-                    if (prependText != null) {
-                        nextItem.fullContent.text = prependText + nextItem.fullContent.text
-                        nextItem.isFirstVerseContent = true
-                        prependText = null
-                    }
+                        part, rawVerse.verseNumber, verseItems.size, prependText, bookHighlighter)
+                    prependText = null
                     verseItems.add(nextItem)
                 }
                 is NoteRef -> {
+                    if (prependText != null) {
+                        out.addInitMarkup(prependText)
+                        prependText = null
+                    }
                     processNoteRef(bibleVersionIndex, chapterNumber, part, out)
                 }
                 else -> {
+                    if (prependText != null) {
+                        out.addInitMarkup(prependText)
+                        prependText = null
+                    }
                     part as FancyContent
                     processFancyContent(part, out)
                 }
@@ -439,16 +452,17 @@ class BookLoader(private val context: Context,
 
         // to deal with omitted niv verses such as matt 17:21,
         // ensure verse items is not empty.
-        if (out.isNotEmpty() || verseItems.isEmpty()) {
-            var isFirstVerseContent = false
+        if (!out.isEmpty() || verseItems.isEmpty()) {
             if (prependText != null) {
-                out.insert(0, prependText)
-                isFirstVerseContent = true
+                out.addInitMarkup(prependText)
+                prependText = null
             }
+            val blockText = bookHighlighter.processBlockText(chapterNumber, rawVerse.verseNumber,
+                verseItems.size, out)
             val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                 chapterNumber, rawVerse.verseNumber,
-                BookDisplayItemContent(bibleVersionIndex, out.toString()),
-                isFirstVerseContent = isFirstVerseContent)
+                BookDisplayItemContent(bibleVersionIndex, blockText),
+                isFirstVerseContent = verseItems.isEmpty())
             verseItems.add(currItem)
         }
 
@@ -459,13 +473,17 @@ class BookLoader(private val context: Context,
         bibleVersionIndex: Int,
         chapterNumber: Int,
         rawQuote: BlockQuote,
-        verseNumber: Int
+        verseNumber: Int,
+        verseBlockIndex: Int,
+        prependText: String?,
+        bookHighlighter: BookHighlighter
     ): BookDisplayItem {
-        val out = StringBuilder()
+        val out = VerseHighlighter()
+        prependText?.let { out.addInitText(it) }
         for (part in rawQuote.parts) {
             when (part) {
                 is WordsOfJesus -> {
-                    out.append("<font color='$wjColor'>")
+                    out.addInitMarkup("<font color='$wjColor'>")
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
@@ -477,7 +495,7 @@ class BookLoader(private val context: Context,
                             }
                         }
                     }
-                    out.append("</font>")
+                    out.addInitMarkup("</font>")
                 }
                 is NoteRef -> {
                     processNoteRef(bibleVersionIndex, chapterNumber, part, out)
@@ -488,24 +506,52 @@ class BookLoader(private val context: Context,
                 }
             }
         }
+        val blockText = bookHighlighter.processBlockText(chapterNumber, verseNumber,
+            verseBlockIndex, out)
         return BookDisplayItem(BookDisplayItemViewType.VERSE, chapterNumber, verseNumber,
-            BookDisplayItemContent(bibleVersionIndex, out.toString(), rawQuote.kind))
+            BookDisplayItemContent(bibleVersionIndex, blockText, rawQuote.kind),
+            isFirstVerseContent = verseBlockIndex == 0)
     }
 
-    private fun processFancyContent(rawContent: FancyContent, out: StringBuilder) {
-        val escapedContent = TextUtils.htmlEncode(rawContent.content)
-        when (rawContent.kind) {
-            FancyContentKind.EM, FancyContentKind.SELAH -> {
-                out.append("<em>$escapedContent</em>")
+    private fun processFancyContent(rawContent: FancyContent, out: Any) {
+        if (out is VerseHighlighter) {
+            when (rawContent.kind) {
+                FancyContentKind.EM, FancyContentKind.SELAH -> {
+                    out.addInitMarkup("<em>")
+                    out.addInitText(rawContent.content)
+                    out.addInitMarkup("</em>")
+                }
+                FancyContentKind.STRONG_EM -> {
+                    out.addInitMarkup("<strong>")
+                    out.addInitText(rawContent.content)
+                    out.addInitMarkup("</strong>")
+                }
+                FancyContentKind.PICTOGRAM -> {
+                    out.addInitMarkup("<big>")
+                    out.addInitText(rawContent.content)
+                    out.addInitMarkup("</big>")
+                }
+                else -> {
+                    out.addInitText(rawContent.content)
+                }
             }
-            FancyContentKind.STRONG_EM -> {
-                out.append("<strong>$escapedContent</strong>")
-            }
-            FancyContentKind.PICTOGRAM -> {
-                out.append("<big>$escapedContent</big>")
-            }
-            else -> {
-                out.append(escapedContent)
+        }
+        else {
+            out as java.lang.StringBuilder
+            val escapedContent = TextUtils.htmlEncode(rawContent.content)
+            when (rawContent.kind) {
+                FancyContentKind.EM, FancyContentKind.SELAH -> {
+                    out.append("<em>$escapedContent</em>")
+                }
+                FancyContentKind.STRONG_EM -> {
+                    out.append("<strong>$escapedContent</strong>")
+                }
+                FancyContentKind.PICTOGRAM -> {
+                    out.append("<big>$escapedContent</big>")
+                }
+                else -> {
+                    out.append(escapedContent)
+                }
             }
         }
     }
@@ -514,13 +560,19 @@ class BookLoader(private val context: Context,
         bibleVersionIndex: Int,
         chapterNumber: Int,
         rawNoteRef: NoteRef,
-        out: StringBuilder
+        out: Any
     ) {
         val lowerA = 'a'.toInt()
         val charRef = (lowerA + rawNoteRef.noteNumber -1).toChar()
         var text = "<sup><a href='${bibleVersions[bibleVersionIndex]}-$chapterNumber-${rawNoteRef.noteNumber}'>" +
             "$charRef</a></sup>"
-        out.append(text)
+        if (out is VerseHighlighter) {
+            out.addInitMarkup("note", text)
+        }
+        else {
+            out as java.lang.StringBuilder
+            out.append(text)
+        }
     }
 
     private fun processNote(

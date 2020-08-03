@@ -40,4 +40,6 @@
     <string name="search_pref_bible_label">Bible Version to search: <b>%s</b></string>
     <string name="switchToPrefText">Switch To Preferred Versions</string>
     <string name="highlight_mode_title">%s - Copy/Highlight mode</string>
+    <string name="action_add_highlight">Highlight</string>
+    <string name="action_remove_highlight">Unhighlight</string>
 </resources>

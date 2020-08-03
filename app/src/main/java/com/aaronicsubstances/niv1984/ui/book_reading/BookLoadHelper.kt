@@ -1,6 +1,9 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.text.Spanned
+import android.view.ActionMode
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -25,6 +28,8 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
 
     private val htmlViewManager: HtmlViewManager
     private val backPressListener: OnBackPressedCallback
+
+    //private val contextMenuActionCallback: ActionMode.Callback
 
     init {
         fragment.requireView().let {
@@ -67,6 +72,45 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
         }
         fragment.requireActivity().onBackPressedDispatcher.addCallback(fragment.viewLifecycleOwner,
             backPressListener)
+
+        selectedChapterContent.customSelectionActionModeCallback = object: ActionMode.Callback {
+            private var mode: ActionMode? = null
+            override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+                this.mode = mode
+                mode.menuInflater.inflate(R.menu.book_load_floating, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+                return false
+            }
+
+            override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.action_add_highlight -> {
+                        addHighlightRange()
+                        finishActionMode()
+                        return true
+                    }
+                    R.id.action_remove_highlight -> {
+                        removeHighlightRange()
+                        finishActionMode()
+                        return true
+                    }
+                }
+                // else let default items be processed.
+                return false
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode) {
+                this.mode = null
+            }
+
+            fun finishActionMode() {
+                mode?.finish()
+                cancelChapterFocusView()
+            }
+        }
     }
 
     fun cancelChapterFocusView() {
@@ -168,5 +212,18 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
         //wrap in body to prevent tag mechanism from treating first verse tag as a sort of wrapper
         val spanned = AppUtils.parseHtml("<body>$chapterContent</body>", htmlViewManager)
         return spanned
+    }
+
+    fun addHighlightRange() {
+        val selStart = selectedChapterContent.selectionStart
+        val selEnd = selectedChapterContent.selectionEnd
+        val vStart = htmlViewManager.getVerseNumber(selStart)
+        val vEnd = htmlViewManager.getVerseNumber(selEnd)
+        /*AppUtils.showShortToast(fragment.context, "selection ($selStart, $selEnd) " +
+                "maps to verses $vStart-$vEnd")*/
+    }
+
+    fun removeHighlightRange() {
+
     }
 }

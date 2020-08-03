@@ -105,12 +105,25 @@ class VerseHighlighter {
         rawText.append(s)
     }
 
+    fun addInitMarkup(m: String) {
+        markupList.add(Markup("", rawText.length, m))
+    }
+
     fun addInitMarkup(id: String, m: String) {
         markupList.add(Markup(id, rawText.length, m))
     }
 
     fun addInitMarkupWithPlaceholder(id: String, m: String, placeholder: String) {
         markupList.add(Markup(id, rawText.length, m, placeholder))
+    }
+
+    fun isEmpty(): Boolean {
+        return rawText.isEmpty() && markupList.isEmpty()
+    }
+
+    fun clear() {
+        rawText.setLength(0)
+        markupList.clear()
     }
 
     fun beginProcessing() {

@@ -1,23 +1,28 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
+import android.os.Bundle
 import android.text.Spanned
 import android.view.ActionMode
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
-import androidx.recyclerview.widget.RecyclerView
-import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
+import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class BookLoadHelper(private val fragment: BookLoadFragment) {
+class HighlightModeHelper(private val fragment: BookLoadFragment,
+                          savedInstanceState: Bundle?) {
+
+    companion object {
+        private const val STATE_KEY_IN_HIGHLIGHT_MODE = "HighlightModeHelper.inHighlightMode"
+    }
+
     private val defaultView: View
     private val chapterFocusView: View
     private val selectedBookTitle: TextView
@@ -27,9 +32,8 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
     private val bookContentAdapter: BookLoadAdapter
 
     private val htmlViewManager: HtmlViewManager
-    private val backPressListener: OnBackPressedCallback
 
-    //private val contextMenuActionCallback: ActionMode.Callback
+    var inHighlightMode: Boolean
 
     init {
         fragment.requireView().let {
@@ -46,38 +50,11 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
         selectedChapterContentScroller.viewDataChangeListener = htmlViewManager
         selectedChapterContent.viewDataChangeListener = htmlViewManager
 
-        val onItemLongClickListenerFactory = object: LargeListEventListenerFactory() {
-            override fun <T> create(
-                viewHolder: RecyclerView.ViewHolder,
-                listenerCls: Class<T>, eventContextData: Any?
-            ): T {
-                assert(listenerCls == View.OnLongClickListener::class.java)
-                return View.OnLongClickListener {
-                    val item = getItem(viewHolder, bookContentAdapter)
-                    val bibleVersionIndex = eventContextData as Int
-                    switchToChapterFocusView(item, bibleVersionIndex)
-                    true
-                } as T
-            }
-        }
-        bookContentAdapter.onItemLongClickListenerFactory = onItemLongClickListenerFactory
-
-        backPressListener = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (!backPressIntercepted()) {
-                    isEnabled = false
-                    fragment.requireActivity().onBackPressed()
-                }
-            }
-        }
-        fragment.requireActivity().onBackPressedDispatcher.addCallback(fragment.viewLifecycleOwner,
-            backPressListener)
-
         selectedChapterContent.customSelectionActionModeCallback = object: ActionMode.Callback {
             private var mode: ActionMode? = null
             override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
                 this.mode = mode
-                mode.menuInflater.inflate(R.menu.book_load_floating, menu)
+                mode.menuInflater.inflate(R.menu.fragment_book_load_floating, menu)
                 return true
             }
 
@@ -108,23 +85,66 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
 
             fun finishActionMode() {
                 mode?.finish()
-                cancelChapterFocusView()
+                exitHighlightMode()
             }
         }
+
+        // enter copy mode immediately if restored state indicates so
+        inHighlightMode = savedInstanceState?.getBoolean(STATE_KEY_IN_HIGHLIGHT_MODE, false) ?: false
+        if (inHighlightMode) {
+            enterHighlightMode()
+        }
     }
 
-    fun cancelChapterFocusView() {
-        defaultView.visibility = View.VISIBLE
-        chapterFocusView.visibility = View.INVISIBLE
-        selectedChapterContent.text = ""
+    fun onSaveInstanceState(outState: Bundle) {
+        outState.putBoolean(STATE_KEY_IN_HIGHLIGHT_MODE, inHighlightMode)
     }
 
-    private fun backPressIntercepted(): Boolean {
-        if (chapterFocusView.visibility != View.VISIBLE) {
+    fun handleBackPress(): Boolean {
+        return exitHighlightMode()
+    }
+
+    fun onPrefZoomLevelChanged() {
+        if (inHighlightMode) {
+            updateTextSizes()
+        }
+    }
+
+    fun onChapterChanged() {
+        if (inHighlightMode) {
+            TODO("Yet to be implemented")
+        }
+    }
+
+    fun enterHighlightMode() {
+        defaultView.visibility = View.INVISIBLE
+        chapterFocusView.visibility = View.VISIBLE
+        updateTextSizes()
+        selectedChapterContent.text = "Highlight mode test"
+        inHighlightMode = true
+        (fragment.activity as MainActivity).invalidateOptionsMenu()
+    }
+
+    fun exitHighlightMode(): Boolean {
+        if (!inHighlightMode) {
             return false
         }
-        cancelChapterFocusView()
+        defaultView.visibility = View.VISIBLE
+        chapterFocusView.visibility = View.INVISIBLE
+        selectedChapterContent.text = "" // should clear any selection
+        inHighlightMode = false
+        (fragment.activity as MainActivity).invalidateOptionsMenu()
         return true
+    }
+
+    private fun updateTextSizes() {
+        val dummyTitleItem = BookDisplayItem(BookDisplayItemViewType.TITLE, 0,
+            0, BookDisplayItemContent(0, "")
+        )
+        val dummyVerseItem = BookDisplayItem(BookDisplayItemViewType.VERSE, 0,
+            0, BookDisplayItemContent(0, ""))
+        bookContentAdapter.initDefault(dummyTitleItem, selectedChapterTitle)
+        bookContentAdapter.initDefault(dummyVerseItem, selectedChapterContent)
     }
 
     private fun switchToChapterFocusView(item: BookDisplayItem, bibleVersionIndex: Int) {
@@ -151,8 +171,6 @@ class BookLoadHelper(private val fragment: BookLoadFragment) {
             htmlViewManager.goToVerse(item.verseNumber, selectedChapterContent,
                 selectedChapterContentScroller)
         }
-
-        backPressListener.isEnabled = true
     }
 
     private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int): Spanned {

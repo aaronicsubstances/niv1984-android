@@ -42,4 +42,8 @@
     <string name="highlight_mode_title">%s - Copy/Highlight mode</string>
     <string name="action_add_highlight">Highlight</string>
     <string name="action_remove_highlight">Unhighlight</string>
+    <string name="action_chapter_switch">Change Chapter</string>
+    <string name="action_book_switch">Change Book</string>
+    <string name="action_enter_copy_mode">Enter Copy/Highlight Mode</string>
+    <string name="action_exit_copy_mode">Exit Copy/Highlight Mode</string>
 </resources>

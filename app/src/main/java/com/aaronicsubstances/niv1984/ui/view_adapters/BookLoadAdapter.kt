@@ -28,8 +28,6 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     var zoomLevel: Int = 100
     var isNightMode: Boolean = false
 
-    var onItemLongClickListenerFactory: LargeListEventListenerFactory? = null
-
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal
         // split viewType to positive or negative depending on displaySideBySide.
@@ -228,10 +226,6 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
         fun bind(item: BookDisplayItem) {
-            onItemLongClickListenerFactory?.let{
-                textView.setOnLongClickListener(it.create(this,
-                    View.OnLongClickListener::class.java, item.fullContent.bibleVersionIndex))
-            }
             bindDefault(item, item.fullContent, textView)
         }
     }
@@ -249,15 +243,6 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     inner class SplitVerseViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val firstSideVerse = itemView.findViewById<ViewGroup>(R.id.firstSideVerse)
         private val secondSideVerse = itemView.findViewById<ViewGroup>(R.id.secondSideVerse)
-
-        init {
-            onItemLongClickListenerFactory?.let{
-                firstSideVerse.setOnLongClickListener(it.create(this,
-                    View.OnLongClickListener::class.java, 0))
-                secondSideVerse.setOnLongClickListener(it.create(this,
-                    View.OnLongClickListener::class.java, 1))
-            }
-        }
 
         fun bind(item: BookDisplayItem) {
             bindSpecific(item, item.firstPartialContent!!, firstSideVerse)

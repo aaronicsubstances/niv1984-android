@@ -50,18 +50,15 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     internal lateinit var chapterAdapter: ChapterWidgetAdapter
 
     private var displayMultipleSideBySide = false
-    private var keepScreenOn = false
     private lateinit var bibleVersions: List<String>
-
-    private var cancelKeepScreenOnRunnable: Runnable? = null
-    private var lastTouchTime = 0L // used for debouncing
-
-    @Inject
-    internal lateinit var sharedPrefMgr: SharedPrefManager
 
     private var bookLoadRequestListener: BookLoadRequestListener? = null
 
-    private var helper: BookLoadHelper? = null
+    private var highlightHelper: HighlightModeHelper? = null
+    private var screenAwakeHelper: KeepScreenAwakeHelper? = null
+
+    @Inject
+    internal lateinit var sharedPrefMgr: SharedPrefManager
 
     companion object {
         private const val ARG_BOOK_NUMBER = "bookNumber"
@@ -116,20 +113,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
-            R.id.action_settings -> {
-                CommonMenuActionProcessor.launchSettings(requireContext())
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context.applicationContext as MyApplication).appComponent.inject(this)
@@ -145,6 +128,49 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     override fun onDetach() {
         super.onDetach()
         bookLoadRequestListener = null
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_book_load, menu)
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val itemIdsToRemove = mutableListOf<Int>()
+        for (i in 0 until menu.size()) {
+            val menuItem = menu.getItem(i)
+            when (menuItem.itemId) {
+                R.id.action_enter_copy_mode -> {
+                    if (highlightHelper?.inHighlightMode == true) {
+                        itemIdsToRemove.add(menuItem.itemId)
+                    }
+                }
+                R.id.action_exit_copy_mode -> {
+                    if (highlightHelper?.inHighlightMode != true) {
+                        itemIdsToRemove.add(menuItem.itemId)
+                    }
+                }
+            }
+        }
+        itemIdsToRemove.forEach { menu.removeItem(it) }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_enter_copy_mode -> {
+                highlightHelper?.enterHighlightMode()
+                true
+            }
+            R.id.action_exit_copy_mode -> {
+                highlightHelper?.exitHighlightMode()
+                true
+            }
+            R.id.action_settings -> {
+                CommonMenuActionProcessor.launchSettings(requireContext())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     override fun onCreateView(
@@ -176,11 +202,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        // as long as touches are occurring on root view, keep screen on
-        (view as FrameLayoutWithTouchIntercept).touchInterceptAction = Runnable {
-            rescheduleKeepScreenOn()
-        }
-
         chapterView.layoutManager = LinearLayoutManager(activity,
             LinearLayoutManager.HORIZONTAL, false)
         chapterAdapter = ChapterWidgetAdapter(AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1],
@@ -197,7 +218,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
            })
         chapterView.adapter = chapterAdapter
 
-        keepScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
         bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
         if (defaultReadingMode) {
             bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
@@ -286,26 +306,35 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         // kickstart actual bible reading
         openBookForReading(null)
 
-        helper = BookLoadHelper(this)
+        highlightHelper = HighlightModeHelper(this, savedInstanceState)
+        screenAwakeHelper = KeepScreenAwakeHelper(this, sharedPrefMgr.getShouldKeepScreenOn())
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        highlightHelper?.onSaveInstanceState(outState)
+    }
+
+    fun handleBackPress(): Boolean {
+        return highlightHelper?.handleBackPress() ?: false
     }
 
     override fun onPause() {
         super.onPause()
-        onCustomPause()
+        screenAwakeHelper?.onPause()
     }
 
     fun onCustomPause() {
-        helper?.cancelChapterFocusView()
-        cancelKeepScreenOn()
+        screenAwakeHelper?.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        onCustomResume()
+        screenAwakeHelper?.onResume()
     }
 
     fun onCustomResume() {
-        scheduleKeepScreenOn()
+        screenAwakeHelper?.onResume()
     }
 
     private fun resetViewForBibleVersions() {
@@ -380,6 +409,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             syncChapterWidget(chapterIdx, true)
             viewModel.updateSystemBookmarks(chapterIdx + 1, 0,
                 BookDisplayItemViewType.TITLE, chapterStartPos)
+            highlightHelper?.onChapterChanged()
         }
     }
 
@@ -431,6 +461,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         bookContentAdapter.zoomLevel = zoomLevel
         // no need to reread book, just refresh contents.
         bookContentAdapter.notifyDataSetChanged()
+        highlightHelper?.onPrefZoomLevelChanged()
     }
 
     override fun onPrefBibleVersionsChanged(bibleVersions: List<String>) {
@@ -440,6 +471,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         this.bibleVersions = bibleVersions
         resetViewForBibleVersions()
         openBookForReading(null)
+        highlightHelper?.exitHighlightMode()
     }
 
     override fun onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide: Boolean) {
@@ -453,61 +485,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     }
 
     override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
-        this.keepScreenOn = keepScreenOn;
+        screenAwakeHelper?.keepScreenOn = keepScreenOn
         // since pref can only be changed when this fragment is hidden/paused,
         // let fragment resumption handle change.
-    }
-
-    private fun scheduleKeepScreenOn() {
-        if (!keepScreenOn) {
-            return
-        }
-        if (cancelKeepScreenOnRunnable != null) {
-            return
-        }
-
-        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        cancelKeepScreenOnRunnable = Runnable {
-            requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-            cancelKeepScreenOnRunnable = null
-        }
-        requireView().apply {
-            removeCallbacks(cancelKeepScreenOnRunnable)
-            postDelayed(cancelKeepScreenOnRunnable, SharedPrefManager.WAKE_LOCK_PERIOD)
-        }
-    }
-
-    private fun cancelKeepScreenOn() {
-        cancelKeepScreenOnRunnable?.let {
-            requireView().removeCallbacks(it)
-            it.run()
-        }
-    }
-
-    private fun rescheduleKeepScreenOn() {
-        if (!keepScreenOn) {
-            return
-        }
-
-        if (cancelKeepScreenOnRunnable != null) {
-            // debounce to reduce frequency of rescheduling
-            val currTime = android.os.SystemClock.uptimeMillis()
-            if (currTime - lastTouchTime < 2000L) { // 2 secs
-                return
-            }
-            lastTouchTime = currTime
-        }
-        else {
-            requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-            cancelKeepScreenOnRunnable = Runnable {
-                requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-                cancelKeepScreenOnRunnable = null
-            }
-        }
-
-        requireView().apply {
-            removeCallbacks(cancelKeepScreenOnRunnable)
-            postDelayed(cancelKeepScreenOnRunnable, SharedPrefManager.WAKE_LOCK_PERIOD)
-        }
     }
 }

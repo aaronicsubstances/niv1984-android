@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_enter_copy_mode"
+        android:title="@string/action_enter_copy_mode"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/action_exit_copy_mode"
+        android:title="@string/action_exit_copy_mode"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_chapter_switch"
+        android:title="@string/action_chapter_switch"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_book_switch"
+        android:title="@string/action_book_switch"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never"/>
+</menu>

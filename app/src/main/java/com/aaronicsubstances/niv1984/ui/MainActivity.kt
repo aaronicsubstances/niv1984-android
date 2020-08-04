@@ -4,7 +4,6 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -102,16 +101,6 @@ class MainActivity : AppCompatActivity(),
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
-
-        onBackPressedDispatcher.addCallback(this,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    if (!backPressIntercepted()){
-                        isEnabled = false
-                        onBackPressed()
-                    }
-                }
-            })
     }
 
     private fun createInitialFragments() {
@@ -206,7 +195,18 @@ class MainActivity : AppCompatActivity(),
         tabs.addOnTabSelectedListener(tabSelectionListener)
     }
 
+    /**
+     * Could not guarantee desired OnBackPressedCallback order between this activity
+     * and BookLoadFragment after rotation, hence this direct handling.
+     */
     private fun backPressIntercepted(): Boolean {
+        val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
+        if (bookLoadFrag != null) {
+            bookLoadFrag as BookLoadFragment
+            if (bookLoadFrag.handleBackPress()) {
+                return true
+            }
+        }
         if (tabs.selectedTabPosition == 0) {
             val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
             if (bookLoadFrag != null) {
@@ -293,7 +293,9 @@ class MainActivity : AppCompatActivity(),
             drawer.closeDrawer(GravityCompat.START)
             return
         }
-        super.onBackPressed()
+        if (!backPressIntercepted()) {
+            super.onBackPressed()
+        }
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {

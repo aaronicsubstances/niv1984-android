@@ -68,6 +68,10 @@ object AppUtils {
         Toast.makeText(context, s, Toast.LENGTH_SHORT).show()
     }
 
+    fun showLongToast(context: Context?, s: String) {
+        Toast.makeText(context, s, Toast.LENGTH_LONG).show()
+    }
+
     fun getAllBooks(topBooks: List<String>): ArrayList<String> {
         val allBooks = ArrayList(AppConstants.bibleVersions.keys)
 

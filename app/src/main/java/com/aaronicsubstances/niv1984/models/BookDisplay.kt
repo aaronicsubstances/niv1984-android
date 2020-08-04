@@ -1,5 +1,6 @@
 package com.aaronicsubstances.niv1984.models
 
+import com.aaronicsubstances.niv1984.data.VerseHighlighter
 import com.aaronicsubstances.niv1984.utils.BookParser
 
 data class BookDisplay(
@@ -25,7 +26,8 @@ data class BookDisplayItemContent(val bibleVersionIndex: Int,
                                   var text: String,
                                   val blockQuoteKind: BookParser.BlockQuoteKind? = null,
                                   var html: CharSequence? = null,
-                                  val isFirstDivider: Boolean = false)
+                                  val isFirstDivider: Boolean = false,
+                                  val highlightModeRemovableMarkups: List<VerseHighlighter.Markup>? = null)
 
 enum class BookDisplayItemViewType {
     TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES

@@ -420,9 +420,11 @@ class BookLoader(private val context: Context,
                     if (!out.isEmpty()) {
                         val blockText = bookHighlighter.processBlockText(chapterNumber,
                             rawVerse.verseNumber, verseItems.size, out)
+                        val removableMarkups = bookHighlighter.getHighlightModeRemovableMarkups(out)
                         val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                             chapterNumber, rawVerse.verseNumber,
-                            BookDisplayItemContent(bibleVersionIndex, blockText),
+                            BookDisplayItemContent(bibleVersionIndex, blockText,
+                                highlightModeRemovableMarkups = removableMarkups),
                             isFirstVerseContent = verseItems.isEmpty())
                         verseItems.add(currItem)
                         out.clear()
@@ -459,9 +461,11 @@ class BookLoader(private val context: Context,
             }
             val blockText = bookHighlighter.processBlockText(chapterNumber, rawVerse.verseNumber,
                 verseItems.size, out)
+            val removableMarkups = bookHighlighter.getHighlightModeRemovableMarkups(out)
             val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                 chapterNumber, rawVerse.verseNumber,
-                BookDisplayItemContent(bibleVersionIndex, blockText),
+                BookDisplayItemContent(bibleVersionIndex, blockText,
+                    highlightModeRemovableMarkups = removableMarkups),
                 isFirstVerseContent = verseItems.isEmpty())
             verseItems.add(currItem)
         }
@@ -508,8 +512,10 @@ class BookLoader(private val context: Context,
         }
         val blockText = bookHighlighter.processBlockText(chapterNumber, verseNumber,
             verseBlockIndex, out)
+        val removableMarkups = bookHighlighter.getHighlightModeRemovableMarkups(out)
         return BookDisplayItem(BookDisplayItemViewType.VERSE, chapterNumber, verseNumber,
-            BookDisplayItemContent(bibleVersionIndex, blockText, rawQuote.kind),
+            BookDisplayItemContent(bibleVersionIndex, blockText, rawQuote.kind,
+                highlightModeRemovableMarkups = removableMarkups),
             isFirstVerseContent = verseBlockIndex == 0)
     }
 

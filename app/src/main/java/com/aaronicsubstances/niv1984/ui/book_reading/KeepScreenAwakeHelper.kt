@@ -9,7 +9,7 @@ class KeepScreenAwakeHelper(private val fragment: BookLoadFragment, var keepScre
 
     init {
         // as long as touches are occurring on root view, keep screen on
-        (fragment.view as FrameLayoutWithTouchIntercept).touchInterceptAction = Runnable {
+        (fragment.view as ConstraintLayoutWithTouchIntercept).touchInterceptAction = Runnable {
             rescheduleKeepScreenOn()
         }
     }

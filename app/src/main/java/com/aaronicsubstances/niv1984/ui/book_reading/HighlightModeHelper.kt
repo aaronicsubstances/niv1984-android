@@ -25,7 +25,6 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
     private val defaultView: View
     private val chapterFocusView: View
-    private val selectedBookTitle: TextView
     private val selectedChapterTitle: TextView
     private val selectedChapterContent: HtmlTextView
     private val selectedChapterContentScroller: HtmlScrollView
@@ -37,13 +36,17 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
     init {
         fragment.requireView().let {
-            defaultView = it.findViewById(R.id.highlightOff)
-            chapterFocusView = it.findViewById(R.id.highlightOn)
-            selectedBookTitle = it.findViewById(R.id.bookDescriptionHighlighted)
-            selectedChapterTitle = it.findViewById(R.id.chapterTitle)
+            defaultView = it.findViewById(R.id.bookReadView)
+            chapterFocusView = it.findViewById(R.id.selectedChapterScroller)
+            selectedChapterTitle = it.findViewById(R.id.selectedChapterTitle)
             selectedChapterContent = it.findViewById(R.id.selectedChapterText)
             selectedChapterContentScroller = it.findViewById(R.id.selectedChapterScroller)
         }
+
+        // use INVISIBLE instead of GONE so that HtmlScrollView height is determined correctly before
+        // highlight requests
+        chapterFocusView.visibility = View.INVISIBLE
+
         bookContentAdapter = fragment.bookContentAdapter
         htmlViewManager = HtmlViewManager(fragment.requireContext())
 
@@ -117,12 +120,22 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun enterHighlightMode() {
+        if (inHighlightMode) {
+            return
+        }
         defaultView.visibility = View.INVISIBLE
         chapterFocusView.visibility = View.VISIBLE
         updateTextSizes()
+
+        val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[0]
+        val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
+        val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, 1)
+        selectedChapterTitle.text = chapterTitle
         selectedChapterContent.text = "Highlight mode test"
+
         inHighlightMode = true
         (fragment.activity as MainActivity).invalidateOptionsMenu()
+        fragment.resetOverlayPanel()
     }
 
     fun exitHighlightMode(): Boolean {
@@ -134,6 +147,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         selectedChapterContent.text = "" // should clear any selection
         inHighlightMode = false
         (fragment.activity as MainActivity).invalidateOptionsMenu()
+        fragment.resetOverlayPanel()
         return true
     }
 
@@ -155,16 +169,10 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
         val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[bibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
-        selectedBookTitle.text = fragment.getString(R.string.highlight_mode_title,
-            bibleVersion.bookNames[fragment.bookNumber - 1])
-        val chapterTitle = bibleVersion.getChapterTitle(
-            fragment.bookNumber, item.chapterNumber)
-        selectedChapterTitle.text = "(${bibleVersion.abbreviation}) $chapterTitle"
+        val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, item.chapterNumber)
+        selectedChapterTitle.text = chapterTitle
 
         selectedChapterContent.text = fetchChapterContent(item.chapterNumber, bibleVersionIndex)
-
-        defaultView.visibility = View.INVISIBLE
-        chapterFocusView.visibility = View.VISIBLE
 
         // delay goToVerse so htmlTextView gets the chance to redraw
         selectedChapterContentScroller.post {

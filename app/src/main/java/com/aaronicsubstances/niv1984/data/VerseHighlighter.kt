@@ -12,7 +12,7 @@ class VerseHighlighter {
         private val NBSP = "\u00a0"
 
         fun addHighlightRange(
-            existingRanges: List<HighlightRange>,
+            existingRanges: Array<HighlightRange>,
             newRange: HighlightRange
         ): List<HighlightRange> {
             val editableRanges = clearHighlightRange(existingRanges, newRange)
@@ -69,14 +69,14 @@ class VerseHighlighter {
         }
 
         fun removeHighlightRange(
-            existingRanges: List<HighlightRange>,
+            existingRanges: Array<HighlightRange>,
             rangeToClear: HighlightRange
         ): List<HighlightRange> {
             return clearHighlightRange(existingRanges, rangeToClear)
         }
 
         internal fun clearHighlightRange(
-            existingRanges: List<HighlightRange>,
+            existingRanges: Array<HighlightRange>,
             rangeToClear: HighlightRange
         ): MutableList<HighlightRange> {
             // PostCondition requirement: maintain disjoint/nonoverlapping property

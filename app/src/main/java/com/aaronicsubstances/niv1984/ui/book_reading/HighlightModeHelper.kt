@@ -177,15 +177,14 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, sysBookmark.chapterNumber)
         selectedChapterTitle.text = chapterTitle
 
-        val lastVerseReceiver = intArrayOf(0)
         selectedChapterContent.text = fetchChapterContent(sysBookmark.chapterNumber,
-            bibleVersionIndex, lastVerseReceiver)
+            bibleVersionIndex)
 
         // delay goToVerse so htmlTextView gets the chance to redraw
         val initialVerseNumber = if (sysBookmark.verseNumber > 0) sysBookmark.verseNumber
         else {
             if (sysBookmark.equivalentViewItemType == BookDisplayItemViewType.TITLE) 0
-            else lastVerseReceiver[0]
+            else htmlViewManager.lastVerseNumberSeen
         }
         selectedChapterContentScroller.post {
             htmlViewManager.goToVerse(
@@ -224,8 +223,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
     }
 
-    private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int,
-                                    lastVerseReceiver: IntArray): Spanned {
+    private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int): Spanned {
         val chapterIndex = fragment.viewModel.lastLoadResult!!.chapterIndices[chapterNumber - 1]
         val titleItem = bookContentAdapter.currentList[chapterIndex]
         assert(titleItem.chapterNumber == chapterNumber)
@@ -233,6 +231,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         var i = chapterIndex + 1
         val chapterContent = StringBuilder()
         var lastVerseNum = 0
+        var lastVerseBlockIndex = 0
         while (i < bookContentAdapter.currentList.size) {
             val item = bookContentAdapter.currentList[i]
             if (item.chapterNumber != chapterNumber) {
@@ -253,32 +252,40 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                 }
             }
             if (contentByParts != null || fullContent != null) {
+                val vTag = "${htmlViewManager.vPrefix}$lastVerseNum"
                 if (lastVerseNum != item.verseNumber) {
                     if (lastVerseNum > 0) {
-                        if (contentByParts == null) {
-                            chapterContent.append("<br>")
-                        }
-                        chapterContent.append("<br></p></${htmlViewManager.vPrefix}$lastVerseNum>")
+                        chapterContent.append("<br></$vTag>")
                     }
-                    chapterContent.append("<${htmlViewManager.vPrefix}${item.verseNumber}><p>")
+                    chapterContent.append("<$vTag>")
                     lastVerseNum = item.verseNumber
+                    lastVerseBlockIndex = 0
                 }
                 contentByParts?.let {
                     for (partIdx in it.indices) {
-                        val processed = processTextForHighlightMode(it[partIdx])
-                        chapterContent.append(processed).append("<br>")
+                        val part = it[partIdx]
+                        val processed = processTextForHighlightMode(part)
+                        val bTag = "${htmlViewManager.bPrefix}$partIdx"
+                        chapterContent.append("<$bTag>")
+                        chapterContent.append(processed)
+                        chapterContent.append("</$bTag>")
+                        chapterContent.append("<br>")
                     }
                 }
                 fullContent?.let {
                     val processed = processTextForHighlightMode(it)
+                    val bTag = "${htmlViewManager.bPrefix}$lastVerseBlockIndex"
+                    lastVerseBlockIndex++
+                    chapterContent.append("<$bTag>")
                     chapterContent.append(processed)
+                    chapterContent.append("</$bTag>")
+                    chapterContent.append("<br>")
                 }
             }
             i++
         }
         assert(lastVerseNum > 0)
-        lastVerseReceiver[0] = lastVerseNum
-        chapterContent.append("</p></${htmlViewManager.vPrefix}$lastVerseNum>")
+        chapterContent.append("</${htmlViewManager.vPrefix}$lastVerseNum>")
 
         htmlViewManager.reset()
         //wrap in body to prevent tag mechanism from treating first verse tag as a sort of wrapper
@@ -305,6 +312,37 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         val vEnd = htmlViewManager.getVerseNumber(selEnd)
         AppUtils.showShortToast(fragment.context, "selection ($selStart, $selEnd) " +
                 "maps to verses $vStart-$vEnd")
+    }
+
+    fun determineRanges(): List<IntArray> {
+        val selStart = selectedChapterContent.selectionStart
+        val selEnd = selectedChapterContent.selectionEnd
+        val ranges = mutableListOf<IntArray>()
+        for (blockEntry in htmlViewManager.verseBlockPosMap) {
+            val blockStart = blockEntry[2]
+            val blockEnd = blockEntry[3]
+
+            // explore 4 possibilities: totally outside, totally inside, overlaps on the left,
+            // or overlaps on the right.
+            if (selStart > blockEnd || selEnd < blockStart) {
+                // totally outside
+            }
+            else if (selStart >= blockStart && selEnd <= blockEnd) {
+                // totally inside.
+                ranges.add(blockEntry)
+            }
+            else {
+                if (selStart < blockStart) {
+                    // overlaps on the left
+                    ranges.add(intArrayOf(blockEntry[0], blockEntry[1], blockStart, selEnd))
+                }
+                if (selEnd > blockEnd) {
+                    // overlaps on the right
+                    ranges.add(intArrayOf(blockEntry[0], blockEntry[1], selStart, blockEnd))
+                }
+            }
+        }
+        return ranges
     }
 
     fun removeHighlightRange() {

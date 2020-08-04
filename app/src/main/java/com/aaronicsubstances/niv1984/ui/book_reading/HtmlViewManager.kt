@@ -13,8 +13,12 @@ import org.xml.sax.XMLReader
 class HtmlViewManager(private val context: Context): Html.TagHandler {
     private val TAG = javaClass.name
     val vPrefix = "verse_"
+    val bPrefix = "block_"
 
     private val versePosMap = mutableMapOf<String, Pair<Int, Int>>()
+    val verseBlockPosMap = mutableListOf<IntArray>()
+    var lastVerseNumberSeen = 0
+
     private var htmlLayout: Layout? = null
     private var scrollHeightRange: Int = -1
     private val lineInfoList = mutableListOf<TextLineInfo>()
@@ -31,10 +35,23 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
             return
         }
 
+        if (tag.startsWith(bPrefix)) {
+            if (opening) {
+                val verseBlockIndex = Integer.parseInt(tag.substring(bPrefix.length))
+                verseBlockPosMap.add(intArrayOf(lastVerseNumberSeen, verseBlockIndex, output.length, 0))
+            }
+            else {
+                val lastBlockEntry = verseBlockPosMap[versePosMap.size - 1]
+                assert(lastBlockEntry[0] == lastVerseNumberSeen)
+                lastBlockEntry[3] = output.length
+            }
+        }
+
         if (!tag.startsWith(vPrefix)) return
 
         if (opening) {
             versePosMap[tag] = Pair(output.length, 0)
+            lastVerseNumberSeen = Integer.parseInt(tag.substring(vPrefix.length))
         }
         else {
             val beginValue = versePosMap.getValue(tag)

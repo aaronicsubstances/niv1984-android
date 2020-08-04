@@ -80,32 +80,32 @@ class VerseHighlighterTest {
     fun testClearHighlightRangeTest() {
         var expected = listOf(HighlightRange(4, 5))
         var actual = VerseHighlighter.clearHighlightRange(
-            listOf(HighlightRange(4, 5)), HighlightRange(5, 6))
+            arrayOf(HighlightRange(4, 5)), HighlightRange(5, 6))
         assertEquals(expected, actual)
 
         expected = listOf(HighlightRange(4, 5), HighlightRange(6, 10))
         actual = VerseHighlighter.clearHighlightRange(
-            listOf(HighlightRange(4, 10)), HighlightRange(5, 6))
+            arrayOf(HighlightRange(4, 10)), HighlightRange(5, 6))
         assertEquals(expected, actual)
 
         expected = listOf()
         actual = VerseHighlighter.clearHighlightRange(
-            listOf(HighlightRange(4, 10)), HighlightRange(1, 16))
+            arrayOf(HighlightRange(4, 10)), HighlightRange(1, 16))
         assertEquals(expected, actual)
 
         expected = listOf()
         actual = VerseHighlighter.clearHighlightRange(
-            listOf(HighlightRange(4, 10)), HighlightRange(4, 10))
+            arrayOf(HighlightRange(4, 10)), HighlightRange(4, 10))
         assertEquals(expected, actual)
 
         expected = listOf(HighlightRange(16, 20))
         actual = VerseHighlighter.clearHighlightRange(
-            listOf(HighlightRange(4, 10), HighlightRange(14, 20)), HighlightRange(1, 16))
+            arrayOf(HighlightRange(4, 10), HighlightRange(14, 20)), HighlightRange(1, 16))
         assertEquals(expected, actual)
 
         expected = listOf(HighlightRange(4, 8), HighlightRange(16, 20))
         actual = VerseHighlighter.clearHighlightRange(
-            listOf(HighlightRange(4, 10), HighlightRange(14, 20)), HighlightRange(8, 16))
+            arrayOf(HighlightRange(4, 10), HighlightRange(14, 20)), HighlightRange(8, 16))
         assertEquals(expected, actual)
     }
 }

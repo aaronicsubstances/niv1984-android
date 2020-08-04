@@ -1,34 +1,51 @@
 package com.aaronicsubstances.niv1984.models
 
-import androidx.room.Dao
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.Query
+import androidx.room.*
 
 @Entity
 data class UserHighlightData(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Int = 0,
 
-    var bibleVersion: String,
+    var bibleVersion: String = "",
 
-    var bookNumber: Int,
+    var bookNumber: Int = 0,
 
-    var chapterNumber: Int,
+    var chapterNumber: Int = 0,
 
-    var verseNumber: Int,
+    var verseNumber: Int = 0,
 
-    var verseBlockIndex: Int,
+    var verseBlockIndex: Int = 0,
 
-    var data: String
+    var data: String = ""
 )
 
 data class HighlightRange(var startIndex: Int, var endIndex: Int)
 
 @Dao
-interface UserHighlightDataDao {
+abstract class UserHighlightDataDao {
     @Query("""SELECT * from UserHighlightData
         WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber""")
-    suspend fun getHighlightData(bibleVersion: String, bookNumber: Int): List<UserHighlightData>
+    abstract suspend fun getHighlightData(bibleVersion: String, bookNumber: Int): List<UserHighlightData>
+
+    @Query("""SELECT * FROM UserHighlightData
+        WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber AND chapterNumber = :chapterNumber
+        AND verseNumber = :verseNumber AND verseBlockIndex In (:blockIndices)
+    """)
+    abstract suspend fun fetchHighlightData(bibleVersion: String, bookNumber: Int, chapterNumber: Int,
+                                            verseNumber: Int, blockIndices: List<Int>): List<UserHighlightData>
+
+    @Insert
+    abstract suspend fun insertHighlightData(entities: List<UserHighlightData>)
+
+    @Delete
+    abstract suspend fun deleteHighlightData(entities: List<UserHighlightData>)
+
+    @Transaction
+    open suspend fun updateHighlightData(entitiesToDelete: List<UserHighlightData>,
+                                         entitiesToInsert: List<UserHighlightData>) {
+        deleteHighlightData(entitiesToDelete)
+        insertHighlightData(entitiesToInsert)
+    }
 }

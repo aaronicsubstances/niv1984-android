@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.data.SourceCodeTransformer
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
@@ -82,6 +83,8 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                     }
                 }
                 // else let default items be processed.
+                // currently this means that completing a default action such as Copy
+                // does not automatically exit highlight mode. That is fine for now.
                 return false
             }
 
@@ -124,10 +127,6 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun enterHighlightMode() {
-        /*if (inHighlightMode) {
-            return
-        }*/
-
         if (!fragment.viewModel.isLastLoadResultValid(bookContentAdapter.bibleVersions,
                 bookContentAdapter.bibleVersionIndexInUI, bookContentAdapter.displayMultipleSideBySide,
                 bookContentAdapter.isNightMode)) {
@@ -205,16 +204,14 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
             var contentByParts: List<BookDisplayItemContent>? = null
             var fullContent: BookDisplayItemContent? = null
             if (item.viewType == BookDisplayItemViewType.VERSE) {
-                if (bookContentAdapter.multipleDisplay) {
-                    if (bookContentAdapter.displayMultipleSideBySide) {
-                        contentByParts = if (bibleVersionIndex == 0) {
-                            item.firstPartialContent
-                        } else {
-                            item.secondPartialContent
-                        }
+                if (bookContentAdapter.multipleDisplay && bookContentAdapter.displayMultipleSideBySide) {
+                    contentByParts = if (bibleVersionIndex == 0) {
+                        item.firstPartialContent
+                    } else {
+                        item.secondPartialContent
                     }
                 }
-                if (contentByParts == null && item.fullContent.bibleVersionIndex == bibleVersionIndex) {
+                else if (item.fullContent.bibleVersionIndex == bibleVersionIndex) {
                     fullContent = item.fullContent
                 }
             }
@@ -230,11 +227,15 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                     lastVerseNum = item.verseNumber
                 }
                 contentByParts?.let {
-                    for (part in it) {
-                        chapterContent.append(part.text).append("<br>")
+                    for (partIdx in it.indices) {
+                        val processed = processTextForHighlightMode(it[partIdx])
+                        chapterContent.append(processed).append("<br>")
                     }
                 }
-                fullContent?.let { chapterContent.append(it.text) }
+                fullContent?.let {
+                    val processed = processTextForHighlightMode(it)
+                    chapterContent.append(processed)
+                }
             }
             i++
         }
@@ -246,6 +247,18 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         //wrap in body to prevent tag mechanism from treating first verse tag as a sort of wrapper
         val spanned = AppUtils.parseHtml("<body>$chapterContent</body>", htmlViewManager)
         return spanned
+    }
+
+    private fun processTextForHighlightMode(item: BookDisplayItemContent): String {
+        val removableMarkups = item.highlightModeRemovableMarkups
+        if (removableMarkups == null || removableMarkups.isEmpty()) {
+            return item.text
+        }
+        val transformer = SourceCodeTransformer(item.text)
+        for (m in removableMarkups) {
+            transformer.addTransform("", m.pos, m.pos + m.tag.length)
+        }
+        return transformer.transformedText.toString()
     }
 
     fun addHighlightRange() {

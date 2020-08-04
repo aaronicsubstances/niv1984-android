@@ -43,8 +43,7 @@ class AppUtilsInstrumentedTest {
         val actual = AppUtils.deserializeFromJson(serialized, expected.javaClass)
         assertEquals(expected, actual)
 
-        val expectedHighlight = UserHighlightData.ChapterData(1,
-            arrayOf(UserHighlightData.VerseBlockData(1, 0, arrayOf(HighlightRange(0, 1)))))
+        val expectedHighlight = arrayOf(HighlightRange(0, 1))
         serialized = AppUtils.serializeAsJson(expectedHighlight)
         val actualHighlight = AppUtils.deserializeFromJson(serialized, expectedHighlight.javaClass)
         assertEquals(expectedHighlight, actualHighlight)

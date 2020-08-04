@@ -1,10 +1,17 @@
 package com.aaronicsubstances.niv1984.data
 
-class SourceCodeTransformer(originalText: String) {
+class SourceCodeTransformer {
+
+    constructor(originalText: String): this(StringBuilder(originalText))
+
+    constructor(originalText: StringBuilder) {
+        transformedText = originalText
+    }
+
     /**
      * Gets string resulting from modification of original string by replacements.
      */
-    val transformedText = StringBuilder(originalText)
+    val transformedText: StringBuilder
 
     /**
      * Gets offset that can be added to an index into original string to

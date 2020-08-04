@@ -219,22 +219,16 @@ class VerseHighlighter {
         // first escape raw text in between markup positions.
         escapeHtmlSections()
 
-        // this code uses the same ideas from SourceCodeTransformer.
-        var positionAdjustment = 0
+        val transformer = SourceCodeTransformer(rawText)
         for (m in markupList) {
-            val diff: Int
+            val newPos = transformer.positionAdjustment
             if (m.placeholder == null) {
-                rawText.insert(positionAdjustment + m.pos, m.tag)
-                diff = m.tag.length
+                transformer.addTransform(m.tag, m.pos)
             }
             else {
-                rawText.replace(positionAdjustment + m.pos,
-                    positionAdjustment + m.pos + m.placeholder.length,
-                    m.tag)
-                diff = m.tag.length - m.placeholder.length
+                transformer.addTransform(m.tag, m.pos, m.pos + m.placeholder.length)
             }
-            m.pos += positionAdjustment
-            positionAdjustment += diff
+            m.pos += newPos
         }
     }
 

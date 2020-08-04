@@ -265,9 +265,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
             Observer<Pair<BookDisplay, BookLoadAftermath>> { (data, bookLoadAftermath) ->
-                bookContentAdapter.bibleVersions = data.bibleVersions
-                bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
-                bookContentAdapter.displayMultipleSideBySide = data.displayMultipleSideBySide
                 bookContentAdapter.submitList(data.displayItems)
                 syncChapterWidget(bookLoadAftermath.chapterNumber - 1, true)
                 // skip scroll if layout is responding to configuration change.
@@ -409,7 +406,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 radioIndex)
         }
 
-        val bibleVersionIndexToUse = if (!defaultReadingMode) {
+        bookContentAdapter.bibleVersionIndexInUI = if (!defaultReadingMode) {
             if (bookContentAdapter.bibleVersions.size > 1) null else 0
         }
         else {
@@ -436,11 +433,14 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         }
 
         val bookDescription = AppConstants.bibleVersions.getValue(
-            bookContentAdapter.bibleVersions[bibleVersionIndexToUse ?: 0]).bookNames[bookNumber - 1]
+            bookContentAdapter.bibleVersions[bookContentAdapter.bibleVersionIndexInUI ?: 0])
+            .bookNames[bookNumber - 1]
         titleTextView.text = bookDescription
 
-        viewModel.loadBook(bookNumber, bookContentAdapter.bibleVersions, bibleVersionIndexToUse,
-            bookContentAdapter.displayMultipleSideBySide, bookContentAdapter.isNightMode)
+        viewModel.loadBook(bookNumber, bookContentAdapter.bibleVersions,
+            bookContentAdapter.bibleVersionIndexInUI,
+            bookContentAdapter.displayMultipleSideBySide,
+            bookContentAdapter.isNightMode)
     }
 
     private fun goToChapter(chapterIdx: Int) {

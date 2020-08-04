@@ -48,4 +48,5 @@
     <string name="action_book_switch">Change Book</string>
     <string name="action_enter_copy_mode">Enter Copy/Highlight Mode</string>
     <string name="action_exit_copy_mode">Exit Copy/Highlight Mode</string>
+    <string name="message_highlight_mode_prohibited">Book loading in progress...</string>
 </resources>

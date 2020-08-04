@@ -1,6 +1,8 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.os.Bundle
+import android.text.Selection
+import android.text.Spannable
 import android.text.Spanned
 import android.view.ActionMode
 import android.view.Menu
@@ -11,6 +13,7 @@ import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
+import com.aaronicsubstances.niv1984.models.ScrollPosPref
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
@@ -115,23 +118,30 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
     fun onChapterChanged() {
         if (inHighlightMode) {
-            TODO("Yet to be implemented")
+            Selection.removeSelection(selectedChapterContent.text as Spannable)
+            enterHighlightMode()
         }
     }
 
     fun enterHighlightMode() {
-        if (inHighlightMode) {
+        /*if (inHighlightMode) {
+            return
+        }*/
+
+        if (!fragment.viewModel.isLastLoadResultValid(bookContentAdapter.bibleVersions,
+                bookContentAdapter.bibleVersionIndexInUI, bookContentAdapter.displayMultipleSideBySide,
+                bookContentAdapter.isNightMode)) {
+            AppUtils.showShortToast(fragment.context, fragment.getString(
+                R.string.message_highlight_mode_prohibited))
             return
         }
+
+        val latestSysBookmark = fragment.viewModel.currLoc
+        switchToChapterFocusView(latestSysBookmark)
+
         defaultView.visibility = View.INVISIBLE
         chapterFocusView.visibility = View.VISIBLE
         updateTextSizes()
-
-        val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[0]
-        val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
-        val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, 1)
-        selectedChapterTitle.text = chapterTitle
-        selectedChapterContent.text = "Highlight mode test"
 
         inHighlightMode = true
         (fragment.activity as MainActivity).invalidateOptionsMenu()
@@ -161,22 +171,20 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         bookContentAdapter.initDefault(dummyVerseItem, selectedChapterContent)
     }
 
-    private fun switchToChapterFocusView(item: BookDisplayItem, bibleVersionIndex: Int) {
-        val titleItem = BookDisplayItem(BookDisplayItemViewType.TITLE, item.chapterNumber,
-            0, item.fullContent)
-        bookContentAdapter.initDefault(titleItem, selectedChapterTitle)
-        bookContentAdapter.initDefault(item, selectedChapterContent)
-
+    private fun switchToChapterFocusView(sysBookmark: ScrollPosPref) {
+        val bibleVersionIndex = sysBookmark.particularBibleVersionIndex ?: 0
         val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[bibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
-        val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, item.chapterNumber)
+        val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, sysBookmark.chapterNumber)
         selectedChapterTitle.text = chapterTitle
 
-        selectedChapterContent.text = fetchChapterContent(item.chapterNumber, bibleVersionIndex)
+        selectedChapterContent.text = fetchChapterContent(sysBookmark.chapterNumber,
+            bibleVersionIndex)
 
         // delay goToVerse so htmlTextView gets the chance to redraw
+        val initialVerseNumber = Math.max(1, sysBookmark.verseNumber)
         selectedChapterContentScroller.post {
-            htmlViewManager.goToVerse(item.verseNumber, selectedChapterContent,
+            htmlViewManager.goToVerse(initialVerseNumber, selectedChapterContent,
                 selectedChapterContentScroller)
         }
     }

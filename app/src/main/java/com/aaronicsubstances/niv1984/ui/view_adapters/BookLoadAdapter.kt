@@ -22,11 +22,17 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
 
+    // these four determine validity of load result in BookLoadViewModel
     var bibleVersions = listOf<String>()
-    var multipleDisplay: Boolean = false
+    var bibleVersionIndexInUI: Int? = 0
     var displayMultipleSideBySide: Boolean = false
-    var zoomLevel: Int = 100
     var isNightMode: Boolean = false
+
+    var zoomLevel: Int = 100
+    val multipleDisplay: Boolean
+        get() {
+            return bibleVersionIndexInUI == null
+        }
 
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal

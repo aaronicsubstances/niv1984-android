@@ -258,9 +258,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             openBookForReading(2)
         }
         switchToPrefBtn.setOnClickListener { _ ->
-            val currLoc = viewModel.currLoc
             bookLoadRequestListener?.onBookLoadRequest(
-                bookNumber, currLoc.chapterNumber, currLoc.verseNumber)
+                bookNumber, viewModel.currLocChapterNumber, viewModel.currLocVerseNumber)
         }
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
@@ -454,7 +453,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         }
     }
 
-    private fun scrollBook(pos: Int) {
+    fun scrollBook(pos: Int) {
         // don't just scroll to item for it to be visible,
         // but force it to appear at the top.
         (bookContentView.layoutManager as LinearLayoutManager)

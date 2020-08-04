@@ -60,17 +60,19 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         systemBookmark = bookmark
     }
 
-    fun isLastLoadResultValid(bibleVersions: List<String>, bibleVersionIndex: Int?,
-                              displayMultipleSideBySide: Boolean, isNightMode: Boolean): Boolean {
+    fun getValidLastLoadResult(bibleVersions: List<String>, bibleVersionIndex: Int?,
+                               displayMultipleSideBySide: Boolean, isNightMode: Boolean): BookDisplay? {
         val temp = lastLoadResult
         if (temp != null) {
-            return temp.bibleVersions == bibleVersions &&
+            if (temp.bibleVersions == bibleVersions &&
                     temp.bibleVersionIndexInUI == bibleVersionIndex &&
                     (temp.bibleVersionIndexInUI != null ||
                             temp.displayMultipleSideBySide == displayMultipleSideBySide) &&
-                    temp.isNightMode == isNightMode
+                    temp.isNightMode == isNightMode) {
+                return temp
+            }
         }
-        return false
+        return null
     }
 
     val currLoc: ScrollPosPref
@@ -78,6 +80,12 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             systemBookmark.verseNumber, systemBookmark.particularViewItemPos,
             systemBookmark.particularBibleVersions, systemBookmark.particularBibleVersionIndex,
             systemBookmark.equivalentViewItemType, systemBookmark.displayMultipleSideBySide)
+
+    val currLocChapterNumber: Int
+        get() = systemBookmark.chapterNumber
+
+    val currLocVerseNumber: Int
+        get() = systemBookmark.verseNumber
 
     private fun loadSystemBookmarks(bookNumber: Int) {
         if (systemBookmark.bookNumber > 0) {
@@ -104,10 +112,11 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     fun loadBook(bookNumber: Int, bibleVersions: List<String>, bibleVersionIndex: Int?,
                  displayMultipleSideBySide: Boolean, isNightMode: Boolean) {
-        if (isLastLoadResultValid(bibleVersions, bibleVersionIndex, displayMultipleSideBySide,
-                isNightMode)) {
+        val temp = getValidLastLoadResult(bibleVersions, bibleVersionIndex, displayMultipleSideBySide,
+                isNightMode)
+        if (temp != null) {
             // reuse lastLoadResult.
-            _loadLiveData.value = Pair(lastLoadResult!!, BookLoadAftermath(-1,
+            _loadLiveData.value = Pair(temp, BookLoadAftermath(-1,
                 systemBookmark.chapterNumber))
             return
         }
@@ -124,7 +133,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             // update system bookmarks in response to version switch, except
             // if loaded system bookmarks has same version as current request.
             // (which can only happen on the very first request).
-            var isParticularPosValid = bibleVersions == systemBookmark.particularBibleVersions &&
+            var isParticularPosValid = systemBookmark.particularViewItemPos >= 0 &&
+                    bibleVersions == systemBookmark.particularBibleVersions &&
                 bibleVersionIndex == systemBookmark.particularBibleVersionIndex &&
                     (bibleVersionIndex != null ||
                             displayMultipleSideBySide == systemBookmark.displayMultipleSideBySide)
@@ -144,19 +154,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         systemBookmark.particularBibleVersions = model.bibleVersions
         systemBookmark.displayMultipleSideBySide = model.displayMultipleSideBySide
         systemBookmark.particularBibleVersionIndex = model.bibleVersionIndexInUI
-        var pos = model.chapterIndices[systemBookmark.chapterNumber - 1]
-        systemBookmark.particularViewItemPos = pos // set by default just in case none is found.
-        while (pos < model.displayItems.size) {
-            val displayItem = model.displayItems[pos]
-            if (displayItem.viewType == systemBookmark.equivalentViewItemType) {
-                if (displayItem.viewType != BookDisplayItemViewType.VERSE ||
-                        displayItem.verseNumber == systemBookmark.verseNumber) {
-                    systemBookmark.particularViewItemPos = pos
-                    break
-                }
-            }
-            pos++
-        }
+        updateParticularPos(model)
     }
 
     fun updateSystemBookmarks(chapterNumber: Int, verseNumber: Int,
@@ -168,6 +166,23 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             this.chapterNumber = chapterNumber
             this.verseNumber = verseNumber
         }
+    }
+
+    fun updateParticularPos(model: BookDisplay): Int {
+        var pos = model.chapterIndices[systemBookmark.chapterNumber - 1]
+        systemBookmark.particularViewItemPos = pos // set by default just in case none is found.
+        while (pos < model.displayItems.size) {
+            val displayItem = model.displayItems[pos]
+            if (displayItem.viewType == systemBookmark.equivalentViewItemType) {
+                if (displayItem.viewType != BookDisplayItemViewType.VERSE ||
+                    displayItem.verseNumber == systemBookmark.verseNumber) {
+                    systemBookmark.particularViewItemPos = pos
+                    break
+                }
+            }
+            pos++
+        }
+        return systemBookmark.particularViewItemPos
     }
 }
 

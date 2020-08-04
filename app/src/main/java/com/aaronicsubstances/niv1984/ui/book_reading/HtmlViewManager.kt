@@ -46,7 +46,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         if (!opening) return
         val start = output.length
         // The space is necessary, the block requires some content:
-        output.append(" \n")
+        output.append("\u00a0") // &nbsp;
         output.setSpan(
             CustomHRSpan(color, 5.0f, 2.0f),
             start, output.length, 0
@@ -61,32 +61,44 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         lineInfoList.clear()
     }
 
-    fun getVerseNumber(loc: Int): Int {
-        var vNum = 1
+    fun getVerseNumber(txtLoc: Int): Int {
         for (e in versePosMap) {
-            if (loc >= e.value.first && loc <= e.value.second) {
-                vNum = Integer.parseInt(e.key.substring(vPrefix.length))
-                android.util.Log.e(TAG, "selection offset $loc maps to verse $vNum")
-                break
+            if (txtLoc >= e.value.first && txtLoc <= e.value.second) {
+                return Integer.parseInt(e.key.substring(vPrefix.length))
             }
         }
-        return vNum
+        return 0
     }
 
-    fun goToVerse(vNum: Int, tv: TextView, sp: ScrollView) {
+    fun getVerseNumber(contentTf: TextView, scrollYPos: Int): Int {
+        val yOffset = contentTf.top
+        for (txtLineInfo in lineInfoList) {
+            if (scrollYPos - yOffset >= txtLineInfo.topPos &&
+                    scrollYPos - yOffset <= txtLineInfo.bottomPos) {
+                return getVerseNumber(txtLineInfo.lineStart)
+            }
+        }
+        return 0
+    }
+
+    fun goToVerse(vNum: Int, sp: ScrollView, contentTf: TextView) {
+        if (vNum < 1) {
+            sp.scrollTo(0, 0)
+            return
+        }
         val vKey = "$vPrefix$vNum"
         if (!versePosMap.contains(vKey)) {
             AppUtils.showShortToast(context, "$vKey not found in map")
             return
         }
         val vLoc = versePosMap.getValue(vKey)
-        //android.util.Log.e(TAG, "$vKey maps to $vLoc")
+        //android.util.Log.d(TAG, "$vKey maps to $vLoc")
 
         var vStart = vLoc.first
         var vEnd = vLoc.second
 
-        Selection.setSelection(tv.text as Spannable, vStart, vEnd)
-        tv.performLongClick()
+        //Selection.setSelection(contentTf.text as Spannable, vStart, vEnd)
+        //contentTf.performLongClick()
 
         if (lineInfoList.isEmpty()) {
             AppUtils.showShortToast(context, "line info list is empty")
@@ -118,29 +130,30 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         }
 
         val vTopLineInfo = lineInfoList[topLineIndex]
-        val vBottomLineInfo = lineInfoList[bottomLineIndex]
-        //android.util.Log.e(TAG, "$vKey maps to $vTopLineInfo, $vBottomLineInfo")
+        /*val vBottomLineInfo = lineInfoList[bottomLineIndex]
+        android.util.Log.d(TAG, "$vKey maps to $vTopLineInfo, $vBottomLineInfo")*/
 
-        if (scrollHeightRange == -1) {
+        /*if (scrollHeightRange == -1) {
             AppUtils.showShortToast(context, "scrollHeightRange is not set")
             return
         }
 
-        val scrY = sp.scrollY
-        //android.util.Log.e(TAG, "using scrollHeightRange=$scrollHeightRange, scrollY=$scrY")
+        val scrY = sp.scrollY*/
+        val yOffset = contentTf.top
+        /*android.util.Log.d(TAG, "using scrollHeightRange=$scrollHeightRange, scrollY=$scrY" +
+                ", contentTop=$yOffset")*/
 
-        if (vTopLineInfo.topPos >= scrY && vTopLineInfo.topPos <= scrY + scrollHeightRange &&
-            vBottomLineInfo.bottomPos >= scrY && vBottomLineInfo.bottomPos <= scrY + scrollHeightRange) {
-            //android.util.Log.e(TAG, "no need to scroll: already visible")
+        /*if (vTopLineInfo.topPos + yOffset >= scrY && vTopLineInfo.topPos + yOffset <= scrY + scrollHeightRange &&
+            vBottomLineInfo.bottomPos + yOffset >= scrY && vBottomLineInfo.bottomPos + yOffset <= scrY + scrollHeightRange) {
+            android.util.Log.d(TAG, "no need to scroll: already visible")
             return
         }
 
-        val yPos = vBottomLineInfo.baselinePos - scrollHeightRange
-        //val yPos = vBottomLineInfo.bottomPos - scrollHeightRange
+        val yPos = vBottomLineInfo.baselinePos + yOffset - scrollHeightRange*/
+        val yPos = vTopLineInfo.topPos + yOffset
 
-        //android.util.Log.e(TAG, "$vKey maps to yPos=$yPos")
-        val offset = scrollHeightRange / 2 // to center it.
-        sp.scrollTo(0, yPos + offset)
+        //android.util.Log.d(TAG, "$vKey maps to yPos=$yPos")
+        sp.scrollTo(0, yPos)
     }
 
     fun onScrollViewSizeChanged(v: ScrollView, w: Int, h: Int) {

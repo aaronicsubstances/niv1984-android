@@ -11,10 +11,7 @@ import android.view.View
 import android.widget.TextView
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.data.SourceCodeTransformer
-import com.aaronicsubstances.niv1984.models.BookDisplayItem
-import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
-import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.models.ScrollPosPref
+import com.aaronicsubstances.niv1984.models.*
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
@@ -22,6 +19,7 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class HighlightModeHelper(private val fragment: BookLoadFragment,
                           savedInstanceState: Bundle?) {
+    private val TAG = javaClass.name
 
     companion object {
         private const val STATE_KEY_IN_HIGHLIGHT_MODE = "HighlightModeHelper.inHighlightMode"
@@ -127,16 +125,17 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun enterHighlightMode() {
-        if (!fragment.viewModel.isLastLoadResultValid(bookContentAdapter.bibleVersions,
-                bookContentAdapter.bibleVersionIndexInUI, bookContentAdapter.displayMultipleSideBySide,
-                bookContentAdapter.isNightMode)) {
+        val currentLoadResult = fragment.viewModel.getValidLastLoadResult(
+            bookContentAdapter.bibleVersions, bookContentAdapter.bibleVersionIndexInUI,
+            bookContentAdapter.displayMultipleSideBySide, bookContentAdapter.isNightMode)
+        if (currentLoadResult == null) {
             AppUtils.showShortToast(fragment.context, fragment.getString(
                 R.string.message_highlight_mode_prohibited))
             return
         }
 
         val latestSysBookmark = fragment.viewModel.currLoc
-        switchToChapterFocusView(latestSysBookmark)
+        switchToChapterFocusView(currentLoadResult, latestSysBookmark)
 
         defaultView.visibility = View.INVISIBLE
         chapterFocusView.visibility = View.VISIBLE
@@ -153,6 +152,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
         defaultView.visibility = View.VISIBLE
         chapterFocusView.visibility = View.INVISIBLE
+        selectedChapterContentScroller.setOnScrollChangeListener(null)
         selectedChapterContent.text = "" // should clear any selection
         inHighlightMode = false
         (fragment.activity as MainActivity).invalidateOptionsMenu()
@@ -170,25 +170,62 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         bookContentAdapter.initDefault(dummyVerseItem, selectedChapterContent)
     }
 
-    private fun switchToChapterFocusView(sysBookmark: ScrollPosPref) {
+    private fun switchToChapterFocusView(currentLoadResult: BookDisplay, sysBookmark: ScrollPosPref) {
         val bibleVersionIndex = sysBookmark.particularBibleVersionIndex ?: 0
         val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[bibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
         val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, sysBookmark.chapterNumber)
         selectedChapterTitle.text = chapterTitle
 
+        val lastVerseReceiver = intArrayOf(0)
         selectedChapterContent.text = fetchChapterContent(sysBookmark.chapterNumber,
-            bibleVersionIndex)
+            bibleVersionIndex, lastVerseReceiver)
 
         // delay goToVerse so htmlTextView gets the chance to redraw
-        val initialVerseNumber = Math.max(1, sysBookmark.verseNumber)
+        val initialVerseNumber = if (sysBookmark.verseNumber > 0) sysBookmark.verseNumber
+        else {
+            if (sysBookmark.equivalentViewItemType == BookDisplayItemViewType.TITLE) 0
+            else lastVerseReceiver[0]
+        }
         selectedChapterContentScroller.post {
-            htmlViewManager.goToVerse(initialVerseNumber, selectedChapterContent,
-                selectedChapterContentScroller)
+            htmlViewManager.goToVerse(
+                initialVerseNumber, selectedChapterContentScroller, selectedChapterContent
+            )
+
+            selectedChapterContentScroller.setOnScrollChangeListener(object :
+                View.OnScrollChangeListener {
+                override fun onScrollChange(
+                    v: View?,
+                    scrollX: Int,
+                    scrollY: Int,
+                    oldScrollX: Int,
+                    oldScrollY: Int
+                ) {
+                    var vNum = htmlViewManager.getVerseNumber(selectedChapterContent, scrollY)
+                    //android.util.Log.d(TAG, "Scroll pos $scrollY points to verse $vNum")
+
+                    var equivalentViewType = BookDisplayItemViewType.VERSE
+                    if (vNum < 1) {
+                        vNum = 0
+                        equivalentViewType = BookDisplayItemViewType.TITLE
+                    }
+                    // debounce
+                    if (vNum != fragment.viewModel.currLocVerseNumber) {
+                        fragment.viewModel.updateSystemBookmarks(
+                            sysBookmark.chapterNumber,
+                            vNum, equivalentViewType, -1
+                        )
+                        val particularPos =
+                            fragment.viewModel.updateParticularPos(currentLoadResult)
+                        fragment.scrollBook(particularPos)
+                    }
+                }
+            })
         }
     }
 
-    private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int): Spanned {
+    private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int,
+                                    lastVerseReceiver: IntArray): Spanned {
         val chapterIndex = fragment.viewModel.lastLoadResult!!.chapterIndices[chapterNumber - 1]
         val titleItem = bookContentAdapter.currentList[chapterIndex]
         assert(titleItem.chapterNumber == chapterNumber)
@@ -239,9 +276,9 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
             }
             i++
         }
-        if (lastVerseNum > 0) {
-            chapterContent.append("</p></${htmlViewManager.vPrefix}$lastVerseNum>")
-        }
+        assert(lastVerseNum > 0)
+        lastVerseReceiver[0] = lastVerseNum
+        chapterContent.append("</p></${htmlViewManager.vPrefix}$lastVerseNum>")
 
         htmlViewManager.reset()
         //wrap in body to prevent tag mechanism from treating first verse tag as a sort of wrapper
@@ -266,8 +303,8 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         val selEnd = selectedChapterContent.selectionEnd
         val vStart = htmlViewManager.getVerseNumber(selStart)
         val vEnd = htmlViewManager.getVerseNumber(selEnd)
-        /*AppUtils.showShortToast(fragment.context, "selection ($selStart, $selEnd) " +
-                "maps to verses $vStart-$vEnd")*/
+        AppUtils.showShortToast(fragment.context, "selection ($selStart, $selEnd) " +
+                "maps to verses $vStart-$vEnd")
     }
 
     fun removeHighlightRange() {

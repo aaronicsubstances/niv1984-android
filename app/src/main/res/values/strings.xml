@@ -38,6 +38,7 @@
     <string name="highlight_mode_title"><![CDATA[ <b>%s</b> (Copy/Highlight mode) ]]></string>
     <string name="search_result_mode_title"><![CDATA[ <b>%s</b> (Search Result) ]]></string>
     <string name="bookmark_mode_title"><![CDATA[ <b>%1$s</b> (Bookmark: <i>%2$s</i>) ]]></string>
+    <string name="message_loading_in_progress"><![CDATA[ Loading <b>%s</b> ... ]]></string>
     <string name="action_add_highlight">Highlight</string>
     <string name="action_remove_highlight">Unhighlight</string>
     <string name="action_chapter_switch">Change Chapter</string>

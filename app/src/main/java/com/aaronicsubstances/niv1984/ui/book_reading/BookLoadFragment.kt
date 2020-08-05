@@ -25,11 +25,18 @@ import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.ui.view_adapters.ChapterWidgetAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.aaronicsubstances.niv1984.utils.LiveDataEvent
+import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class BookLoadFragment : Fragment(), PrefListenerFragment {
     var bookNumber: Int = 0
+    lateinit var bibleVersions: List<String>
+    var bibleVersionIndex: Int? = 0
+    var displayMultipleSideBySide = false
+    var isNightMode = false
+
     private var initialLoc: Pair<Int, Int>? = null
     private var defaultReadingMode = false
     private var searchResultBibleVersion = ""
@@ -51,7 +58,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
     internal lateinit var viewModel: BookLoadViewModel
     internal lateinit var bookContentAdapter: BookLoadAdapter
-    internal lateinit var chapterAdapter: ChapterWidgetAdapter
+    private lateinit var chapterAdapter: ChapterWidgetAdapter
 
     private var bookLoadRequestListener: BookLoadRequestListener? = null
 
@@ -132,6 +139,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     override fun onDetach() {
         super.onDetach()
         bookLoadRequestListener = null
+        viewModel.loadResultValidationCallback = null
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -223,25 +231,25 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
            })
         chapterView.adapter = chapterAdapter
 
-        bookContentAdapter.isNightMode = AppUtils.isNightMode(requireContext())
+        isNightMode = AppUtils.isNightMode(requireContext())
         bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
         if (defaultReadingMode) {
-            bookContentAdapter.bibleVersions =
-                sharedPrefMgr.getPreferredBibleVersions()
-            bookContentAdapter.displayMultipleSideBySide =
-                sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
+            bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+            displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
         } else {
             if (searchResultBibleVersion.isNotEmpty()) {
-                bookContentAdapter.bibleVersions = listOf(searchResultBibleVersion)
+                bibleVersions = listOf(searchResultBibleVersion)
             }
             userBookmark?.let {
-                bookContentAdapter.bibleVersions = it.particularBibleVersions
-                bookContentAdapter.displayMultipleSideBySide = it.displayMultipleSideBySide
+                bibleVersions = it.particularBibleVersions
+                displayMultipleSideBySide = it.displayMultipleSideBySide
             }
         }
-        resetViewForBibleVersions()
 
         viewModel = ViewModelProvider(this).get(BookLoadViewModel::class.java)
+        viewModel.loadResultValidationCallback = {
+            isBookModelAsExpected(it)
+        }
 
         // use initial position if any is provided.
         initialLoc?.let { viewModel.initCurrLoc(bookNumber, it.first, it.second,
@@ -263,14 +271,24 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         }
 
         viewModel.loadLiveData.observe(viewLifecycleOwner,
-            Observer<Pair<BookDisplay, BookLoadAftermath>> { (data, bookLoadAftermath) ->
+            Observer<BookDisplay> { data ->
+                bookContentAdapter.bibleVersions = data.bibleVersions
+                bookContentAdapter.isNightMode = data.isNightMode
+                bookContentAdapter.displayMultipleSideBySide = data.displayMultipleSideBySide
+                bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
                 bookContentAdapter.submitList(data.displayItems)
-                syncChapterWidget(bookLoadAftermath.chapterNumber - 1, true)
-                // skip scroll if layout is responding to configuration change.
-                if (bookLoadAftermath.particularPos != -1) {
-                    scrollBook(bookLoadAftermath.particularPos)
+                if (viewModel.bookLoadAftermath.chapterNumber > 0) {
+                    syncChapterWidget(viewModel.bookLoadAftermath.chapterNumber - 1, true)
                 }
+                // skip scroll if layout is responding to configuration change.
+                if (viewModel.bookLoadAftermath.particularPos != -1) {
+                    scrollBook(viewModel.bookLoadAftermath.particularPos)
+                }
+                syncViewWithDataContext()
             })
+
+        viewModel.loadProgressLiveData.observeProperAsEvent(viewLifecycleOwner,
+                Observer<Boolean> { syncViewWithDataContext(true) })
 
         bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {
             override fun listScrolled(
@@ -341,64 +359,74 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         screenAwakeHelper?.onResume()
     }
 
-    private fun resetViewForBibleVersions() {
-        if (defaultReadingMode) {
+    fun syncViewWithDataContext(loading: Boolean = false) {
+        // reset book description.
+        run {
+            val bibleVersionIndexToUse = if (highlightHelper?.inHighlightMode == true) {
+                highlightHelper!!.bibleVersionIndex
+            } else if (bibleVersionIndex == 1) {
+                1
+            } else {
+                0
+            }
+            val bookDescription = AppConstants.bibleVersions.getValue(
+                    bibleVersions[bibleVersionIndexToUse]).bookNames[bookNumber - 1]
+            titleTextView.text = bookDescription
+        }
+
+        // now reset overlay panel
+        if (defaultReadingMode && !loading && highlightHelper?.inHighlightMode != true) {
             defaultBottomPanel.visibility = View.VISIBLE
             prefOverlayPanel.visibility = View.GONE
 
             firstPrefRadio.text = AppConstants.bibleVersions.getValue(
-                bookContentAdapter.bibleVersions[0]).abbreviation
+                    bibleVersions[0]).abbreviation
             secondPrefRadio.text = AppConstants.bibleVersions.getValue(
-                bookContentAdapter.bibleVersions[1]).abbreviation
+                    bibleVersions[1]).abbreviation
             bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
         }
         else {
-            resetOverlayPanel()
-        }
-    }
+            defaultBottomPanel.visibility = View.GONE
+            prefOverlayPanel.visibility = View.VISIBLE
+            prefOverlayPanel.children.forEach { it.visibility = View.GONE }
+            prefOverlayDescriptionTextView.visibility = View.VISIBLE
 
-    fun resetOverlayPanel() {
-        var loading = false
-        if (defaultReadingMode && !loading && highlightHelper?.inHighlightMode != true) {
-            defaultBottomPanel.visibility = View.VISIBLE
-            prefOverlayPanel.visibility = View.GONE
-            return
-        }
-
-        defaultBottomPanel.visibility = View.GONE
-        prefOverlayPanel.visibility = View.VISIBLE
-        prefOverlayPanel.children.forEach { it.visibility = View.GONE }
-        prefOverlayDescriptionTextView.visibility = View.VISIBLE
-
-        if (loading) {
-            TODO("Implement loading of book progress")
-        }
-        else if (highlightHelper?.inHighlightMode == true) {
-            val pinnedVersions = AppConstants.bibleVersions.getValue(
-                    bookContentAdapter.bibleVersions[
-                            bookContentAdapter.bibleVersionIndex ?: 0]).abbreviation
-            prefOverlayDescriptionTextView.text = AppUtils.parseHtml(
-                    getString(R.string.highlight_mode_title, pinnedVersions))
-        }
-        else {
-            switchToPrefBtn.visibility =  View.VISIBLE
-
-            val pinnedVersions = bookContentAdapter.bibleVersions.map {
+            val pinnedVersions = bibleVersions.filterIndexed { i, _ ->
+                if (highlightHelper?.inHighlightMode == true) {
+                    i == highlightHelper!!.bibleVersionIndex
+                }
+                if (defaultReadingMode && bibleVersionIndex != null) {
+                    i == bibleVersionIndex
+                } else {
+                    true
+                }
+            }.map {
                 AppConstants.bibleVersions.getValue(it).abbreviation
             }.joinToString("/")
-            prefOverlayDescriptionTextView.text = if (userBookmarkTitle != null) {
-                AppUtils.parseHtml(
-                    getString(R.string.bookmark_mode_title, userBookmarkTitle, pinnedVersions))
-            }
-            else {
-                 AppUtils.parseHtml(
-                    getString(R.string.search_result_mode_title, pinnedVersions))
+
+            if (loading) {
+                prefOverlayProgressBar.visibility = View.VISIBLE
+                prefOverlayDescriptionTextView.text = AppUtils.parseHtml(
+                        getString(R.string.message_loading_in_progress, pinnedVersions))
+            } else if (highlightHelper?.inHighlightMode == true) {
+                prefOverlayDescriptionTextView.text = AppUtils.parseHtml(
+                        getString(R.string.highlight_mode_title, pinnedVersions))
+            } else {
+                switchToPrefBtn.visibility = View.VISIBLE
+
+                prefOverlayDescriptionTextView.text = if (userBookmarkTitle != null) {
+                    AppUtils.parseHtml(
+                            getString(R.string.bookmark_mode_title, userBookmarkTitle, pinnedVersions))
+                } else {
+                    AppUtils.parseHtml(
+                            getString(R.string.search_result_mode_title, pinnedVersions))
+                }
             }
         }
     }
 
     private fun openBookForReading(radioIndex: Int?) {
-        bookContentAdapter.bibleVersionIndex = if (defaultReadingMode) {
+        bibleVersionIndex = if (defaultReadingMode) {
             var index = radioIndex
             if (radioIndex == null) {
                 index = sharedPrefMgr.loadPrefInt(
@@ -433,15 +461,20 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             if (bookContentAdapter.bibleVersions.size > 1) null else 0
         }
 
-        val bookDescription = AppConstants.bibleVersions.getValue(
-            bookContentAdapter.bibleVersions[bookContentAdapter.bibleVersionIndex ?: 0])
-            .bookNames[bookNumber - 1]
-        titleTextView.text = bookDescription
+        viewModel.loadBook(bookNumber, bibleVersions,
+            bibleVersionIndex,  displayMultipleSideBySide, isNightMode)
+        syncViewWithDataContext()
+    }
 
-        viewModel.loadBook(bookNumber, bookContentAdapter.bibleVersions,
-            bookContentAdapter.bibleVersionIndex,
-            bookContentAdapter.displayMultipleSideBySide,
-            bookContentAdapter.isNightMode)
+    private fun isBookModelAsExpected(model: BookDisplay?): Boolean {
+        if (model == null) {
+            return false
+        }
+        return model.bibleVersions == bibleVersions &&
+                model.bibleVersionIndexInUI == bibleVersionIndex &&
+                (model.bibleVersionIndexInUI != null ||
+                        model.displayMultipleSideBySide == displayMultipleSideBySide) &&
+                model.isNightMode == isNightMode
     }
 
     private fun goToChapter(chapterIdx: Int) {
@@ -510,18 +543,17 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         if (!defaultReadingMode) {
             return
         }
-        bookContentAdapter.bibleVersions = bibleVersions
-        resetViewForBibleVersions()
-        openBookForReading(null)
+        this.bibleVersions = bibleVersions
         highlightHelper?.exitHighlightMode()
+        openBookForReading(null)
     }
 
     override fun onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide: Boolean) {
         if (!defaultReadingMode) {
             return
         }
-        bookContentAdapter.displayMultipleSideBySide = displayMultipleSideBySide
-        if (bothPrefRadio.isChecked) {
+        this.displayMultipleSideBySide = displayMultipleSideBySide
+        if (bibleVersionIndex == null) {
             openBookForReading(2)
         }
     }

@@ -14,6 +14,7 @@ import com.google.gson.GsonBuilder
 
 object AppUtils {
     const val VIEW_TYPE_LOADING = -1
+    const val DEFAULT_CHARSET = "utf-8"
 
     private val JSON_SERIALIZER = GsonBuilder().create()
 

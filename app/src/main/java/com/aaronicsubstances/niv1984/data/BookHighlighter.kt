@@ -119,6 +119,10 @@ class BookHighlighter(private val context: Context,
                 entitiesToInsert.add(newBlockData)
             }
         }
+
+        // clear cache just before saving.
+        BookCache(context, bookNumber).purge(bibleVersion)
+
         db.userHighlightDataDao().updateHighlightData(entitiesToDelete, entitiesToInsert)
     }
 }

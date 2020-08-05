@@ -12,6 +12,7 @@ import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
@@ -21,17 +22,11 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
 
-    // these four determine validity of load result in BookLoadViewModel
     var bibleVersions = listOf<String>()
-    var bibleVersionIndex: Int? = 0
+    var multipleDisplay = false
     var displayMultipleSideBySide: Boolean = false
     var isNightMode: Boolean = false
-
     var zoomLevel: Int = 100
-    val multipleDisplay: Boolean
-        get() {
-            return bibleVersionIndex == null
-        }
 
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal

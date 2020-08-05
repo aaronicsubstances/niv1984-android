@@ -2,6 +2,7 @@ package com.aaronicsubstances.niv1984.data
 
 import android.content.Context
 import android.text.TextUtils
+import androidx.lifecycle.MutableLiveData
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
@@ -23,6 +24,7 @@ import com.aaronicsubstances.niv1984.utils.BookParser.WordsOfJesus
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.AsanteTwiBibleVersion
+import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -31,7 +33,8 @@ class BookLoader(private val context: Context,
                  private val bibleVersions: List<String>,
                  private val bibleVersionIndexInUI: Int?,
                  private val displayMultipleSideBySide: Boolean,
-                 private val isNightMode: Boolean) {
+                 private val isNightMode: Boolean,
+                 private val progressReporter: MutableLiveData<LiveDataEvent<Boolean>>) {
 
     // use flame red by default, apricot colour in night mode
     private val wjColor = AppUtils.colorResToString(R.color.wjColor, context)
@@ -44,13 +47,12 @@ class BookLoader(private val context: Context,
         return withContext(Dispatchers.IO) {
 
             val book = if (bibleVersionIndexInUI == null) {
-                val rawChapters = loadRawBookAsset(bibleVersions[0])
                 val chapterIndices = mutableListOf<Int>()
-                val displayItems = processChapters(0, rawChapters, chapterIndices)
+                val displayItems = processChapters(0, chapterIndices)
 
-                val rawChapters2 = loadRawBookAsset(bibleVersions[1])
                 val chapterIndices2 = mutableListOf<Int>()
-                val displayItems2 = processChapters(1, rawChapters2, chapterIndices2)
+                val displayItems2 = processChapters(1, chapterIndices2)
+
                 val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
                 val combinedDisplayItems = mutableListOf<BookDisplayItem>()
                 val combinedChapterIndices = mutableListOf<Int>()
@@ -77,9 +79,8 @@ class BookLoader(private val context: Context,
                     isNightMode)
             }
             else {
-                val rawChapters = loadRawBookAsset(bibleVersions[bibleVersionIndexInUI])
                 val chapterIndices = mutableListOf<Int>()
-                val displayItems = processChapters(bibleVersionIndexInUI, rawChapters, chapterIndices)
+                val displayItems = processChapters(bibleVersionIndexInUI, chapterIndices)
                 BookDisplay(bookNumber, bibleVersions, bibleVersionIndexInUI, displayItems, chapterIndices,
                     displayMultipleSideBySide, isNightMode)
             }
@@ -285,25 +286,33 @@ class BookLoader(private val context: Context,
         return retResult
     }
 
-    private fun loadRawBookAsset(bibleVersionCode: String): List<Chapter> {
+    private suspend fun processChapters(
+        bibleVersionIndex: Int,
+        chapterIndices: MutableList<Int>
+    ): List<BookDisplayItem> {
+        val bibleVersionCode = bibleVersions[bibleVersionIndex]
+        // first try and read from cache
+        val cacheLoader = BookCache(context, bookNumber)
+        try {
+            return cacheLoader.load(bibleVersionCode, isNightMode, chapterIndices)
+        }
+        catch (ignore: Exception) {}
+
+        progressReporter.postValue(LiveDataEvent(true))
+
+        // load book in raw XML
         val assetPath = String.format("%s/%02d.xml", bibleVersionCode, bookNumber)
-        return context.assets.open(assetPath).use {
+        val rawChapters = context.assets.open(assetPath).use {
             val parser = BookParser()
             parser.parse(it)
         }
-    }
 
-    private suspend fun processChapters(
-        bibleVersionIndex: Int,
-        rawChapters: List<Chapter>,
-        chapterIndices: MutableList<Int>
-    ): List<BookDisplayItem> {
-
-        // load verse highlights.
+        // load verse highlights from SQLite.
         val bookHighlighter = BookHighlighter(context, bookNumber,
             bibleVersions[bibleVersionIndex])
         bookHighlighter.load()
 
+        // Now process each chapter, inserting highlights as appropriate.
         val displayItems = mutableListOf<BookDisplayItem>()
         for (rawChapter in rawChapters) {
             chapterIndices.add(displayItems.size)
@@ -354,6 +363,13 @@ class BookLoader(private val context: Context,
                     rawChapter.chapterNumber,0,
                     BookDisplayItemContent(bibleVersionIndex, "")))
         }
+
+        // lastly save read items to cache
+        try {
+            cacheLoader.save(bibleVersionCode, isNightMode, displayItems, chapterIndices)
+        }
+        catch (ignore: Exception) {}
+
         return displayItems
     }
 

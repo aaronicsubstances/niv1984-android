@@ -199,6 +199,7 @@ class VerseHighlighter {
         val addedDuringUpdate: Boolean = false,
         val removeDuringHighlighting: Boolean = false
     )
+
     companion object {
         private val TEMP_TAG_PREFIX = "t_"
         private val WS_REGEX = Regex("\\s")

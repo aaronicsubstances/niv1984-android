@@ -14,18 +14,26 @@ import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.models.ScrollPosPref
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.coroutineScope
+import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class BookLoadViewModel(application: Application): AndroidViewModel(application) {
 
-    private val _loadLiveData: MutableLiveData<Pair<BookDisplay, BookLoadAftermath>> = MutableLiveData()
+    private val _loadLiveData: MutableLiveData<BookDisplay> = MutableLiveData()
+    val loadLiveData: LiveData<BookDisplay>
+        get() = _loadLiveData
+
     var lastLoadResult: BookDisplay? = null
         private set
+    var bookLoadAftermath = BookLoadAftermath(-1, 0)
+        private set
 
-    private var lastJob: Job? = null
+    private val _loadProgressLiveData: MutableLiveData<LiveDataEvent<Boolean>> = MutableLiveData()
+    val loadProgressLiveData: LiveData<LiveDataEvent<Boolean>>
+        get() = _loadProgressLiveData
+
+    var loadResultValidationCallback: ((BookDisplay?) -> Boolean)? = null
 
     private var systemBookmark = ScrollPosPref(0, 0, 0, 0,
             listOf(), null, BookDisplayItemViewType.CHAPTER_FRAGMENT, false)
@@ -67,19 +75,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         systemBookmark = bookmark
     }
 
-    fun getValidLastLoadResult(bibleVersions: List<String>, bibleVersionIndex: Int?,
-                               displayMultipleSideBySide: Boolean, isNightMode: Boolean): BookDisplay? {
-        val temp = lastLoadResult
-        if (temp != null) {
-            if (temp.bibleVersions == bibleVersions &&
-                    temp.bibleVersionIndexInUI == bibleVersionIndex &&
-                    (temp.bibleVersionIndexInUI != null ||
-                            temp.displayMultipleSideBySide == displayMultipleSideBySide) &&
-                    temp.isNightMode == isNightMode) {
-                return temp
-            }
-        }
-        return null
+    fun isLastLoadResultValid(): Boolean {
+        return loadResultValidationCallback?.invoke(lastLoadResult) ?: false
     }
 
     val currLoc: ScrollPosPref
@@ -114,25 +111,23 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
-    val loadLiveData: LiveData<Pair<BookDisplay, BookLoadAftermath>>
-        get() = _loadLiveData
-
     fun loadBook(bookNumber: Int, bibleVersions: List<String>, bibleVersionIndex: Int?,
                  displayMultipleSideBySide: Boolean, isNightMode: Boolean) {
-        val temp = getValidLastLoadResult(bibleVersions, bibleVersionIndex, displayMultipleSideBySide,
-                isNightMode)
-        if (temp != null) {
-            // reuse lastLoadResult.
-            _loadLiveData.value = Pair(temp, BookLoadAftermath(-1,
-                systemBookmark.chapterNumber))
+        if (isLastLoadResultValid()) {
+            // reuse lastLoadResult. if first time subscribe after config change,
+            // live data mechanism will republish result.
             return
         }
 
-        lastJob?.cancel()
-        lastJob = viewModelScope.launch {
+        viewModelScope.launch {
             val bookLoader = BookLoader(context, bookNumber, bibleVersions, bibleVersionIndex,
-                displayMultipleSideBySide, isNightMode)
+                displayMultipleSideBySide, isNightMode, _loadProgressLiveData)
             val model = bookLoader.load()
+
+            // don't proceed further if model is no longer needed due to UI change request.
+            if (loadResultValidationCallback?.invoke(model) != true) {
+                return@launch
+            }
 
             loadSystemBookmarks(bookNumber)
 
@@ -148,11 +143,10 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 updateSystemBookmarkInternally(model)
             }
 
-            val bookLoadAftermath = BookLoadAftermath(systemBookmark.particularViewItemPos,
+            bookLoadAftermath = BookLoadAftermath(systemBookmark.particularViewItemPos,
                 systemBookmark.chapterNumber)
-
             lastLoadResult = model
-            _loadLiveData.value = Pair(model, bookLoadAftermath)
+            _loadLiveData.value = model
         }
     }
 
@@ -191,14 +185,15 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         return systemBookmark.particularViewItemPos
     }
 
-    fun updateHighlights(changes: List<VerseBlockHighlightRange>, removeHighlight: Boolean) {
+    fun updateHighlights(bibleVersionIndex: Int, changes: List<VerseBlockHighlightRange>,
+                         removeHighlight: Boolean) {
+        val temp = lastLoadResult!!
         viewModelScope.launch {
-            val temp = lastLoadResult!!
             val bookHighlighter = BookHighlighter(context, temp.bookNumber,
-                temp.bibleVersions[temp.bibleVersionIndexInUI ?: 0])
+                temp.bibleVersions[bibleVersionIndex])
             bookHighlighter.save(systemBookmark.chapterNumber, changes, removeHighlight)
-            if (getValidLastLoadResult(temp.bibleVersions, temp.bibleVersionIndexInUI,
-                            temp.displayMultipleSideBySide, temp.isNightMode) != null) {
+            if (loadResultValidationCallback?.invoke(temp) == true) {
+                // reload book
                 lastLoadResult = null
                 loadBook(temp.bookNumber, temp.bibleVersions,
                         temp.bibleVersionIndexInUI, temp.displayMultipleSideBySide,

@@ -97,6 +97,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="@dimen/activity_margin"
+        android:layout_gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -112,7 +113,7 @@
 
         <ProgressBar
             android:id="@+id/prefOverlayProgressBar"
-            style="?android:attr/progressBarStyle"
+            style="?android:attr/progressBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

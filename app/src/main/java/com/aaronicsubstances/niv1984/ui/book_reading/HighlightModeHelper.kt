@@ -36,6 +36,8 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     private val htmlViewManager: HtmlViewManager
 
     var inHighlightMode: Boolean
+    var bibleVersionIndex: Int = 0
+        private set
 
     init {
         fragment.requireView().let {
@@ -126,17 +128,15 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun enterHighlightMode() {
-        val currentLoadResult = fragment.viewModel.getValidLastLoadResult(
-            bookContentAdapter.bibleVersions, bookContentAdapter.bibleVersionIndex,
-            bookContentAdapter.displayMultipleSideBySide, bookContentAdapter.isNightMode)
-        if (currentLoadResult == null) {
+        if (!fragment.viewModel.isLastLoadResultValid()) {
             AppUtils.showShortToast(fragment.context, fragment.getString(
                 R.string.message_highlight_mode_prohibited))
             return
         }
 
+        bibleVersionIndex = fragment.bibleVersionIndex ?: 0
         val latestSysBookmark = fragment.viewModel.currLoc
-        switchToChapterFocusView(currentLoadResult, latestSysBookmark)
+        switchToChapterFocusView(fragment.viewModel.lastLoadResult!!, latestSysBookmark)
 
         defaultView.visibility = View.INVISIBLE
         chapterFocusView.visibility = View.VISIBLE
@@ -144,7 +144,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
         inHighlightMode = true
         (fragment.activity as MainActivity).invalidateOptionsMenu()
-        fragment.resetOverlayPanel()
+        fragment.syncViewWithDataContext()
     }
 
     fun exitHighlightMode(): Boolean {
@@ -157,7 +157,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         selectedChapterContent.text = "" // should clear any selection
         inHighlightMode = false
         (fragment.activity as MainActivity).invalidateOptionsMenu()
-        fragment.resetOverlayPanel()
+        fragment.syncViewWithDataContext()
         return true
     }
 
@@ -172,14 +172,13 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     private fun switchToChapterFocusView(currentLoadResult: BookDisplay, sysBookmark: ScrollPosPref) {
-        val bibleVersionIndex = fragment.bookContentAdapter.bibleVersionIndex ?: 0
-        val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[bibleVersionIndex]
+        val bibleVersionCode = fragment.bibleVersions[bibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
         val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, sysBookmark.chapterNumber)
         selectedChapterTitle.text = chapterTitle
 
         selectedChapterContent.text = fetchChapterContent(
-                currentLoadResult, bibleVersionIndex, sysBookmark.chapterNumber)
+                currentLoadResult, sysBookmark.chapterNumber)
 
         // delay goToVerse so htmlTextView gets the chance to redraw
         val initialVerseNumber = if (sysBookmark.verseNumber > 0) sysBookmark.verseNumber
@@ -224,25 +223,24 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
     }
 
-    private fun fetchChapterContent(currentLoadResult: BookDisplay,
-                                    bibleVersionIndex: Int, chapterNumber: Int): Spanned {
+    private fun fetchChapterContent(currentLoadResult: BookDisplay, chapterNumber: Int): Spanned {
         val chapterIndex = currentLoadResult.chapterIndices[chapterNumber - 1]
-        val titleItem = bookContentAdapter.currentList[chapterIndex]
+        val titleItem = currentLoadResult.displayItems[chapterIndex]
         AppUtils.assert(titleItem.chapterNumber == chapterNumber)
         AppUtils.assert(titleItem.viewType == BookDisplayItemViewType.TITLE)
         var i = chapterIndex + 1
         val chapterContent = StringBuilder()
         var lastVerseNum = 0
         var lastVerseBlockIndex = 0
-        while (i < bookContentAdapter.currentList.size) {
-            val item = bookContentAdapter.currentList[i]
+        while (i < currentLoadResult.displayItems.size) {
+            val item = currentLoadResult.displayItems[i]
             if (item.chapterNumber != chapterNumber) {
                 break
             }
             var contentByParts: List<BookDisplayItemContent>? = null
             var fullContent: BookDisplayItemContent? = null
             if (item.viewType == BookDisplayItemViewType.VERSE) {
-                if (bookContentAdapter.multipleDisplay && bookContentAdapter.displayMultipleSideBySide) {
+                if (fragment.bibleVersionIndex == null && fragment.displayMultipleSideBySide) {
                     contentByParts = if (bibleVersionIndex == 0) {
                         item.firstPartialContent
                     } else {
@@ -318,7 +316,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                     fragment.getString(R.string.message_no_highlightable_content))
         }
         else {
-            fragment.viewModel.updateHighlights(changes, false)
+            fragment.viewModel.updateHighlights(bibleVersionIndex, changes, false)
         }
     }
 
@@ -328,7 +326,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         val changes = VerseHighlighter.determineBlockRangesAffectedBySelection(selStart, selEnd,
                 htmlViewManager.verseBlockRanges)
         if (changes.isNotEmpty()) {
-            fragment.viewModel.updateHighlights(changes, true)
+            fragment.viewModel.updateHighlights(bibleVersionIndex, changes, true)
         }
     }
 }

@@ -398,21 +398,16 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     }
 
     private fun openBookForReading(radioIndex: Int?) {
-        var index = radioIndex
-        if (radioIndex == null) {
-            index = sharedPrefMgr.loadPrefInt(
-                SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION, 0)
-        }
-        else {
-            sharedPrefMgr.savePrefInt(
-                SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION,
-                radioIndex)
-        }
-
-        bookContentAdapter.bibleVersionIndex = if (!defaultReadingMode) {
-            if (bookContentAdapter.bibleVersions.size > 1) null else 0
-        }
-        else {
+        bookContentAdapter.bibleVersionIndex = if (defaultReadingMode) {
+            var index = radioIndex
+            if (radioIndex == null) {
+                index = sharedPrefMgr.loadPrefInt(
+                        SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION, 0)
+            } else {
+                sharedPrefMgr.savePrefInt(
+                        SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION,
+                        radioIndex)
+            }
             when (index) {
                 2 -> {
                     if (radioIndex == null) {
@@ -433,6 +428,9 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                     0
                 }
             }
+        }
+        else {
+            if (bookContentAdapter.bibleVersions.size > 1) null else 0
         }
 
         val bookDescription = AppConstants.bibleVersions.getValue(

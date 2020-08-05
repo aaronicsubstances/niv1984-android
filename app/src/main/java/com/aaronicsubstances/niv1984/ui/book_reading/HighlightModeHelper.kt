@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.TextView
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.data.SourceCodeTransformer
+import com.aaronicsubstances.niv1984.data.VerseHighlighter
 import com.aaronicsubstances.niv1984.models.*
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
@@ -308,9 +309,13 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun addHighlightRange() {
-        val changes = determineBlockRangesAffectedBySelection()
+        val selStart = selectedChapterContent.selectionStart
+        val selEnd = selectedChapterContent.selectionEnd
+        val changes = VerseHighlighter.determineBlockRangesAffectedBySelection(selStart, selEnd,
+                htmlViewManager.verseBlockRanges)
         if (changes.isEmpty()) {
-            AppUtils.showShortToast(fragment.context, "No highlightable content found in selection")
+            AppUtils.showShortToast(fragment.context,
+                    fragment.getString(R.string.message_no_highlightable_content))
         }
         else {
             fragment.viewModel.updateHighlights(changes, false)
@@ -318,68 +323,12 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun removeHighlightRange() {
-        val changes = determineBlockRangesAffectedBySelection()
+        val selStart = selectedChapterContent.selectionStart
+        val selEnd = selectedChapterContent.selectionEnd
+        val changes = VerseHighlighter.determineBlockRangesAffectedBySelection(selStart, selEnd,
+                htmlViewManager.verseBlockRanges)
         if (changes.isNotEmpty()) {
             fragment.viewModel.updateHighlights(changes, true)
         }
-    }
-
-    private fun determineBlockRangesAffectedBySelection(): List<VerseBlockHighlightRange> {
-        val selStart = selectedChapterContent.selectionStart
-        val selEnd = selectedChapterContent.selectionEnd
-        AppUtils.assert(selStart <= selEnd) {
-            "Unexpected selection indices: $selStart > $selEnd"
-        }
-        val affectedRanges = mutableListOf<VerseBlockHighlightRange>()
-        for (blockEntry in htmlViewManager.verseBlockRanges) {
-            val blockStart = blockEntry.range.startIndex
-            val blockEnd = blockEntry.range.endIndex
-
-            // explore 5 possibilities of sel relative to block:
-            // totally outside, totally inside, totally enclosing, overlaps on the left,
-            // or overlaps on the right.
-            // also convert absolute positions to indices relative to block start.
-
-            if (selStart >= blockEnd || selEnd <= blockStart) {
-                // totally outside
-                continue
-            }
-
-            if (selStart >= blockStart && selEnd <= blockEnd) {
-                // sel totally inside block.
-                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
-                        blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
-                        selEnd - blockStart)))
-            }
-            else if (blockStart >= selStart && blockEnd <= selEnd) {
-                // block totally inside sel
-                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
-                        blockEntry.verseBlockIndex, HighlightRange(0, blockEnd - blockStart)))
-            }
-            else if (selStart <= blockStart) {
-                // sel overlaps block on the left
-                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
-                        blockEntry.verseBlockIndex, HighlightRange(0, selEnd - blockStart)))
-            }
-            else {
-                AppUtils.assert(selEnd >= blockEnd)
-                // sel overlaps block on the right
-                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
-                        blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
-                        blockEnd - blockStart)))
-            }
-
-            val lastAffectedRange = affectedRanges[affectedRanges.size - 1].range
-            AppUtils.assert(lastAffectedRange.startIndex <= lastAffectedRange.endIndex)
-            val maxAffectedRangeLen = blockEnd - blockStart
-            AppUtils.assert(lastAffectedRange.endIndex - lastAffectedRange.startIndex <=
-                    maxAffectedRangeLen)
-            AppUtils.assert(lastAffectedRange.startIndex in 0 .. maxAffectedRangeLen)
-            AppUtils.assert(lastAffectedRange.endIndex in 0 .. maxAffectedRangeLen)
-            if (lastAffectedRange.startIndex == lastAffectedRange.endIndex) {
-                affectedRanges.removeAt(affectedRanges.size - 1)
-            }
-        }
-        return affectedRanges
     }
 }

@@ -1,6 +1,7 @@
 package com.aaronicsubstances.niv1984.data
 
 import android.content.Context
+import com.aaronicsubstances.niv1984.BuildConfig
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.UserHighlightData
@@ -36,35 +37,48 @@ class BookHighlighter(private val context: Context,
         else {
             AppUtils.deserializeFromJson(blockHighlightData.data, Array<HighlightRange>::class.java)
         }
-        //try {
-            for (highlightRange in blockHighlights) {
-                source.updateMarkup(
-                    highlightRange.startIndex,
-                    "<span style='background-color: $highlightColor'>", false
+        for (highlightRange in blockHighlights) {
+            var insertedStartSpanIdx = -1
+            try {
+                insertedStartSpanIdx = source.updateMarkup(
+                        highlightRange.startIndex,
+                        "<span style='background-color: $highlightColor'>", false
                 )
                 source.updateMarkup(
-                    highlightRange.endIndex,
-                    "</span>", true
+                        highlightRange.endIndex,
+                        "</span>", true
                 )
             }
-        /*}
-        catch (ex: Exception) {
-            val exLoc = "$chapterNumber.${verseNumber}[$verseBlockIndex]"
-            android.util.Log.e(TAG, "Unable to apply highlights to $exLoc: ${ex.message}", ex)
-            var i = source.markupList.size -1
-            while (i >= 0) {
-                if (source.markupList[i].addedDuringUpdate) {
-                    source.markupList.removeAt(i)
+            catch (ex: Exception) {
+                if (BuildConfig.DEBUG) {
+                    throw ex
                 }
-                i--
+
+                // in production usage it won't be desirable for a single troublesome
+                // highlight range to block the display of an entire book!
+                // ignore error and therefore highlighting if start span could not be applied.
+                if (insertedStartSpanIdx != -1) {
+                    // on the other hand if start span was applied, then add end span
+                    // if end index is equivalent to end of source raw text.
+                    // else remove added start span.
+                    if (highlightRange.endIndex >= source.rawText.length) {
+                        source.updateMarkup(
+                                source.rawText.length,
+                                "</span>", true
+                        )
+                    }
+                    else {
+                        source.markupList.removeAt(insertedStartSpanIdx)
+                    }
+                }
             }
-        }*/
+        }
         source.finalizeProcessing()
         return source.rawText.toString()
     }
 
     fun getHighlightModeRemovableMarkups(source: VerseHighlighter): List<VerseHighlighter.Markup>? {
-        val removableMarkups = source.markupList.filter { it.id != null }
+        val removableMarkups = source.markupList.filter { it.removeDuringHighlighting }
         return if (removableMarkups.isEmpty()) null else removableMarkups
     }
 

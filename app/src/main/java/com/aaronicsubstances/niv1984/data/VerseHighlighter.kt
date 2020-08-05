@@ -3,108 +3,10 @@ package com.aaronicsubstances.niv1984.data
 import android.text.Html
 import android.text.TextUtils
 import com.aaronicsubstances.niv1984.models.HighlightRange
+import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class VerseHighlighter {
-    companion object {
-        private val TEMP_TAG_PREFIX = "t_"
-        private val WS_REGEX = Regex("\\s")
-        private val NBSP = "\u00a0"
-
-        fun addHighlightRange(
-            existingRanges: Array<HighlightRange>,
-            newRange: HighlightRange
-        ): List<HighlightRange> {
-            val editableRanges = clearHighlightRange(existingRanges, newRange)
-            addNewHighlightRange(editableRanges, newRange)
-            return optimizeHighlightRanges(editableRanges)
-        }
-
-        internal fun addNewHighlightRange(
-            editableRanges: MutableList<HighlightRange>,
-            newRange: HighlightRange) {
-            // PostCondition: editable ranges remain sorted
-            // assuming editableRanges is already sorted.
-
-            // look for appropriate place to insert newRange,
-            // using inner loop of insertion sort
-            var i = 0
-            while (i < editableRanges.size) {
-                if (editableRanges[i].startIndex > newRange.startIndex) {
-                    break
-                }
-                i++
-            }
-            editableRanges.add(i, newRange)
-        }
-
-        internal fun optimizeHighlightRanges(editableRanges: MutableList<HighlightRange>):
-                List<HighlightRange> {
-            // optimize number of ranges by merging adjacent ranges
-            val indicesToRemove = mutableListOf<Int>()
-            var i = 0
-            while (i < editableRanges.size) {
-                var (s, t) = editableRanges[i]
-                var endI = i + 1 // ensure progress at all cost to avoid endless looping
-                while (endI < editableRanges.size) {
-                    val adj = editableRanges[endI]
-                    if (t != adj.startIndex) {
-                        break
-                    }
-                    t = adj.endIndex
-                    endI++
-                }
-                if (endI - i > 1) {
-                    (i + 1 until endI).forEach { indicesToRemove.add(it) }
-                    editableRanges[i] = HighlightRange(s, t)
-                }
-                i = endI
-            }
-            if (indicesToRemove.isEmpty()) {
-                return editableRanges
-            }
-            return editableRanges.filterIndexed { index, _ ->
-                !indicesToRemove.contains(index)
-            }
-        }
-
-        fun removeHighlightRange(
-            existingRanges: Array<HighlightRange>,
-            rangeToClear: HighlightRange
-        ): List<HighlightRange> {
-            return clearHighlightRange(existingRanges, rangeToClear)
-        }
-
-        internal fun clearHighlightRange(
-            existingRanges: Array<HighlightRange>,
-            rangeToClear: HighlightRange
-        ): MutableList<HighlightRange> {
-            // PostCondition requirement: maintain disjoint/nonoverlapping property
-            // assuming existingRanges is already disjoint.
-
-            val editableRanges = mutableListOf<HighlightRange>()
-            for (r in existingRanges) {
-                // if r is entirely outside rangeToClear, readd it
-                // if r is entirely inside rangeToClear, don't readd it.
-                // if r overlaps rangeToClear, then readd one or both of left and right portions of it.
-                if (r.endIndex <= rangeToClear.startIndex || r.startIndex >= rangeToClear.endIndex) {
-                    editableRanges.add(r)
-                }
-                else {
-                    if (r.startIndex < rangeToClear.startIndex) {
-                        // add left portion outside of rangeToClear
-                        editableRanges.add(HighlightRange(r.startIndex, rangeToClear.startIndex))
-                    }
-                    if (r.endIndex > rangeToClear.endIndex) {
-                        // add right portion outside of rangeToClear
-                        editableRanges.add(HighlightRange(rangeToClear.endIndex, r.endIndex))
-                    }
-                }
-            }
-            return editableRanges
-        }
-    }
-
     val rawText = StringBuilder()
     val markupList = mutableListOf<Markup>()
 
@@ -170,7 +72,7 @@ class VerseHighlighter {
         }
     }
 
-    fun updateMarkup(insertPos: Int, tag: String, precedesSamePosMarkup: Boolean) {
+    fun updateMarkup(insertPos: Int, tag: String, precedesSamePosMarkup: Boolean): Int {
         if (insertPos < 0 || insertPos > rawText.length) {
             throw IllegalArgumentException("Invalid insert position: $insertPos (" +
                     "text length is ${rawText.length})")
@@ -214,6 +116,7 @@ class VerseHighlighter {
             insertPos + samePosPlaceholderLen,
             addedDuringUpdate = true
         ))
+        return mIdx
     }
 
     fun finalizeProcessing() {
@@ -293,6 +196,163 @@ class VerseHighlighter {
         var pos: Int = 0,
         val placeholder: String? = null,
         val id: String? = null,
-        val addedDuringUpdate: Boolean = false
+        val addedDuringUpdate: Boolean = false,
+        val removeDuringHighlighting: Boolean = false
     )
+    companion object {
+        private val TEMP_TAG_PREFIX = "t_"
+        private val WS_REGEX = Regex("\\s")
+        private val NBSP = "\u00a0"
+
+        fun addHighlightRange(
+                existingRanges: Array<HighlightRange>,
+                newRange: HighlightRange
+        ): List<HighlightRange> {
+            val editableRanges = clearHighlightRange(existingRanges, newRange)
+            addNewHighlightRange(editableRanges, newRange)
+            return optimizeHighlightRanges(editableRanges)
+        }
+
+        internal fun addNewHighlightRange(
+                editableRanges: MutableList<HighlightRange>,
+                newRange: HighlightRange) {
+            // PostCondition: editable ranges remain sorted
+            // assuming editableRanges is already sorted.
+
+            // look for appropriate place to insert newRange,
+            // using inner loop of insertion sort
+            var i = 0
+            while (i < editableRanges.size) {
+                if (editableRanges[i].startIndex > newRange.startIndex) {
+                    break
+                }
+                i++
+            }
+            editableRanges.add(i, newRange)
+        }
+
+        internal fun optimizeHighlightRanges(editableRanges: MutableList<HighlightRange>):
+                List<HighlightRange> {
+            // optimize number of ranges by merging adjacent ranges
+            val indicesToRemove = mutableListOf<Int>()
+            var i = 0
+            while (i < editableRanges.size) {
+                var (s, t) = editableRanges[i]
+                var endI = i + 1 // ensure progress at all cost to avoid endless looping
+                while (endI < editableRanges.size) {
+                    val adj = editableRanges[endI]
+                    if (t != adj.startIndex) {
+                        break
+                    }
+                    t = adj.endIndex
+                    endI++
+                }
+                if (endI - i > 1) {
+                    (i + 1 until endI).forEach { indicesToRemove.add(it) }
+                    editableRanges[i] = HighlightRange(s, t)
+                }
+                i = endI
+            }
+            if (indicesToRemove.isEmpty()) {
+                return editableRanges
+            }
+            return editableRanges.filterIndexed { index, _ ->
+                !indicesToRemove.contains(index)
+            }
+        }
+
+        fun removeHighlightRange(
+                existingRanges: Array<HighlightRange>,
+                rangeToClear: HighlightRange
+        ): List<HighlightRange> {
+            return clearHighlightRange(existingRanges, rangeToClear)
+        }
+
+        internal fun clearHighlightRange(
+                existingRanges: Array<HighlightRange>,
+                rangeToClear: HighlightRange
+        ): MutableList<HighlightRange> {
+            // PostCondition requirement: maintain disjoint/nonoverlapping property
+            // assuming existingRanges is already disjoint.
+
+            val editableRanges = mutableListOf<HighlightRange>()
+            for (r in existingRanges) {
+                // if r is entirely outside rangeToClear, readd it
+                // if r is entirely inside rangeToClear, don't readd it.
+                // if r overlaps rangeToClear, then readd one or both of left and right portions of it.
+                if (r.endIndex <= rangeToClear.startIndex || r.startIndex >= rangeToClear.endIndex) {
+                    editableRanges.add(r)
+                }
+                else {
+                    if (r.startIndex < rangeToClear.startIndex) {
+                        // add left portion outside of rangeToClear
+                        editableRanges.add(HighlightRange(r.startIndex, rangeToClear.startIndex))
+                    }
+                    if (r.endIndex > rangeToClear.endIndex) {
+                        // add right portion outside of rangeToClear
+                        editableRanges.add(HighlightRange(rangeToClear.endIndex, r.endIndex))
+                    }
+                }
+            }
+            return editableRanges
+        }
+
+        fun determineBlockRangesAffectedBySelection(
+                selStart:Int,
+                selEnd: Int,
+                verseBlockRanges: List<VerseBlockHighlightRange>
+        ): List<VerseBlockHighlightRange> {
+            val affectedRanges = mutableListOf<VerseBlockHighlightRange>()
+            for (blockEntry in verseBlockRanges) {
+                val blockStart = blockEntry.range.startIndex
+                val blockEnd = blockEntry.range.endIndex
+
+                // explore 5 possibilities of sel relative to block:
+                // totally outside, totally inside, totally enclosing, overlaps on the left,
+                // or overlaps on the right.
+                // also convert absolute positions to indices relative to block start.
+
+                if (selStart >= blockEnd || selEnd <= blockStart) {
+                    // totally outside
+                    continue
+                }
+
+                if (selStart >= blockStart && selEnd <= blockEnd) {
+                    // sel totally inside block.
+                    affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                            blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
+                            selEnd - blockStart)))
+                }
+                else if (blockStart >= selStart && blockEnd <= selEnd) {
+                    // block totally inside sel
+                    affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                            blockEntry.verseBlockIndex, HighlightRange(0, blockEnd - blockStart)))
+                }
+                else if (selStart <= blockStart) {
+                    // sel overlaps block on the left
+                    affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                            blockEntry.verseBlockIndex, HighlightRange(0, selEnd - blockStart)))
+                }
+                else {
+                    AppUtils.assert(selEnd >= blockEnd)
+                    // sel overlaps block on the right
+                    affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                            blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
+                            blockEnd - blockStart)))
+                }
+
+                val lastAffectedRange = affectedRanges[affectedRanges.size - 1].range
+                AppUtils.assert(lastAffectedRange.startIndex <= lastAffectedRange.endIndex)
+                val maxAffectedRangeLen = blockEnd - blockStart
+                AppUtils.assert(lastAffectedRange.endIndex - lastAffectedRange.startIndex <=
+                        maxAffectedRangeLen)
+                AppUtils.assert(lastAffectedRange.startIndex in 0 .. maxAffectedRangeLen)
+                AppUtils.assert(lastAffectedRange.endIndex in 0 .. maxAffectedRangeLen)
+                if (lastAffectedRange.startIndex == lastAffectedRange.endIndex) {
+                    affectedRanges.removeAt(affectedRanges.size - 1)
+                }
+            }
+            return affectedRanges
+        }
+    }
 }

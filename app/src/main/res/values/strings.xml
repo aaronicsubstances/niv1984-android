@@ -26,16 +26,12 @@
     <string name="display_book_pref_instruction">Select a book version and use up/down buttons to push
         the two(2) preferred bible versions to the top.\nThen click OK to confirm.</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="tab_text_1">Books</string>
     <string name="tab_text_2">Search</string>
     <string name="chapter_widget_title">Chapters:</string>
     <string name="screen_wake_option_title">Keep screen on during reading</string>
     <string name="screen_wake_option_summary">Screen will still be turned off after 5 minutes of inactivity</string>
     <string name="action_reset_to_default">Reset to Default</string>
-    <string name="label_query">Search Box</string>
     <string name="label_search">Search</string>
     <string name="search_pref_bible_label">Bible Version to search: <b>%s</b></string>
     <string name="switchToPrefText">Switch To Preferred Versions</string>
@@ -49,4 +45,5 @@
     <string name="action_enter_copy_mode">Enter Copy/Highlight Mode</string>
     <string name="action_exit_copy_mode">Exit Copy/Highlight Mode</string>
     <string name="message_highlight_mode_prohibited">Book loading in progress...</string>
+    <string name="message_no_highlightable_content">No highlightable content found in selection</string>
 </resources>

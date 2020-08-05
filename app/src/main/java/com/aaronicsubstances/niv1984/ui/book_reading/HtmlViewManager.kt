@@ -139,10 +139,10 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         var bottomLineIndex = -1
         for (i in 0 until lineInfoList.size) {
             val txtLineInfo = lineInfoList[i]
-            if (topLineIndex == -1 && vStart >= txtLineInfo.lineStart && vStart <= txtLineInfo.lineEnd) {
+            if (topLineIndex == -1 && vStart >= txtLineInfo.lineStart && vStart < txtLineInfo.lineEnd) {
                 topLineIndex = i
             }
-            if (bottomLineIndex == -1 && vEnd >= txtLineInfo.lineStart && vEnd <= txtLineInfo.lineEnd) {
+            if (bottomLineIndex == -1 && vEnd >= txtLineInfo.lineStart && vEnd < txtLineInfo.lineEnd) {
                 bottomLineIndex = i
             }
             if (topLineIndex != -1 && bottomLineIndex != -1) {

@@ -188,7 +188,8 @@ class VerseHighlighterInstrumentedTest {
             ), instance.markupList
         )
 
-        instance.updateMarkup(1, "<span>", false)
+        var updatedPos = instance.updateMarkup(1, "<span>", false)
+        Assert.assertEquals(3, updatedPos)
         Assert.assertEquals(
             listOf(
                 Markup("<p>", 1),
@@ -200,7 +201,8 @@ class VerseHighlighterInstrumentedTest {
             ), instance.markupList
         )
 
-        instance.updateMarkup(12, "</span>", true)
+        updatedPos = instance.updateMarkup(12, "</span>", true)
+        Assert.assertEquals(4, updatedPos)
         Assert.assertEquals(
             listOf(
                 Markup("<p>", 1),
@@ -248,7 +250,8 @@ class VerseHighlighterInstrumentedTest {
             ), instance.markupList
         )
 
-        instance.updateMarkup(1, "<span>", false)
+        var updatedPos = instance.updateMarkup(1, "<span>", false)
+        Assert.assertEquals(1, updatedPos)
         Assert.assertEquals(
             listOf(
                 Markup("<p>", 0),
@@ -258,7 +261,8 @@ class VerseHighlighterInstrumentedTest {
             ), instance.markupList
         )
 
-        instance.updateMarkup(4, "</span>", true)
+        updatedPos = instance.updateMarkup(4, "</span>", true)
+        Assert.assertEquals(2, updatedPos)
         Assert.assertEquals(
             listOf(
                 Markup("<p>", 0),

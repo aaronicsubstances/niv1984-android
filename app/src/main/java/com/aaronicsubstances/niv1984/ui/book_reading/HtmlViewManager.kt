@@ -81,8 +81,10 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         // reset only text view related data, and leave
         // scroll unchanged.
         versePosMap.clear()
+        verseBlockRanges.clear()
         htmlLayout = null
         lineInfoList.clear()
+        lastVerseNumberSeen = 0
     }
 
     fun getVerseNumber(contentTf: TextView, scrollYPos: Int): Int {
@@ -90,17 +92,21 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         for (txtLineInfo in lineInfoList) {
             if (scrollYPos - yOffset >= txtLineInfo.topPos &&
                     scrollYPos - yOffset <= txtLineInfo.bottomPos) {
-                return getVerseNumber(txtLineInfo.lineStart)
+                return getVerseNumber(txtLineInfo)
             }
         }
         return 0
     }
 
-    private fun getVerseNumber(txtLoc: Int): Int {
+    private fun getVerseNumber(txtLineInfo: TextLineInfo): Int {
         for (e in versePosMap) {
-            if (txtLoc >= e.value.first && txtLoc <= e.value.second) {
-                return Integer.parseInt(e.key.substring(vPrefix.length))
+            if (txtLineInfo.lineStart < e.value.first || txtLineInfo.lineStart >= e.value.second) {
+                continue
             }
+            if (txtLineInfo.lineEnd < e.value.first || txtLineInfo.lineEnd >= e.value.second) {
+                continue
+            }
+            return Integer.parseInt(e.key.substring(vPrefix.length))
         }
         return 0
     }

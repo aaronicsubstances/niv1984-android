@@ -374,14 +374,18 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             TODO("Implement loading of book progress")
         }
         else if (highlightHelper?.inHighlightMode == true) {
-            prefOverlayDescriptionTextView.text = getText(R.string.highlight_mode_title)
+            val pinnedVersions = AppConstants.bibleVersions.getValue(
+                    bookContentAdapter.bibleVersions[
+                            bookContentAdapter.bibleVersionIndex ?: 0]).abbreviation
+            prefOverlayDescriptionTextView.text = AppUtils.parseHtml(
+                    getString(R.string.highlight_mode_title, pinnedVersions))
         }
         else {
             switchToPrefBtn.visibility =  View.VISIBLE
 
             val pinnedVersions = bookContentAdapter.bibleVersions.map {
                 AppConstants.bibleVersions.getValue(it).abbreviation
-            }.joinToString(", ")
+            }.joinToString("/")
             prefOverlayDescriptionTextView.text = if (userBookmarkTitle != null) {
                 AppUtils.parseHtml(
                     getString(R.string.bookmark_mode_title, userBookmarkTitle, pinnedVersions))

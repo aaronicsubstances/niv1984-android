@@ -95,8 +95,7 @@
         android:id="@+id/prefOverlayPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="right"
+        android:orientation="horizontal"
         android:padding="@dimen/activity_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -105,9 +104,11 @@
         <TextView
             android:id="@+id/prefOverlayDescription"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:scrollbars="horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginRight="8dp"/>
 
         <ProgressBar
             android:id="@+id/prefOverlayProgressBar"

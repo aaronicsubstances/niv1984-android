@@ -172,7 +172,8 @@ class VerseHighlighter {
 
     fun updateMarkup(insertPos: Int, tag: String, precedesSamePosMarkup: Boolean) {
         if (insertPos < 0 || insertPos > rawText.length) {
-            throw IllegalArgumentException("Invalid insert position: $insertPos")
+            throw IllegalArgumentException("Invalid insert position: $insertPos (" +
+                    "text length is ${rawText.length})")
         }
         var mIdx = 0
         var samePosPlaceholderLen = 0
@@ -184,12 +185,12 @@ class VerseHighlighter {
                 throw IllegalArgumentException("Update operation invalid because it will " +
                         "edit placeholder markup at index ${mIdx}: $m")
             }
-            // if insertPos equals a markup pos, then resolve duplication using boolean parameter.
-            // Determine whether it is <s> <markups> (ie precedesSamePosMarkup = true)
-            // or it is <markup> <s> (ie precedesSamePosMarkup = false).
             if (insertPos < m.pos) {
                 break
             }
+            // if insertPos equals a markup pos, then resolve duplication using boolean parameter.
+            // Determine whether it is <s> <markups> (ie precedesSamePosMarkup = true)
+            // or it is <markup> <s> (ie precedesSamePosMarkup = false).
             if (insertPos == m.pos) {
                 if (precedesSamePosMarkup) {
                     // cannot precede another markup also added during update at same position.

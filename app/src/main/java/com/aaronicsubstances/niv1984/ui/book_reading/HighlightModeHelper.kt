@@ -327,46 +327,59 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     private fun determineBlockRangesAffectedBySelection(): List<VerseBlockHighlightRange> {
         val selStart = selectedChapterContent.selectionStart
         val selEnd = selectedChapterContent.selectionEnd
-        AppUtils.assert(selStart < selEnd) {
-            "Unexpected selection indices: $selStart >= $selEnd"
+        AppUtils.assert(selStart <= selEnd) {
+            "Unexpected selection indices: $selStart > $selEnd"
         }
-        val ranges = mutableListOf<VerseBlockHighlightRange>()
-        for (blockEntry in htmlViewManager.verseBlockPosMap) {
+        val affectedRanges = mutableListOf<VerseBlockHighlightRange>()
+        for (blockEntry in htmlViewManager.verseBlockRanges) {
             val blockStart = blockEntry.range.startIndex
             val blockEnd = blockEntry.range.endIndex
+
             // explore 5 possibilities of sel relative to block:
             // totally outside, totally inside, totally enclosing, overlaps on the left,
             // or overlaps on the right.
             // also convert absolute positions to indices relative to block start.
+
+            if (selStart >= blockEnd || selEnd <= blockStart) {
+                // totally outside
+                continue
+            }
+
             if (selStart >= blockStart && selEnd <= blockEnd) {
                 // sel totally inside block.
-                ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
                         blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
                         selEnd - blockStart)))
             }
             else if (blockStart >= selStart && blockEnd <= selEnd) {
                 // block totally inside sel
-                ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
                         blockEntry.verseBlockIndex, HighlightRange(0, blockEnd - blockStart)))
             }
+            else if (selStart <= blockStart) {
+                // sel overlaps block on the left
+                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                        blockEntry.verseBlockIndex, HighlightRange(0, selEnd - blockStart)))
+            }
             else {
-                if (selStart > blockEnd || selEnd < blockStart) {
-                    // totally outside
-                }
-                else if (selStart < blockStart) {
-                    // sel overlaps block on the left
-                    ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
-                            blockEntry.verseBlockIndex, HighlightRange(0, selEnd - blockStart)))
-                }
-                else {
-                    AppUtils.assert(selEnd > blockEnd)
-                    // sel overlaps block on the right
-                    ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
-                            blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
-                            blockEnd - blockStart)))
-                }
+                AppUtils.assert(selEnd >= blockEnd)
+                // sel overlaps block on the right
+                affectedRanges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                        blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
+                        blockEnd - blockStart)))
+            }
+
+            val lastAffectedRange = affectedRanges[affectedRanges.size - 1].range
+            AppUtils.assert(lastAffectedRange.startIndex <= lastAffectedRange.endIndex)
+            val maxAffectedRangeLen = blockEnd - blockStart
+            AppUtils.assert(lastAffectedRange.endIndex - lastAffectedRange.startIndex <=
+                    maxAffectedRangeLen)
+            AppUtils.assert(lastAffectedRange.startIndex in 0 .. maxAffectedRangeLen)
+            AppUtils.assert(lastAffectedRange.endIndex in 0 .. maxAffectedRangeLen)
+            if (lastAffectedRange.startIndex == lastAffectedRange.endIndex) {
+                affectedRanges.removeAt(affectedRanges.size - 1)
             }
         }
-        return ranges
+        return affectedRanges
     }
 }

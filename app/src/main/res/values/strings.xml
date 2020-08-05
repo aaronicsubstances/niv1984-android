@@ -39,9 +39,9 @@
     <string name="label_search">Search</string>
     <string name="search_pref_bible_label">Bible Version to search: <b>%s</b></string>
     <string name="switchToPrefText">Switch To Preferred Versions</string>
-    <string name="highlight_mode_title"><i>NB:</i> Currently in <b>Copy/Highlight</b> mode</string>
+    <string name="highlight_mode_title"><![CDATA[ <b>%s</b> (Copy/Highlight mode) ]]></string>
     <string name="search_result_mode_title"><![CDATA[ <b>%s</b> (Search Result) ]]></string>
-    <string name="bookmark_mode_title"><![CDATA[ <b>%2$s</b> Bookmark <i>%1$s</i> ]]></string>
+    <string name="bookmark_mode_title"><![CDATA[ <b>%1$s</b> (Bookmark: <i>%2$s</i>) ]]></string>
     <string name="action_add_highlight">Highlight</string>
     <string name="action_remove_highlight">Unhighlight</string>
     <string name="action_chapter_switch">Change Chapter</string>

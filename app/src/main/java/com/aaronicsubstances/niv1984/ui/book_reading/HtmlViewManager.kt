@@ -18,7 +18,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
     val bPrefix = "block_"
 
     private val versePosMap = mutableMapOf<String, Pair<Int, Int>>()
-    val verseBlockPosMap = mutableListOf<VerseBlockHighlightRange>()
+    val verseBlockRanges = mutableListOf<VerseBlockHighlightRange>()
     var lastVerseNumberSeen = 0
 
     private var htmlLayout: Layout? = null
@@ -40,11 +40,11 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         if (tag.startsWith(bPrefix)) {
             val verseBlockIndex = Integer.parseInt(tag.substring(bPrefix.length))
             if (opening) {
-                verseBlockPosMap.add(VerseBlockHighlightRange(lastVerseNumberSeen,
+                verseBlockRanges.add(VerseBlockHighlightRange(lastVerseNumberSeen,
                         verseBlockIndex, HighlightRange(output.length, 0)))
             }
             else {
-                val lastBlockEntry = verseBlockPosMap[verseBlockPosMap.size - 1]
+                val lastBlockEntry = verseBlockRanges[verseBlockRanges.size - 1]
                 AppUtils.assert(lastBlockEntry.verseNumber == lastVerseNumberSeen)
                 AppUtils.assert(lastBlockEntry.verseBlockIndex == verseBlockIndex)
                 lastBlockEntry.range.endIndex = output.length
@@ -85,21 +85,21 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         lineInfoList.clear()
     }
 
-    fun getVerseNumber(txtLoc: Int): Int {
-        for (e in versePosMap) {
-            if (txtLoc >= e.value.first && txtLoc <= e.value.second) {
-                return Integer.parseInt(e.key.substring(vPrefix.length))
-            }
-        }
-        return 0
-    }
-
     fun getVerseNumber(contentTf: TextView, scrollYPos: Int): Int {
         val yOffset = contentTf.top
         for (txtLineInfo in lineInfoList) {
             if (scrollYPos - yOffset >= txtLineInfo.topPos &&
                     scrollYPos - yOffset <= txtLineInfo.bottomPos) {
                 return getVerseNumber(txtLineInfo.lineStart)
+            }
+        }
+        return 0
+    }
+
+    private fun getVerseNumber(txtLoc: Int): Int {
+        for (e in versePosMap) {
+            if (txtLoc >= e.value.first && txtLoc <= e.value.second) {
+                return Integer.parseInt(e.key.substring(vPrefix.length))
             }
         }
         return 0

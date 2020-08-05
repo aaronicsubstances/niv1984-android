@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
-import com.aaronicsubstances.largelistpaging.LargeListEventListenerFactory
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
@@ -24,14 +23,14 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
 
     // these four determine validity of load result in BookLoadViewModel
     var bibleVersions = listOf<String>()
-    var bibleVersionIndexInUI: Int? = 0
+    var bibleVersionIndex: Int? = 0
     var displayMultipleSideBySide: Boolean = false
     var isNightMode: Boolean = false
 
     var zoomLevel: Int = 100
     val multipleDisplay: Boolean
         get() {
-            return bibleVersionIndexInUI == null
+            return bibleVersionIndex == null
         }
 
     override fun getItemViewType(position: Int): Int {

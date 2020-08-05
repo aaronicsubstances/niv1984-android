@@ -4,68 +4,23 @@ import android.content.Context
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.UserHighlightData
+import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class BookHighlighter(private val context: Context,
                       private val bookNumber: Int,
                       private val bibleVersion: String) {
+
+    private val TAG = javaClass.name
 
     // use shades of yellow in both day and night modes
     private val highlightColor = AppUtils.colorResToString(R.color.highlightColor, context)
 
     private lateinit var highlightData: List<UserHighlightData>
 
-    suspend fun save(chapterNumber: Int,
-                     changes: List<IntArray>,
-                     removeHighlight: Boolean) {
-        withContext(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(context)
-            val uniqueVerseNumbers = changes.map { it[0] }.distinct()
-            val entitiesToDelete = mutableListOf<UserHighlightData>()
-            val entitiesToInsert = mutableListOf<UserHighlightData>()
-            for (vNum in uniqueVerseNumbers) {
-                val newBlockRanges = changes.filter { it[0] == vNum }
-                val existingBlockRanges = db.userHighlightDataDao().fetchHighlightData(
-                    bibleVersion, bookNumber,
-                    chapterNumber, vNum, newBlockRanges.map{ it[1] })
-                entitiesToDelete.addAll(existingBlockRanges)
-                for (blockRange in newBlockRanges) {
-                    val existingBlockData = existingBlockRanges.firstOrNull { it.verseBlockIndex == blockRange[1] }
-                    val existingHighlightRanges = if (existingBlockData == null) arrayOf() else {
-                        AppUtils.deserializeFromJson(existingBlockData.data, Array<HighlightRange>::class.java)
-                    }
-                    val updated = if (removeHighlight) {
-                        VerseHighlighter.removeHighlightRange(existingHighlightRanges,
-                            HighlightRange(blockRange[2], blockRange[3]))
-                    }
-                    else {
-                        VerseHighlighter.addHighlightRange(existingHighlightRanges,
-                            HighlightRange(blockRange[2], blockRange[3]))
-                    }
-                    val newBlockData = UserHighlightData()
-                    newBlockData.apply {
-                        this.bibleVersion = bibleVersion
-                        this.bookNumber = bookNumber
-                        this.chapterNumber = chapterNumber
-                        this.verseNumber = vNum
-                        this.verseBlockIndex = blockRange[1]
-                        this.data = AppUtils.serializeAsJson(updated)
-                    }
-                    entitiesToInsert.add(newBlockData)
-                }
-            }
-            db.userHighlightDataDao().updateHighlightData(entitiesToDelete,
-                entitiesToInsert)
-        }
-    }
-
     suspend fun load() {
-        highlightData = withContext(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(context)
-            db.userHighlightDataDao().getHighlightData(bibleVersion, bookNumber)
-        }
+        val db = AppDatabase.getDatabase(context)
+        highlightData = db.userHighlightDataDao().getBookHighlightData(bibleVersion, bookNumber)
     }
 
     fun processBlockText(chapterNumber: Int, verseNumber: Int, verseBlockIndex: Int,
@@ -81,7 +36,7 @@ class BookHighlighter(private val context: Context,
         else {
             AppUtils.deserializeFromJson(blockHighlightData.data, Array<HighlightRange>::class.java)
         }
-        try {
+        //try {
             for (highlightRange in blockHighlights) {
                 source.updateMarkup(
                     highlightRange.startIndex,
@@ -92,10 +47,10 @@ class BookHighlighter(private val context: Context,
                     "</span>", true
                 )
             }
-        }
+        /*}
         catch (ex: Exception) {
             val exLoc = "$chapterNumber.${verseNumber}[$verseBlockIndex]"
-            AppUtils.showLongToast(context, "Unable to apply highlights to $exLoc: ${ex.message}")
+            android.util.Log.e(TAG, "Unable to apply highlights to $exLoc: ${ex.message}", ex)
             var i = source.markupList.size -1
             while (i >= 0) {
                 if (source.markupList[i].addedDuringUpdate) {
@@ -103,7 +58,7 @@ class BookHighlighter(private val context: Context,
                 }
                 i--
             }
-        }
+        }*/
         source.finalizeProcessing()
         return source.rawText.toString()
     }
@@ -111,5 +66,45 @@ class BookHighlighter(private val context: Context,
     fun getHighlightModeRemovableMarkups(source: VerseHighlighter): List<VerseHighlighter.Markup>? {
         val removableMarkups = source.markupList.filter { it.id != null }
         return if (removableMarkups.isEmpty()) null else removableMarkups
+    }
+
+    suspend fun save(chapterNumber: Int,
+                     changes: List<VerseBlockHighlightRange>,
+                     removeHighlight: Boolean) {
+        val db = AppDatabase.getDatabase(context)
+        val uniqueVerseNumbers = changes.map { it.verseNumber }.distinct()
+        val entitiesToDelete = mutableListOf<UserHighlightData>()
+        val entitiesToInsert = mutableListOf<UserHighlightData>()
+        for (vNum in uniqueVerseNumbers) {
+            val newBlockRanges = changes.filter { it.verseNumber == vNum }
+            val existingBlockRanges = db.userHighlightDataDao().getChapterHighlightData(
+                    bibleVersion, bookNumber,
+                    chapterNumber, vNum, newBlockRanges.map{ it.verseBlockIndex })
+            entitiesToDelete.addAll(existingBlockRanges)
+            for (blockRange in newBlockRanges) {
+                val existingBlockData = existingBlockRanges.firstOrNull {
+                    it.verseBlockIndex == blockRange.verseBlockIndex
+                }
+                val existingHighlightRanges = if (existingBlockData == null) arrayOf() else
+                    AppUtils.deserializeFromJson(existingBlockData.data, Array<HighlightRange>::class.java)
+                val updated = if (removeHighlight) {
+                    VerseHighlighter.removeHighlightRange(existingHighlightRanges, blockRange.range)
+                }
+                else {
+                    VerseHighlighter.addHighlightRange(existingHighlightRanges, blockRange.range)
+                }
+                val newBlockData = UserHighlightData()
+                newBlockData.let {
+                    it.bibleVersion = bibleVersion
+                    it.bookNumber = bookNumber
+                    it.chapterNumber = chapterNumber
+                    it.verseNumber = vNum
+                    it.verseBlockIndex = blockRange.verseBlockIndex
+                    it.data = AppUtils.serializeAsJson(updated)
+                }
+                entitiesToInsert.add(newBlockData)
+            }
+        }
+        db.userHighlightDataDao().updateHighlightData(entitiesToDelete, entitiesToInsert)
     }
 }

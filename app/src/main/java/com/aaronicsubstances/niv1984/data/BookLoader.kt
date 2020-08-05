@@ -25,7 +25,6 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.AsanteTwiBibleVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.lang.AssertionError
 
 class BookLoader(private val context: Context,
                  private val bookNumber: Int,
@@ -204,11 +203,11 @@ class BookLoader(private val context: Context,
 
             }
         }
-        if (pt1 != dividerIdx1) {
-            throw AssertionError("$chapterNumber.$vNum: $pt1 != $dividerIdx1")
+        AppUtils.assert(pt1 == dividerIdx1) {
+            "$chapterNumber.$vNum: $pt1 != $dividerIdx1"
         }
-        if (pt2 != dividerIdx2) {
-            throw AssertionError("$chapterNumber.$vNum: $pt2 != $dividerIdx2")
+        AppUtils.assert(pt2 == dividerIdx2) {
+            "$chapterNumber.$vNum: $pt2 != $dividerIdx2"
         }
 
         // add footnotes as one, for each bible version.
@@ -235,8 +234,8 @@ class BookLoader(private val context: Context,
         displayItems: List<BookDisplayItem>
     ): IntArray {
         var dividerIdx = cEndIdx - 1
-        if (displayItems[dividerIdx].viewType != BookDisplayItemViewType.DIVIDER) {
-            throw AssertionError("${displayItems[dividerIdx].viewType} != DIVIDER")
+        AppUtils.assert(displayItems[dividerIdx].viewType == BookDisplayItemViewType.DIVIDER) {
+            "${displayItems[dividerIdx].viewType} != DIVIDER"
         }
         dividerIdx--
         while (true) {
@@ -249,8 +248,8 @@ class BookLoader(private val context: Context,
         // deal with verses next.
 
         var pt = cIdx
-        if (displayItems[pt].viewType != BookDisplayItemViewType.TITLE) {
-            throw AssertionError("${displayItems[pt].viewType} != TITLE")
+        AppUtils.assert(displayItems[pt].viewType == BookDisplayItemViewType.TITLE) {
+            "${displayItems[pt].viewType} != TITLE"
         }
 
         return intArrayOf(pt + 1, dividerIdx)

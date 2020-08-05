@@ -126,7 +126,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
     fun enterHighlightMode() {
         val currentLoadResult = fragment.viewModel.getValidLastLoadResult(
-            bookContentAdapter.bibleVersions, bookContentAdapter.bibleVersionIndexInUI,
+            bookContentAdapter.bibleVersions, bookContentAdapter.bibleVersionIndex,
             bookContentAdapter.displayMultipleSideBySide, bookContentAdapter.isNightMode)
         if (currentLoadResult == null) {
             AppUtils.showShortToast(fragment.context, fragment.getString(
@@ -171,14 +171,14 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     private fun switchToChapterFocusView(currentLoadResult: BookDisplay, sysBookmark: ScrollPosPref) {
-        val bibleVersionIndex = sysBookmark.particularBibleVersionIndex ?: 0
+        val bibleVersionIndex = fragment.bookContentAdapter.bibleVersionIndex ?: 0
         val bibleVersionCode = fragment.bookContentAdapter.bibleVersions[bibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
         val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, sysBookmark.chapterNumber)
         selectedChapterTitle.text = chapterTitle
 
-        selectedChapterContent.text = fetchChapterContent(sysBookmark.chapterNumber,
-            bibleVersionIndex)
+        selectedChapterContent.text = fetchChapterContent(
+                currentLoadResult, bibleVersionIndex, sysBookmark.chapterNumber)
 
         // delay goToVerse so htmlTextView gets the chance to redraw
         val initialVerseNumber = if (sysBookmark.verseNumber > 0) sysBookmark.verseNumber
@@ -223,11 +223,12 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
     }
 
-    private fun fetchChapterContent(chapterNumber: Int, bibleVersionIndex: Int): Spanned {
-        val chapterIndex = fragment.viewModel.lastLoadResult!!.chapterIndices[chapterNumber - 1]
+    private fun fetchChapterContent(currentLoadResult: BookDisplay,
+                                    bibleVersionIndex: Int, chapterNumber: Int): Spanned {
+        val chapterIndex = currentLoadResult.chapterIndices[chapterNumber - 1]
         val titleItem = bookContentAdapter.currentList[chapterIndex]
-        assert(titleItem.chapterNumber == chapterNumber)
-        assert(titleItem.viewType == BookDisplayItemViewType.TITLE)
+        AppUtils.assert(titleItem.chapterNumber == chapterNumber)
+        AppUtils.assert(titleItem.viewType == BookDisplayItemViewType.TITLE)
         var i = chapterIndex + 1
         val chapterContent = StringBuilder()
         var lastVerseNum = 0
@@ -252,14 +253,15 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                 }
             }
             if (contentByParts != null || fullContent != null) {
-                val vTag = "${htmlViewManager.vPrefix}$lastVerseNum"
                 if (lastVerseNum != item.verseNumber) {
                     if (lastVerseNum > 0) {
+                        val vTag = "${htmlViewManager.vPrefix}$lastVerseNum"
                         chapterContent.append("<br></$vTag>")
                     }
-                    chapterContent.append("<$vTag>")
                     lastVerseNum = item.verseNumber
                     lastVerseBlockIndex = 0
+                    val vTag = "${htmlViewManager.vPrefix}$lastVerseNum"
+                    chapterContent.append("<$vTag>")
                 }
                 contentByParts?.let {
                     for (partIdx in it.indices) {
@@ -284,7 +286,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
             }
             i++
         }
-        assert(lastVerseNum > 0)
+        AppUtils.assert(lastVerseNum > 0)
         chapterContent.append("</${htmlViewManager.vPrefix}$lastVerseNum>")
 
         htmlViewManager.reset()
@@ -306,46 +308,65 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     fun addHighlightRange() {
-        val selStart = selectedChapterContent.selectionStart
-        val selEnd = selectedChapterContent.selectionEnd
-        val vStart = htmlViewManager.getVerseNumber(selStart)
-        val vEnd = htmlViewManager.getVerseNumber(selEnd)
-        AppUtils.showShortToast(fragment.context, "selection ($selStart, $selEnd) " +
-                "maps to verses $vStart-$vEnd")
+        val changes = determineBlockRangesAffectedBySelection()
+        if (changes.isEmpty()) {
+            AppUtils.showShortToast(fragment.context, "No highlightable content found in selection")
+        }
+        else {
+            fragment.viewModel.updateHighlights(changes, false)
+        }
     }
 
-    fun determineRanges(): List<IntArray> {
+    fun removeHighlightRange() {
+        val changes = determineBlockRangesAffectedBySelection()
+        if (changes.isNotEmpty()) {
+            fragment.viewModel.updateHighlights(changes, true)
+        }
+    }
+
+    private fun determineBlockRangesAffectedBySelection(): List<VerseBlockHighlightRange> {
         val selStart = selectedChapterContent.selectionStart
         val selEnd = selectedChapterContent.selectionEnd
-        val ranges = mutableListOf<IntArray>()
+        AppUtils.assert(selStart < selEnd) {
+            "Unexpected selection indices: $selStart >= $selEnd"
+        }
+        val ranges = mutableListOf<VerseBlockHighlightRange>()
         for (blockEntry in htmlViewManager.verseBlockPosMap) {
-            val blockStart = blockEntry[2]
-            val blockEnd = blockEntry[3]
-
-            // explore 4 possibilities: totally outside, totally inside, overlaps on the left,
+            val blockStart = blockEntry.range.startIndex
+            val blockEnd = blockEntry.range.endIndex
+            // explore 5 possibilities of sel relative to block:
+            // totally outside, totally inside, totally enclosing, overlaps on the left,
             // or overlaps on the right.
-            if (selStart > blockEnd || selEnd < blockStart) {
-                // totally outside
+            // also convert absolute positions to indices relative to block start.
+            if (selStart >= blockStart && selEnd <= blockEnd) {
+                // sel totally inside block.
+                ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                        blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
+                        selEnd - blockStart)))
             }
-            else if (selStart >= blockStart && selEnd <= blockEnd) {
-                // totally inside.
-                ranges.add(blockEntry)
+            else if (blockStart >= selStart && blockEnd <= selEnd) {
+                // block totally inside sel
+                ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                        blockEntry.verseBlockIndex, HighlightRange(0, blockEnd - blockStart)))
             }
             else {
-                if (selStart < blockStart) {
-                    // overlaps on the left
-                    ranges.add(intArrayOf(blockEntry[0], blockEntry[1], blockStart, selEnd))
+                if (selStart > blockEnd || selEnd < blockStart) {
+                    // totally outside
                 }
-                if (selEnd > blockEnd) {
-                    // overlaps on the right
-                    ranges.add(intArrayOf(blockEntry[0], blockEntry[1], selStart, blockEnd))
+                else if (selStart < blockStart) {
+                    // sel overlaps block on the left
+                    ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                            blockEntry.verseBlockIndex, HighlightRange(0, selEnd - blockStart)))
+                }
+                else {
+                    AppUtils.assert(selEnd > blockEnd)
+                    // sel overlaps block on the right
+                    ranges.add(VerseBlockHighlightRange(blockEntry.verseNumber,
+                            blockEntry.verseBlockIndex, HighlightRange(selStart - blockStart,
+                            blockEnd - blockStart)))
                 }
             }
         }
         return ranges
-    }
-
-    fun removeHighlightRange() {
-
     }
 }

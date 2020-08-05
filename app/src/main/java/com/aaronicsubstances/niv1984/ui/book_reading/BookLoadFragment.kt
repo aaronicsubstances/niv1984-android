@@ -405,7 +405,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 radioIndex)
         }
 
-        bookContentAdapter.bibleVersionIndexInUI = if (!defaultReadingMode) {
+        bookContentAdapter.bibleVersionIndex = if (!defaultReadingMode) {
             if (bookContentAdapter.bibleVersions.size > 1) null else 0
         }
         else {
@@ -432,12 +432,12 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         }
 
         val bookDescription = AppConstants.bibleVersions.getValue(
-            bookContentAdapter.bibleVersions[bookContentAdapter.bibleVersionIndexInUI ?: 0])
+            bookContentAdapter.bibleVersions[bookContentAdapter.bibleVersionIndex ?: 0])
             .bookNames[bookNumber - 1]
         titleTextView.text = bookDescription
 
         viewModel.loadBook(bookNumber, bookContentAdapter.bibleVersions,
-            bookContentAdapter.bibleVersionIndexInUI,
+            bookContentAdapter.bibleVersionIndex,
             bookContentAdapter.displayMultipleSideBySide,
             bookContentAdapter.isNightMode)
     }

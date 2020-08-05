@@ -23,17 +23,21 @@ data class UserHighlightData(
 
 data class HighlightRange(var startIndex: Int, var endIndex: Int)
 
+data class VerseBlockHighlightRange(val verseNumber: Int,
+                                    val verseBlockIndex: Int,
+                                    val range: HighlightRange)
+
 @Dao
 abstract class UserHighlightDataDao {
     @Query("""SELECT * from UserHighlightData
         WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber""")
-    abstract suspend fun getHighlightData(bibleVersion: String, bookNumber: Int): List<UserHighlightData>
+    abstract suspend fun getBookHighlightData(bibleVersion: String, bookNumber: Int): List<UserHighlightData>
 
     @Query("""SELECT * FROM UserHighlightData
         WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber AND chapterNumber = :chapterNumber
-        AND verseNumber = :verseNumber AND verseBlockIndex In (:blockIndices)
+        AND verseNumber = :verseNumber AND verseBlockIndex IN (:blockIndices)
     """)
-    abstract suspend fun fetchHighlightData(bibleVersion: String, bookNumber: Int, chapterNumber: Int,
+    abstract suspend fun getChapterHighlightData(bibleVersion: String, bookNumber: Int, chapterNumber: Int,
                                             verseNumber: Int, blockIndices: List<Int>): List<UserHighlightData>
 
     @Insert

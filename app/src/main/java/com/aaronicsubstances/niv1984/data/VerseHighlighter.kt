@@ -201,7 +201,7 @@ class VerseHighlighter {
                     // to properly follow a placeholder markup at same pos,
                     // insert pos must be edited to point beyond it.
                     if (m.placeholder != null) {
-                        assert(samePosPlaceholderLen == 0)
+                        AppUtils.assert(samePosPlaceholderLen == 0)
                         samePosPlaceholderLen = m.placeholder.length
                     }
                 }

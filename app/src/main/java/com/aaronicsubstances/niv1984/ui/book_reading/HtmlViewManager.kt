@@ -7,6 +7,8 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.models.HighlightRange
+import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import org.xml.sax.XMLReader
 
@@ -16,7 +18,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
     val bPrefix = "block_"
 
     private val versePosMap = mutableMapOf<String, Pair<Int, Int>>()
-    val verseBlockPosMap = mutableListOf<IntArray>()
+    val verseBlockPosMap = mutableListOf<VerseBlockHighlightRange>()
     var lastVerseNumberSeen = 0
 
     private var htmlLayout: Layout? = null
@@ -36,14 +38,19 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         }
 
         if (tag.startsWith(bPrefix)) {
+            val verseBlockIndex = Integer.parseInt(tag.substring(bPrefix.length))
             if (opening) {
-                val verseBlockIndex = Integer.parseInt(tag.substring(bPrefix.length))
-                verseBlockPosMap.add(intArrayOf(lastVerseNumberSeen, verseBlockIndex, output.length, 0))
+                verseBlockPosMap.add(VerseBlockHighlightRange(lastVerseNumberSeen,
+                        verseBlockIndex, HighlightRange(output.length, 0)))
             }
             else {
-                val lastBlockEntry = verseBlockPosMap[versePosMap.size - 1]
-                assert(lastBlockEntry[0] == lastVerseNumberSeen)
-                lastBlockEntry[3] = output.length
+                val lastBlockEntry = verseBlockPosMap[verseBlockPosMap.size - 1]
+                AppUtils.assert(lastBlockEntry.verseNumber == lastVerseNumberSeen)
+                AppUtils.assert(lastBlockEntry.verseBlockIndex == verseBlockIndex)
+                lastBlockEntry.range.endIndex = output.length
+                AppUtils.assert(lastBlockEntry.range.startIndex < lastBlockEntry.range.endIndex) {
+                    "Unexpected block range indices: $lastBlockEntry"
+                }
             }
         }
 

@@ -90,4 +90,13 @@ object AppUtils {
 
         return allBooks
     }
+
+    fun assert(value: Boolean, lazyMessage: (()->Any)? = null){
+        if (!value) {
+            if (lazyMessage != null) {
+                throw AssertionError(lazyMessage().toString())
+            }
+            throw AssertionError()
+        }
+    }
 }

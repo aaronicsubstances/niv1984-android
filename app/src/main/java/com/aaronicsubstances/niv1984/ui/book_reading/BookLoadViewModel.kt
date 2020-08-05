@@ -1,17 +1,21 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.BookHighlighter
 import com.aaronicsubstances.niv1984.data.BookLoader
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.models.ScrollPosPref
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
+import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -28,6 +32,9 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
+
+    @Inject
+    internal lateinit var context: Context
 
     init {
         (application as MyApplication).appComponent.inject(this)
@@ -121,7 +128,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             return
         }
 
-        val context = (getApplication() as MyApplication).applicationContext
         lastJob?.cancel()
         lastJob = viewModelScope.launch {
             val bookLoader = BookLoader(context, bookNumber, bibleVersions, bibleVersionIndex,
@@ -183,6 +189,22 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             pos++
         }
         return systemBookmark.particularViewItemPos
+    }
+
+    fun updateHighlights(changes: List<VerseBlockHighlightRange>, removeHighlight: Boolean) {
+        viewModelScope.launch {
+            val temp = lastLoadResult!!
+            val bookHighlighter = BookHighlighter(context, temp.bookNumber,
+                temp.bibleVersions[temp.bibleVersionIndexInUI ?: 0])
+            bookHighlighter.save(systemBookmark.chapterNumber, changes, removeHighlight)
+            if (getValidLastLoadResult(temp.bibleVersions, temp.bibleVersionIndexInUI,
+                            temp.displayMultipleSideBySide, temp.isNightMode) != null) {
+                lastLoadResult = null
+                loadBook(temp.bookNumber, temp.bibleVersions,
+                        temp.bibleVersionIndexInUI, temp.displayMultipleSideBySide,
+                        temp.isNightMode)
+            }
+        }
     }
 }
 

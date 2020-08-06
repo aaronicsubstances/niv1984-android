@@ -122,7 +122,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         }
 
         viewModelScope.launch {
-            _loadProgressLiveData.postValue(LiveDataEvent(true))
             val startTime = SystemClock.uptimeMillis()
             val bookLoader = BookLoader(context, bookNumber, bibleVersions, bibleVersionIndex,
                 displayMultipleSideBySide, isNightMode)
@@ -132,7 +131,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
             // don't proceed further if model is no longer needed due to UI change request.
             if (loadResultValidationCallback?.invoke(model) != true) {
-                _loadProgressLiveData.postValue(LiveDataEvent(false))
                 return@launch
             }
 
@@ -207,6 +205,10 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                         temp.isNightMode)
             }
         }
+    }
+
+    fun notifyUserOfOngoingLoadProgress() {
+        _loadProgressLiveData.postValue(LiveDataEvent(true))
     }
 }
 

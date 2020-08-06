@@ -65,6 +65,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
     private var highlightHelper: HighlightModeHelper? = null
     private var screenAwakeHelper: KeepScreenAwakeHelper? = null
+    private var loadProgessReporter: LoadProgressReporter? = null
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -328,10 +329,12 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         })
 
         // kickstart actual bible reading
+        // set up load progress reporter early to enable initial reporting setup.
+        loadProgessReporter = LoadProgressReporter(this)
         openBookForReading(null)
 
-        highlightHelper = HighlightModeHelper(this, savedInstanceState)
         screenAwakeHelper = KeepScreenAwakeHelper(this, sharedPrefMgr.getShouldKeepScreenOn())
+        highlightHelper = HighlightModeHelper(this, savedInstanceState)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -394,7 +397,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         // at bottom
         bottomPanel.children.forEach { it.visibility = View.INVISIBLE }
 
-        if (!viewModel.isLastLoadResultValid()) {
+        if (loadProgessReporter?.shouldReportProgress() == true) {
             // meaning book is being loaded.
             listOf(prefOverlayDescriptionStandalone, prefOverlayProgressBar).forEach {
                 it.visibility = View.VISIBLE

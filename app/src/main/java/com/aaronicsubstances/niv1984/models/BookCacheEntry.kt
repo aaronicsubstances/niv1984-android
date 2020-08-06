@@ -45,6 +45,7 @@ abstract class BookCacheEntryDao {
     """)
     abstract suspend fun getEntries(groupId: String, cacheVersion: String): List<BookCacheEntry>
 
-    @Query("""DELETE FROM BookCacheEntry WHERE groupId =:groupId""")
-    abstract suspend fun purgeEntries(groupId: String)
+    @Query("""DELETE FROM BookCacheEntry 
+        WHERE groupId IN (:groupIds) AND chapterNumber = :chapterNumber""")
+    abstract suspend fun purgeEntries(groupIds: List<String>, chapterNumber: Int)
 }

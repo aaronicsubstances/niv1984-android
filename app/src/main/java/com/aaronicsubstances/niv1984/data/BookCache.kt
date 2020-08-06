@@ -67,9 +67,8 @@ class BookCache(private val context: Context,
 
     suspend fun purge(bibleVersion: String, chapterNumber: Int) {
         val db = AppDatabase.getDatabase(context)
-        listOf(true, false).forEach { isNightMode ->
-            val groupId = generateGroupId(bibleVersion, isNightMode)
-            db.bookCacheEntryDao().purgeEntries(groupId)
-        }
+        db.bookCacheEntryDao().purgeEntries(listOf(true, false).map { isNightMode ->
+            generateGroupId(bibleVersion, isNightMode)
+        }, chapterNumber)
     }
 }

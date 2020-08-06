@@ -6,19 +6,20 @@ import androidx.room.*
 data class UserHighlightData(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0,
+    var id: Int,
 
-    var bibleVersion: String = "",
+    var bibleVersion: String,
 
-    var bookNumber: Int = 0,
+    var bookNumber: Int,
 
-    var chapterNumber: Int = 0,
+    var chapterNumber: Int,
 
-    var verseNumber: Int = 0,
+    var verseNumber: Int,
 
-    var verseBlockIndex: Int = 0,
+    var verseBlockIndex: Int,
 
-    var data: String = ""
+    @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
+    var data: ByteArray
 )
 
 data class HighlightRange(var startIndex: Int, var endIndex: Int)

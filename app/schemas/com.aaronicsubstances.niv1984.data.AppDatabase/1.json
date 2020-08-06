@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4847d50b2b795ea81fe3030db9809de8",
+    "identityHash": "c49b673964671699346cd4f5c0c2ba98",
     "entities": [
       {
         "tableName": "UserHighlightData",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bibleVersion` TEXT NOT NULL, `bookNumber` INTEGER NOT NULL, `chapterNumber` INTEGER NOT NULL, `verseNumber` INTEGER NOT NULL, `verseBlockIndex` INTEGER NOT NULL, `data` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `bibleVersion` TEXT NOT NULL, `bookNumber` INTEGER NOT NULL, `chapterNumber` INTEGER NOT NULL, `verseNumber` INTEGER NOT NULL, `verseBlockIndex` INTEGER NOT NULL, `data` BLOB NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -47,7 +47,7 @@
           {
             "fieldPath": "data",
             "columnName": "data",
-            "affinity": "TEXT",
+            "affinity": "BLOB",
             "notNull": true
           }
         ],
@@ -190,12 +190,98 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "BookCacheEntry",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `groupId` TEXT NOT NULL, `cacheVersion` TEXT NOT NULL, `perChapterItemRank` INTEGER NOT NULL, `serializedViewType` TEXT NOT NULL, `chapterNumber` INTEGER NOT NULL, `verseNumber` INTEGER NOT NULL, `isFirstVerseContent` INTEGER NOT NULL, `text` TEXT NOT NULL, `serializedBlockQuoteKind` TEXT, `isFirstDivider` INTEGER NOT NULL, `serializedHighlightModeRemovableMarkups` BLOB)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupId",
+            "columnName": "groupId",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "cacheVersion",
+            "columnName": "cacheVersion",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "perChapterItemRank",
+            "columnName": "perChapterItemRank",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serializedViewType",
+            "columnName": "serializedViewType",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "chapterNumber",
+            "columnName": "chapterNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "verseNumber",
+            "columnName": "verseNumber",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFirstVerseContent",
+            "columnName": "isFirstVerseContent",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "text",
+            "columnName": "text",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serializedBlockQuoteKind",
+            "columnName": "serializedBlockQuoteKind",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isFirstDivider",
+            "columnName": "isFirstDivider",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serializedHighlightModeRemovableMarkups",
+            "columnName": "serializedHighlightModeRemovableMarkups",
+            "affinity": "BLOB",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4847d50b2b795ea81fe3030db9809de8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c49b673964671699346cd4f5c0c2ba98')"
     ]
   }
 }

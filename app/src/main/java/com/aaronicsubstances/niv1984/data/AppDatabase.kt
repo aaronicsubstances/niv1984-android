@@ -11,13 +11,14 @@ import kotlinx.coroutines.*
 @TypeConverters( DateTypeConverter::class, TimestampTypeConverter::class,
     UuidTypeConverter::class)
 @Database(entities = [ UserHighlightData::class, BibleIndexRecord::class,
-    BatchedDataSourceEntity::class ],
+    BatchedDataSourceEntity::class, BookCacheEntry::class ],
     version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userHighlightDataDao(): UserHighlightDataDao
     abstract fun bibleIndexRecordDao(): BibleIndexRecordDao
     abstract fun batchedDataSourceDao(): BatchedDataSourceEntityDao
+    abstract fun bookCacheEntryDao(): BookCacheEntryDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

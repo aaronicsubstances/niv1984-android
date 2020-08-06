@@ -3,7 +3,6 @@ package com.aaronicsubstances.niv1984.data
 import android.content.Context
 import com.aaronicsubstances.niv1984.BuildConfig
 import com.aaronicsubstances.niv1984.R
-import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.UserHighlightData
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
@@ -31,11 +30,8 @@ class BookHighlighter(private val context: Context,
             it.chapterNumber == chapterNumber && it.verseNumber == verseNumber &&
                     it.verseBlockIndex == verseBlockIndex
         }
-        val blockHighlights = if (blockHighlightData == null) {
-            arrayOf()
-        }
-        else {
-            AppUtils.deserializeFromJson(blockHighlightData.data, Array<HighlightRange>::class.java)
+        val blockHighlights = if (blockHighlightData == null) listOf() else {
+            CustomBinarySerializer.deserializeHighlightRanges(blockHighlightData.data)
         }
         for (highlightRange in blockHighlights) {
             var insertedStartSpanIdx = -1
@@ -99,29 +95,29 @@ class BookHighlighter(private val context: Context,
                 val existingBlockData = existingBlockRanges.firstOrNull {
                     it.verseBlockIndex == blockRange.verseBlockIndex
                 }
-                val existingHighlightRanges = if (existingBlockData == null) arrayOf() else
-                    AppUtils.deserializeFromJson(existingBlockData.data, Array<HighlightRange>::class.java)
+                val existingHighlightRanges = if (existingBlockData == null) listOf() else
+                    CustomBinarySerializer.deserializeHighlightRanges(existingBlockData.data)
                 val updated = if (removeHighlight) {
                     VerseHighlighter.removeHighlightRange(existingHighlightRanges, blockRange.range)
                 }
                 else {
                     VerseHighlighter.addHighlightRange(existingHighlightRanges, blockRange.range)
                 }
-                val newBlockData = UserHighlightData()
-                newBlockData.let {
-                    it.bibleVersion = bibleVersion
-                    it.bookNumber = bookNumber
-                    it.chapterNumber = chapterNumber
-                    it.verseNumber = vNum
-                    it.verseBlockIndex = blockRange.verseBlockIndex
-                    it.data = AppUtils.serializeAsJson(updated)
-                }
+                val serializedUpdate = CustomBinarySerializer.serializeHighlightRanges(updated)
+                val newBlockData = UserHighlightData(0,
+                    bibleVersion,
+                    bookNumber,
+                    chapterNumber,
+                    vNum,
+                    blockRange.verseBlockIndex,
+                    serializedUpdate
+                )
                 entitiesToInsert.add(newBlockData)
             }
         }
 
         // clear cache just before saving.
-        BookCache(context, bookNumber).purge(bibleVersion)
+        BookCache(context, bookNumber).purge(bibleVersion, chapterNumber)
 
         db.userHighlightDataDao().updateHighlightData(entitiesToDelete, entitiesToInsert)
     }

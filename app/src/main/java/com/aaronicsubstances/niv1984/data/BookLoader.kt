@@ -363,10 +363,10 @@ class BookLoader(private val context: Context,
         }
 
         // lastly save read items to cache
-        try {
+        //try {
             cacheLoader.save(bibleVersionCode, isNightMode, displayItems, chapterIndices)
-        }
-        catch (ignore: Exception) {}
+        //}
+        //catch (ignore: Exception) {}
 
         return displayItems
     }

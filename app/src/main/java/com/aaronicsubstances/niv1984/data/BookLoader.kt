@@ -291,7 +291,10 @@ class BookLoader(private val context: Context,
         // first try and read from cache
         val cacheLoader = BookCache(context, bookNumber)
         try {
-            return cacheLoader.load(bibleVersionCode, isNightMode, chapterIndices)
+            val cached = cacheLoader.load(bibleVersionCode, isNightMode, chapterIndices)
+            // reassign bible version indices
+            cached.forEach { it.fullContent.bibleVersionIndex = bibleVersionIndex }
+            return cached
         }
         catch (ignore: Exception) {}
 

@@ -7,6 +7,7 @@ import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.BookParser
 import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import java.io.*
 
 class BookCache(private val context: Context,
@@ -50,13 +51,15 @@ class BookCache(private val context: Context,
 
 
 class CachedBookDisplay {
+    @SerializedName("d")
     var displayItems: Array<CachedBookDisplayItem>? = null
+    @SerializedName("c")
     var chapterIndices: Array<Int>? = null
 
     companion object {
 
         private fun fromCacheItemContent(cached: CachedBookDisplayItemContent): BookDisplayItemContent {
-            return BookDisplayItemContent(cached.bibleVersionIndex,
+            return BookDisplayItemContent(0,
                     cached.text, cached.blockQuoteKind, null,
                     cached.isFirstDivider,
                     cached.highlightModeRemovableMarkups?.map {
@@ -68,7 +71,6 @@ class CachedBookDisplay {
 
         private fun toCacheItemContent(itemContent: BookDisplayItemContent): CachedBookDisplayItemContent {
             return CachedBookDisplayItemContent().apply {
-                this.bibleVersionIndex = itemContent.bibleVersionIndex
                 this.text = itemContent.text
                 this.blockQuoteKind = itemContent.blockQuoteKind
                 this.isFirstDivider = itemContent.isFirstDivider
@@ -112,27 +114,41 @@ class CachedBookDisplay {
     }
 
     class CachedBookDisplayItem {
+        @SerializedName("v")
         var viewType: BookDisplayItemViewType? = null
+        @SerializedName("c")
         var chapterNumber: Int = 0
+        @SerializedName("v1")
         var verseNumber: Int = 0
+        @SerializedName("f")
         var fullContent: CachedBookDisplayItemContent? = null
+        @SerializedName("i")
         var isFirstVerseContent: Boolean = false
     }
 
     class CachedBookDisplayItemContent {
-        var bibleVersionIndex: Int = 0
+        @SerializedName("t")
         var text: String = ""
+        @SerializedName("b")
         var blockQuoteKind: BookParser.BlockQuoteKind? = null
+        @SerializedName("i")
         var isFirstDivider: Boolean = false
+        @SerializedName("h")
         var highlightModeRemovableMarkups: Array<CachedMarkup>? = null
     }
 
     class CachedMarkup {
+        @SerializedName("t")
         var tag: String = ""
+        @SerializedName("p")
         var pos: Int = 0
+        @SerializedName("p1")
         var placeholder: String? = null
+        @SerializedName("i")
         var id: String? = null
+        @SerializedName("a")
         var addedDuringUpdate: Boolean = false
+        @SerializedName("r")
         var removeDuringHighlighting: Boolean = false
     }
 }

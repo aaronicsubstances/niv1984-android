@@ -22,7 +22,7 @@ data class BookDisplayItem(val viewType: BookDisplayItemViewType,
                            var secondPartialContent: List<BookDisplayItemContent>? = null,
                            var isFirstVerseContent: Boolean = false)
 
-data class BookDisplayItemContent(val bibleVersionIndex: Int,
+data class BookDisplayItemContent(var bibleVersionIndex: Int,
                                   var text: String,
                                   val blockQuoteKind: BookParser.BlockQuoteKind? = null,
                                   var html: CharSequence? = null,

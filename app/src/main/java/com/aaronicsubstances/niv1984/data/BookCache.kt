@@ -18,19 +18,16 @@ class BookCache(private val context: Context,
     }
 
     suspend fun load(bibleVersion: String, isNightMode: Boolean,
-             chapterIndices: MutableList<Int>): List<BookDisplayItem> {
+             chapterIndices: MutableList<Pair<Int, Int>>): List<BookDisplayItem> {
         val db = AppDatabase.getDatabase(context)
         val groupId = generateGroupId(bibleVersion, isNightMode)
         val entries = db.bookCacheEntryDao().getEntries(groupId, CACHE_VERSION)
-        if (entries.isEmpty()) {
-            throw RuntimeException("Not found")
-        }
         val items = mutableListOf<BookDisplayItem>()
         var runningChapterNumber = 0
         for (cached in entries) {
             if (cached.chapterNumber != runningChapterNumber) {
                 runningChapterNumber = cached.chapterNumber
-                chapterIndices.add(items.size)
+                chapterIndices.add(Pair(runningChapterNumber, items.size))
             }
             val removableMarkups = cached.serializedHighlightModeRemovableMarkups?.let {
                 CustomBinarySerializer.deserializeMarkups(it)
@@ -47,7 +44,7 @@ class BookCache(private val context: Context,
     }
 
     suspend fun save(bibleVersion: String, isNightMode: Boolean,
-             items: List<BookDisplayItem>, chapterIndices: List<Int>) {
+             items: List<BookDisplayItem>) {
         val db = AppDatabase.getDatabase(context)
         val groupId = generateGroupId(bibleVersion, isNightMode)
         val entries = mutableListOf<BookCacheEntry>()

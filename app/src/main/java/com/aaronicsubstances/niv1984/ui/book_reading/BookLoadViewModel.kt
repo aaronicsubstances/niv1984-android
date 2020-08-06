@@ -2,7 +2,6 @@ package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.app.Application
 import android.content.Context
-import android.os.SystemClock
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,7 +14,6 @@ import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.models.ScrollPosPref
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
-import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -122,12 +120,12 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         }
 
         viewModelScope.launch {
-            val startTime = SystemClock.uptimeMillis()
+            //val startTime = SystemClock.uptimeMillis()
             val bookLoader = BookLoader(context, bookNumber, bibleVersions, bibleVersionIndex,
                 displayMultipleSideBySide, isNightMode)
             val model = bookLoader.load()
-            val timeTaken = SystemClock.uptimeMillis() - startTime
-            AppUtils.showShortToast(context, "Book loaded in ${timeTaken / 1000.0} secs")
+            //val timeTaken = SystemClock.uptimeMillis() - startTime
+            //AppUtils.showShortToast(context, "Book loaded in ${timeTaken / 1000.0} secs")
 
             // don't proceed further if model is no longer needed due to UI change request.
             if (loadResultValidationCallback?.invoke(model) != true) {

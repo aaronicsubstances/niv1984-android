@@ -288,17 +288,24 @@ class BookLoader(private val context: Context,
         chapterIndices: MutableList<Int>
     ): List<BookDisplayItem> {
         val bibleVersionCode = bibleVersions[bibleVersionIndex]
-        // first try and read from cache
+
+        // first read from cache
         val cacheLoader = BookCache(context, bookNumber)
-        try {
-            val cached = cacheLoader.load(bibleVersionCode, isNightMode, chapterIndices)
-            // reassign bible version indices
-            cached.forEach { it.fullContent.bibleVersionIndex = bibleVersionIndex }
+        val cachedChapterIndices = mutableListOf<Pair<Int, Int>>()
+        val cached = cacheLoader.load(bibleVersionCode, isNightMode, cachedChapterIndices)
+        // reassign bible version indices
+        cached.forEach { it.fullContent.bibleVersionIndex = bibleVersionIndex }
+
+        val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
+        if (chapterIndices.size == totalChapterCount) {
+            // all chapters are intact, no need to proceed further.
+            // just transfer chapter indices.
+            chapterIndices.addAll(cachedChapterIndices.map { it.first })
             return cached
         }
-        catch (ignore: Exception) {}
 
-        // load book in raw XML
+        // Getting here means there are missing chapters,
+        // so load book in raw XML
         val assetPath = String.format("%s/%02d.xml", bibleVersionCode, bookNumber)
         val rawChapters = context.assets.open(assetPath).use {
             val parser = BookParser()
@@ -311,9 +318,28 @@ class BookLoader(private val context: Context,
         bookHighlighter.load()
 
         // Now process each chapter, inserting highlights as appropriate.
+        // However if a chapter already exists in cache, copy its items over.
         val displayItems = mutableListOf<BookDisplayItem>()
         for (rawChapter in rawChapters) {
             chapterIndices.add(displayItems.size)
+
+            // try and fetch chapter from cache if present.
+            val indexIntoCachedChapterIndices = cachedChapterIndices.indexOfFirst {
+                it.first == rawChapter.chapterNumber
+            }
+            if (indexIntoCachedChapterIndices != -1) {
+                val indexIntoCache = cachedChapterIndices[indexIntoCachedChapterIndices].second
+                val endIndexIntoCache = if (indexIntoCachedChapterIndices + 1 < cachedChapterIndices.size) {
+                    cachedChapterIndices[indexIntoCachedChapterIndices + 1].second
+                }
+                else {
+                    cached.size
+                }
+                (indexIntoCache until endIndexIntoCache).forEach {
+                    displayItems.add(cached[it])
+                }
+                continue
+            }
 
             // add title item
             val bibleVersionInst = AppConstants.bibleVersions.getValue(
@@ -363,10 +389,7 @@ class BookLoader(private val context: Context,
         }
 
         // lastly save read items to cache
-        //try {
-            cacheLoader.save(bibleVersionCode, isNightMode, displayItems, chapterIndices)
-        //}
-        //catch (ignore: Exception) {}
+        cacheLoader.save(bibleVersionCode, isNightMode, displayItems)
 
         return displayItems
     }

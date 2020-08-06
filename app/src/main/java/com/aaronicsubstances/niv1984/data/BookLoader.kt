@@ -2,7 +2,6 @@ package com.aaronicsubstances.niv1984.data
 
 import android.content.Context
 import android.text.TextUtils
-import androidx.lifecycle.MutableLiveData
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
@@ -24,7 +23,6 @@ import com.aaronicsubstances.niv1984.utils.BookParser.WordsOfJesus
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.AsanteTwiBibleVersion
-import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -33,8 +31,7 @@ class BookLoader(private val context: Context,
                  private val bibleVersions: List<String>,
                  private val bibleVersionIndexInUI: Int?,
                  private val displayMultipleSideBySide: Boolean,
-                 private val isNightMode: Boolean,
-                 private val progressReporter: MutableLiveData<LiveDataEvent<Boolean>>) {
+                 private val isNightMode: Boolean) {
 
     // use flame red by default, apricot colour in night mode
     private val wjColor = AppUtils.colorResToString(R.color.wjColor, context)
@@ -298,8 +295,6 @@ class BookLoader(private val context: Context,
         }
         catch (ignore: Exception) {}
 
-        progressReporter.postValue(LiveDataEvent(true))
-
         // load book in raw XML
         val assetPath = String.format("%s/%02d.xml", bibleVersionCode, bookNumber)
         val rawChapters = context.assets.open(assetPath).use {
@@ -435,7 +430,7 @@ class BookLoader(private val context: Context,
                     if (!out.isEmpty()) {
                         val blockText = bookHighlighter.processBlockText(chapterNumber,
                             rawVerse.verseNumber, verseItems.size, out)
-                        val removableMarkups = bookHighlighter.getHighlightModeRemovableMarkups(out)
+                        val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
                         val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                             chapterNumber, rawVerse.verseNumber,
                             BookDisplayItemContent(bibleVersionIndex, blockText,
@@ -476,7 +471,7 @@ class BookLoader(private val context: Context,
             }
             val blockText = bookHighlighter.processBlockText(chapterNumber, rawVerse.verseNumber,
                 verseItems.size, out)
-            val removableMarkups = bookHighlighter.getHighlightModeRemovableMarkups(out)
+            val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
             val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                 chapterNumber, rawVerse.verseNumber,
                 BookDisplayItemContent(bibleVersionIndex, blockText,
@@ -527,7 +522,7 @@ class BookLoader(private val context: Context,
         }
         val blockText = bookHighlighter.processBlockText(chapterNumber, verseNumber,
             verseBlockIndex, out)
-        val removableMarkups = bookHighlighter.getHighlightModeRemovableMarkups(out)
+        val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
         return BookDisplayItem(BookDisplayItemViewType.VERSE, chapterNumber, verseNumber,
             BookDisplayItemContent(bibleVersionIndex, blockText, rawQuote.kind,
                 highlightModeRemovableMarkups = removableMarkups),

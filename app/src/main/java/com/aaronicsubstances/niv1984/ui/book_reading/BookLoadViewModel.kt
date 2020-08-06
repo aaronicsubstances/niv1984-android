@@ -120,12 +120,14 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         }
 
         viewModelScope.launch {
+            _loadProgressLiveData.postValue(LiveDataEvent(true))
             val bookLoader = BookLoader(context, bookNumber, bibleVersions, bibleVersionIndex,
-                displayMultipleSideBySide, isNightMode, _loadProgressLiveData)
+                displayMultipleSideBySide, isNightMode)
             val model = bookLoader.load()
 
             // don't proceed further if model is no longer needed due to UI change request.
             if (loadResultValidationCallback?.invoke(model) != true) {
+                _loadProgressLiveData.postValue(LiveDataEvent(false))
                 return@launch
             }
 

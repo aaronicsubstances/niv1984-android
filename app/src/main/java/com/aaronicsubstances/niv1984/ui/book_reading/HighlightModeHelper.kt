@@ -35,8 +35,8 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
 
     private val htmlViewManager: HtmlViewManager
 
-    var inHighlightMode: Boolean
-    var bibleVersionIndex: Int = 0
+    var inHighlightMode: Boolean = false
+    var specificBibleVersionIndex: Int = 0
         private set
 
     init {
@@ -100,8 +100,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
 
         // enter copy mode immediately if restored state indicates so
-        inHighlightMode = savedInstanceState?.getBoolean(STATE_KEY_IN_HIGHLIGHT_MODE, false) ?: false
-        if (inHighlightMode) {
+        if (savedInstanceState?.getBoolean(STATE_KEY_IN_HIGHLIGHT_MODE, false) == true) {
             enterHighlightMode()
         }
     }
@@ -134,7 +133,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
             return
         }
 
-        bibleVersionIndex = fragment.bibleVersionIndex ?: 0
+        specificBibleVersionIndex = fragment.bibleVersionIndex ?: 0
         val latestSysBookmark = fragment.viewModel.currLoc
         switchToChapterFocusView(fragment.viewModel.lastLoadResult!!, latestSysBookmark)
 
@@ -172,9 +171,9 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     private fun switchToChapterFocusView(currentLoadResult: BookDisplay, sysBookmark: ScrollPosPref) {
-        val bibleVersionCode = fragment.bibleVersions[bibleVersionIndex]
+        val bibleVersionCode = currentLoadResult.bibleVersions[specificBibleVersionIndex]
         val bibleVersion = AppConstants.bibleVersions.getValue(bibleVersionCode)
-        val chapterTitle = bibleVersion.getChapterTitle(fragment.bookNumber, sysBookmark.chapterNumber)
+        val chapterTitle = bibleVersion.getChapterTitle(currentLoadResult.bookNumber, sysBookmark.chapterNumber)
         selectedChapterTitle.text = chapterTitle
 
         selectedChapterContent.text = fetchChapterContent(
@@ -240,14 +239,14 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
             var contentByParts: List<BookDisplayItemContent>? = null
             var fullContent: BookDisplayItemContent? = null
             if (item.viewType == BookDisplayItemViewType.VERSE) {
-                if (fragment.bibleVersionIndex == null && fragment.displayMultipleSideBySide) {
-                    contentByParts = if (bibleVersionIndex == 0) {
+                if (currentLoadResult.bibleVersionIndexInUI == null && currentLoadResult.displayMultipleSideBySide) {
+                    contentByParts = if (specificBibleVersionIndex == 0) {
                         item.firstPartialContent
                     } else {
                         item.secondPartialContent
                     }
                 }
-                else if (item.fullContent.bibleVersionIndex == bibleVersionIndex) {
+                else if (item.fullContent.bibleVersionIndex == specificBibleVersionIndex) {
                     fullContent = item.fullContent
                 }
             }
@@ -301,7 +300,12 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
         val transformer = SourceCodeTransformer(item.text)
         for (m in removableMarkups) {
-            transformer.addTransform("", m.pos, m.pos + m.tag.length)
+            if (m.removeDuringHighlighting) {
+                transformer.addTransform("", m.pos, m.pos + m.tag.length)
+            }
+            else {
+                AppUtils.assert(m.addedDuringUpdate)
+            }
         }
         return transformer.transformedText.toString()
     }
@@ -316,7 +320,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                     fragment.getString(R.string.message_no_highlightable_content))
         }
         else {
-            fragment.viewModel.updateHighlights(bibleVersionIndex, changes, false)
+            fragment.viewModel.updateHighlights(specificBibleVersionIndex, changes, false)
         }
     }
 
@@ -326,7 +330,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         val changes = VerseHighlighter.determineBlockRangesAffectedBySelection(selStart, selEnd,
                 htmlViewManager.verseBlockRanges)
         if (changes.isNotEmpty()) {
-            fragment.viewModel.updateHighlights(bibleVersionIndex, changes, true)
+            fragment.viewModel.updateHighlights(specificBibleVersionIndex, changes, true)
         }
     }
 }

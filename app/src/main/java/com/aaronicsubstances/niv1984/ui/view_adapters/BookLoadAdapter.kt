@@ -12,7 +12,6 @@ import androidx.core.view.setPadding
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.largelistpaging.FiniteListAdapter
 import com.aaronicsubstances.niv1984.R
-import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType

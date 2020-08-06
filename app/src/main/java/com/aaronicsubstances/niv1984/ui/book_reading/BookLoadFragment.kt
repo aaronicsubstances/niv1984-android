@@ -43,18 +43,19 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     private var userBookmark: ScrollPosPref? = null
     private var userBookmarkTitle: String? = null
 
-    private lateinit var firstPrefRadio: RadioButton
-    private lateinit var secondPrefRadio: RadioButton
-    private lateinit var bothPrefRadio: RadioButton
     private lateinit var bookContentView: RecyclerView
     private lateinit var chapterView: RecyclerView
     private lateinit var titleTextView: TextView
 
-    private lateinit var defaultBottomPanel: View
-    private lateinit var prefOverlayPanel: ViewGroup
+    private lateinit var bottomPanel: ViewGroup
+    private lateinit var bookVersionSelectionPanel: View
+    private lateinit var firstPrefRadio: RadioButton
+    private lateinit var secondPrefRadio: RadioButton
+    private lateinit var bothPrefRadio: RadioButton
     private lateinit var switchToPrefBtn: Button
-    private lateinit var prefOverlayDescriptionTextView: TextView
+    private lateinit var prefOverlayDescriptionWithSwitchBtn: TextView
     private lateinit var prefOverlayProgressBar: ProgressBar
+    private lateinit var prefOverlayDescriptionStandalone: TextView
 
     internal lateinit var viewModel: BookLoadViewModel
     internal lateinit var bookContentAdapter: BookLoadAdapter
@@ -191,18 +192,19 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     ): View? {
         val root = inflater.inflate(R.layout.book_load_fragment, container, false)
 
+        titleTextView = root.findViewById(R.id.bookDescription)
         bookContentView = root.findViewById(R.id.bookReadView)
         chapterView = root.findViewById(R.id.chapterView)
 
-        defaultBottomPanel = root.findViewById(R.id.bookVersionSelectionPanel)
+        bottomPanel = root.findViewById(R.id.bottomPanel)
+        bookVersionSelectionPanel = root.findViewById(R.id.bookVersionSelectionPanel)
         firstPrefRadio = root.findViewById(R.id.firstPreferredVersion)
         secondPrefRadio = root.findViewById(R.id.secondPreferredVersion)
         bothPrefRadio = root.findViewById(R.id.bothVersions)
-        titleTextView = root.findViewById(R.id.bookDescription)
 
-        prefOverlayPanel = root.findViewById(R.id.prefOverlayPanel)
+        prefOverlayDescriptionStandalone = root.findViewById(R.id.prefOverlayDescriptionCentered)
         prefOverlayProgressBar = root.findViewById(R.id.prefOverlayProgressBar)
-        prefOverlayDescriptionTextView = root.findViewById(R.id.prefOverlayDescription)
+        prefOverlayDescriptionWithSwitchBtn = root.findViewById(R.id.prefOverlayDescriptionWithSwitchBtn)
         switchToPrefBtn = root.findViewById(R.id.switchToPrefBtn)
 
         bookContentView.layoutManager = LinearLayoutManager(activity)
@@ -288,7 +290,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             })
 
         viewModel.loadProgressLiveData.observeProperAsEvent(viewLifecycleOwner,
-                Observer<Boolean> { syncViewWithDataContext(true) })
+                Observer<Boolean> { syncViewWithDataContext() })
 
         bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {
             override fun listScrolled(
@@ -363,7 +365,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         // reset book description.
         run {
             val bibleVersionIndexToUse = if (highlightHelper?.inHighlightMode == true) {
-                highlightHelper!!.bibleVersionIndex
+                highlightHelper!!.specificBibleVersionIndex
             } else if (bibleVersionIndex == 1) {
                 1
             } else {
@@ -375,10 +377,42 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         }
 
         // now reset overlay panel
-        if (defaultReadingMode && !loading && highlightHelper?.inHighlightMode != true) {
-            defaultBottomPanel.visibility = View.VISIBLE
-            prefOverlayPanel.visibility = View.GONE
+        val pinnedVersions = bibleVersions.filterIndexed { i, _ ->
+            if (highlightHelper?.inHighlightMode == true) {
+                i == highlightHelper!!.specificBibleVersionIndex
+            }
+            if (defaultReadingMode && bibleVersionIndex != null) {
+                i == bibleVersionIndex
+            } else {
+                true
+            }
+        }.map {
+            AppConstants.bibleVersions.getValue(it).abbreviation
+        }.joinToString("/")
 
+        // use invisible instead of gone to prevent "jumping effect" upon book content panel
+        // at bottom
+        bottomPanel.children.forEach { it.visibility = View.INVISIBLE }
+
+        if (!viewModel.isLastLoadResultValid()) {
+            // meaning book is being loaded.
+            listOf(prefOverlayDescriptionStandalone, prefOverlayProgressBar).forEach {
+                it.visibility = View.VISIBLE
+            }
+            prefOverlayDescriptionStandalone.text = AppUtils.parseHtml(
+                    getString(R.string.message_loading_in_progress, pinnedVersions))
+        }
+        else if (highlightHelper?.inHighlightMode == true) {
+            listOf(prefOverlayDescriptionStandalone).forEach {
+                it.visibility = View.VISIBLE
+            }
+            prefOverlayDescriptionStandalone.text = AppUtils.parseHtml(
+                    getString(R.string.highlight_mode_title, pinnedVersions))
+        }
+        else if (defaultReadingMode) {
+            listOf(bookVersionSelectionPanel).forEach {
+                it.visibility = View.VISIBLE
+            }
             firstPrefRadio.text = AppConstants.bibleVersions.getValue(
                     bibleVersions[0]).abbreviation
             secondPrefRadio.text = AppConstants.bibleVersions.getValue(
@@ -386,41 +420,15 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
         }
         else {
-            defaultBottomPanel.visibility = View.GONE
-            prefOverlayPanel.visibility = View.VISIBLE
-            prefOverlayPanel.children.forEach { it.visibility = View.GONE }
-            prefOverlayDescriptionTextView.visibility = View.VISIBLE
-
-            val pinnedVersions = bibleVersions.filterIndexed { i, _ ->
-                if (highlightHelper?.inHighlightMode == true) {
-                    i == highlightHelper!!.bibleVersionIndex
-                }
-                if (defaultReadingMode && bibleVersionIndex != null) {
-                    i == bibleVersionIndex
-                } else {
-                    true
-                }
-            }.map {
-                AppConstants.bibleVersions.getValue(it).abbreviation
-            }.joinToString("/")
-
-            if (loading) {
-                prefOverlayProgressBar.visibility = View.VISIBLE
-                prefOverlayDescriptionTextView.text = AppUtils.parseHtml(
-                        getString(R.string.message_loading_in_progress, pinnedVersions))
-            } else if (highlightHelper?.inHighlightMode == true) {
-                prefOverlayDescriptionTextView.text = AppUtils.parseHtml(
-                        getString(R.string.highlight_mode_title, pinnedVersions))
+            listOf(prefOverlayDescriptionWithSwitchBtn, switchToPrefBtn).forEach {
+                it.visibility = View.VISIBLE
+            }
+            prefOverlayDescriptionWithSwitchBtn.text = if (userBookmarkTitle != null) {
+                AppUtils.parseHtml(
+                        getString(R.string.bookmark_mode_title, userBookmarkTitle, pinnedVersions))
             } else {
-                switchToPrefBtn.visibility = View.VISIBLE
-
-                prefOverlayDescriptionTextView.text = if (userBookmarkTitle != null) {
-                    AppUtils.parseHtml(
-                            getString(R.string.bookmark_mode_title, userBookmarkTitle, pinnedVersions))
-                } else {
-                    AppUtils.parseHtml(
-                            getString(R.string.search_result_mode_title, pinnedVersions))
-                }
+                AppUtils.parseHtml(
+                        getString(R.string.search_result_mode_title, pinnedVersions))
             }
         }
     }

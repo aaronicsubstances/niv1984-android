@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chapterViewPanel"
-        app:layout_constraintBottom_toTopOf="@id/bottomPanelBarrier">
+        app:layout_constraintBottom_toTopOf="@id/bottomPanel">
 
         <LinearLayout
             android:orientation="vertical"
@@ -82,78 +82,92 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chapterViewPanel"
-        app:layout_constraintBottom_toTopOf="@id/bottomPanelBarrier"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomPanel"/>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/bottomPanelBarrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="top"
-        app:constraint_referenced_ids="prefOverlayPanel,bookVersionSelectionPanel"/>
-
-    <LinearLayout
-        android:id="@+id/prefOverlayPanel"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bottomPanel"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:padding="@dimen/activity_margin"
         android:layout_gravity="center_vertical"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <TextView
-            android:id="@+id/prefOverlayDescription"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        <RadioGroup
+            android:id="@+id/bookVersionSelectionPanel"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:scrollbars="horizontal"
             android:layout_height="wrap_content"
-            android:layout_marginRight="8dp"/>
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <RadioButton
+                android:id="@+id/firstPreferredVersion"
+                android:text="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/secondPreferredVersion"
+                android:text="2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <RadioButton
+                android:id="@+id/bothVersions"
+                android:text="1/2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/prefOverlayDescriptionCentered"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ProgressBar
             android:id="@+id/prefOverlayProgressBar"
             style="?android:attr/progressBarStyleSmall"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <TextView
+            android:id="@+id/prefOverlayDescriptionWithSwitchBtn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:scrollbars="horizontal"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/switchToPrefBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <Button
             android:id="@+id/switchToPrefBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/switchToPrefText"/>
-    </LinearLayout>
+            android:layout_marginLeft="8dp"
+            android:text="@string/switchToPrefText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <RadioGroup
-        android:id="@+id/bookVersionSelectionPanel"
-        android:padding="@dimen/activity_margin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <RadioButton
-            android:id="@+id/firstPreferredVersion"
-            android:text="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <RadioButton
-            android:id="@+id/secondPreferredVersion"
-            android:text="2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <RadioButton
-            android:id="@+id/bothVersions"
-            android:text="1/2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.aaronicsubstances.niv1984.ui.book_reading.ConstraintLayoutWithTouchIntercept>

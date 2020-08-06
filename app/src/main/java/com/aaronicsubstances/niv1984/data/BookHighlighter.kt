@@ -77,8 +77,8 @@ class BookHighlighter(private val context: Context,
         return source.rawText.toString()
     }
 
-    fun getHighlightModeRemovableMarkups(source: VerseHighlighter): List<VerseHighlighter.Markup>? {
-        val removableMarkups = source.markupList.filter { it.removeDuringHighlighting }
+    fun getHighlightModeEditableMarkups(source: VerseHighlighter): List<VerseHighlighter.Markup>? {
+        val removableMarkups = source.markupList.filter { it.addedDuringUpdate || it.removeDuringHighlighting }
         return if (removableMarkups.isEmpty()) null else removableMarkups
     }
 

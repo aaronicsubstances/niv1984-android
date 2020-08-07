@@ -37,6 +37,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     var displayMultipleSideBySide = false
     var isNightMode = false
 
+    private var hasReceivedDataBefore = false
+
     private var initialLoc: Pair<Int, Int>? = null
     private var defaultReadingMode = false
     private var searchResultBibleVersion = ""
@@ -142,6 +144,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         super.onDetach()
         bookLoadRequestListener = null
         viewModel.loadResultValidationCallback = null
+        viewModel.saveSystemBookmarks()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -273,23 +276,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 bookNumber, viewModel.currLocChapterNumber, viewModel.currLocVerseNumber)
         }
 
-        viewModel.loadLiveData.observe(viewLifecycleOwner,
-            Observer<BookDisplay> { data ->
-                bookContentAdapter.bibleVersions = data.bibleVersions
-                bookContentAdapter.isNightMode = data.isNightMode
-                bookContentAdapter.displayMultipleSideBySide = data.displayMultipleSideBySide
-                bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
-                bookContentAdapter.submitList(data.displayItems)
-                if (viewModel.bookLoadAftermath.chapterNumber > 0) {
-                    syncChapterWidget(viewModel.bookLoadAftermath.chapterNumber - 1, true)
-                }
-                // skip scroll if layout is responding to configuration change.
-                if (viewModel.bookLoadAftermath.particularPos != -1) {
-                    scrollBook(viewModel.bookLoadAftermath.particularPos)
-                }
-                syncViewWithDataContext()
-            })
-
         viewModel.loadProgressLiveData.observeProperAsEvent(viewLifecycleOwner,
                 Observer<Boolean> { syncViewWithDataContext() })
 
@@ -335,6 +321,29 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
 
         screenAwakeHelper = KeepScreenAwakeHelper(this, sharedPrefMgr.getShouldKeepScreenOn())
         highlightHelper = HighlightModeHelper(this, savedInstanceState)
+
+        // ensure observation occurs after openBookForReading so that on
+        // configuration change bookLoadAftermath result in viewModel can be
+        // used.
+        viewModel.loadLiveData.observe(viewLifecycleOwner,
+                Observer<BookDisplay> { data ->
+                    bookContentAdapter.bibleVersions = data.bibleVersions
+                    bookContentAdapter.isNightMode = data.isNightMode
+                    bookContentAdapter.displayMultipleSideBySide = data.displayMultipleSideBySide
+                    bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
+                    bookContentAdapter.submitList(data.displayItems)
+
+                    // skip scroll if layout is responding to configuration change.
+                    val scrollRelatedViews = if (!hasReceivedDataBefore) savedInstanceState == null
+                    else true
+                    hasReceivedDataBefore = true
+
+                    if (scrollRelatedViews) {
+                        scrollBook(viewModel.currLocViewItemPos)
+                    }
+                    syncChapterWidget(viewModel.currLocChapterNumber - 1, scrollRelatedViews)
+                    syncViewWithDataContext()
+                })
     }
 
     override fun onSaveInstanceState(outState: Bundle) {

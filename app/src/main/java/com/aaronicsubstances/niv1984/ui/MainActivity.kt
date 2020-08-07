@@ -245,19 +245,29 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
-        val bookListFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LIST)
-                as PrefListenerFragment
-        val searchReqFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_REQUEST)
-                as PrefListenerFragment
+        // NB: persisting of system bookmarks call this method too.
+        // on configuration change when activity is destroyed, not even fragments we
+        // usually expect to exist will be present, so cater for that.
+        if (isFinishing) {
+            return
+        }
+        val interestedFrags = mutableListOf<PrefListenerFragment>()
+        (supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LIST)
+                as PrefListenerFragment?)?.let { interestedFrags.add(it) }
+        (supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_REQUEST)
+                as PrefListenerFragment?)?.let { interestedFrags.add(it) }
 
         val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
                 as PrefListenerFragment?
         //val searchResFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_RESPONSE)
         //      as PrefListenerFragment?
 
-        val interestedFrags = mutableListOf(bookListFrag, searchReqFrag)
         bookLoadFrag?.let { interestedFrags.add(it) }
         //searchResFrag?.let { interestedFrags.add(it) }
+
+        if (interestedFrags.isEmpty()) {
+            return
+        }
 
         when (key) {
             SharedPrefManager.PREF_KEY_BIBLE_VERSIONS -> {

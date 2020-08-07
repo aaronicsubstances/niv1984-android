@@ -26,8 +26,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     var lastLoadResult: BookDisplay? = null
         private set
-    var bookLoadAftermath = BookLoadAftermath(-1, 0)
-        private set
 
     private val _loadProgressLiveData: MutableLiveData<LiveDataEvent<Boolean>> = MutableLiveData()
     val loadProgressLiveData: LiveData<LiveDataEvent<Boolean>>
@@ -91,6 +89,9 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     val currLocVerseNumber: Int
         get() = systemBookmark.verseNumber
 
+    val currLocViewItemPos: Int
+        get() = systemBookmark.particularViewItemPos
+
     private fun loadSystemBookmarks(bookNumber: Int) {
         if (systemBookmark.bookNumber > 0) {
             return
@@ -102,7 +103,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 listOf(), 0, BookDisplayItemViewType.TITLE, false)
     }
 
-    private fun saveSystemBookmarks() {
+    fun saveSystemBookmarks() {
         if (systemBookmark.bookNumber > 0) {
             sharedPrefManager.savePrefItem(
                 SharedPrefManager.PREF_KEY_SYSTEM_BOOKMARKS + systemBookmark.bookNumber,
@@ -136,7 +137,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
             // update system bookmarks in response to version switch, except
             // if loaded system bookmarks has same version as current request.
-            // (which can only happen on the very first request).
+            // (which is the case with a repeat book load request).
             var isParticularPosValid = systemBookmark.particularViewItemPos >= 0 &&
                     bibleVersions == systemBookmark.particularBibleVersions &&
                 bibleVersionIndex == systemBookmark.particularBibleVersionIndex &&
@@ -146,8 +147,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 updateSystemBookmarkInternally(model)
             }
 
-            bookLoadAftermath = BookLoadAftermath(systemBookmark.particularViewItemPos,
-                systemBookmark.chapterNumber)
             lastLoadResult = model
             _loadLiveData.value = model
         }
@@ -209,6 +208,3 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         _loadProgressLiveData.postValue(LiveDataEvent(true))
     }
 }
-
-data class BookLoadAftermath(val particularPos: Int,
-                             val chapterNumber: Int)

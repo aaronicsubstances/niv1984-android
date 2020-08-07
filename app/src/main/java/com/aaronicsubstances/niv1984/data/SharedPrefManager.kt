@@ -15,15 +15,16 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         // will be up to 66, so use short prefix
         const val PREF_KEY_SYSTEM_BOOKMARKS = "autoSysMark."
         const val PREF_KEY_BIBLE_VERSION_COMBINATION = "bibleVersionCombination"
-        const val PREF_KEY_BIBLE_VERSIONS = "bible_versions"
+        /*const val PREF_KEY_BIBLE_VERSIONS = "bible_versions"
         const val PREF_KEY_ZOOM = "zoomLevel"
         const val PREF_KEY_MULTIPLE_DISPLAY_OPTION = "multiple_version_display"
-        const val PREF_KEY_SCREEN_WAKE = "screen_wake_option"
+        const val PREF_KEY_SCREEN_WAKE = "screen_wake_option"*/
         const val WAKE_LOCK_PERIOD = 5 * 60 * 1000L // 5 minutes
     }
 
     fun getZoomLevel(): Int {
-        val opt = loadPrefString(PREF_KEY_ZOOM, "100")
+        val defaultOpt = context.getString(R.string.pref_key_zoom)
+        val opt = loadPrefString(context.getString(R.string.pref_key_zoom), defaultOpt)
         try {
             return Integer.parseInt(opt)
         }
@@ -34,18 +35,22 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
 
     fun getPreferredBibleVersions(): List<String> {
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
-        val persistedValue = preferenceManager.getString(PREF_KEY_BIBLE_VERSIONS, "") as String
+        val defaultOpt = context.getString(R.string.pref_key_bible_versions)
+        val persistedValue = preferenceManager.getString(
+                context.getString(R.string.pref_key_bible_versions), defaultOpt) as String
         val codes = persistedValue.splitToSequence(" ").filter {
             it.isNotEmpty()
         }.toList()
-        if (codes.size < AppConstants.DEFAULT_BIBLE_VERSIONS.size) {
+        if (codes.isEmpty()) {
             return AppConstants.DEFAULT_BIBLE_VERSIONS
         }
         return codes
     }
 
     fun getShouldDisplayMultipleVersionsSideBySide(): Boolean {
-        var opt = loadPrefString(PREF_KEY_MULTIPLE_DISPLAY_OPTION, "2")
+        var defaultOpt = context.getString(R.string.pref_default_multiple_version_display)
+        var opt = loadPrefString(context.getString(R.string.pref_key_multiple_version_display),
+                defaultOpt)
         if (opt == "0") {
             opt = context.resources.getString(R.string.multiple_version_display_default_value)
         }
@@ -54,7 +59,9 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
 
     fun getShouldKeepScreenOn(): Boolean {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
-        return sharedPref.getBoolean(PREF_KEY_SCREEN_WAKE, true)
+        val defaultOpt = context.resources.getBoolean(R.bool.pref_default_keep_screen_awake)
+        return sharedPref.getBoolean(context.getString(R.string.pref_key_keep_screen_awake),
+                defaultOpt)
     }
 
     fun <T> loadPrefItem(key: String, cls: Class<T>): T? {

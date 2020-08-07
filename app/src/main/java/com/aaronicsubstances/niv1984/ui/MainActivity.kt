@@ -270,25 +270,25 @@ class MainActivity : AppCompatActivity(),
         }
 
         when (key) {
-            SharedPrefManager.PREF_KEY_BIBLE_VERSIONS -> {
+            getString(R.string.pref_key_bible_versions) -> {
                 val bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
                 interestedFrags.forEach {
                     it.onPrefBibleVersionsChanged(bibleVersions)
                 }
             }
-            SharedPrefManager.PREF_KEY_MULTIPLE_DISPLAY_OPTION -> {
+            getString(R.string.pref_key_multiple_version_display) -> {
                 val displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
                 interestedFrags.forEach {
                     it.onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide)
                 }
             }
-            SharedPrefManager.PREF_KEY_ZOOM -> {
+            getString(R.string.pref_key_zoom) -> {
                 val zoomLevel = sharedPrefMgr.getZoomLevel()
                 interestedFrags.forEach {
                     it.onPrefZoomLevelChanged(zoomLevel)
                 }
             }
-            SharedPrefManager.PREF_KEY_SCREEN_WAKE -> {
+            getString(R.string.pref_key_keep_screen_awake) -> {
                 val isScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
                 interestedFrags.forEach {
                     it.onPrefKeepScreenOnDuringReadingChanged(isScreenOn)

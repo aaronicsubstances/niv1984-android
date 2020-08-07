@@ -18,6 +18,15 @@
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preferences -->
+    <string name="pref_key_zoom">zoomLevel</string>
+    <string name="pref_key_bible_versions">bible_versions</string>
+    <string name="pref_key_multiple_version_display">multiple_version_display</string>
+    <string name="pref_key_keep_screen_awake">screen_wake_option</string>
+    <string name="pref_default_zoom">100</string>
+    <string name="pref_default_bible_versions">niv1984 kjv1769</string>
+    <string name="pref_default_multiple_version_display">2</string>
+    <bool name="pref_default_keep_screen_awake">true</bool>
+
     <string name="zoom_title">Bible Reading Text Zoom Level</string>
     <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
     <string name="multiple_version_display_default_value">1</string>

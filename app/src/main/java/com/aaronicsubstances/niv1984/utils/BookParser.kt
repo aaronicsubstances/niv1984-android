@@ -86,13 +86,13 @@ class BookParser {
         private const val TAG_NOTE_REF = "note_ref"
     }
 
-    fun parse(inputStream: InputStream): List<Chapter> {
+    fun parse(inputStream: InputStream, chapterNumbersToIgnore: List<Int>? = null): List<Chapter> {
         val parser: XmlPullParser = Xml.newPullParser()
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
         parser.setInput(inputStream, null)
         parser.nextTag()
         val results = mutableListOf<Chapter>()
-        parseBook(parser, results)
+        parseBook(parser, chapterNumbersToIgnore, results)
         return results
     }
 
@@ -124,7 +124,8 @@ class BookParser {
         }
     }
 
-    private fun parseBook(parser: XmlPullParser, results: MutableList<Chapter>) {
+    private fun parseBook(parser: XmlPullParser, chapterNumbersToIgnore: List<Int>?, 
+            results: MutableList<Chapter>) {
         parseElement(parser, TAG_BOOK) {
             when(parser.name) {
                 TAG_CHAPTER -> {
@@ -132,15 +133,18 @@ class BookParser {
                         ATTR_NUMBER
                     )
                     val chapterNum = Integer.parseInt(numAttr)
-                    val chapterResults = mutableListOf<Any>();
-                    parseChapter(parser, chapterResults)
+                    val chapterResults = mutableListOf<Any>()
+                    val processChapterXml = chapterNumbersToIgnore?.contains(chapterNum) != true
+                    if (processChapterXml) {
+                        parseChapter(parser, chapterResults)
+                    }
                     results.add(
                         Chapter(
                             chapterNum,
                             chapterResults
                         )
                     )
-                    true
+                    processChapterXml
                 }
                 else -> false
             }

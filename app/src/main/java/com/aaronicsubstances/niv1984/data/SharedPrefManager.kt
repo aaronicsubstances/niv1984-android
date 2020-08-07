@@ -16,7 +16,7 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         const val PREF_KEY_SYSTEM_BOOKMARKS = "autoSysMark."
         const val PREF_KEY_BIBLE_VERSION_COMBINATION = "bibleVersionCombination"
         const val PREF_KEY_BIBLE_VERSIONS = "bible_versions"
-        const val PREF_KEY_ZOOM = "zoom"
+        const val PREF_KEY_ZOOM = "zoomLevel"
         const val PREF_KEY_MULTIPLE_DISPLAY_OPTION = "multiple_version_display"
         const val PREF_KEY_SCREEN_WAKE = "screen_wake_option"
         const val WAKE_LOCK_PERIOD = 5 * 60 * 1000L // 5 minutes

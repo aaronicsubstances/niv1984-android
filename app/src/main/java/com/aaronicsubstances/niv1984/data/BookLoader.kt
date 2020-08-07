@@ -297,10 +297,11 @@ class BookLoader(private val context: Context,
         cached.forEach { it.fullContent.bibleVersionIndex = bibleVersionIndex }
 
         val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
+        val cachedChapterNumbers = cachedChapterIndices.map { it.first }
         if (chapterIndices.size == totalChapterCount) {
             // all chapters are intact, no need to proceed further.
             // just transfer chapter indices.
-            chapterIndices.addAll(cachedChapterIndices.map { it.first })
+            chapterIndices.addAll(cachedChapterNumbers)
             return cached
         }
 
@@ -309,13 +310,13 @@ class BookLoader(private val context: Context,
         val assetPath = String.format("%s/%02d.xml", bibleVersionCode, bookNumber)
         val rawChapters = context.assets.open(assetPath).use {
             val parser = BookParser()
-            parser.parse(it)
+            parser.parse(it, cachedChapterNumbers)
         }
 
         // load verse highlights from SQLite.
         val bookHighlighter = BookHighlighter(context, bookNumber,
             bibleVersions[bibleVersionIndex])
-        bookHighlighter.load()
+        bookHighlighter.load(cachedChapterNumbers)
 
         // Now process each chapter, inserting highlights as appropriate.
         // However if a chapter already exists in cache, copy its items over.
@@ -324,9 +325,7 @@ class BookLoader(private val context: Context,
             chapterIndices.add(displayItems.size)
 
             // try and fetch chapter from cache if present.
-            val indexIntoCachedChapterIndices = cachedChapterIndices.indexOfFirst {
-                it.first == rawChapter.chapterNumber
-            }
+            val indexIntoCachedChapterIndices = cachedChapterNumbers.indexOf(rawChapter.chapterNumber)
             if (indexIntoCachedChapterIndices != -1) {
                 val indexIntoCache = cachedChapterIndices[indexIntoCachedChapterIndices].second
                 val endIndexIntoCache = if (indexIntoCachedChapterIndices + 1 < cachedChapterIndices.size) {
@@ -340,6 +339,8 @@ class BookLoader(private val context: Context,
                 }
                 continue
             }
+
+            AppUtils.assert(rawChapter.parts.isNotEmpty())
 
             // add title item
             val bibleVersionInst = AppConstants.bibleVersions.getValue(

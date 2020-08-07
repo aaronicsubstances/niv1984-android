@@ -18,9 +18,10 @@ class BookHighlighter(private val context: Context,
 
     private lateinit var highlightData: List<UserHighlightData>
 
-    suspend fun load() {
+    suspend fun load(chapterNumbersToIgnore: List<Int>) {
         val db = AppDatabase.getDatabase(context)
-        highlightData = db.userHighlightDataDao().getBookHighlightData(bibleVersion, bookNumber)
+        highlightData = db.userHighlightDataDao().getBookHighlightData(bibleVersion, bookNumber,
+                chapterNumbersToIgnore)
     }
 
     fun processBlockText(chapterNumber: Int, verseNumber: Int, verseBlockIndex: Int,

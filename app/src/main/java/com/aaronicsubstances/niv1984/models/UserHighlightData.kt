@@ -31,8 +31,10 @@ data class VerseBlockHighlightRange(val verseNumber: Int,
 @Dao
 abstract class UserHighlightDataDao {
     @Query("""SELECT * from UserHighlightData
-        WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber""")
-    abstract suspend fun getBookHighlightData(bibleVersion: String, bookNumber: Int): List<UserHighlightData>
+        WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber AND
+            chapterNumber NOT IN (:chapterNumbersToIgnore)""")
+    abstract suspend fun getBookHighlightData(bibleVersion: String, bookNumber: Int,
+                                              chapterNumbersToIgnore: List<Int>): List<UserHighlightData>
 
     @Query("""SELECT * FROM UserHighlightData
         WHERE bibleVersion = :bibleVersion AND bookNumber = :bookNumber AND chapterNumber = :chapterNumber

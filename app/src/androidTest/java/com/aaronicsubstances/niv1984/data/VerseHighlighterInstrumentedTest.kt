@@ -10,7 +10,7 @@ class VerseHighlighterInstrumentedTest {
 
     @Test
     fun testEscapeHtmlSections1() {
-        val instance = VerseHighlighter()
+        val instance = VerseHighlighter(true)
         instance.addInitMarkup(Markup("<font>", id="1"))
         instance.addInitText("a \ttitle>$nbsp  ")
         instance.addInitMarkup(Markup("</font>", id="2"))
@@ -36,7 +36,7 @@ class VerseHighlighterInstrumentedTest {
 
     @Test
     fun testEscapeHtmlSections2() {
-        val instance = VerseHighlighter()
+        val instance = VerseHighlighter(true)
         instance.addInitText("  ")
         instance.addInitMarkup("<p>")
         instance.addInitMarkup("<font>")
@@ -71,68 +71,96 @@ class VerseHighlighterInstrumentedTest {
 
     @Test
     fun test1() {
-        val instance = VerseHighlighter()
-        instance.addInitMarkup(Markup("<font>", id="1"))
-        instance.addInitText("a  title  ")
-        instance.addInitMarkup(Markup("</font>", id="2"))
+        listOf(true, false).forEach { expectUpdates ->
+            val instance = VerseHighlighter(expectUpdates)
+            instance.addInitMarkup(Markup("<font>", id = "1"))
+            instance.addInitText("a  title  ")
+            instance.addInitMarkup(Markup("</font>", id = "2"))
 
-        instance.beginProcessing()
-        Assert.assertEquals("a title", instance.rawText.toString())
-        Assert.assertEquals(
-            listOf(
-                Markup("<font>", 0, id="1"),
-                Markup("</font>", 7, id="2")
-            ), instance.markupList
-        )
+            instance.beginProcessing()
+            if (expectUpdates) {
+                Assert.assertEquals("a title", instance.rawText.toString())
+                Assert.assertEquals(
+                        listOf(
+                                Markup("<font>", 0, id = "1"),
+                                Markup("</font>", 7, id = "2")
+                        ), instance.markupList
+                )
+            }
+            else {
+                Assert.assertEquals("<font>a title</font>", instance.rawText.toString())
+                Assert.assertEquals(
+                        listOf(
+                                Markup("<font>", 0, id = "1"),
+                                Markup("</font>", 13, id = "2")
+                        ), instance.markupList
+                )
+            }
 
-        instance.finalizeProcessing()
-        Assert.assertEquals("<font>a title</font>", instance.rawText.toString())
-        Assert.assertEquals(
-            listOf(
-                Markup("<font>", 0, id="1"),
-                Markup("</font>", 13, id="2")
-            ), instance.markupList
-        )
+            instance.finalizeProcessing()
+            Assert.assertEquals("<font>a title</font>", instance.rawText.toString())
+            Assert.assertEquals(
+                    listOf(
+                            Markup("<font>", 0, id = "1"),
+                            Markup("</font>", 13, id = "2")
+                    ), instance.markupList
+            )
+        }
     }
 
     @Test
     fun test2() {
-        val instance = VerseHighlighter()
-        instance.addInitText("  ")
-        instance.addInitMarkup("<p>")
-        instance.addInitMarkup("<font>")
-        instance.addInitText(" a <title>  ")
-        instance.addInitMarkup("</font>")
-        instance.addInitMarkup("</p>")
+        listOf(true, false).forEach { expectUpdates ->
+            val instance = VerseHighlighter(expectUpdates)
+            instance.addInitText("  ")
+            instance.addInitMarkup("<p>")
+            instance.addInitMarkup("<font>")
+            instance.addInitText(" a <title>  ")
+            instance.addInitMarkup("</font>")
+            instance.addInitMarkup("</p>")
 
-        instance.beginProcessing()
-        Assert.assertEquals("a <title>", instance.rawText.toString())
-        Assert.assertEquals(
-            listOf(
-                Markup("<p>", 0),
-                Markup("<font>", 0),
-                Markup("</font>", 9),
-                Markup("</p>", 9)
-            ), instance.markupList
-        )
+            instance.beginProcessing()
+            if (expectUpdates) {
+                Assert.assertEquals("a <title>", instance.rawText.toString())
+                Assert.assertEquals(
+                        listOf(
+                                Markup("<p>", 0),
+                                Markup("<font>", 0),
+                                Markup("</font>", 9),
+                                Markup("</p>", 9)
+                        ), instance.markupList
+                )
+            }
+            else {
+                Assert.assertEquals("<p><font>a &lt;title&gt;</font></p>",
+                        instance.rawText.toString()
+                )
+                Assert.assertEquals(listOf<Markup>(), instance.markupList)
+            }
 
-        instance.finalizeProcessing()
-        Assert.assertEquals("<p><font>a &lt;title&gt;</font></p>",
-            instance.rawText.toString()
-        )
-        Assert.assertEquals(
-            listOf(
-                Markup("<p>", 0),
-                Markup("<font>", 3),
-                Markup("</font>", 24),
-                Markup("</p>", 31)
-            ), instance.markupList
-        )
+            instance.finalizeProcessing()
+            Assert.assertEquals("<p><font>a &lt;title&gt;</font></p>",
+                    instance.rawText.toString()
+            )
+            if (expectUpdates) {
+                Assert.assertEquals(
+                        listOf(
+                                Markup("<p>", 0),
+                                Markup("<font>", 3),
+                                Markup("</font>", 24),
+                                Markup("</p>", 31)
+                        ), instance.markupList
+                )
+            }
+            else {
+                Assert.assertEquals(listOf<Markup>(), instance.markupList)
+            }
+        }
     }
 
     @Test
     fun test3() {
-        val instance = VerseHighlighter()
+        val instance = VerseHighlighter(true)
         instance.addInitText("  ")
         instance.addInitMarkup("<p>")
         instance.addInitMarkup("<font>")
@@ -167,7 +195,7 @@ class VerseHighlighterInstrumentedTest {
 
     @Test
     fun test4() {
-        val instance = VerseHighlighter()
+        val instance = VerseHighlighter(true)
         instance.addInitText("s")
         instance.addInitMarkup("<p>")
         instance.addInitMarkup("<font>")
@@ -232,7 +260,7 @@ class VerseHighlighterInstrumentedTest {
 
     @Test
     fun test5() {
-        val instance = VerseHighlighter()
+        val instance = VerseHighlighter(true)
         instance.addInitMarkup("<p>")
         instance.addInitText("font")
         instance.addInitMarkup(Markup("<hr>", placeholder = "line"))

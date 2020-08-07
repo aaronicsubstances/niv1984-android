@@ -341,6 +341,7 @@ class BookLoader(private val context: Context,
             }
 
             AppUtils.assert(rawChapter.parts.isNotEmpty())
+            val chapterHasHighlights = bookHighlighter.loadChapterHighlights(rawChapter.chapterNumber)
 
             // add title item
             val bibleVersionInst = AppConstants.bibleVersions.getValue(
@@ -364,7 +365,7 @@ class BookLoader(private val context: Context,
                     is Verse -> {
                         val items = processVerse(
                             bibleVersionIndex, rawChapter.chapterNumber,
-                            part, bookHighlighter)
+                            part, bookHighlighter, chapterHasHighlights)
                         displayItems.addAll(items)
                     }
                     else -> {
@@ -427,11 +428,12 @@ class BookLoader(private val context: Context,
         bibleVersionIndex: Int,
         chapterNumber: Int,
         rawVerse: Verse,
-        bookHighlighter: BookHighlighter
+        bookHighlighter: BookHighlighter,
+        chapterHasHighlights: Boolean
     ): List<BookDisplayItem> {
         var prependText: String? = "${rawVerse.verseNumber}. "
         val verseItems = mutableListOf<BookDisplayItem>()
-        val out = VerseHighlighter()
+        val out = VerseHighlighter(chapterHasHighlights)
         for (part in rawVerse.parts) {
             when (part) {
                 is WordsOfJesus -> {
@@ -455,7 +457,7 @@ class BookLoader(private val context: Context,
                 }
                 is BlockQuote -> {
                     if (!out.isEmpty()) {
-                        val blockText = bookHighlighter.processBlockText(chapterNumber,
+                        val blockText = bookHighlighter.processBlockText(
                             rawVerse.verseNumber, verseItems.size, out)
                         val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
                         val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
@@ -467,7 +469,8 @@ class BookLoader(private val context: Context,
                         out.clear()
                     }
                     val nextItem = processBlockQuote(bibleVersionIndex, chapterNumber,
-                        part, rawVerse.verseNumber, verseItems.size, prependText, bookHighlighter)
+                        part, rawVerse.verseNumber, verseItems.size, prependText, bookHighlighter,
+                            chapterHasHighlights)
                     prependText = null
                     verseItems.add(nextItem)
                 }
@@ -496,7 +499,7 @@ class BookLoader(private val context: Context,
                 out.addInitText(prependText)
                 prependText = null
             }
-            val blockText = bookHighlighter.processBlockText(chapterNumber, rawVerse.verseNumber,
+            val blockText = bookHighlighter.processBlockText(rawVerse.verseNumber,
                 verseItems.size, out)
             val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
             val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
@@ -517,9 +520,10 @@ class BookLoader(private val context: Context,
         verseNumber: Int,
         verseBlockIndex: Int,
         prependText: String?,
-        bookHighlighter: BookHighlighter
+        bookHighlighter: BookHighlighter,
+        chapterHasHighlights: Boolean
     ): BookDisplayItem {
-        val out = VerseHighlighter()
+        val out = VerseHighlighter(chapterHasHighlights)
         prependText?.let { out.addInitText(it) }
         for (part in rawQuote.parts) {
             when (part) {
@@ -547,7 +551,7 @@ class BookLoader(private val context: Context,
                 }
             }
         }
-        val blockText = bookHighlighter.processBlockText(chapterNumber, verseNumber,
+        val blockText = bookHighlighter.processBlockText(verseNumber,
             verseBlockIndex, out)
         val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
         return BookDisplayItem(BookDisplayItemViewType.VERSE, chapterNumber, verseNumber,

@@ -6,26 +6,64 @@ import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class VerseHighlighter {
+class VerseHighlighter(private val expectUpdates: Boolean) {
     val rawText = StringBuilder()
     val markupList = mutableListOf<Markup>()
+
+    var noUpdateRawTextEndPtr = -1
 
     fun addInitText(s: String): VerseHighlighter {
         // for some reason Html.fromHtml() does not collapse tabs into space,
         // so explicitly perform replacement, and allow only &nbsp; as exception
         // to whitespace collapsing.
-        rawText.append(TextUtils.htmlEncode(s.replace(WS_REGEX) {
-            if (it.value == NBSP) NBSP else " "
-        }))
+        var escapedText = TextUtils.htmlEncode(s.replace(WS_REGEX) {
+            if (it.value.contains(NBSP)) {
+                it.value.replace(NBSP, 'x')
+                        .replace(WS_REGEX, " ")
+                        .replace('x', NBSP)
+            }
+            else {
+                " "
+            }
+        })
+        if (expectUpdates) {
+            rawText.append(escapedText)
+        }
+        else {
+            // since Html.fromHtml() will be skipped, we have to chop of trailing space char ourselves
+            if (escapedText.isNotEmpty() && escapedText[0] == ' ') {
+                if (noUpdateRawTextEndPtr == -1 || rawText[noUpdateRawTextEndPtr] == ' ') {
+                    escapedText = escapedText.substring(1)
+                }
+            }
+            if (escapedText.isNotEmpty()) {
+                rawText.append(escapedText)
+                noUpdateRawTextEndPtr = rawText.length - 1
+            }
+        }
         return this
     }
 
     fun addInitMarkup(tag: String): VerseHighlighter {
-        return addInitMarkup(Markup(tag))
+        if (expectUpdates) {
+            return addInitMarkup(Markup(tag))
+        }
+        else {
+            rawText.append(tag)
+            return this
+        }
     }
 
     fun addInitMarkup(m: Markup): VerseHighlighter {
-        rawText.append("<$TEMP_TAG_PREFIX${markupList.size} />")
+        if (expectUpdates) {
+            rawText.append("<$TEMP_TAG_PREFIX${markupList.size} />")
+        }
+        else {
+            // since begin processing will not do this for us, we have to
+            // set m.pos ourselves.
+            m.pos = rawText.length
+            rawText.append(m.tag)
+        }
         markupList.add(m)
         return this
     }
@@ -37,42 +75,62 @@ class VerseHighlighter {
     fun clear() {
         rawText.setLength(0)
         markupList.clear()
+        noUpdateRawTextEndPtr = -1
     }
 
     fun beginProcessing() {
-        val rawHtml = AppUtils.parseHtml("<body>$rawText</body>",
-            Html.TagHandler { opening, tag, output, _ ->
-                if (opening && tag.startsWith(TEMP_TAG_PREFIX)) {
-                    val idx = Integer.parseInt(tag.substring(TEMP_TAG_PREFIX.length))
-                    val m = markupList[idx]
-                    m.pos = output.length
-                    if (m.placeholder != null) {
-                        output.append(m.placeholder)
-                    }
-                }
-            }).toString()
-        rawText.clear()
-        rawText.append(rawHtml)
+        if (expectUpdates) {
+            val rawHtml = AppUtils.parseHtml("<body>$rawText</body>",
+                    Html.TagHandler { opening, tag, output, _ ->
+                        if (opening && tag.startsWith(TEMP_TAG_PREFIX)) {
+                            val idx = Integer.parseInt(tag.substring(TEMP_TAG_PREFIX.length))
+                            val m = markupList[idx]
+                            m.pos = output.length
+                            if (m.placeholder != null) {
+                                output.append(m.placeholder)
+                            }
+                        }
+                    }).toString()
+            rawText.clear()
+            rawText.append(rawHtml)
 
-        /*
-         * NB: for some reason, Html.fromHtml() trims leading whitespace, but
-         * collapses trailing whitespace to single space character.
-         * Hence remove trailing space.
-         */
-        if (rawText.isNotEmpty() && rawText[rawText.length - 1] == ' ') {
-            var i = markupList.size - 1
-            while (i >= 0) {
-                if (markupList[i].pos != rawText.length) {
-                    break
+            /*
+             * NB: for some reason, Html.fromHtml() trims leading whitespace, but
+             * collapses trailing whitespace to single space character.
+             * Hence remove trailing space.
+             */
+            if (rawText.isNotEmpty() && rawText[rawText.length - 1] == ' ') {
+                var i = markupList.size - 1
+                while (i >= 0) {
+                    if (markupList[i].pos != rawText.length) {
+                        break
+                    }
+                    markupList[i].pos--
+                    i--
                 }
-                markupList[i].pos--
-                i--
+                rawText.setLength(rawText.length - 1)
             }
-            rawText.setLength(rawText.length - 1)
+        }
+        else {
+            // deal only with trailing space char.
+            if (noUpdateRawTextEndPtr != -1 && rawText[noUpdateRawTextEndPtr] == ' ') {
+                rawText.deleteCharAt(noUpdateRawTextEndPtr)
+                var i = markupList.size - 1
+                while (i >= 0) {
+                    if (markupList[i].pos < noUpdateRawTextEndPtr) {
+                        break
+                    }
+                    markupList[i].pos--
+                    i--
+                }
+            }
         }
     }
 
     fun updateMarkup(insertPos: Int, tag: String, precedesSamePosMarkup: Boolean): Int {
+        if (!expectUpdates) {
+            throw RuntimeException("Cannot update markup when not expecting updates")
+        }
         if (insertPos < 0 || insertPos > rawText.length) {
             throw IllegalArgumentException("Invalid insert position: $insertPos (" +
                     "text length is ${rawText.length})")
@@ -120,6 +178,11 @@ class VerseHighlighter {
     }
 
     fun finalizeProcessing() {
+        if (!expectUpdates) {
+            // done.
+            return
+        }
+
         // first escape raw text in between markup positions.
         escapeHtmlSections()
 
@@ -190,6 +253,8 @@ class VerseHighlighter {
     /*
      * A tag or placeholder must not begin or end with whitespace to enable correct
      * predictions of markup positions.
+     * Also a tag must not have contiguous multiple space characters, or any whitespace
+     * character other than space (ASCII 32) when expectedUpdates constructor parameter is false.
      */
     data class Markup(
         val tag: String,
@@ -202,8 +267,8 @@ class VerseHighlighter {
 
     companion object {
         private val TEMP_TAG_PREFIX = "t_"
-        private val WS_REGEX = Regex("\\s")
-        private val NBSP = "\u00a0"
+        private val NBSP = '\u00a0'
+        private val WS_REGEX = Regex("\\s+")
 
         fun addHighlightRange(
                 existingRanges: List<HighlightRange>,

@@ -21,6 +21,7 @@ class BookHighlighter(private val context: Context,
     private val highlightColor = AppUtils.colorResToString(R.color.highlightColor, context)
 
     private lateinit var highlightData: List<UserHighlightData>
+    private var latestChapterHighlights = listOf<UserHighlightData>()
 
     suspend fun load(chapterNumbersToIgnore: List<Int>) {
         val db = AppDatabase.getDatabase(context)
@@ -28,12 +29,18 @@ class BookHighlighter(private val context: Context,
                 chapterNumbersToIgnore)
     }
 
-    fun processBlockText(chapterNumber: Int, verseNumber: Int, verseBlockIndex: Int,
+    fun loadChapterHighlights(chapterNumber: Int): Boolean {
+        latestChapterHighlights = highlightData.filter {
+            it.chapterNumber == chapterNumber
+        }
+        return latestChapterHighlights.isNotEmpty()
+    }
+
+    fun processBlockText(verseNumber: Int, verseBlockIndex: Int,
                          source: VerseHighlighter): String {
         source.beginProcessing()
-        val blockHighlightData = highlightData.firstOrNull {
-            it.chapterNumber == chapterNumber && it.verseNumber == verseNumber &&
-                    it.verseBlockIndex == verseBlockIndex
+        val blockHighlightData = latestChapterHighlights.firstOrNull {
+            it.verseNumber == verseNumber && it.verseBlockIndex == verseBlockIndex
         }
         val blockHighlights = if (blockHighlightData == null) listOf() else {
             AppBinarySerializer.deserializeHighlightRanges(blockHighlightData.data)

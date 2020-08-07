@@ -17,36 +17,30 @@ class AppBinarySerializerUnitTest {
         var actualDeserialized = AppBinarySerializer.deserializeMarkups(actualSerialized)
         assertEquals(emptyList, actualDeserialized)
 
-        val singleItemList = listOf(Markup("<span>", 10, "3", "high",
-                true, true))
+        val singleItemList = listOf(Markup("<span>", 10, "3", true))
         expected = byteArrayOf(0, 0, 0, 1, 0, 0, 0, 1,
                 0, 6, '<'.toByte(), 's'.toByte(), 'p'.toByte(), 'a'.toByte(), 'n'.toByte(),
                 '>'.toByte(),
                 0, 0, 0, 10,
                 1, 0, 1, '3'.toByte(),
-                1, 0, 4, 'h'.toByte(), 'i'.toByte(),'g'.toByte(), 'h'.toByte(),
-                1, 1)
+                1)
         actualSerialized = AppBinarySerializer.serializeMarkups(singleItemList)
         assertArrayEquals(expected, actualSerialized)
         actualDeserialized = AppBinarySerializer.deserializeMarkups(actualSerialized)
         assertEquals(singleItemList, actualDeserialized)
 
-        val multipleItemList = listOf(Markup("<b>", 300, "yes", null,
-                false, false),
-                Markup("", 1000, null, "it",
-                        false, true))
+        val multipleItemList = listOf(Markup("<b>", 300, "yes", false),
+                Markup("", 1000, null, true))
         expected = byteArrayOf(0, 0, 0, 1, 0, 0, 0, 2,
                 0, 3, '<'.toByte(), 'b'.toByte(), '>'.toByte(),
                 0, 0, 0b0001, 0b00101100,
                 1, 0, 3, 'y'.toByte(), 'e'.toByte(), 's'.toByte(),
                 0,
-                0, 0,
 
                 0, 0,
                 0, 0, 0b0011, 0b11101000.toByte(),
                 0,
-                1, 0, 2, 'i'.toByte(), 't'.toByte(),
-                0, 1)
+                1)
         actualSerialized = AppBinarySerializer.serializeMarkups(multipleItemList)
         assertArrayEquals(expected, actualSerialized)
         actualDeserialized = AppBinarySerializer.deserializeMarkups(actualSerialized)

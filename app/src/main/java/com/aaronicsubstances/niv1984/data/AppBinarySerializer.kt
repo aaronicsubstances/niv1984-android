@@ -15,15 +15,10 @@ object AppBinarySerializer {
             for (m in markups) {
                 binaryWriter.writeUTF(m.tag)
                 binaryWriter.writeInt(m.pos)
-                binaryWriter.writeBoolean(m.placeholder != null)
-                if (m.placeholder != null) {
-                    binaryWriter.writeUTF(m.placeholder)
-                }
                 binaryWriter.writeBoolean(m.id != null)
                 if (m.id != null) {
                     binaryWriter.writeUTF(m.id)
                 }
-                binaryWriter.writeBoolean(m.addedDuringUpdate)
                 binaryWriter.writeBoolean(m.removeDuringHighlighting)
             }
         }
@@ -37,21 +32,15 @@ object AppBinarySerializer {
             val serializerVersionUsed = binaryReader.readInt()
             AppUtils.assert(serializerVersionUsed == SERIALIZER_VERSION)
             val markupCount = binaryReader.readInt()
-            (0 until markupCount).forEach {
+            repeat(markupCount) {
                 val tag = binaryReader.readUTF()
                 val pos = binaryReader.readInt()
-                val placeholderPresent = binaryReader.readBoolean()
-                val placeholder = if (!placeholderPresent) null else {
-                    binaryReader.readUTF()
-                }
                 val idPresent = binaryReader.readBoolean()
                 val id = if (!idPresent) null else {
                     binaryReader.readUTF()
                 }
-                val addedDuringUpdate = binaryReader.readBoolean()
                 val removeDuringHighlighting = binaryReader.readBoolean()
-                val m = VerseHighlighter.Markup(tag, pos, placeholder,
-                        id, addedDuringUpdate, removeDuringHighlighting)
+                val m = VerseHighlighter.Markup(tag, pos, id, removeDuringHighlighting)
                 markups.add(m)
             }
         }
@@ -78,7 +67,7 @@ object AppBinarySerializer {
             val serializerVersionUsed = binaryReader.readInt()
             AppUtils.assert(serializerVersionUsed == SERIALIZER_VERSION)
             val rangeCount = binaryReader.readInt()
-            (0 until rangeCount).forEach {
+            repeat(rangeCount) {
                 val startIndex = binaryReader.readInt()
                 val endIndex = binaryReader.readInt()
                 val m = HighlightRange(startIndex, endIndex)

@@ -13,6 +13,10 @@ class BookHighlighter(private val context: Context,
 
     private val TAG = javaClass.name
 
+    companion object {
+        const val MARKUP_ID_HIGHLIGHT = "highlight"
+    }
+
     // use shades of yellow in both day and night modes
     private val highlightColor = AppUtils.colorResToString(R.color.highlightColor, context)
 
@@ -41,10 +45,14 @@ class BookHighlighter(private val context: Context,
                         highlightRange.startIndex,
                         "<span style='background-color: $highlightColor'>", false
                 )
-                source.updateMarkup(
+                // ensure alpha channel addition.
+                val startSpanId = "$MARKUP_ID_HIGHLIGHT+FF${highlightColor.substring(1)}"
+                source.markupList[insertedStartSpanIdx].id = startSpanId
+                val endSpanIdx = source.updateMarkup(
                         highlightRange.endIndex,
                         "</span>", true
                 )
+                source.markupList[endSpanIdx].id = startSpanId.replaceFirst('+', '-')
             }
             catch (ex: Exception) {
                 if (BuildConfig.DEBUG) {
@@ -75,7 +83,9 @@ class BookHighlighter(private val context: Context,
     }
 
     fun getHighlightModeEditableMarkups(source: VerseHighlighter): List<VerseHighlighter.Markup>? {
-        val removableMarkups = source.markupList.filter { it.addedDuringUpdate || it.removeDuringHighlighting }
+        val removableMarkups = source.markupList.filter {
+            it.removeDuringHighlighting || it.id?.startsWith(MARKUP_ID_HIGHLIGHT) == true
+        }
         return if (removableMarkups.isEmpty()) null else removableMarkups
     }
 

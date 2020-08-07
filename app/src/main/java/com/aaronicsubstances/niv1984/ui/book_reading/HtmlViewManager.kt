@@ -1,8 +1,10 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.content.Context
+import android.graphics.Color
 import android.graphics.Rect
 import android.text.*
+import android.text.style.BackgroundColorSpan
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -11,11 +13,13 @@ import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import org.xml.sax.XMLReader
+import java.util.*
 
 class HtmlViewManager(private val context: Context): Html.TagHandler {
     private val TAG = javaClass.name
     val vPrefix = "verse_"
     val bPrefix = "block_"
+    val highlightTagPrefix = "highlight_"
 
     private val versePosMap = mutableMapOf<String, Pair<Int, Int>>()
     val verseBlockRanges = mutableListOf<VerseBlockHighlightRange>()
@@ -25,15 +29,32 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
     private var scrollHeightRange: Int = -1
     private val lineInfoList = mutableListOf<TextLineInfo>()
 
+    val highlightTagStartStack = LinkedList<Int>()
+
     override fun handleTag(
         opening: Boolean,
         tag: String,
         output: Editable,
         xmlReader: XMLReader
     ) {
-        if (tag == "hr") {
+        /*if (tag == "hr") {
             val hrColor = ContextCompat.getColor(context, R.color.dividerColor)
             handleHRTag(opening, output, hrColor)
+            return
+        }*/
+
+        if (tag.startsWith(highlightTagPrefix)) {
+            if (opening) {
+                highlightTagStartStack.push(output.length)
+            }
+            else {
+                val startPos = highlightTagStartStack.pop()
+                val highlightColourUsedWithoutHashButWithAlpha = tag.substring(highlightTagPrefix.length)
+                val translucentEquivalent = Color.parseColor("#44" +
+                        highlightColourUsedWithoutHashButWithAlpha.substring(2))
+                output.setSpan(BackgroundColorSpan(translucentEquivalent),
+                        startPos, output.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
             return
         }
 
@@ -66,7 +87,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         }
     }
 
-    private fun handleHRTag(opening: Boolean, output: Editable, color: Int) {
+    /*private fun handleHRTag(opening: Boolean, output: Editable, color: Int) {
         if (!opening) return
         val start = output.length
         // The space is necessary, the block requires some content:
@@ -75,7 +96,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
             CustomHRSpan(color, 5.0f, 2.0f),
             start, output.length, 0
         )
-    }
+    }*/
 
     fun reset() {
         // reset only text view related data, and leave
@@ -85,6 +106,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         htmlLayout = null
         lineInfoList.clear()
         lastVerseNumberSeen = 0
+        highlightTagStartStack.clear()
     }
 
     fun getVerseNumber(contentTf: TextView, scrollYPos: Int): Int {

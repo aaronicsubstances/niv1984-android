@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.data.BookHighlighter
 import com.aaronicsubstances.niv1984.data.SourceCodeTransformer
 import com.aaronicsubstances.niv1984.data.VerseHighlighter
 import com.aaronicsubstances.niv1984.models.*
@@ -304,7 +305,18 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                 transformer.addTransform("", m.pos, m.pos + m.tag.length)
             }
             else {
-                AppUtils.assert(m.addedDuringUpdate)
+                val mId = m.id as String
+                AppUtils.assert(mId.startsWith(BookHighlighter.MARKUP_ID_HIGHLIGHT))
+                val idSuffix = mId.substring(BookHighlighter.MARKUP_ID_HIGHLIGHT.length)
+                AppUtils.assert(idSuffix.length == 9) {
+                    "Unexpected highlight markup suffix: $idSuffix (from $m)"
+                }
+                var tempTag = "<"
+                if (idSuffix.startsWith("-")) {
+                    tempTag += "/"
+                }
+                tempTag += "${htmlViewManager.highlightTagPrefix}${idSuffix.substring(1)}>"
+                transformer.addTransform(tempTag, m.pos, m.pos + m.tag.length)
             }
         }
         return transformer.transformedText.toString()

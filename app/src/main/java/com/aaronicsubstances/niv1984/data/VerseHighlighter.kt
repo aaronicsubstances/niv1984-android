@@ -194,10 +194,10 @@ class VerseHighlighter {
     data class Markup(
         val tag: String,
         var pos: Int = 0,
+        var id: String? = null,
+        val removeDuringHighlighting: Boolean = false,
         val placeholder: String? = null,
-        val id: String? = null,
-        val addedDuringUpdate: Boolean = false,
-        val removeDuringHighlighting: Boolean = false
+        val addedDuringUpdate: Boolean = false
     )
 
     companion object {

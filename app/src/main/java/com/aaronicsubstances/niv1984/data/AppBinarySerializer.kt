@@ -4,7 +4,7 @@ import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import java.io.*
 
-object CustomBinarySerializer {
+object AppBinarySerializer {
     private const val SERIALIZER_VERSION = 1
 
     fun serializeMarkups(markups: List<VerseHighlighter.Markup>): ByteArray {

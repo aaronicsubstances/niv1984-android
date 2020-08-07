@@ -24,7 +24,7 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
 
     fun getZoomLevel(): Int {
         val defaultOpt = context.getString(R.string.pref_key_zoom)
-        val opt = loadPrefString(context.getString(R.string.pref_key_zoom), defaultOpt)
+        val opt = loadPrefString(context.getString(R.string.pref_default_zoom), defaultOpt)
         try {
             return Integer.parseInt(opt)
         }
@@ -35,7 +35,7 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
 
     fun getPreferredBibleVersions(): List<String> {
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
-        val defaultOpt = context.getString(R.string.pref_key_bible_versions)
+        val defaultOpt = context.getString(R.string.pref_default_bible_versions)
         val persistedValue = preferenceManager.getString(
                 context.getString(R.string.pref_key_bible_versions), defaultOpt) as String
         val codes = persistedValue.splitToSequence(" ").filter {

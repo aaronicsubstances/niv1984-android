@@ -58,11 +58,16 @@ class BookParserTest {
         runTest(::supplyTestWithEmptyContentAndBlockQuote)
     }
 
-    private fun runTest(supplier: ((MutableList<Chapter>) -> String)) {
+    @Test
+    fun testChapterSkipping() {
+        runTest(::supplyTestWithChapterIgnoreData, listOf(20, 30))
+    }
+
+    private fun runTest(supplier: ((MutableList<Chapter>) -> String), chapterNumbersToIgnore: List<Int>? = null) {
         val expectedResults = mutableListOf<Chapter>()
         val inputStream = supplier(expectedResults).byteInputStream()
         val instance = BookParser()
-        val actualResults = instance.parse(inputStream)
+        val actualResults = instance.parse(inputStream, chapterNumbersToIgnore)
         assertEquals(expectedResults, actualResults)
     }
 
@@ -330,5 +335,51 @@ class BookParserTest {
                 </verse>
             </chapter>
         </book>"""
+    }
+    
+    private fun supplyTestWithChapterIgnoreData(book: MutableList<Chapter>): String {
+        book.add(Chapter(17, listOf(
+            Verse(21, listOf(FancyContent(FancyContentKind.NONE, "")))
+        )))
+        book.add(Chapter(20, listOf()))
+        book.add(Chapter(25, listOf(
+            Verse(20, listOf(
+                BlockQuote(BlockQuoteKind.LEFT_INDENTED, listOf(
+                    WordsOfJesus(listOf(FancyContent(FancyContentKind.NONE, "He"))),
+                    FancyContent(FancyContentKind.NONE, " that is separated")))))
+        )))
+        book.add(Chapter(30, listOf()))
+        return """<book>
+            <chapter num="17">
+                <verse num="21">
+                    <content/>
+                </verse>
+            </chapter>
+            <chapter num="20">
+                <verse num="21">
+                    <content/>
+                </verse>
+            </chapter>
+            <chapter num="25">
+                <verse num="20">
+                    <block_quote kind="left_indented">
+                        <wj>
+                            <content>He</content>
+                        </wj>
+                        <content> that is separated</content>
+                    </block_quote>
+                </verse>
+            </chapter>
+            <chapter num="30">
+                <verse num="20">
+                    <block_quote kind="left_indented">
+                        <wj>
+                            <content>He</content>
+                        </wj>
+                        <content> that is separated</content>
+                    </block_quote>
+                </verse>
+            </chapter>
+        </book>"""    
     }
 }

@@ -32,7 +32,7 @@ class BookHighlighter(private val context: Context,
                     it.verseBlockIndex == verseBlockIndex
         }
         val blockHighlights = if (blockHighlightData == null) listOf() else {
-            CustomBinarySerializer.deserializeHighlightRanges(blockHighlightData.data)
+            AppBinarySerializer.deserializeHighlightRanges(blockHighlightData.data)
         }
         for (highlightRange in blockHighlights) {
             var insertedStartSpanIdx = -1
@@ -97,14 +97,14 @@ class BookHighlighter(private val context: Context,
                     it.verseBlockIndex == blockRange.verseBlockIndex
                 }
                 val existingHighlightRanges = if (existingBlockData == null) listOf() else
-                    CustomBinarySerializer.deserializeHighlightRanges(existingBlockData.data)
+                    AppBinarySerializer.deserializeHighlightRanges(existingBlockData.data)
                 val updated = if (removeHighlight) {
                     VerseHighlighter.removeHighlightRange(existingHighlightRanges, blockRange.range)
                 }
                 else {
                     VerseHighlighter.addHighlightRange(existingHighlightRanges, blockRange.range)
                 }
-                val serializedUpdate = CustomBinarySerializer.serializeHighlightRanges(updated)
+                val serializedUpdate = AppBinarySerializer.serializeHighlightRanges(updated)
                 val newBlockData = UserHighlightData(0,
                     bibleVersion,
                     bookNumber,

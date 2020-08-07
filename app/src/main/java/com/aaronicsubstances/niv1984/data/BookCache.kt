@@ -30,7 +30,7 @@ class BookCache(private val context: Context,
                 chapterIndices.add(Pair(runningChapterNumber, items.size))
             }
             val removableMarkups = cached.serializedHighlightModeRemovableMarkups?.let {
-                CustomBinarySerializer.deserializeMarkups(it)
+                AppBinarySerializer.deserializeMarkups(it)
             }
             val viewType = enumValueOf<BookDisplayItemViewType>(cached.serializedViewType)
             val blockQuoteKind = cached.serializedBlockQuoteKind?.let {enumValueOf<BookParser.BlockQuoteKind>(it) }
@@ -50,7 +50,7 @@ class BookCache(private val context: Context,
         val entries = mutableListOf<BookCacheEntry>()
         for (item in items) {
             var serializedRemovableMarkups = item.fullContent.highlightModeRemovableMarkups?.let {
-                CustomBinarySerializer.serializeMarkups(it)
+                AppBinarySerializer.serializeMarkups(it)
             }
             val cached = BookCacheEntry(0, groupId, CACHE_VERSION, entries.size,
                     item.viewType.toString(),

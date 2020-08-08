@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">NIV1984 Plus</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preferences -->
+    <string name="pref_key_zoom">zoomLevel</string>
+    <string name="pref_key_bible_versions">bible_versions</string>
+    <string name="pref_key_multiple_version_display">multiple_version_display</string>
+    <string name="pref_key_keep_screen_awake">screen_wake_option</string>
+    <string name="pref_default_zoom">100</string>
+    <string name="pref_default_bible_versions">niv1984 kjv1769</string>
+    <string name="pref_default_multiple_version_display">2</string>
+    <bool name="pref_default_keep_screen_awake">true</bool>
+
+    <string name="zoom_title">Bible Reading Text Zoom Level</string>
+    <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
+    <string name="multiple_version_display_default_value">1</string>
+    <string name="action_move_up">Move Up</string>
+    <string name="action_move_down">Move Down</string>
+    <string name="display_book_pref_instruction">Select a book version and use up/down buttons to push
+        the two(2) preferred bible versions to the top.\nThen click OK to confirm.</string>
+
+    <string name="tab_text_1">Books</string>
+    <string name="tab_text_2">Search</string>
+    <string name="chapter_widget_title">Chapters:</string>
+    <string name="screen_wake_option_title">Keep screen on during reading</string>
+    <string name="screen_wake_option_summary">Screen will still be turned off after 5 minutes of inactivity</string>
+    <string name="action_reset_to_default">Reset to Default</string>
+    <string name="label_search">Search</string>
+    <string name="search_pref_bible_label">Bible Version to search: <b>%s</b></string>
+    <string name="switchToPrefText">Switch To Preferred Versions</string>
+    <string name="highlight_mode_title"><![CDATA[ <b>%s</b> (Copy/Highlight mode) ]]></string>
+    <string name="search_result_mode_title"><![CDATA[ <b>%s</b> (Search Result) ]]></string>
+    <string name="bookmark_mode_title"><![CDATA[ <b>%1$s</b> (Bookmark: <i>%2$s</i>) ]]></string>
+    <string name="message_loading_in_progress"><![CDATA[ Loading <b>%s</b> ... ]]></string>
+    <string name="action_add_highlight">Highlight</string>
+    <string name="action_remove_highlight">Unhighlight</string>
+    <string name="action_chapter_switch">Change Chapter</string>
+    <string name="action_book_switch">Change Book</string>
+    <string name="action_enter_copy_mode">Enter Copy/Highlight Mode</string>
+    <string name="action_exit_copy_mode">Exit Copy/Highlight Mode</string>
+    <string name="message_highlight_mode_prohibited">Book loading in progress...</string>
+    <string name="message_no_highlightable_content">No highlightable content found in selection</string>
+</resources>

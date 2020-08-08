@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        app:key="@string/pref_key_zoom"
+        app:defaultValue="@string/pref_default_zoom"
+        app:entries="@array/zoom_entries"
+        app:entryValues="@array/zoom_values"
+        app:title="@string/zoom_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <com.aaronicsubstances.niv1984.ui.settings.DisplayBookPreference
+        android:key="@string/pref_key_bible_versions"
+        android:title="Preferred Bible Versions"
+        android:defaultValue="@string/pref_default_bible_versions"
+        android:positiveButtonText="ok"
+        android:negativeButtonText="cancel"
+        app:useSimpleSummaryProvider="true"/>
+
+    <ListPreference
+        app:key="@string/pref_key_multiple_version_display"
+        app:defaultValue="@string/pref_default_multiple_version_display"
+        app:entries="@array/multiple_version_display_entries"
+        app:entryValues="@array/multiple_version_display_values"
+        app:title="@string/multiple_version_display_title"
+        app:useSimpleSummaryProvider="true" />
+
+    <SwitchPreferenceCompat
+        android:key="@string/pref_key_keep_screen_awake"
+        android:title="@string/screen_wake_option_title"
+        android:summary="@string/screen_wake_option_summary"
+        android:defaultValue="@bool/pref_default_keep_screen_awake"/>
+</PreferenceScreen>

@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+    <chapter num="1">
+        <verse num="1">
+            <content>Paul, an apostle--sent not from men nor by man, but by Jesus Christ and God the Father, who raised him from the dead--</content>
+        </verse>
+        <verse num="2">
+            <content>and all the brothers with me, To the churches in Galatia: </content>
+        </verse>
+        <verse num="3">
+            <content>Grace and peace to you from God our Father and the Lord Jesus Christ,</content>
+        </verse>
+        <verse num="4">
+            <content>who gave himself for our sins to rescue us from the present evil age, according to the will of our God and Father,</content>
+        </verse>
+        <verse num="5">
+            <content>to whom be glory for ever and ever. Amen. </content>
+        </verse>
+        <verse num="6">
+            <content>I am astonished that you are so quickly deserting the one who called you by the grace of Christ and are turning to a different gospel--</content>
+        </verse>
+        <verse num="7">
+            <content>which is really no gospel at all. Evidently some people are throwing you into confusion and are trying to pervert the gospel of Christ.</content>
+        </verse>
+        <verse num="8">
+            <content>But even if we or an angel from heaven should preach a gospel other than the one we preached to you, let him be eternally condemned!</content>
+        </verse>
+        <verse num="9">
+            <content>As we have already said, so now I say again: If anybody is preaching to you a gospel other than what you accepted, let him be eternally condemned!</content>
+        </verse>
+        <verse num="10">
+            <content>Am I now trying to win the approval of men, or of God? Or am I trying to please men? If I were still trying to please men, I would not be a servant of Christ.</content>
+        </verse>
+        <verse num="11">
+            <content>I want you to know, brothers, that the gospel I preached is not something that man made up.</content>
+        </verse>
+        <verse num="12">
+            <content>I did not receive it from any man, nor was I taught it; rather, I received it by revelation from Jesus Christ.</content>
+        </verse>
+        <verse num="13">
+            <content>For you have heard of my previous way of life in Judaism, how intensely I persecuted the church of God and tried to destroy it.</content>
+        </verse>
+        <verse num="14">
+            <content>I was advancing in Judaism beyond many Jews of my own age and was extremely zealous for the traditions of my fathers.</content>
+        </verse>
+        <verse num="15">
+            <content>But when God, who set me apart from birth </content>
+            <note_ref>1</note_ref>
+            <content> and called me by his grace, was pleased</content>
+        </verse>
+        <verse num="16">
+            <content>to reveal his Son in me so that I might preach him among the Gentiles, I did not consult any man,</content>
+        </verse>
+        <verse num="17">
+            <content>nor did I go up to Jerusalem to see those who were apostles before I was, but I went immediately into Arabia and later returned to Damascus.</content>
+        </verse>
+        <verse num="18">
+            <content>Then after three years, I went up to Jerusalem to get acquainted with Peter </content>
+            <note_ref>2</note_ref>
+            <content> and stayed with him fifteen days.</content>
+        </verse>
+        <verse num="19">
+            <content>I saw none of the other apostles--only James, the Lord's brother.</content>
+        </verse>
+        <verse num="20">
+            <content>I assure you before God that what I am writing you is no lie.</content>
+        </verse>
+        <verse num="21">
+            <content>Later I went to Syria and Cilicia.</content>
+        </verse>
+        <verse num="22">
+            <content>I was personally unknown to the churches of Judea that are in Christ.</content>
+        </verse>
+        <verse num="23">
+            <content>They only heard the report: "The man who formerly persecuted us is now preaching the faith he once tried to destroy."</content>
+        </verse>
+        <verse num="24">
+            <content>And they praised God because of me.</content>
+        </verse>
+        <note num="1">
+            <content kind="REF_VERSE_START">15</content>
+            <content> Or </content>
+            <content kind="EM">from my mother's womb</content>
+        </note>
+        <note num="2">
+            <content kind="REF_VERSE_START">18</content>
+            <content> Greek </content>
+            <content kind="EM">Cephas</content>
+        </note>
+    </chapter>
+    <chapter num="2">
+        <verse num="1">
+            <content>Fourteen years later I went up again to Jerusalem, this time with Barnabas. I took Titus along also.</content>
+        </verse>
+        <verse num="2">
+            <content>I went in response to a revelation and set before them the gospel that I preach among the Gentiles. But I did this privately to those who seemed to be leaders, for fear that I was running or had run my race in vain.</content>
+        </verse>
+        <verse num="3">
+            <content>Yet not even Titus, who was with me, was compelled to be circumcised, even though he was a Greek.</content>
+        </verse>
+        <verse num="4">
+            <content>[This matter arose] because some false brothers had infiltrated our ranks to spy on the freedom we have in Christ Jesus and to make us slaves.</content>
+        </verse>
+        <verse num="5">
+            <content>We did not give in to them for a moment, so that the truth of the gospel might remain with you.</content>
+        </verse>
+        <verse num="6">
+            <content>As for those who seemed to be important--whatever they were makes no difference to me; God does not judge by external appearance--those men added nothing to my message.</content>
+        </verse>
+        <verse num="7">
+            <content>On the contrary, they saw that I had been entrusted with the task of preaching the gospel to the Gentiles, </content>
+            <note_ref>1</note_ref>
+            <content> just as Peter had been to the Jews. </content>
+            <note_ref>2</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="8">
+            <content>For God, who was at work in the ministry of Peter as an apostle to the Jews, was also at work in my ministry as an apostle to the Gentiles.</content>
+        </verse>
+        <verse num="9">
+            <content>James, Peter </content>
+            <note_ref>3</note_ref>
+            <content> and John, those reputed to be pillars, gave me and Barnabas the right hand of fellowship when they recognized the grace given to me. They agreed that we should go to the Gentiles, and they to the Jews.</content>
+        </verse>
+        <verse num="10">
+            <content>All they asked was that we should continue to remember the poor, the very thing I was eager to do.</content>
+        </verse>
+        <verse num="11">
+            <content>When Peter came to Antioch, I opposed him to his face, because he was clearly in the wrong.</content>
+        </verse>
+        <verse num="12">
+            <content>Before certain men came from James, he used to eat with the Gentiles. But when they arrived, he began to draw back and separate himself from the Gentiles because he was afraid of those who belonged to the circumcision group.</content>
+        </verse>
+        <verse num="13">
+            <content>The other Jews joined him in his hypocrisy, so that by their hypocrisy even Barnabas was led astray.</content>
+        </verse>
+        <verse num="14">
+            <content>When I saw that they were not acting in line with the truth of the gospel, I said to Peter in front of them all, "You are a Jew, yet you live like a Gentile and not like a Jew. How is it, then, that you force Gentiles to follow Jewish customs?</content>
+        </verse>
+        <verse num="15">
+            <content>"We who are Jews by birth and not `Gentile sinners'</content>
+        </verse>
+        <verse num="16">
+            <content>know that a man is not justified by observing the law, but by faith in Jesus Christ. So we, too, have put our faith in Christ Jesus that we may be justified by faith in Christ and not by observing the law, because by observing the law no one will be justified.</content>
+        </verse>
+        <verse num="17">
+            <content>"If, while we seek to be justified in Christ, it becomes evident that we ourselves are sinners, does that mean that Christ promotes sin? Absolutely not!</content>
+        </verse>
+        <verse num="18">
+            <content>If I rebuild what I destroyed, I prove that I am a lawbreaker.</content>
+        </verse>
+        <verse num="19">
+            <content>For through the law I died to the law so that I might live for God.</content>
+        </verse>
+        <verse num="20">
+            <content>I have been crucified with Christ and I no longer live, but Christ lives in me. The life I live in the body, I live by faith in the Son of God, who loved me and gave himself for me.</content>
+        </verse>
+        <verse num="21">
+            <content>I do not set aside the grace of God, for if righteousness could be gained through the law, Christ died for nothing!" </content>
+            <note_ref>4</note_ref>
+            <content> </content>
+        </verse>
+        <note num="1">
+            <content kind="REF_VERSE_START">7</content>
+            <content> Greek </content>
+            <content kind="EM">uncircumcised</content>
+        </note>
+        <note num="2">
+            <content kind="REF_VERSE_START">7</content>
+            <content> Greek </content>
+            <content kind="EM">circumcised</content>
+            <content>; also in verses 8 and 9</content>
+        </note>
+        <note num="3">
+            <content kind="REF_VERSE_START">9</content>
+            <content> Greek </content>
+            <content kind="EM">Cephas</content>
+            <content>; also in verses 11 and 14</content>
+        </note>
+        <note num="4">
+            <content kind="REF_VERSE_START">21</content>
+            <content> Some interpreters end the quotation after verse 14.</content>
+        </note>
+    </chapter>
+    <chapter num="3">
+        <verse num="1">
+            <content>You foolish Galatians! Who has bewitched you? Before your very eyes Jesus Christ was clearly portrayed as crucified.</content>
+        </verse>
+        <verse num="2">
+            <content>I would like to learn just one thing from you: Did you receive the Spirit by observing the law, or by believing what you heard?</content>
+        </verse>
+        <verse num="3">
+            <content>Are you so foolish? After beginning with the Spirit, are you now trying to attain your goal by human effort?</content>
+        </verse>
+        <verse num="4">
+            <content>Have you suffered so much for nothing--if it really was for nothing?</content>
+        </verse>
+        <verse num="5">
+            <content>Does God give you his Spirit and work miracles among you because you observe the law, or because you believe what you heard?</content>
+        </verse>
+        <verse num="6">
+            <content>Consider Abraham: "He believed God, and it was credited to him as righteousness." </content>
+            <note_ref>1</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="7">
+            <content>Understand, then, that those who believe are children of Abraham.</content>
+        </verse>
+        <verse num="8">
+            <content>The Scripture foresaw that God would justify the Gentiles by faith, and announced the gospel in advance to Abraham: "All nations will be blessed through you." </content>
+            <note_ref>2</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="9">
+            <content>So those who have faith are blessed along with Abraham, the man of faith.</content>
+        </verse>
+        <verse num="10">
+            <content>All who rely on observing the law are under a curse, for it is written: "Cursed is everyone who does not continue to do everything written in the Book of the Law." </content>
+            <note_ref>3</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="11">
+            <content>Clearly no one is justified before God by the law, because, "The righteous will live by faith." </content>
+            <note_ref>4</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="12">
+            <content>The law is not based on faith; on the contrary, "The man who does these things will live by them." </content>
+            <note_ref>5</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="13">
+            <content>Christ redeemed us from the curse of the law by becoming a curse for us, for it is written: "Cursed is everyone who is hung on a tree." </content>
+            <note_ref>6</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="14">
+            <content>He redeemed us in order that the blessing given to Abraham might come to the Gentiles through Christ Jesus, so that by faith we might receive the promise of the Spirit.</content>
+        </verse>
+        <verse num="15">
+            <content>Brothers, let me take an example from everyday life. Just as no one can set aside or add to a human covenant that has been duly established, so it is in this case.</content>
+        </verse>
+        <verse num="16">
+            <content>The promises were spoken to Abraham and to his seed. The Scripture does not say "and to seeds," meaning many people, but "and to your seed," </content>
+            <note_ref>7</note_ref>
+            <content> meaning one person, who is Christ.</content>
+        </verse>
+        <verse num="17">
+            <content>What I mean is this: The law, introduced 430 years later, does not set aside the covenant previously established by God and thus do away with the promise.</content>
+        </verse>
+        <verse num="18">
+            <content>For if the inheritance depends on the law, then it no longer depends on a promise; but God in his grace gave it to Abraham through a promise.</content>
+        </verse>
+        <verse num="19">
+            <content>What, then, was the purpose of the law? It was added because of transgressions until the Seed to whom the promise referred had come. The law was put into effect through angels by a mediator.</content>
+        </verse>
+        <verse num="20">
+            <content>A mediator, however, does not represent just one party; but God is one.</content>
+        </verse>
+        <verse num="21">
+            <content>Is the law, therefore, opposed to the promises of God? Absolutely not! For if a law had been given that could impart life, then righteousness would certainly have come by the law.</content>
+        </verse>
+        <verse num="22">
+            <content>But the Scripture declares that the whole world is a prisoner of sin, so that what was promised, being given through faith in Jesus Christ, might be given to those who believe.</content>
+        </verse>
+        <verse num="23">
+            <content>Before this faith came, we were held prisoners by the law, locked up until faith should be revealed.</content>
+        </verse>
+        <verse num="24">
+            <content>So the law was put in charge to lead us to Christ </content>
+            <note_ref>8</note_ref>
+            <content> that we might be justified by faith.</content>
+        </verse>
+        <verse num="25">
+            <content>Now that faith has come, we are no longer under the supervision of the law.</content>
+        </verse>
+        <verse num="26">
+            <content>You are all sons of God through faith in Christ Jesus,</content>
+        </verse>
+        <verse num="27">
+            <content>for all of you who were baptized into Christ have clothed yourselves with Christ.</content>
+        </verse>
+        <verse num="28">
+            <content>There is neither Jew nor Greek, slave nor free, male nor female, for you are all one in Christ Jesus.</content>
+        </verse>
+        <verse num="29">
+            <content>If you belong to Christ, then you are Abraham's seed, and heirs according to the promise.</content>
+        </verse>
+        <note num="1">
+            <content kind="REF_VERSE_START">6</content>
+            <content> Gen. 15:6</content>
+        </note>
+        <note num="2">
+            <content kind="REF_VERSE_START">8</content>
+            <content> Gen. 12:3; 18:18; 22:18</content>
+        </note>
+        <note num="3">
+            <content kind="REF_VERSE_START">10</content>
+            <content> Deut. 27:26</content>
+        </note>
+        <note num="4">
+            <content kind="REF_VERSE_START">11</content>
+            <content> Hab. 2:4</content>
+        </note>
+        <note num="5">
+            <content kind="REF_VERSE_START">12</content>
+            <content> Lev. 18:5</content>
+        </note>
+        <note num="6">
+            <content kind="REF_VERSE_START">13</content>
+            <content> Deut. 21:23</content>
+        </note>
+        <note num="7">
+            <content kind="REF_VERSE_START">16</content>
+            <content> Gen. 12:7; 13:15; 24:7</content>
+        </note>
+        <note num="8">
+            <content kind="REF_VERSE_START">24</content>
+            <content> Or </content>
+            <content kind="EM">charge until Christ came</content>
+        </note>
+    </chapter>
+    <chapter num="4">
+        <verse num="1">
+            <content>What I am saying is that as long as the heir is a child, he is no different from a slave, although he owns the whole estate.</content>
+        </verse>
+        <verse num="2">
+            <content>He is subject to guardians and trustees until the time set by his father.</content>
+        </verse>
+        <verse num="3">
+            <content>So also, when we were children, we were in slavery under the basic principles of the world.</content>
+        </verse>
+        <verse num="4">
+            <content>But when the time had fully come, God sent his Son, born of a woman, born under law,</content>
+        </verse>
+        <verse num="5">
+            <content>to redeem those under law, that we might receive the full rights of sons.</content>
+        </verse>
+        <verse num="6">
+            <content>Because you are sons, God sent the Spirit of his Son into our hearts, the Spirit who calls out, "Abba, </content>
+            <note_ref>1</note_ref>
+            <content> Father."</content>
+        </verse>
+        <verse num="7">
+            <content>So you are no longer a slave, but a son; and since you are a son, God has made you also an heir.</content>
+        </verse>
+        <verse num="8">
+            <content>Formerly, when you did not know God, you were slaves to those who by nature are not gods.</content>
+        </verse>
+        <verse num="9">
+            <content>But now that you know God--or rather are known by God--how is it that you are turning back to those weak and miserable principles? Do you wish to be enslaved by them all over again?</content>
+        </verse>
+        <verse num="10">
+            <content>You are observing special days and months and seasons and years!</content>
+        </verse>
+        <verse num="11">
+            <content>I fear for you, that somehow I have wasted my efforts on you.</content>
+        </verse>
+        <verse num="12">
+            <content>I plead with you, brothers, become like me, for I became like you. You have done me no wrong.</content>
+        </verse>
+        <verse num="13">
+            <content>As you know, it was because of an illness that I first preached the gospel to you.</content>
+        </verse>
+        <verse num="14">
+            <content>Even though my illness was a trial to you, you did not treat me with contempt or scorn. Instead, you welcomed me as if I were an angel of God, as if I were Christ Jesus himself.</content>
+        </verse>
+        <verse num="15">
+            <content>What has happened to all your joy? I can testify that, if you could have done so, you would have torn out your eyes and given them to me.</content>
+        </verse>
+        <verse num="16">
+            <content>Have I now become your enemy by telling you the truth?</content>
+        </verse>
+        <verse num="17">
+            <content>Those people are zealous to win you over, but for no good. What they want is to alienate you [from us], so that you may be zealous for them.</content>
+        </verse>
+        <verse num="18">
+            <content>It is fine to be zealous, provided the purpose is good, and to be so always and not just when I am with you.</content>
+        </verse>
+        <verse num="19">
+            <content>My dear children, for whom I am again in the pains of childbirth until Christ is formed in you,</content>
+        </verse>
+        <verse num="20">
+            <content>how I wish I could be with you now and change my tone, because I am perplexed about you!</content>
+        </verse>
+        <verse num="21">
+            <content>Tell me, you who want to be under the law, are you not aware of what the law says?</content>
+        </verse>
+        <verse num="22">
+            <content>For it is written that Abraham had two sons, one by the slave woman and the other by the free woman.</content>
+        </verse>
+        <verse num="23">
+            <content>His son by the slave woman was born in the ordinary way; but his son by the free woman was born as the result of a promise.</content>
+        </verse>
+        <verse num="24">
+            <content>These things may be taken figuratively, for the women represent two covenants. One covenant is from Mount Sinai and bears children who are to be slaves: This is Hagar.</content>
+        </verse>
+        <verse num="25">
+            <content>Now Hagar stands for Mount Sinai in Arabia and corresponds to the present city of Jerusalem, because she is in slavery with her children.</content>
+        </verse>
+        <verse num="26">
+            <content>But the Jerusalem that is above is free, and she is our mother.</content>
+        </verse>
+        <verse num="27">
+            <content>For it is written: "Be glad, O barren woman, who bears no children; break forth and cry aloud, you who have no labor pains; because more are the children of the desolate woman than of her who has a husband." </content>
+            <note_ref>2</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="28">
+            <content>Now you, brothers, like Isaac, are children of promise.</content>
+        </verse>
+        <verse num="29">
+            <content>At that time the son born in the ordinary way persecuted the son born by the power of the Spirit. It is the same now.</content>
+        </verse>
+        <verse num="30">
+            <content>But what does the Scripture say? "Get rid of the slave woman and her son, for the slave woman's son will never share in the inheritance with the free woman's son." </content>
+            <note_ref>3</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="31">
+            <content>Therefore, brothers, we are not children of the slave woman, but of the free woman.</content>
+        </verse>
+        <note num="1">
+            <content kind="REF_VERSE_START">6</content>
+            <content> Aramaic for </content>
+            <content kind="EM">Father</content>
+        </note>
+        <note num="2">
+            <content kind="REF_VERSE_START">27</content>
+            <content> Isaiah 54:1</content>
+        </note>
+        <note num="3">
+            <content kind="REF_VERSE_START">30</content>
+            <content> Gen. 21:10</content>
+        </note>
+    </chapter>
+    <chapter num="5">
+        <verse num="1">
+            <content>It is for freedom that Christ has set us free. Stand firm, then, and do not let yourselves be burdened again by a yoke of slavery.</content>
+        </verse>
+        <verse num="2">
+            <content>Mark my words! I, Paul, tell you that if you let yourselves be circumcised, Christ will be of no value to you at all.</content>
+        </verse>
+        <verse num="3">
+            <content>Again I declare to every man who lets himself be circumcised that he is obligated to obey the whole law.</content>
+        </verse>
+        <verse num="4">
+            <content>You who are trying to be justified by law have been alienated from Christ; you have fallen away from grace.</content>
+        </verse>
+        <verse num="5">
+            <content>But by faith we eagerly await through the Spirit the righteousness for which we hope.</content>
+        </verse>
+        <verse num="6">
+            <content>For in Christ Jesus neither circumcision nor uncircumcision has any value. The only thing that counts is faith expressing itself through love.</content>
+        </verse>
+        <verse num="7">
+            <content>You were running a good race. Who cut in on you and kept you from obeying the truth?</content>
+        </verse>
+        <verse num="8">
+            <content>That kind of persuasion does not come from the one who calls you.</content>
+        </verse>
+        <verse num="9">
+            <content>"A little yeast works through the whole batch of dough."</content>
+        </verse>
+        <verse num="10">
+            <content>I am confident in the Lord that you will take no other view. The one who is throwing you into confusion will pay the penalty, whoever he may be.</content>
+        </verse>
+        <verse num="11">
+            <content>Brothers, if I am still preaching circumcision, why am I still being persecuted? In that case the offense of the cross has been abolished.</content>
+        </verse>
+        <verse num="12">
+            <content>As for those agitators, I wish they would go the whole way and emasculate themselves!</content>
+        </verse>
+        <verse num="13">
+            <content>You, my brothers, were called to be free. But do not use your freedom to indulge the sinful nature </content>
+            <note_ref>1</note_ref>
+            <content> ; rather, serve one another in love.</content>
+        </verse>
+        <verse num="14">
+            <content>The entire law is summed up in a single command: "Love your neighbor as yourself." </content>
+            <note_ref>2</note_ref>
+            <content> </content>
+        </verse>
+        <verse num="15">
+            <content>If you keep on biting and devouring each other, watch out or you will be destroyed by each other.</content>
+        </verse>
+        <verse num="16">
+            <content>So I say, live by the Spirit, and you will not gratify the desires of the sinful nature.</content>
+        </verse>
+        <verse num="17">
+            <content>For the sinful nature desires what is contrary to the Spirit, and the Spirit what is contrary to the sinful nature. They are in conflict with each other, so that you do not do what you want.</content>
+        </verse>
+        <verse num="18">
+            <content>But if you are led by the Spirit, you are not under law.</content>
+        </verse>
+        <verse num="19">
+            <content>The acts of the sinful nature are obvious: sexual immorality, impurity and debauchery;</content>
+        </verse>
+        <verse num="20">
+            <content>idolatry and witchcraft; hatred, discord, jealousy, fits of rage, selfish ambition, dissensions, factions</content>
+        </verse>
+        <verse num="21">
+            <content>and envy; drunkenness, orgies, and the like. I warn you, as I did before, that those who live like this will not inherit the kingdom of God.</content>
+        </verse>
+        <verse num="22">
+            <content>But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faithfulness,</content>
+        </verse>
+        <verse num="23">
+            <content>gentleness and self-control. Against such things there is no law.</content>
+        </verse>
+        <verse num="24">
+            <content>Those who belong to Christ Jesus have crucified the sinful nature with its passions and desires.</content>
+        </verse>
+        <verse num="25">
+            <content>Since we live by the Spirit, let us keep in step with the Spirit.</content>
+        </verse>
+        <verse num="26">
+            <content>Let us not become conceited, provoking and envying each other.</content>
+        </verse>
+        <note num="1">
+            <content kind="REF_VERSE_START">13</content>
+            <content> Or </content>
+            <content kind="EM">the flesh</content>
+            <content>; also in verses 16, 17, 19 and 24</content>
+        </note>
+        <note num="2">
+            <content kind="REF_VERSE_START">14</content>
+            <content> Lev. 19:18</content>
+        </note>
+    </chapter>
+    <chapter num="6">
+        <verse num="1">
+            <content>Brothers, if someone is caught in a sin, you who are spiritual should restore him gently. But watch yourself, or you also may be tempted.</content>
+        </verse>
+        <verse num="2">
+            <content>Carry each other's burdens, and in this way you will fulfill the law of Christ.</content>
+        </verse>
+        <verse num="3">
+            <content>If anyone thinks he is something when he is nothing, he deceives himself.</content>
+        </verse>
+        <verse num="4">
+            <content>Each one should test his own actions. Then he can take pride in himself, without comparing himself to somebody else,</content>
+        </verse>
+        <verse num="5">
+            <content>for each one should carry his own load.</content>
+        </verse>
+        <verse num="6">
+            <content>Anyone who receives instruction in the word must share all good things with his instructor.</content>
+        </verse>
+        <verse num="7">
+            <content>Do not be deceived: God cannot be mocked. A man reaps what he sows.</content>
+        </verse>
+        <verse num="8">
+            <content>The one who sows to please his sinful nature, from that nature </content>
+            <note_ref>1</note_ref>
+            <content> will reap destruction; the one who sows to please the Spirit, from the Spirit will reap eternal life.</content>
+        </verse>
+        <verse num="9">
+            <content>Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.</content>
+        </verse>
+        <verse num="10">
+            <content>Therefore, as we have opportunity, let us do good to all people, especially to those who belong to the family of believers.</content>
+        </verse>
+        <verse num="11">
+            <content>See what large letters I use as I write to you with my own hand!</content>
+        </verse>
+        <verse num="12">
+            <content>Those who want to make a good impression outwardly are trying to compel you to be circumcised. The only reason they do this is to avoid being persecuted for the cross of Christ.</content>
+        </verse>
+        <verse num="13">
+            <content>Not even those who are circumcised obey the law, yet they want you to be circumcised that they may boast about your flesh.</content>
+        </verse>
+        <verse num="14">
+            <content>May I never boast except in the cross of our Lord Jesus Christ, through which </content>
+            <note_ref>2</note_ref>
+            <content> the world has been crucified to me, and I to the world.</content>
+        </verse>
+        <verse num="15">
+            <content>Neither circumcision nor uncircumcision means anything; what counts is a new creation.</content>
+        </verse>
+        <verse num="16">
+            <content>Peace and mercy to all who follow this rule, even to the Israel of God.</content>
+        </verse>
+        <verse num="17">
+            <content>Finally, let no one cause me trouble, for I bear on my body the marks of Jesus.</content>
+        </verse>
+        <verse num="18">
+            <content>The grace of our Lord Jesus Christ be with your spirit, brothers. Amen. </content>
+        </verse>
+        <note num="1">
+            <content kind="REF_VERSE_START">8</content>
+            <content> Or </content>
+            <content kind="EM">his flesh, from the flesh</content>
+        </note>
+        <note num="2">
+            <content kind="REF_VERSE_START">14</content>
+            <content> Or </content>
+            <content kind="EM">whom</content>
+        </note>
+    </chapter>
+</book>

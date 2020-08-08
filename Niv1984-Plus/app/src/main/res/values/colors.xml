@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="testColor">#12345678</color>
+
+    <color name="dividerColor">#aaaaaa</color>
+    <color name="wjColor">#cf352e</color>
+    <color name="highlightColor">#FFD300</color>
+    <color name="letterTextColor">@android:color/white</color>
+    <color name="letter_00">@android:color/black</color>
+    <color name="bibleReadingTextColor">@android:color/black</color>
+
+    <!--<color name="letter_01">#d61e25</color>-->
+    <color name="letter_01">#d8648b</color>
+    <color name="letter_02">#7d3fa4</color>
+    <color name="letter_03">#4856af</color>
+    <!--<color name="letter_04">#4c8ad0</color>
+    <color name="letter_05">#46c09d</color>-->
+    <color name="letter_04">#9baaf3</color>
+    <color name="letter_05">#05fa12</color>
+    <color name="letter_06">#6ac52f</color>
+    <color name="letter_07">#f9d506</color>
+    <!--<color name="letter_08">#f25b19</color>-->
+    <color name="letter_08">#1defd7</color>
+    <color name="letter_09">#84154d</color>
+    <!--<color name="letter_10">#342f8c</color>
+    <color name="letter_11">#2746a1</color>
+    <color name="letter_12">#215d63</color>
+    <color name="letter_13">#255b2a</color>-->
+    <color name="letter_10">#010271</color>
+    <color name="letter_11">#5f27f7</color>
+    <color name="letter_12">#f66c57</color>
+    <color name="letter_13">#d9800d</color>
+    <color name="letter_14">#787422</color>
+    <!--<color name="letter_15">#d8105f</color>
+    <color name="letter_16">#e6411f</color>
+    <color name="letter_17">#ef3034</color>-->
+    <color name="letter_15">#ea9fff</color>
+    <color name="letter_16">#33dfa2</color>
+    <color name="letter_17">#88df9c</color>
+    <color name="letter_18">#8b2b99</color>
+    <!--<color name="letter_19">#444ca8</color>-->
+    <color name="letter_19">#02b3a1</color>
+    <color name="letter_20">#54a6e0</color>
+    <!--<color name="letter_21">#339a88</color>-->
+    <color name="letter_21">#129525</color>
+    <color name="letter_22">#7eca35</color>
+    <!--<color name="letter_23">#f8a20e</color>
+    <color name="letter_24">#f04526</color>-->
+    <color name="letter_23">#f4a589</color>
+    <color name="letter_24">#ca085f</color>
+    <color name="letter_25">#5b7a8b</color>
+    <color name="letter_26">#8f66ba</color>
+</resources>

@@ -56,4 +56,7 @@
     <string name="action_exit_copy_mode">Exit Copy/Highlight Mode</string>
     <string name="message_highlight_mode_prohibited">Book loading in progress...</string>
     <string name="message_no_highlightable_content">No highlightable content found in selection</string>
+    <string name="dialog_title_change_chapter">Change Chapter</string>
+    <string name="dialog_title_change_book">Change Book</string>
+    <integer name="chapterSelectionGridColumnCount">3</integer>
 </resources>

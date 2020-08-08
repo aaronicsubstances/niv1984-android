@@ -176,10 +176,11 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
             AppUtils.showShortToast(context, "$vKey -> top line for $vStart not found in list")
             return
         }
-        if (bottomLineIndex == -1) {
+        // once gave -1 even though topLineIndex was found.
+        /*if (bottomLineIndex == -1) {
             AppUtils.showShortToast(context, "$vKey -> bottom line for $vEnd not found in list")
             return
-        }
+        }*/
 
         val vTopLineInfo = lineInfoList[topLineIndex]
         /*val vBottomLineInfo = lineInfoList[bottomLineIndex]

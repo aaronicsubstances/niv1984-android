@@ -1,6 +1,7 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
@@ -68,6 +69,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     private var highlightHelper: HighlightModeHelper? = null
     private var screenAwakeHelper: KeepScreenAwakeHelper? = null
     private var loadProgessReporter: LoadProgressReporter? = null
+    private var bookOrChapterSwitchHandler: BookOrChapterSwitchHandler? = null
 
     @Inject
     internal lateinit var sharedPrefMgr: SharedPrefManager
@@ -182,12 +184,24 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 highlightHelper?.exitHighlightMode()
                 true
             }
+            R.id.action_chapter_switch -> {
+                bookOrChapterSwitchHandler?.startChapterSelection(viewModel!!.currLocChapterNumber)
+                true
+            }
+            R.id.action_book_switch -> {
+                bookOrChapterSwitchHandler?.startBookSelection()
+                true
+            }
             R.id.action_settings -> {
                 CommonMenuActionProcessor.launchSettings(requireContext())
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        bookOrChapterSwitchHandler?.onActivityResultFromFragment(requestCode, resultCode, data)
     }
 
     override fun onCreateView(
@@ -231,7 +245,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                ): T {
                    assert(listenerCls == View.OnClickListener::class.java)
                    return View.OnClickListener {
-                       goToChapter(getItemPosition(viewHolder))
+                       goToChapter(getItemPosition(viewHolder) + 1)
                    } as T
                }
            })
@@ -272,8 +286,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             openBookForReading(2)
         }
         switchToPrefBtn.setOnClickListener { _ ->
-            bookLoadRequestListener?.onBookLoadRequest(
-                bookNumber, viewModel.currLocChapterNumber, viewModel.currLocVerseNumber)
+            goToBook(bookNumber, viewModel.currLocChapterNumber, viewModel.currLocVerseNumber)
         }
 
         viewModel.loadProgressLiveData.observeProperAsEvent(viewLifecycleOwner,
@@ -320,6 +333,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         openBookForReading(null)
 
         screenAwakeHelper = KeepScreenAwakeHelper(this, sharedPrefMgr.getShouldKeepScreenOn())
+        bookOrChapterSwitchHandler = BookOrChapterSwitchHandler(this)
         highlightHelper = HighlightModeHelper(this, savedInstanceState)
 
         // ensure observation occurs after openBookForReading so that on
@@ -373,20 +387,22 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         screenAwakeHelper?.onResume()
     }
 
+    fun getEffectiveTitle(): String {
+        val bibleVersionIndexToUse = if (highlightHelper?.inHighlightMode == true) {
+            highlightHelper!!.specificBibleVersionIndex
+        } else if (bibleVersionIndex == 1) {
+            1
+        } else {
+            0
+        }
+        val bookDescription = AppConstants.bibleVersions.getValue(
+            bibleVersions[bibleVersionIndexToUse]).bookNames[bookNumber - 1]
+        return bookDescription
+    }
+
     fun syncViewWithDataContext(loading: Boolean = false) {
         // reset book description.
-        run {
-            val bibleVersionIndexToUse = if (highlightHelper?.inHighlightMode == true) {
-                highlightHelper!!.specificBibleVersionIndex
-            } else if (bibleVersionIndex == 1) {
-                1
-            } else {
-                0
-            }
-            val bookDescription = AppConstants.bibleVersions.getValue(
-                    bibleVersions[bibleVersionIndexToUse]).bookNames[bookNumber - 1]
-            titleTextView.text = bookDescription
-        }
+        titleTextView.text = getEffectiveTitle()
 
         // now reset overlay panel
         val pinnedVersions = bibleVersions.filterIndexed { i, _ ->
@@ -497,12 +513,16 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 model.isNightMode == isNightMode
     }
 
-    private fun goToChapter(chapterIdx: Int) {
+    fun goToBook(newBookNumber: Int, chapterNumber: Int, verseNumber: Int) {
+        bookLoadRequestListener?.onBookLoadRequest(newBookNumber, chapterNumber, verseNumber)
+    }
+
+    fun goToChapter(chapterNumber: Int) {
         viewModel.lastLoadResult?.let {
-            val chapterStartPos = it.chapterIndices[chapterIdx]
+            val chapterStartPos = it.chapterIndices[chapterNumber - 1]
             scrollBook(chapterStartPos)
-            syncChapterWidget(chapterIdx, true)
-            viewModel.updateSystemBookmarks(chapterIdx + 1, 0,
+            syncChapterWidget(chapterNumber - 1, true)
+            viewModel.updateSystemBookmarks(chapterNumber, 0,
                 BookDisplayItemViewType.TITLE, chapterStartPos)
             highlightHelper?.onChapterChanged()
         }

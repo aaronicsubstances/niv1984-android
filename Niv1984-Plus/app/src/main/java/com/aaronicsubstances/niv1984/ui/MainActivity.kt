@@ -32,10 +32,12 @@ class MainActivity : AppCompatActivity(),
         SearchResponseFragment.SearchResultSelectionListener {
 
     companion object {
-        private const val FRAG_ID_BOOK_LIST = "MainActivity.bookList"
-        private const val FRAG_ID_BOOK_LOAD = "MainActivity.bookLoad"
-        private const val FRAG_ID_SEARCH_REQUEST = "MainActivity.searchRequest"
-        private const val FRAG_ID_SEARCH_RESPONSE = "MainActivity.searchResponse"
+        private const val FRAG_TAG_BOOK_LIST = "MainActivity.bookList"
+        private const val FRAG_TAG_BOOK_LOAD = "MainActivity.bookLoad"
+        private const val FRAG_TAG_SEARCH_REQUEST = "MainActivity.searchRequest"
+        private const val FRAG_TAG_SEARCH_RESPONSE = "MainActivity.searchResponse"
+        const val FRAG_TAG_CHAPTER_SEL = "MainActivity.bookLoad.chapterSel"
+        const val FRAG_TAG_BOOK_SEL = "MainActivity.bookLoad.bookSel"
         private const val STATE_KEY_SELECTED_TAB_POS = "MainActivity.selectedTabPosition"
     }
 
@@ -106,9 +108,9 @@ class MainActivity : AppCompatActivity(),
     private fun createInitialFragments() {
         val ft = supportFragmentManager.beginTransaction()
         val initialHomeFrag = BookListFragment.newInstance()
-        ft.add(R.id.container, initialHomeFrag, FRAG_ID_BOOK_LIST)
+        ft.add(R.id.container, initialHomeFrag, FRAG_TAG_BOOK_LIST)
         val initialSearchFrag = SearchRequestFragment.newInstance()
-        ft.add(R.id.container, initialSearchFrag, FRAG_ID_SEARCH_REQUEST)
+        ft.add(R.id.container, initialSearchFrag, FRAG_TAG_SEARCH_REQUEST)
         ft.hide(initialSearchFrag)
         ft.commit()
     }
@@ -120,18 +122,18 @@ class MainActivity : AppCompatActivity(),
 
     private fun dealWithTabSwitch(isHomeTab: Boolean, ft: FragmentTransaction?,
                                   inFlightFragments: Map<String, Fragment?>?) {
-        val bookListFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LIST)!!
-        val searchReqFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_REQUEST)!!
+        val bookListFrag = supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LIST)!!
+        val searchReqFrag = supportFragmentManager.findFragmentByTag(FRAG_TAG_SEARCH_REQUEST)!!
 
-        val bookLoadFrag = (if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) == true) {
-            inFlightFragments[FRAG_ID_BOOK_LOAD]
+        val bookLoadFrag = (if (inFlightFragments?.containsKey(FRAG_TAG_BOOK_LOAD) == true) {
+            inFlightFragments[FRAG_TAG_BOOK_LOAD]
         } else {
-            supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
+            supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)
         }) as BookLoadFragment?
-        val searchResFrag = if (inFlightFragments?.containsKey(FRAG_ID_SEARCH_RESPONSE) == true) {
-            inFlightFragments[FRAG_ID_SEARCH_RESPONSE]
+        val searchResFrag = if (inFlightFragments?.containsKey(FRAG_TAG_SEARCH_RESPONSE) == true) {
+            inFlightFragments[FRAG_TAG_SEARCH_RESPONSE]
         } else {
-            supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_RESPONSE)
+            supportFragmentManager.findFragmentByTag(FRAG_TAG_SEARCH_RESPONSE)
         }
 
         (ft ?: supportFragmentManager.beginTransaction()).apply {
@@ -143,7 +145,7 @@ class MainActivity : AppCompatActivity(),
                 else {
                     show(bookListFrag)
                 }
-                if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) != true) {
+                if (inFlightFragments?.containsKey(FRAG_TAG_BOOK_LOAD) != true) {
                     bookLoadFrag?.onCustomResume()
                 }
 
@@ -160,7 +162,7 @@ class MainActivity : AppCompatActivity(),
                 }
                 hide(bookListFrag)
                 bookLoadFrag?.let { hide(it) }
-                if (inFlightFragments?.containsKey(FRAG_ID_BOOK_LOAD) != true) {
+                if (inFlightFragments?.containsKey(FRAG_TAG_BOOK_LOAD) != true) {
                     bookLoadFrag?.onCustomPause()
                 }
             }
@@ -170,24 +172,24 @@ class MainActivity : AppCompatActivity(),
 
     override fun onBookLoadRequest(bookNumber: Int, chapterNumber: Int, verseNumber: Int) {
         val ft = supportFragmentManager.beginTransaction()
-        supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)?.let { ft.remove(it) }
+        supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)?.let { ft.remove(it) }
         val bookLoadFrag = BookLoadFragment.newInstance(bookNumber, chapterNumber, verseNumber)
-        ft.add(R.id.container, bookLoadFrag, FRAG_ID_BOOK_LOAD)
-        dealWithTabSwitch(true, ft, mapOf(FRAG_ID_BOOK_LOAD to bookLoadFrag))
+        ft.add(R.id.container, bookLoadFrag, FRAG_TAG_BOOK_LOAD)
+        dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
     }
 
     override fun onProcessSearchRequest(f: SearchResponseFragment) {
         val ft = supportFragmentManager.beginTransaction()
-        ft.add(R.id.container, f, FRAG_ID_SEARCH_RESPONSE)
-        dealWithTabSwitch(false, ft, mapOf(FRAG_ID_SEARCH_RESPONSE to f))
+        ft.add(R.id.container, f, FRAG_TAG_SEARCH_RESPONSE)
+        dealWithTabSwitch(false, ft, mapOf(FRAG_TAG_SEARCH_RESPONSE to f))
     }
 
     override fun onSearchResultSelected(searchResult: SearchResult) {
         val ft = supportFragmentManager.beginTransaction()
-        supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)?.let { ft.remove(it) }
+        supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)?.let { ft.remove(it) }
         val bookLoadFrag = BookLoadFragment.newInstance(searchResult)
-        ft.add(R.id.container, bookLoadFrag, FRAG_ID_BOOK_LOAD)
-        dealWithTabSwitch(true, ft, mapOf(FRAG_ID_BOOK_LOAD to bookLoadFrag))
+        ft.add(R.id.container, bookLoadFrag, FRAG_TAG_BOOK_LOAD)
+        dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
 
         // select tab, but don't trigger dealWithTabSwitch again.
         tabs.removeOnTabSelectedListener(tabSelectionListener)
@@ -200,7 +202,7 @@ class MainActivity : AppCompatActivity(),
      * and BookLoadFragment after rotation, hence this direct handling.
      */
     private fun backPressIntercepted(): Boolean {
-        val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
+        val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)
         if (bookLoadFrag != null) {
             bookLoadFrag as BookLoadFragment
             if (bookLoadFrag.handleBackPress()) {
@@ -208,20 +210,20 @@ class MainActivity : AppCompatActivity(),
             }
         }
         if (tabs.selectedTabPosition == 0) {
-            val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
+            val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)
             if (bookLoadFrag != null) {
                 val ft = supportFragmentManager.beginTransaction()
                 ft.remove(bookLoadFrag)
-                dealWithTabSwitch(true, ft, mapOf(FRAG_ID_BOOK_LOAD to null))
+                dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to null))
                 return true
             }
         }
         else {
-            val searchResFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_RESPONSE)
+            val searchResFrag = supportFragmentManager.findFragmentByTag(FRAG_TAG_SEARCH_RESPONSE)
             if (searchResFrag != null) {
                 val ft = supportFragmentManager.beginTransaction()
                 ft.remove(searchResFrag)
-                dealWithTabSwitch(false, ft, mapOf(FRAG_ID_SEARCH_RESPONSE to null))
+                dealWithTabSwitch(false, ft, mapOf(FRAG_TAG_SEARCH_RESPONSE to null))
             }
             else {
                 tabs.getTabAt(0)!!.select()
@@ -252,12 +254,12 @@ class MainActivity : AppCompatActivity(),
             return
         }
         val interestedFrags = mutableListOf<PrefListenerFragment>()
-        (supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LIST)
+        (supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LIST)
                 as PrefListenerFragment?)?.let { interestedFrags.add(it) }
-        (supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_REQUEST)
+        (supportFragmentManager.findFragmentByTag(FRAG_TAG_SEARCH_REQUEST)
                 as PrefListenerFragment?)?.let { interestedFrags.add(it) }
 
-        val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_BOOK_LOAD)
+        val bookLoadFrag = supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)
                 as PrefListenerFragment?
         //val searchResFrag = supportFragmentManager.findFragmentByTag(FRAG_ID_SEARCH_RESPONSE)
         //      as PrefListenerFragment?

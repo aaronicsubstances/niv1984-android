@@ -2,20 +2,76 @@ package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.app.Activity
 import android.content.Intent
+import android.view.View
+import android.widget.ImageButton
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.dialogs.BookSelectionDialog
 import com.aaronicsubstances.niv1984.ui.dialogs.ChapterSelectionDialog
 import com.aaronicsubstances.niv1984.utils.AppConstants
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.list.listItemsSingleChoice
+import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class BookOrChapterSwitchHandler(private val fragment: BookLoadFragment) {
+
     companion object {
         const val INTENT_EXTRA_BOOK_SELECTION = "selectedBookNumber"
         const val INTENT_EXTRA_CHAPTER_SELECTION = "selectedChapterNumber"
         private const val REQUEST_CODE_CHAPTER_SELECTED = 1
         private const val REQUEST_CODE_BOOK_SELECTED = 2
+    }
+
+    init {
+        val root = fragment.requireView()
+        val prevChapButton = root.findViewById<ImageButton>(R.id.prevChapButton)
+        val nextChapButton = root.findViewById<ImageButton>(R.id.nextChapButton)
+        val prevBookPresentButton = root.findViewById<ImageButton>(R.id.prevBookPresent)
+        val nextBookPresentButton = root.findViewById<ImageButton>(R.id.nextBookPresent)
+        val prevBookAbsentButton = root.findViewById<ImageButton>(R.id.prevBookAbsent)
+        val nextBookAbsentButton = root.findViewById<ImageButton>(R.id.nextBookAbsent)
+
+        val prevBookPresent = fragment.bookNumber > 1
+        val nextBookPresent = fragment.bookNumber < AppConstants.BIBLE_BOOK_COUNT
+        prevBookPresentButton.visibility = if (prevBookPresent) View.VISIBLE else View.GONE
+        prevBookAbsentButton.visibility = if (!prevBookPresent) View.VISIBLE else View.GONE
+        nextBookPresentButton.visibility = if (nextBookPresent) View.VISIBLE else View.GONE
+        nextBookAbsentButton.visibility = if (!nextBookPresent) View.VISIBLE else View.GONE
+
+        prevBookPresentButton.setOnClickListener {
+            fragment.goToBook(fragment.bookNumber - 1, 0, 0)
+        }
+        nextBookPresentButton.setOnClickListener {
+            fragment.goToBook(fragment.bookNumber + 1, 0, 0)
+        }
+
+        prevBookAbsentButton.setOnClickListener {
+            AppUtils.showShortToast(fragment.context, fragment.getString(
+                R.string.message_already_at_first_book))
+        }
+        nextBookAbsentButton.setOnClickListener {
+            AppUtils.showShortToast(fragment.context, fragment.getString(
+                R.string.message_already_at_last_book))
+        }
+
+        prevChapButton.setOnClickListener {
+            val prevChapter = fragment.viewModel.currLocChapterNumber - 1
+            if (prevChapter < 1) {
+                AppUtils.showShortToast(fragment.context, fragment.getString(
+                    R.string.message_already_at_first_chapter))
+            }
+            else {
+                fragment.goToChapter(prevChapter)
+            }
+        }
+        nextChapButton.setOnClickListener {
+            val nextChapter = fragment.viewModel.currLocChapterNumber + 1
+            if (nextChapter > AppConstants.BIBLE_BOOK_CHAPTER_COUNT[fragment.bookNumber - 1]) {
+                AppUtils.showShortToast(fragment.context, fragment.getString(
+                    R.string.message_already_at_last_chapter))
+            }
+            else {
+                fragment.goToChapter(nextChapter)
+            }
+        }
     }
 
     fun startChapterSelection(selectedChapterNumber: Int) {

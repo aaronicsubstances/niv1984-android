@@ -37,7 +37,6 @@
 
     <string name="tab_text_1">Books</string>
     <string name="tab_text_2">Search</string>
-    <string name="chapter_widget_title">Chapters:</string>
     <string name="screen_wake_option_title">Keep screen on during reading</string>
     <string name="screen_wake_option_summary">Screen will still be turned off after 5 minutes of inactivity</string>
     <string name="action_reset_to_default">Reset to Default</string>
@@ -58,5 +57,9 @@
     <string name="message_no_highlightable_content">No highlightable content found in selection</string>
     <string name="dialog_title_change_chapter">Change Chapter</string>
     <string name="dialog_title_change_book">Change Book</string>
+    <string name="message_already_at_first_chapter">Currently in first chapter</string>
+    <string name="message_already_at_last_chapter">Currently in last chapter</string>
+    <string name="message_already_at_first_book">Currently in first book</string>
+    <string name="message_already_at_last_book">Currently in last book</string>
     <integer name="chapterSelectionGridColumnCount">3</integer>
 </resources>

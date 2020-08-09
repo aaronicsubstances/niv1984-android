@@ -7,16 +7,52 @@
     android:layout_height="match_parent"
     tools:context="com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment">
 
-    <TextView
-        android:id="@+id/bookDescription"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/bookTitlePanel"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:padding="8dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/prevBookPresent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:srcCompat="@drawable/ic_chevron_left_24dp"/>
+        <ImageButton
+            android:id="@+id/prevBookAbsent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            app:srcCompat="@drawable/ic_first_page_24dp"/>
+        <TextView
+            android:id="@+id/bookDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:gravity="center"/>
+        <ImageButton
+            android:id="@+id/nextBookPresent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            app:srcCompat="@drawable/ic_chevron_right_24dp"/>
+        <ImageButton
+            android:id="@+id/nextBookAbsent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            app:srcCompat="@drawable/ic_last_page_24dp"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/chapterViewPanel"
@@ -24,21 +60,31 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        app:layout_constraintWidth_default="wrap"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bookDescription">
+        app:layout_constraintTop_toBottomOf="@id/bookTitlePanel">
 
-        <TextView
-            android:padding="8dp"
+        <ImageButton
+            android:id="@+id/prevChapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/chapter_widget_title"/>
+            android:layout_marginLeft="8dp"
+            app:srcCompat="@drawable/ic_chevron_left_24dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chapterView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/nextChapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            app:srcCompat="@drawable/ic_chevron_right_24dp"/>
     </LinearLayout>
 
     <com.aaronicsubstances.niv1984.ui.book_reading.HtmlScrollView

@@ -28,6 +28,9 @@ android {
         sourceSets {
             androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
         }
+        vectorDrawables {
+            useSupportLibrary = true
+        }
     }
     buildTypes {
         debug {

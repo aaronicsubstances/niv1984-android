@@ -15,9 +15,10 @@ import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.utils.BookParser
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.aaronicsubstances.niv1984.utils.BookParser
+import me.saket.bettermovementmethod.BetterLinkMovementMethod
 
 class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
 
@@ -26,6 +27,8 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
     var displayMultipleSideBySide: Boolean = false
     var isNightMode: Boolean = false
     var zoomLevel: Int = 100
+
+    var bookReadingEventListener: BookReadingEventListener? = null
 
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal
@@ -146,6 +149,18 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
                 }
             }
             itemContent.html = AppUtils.parseHtml(prependText + itemContent.text)
+            textView.movementMethod = BetterLinkMovementMethod.newInstance().apply {
+                setOnLinkClickListener { textView, url ->
+                    // Handle click or return false to let the framework handle this link.
+                    bookReadingEventListener?.onFootNoteClick(itemContent.bibleVersionIndex, url)
+                    true
+                }
+                setOnLinkLongClickListener { textView, url ->
+                    // Handle long-click or return false to let the framework handle this link.
+                    bookReadingEventListener?.onFootNoteClick(itemContent.bibleVersionIndex, url)
+                    true
+                }
+            }
         }
         textView.text = itemContent.html
 

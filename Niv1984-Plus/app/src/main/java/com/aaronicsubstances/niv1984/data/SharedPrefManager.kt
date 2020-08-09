@@ -49,12 +49,8 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
 
     fun getShouldDisplayMultipleVersionsSideBySide(): Boolean {
         var defaultOpt = context.getString(R.string.pref_default_multiple_version_display)
-        var opt = loadPrefString(context.getString(R.string.pref_key_multiple_version_display),
-                defaultOpt)
-        if (opt == "0") {
-            opt = context.resources.getString(R.string.multiple_version_display_default_value)
-        }
-        return opt == "2"
+        var opt = loadPrefString(context.getString(R.string.pref_key_multiple_version_display), defaultOpt)
+        return opt == defaultOpt
     }
 
     fun getShouldKeepScreenOn(): Boolean {

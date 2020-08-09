@@ -27,6 +27,7 @@ data class BookDisplayItemContent(var bibleVersionIndex: Int,
                                   val blockQuoteKind: BookParser.BlockQuoteKind? = null,
                                   var html: CharSequence? = null,
                                   val isFirstDivider: Boolean = false,
+                                  val footNoteId: String? = null,
                                   val highlightModeRemovableMarkups: List<VerseHighlighter.Markup>? = null)
 
 enum class BookDisplayItemViewType {

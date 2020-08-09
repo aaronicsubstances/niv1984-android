@@ -35,7 +35,7 @@ class BookCache(private val context: Context,
             val viewType = enumValueOf<BookDisplayItemViewType>(cached.serializedViewType)
             val blockQuoteKind = cached.serializedBlockQuoteKind?.let {enumValueOf<BookParser.BlockQuoteKind>(it) }
             val fullContent = BookDisplayItemContent(0, cached.text,
-                    blockQuoteKind, null, cached.isFirstDivider, removableMarkups)
+                    blockQuoteKind, null, cached.isFirstDivider, cached.footNoteId, removableMarkups)
             val item = BookDisplayItem(viewType, cached.chapterNumber, cached.verseNumber,
                     fullContent, null, null, cached.isFirstVerseContent)
             items.add(item)
@@ -56,7 +56,7 @@ class BookCache(private val context: Context,
                     item.viewType.toString(),
                     item.chapterNumber, item.verseNumber, item.isFirstVerseContent,
                     item.fullContent.text, item.fullContent.blockQuoteKind?.toString(),
-                    item.fullContent.isFirstDivider, serializedRemovableMarkups)
+                    item.fullContent.isFirstDivider, item.fullContent.footNoteId, serializedRemovableMarkups)
             entries.add(cached)
         }
         db.bookCacheEntryDao().setEntries(groupId, entries)

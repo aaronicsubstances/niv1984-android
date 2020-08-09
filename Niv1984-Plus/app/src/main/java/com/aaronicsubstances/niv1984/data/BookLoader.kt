@@ -9,7 +9,6 @@ import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.utils.BookParser
 import com.aaronicsubstances.niv1984.utils.BookParser.BlockQuote
-import com.aaronicsubstances.niv1984.utils.BookParser.Chapter
 import com.aaronicsubstances.niv1984.utils.BookParser.ChapterFragment
 import com.aaronicsubstances.niv1984.utils.BookParser.ChapterFragmentKind
 import com.aaronicsubstances.niv1984.utils.BookParser.FancyContent
@@ -45,10 +44,10 @@ class BookLoader(private val context: Context,
 
             val book = if (bibleVersionIndexInUI == null) {
                 val chapterIndices = mutableListOf<Int>()
-                val displayItems = processChapters(0, chapterIndices)
+                val displayItems = loadBibleVersionBook(0, chapterIndices)
 
                 val chapterIndices2 = mutableListOf<Int>()
-                val displayItems2 = processChapters(1, chapterIndices2)
+                val displayItems2 = loadBibleVersionBook(1, chapterIndices2)
 
                 val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
                 val combinedDisplayItems = mutableListOf<BookDisplayItem>()
@@ -77,7 +76,7 @@ class BookLoader(private val context: Context,
             }
             else {
                 val chapterIndices = mutableListOf<Int>()
-                val displayItems = processChapters(bibleVersionIndexInUI, chapterIndices)
+                val displayItems = loadBibleVersionBook(bibleVersionIndexInUI, chapterIndices)
                 BookDisplay(bookNumber, bibleVersions, bibleVersionIndexInUI, displayItems, chapterIndices,
                     displayMultipleSideBySide, isNightMode)
             }
@@ -283,6 +282,14 @@ class BookLoader(private val context: Context,
         return retResult
     }
 
+    private suspend fun loadBibleVersionBook(bibleVersionIndex: Int,
+                                             chapterIndices: MutableList<Int>): List<BookDisplayItem> {
+        val bookContents = processChapters(bibleVersionIndex, chapterIndices)
+        // reassign bible version indices
+        bookContents.forEach { it.fullContent.bibleVersionIndex = bibleVersionIndex }
+        return bookContents
+    }
+
     private suspend fun processChapters(
         bibleVersionIndex: Int,
         chapterIndices: MutableList<Int>
@@ -293,8 +300,6 @@ class BookLoader(private val context: Context,
         val cacheLoader = BookCache(context, bookNumber)
         val cachedChapterIndices = mutableListOf<Pair<Int, Int>>()
         val cached = cacheLoader.load(bibleVersionCode, isNightMode, cachedChapterIndices)
-        // reassign bible version indices
-        cached.forEach { it.fullContent.bibleVersionIndex = bibleVersionIndex }
 
         val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
         val cachedChapterNumbers = cachedChapterIndices.map { it.first }
@@ -358,20 +363,19 @@ class BookLoader(private val context: Context,
                 when (part) {
                     is ChapterFragment -> {
                         val item = processChapterFragment(
-                            bibleVersionIndex, rawChapter.chapterNumber,
+                            rawChapter.chapterNumber,
                             part)
                         displayItems.add(item)
                     }
                     is Verse -> {
                         val items = processVerse(
-                            bibleVersionIndex, rawChapter.chapterNumber,
+                            rawChapter.chapterNumber,
                             part, bookHighlighter, chapterHasHighlights)
                         displayItems.addAll(items)
                     }
                     else -> {
                         part as Note
-                        val footNoteItem = processNote(bibleVersionIndex, rawChapter.chapterNumber,
-                            part)
+                        val footNoteItem = processNote(rawChapter.chapterNumber, part)
                         footNotes.add(footNoteItem)
                     }
                 }
@@ -397,7 +401,6 @@ class BookLoader(private val context: Context,
     }
 
     private fun processChapterFragment(
-        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawFragment: ChapterFragment
     ): BookDisplayItem {
@@ -412,7 +415,7 @@ class BookLoader(private val context: Context,
         for (part in rawFragment.parts) {
             when (part) {
                 is NoteRef -> {
-                    processNoteRef(bibleVersionIndex, chapterNumber, part, out)
+                    processNoteRef(chapterNumber, part, out)
                 }
                 else -> {
                     part as FancyContent
@@ -421,11 +424,10 @@ class BookLoader(private val context: Context,
             }
         }
         return BookDisplayItem(viewType, chapterNumber, 0,
-            BookDisplayItemContent(bibleVersionIndex, out.toString()))
+            BookDisplayItemContent(0, out.toString()))
     }
 
     private fun processVerse(
-        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawVerse: Verse,
         bookHighlighter: BookHighlighter,
@@ -445,7 +447,7 @@ class BookLoader(private val context: Context,
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
-                                processNoteRef(bibleVersionIndex, chapterNumber, wjPart, out)
+                                processNoteRef(chapterNumber, wjPart, out)
                             }
                             else -> {
                                 wjPart as FancyContent
@@ -462,13 +464,13 @@ class BookLoader(private val context: Context,
                         val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
                         val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                             chapterNumber, rawVerse.verseNumber,
-                            BookDisplayItemContent(bibleVersionIndex, blockText,
+                            BookDisplayItemContent(0, blockText,
                                 highlightModeRemovableMarkups = removableMarkups),
                             isFirstVerseContent = verseItems.isEmpty())
                         verseItems.add(currItem)
                         out.clear()
                     }
-                    val nextItem = processBlockQuote(bibleVersionIndex, chapterNumber,
+                    val nextItem = processBlockQuote(chapterNumber,
                         part, rawVerse.verseNumber, verseItems.size, prependText, bookHighlighter,
                             chapterHasHighlights)
                     prependText = null
@@ -479,7 +481,7 @@ class BookLoader(private val context: Context,
                         out.addInitText(prependText)
                         prependText = null
                     }
-                    processNoteRef(bibleVersionIndex, chapterNumber, part, out)
+                    processNoteRef(chapterNumber, part, out)
                 }
                 else -> {
                     if (prependText != null) {
@@ -504,7 +506,7 @@ class BookLoader(private val context: Context,
             val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
             val currItem = BookDisplayItem(BookDisplayItemViewType.VERSE,
                 chapterNumber, rawVerse.verseNumber,
-                BookDisplayItemContent(bibleVersionIndex, blockText,
+                BookDisplayItemContent(0, blockText,
                     highlightModeRemovableMarkups = removableMarkups),
                 isFirstVerseContent = verseItems.isEmpty())
             verseItems.add(currItem)
@@ -514,7 +516,6 @@ class BookLoader(private val context: Context,
     }
 
     private fun processBlockQuote(
-        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawQuote: BlockQuote,
         verseNumber: Int,
@@ -532,7 +533,7 @@ class BookLoader(private val context: Context,
                     for (wjPart in part.parts) {
                         when (wjPart) {
                             is NoteRef -> {
-                                processNoteRef(bibleVersionIndex, chapterNumber, wjPart, out)
+                                processNoteRef(chapterNumber, wjPart, out)
                             }
                             else -> {
                                 wjPart as FancyContent
@@ -543,7 +544,7 @@ class BookLoader(private val context: Context,
                     out.addInitMarkup("</font>")
                 }
                 is NoteRef -> {
-                    processNoteRef(bibleVersionIndex, chapterNumber, part, out)
+                    processNoteRef(chapterNumber, part, out)
                 }
                 else -> {
                     part as FancyContent
@@ -555,7 +556,7 @@ class BookLoader(private val context: Context,
             verseBlockIndex, out)
         val removableMarkups = bookHighlighter.getHighlightModeEditableMarkups(out)
         return BookDisplayItem(BookDisplayItemViewType.VERSE, chapterNumber, verseNumber,
-            BookDisplayItemContent(bibleVersionIndex, blockText, rawQuote.kind,
+            BookDisplayItemContent(0, blockText, rawQuote.kind,
                 highlightModeRemovableMarkups = removableMarkups),
             isFirstVerseContent = verseBlockIndex == 0)
     }
@@ -604,14 +605,13 @@ class BookLoader(private val context: Context,
     }
 
     private fun processNoteRef(
-        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawNoteRef: NoteRef,
         out: Any
     ) {
         val lowerA = 'a'.toInt()
         val charRef = (lowerA + rawNoteRef.noteNumber -1).toChar()
-        var text = "<sup><a href='${bibleVersions[bibleVersionIndex]}-$chapterNumber-${rawNoteRef.noteNumber}'>" +
+        var text = "<sup><a href='$chapterNumber-${rawNoteRef.noteNumber}'>" +
             "$charRef</a></sup>"
         if (out is VerseHighlighter) {
             out.addInitMarkup(VerseHighlighter.Markup(text, removeDuringHighlighting = true))
@@ -623,7 +623,6 @@ class BookLoader(private val context: Context,
     }
 
     private fun processNote(
-        bibleVersionIndex: Int,
         chapterNumber: Int,
         rawNote: Note
     ): BookDisplayItem {
@@ -634,10 +633,12 @@ class BookLoader(private val context: Context,
             BookDisplayItemViewType.FOOTNOTE
         }
         var out = StringBuilder()
+        var footNoteId: String? = null
         if (viewType == BookDisplayItemViewType.FOOTNOTE) {
             val lowerA = 'a'.toInt()
             val charRef = (lowerA + rawNote.noteNumber - 1).toChar()
             out.append("<sup>$charRef</sup>")
+            footNoteId = "$chapterNumber-${rawNote.noteNumber}"
         }
         for (part in rawNote.parts) {
             val escapedContent = TextUtils.htmlEncode(part.body)
@@ -662,7 +663,8 @@ class BookLoader(private val context: Context,
             }
         }
         return BookDisplayItem(viewType, chapterNumber, 0,
-            BookDisplayItemContent(bibleVersionIndex, out.toString()))
+            BookDisplayItemContent(0, out.toString(),
+            footNoteId = footNoteId))
     }
 
     private fun compressFootNotes(footNotes: List<BookDisplayItem>): List<BookDisplayItem> {

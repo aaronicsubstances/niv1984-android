@@ -20,6 +20,7 @@ data class BookCacheEntry(
     var text: String,
     var serializedBlockQuoteKind: String?,
     var isFirstDivider: Boolean,
+    var footNoteId: String?,
     @ColumnInfo(typeAffinity = ColumnInfo.BLOB)
     var serializedHighlightModeRemovableMarkups: ByteArray?
 )

@@ -26,12 +26,11 @@ import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
 import com.aaronicsubstances.niv1984.ui.view_adapters.ChapterWidgetAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
-import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
-import java.lang.IllegalArgumentException
 import javax.inject.Inject
 
 class BookLoadFragment : Fragment(), PrefListenerFragment {
+
     var bookNumber: Int = 0
     lateinit var bibleVersions: List<String>
     var bibleVersionIndex: Int? = 0
@@ -250,6 +249,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                }
            })
         chapterView.adapter = chapterAdapter
+
+        bookContentAdapter.bookReadingEventListener = BookReadingEventListenerImpl(this)
 
         isNightMode = AppUtils.isNightMode(requireContext())
         bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()

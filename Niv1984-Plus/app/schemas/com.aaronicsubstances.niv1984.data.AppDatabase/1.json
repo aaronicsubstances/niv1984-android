@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c49b673964671699346cd4f5c0c2ba98",
+    "identityHash": "f4040842a92b2ecc11512bdaeb8b014d",
     "entities": [
       {
         "tableName": "UserHighlightData",
@@ -193,7 +193,7 @@
       },
       {
         "tableName": "BookCacheEntry",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `groupId` TEXT NOT NULL, `cacheVersion` TEXT NOT NULL, `perChapterItemRank` INTEGER NOT NULL, `serializedViewType` TEXT NOT NULL, `chapterNumber` INTEGER NOT NULL, `verseNumber` INTEGER NOT NULL, `isFirstVerseContent` INTEGER NOT NULL, `text` TEXT NOT NULL, `serializedBlockQuoteKind` TEXT, `isFirstDivider` INTEGER NOT NULL, `serializedHighlightModeRemovableMarkups` BLOB)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `groupId` TEXT NOT NULL, `cacheVersion` TEXT NOT NULL, `perChapterItemRank` INTEGER NOT NULL, `serializedViewType` TEXT NOT NULL, `chapterNumber` INTEGER NOT NULL, `verseNumber` INTEGER NOT NULL, `isFirstVerseContent` INTEGER NOT NULL, `text` TEXT NOT NULL, `serializedBlockQuoteKind` TEXT, `isFirstDivider` INTEGER NOT NULL, `footNoteId` TEXT, `serializedHighlightModeRemovableMarkups` BLOB)",
         "fields": [
           {
             "fieldPath": "id",
@@ -262,6 +262,12 @@
             "notNull": true
           },
           {
+            "fieldPath": "footNoteId",
+            "columnName": "footNoteId",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
             "fieldPath": "serializedHighlightModeRemovableMarkups",
             "columnName": "serializedHighlightModeRemovableMarkups",
             "affinity": "BLOB",
@@ -281,7 +287,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c49b673964671699346cd4f5c0c2ba98')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'f4040842a92b2ecc11512bdaeb8b014d')"
     ]
   }
 }

@@ -611,7 +611,7 @@ class BookLoader(private val context: Context,
     ) {
         val lowerA = 'a'.toInt()
         val charRef = (lowerA + rawNoteRef.noteNumber -1).toChar()
-        var text = "<sup><a href='$chapterNumber-${rawNoteRef.noteNumber}'>" +
+        var text = "<sup><a href='ft-$chapterNumber-${rawNoteRef.noteNumber}'>" +
             "$charRef</a></sup>"
         if (out is VerseHighlighter) {
             out.addInitMarkup(VerseHighlighter.Markup(text, removeDuringHighlighting = true))

@@ -166,7 +166,9 @@ class MainActivity : AppCompatActivity(),
                     bookLoadFrag?.onCustomPause()
                 }
             }
-            commit()
+            // commit now rather than later to prevent fragment exit actions
+            // (such as pevious/next book load buttons) being handled more than once.
+            commitNow()
         }
     }
 

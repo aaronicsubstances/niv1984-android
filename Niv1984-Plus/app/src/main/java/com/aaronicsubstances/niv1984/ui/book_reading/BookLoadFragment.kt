@@ -23,13 +23,14 @@ import com.aaronicsubstances.niv1984.models.*
 import com.aaronicsubstances.niv1984.ui.CommonMenuActionProcessor
 import com.aaronicsubstances.niv1984.ui.PrefListenerFragment
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookLoadAdapter
+import com.aaronicsubstances.niv1984.ui.view_adapters.BookReadingEventListener
 import com.aaronicsubstances.niv1984.ui.view_adapters.ChapterWidgetAdapter
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 import javax.inject.Inject
 
-class BookLoadFragment : Fragment(), PrefListenerFragment {
+class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListener {
 
     var bookNumber: Int = 0
     lateinit var bibleVersions: List<String>
@@ -176,7 +177,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.action_enter_copy_mode -> {
-                highlightHelper?.enterHighlightMode()
+                highlightHelper?.enterHighlightMode(bibleVersionIndex ?: 0)
                 true
             }
             R.id.action_exit_copy_mode -> {
@@ -184,7 +185,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                 true
             }
             R.id.action_chapter_switch -> {
-                bookOrChapterSwitchHandler?.startChapterSelection(viewModel!!.currLocChapterNumber)
+                bookOrChapterSwitchHandler?.startChapterSelection(viewModel.currLocChapterNumber)
                 true
             }
             R.id.action_book_switch -> {
@@ -225,7 +226,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         switchToPrefBtn = root.findViewById(R.id.switchToPrefBtn)
 
         bookContentView.layoutManager = LinearLayoutManager(activity)
-        bookContentAdapter = BookLoadAdapter()
+        bookContentAdapter = BookLoadAdapter(this)
         bookContentView.adapter = bookContentAdapter
 
         return root
@@ -249,8 +250,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
                }
            })
         chapterView.adapter = chapterAdapter
-
-        bookContentAdapter.bookReadingEventListener = BookReadingEventListenerImpl(this)
 
         isNightMode = AppUtils.isNightMode(requireContext())
         bookContentAdapter.zoomLevel = sharedPrefMgr.getZoomLevel()
@@ -536,6 +535,9 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
             .scrollToPositionWithOffset(pos, 0)
     }
 
+    fun enterHighlightModeFromLongClick(bibleVersionIndex: Int, chapterNumber: Int, verseNumber: Int) {
+    }
+
     private fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
         chapterAdapter.selectedIndex = chapterIdx
         if (scroll) {
@@ -603,5 +605,42 @@ class BookLoadFragment : Fragment(), PrefListenerFragment {
         // since pref can only be changed when this fragment is hidden/paused,
         // let fragment resumption handle change.
         screenAwakeHelper?.keepScreenOn = keepScreenOn
+    }
+
+    override fun onUrlClick(bibleVersionIndex: Int, url: String) {
+        BookReadingEventListenerImpl.handleUrlClick(this, bibleVersionIndex, url)
+    }
+
+    override fun onVerseLongClick(bibleVersionIndex: Int, chapterNumber: Int, verseNumber: Int) {
+        if (!viewModel.isLastLoadResultValid()) {
+            return
+        }
+        val bookModel = viewModel.lastLoadResult!!
+        val currentList = bookContentAdapter.currentList
+        val commonItemPos = locateParticularVersePos(currentList, verseNumber,
+            bookModel.chapterIndices[chapterNumber - 1])
+        viewModel.updateSystemBookmarks(chapterNumber, verseNumber, BookDisplayItemViewType.VERSE,
+            commonItemPos)
+        syncChapterWidget(chapterNumber - 1, false)
+        highlightHelper?.enterHighlightMode(bibleVersionIndex)
+    }
+
+    private fun locateParticularVersePos(
+        currentList: List<BookDisplayItem>,
+        verseNumber: Int,
+        startItemPos: Int
+    ): Int {
+        val startItem = currentList[startItemPos]
+        var i = startItemPos
+        // look for verse.
+        while (true) {
+            val item = currentList[i]
+            if (item.chapterNumber == startItem.chapterNumber &&
+                    item.viewType == BookDisplayItemViewType.VERSE &&
+                    item.verseNumber == verseNumber) {
+                return i
+            }
+            i++
+        }
     }
 }

@@ -7,8 +7,6 @@ import android.text.*
 import android.text.style.BackgroundColorSpan
 import android.widget.ScrollView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.HighlightRange
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.AppUtils
@@ -133,7 +131,37 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
         return 0
     }
 
-    fun goToVerse(vNum: Int, sp: ScrollView, contentTf: TextView) {
+    fun initiateVerseSelection(vNum: Int, contentTf: TextView) {
+        var vNum = vNum
+        if (vNum < 1) {
+            vNum = 1
+        }
+        val vKey = "$vPrefix$vNum"
+        if (!versePosMap.contains(vKey)) {
+            AppUtils.showShortToast(context, "$vKey not found in map")
+            return
+        }
+
+        val vLoc = versePosMap.getValue(vKey)
+        /*var vStart = vLoc.first
+        var vEnd = vLoc.second*/
+
+        // select verse number to force user to perform extra action to select.
+        var vStart = vLoc.first
+        var vEnd = vLoc.first + 3 // = "1. ".length
+
+        if (vNum > 10) {
+            vEnd++
+            if (vNum > 100) {
+                vEnd++
+            }
+        }
+
+        Selection.setSelection(contentTf.text as Spannable, vStart, vEnd)
+        contentTf.performLongClick()
+    }
+
+    fun scrollToVerse(vNum: Int, sp: ScrollView, contentTf: TextView) {
         if (vNum < 1) {
             sp.scrollTo(0, 0)
             return
@@ -148,9 +176,6 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
 
         var vStart = vLoc.first
         var vEnd = vLoc.second
-
-        //Selection.setSelection(contentTf.text as Spannable, vStart, vEnd)
-        //contentTf.performLongClick()
 
         if (lineInfoList.isEmpty()) {
             AppUtils.showShortToast(context, "line info list is empty")
@@ -176,33 +201,34 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
             AppUtils.showShortToast(context, "$vKey -> top line for $vStart not found in list")
             return
         }
-        // once gave -1 even though topLineIndex was found.
-        /*if (bottomLineIndex == -1) {
-            AppUtils.showShortToast(context, "$vKey -> bottom line for $vEnd not found in list")
-            return
-        }*/
 
         val vTopLineInfo = lineInfoList[topLineIndex]
-        /*val vBottomLineInfo = lineInfoList[bottomLineIndex]
-        android.util.Log.d(TAG, "$vKey maps to $vTopLineInfo, $vBottomLineInfo")*/
+        val yOffset = contentTf.top
 
         /*if (scrollHeightRange == -1) {
             AppUtils.showShortToast(context, "scrollHeightRange is not set")
             return
-        }
+        }*/
 
-        val scrY = sp.scrollY*/
-        val yOffset = contentTf.top
-        /*android.util.Log.d(TAG, "using scrollHeightRange=$scrollHeightRange, scrollY=$scrY" +
+        // once gave -1 even though topLineIndex was found.
+        /*if (bottomLineIndex != -1 && scrollHeightRange != -1) {
+
+            val vBottomLineInfo = lineInfoList[bottomLineIndex]
+            //android.util.Log.d(TAG, "$vKey maps to $vTopLineInfo, $vBottomLineInfo")
+
+            val scrY = sp.scrollY
+            /*android.util.Log.d(TAG, "using scrollHeightRange=$scrollHeightRange, scrollY=$scrY" +
                 ", contentTop=$yOffset")*/
 
-        /*if (vTopLineInfo.topPos + yOffset >= scrY && vTopLineInfo.topPos + yOffset <= scrY + scrollHeightRange &&
-            vBottomLineInfo.bottomPos + yOffset >= scrY && vBottomLineInfo.bottomPos + yOffset <= scrY + scrollHeightRange) {
-            android.util.Log.d(TAG, "no need to scroll: already visible")
-            return
-        }
+            if (vTopLineInfo.topPos + yOffset >= scrY && vTopLineInfo.topPos + yOffset <= scrY + scrollHeightRange &&
+                vBottomLineInfo.bottomPos + yOffset >= scrY && vBottomLineInfo.bottomPos + yOffset <= scrY + scrollHeightRange
+            ) {
+                //android.util.Log.d(TAG, "no need to scroll: already visible")
+                return
+            }
+        }*/
 
-        val yPos = vBottomLineInfo.baselinePos + yOffset - scrollHeightRange*/
+        /*val yPos = vBottomLineInfo.baselinePos + yOffset - scrollHeightRange*/
         val yPos = vTopLineInfo.topPos + yOffset
 
         //android.util.Log.d(TAG, "$vKey maps to yPos=$yPos")

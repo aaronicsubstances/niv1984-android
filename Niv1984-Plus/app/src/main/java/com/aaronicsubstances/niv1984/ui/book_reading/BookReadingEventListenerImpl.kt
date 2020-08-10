@@ -1,17 +1,17 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.ui.view_adapters.BookReadingEventListener
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.afollestad.materialdialogs.MaterialDialog
 
-class BookReadingEventListenerImpl(private val fragment: BookLoadFragment): BookReadingEventListener {
+object BookReadingEventListenerImpl {
 
-    override fun onFootNoteClick(bibleVersionIndex: Int, description: String) {
-        val parts = description.split('-')
-        val chapterNumber = Integer.parseInt(parts[0])
-        val noteRefNumber = Integer.parseInt(parts[1])
+    fun handleUrlClick(fragment: BookLoadFragment, bibleVersionIndex: Int, url: String) {
+        AppUtils.assert(url.startsWith("ft-"))
+        val parts = url.split('-')
+        val chapterNumber = Integer.parseInt(parts[1])
+        val noteRefNumber = Integer.parseInt(parts[2])
         if (!fragment.viewModel.isLastLoadResultValid()) {
             return
         }
@@ -26,7 +26,7 @@ class BookReadingEventListenerImpl(private val fragment: BookLoadFragment): Book
         while (true) {
             val item = temp.displayItems[idx]
             if (item.fullContent.bibleVersionIndex == bibleVersionIndex &&
-                    item.fullContent.footNoteId == description) {
+                    item.fullContent.footNoteId == url) {
                 break
             }
             idx--
@@ -53,9 +53,5 @@ class BookReadingEventListenerImpl(private val fragment: BookLoadFragment): Book
             title(text = dialogTitle)
             message(text = dialogMessage)
         }
-    }
-
-    override fun onVerseLongClick(bibleVersionIndex: Int, chapterNumber: Int, verseNumber: Int) {
-
     }
 }

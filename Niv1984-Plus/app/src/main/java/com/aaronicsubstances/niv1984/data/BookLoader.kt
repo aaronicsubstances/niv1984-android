@@ -638,7 +638,7 @@ class BookLoader(private val context: Context,
             val lowerA = 'a'.toInt()
             val charRef = (lowerA + rawNote.noteNumber - 1).toChar()
             out.append("<sup>$charRef</sup>")
-            footNoteId = "$chapterNumber-${rawNote.noteNumber}"
+            footNoteId = "ft-$chapterNumber-${rawNote.noteNumber}"
         }
         for (part in rawNote.parts) {
             val escapedContent = TextUtils.htmlEncode(part.body)

@@ -20,15 +20,15 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.BookParser
 import me.saket.bettermovementmethod.BetterLinkMovementMethod
 
-class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
+class BookLoadAdapter(
+    private val bookReadingEventListener: BookReadingEventListener
+): FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolder>(null) {
 
     var bibleVersions = listOf<String>()
     var multipleDisplay = false
     var displayMultipleSideBySide: Boolean = false
     var isNightMode: Boolean = false
     var zoomLevel: Int = 100
-
-    var bookReadingEventListener: BookReadingEventListener? = null
 
     override fun getItemViewType(position: Int): Int {
         var viewType = getItem(position).viewType.ordinal
@@ -152,13 +152,12 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
             textView.movementMethod = BetterLinkMovementMethod.newInstance().apply {
                 setOnLinkClickListener { textView, url ->
                     // Handle click or return false to let the framework handle this link.
-                    bookReadingEventListener?.onFootNoteClick(itemContent.bibleVersionIndex, url)
+                    bookReadingEventListener.onUrlClick(itemContent.bibleVersionIndex, url)
                     true
                 }
                 setOnLinkLongClickListener { textView, url ->
                     // Handle long-click or return false to let the framework handle this link.
-                    bookReadingEventListener?.onFootNoteClick(itemContent.bibleVersionIndex, url)
-                    true
+                    false
                 }
             }
         }
@@ -240,6 +239,11 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
         fun bind(item: BookDisplayItem) {
+            textView.setOnLongClickListener {
+                bookReadingEventListener?.onVerseLongClick(item.fullContent.bibleVersionIndex,
+                    item.chapterNumber, item.verseNumber)
+                true
+            }
             bindDefault(item, item.fullContent, textView)
         }
     }
@@ -265,6 +269,14 @@ class BookLoadAdapter: FiniteListAdapter<BookDisplayItem, RecyclerView.ViewHolde
 
         private fun bindSpecific(item: BookDisplayItem, items: List<BookDisplayItemContent>,
                                  textViewGroup: ViewGroup) {
+
+            textViewGroup.setOnLongClickListener {
+                bookReadingEventListener.onVerseLongClick(
+                    if (textViewGroup == firstSideVerse) 0 else 1,
+                    item.chapterNumber, item.verseNumber)
+                true
+            }
+
             // ensure enough text views.
             while (textViewGroup.childCount < items.size) {
                 val tv = TextView(textViewGroup.context)

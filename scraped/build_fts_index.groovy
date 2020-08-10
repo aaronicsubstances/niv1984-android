@@ -45,7 +45,7 @@ testAssumptions()
 
 scriptDir = new File(getClass().protectionDomain.codeSource.location.path).parentFile
         
-Sql.withInstance("jdbc:sqlite:$scriptDir/app/src/main/assets/seed_data.db".replaceAll("\\\\", '/'), '', '', 'org.sqlite.JDBC') { sql ->
+Sql.withInstance("jdbc:sqlite:$scriptDir/../Niv1984-Plus/app/src/main/assets/search_data.db".replaceAll("\\\\", '/'), '', '', 'org.sqlite.JDBC') { sql ->
     // use 'sql' instance ...
     //args = ["SELECT snippet(bible_index_record) FROM bible_index_record WHERE content MATCH 'Nyankop\u0186n' LIMIT 9"] // verifies that capital twi Oh
                                                                                                                     // can still find small twi oh in index

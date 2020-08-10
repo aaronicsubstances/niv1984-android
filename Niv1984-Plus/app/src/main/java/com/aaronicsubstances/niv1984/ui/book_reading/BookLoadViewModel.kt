@@ -9,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.BookHighlighter
 import com.aaronicsubstances.niv1984.data.BookLoader
+import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.models.ScrollPosPref
-import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
 import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import kotlinx.coroutines.launch

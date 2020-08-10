@@ -93,7 +93,7 @@ class SearchResultDataSource(
         transformedQuery = transformUserQuery(queryTerms, true, 0)
 
         coroutineScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(context)
+            val db = SearchDatabase.getDatabase(context)
             val asyncContext =
                 HelperAsyncContext(db.batchedDataSourceDao(), db.bibleIndexRecordDao())
             val result = loadBatch(
@@ -112,7 +112,7 @@ class SearchResultDataSource(
         loadCallback: Consumer<UnboundedDataSource.LoadResult<SearchResult>>
     ) {
         coroutineScope.launch(Dispatchers.IO) {
-            val db = AppDatabase.getDatabase(context)
+            val db = SearchDatabase.getDatabase(context)
             val asyncContext =
                 HelperAsyncContext(db.batchedDataSourceDao(), db.bibleIndexRecordDao())
             val result = loadBatch(

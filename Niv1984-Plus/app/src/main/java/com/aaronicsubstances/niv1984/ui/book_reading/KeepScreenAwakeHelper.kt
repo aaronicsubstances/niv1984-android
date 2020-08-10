@@ -32,7 +32,7 @@ class KeepScreenAwakeHelper(private val fragment: BookLoadFragment, var keepScre
 
         fragment.requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         cancelKeepScreenOnRunnable = Runnable {
-            fragment.requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            fragment.activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             cancelKeepScreenOnRunnable = null
         }
         fragment.requireView().apply {
@@ -43,7 +43,7 @@ class KeepScreenAwakeHelper(private val fragment: BookLoadFragment, var keepScre
 
     private fun cancelKeepScreenOn() {
         cancelKeepScreenOnRunnable?.let {
-            fragment.requireView().removeCallbacks(it)
+            fragment.view?.removeCallbacks(it)
             it.run()
         }
     }
@@ -64,7 +64,7 @@ class KeepScreenAwakeHelper(private val fragment: BookLoadFragment, var keepScre
         else {
             fragment.requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             cancelKeepScreenOnRunnable = Runnable {
-                fragment.requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                fragment.activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
                 cancelKeepScreenOnRunnable = null
             }
         }

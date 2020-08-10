@@ -19,7 +19,7 @@ class BookCache(private val context: Context,
 
     suspend fun load(bibleVersion: String, isNightMode: Boolean,
              chapterIndices: MutableList<Pair<Int, Int>>): List<BookDisplayItem> {
-        val db = AppDatabase.getDatabase(context)
+        val db = SearchDatabase.getDatabase(context)
         val groupId = generateGroupId(bibleVersion, isNightMode)
         val entries = db.bookCacheEntryDao().getEntries(groupId, CACHE_VERSION)
         val items = mutableListOf<BookDisplayItem>()
@@ -45,7 +45,7 @@ class BookCache(private val context: Context,
 
     suspend fun save(bibleVersion: String, isNightMode: Boolean,
              items: List<BookDisplayItem>) {
-        val db = AppDatabase.getDatabase(context)
+        val db = SearchDatabase.getDatabase(context)
         val groupId = generateGroupId(bibleVersion, isNightMode)
         val entries = mutableListOf<BookCacheEntry>()
         for (item in items) {
@@ -63,7 +63,7 @@ class BookCache(private val context: Context,
     }
 
     suspend fun purge(bibleVersion: String, chapterNumber: Int) {
-        val db = AppDatabase.getDatabase(context)
+        val db = SearchDatabase.getDatabase(context)
         db.bookCacheEntryDao().purgeEntries(listOf(true, false).map { isNightMode ->
             generateGroupId(bibleVersion, isNightMode)
         }, chapterNumber)

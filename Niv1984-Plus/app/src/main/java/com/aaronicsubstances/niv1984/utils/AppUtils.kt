@@ -1,8 +1,11 @@
 package com.aaronicsubstances.niv1984.utils
 
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.net.Uri
 import android.text.Html
 import android.text.Spanned
 import android.util.TypedValue
@@ -11,21 +14,15 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
 import com.google.gson.GsonBuilder
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.Uri
-import kotlin.jvm.functions.Function0
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-
 object AppUtils {
     const val VIEW_TYPE_LOADING = -1
     const val DEFAULT_CHARSET = "utf-8"
-    private const val APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id="
+    const val APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id="
 
     private val JSON_SERIALIZER = GsonBuilder().create()
 

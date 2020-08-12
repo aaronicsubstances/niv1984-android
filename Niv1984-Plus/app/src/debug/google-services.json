@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "765437353120",
+    "firebase_url": "https://niv1984-debug.firebaseio.com",
+    "project_id": "niv1984-debug",
+    "storage_bucket": "niv1984-debug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765437353120:android:0ff8d5b1c224be5717bdc5",
+        "android_client_info": {
+          "package_name": "com.aaronicsubstances.niv1984.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "765437353120-0cg5hjmdq0576eru2cdj0s3ao8o3504q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEASkg8ZwLbnwCOPEGJNr7o1bOdBzfiv4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "765437353120-0cg5hjmdq0576eru2cdj0s3ao8o3504q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

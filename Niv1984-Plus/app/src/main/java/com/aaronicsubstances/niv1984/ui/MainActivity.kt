@@ -11,16 +11,24 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
+import com.aaronicsubstances.niv1984.models.LatestVersionCheckResult
 import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadRequestListener
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchResponseFragment
+import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.callbacks.onCancel
+import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
@@ -103,6 +111,11 @@ class MainActivity : AppCompatActivity(),
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
+
+        val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        viewModel.latestVersionLiveData.observeProperAsEvent(this,
+            Observer { recommendOrForceUpgrade(it) })
+        viewModel.startFetchingLatestVersionInfo()
     }
 
     private fun createInitialFragments() {
@@ -296,6 +309,33 @@ class MainActivity : AppCompatActivity(),
                 val isScreenOn = sharedPrefMgr.getShouldKeepScreenOn()
                 interestedFrags.forEach {
                     it.onPrefKeepScreenOnDuringReadingChanged(isScreenOn)
+                }
+            }
+        }
+    }
+
+    private fun recommendOrForceUpgrade(latestVersionCheckResult: LatestVersionCheckResult) {
+        var dialogMessage = if (latestVersionCheckResult.forceUpgradeMessage.isNotEmpty()) {
+            latestVersionCheckResult.forceUpgradeMessage
+        } else {
+            latestVersionCheckResult.recommendUpgradeMessage
+        }
+        MaterialDialog(this).show {
+            title(R.string.version_out_of_date_dialog_title)
+            message(text = dialogMessage)
+            positiveButton(R.string.action_update) {
+                AppUtils.openAppOnPlayStore(this@MainActivity)
+                this@MainActivity.finish()
+            }
+            negativeButton(R.string.action_cancel) {
+                if (latestVersionCheckResult.forceUpgradeMessage.isNotEmpty()) {
+                    this@MainActivity.finish()
+                }
+            }
+            cancelOnTouchOutside(false)
+            onCancel { dialog ->
+                if (latestVersionCheckResult.forceUpgradeMessage.isNotEmpty()) {
+                    this@MainActivity.finish()
                 }
             }
         }

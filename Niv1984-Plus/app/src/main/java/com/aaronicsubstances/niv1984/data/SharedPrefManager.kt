@@ -23,8 +23,8 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
     }
 
     fun getZoomLevel(): Int {
-        val defaultOpt = context.getString(R.string.pref_key_zoom)
-        val opt = loadPrefString(context.getString(R.string.pref_default_zoom), defaultOpt)
+        val defaultOpt = context.getString(R.string.pref_default_zoom)
+        val opt = loadPrefString(context.getString(R.string.pref_key_zoom), defaultOpt)
         try {
             return Integer.parseInt(opt)
         }
@@ -34,10 +34,9 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
     }
 
     fun getPreferredBibleVersions(): List<String> {
-        val preferenceManager = PreferenceManager.getDefaultSharedPreferences(context)
         val defaultOpt = context.getString(R.string.pref_default_bible_versions)
-        val persistedValue = preferenceManager.getString(
-                context.getString(R.string.pref_key_bible_versions), defaultOpt) as String
+        val persistedValue = loadPrefString(
+                context.getString(R.string.pref_key_bible_versions), defaultOpt)
         val codes = persistedValue.splitToSequence(" ").filter {
             it.isNotEmpty()
         }.toList()
@@ -56,8 +55,7 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
     fun getShouldKeepScreenOn(): Boolean {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val defaultOpt = context.resources.getBoolean(R.bool.pref_default_keep_screen_awake)
-        return sharedPref.getBoolean(context.getString(R.string.pref_key_keep_screen_awake),
-                defaultOpt)
+        return sharedPref.getBoolean(context.getString(R.string.pref_key_keep_screen_awake), defaultOpt)
     }
 
     fun <T> loadPrefItem(key: String, cls: Class<T>): T? {

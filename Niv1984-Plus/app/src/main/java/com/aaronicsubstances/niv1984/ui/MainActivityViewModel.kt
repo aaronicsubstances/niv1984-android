@@ -19,7 +19,12 @@ class MainActivityViewModel(application: Application): AndroidViewModel(applicat
             FirebaseFacade.getConfItems()?.let {
                 if (it.latestVersion.isNotEmpty() && it.latestVersionCode >= 0) {
                     val currentVersionCode = AppUtils.getAppVersionCode(context)
-                    if (currentVersionCode < it.latestVersionCode) {
+                    // Don't require update if installed version is not lower than latest version.
+                    // This solves potential problem after upgrade where upgrade required indicators
+                    // are no longer meant for the now upgraded app version.
+                    if (currentVersionCode < it.latestVersionCode &&
+                        (it.forceUpgradeMessage.isNotEmpty() ||
+                            it.recommendUpgradeMessage.isNotEmpty())) {
                         _latestVersionLiveData.value = LiveDataEvent(it)
                     }
                 }

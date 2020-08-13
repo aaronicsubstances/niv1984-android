@@ -299,14 +299,12 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                 firstVisibleItemPos: Int,
                 totalItemCount: Int
             ) {
-                val currentList = bookContentAdapter.currentList
-                val commonItemPos = locateEquivalentViewTypePos(currentList,
-                    firstVisibleItemPos)
-                val commonVisibleItem = currentList[commonItemPos]
+                val scrollResult = fetchScrollResult(firstVisibleItemPos)
+                val commonVisibleItem = scrollResult.first
 
                 viewModel.updateSystemBookmarks(commonVisibleItem.chapterNumber,
                     commonVisibleItem.verseNumber, commonVisibleItem.viewType,
-                    firstVisibleItemPos)
+                    scrollResult.second)
             }
         })
 
@@ -316,10 +314,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 val firstVisibleItemPos = LargeListViewScrollListener.findFirstVisibleItemPosition(
                     recyclerView.layoutManager)
-                val currentList = bookContentAdapter.currentList
-                val commonItemPos = locateEquivalentViewTypePos(currentList,
-                    firstVisibleItemPos)
-                val commonVisibleItem = currentList[commonItemPos]
+                val commonVisibleItem = fetchScrollResult(firstVisibleItemPos).first
 
                 if (commonVisibleItem.chapterNumber - 1 != chapterAdapter.selectedIndex) {
                     syncChapterWidget(commonVisibleItem.chapterNumber - 1, true)
@@ -545,36 +540,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         }
     }
 
-    private fun locateEquivalentViewTypePos(
-        currentList: List<BookDisplayItem>,
-        firstVisibleItemPos: Int
-    ): Int {
-        val firstVisibleItem = currentList[firstVisibleItemPos]
-        var i = firstVisibleItemPos
-        // look for title, verse or divider (first or last).
-        loopFwd@ while (i >= 0) {
-            if (currentList[i].chapterNumber != firstVisibleItem.chapterNumber) {
-                break
-            }
-            when (currentList[i].viewType) {
-                BookDisplayItemViewType.TITLE -> {
-                    break@loopFwd
-                }
-                BookDisplayItemViewType.VERSE -> {
-                    break@loopFwd
-                }
-                BookDisplayItemViewType.DIVIDER -> {
-                    break@loopFwd
-                }
-                else -> {
-                    // continue
-                }
-            }
-            i--
-        }
-        return i
-    }
-
     override fun onPrefZoomLevelChanged(zoomLevel: Int) {
         bookContentAdapter.zoomLevel = zoomLevel
         // no need to reread book, just refresh contents.
@@ -623,6 +588,52 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             commonItemPos)
         syncChapterWidget(chapterNumber - 1, false)
         highlightHelper?.enterHighlightMode(bibleVersionIndex)
+    }
+
+    private fun fetchScrollResult(firstVisibleItemPos: Int): Pair<BookDisplayItem, Int> {
+        val currentList = bookContentAdapter.currentList
+        val visibleItemCount = (bookContentView.layoutManager as LinearLayoutManager).childCount
+        var particularItemPos = firstVisibleItemPos
+        // if end of book is reached, use last divider rather than usual first visible
+        // item pos, to deal with system bookmarking and chapter widget selection towards
+        // ending short chapters such as Psalm 150
+        val lastVisibleItemPos = firstVisibleItemPos + visibleItemCount - 1
+        if (lastVisibleItemPos == currentList.size - 1) {
+            particularItemPos = lastVisibleItemPos
+        }
+        val commonItemPos = locateEquivalentViewTypePos(currentList, particularItemPos)
+        val commonVisibleItem = currentList[commonItemPos]
+        return Pair(commonVisibleItem, particularItemPos)
+    }
+
+    private fun locateEquivalentViewTypePos(
+        currentList: List<BookDisplayItem>,
+        firstVisibleItemPos: Int
+    ): Int {
+        val firstVisibleItem = currentList[firstVisibleItemPos]
+        var i = firstVisibleItemPos
+        // look for title, verse or divider (first or last).
+        loopFwd@ while (i >= 0) {
+            if (currentList[i].chapterNumber != firstVisibleItem.chapterNumber) {
+                break
+            }
+            when (currentList[i].viewType) {
+                BookDisplayItemViewType.TITLE -> {
+                    break@loopFwd
+                }
+                BookDisplayItemViewType.VERSE -> {
+                    break@loopFwd
+                }
+                BookDisplayItemViewType.DIVIDER -> {
+                    break@loopFwd
+                }
+                else -> {
+                    // continue
+                }
+            }
+            i--
+        }
+        return i
     }
 
     private fun locateParticularVersePos(

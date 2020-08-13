@@ -28,7 +28,6 @@ import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onCancel
-import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
@@ -104,13 +103,6 @@ class MainActivity : AppCompatActivity(),
 
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
         preferenceManager.registerOnSharedPreferenceChangeListener(this)
-
-        /*val fab: FloatingActionButton = findViewById(R.id.fab)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
 
         val viewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
         viewModel.latestVersionLiveData.observeProperAsEvent(this,

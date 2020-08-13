@@ -48,7 +48,7 @@ def appDb = "../Niv1984-Plus/app/src/main/assets/search_data.db"
 //appDb = "test_search_data.db"
 Sql.withInstance("jdbc:sqlite:$scriptDir/$appDb".replaceAll("\\\\", '/'), '', '', 'org.sqlite.JDBC') { sql ->
     // use 'sql' instance ...
-    args = ["SELECT snippet(bible_index_record) FROM bible_index_record WHERE content MATCH 'Nyankop\u0186n' LIMIT 9"] // verifies that capital twi Oh
+    //args = ["SELECT snippet(bible_index_record) FROM bible_index_record WHERE content MATCH 'Nyankop\u0186n' LIMIT 9"] // verifies that capital twi Oh
                                                                                                                     // can still find small twi oh in index
     if (args) {
         def sqlQuery = args.join(" ")

@@ -312,7 +312,7 @@ class XmlGenerator {
                 if (first && removeFromFirst) {
                     remainder = remainder.substring(removeFromFirst.size())
                 }
-                fragEl.appendChild(createOutContentEl(remainder, FancyContentKind.EM))
+                fragEl.appendChild(createOutContentEl(remainder, null))
             }
             else {
                 processNoteRef(fragEl, ddChild, footnoteMap)

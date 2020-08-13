@@ -346,9 +346,10 @@
         <verse num="28">
             <content>The grace of our Lord Jesus Christ </content>
             <content kind="EM">be</content>
-            <content> with you. Amen. (</content>
-            <content kind="EM">The first epistle to the Thessalonians was written from Athens.</content>
-            <content>)</content>
+            <content> with you. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">The first epistle to the Thessalonians was written from Athens.</content>
+        </fragment>
     </chapter>
 </book>

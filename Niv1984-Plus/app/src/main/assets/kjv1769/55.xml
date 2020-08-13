@@ -329,9 +329,10 @@
             <content kind="EM">be</content>
             <content> with thy spirit. Grace </content>
             <content kind="EM">be</content>
-            <content> with you. Amen. (</content>
-            <content kind="EM">The second epistle unto Timotheus, ordained the first bishop of the church of the Ephesians, was written from Rome, when Paul was brought before Nero the second time.</content>
-            <content>)</content>
+            <content> with you. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">The second epistle unto Timotheus, ordained the first bishop of the church of the Ephesians, was written from Rome, when Paul was brought before Nero the second time.</content>
+        </fragment>
     </chapter>
 </book>

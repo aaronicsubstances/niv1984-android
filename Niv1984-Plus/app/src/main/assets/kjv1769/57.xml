@@ -88,9 +88,10 @@
         <verse num="25">
             <content>The grace of our Lord Jesus Christ </content>
             <content kind="EM">be</content>
-            <content> with your spirit. Amen. (</content>
-            <content kind="EM">Written from Rome to Philemon, by Onesimus a servant.</content>
-            <content>)</content>
+            <content> with your spirit. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">Written from Rome to Philemon, by Onesimus a servant.</content>
+        </fragment>
     </chapter>
 </book>

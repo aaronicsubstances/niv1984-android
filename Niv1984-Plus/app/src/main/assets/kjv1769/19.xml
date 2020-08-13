@@ -82,7 +82,7 @@
     </chapter>
     <chapter num="3">
         <fragment>
-            <content kind="EM">A Psalm of David, when he fled from Absalom his son.</content>
+            <content>A Psalm of David, when he fled from Absalom his son.</content>
         </fragment>
         <verse num="1">
             <content>LORD, how are they increased that trouble me! many </content>
@@ -127,7 +127,7 @@
     </chapter>
     <chapter num="4">
         <fragment>
-            <content kind="EM">To the chief Musician on Neginoth, A Psalm of David.</content>
+            <content>To the chief Musician on Neginoth, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear me when I call, O God of my righteousness: thou hast enlarged me </content>
@@ -169,7 +169,7 @@
     </chapter>
     <chapter num="5">
         <fragment>
-            <content kind="EM">To the chief Musician upon Nehiloth, A Psalm of David.</content>
+            <content>To the chief Musician upon Nehiloth, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Give ear to my words, O LORD, consider my meditation.</content>
@@ -226,7 +226,7 @@
     </chapter>
     <chapter num="6">
         <fragment>
-            <content kind="EM">To the chief Musician on Neginoth upon Sheminith, A Psalm of David.</content>
+            <content>To the chief Musician on Neginoth upon Sheminith, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, rebuke me not in thine anger, neither chasten me in thy hot displeasure.</content>
@@ -267,7 +267,7 @@
     </chapter>
     <chapter num="7">
         <fragment>
-            <content kind="EM">Shiggaion of David, which he sang unto the LORD, concerning the words of Cush the Benjamite.</content>
+            <content>Shiggaion of David, which he sang unto the LORD, concerning the words of Cush the Benjamite.</content>
         </fragment>
         <verse num="1">
             <content>O LORD my God, in thee do I put my trust: save me from all them that persecute me, and deliver me:</content>
@@ -341,7 +341,7 @@
     </chapter>
     <chapter num="8">
         <fragment>
-            <content kind="EM">To the chief Musician upon Gittith, A Psalm of David.</content>
+            <content>To the chief Musician upon Gittith, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD our Lord, how excellent </content>
@@ -381,7 +381,7 @@
     </chapter>
     <chapter num="9">
         <fragment>
-            <content kind="EM">To the chief Musician upon Muthlabben, A Psalm of David.</content>
+            <content>To the chief Musician upon Muthlabben, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>I will praise </content>
@@ -557,10 +557,13 @@
         </verse>
     </chapter>
     <chapter num="11">
-        <verse num="1">
-            <content>(To the chief Musician, </content>
+        <fragment>
+            <content>To the chief Musician, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David.) In the LORD put I my trust: how say ye to my soul, Flee </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>In the LORD put I my trust: how say ye to my soul, Flee </content>
             <content kind="EM">as</content>
             <content> a bird to your mountain?</content>
         </verse>
@@ -593,7 +596,7 @@
     </chapter>
     <chapter num="12">
         <fragment>
-            <content kind="EM">To the chief Musician upon Sheminith, A Psalm of David.</content>
+            <content>To the chief Musician upon Sheminith, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Help, LORD; for the godly man ceaseth; for the faithful fail from among the children of men.</content>
@@ -640,7 +643,7 @@
     </chapter>
     <chapter num="13">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>How long wilt thou forget me, O LORD? for ever? how long wilt thou hide thy face from me?</content>
@@ -670,10 +673,13 @@
         </verse>
     </chapter>
     <chapter num="14">
-        <verse num="1">
-            <content>(To the chief Musician, </content>
+        <fragment>
+            <content>To the chief Musician, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David.) The fool hath said in his heart, </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>The fool hath said in his heart, </content>
             <content kind="EM">There is</content>
             <content> no God. They are corrupt, they have done abominable works, </content>
             <content kind="EM">there is</content>
@@ -716,7 +722,7 @@
     </chapter>
     <chapter num="15">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>LORD, who shall abide in thy tabernacle? who shall dwell in thy holy hill?</content>
@@ -744,7 +750,7 @@
     </chapter>
     <chapter num="16">
         <fragment>
-            <content kind="EM">Michtam of David.</content>
+            <content>Michtam of David.</content>
         </fragment>
         <verse num="1">
             <content>Preserve me, O God: for in thee do I put my trust.</content>
@@ -810,7 +816,7 @@
     </chapter>
     <chapter num="17">
         <fragment>
-            <content kind="EM">A Prayer of David.</content>
+            <content>A Prayer of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear the right, O LORD, attend unto my cry, give ear unto my prayer, </content>
@@ -895,12 +901,15 @@
         </verse>
     </chapter>
     <chapter num="18">
-        <verse num="1">
-            <content>(To the chief Musician, </content>
+        <fragment>
+            <content>To the chief Musician, </content>
             <content kind="EM">A Psalm</content>
             <content> of David, the servant of the LORD, who spake unto the LORD the words of this song in the day </content>
             <content kind="EM">that</content>
-            <content> the LORD delivered him from the hand of all his enemies, and from the hand of Saul: And he said,) I will love thee, O LORD, my strength.</content>
+            <content> the LORD delivered him from the hand of all his enemies, and from the hand of Saul: And he said,</content>
+        </fragment>
+        <verse num="1">
+            <content>I will love thee, O LORD, my strength.</content>
         </verse>
         <verse num="2">
             <content>The LORD </content>
@@ -1097,7 +1106,7 @@
     </chapter>
     <chapter num="19">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The heavens declare the glory of God; and the firmament sheweth his handywork.</content>
@@ -1179,7 +1188,7 @@
     </chapter>
     <chapter num="20">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The LORD hear thee in the day of trouble; the name of the God of Jacob defend thee;</content>
@@ -1215,7 +1224,7 @@
     </chapter>
     <chapter num="21">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The king shall joy in thy strength, O LORD; and in thy salvation how greatly shall he rejoice!</content>
@@ -1277,7 +1286,7 @@
     </chapter>
     <chapter num="22">
         <fragment>
-            <content kind="EM">To the chief Musician upon Aijeleth Shahar, A Psalm of David.</content>
+            <content>To the chief Musician upon Aijeleth Shahar, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>My God, my God, why hast thou forsaken me? </content>
@@ -1417,7 +1426,7 @@
     </chapter>
     <chapter num="23">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The LORD </content>
@@ -1444,7 +1453,7 @@
     </chapter>
     <chapter num="24">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The earth </content>
@@ -1488,10 +1497,12 @@
         </verse>
     </chapter>
     <chapter num="25">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Unto thee, O LORD, do I lift up my soul.</content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Unto thee, O LORD, do I lift up my soul.</content>
         </verse>
         <verse num="2">
             <content>O my God, I trust in thee: let me not be ashamed, let not mine enemies triumph over me.</content>
@@ -1580,10 +1591,12 @@
         </verse>
     </chapter>
     <chapter num="26">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Judge me, O LORD; for I have walked in mine integrity: I have trusted also in the LORD; </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Judge me, O LORD; for I have walked in mine integrity: I have trusted also in the LORD; </content>
             <content kind="EM">therefore</content>
             <content> I shall not slide.</content>
         </verse>
@@ -1626,10 +1639,12 @@
         </verse>
     </chapter>
     <chapter num="27">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) The LORD </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>The LORD </content>
             <content kind="EM">is</content>
             <content> my light and my salvation; whom shall I fear? the LORD </content>
             <content kind="EM">is</content>
@@ -1690,10 +1705,12 @@
         </verse>
     </chapter>
     <chapter num="28">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Unto thee will I cry, O LORD my rock; be not silent to me: lest, </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Unto thee will I cry, O LORD my rock; be not silent to me: lest, </content>
             <content kind="EM">if</content>
             <content> thou be silent to me, I become like them that go down into the pit.</content>
         </verse>
@@ -1734,7 +1751,7 @@
     </chapter>
     <chapter num="29">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Give unto the LORD, O ye mighty, give unto the LORD glory and strength.</content>
@@ -1781,12 +1798,15 @@
         </verse>
     </chapter>
     <chapter num="30">
-        <verse num="1">
-            <content>(A Psalm </content>
+        <fragment>
+            <content>A Psalm </content>
             <content kind="EM">and</content>
             <content> Song </content>
             <content kind="EM">at</content>
-            <content> the dedication of the house of David.) I will extol thee, O LORD; for thou hast lifted me up, and hast not made my foes to rejoice over me.</content>
+            <content> the dedication of the house of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>I will extol thee, O LORD; for thou hast lifted me up, and hast not made my foes to rejoice over me.</content>
         </verse>
         <verse num="2">
             <content>O LORD my God, I cried unto thee, and thou hast healed me.</content>
@@ -1836,7 +1856,7 @@
     </chapter>
     <chapter num="31">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>In thee, O LORD, do I put my trust; let me never be ashamed: deliver me in thy righteousness.</content>
@@ -1935,10 +1955,12 @@
         </verse>
     </chapter>
     <chapter num="32">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David, Maschil.) Blessed </content>
+            <content> of David, Maschil.</content>
+        </fragment>
+        <verse num="1">
+            <content>Blessed </content>
             <content kind="EM">is he whose</content>
             <content> transgression </content>
             <content kind="EM">is</content>
@@ -2088,10 +2110,12 @@
         </verse>
     </chapter>
     <chapter num="34">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David, when he changed his behaviour before Abimelech; who drove him away, and he departed.) I will bless the LORD at all times: his praise </content>
+            <content> of David, when he changed his behaviour before Abimelech; who drove him away, and he departed.</content>
+        </fragment>
+        <verse num="1">
+            <content>I will bless the LORD at all times: his praise </content>
             <content kind="EM">shall</content>
             <content> continually </content>
             <content kind="EM">be</content>
@@ -2193,10 +2217,12 @@
         </verse>
     </chapter>
     <chapter num="35">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Plead </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Plead </content>
             <content kind="EM">my cause</content>
             <content>, O LORD, with them that strive with me: fight against them that fight against me.</content>
         </verse>
@@ -2328,10 +2354,13 @@
         </verse>
     </chapter>
     <chapter num="36">
-        <verse num="1">
-            <content>(To the chief Musician, </content>
+        <fragment>
+            <content>To the chief Musician, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David the servant of the LORD.) The transgression of the wicked saith within my heart, </content>
+            <content> of David the servant of the LORD.</content>
+        </fragment>
+        <verse num="1">
+            <content>The transgression of the wicked saith within my heart, </content>
             <content kind="EM">that there is</content>
             <content> no fear of God before his eyes.</content>
         </verse>
@@ -2390,10 +2419,12 @@
         </verse>
     </chapter>
     <chapter num="37">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Fret not thyself because of evildoers, neither be thou envious against the workers of iniquity.</content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Fret not thyself because of evildoers, neither be thou envious against the workers of iniquity.</content>
         </verse>
         <verse num="2">
             <content>For they shall soon be cut down like the grass, and wither as the green herb.</content>
@@ -2562,7 +2593,7 @@
     </chapter>
     <chapter num="38">
         <fragment>
-            <content kind="EM">A Psalm of David, to bring to remembrance.</content>
+            <content>A Psalm of David, to bring to remembrance.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, rebuke me not in thy wrath: neither chasten me in thy hot displeasure.</content>
@@ -2671,10 +2702,13 @@
         </verse>
     </chapter>
     <chapter num="39">
-        <verse num="1">
-            <content>(To the chief Musician, </content>
+        <fragment>
+            <content>To the chief Musician, </content>
             <content kind="EM">even</content>
-            <content> to Jeduthun, A Psalm of David.) I said, I will take heed to my ways, that I sin not with my tongue: I will keep my mouth with a bridle, while the wicked is before me.</content>
+            <content> to Jeduthun, A Psalm of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>I said, I will take heed to my ways, that I sin not with my tongue: I will keep my mouth with a bridle, while the wicked is before me.</content>
         </verse>
         <verse num="2">
             <content>I was dumb with silence, I held my peace, </content>
@@ -2743,7 +2777,7 @@
     </chapter>
     <chapter num="40">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>I waited patiently for the LORD; and he inclined unto me, and heard my cry.</content>
@@ -2827,7 +2861,7 @@
     </chapter>
     <chapter num="41">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Blessed </content>
@@ -2889,7 +2923,7 @@
     </chapter>
     <chapter num="42">
         <fragment>
-            <content kind="EM">To the chief Musician, Maschil, for the sons of Korah.</content>
+            <content>To the chief Musician, Maschil, for the sons of Korah.</content>
         </fragment>
         <verse num="1">
             <content>As the hart panteth after the water brooks, so panteth my soul after thee, O God.</content>
@@ -2966,7 +3000,7 @@
     </chapter>
     <chapter num="44">
         <fragment>
-            <content kind="EM">To the chief Musician for the sons of Korah, Maschil.</content>
+            <content>To the chief Musician for the sons of Korah, Maschil.</content>
         </fragment>
         <verse num="1">
             <content>We have heard with our ears, O God, our fathers have told us, </content>
@@ -3064,7 +3098,7 @@
     </chapter>
     <chapter num="45">
         <fragment>
-            <content kind="EM">To the chief Musician upon Shoshannim, for the sons of Korah, Maschil, A Song of loves.</content>
+            <content>To the chief Musician upon Shoshannim, for the sons of Korah, Maschil, A Song of loves.</content>
         </fragment>
         <verse num="1">
             <content>My heart is inditing a good matter: I speak of the things which I have made touching the king: my tongue </content>
@@ -3152,7 +3186,7 @@
     </chapter>
     <chapter num="46">
         <fragment>
-            <content kind="EM">To the chief Musician for the sons of Korah, A Song upon Alamoth.</content>
+            <content>To the chief Musician for the sons of Korah, A Song upon Alamoth.</content>
         </fragment>
         <verse num="1">
             <content>God </content>
@@ -3214,7 +3248,7 @@
     </chapter>
     <chapter num="47">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm for the sons of Korah.</content>
+            <content>To the chief Musician, A Psalm for the sons of Korah.</content>
         </fragment>
         <verse num="1">
             <content>O clap your hands, all ye people; shout unto God with the voice of triumph.</content>
@@ -3255,10 +3289,13 @@
         </verse>
     </chapter>
     <chapter num="48">
-        <verse num="1">
-            <content>(A Song </content>
+        <fragment>
+            <content>A Song </content>
             <content kind="EM">and</content>
-            <content> Psalm for the sons of Korah.) Great </content>
+            <content> Psalm for the sons of Korah.</content>
+        </fragment>
+        <verse num="1">
+            <content>Great </content>
             <content kind="EM">is</content>
             <content> the LORD, and greatly to be praised in the city of our God, </content>
             <content kind="EM">in</content>
@@ -3324,7 +3361,7 @@
     </chapter>
     <chapter num="49">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm for the sons of Korah.</content>
+            <content>To the chief Musician, A Psalm for the sons of Korah.</content>
         </fragment>
         <verse num="1">
             <content>Hear this, all </content>
@@ -3425,7 +3462,7 @@
     </chapter>
     <chapter num="50">
         <fragment>
-            <content kind="EM">A Psalm of Asaph.</content>
+            <content>A Psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>The mighty God, </content>
@@ -3539,7 +3576,7 @@
     </chapter>
     <chapter num="51">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David, when Nathan the prophet came unto him, after he had gone in to Bathsheba.</content>
+            <content>To the chief Musician, A Psalm of David, when Nathan the prophet came unto him, after he had gone in to Bathsheba.</content>
         </fragment>
         <verse num="1">
             <content>Have mercy upon me, O God, according to thy lovingkindness: according unto the multitude of thy tender mercies blot out my transgressions.</content>
@@ -3621,10 +3658,13 @@
         </verse>
     </chapter>
     <chapter num="52">
-        <verse num="1">
-            <content>(To the chief Musician, Maschil, </content>
+        <fragment>
+            <content>To the chief Musician, Maschil, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David, when Doeg the Edomite came and told Saul, and said unto him, David is come to the house of Ahimelech.) Why boastest thou thyself in mischief, O mighty man? the goodness of God </content>
+            <content> of David, when Doeg the Edomite came and told Saul, and said unto him, David is come to the house of Ahimelech.</content>
+        </fragment>
+        <verse num="1">
+            <content>Why boastest thou thyself in mischief, O mighty man? the goodness of God </content>
             <content kind="EM">endureth</content>
             <content> continually.</content>
         </verse>
@@ -3672,10 +3712,13 @@
         </verse>
     </chapter>
     <chapter num="53">
-        <verse num="1">
-            <content>(To the chief Musician upon Mahalath, Maschil, </content>
+        <fragment>
+            <content>To the chief Musician upon Mahalath, Maschil, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David.) The fool hath said in his heart, </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>The fool hath said in his heart, </content>
             <content kind="EM">There is</content>
             <content> no God. Corrupt are they, and have done abominable iniquity: </content>
             <content kind="EM">there is</content>
@@ -3714,10 +3757,13 @@
         </verse>
     </chapter>
     <chapter num="54">
-        <verse num="1">
-            <content>(To the chief Musician on Neginoth, Maschil, </content>
+        <fragment>
+            <content>To the chief Musician on Neginoth, Maschil, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David, when the Ziphims came and said to Saul, Doth not David hide himself with us?) Save me, O God, by thy name, and judge me by thy strength.</content>
+            <content> of David, when the Ziphims came and said to Saul, Doth not David hide himself with us?</content>
+        </fragment>
+        <verse num="1">
+            <content>Save me, O God, by thy name, and judge me by thy strength.</content>
         </verse>
         <verse num="2">
             <content>Hear my prayer, O God; give ear to the words of my mouth.</content>
@@ -3747,10 +3793,13 @@
         </verse>
     </chapter>
     <chapter num="55">
-        <verse num="1">
-            <content>(To the chief Musician on Neginoth, Maschil, </content>
+        <fragment>
+            <content>To the chief Musician on Neginoth, Maschil, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Give ear to my prayer, O God; and hide not thyself from my supplication.</content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Give ear to my prayer, O God; and hide not thyself from my supplication.</content>
         </verse>
         <verse num="2">
             <content>Attend unto me, and hear me: I mourn in my complaint, and make a noise;</content>
@@ -3864,7 +3913,7 @@
     </chapter>
     <chapter num="56">
         <fragment>
-            <content kind="EM">To the chief Musician upon Jonathelemrechokim, Michtam of David, when the Philistines took him in Gath.</content>
+            <content>To the chief Musician upon Jonathelemrechokim, Michtam of David, when the Philistines took him in Gath.</content>
         </fragment>
         <verse num="1">
             <content>Be merciful unto me, O God: for man would swallow me up; he fighting daily oppresseth me.</content>
@@ -3932,7 +3981,7 @@
     </chapter>
     <chapter num="57">
         <fragment>
-            <content kind="EM">To the chief Musician, Altaschith, Michtam of David, when he fled from Saul in the cave.</content>
+            <content>To the chief Musician, Altaschith, Michtam of David, when he fled from Saul in the cave.</content>
         </fragment>
         <verse num="1">
             <content>Be merciful unto me, O God, be merciful unto me: for my soul trusteth in thee: yea, in the shadow of thy wings will I make my refuge, until </content>
@@ -4000,7 +4049,7 @@
     </chapter>
     <chapter num="58">
         <fragment>
-            <content kind="EM">To the chief Musician, Altaschith, Michtam of David.</content>
+            <content>To the chief Musician, Altaschith, Michtam of David.</content>
         </fragment>
         <verse num="1">
             <content>Do ye indeed speak righteousness, O congregation? do ye judge uprightly, O ye sons of men?</content>
@@ -4062,7 +4111,7 @@
     </chapter>
     <chapter num="59">
         <fragment>
-            <content kind="EM">To the chief Musician, Altaschith, Michtam of David; when Saul sent, and they watched the house to kill him.</content>
+            <content>To the chief Musician, Altaschith, Michtam of David; when Saul sent, and they watched the house to kill him.</content>
         </fragment>
         <verse num="1">
             <content>Deliver me from mine enemies, O my God: defend me from them that rise up against me.</content>
@@ -4152,7 +4201,7 @@
     </chapter>
     <chapter num="60">
         <fragment>
-            <content kind="EM">To the chief Musician upon Shushaneduth, Michtam of David, to teach; when he strove with Aramnaharaim and with Aramzobah, when Joab returned, and smote of Edom in the valley of salt twelve thousand.</content>
+            <content>To the chief Musician upon Shushaneduth, Michtam of David, to teach; when he strove with Aramnaharaim and with Aramzobah, when Joab returned, and smote of Edom in the valley of salt twelve thousand.</content>
         </fragment>
         <verse num="1">
             <content>O God, thou hast cast us off, thou hast scattered us, thou hast been displeased; O turn thyself to us again.</content>
@@ -4217,10 +4266,13 @@
         </verse>
     </chapter>
     <chapter num="61">
-        <verse num="1">
-            <content>(To the chief Musician upon Neginah, </content>
+        <fragment>
+            <content>To the chief Musician upon Neginah, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Hear my cry, O God; attend unto my prayer.</content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Hear my cry, O God; attend unto my prayer.</content>
         </verse>
         <verse num="2">
             <content>From the end of the earth will I cry unto thee, when my heart is overwhelmed: lead me to the rock </content>
@@ -4256,7 +4308,7 @@
     </chapter>
     <chapter num="62">
         <fragment>
-            <content kind="EM">To the chief Musician, to Jeduthun, A Psalm of David.</content>
+            <content>To the chief Musician, to Jeduthun, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Truly my soul waiteth upon God: from him </content>
@@ -4339,7 +4391,7 @@
     </chapter>
     <chapter num="63">
         <fragment>
-            <content kind="EM">A Psalm of David, when he was in the wilderness of Judah.</content>
+            <content>A Psalm of David, when he was in the wilderness of Judah.</content>
         </fragment>
         <verse num="1">
             <content>O God, thou </content>
@@ -4395,7 +4447,7 @@
     </chapter>
     <chapter num="64">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear my voice, O God, in my prayer: preserve my life from fear of the enemy.</content>
@@ -4445,10 +4497,13 @@
         </verse>
     </chapter>
     <chapter num="65">
-        <verse num="1">
-            <content>(To the chief Musician, A Psalm </content>
+        <fragment>
+            <content>To the chief Musician, A Psalm </content>
             <content kind="EM">and</content>
-            <content> Song of David.) Praise waiteth for thee, O God, in Sion: and unto thee shall the vow be performed.</content>
+            <content> Song of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Praise waiteth for thee, O God, in Sion: and unto thee shall the vow be performed.</content>
         </verse>
         <verse num="2">
             <content>O thou that hearest prayer, unto thee shall all flesh come.</content>
@@ -4507,10 +4562,13 @@
         </verse>
     </chapter>
     <chapter num="66">
-        <verse num="1">
-            <content>(To the chief Musician, A Song </content>
+        <fragment>
+            <content>To the chief Musician, A Song </content>
             <content kind="EM">or</content>
-            <content> Psalm.) Make a joyful noise unto God, all ye lands:</content>
+            <content> Psalm.</content>
+        </fragment>
+        <verse num="1">
+            <content>Make a joyful noise unto God, all ye lands:</content>
         </verse>
         <verse num="2">
             <content>Sing forth the honour of his name: make his praise glorious.</content>
@@ -4592,10 +4650,13 @@
         </verse>
     </chapter>
     <chapter num="67">
-        <verse num="1">
-            <content>(To the chief Musician on Neginoth, A Psalm </content>
+        <fragment>
+            <content>To the chief Musician on Neginoth, A Psalm </content>
             <content kind="EM">or</content>
-            <content> Song.) God be merciful unto us, and bless us; </content>
+            <content> Song.</content>
+        </fragment>
+        <verse num="1">
+            <content>God be merciful unto us, and bless us; </content>
             <content kind="EM">and</content>
             <content> cause his face to shine upon us; Selah.</content>
         </verse>
@@ -4624,10 +4685,13 @@
         </verse>
     </chapter>
     <chapter num="68">
-        <verse num="1">
-            <content>(To the chief Musician, A Psalm </content>
+        <fragment>
+            <content>To the chief Musician, A Psalm </content>
             <content kind="EM">or</content>
-            <content> Song of David.) Let God arise, let his enemies be scattered: let them also that hate him flee before him.</content>
+            <content> Song of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Let God arise, let his enemies be scattered: let them also that hate him flee before him.</content>
         </verse>
         <verse num="2">
             <content>As smoke is driven away, </content>
@@ -4834,10 +4898,13 @@
         </verse>
     </chapter>
     <chapter num="69">
-        <verse num="1">
-            <content>(To the chief Musician upon Shoshannim, </content>
+        <fragment>
+            <content>To the chief Musician upon Shoshannim, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Save me, O God; for the waters are come in unto </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Save me, O God; for the waters are come in unto </content>
             <content kind="EM">my</content>
             <content> soul.</content>
         </verse>
@@ -4989,10 +5056,12 @@
         </verse>
     </chapter>
     <chapter num="70">
-        <verse num="1">
-            <content>(To the chief Musician, </content>
+        <fragment>
+            <content>To the chief Musician, </content>
             <content kind="EM">A Psalm</content>
-            <content> of David, to bring to remembrance.) </content>
+            <content> of David, to bring to remembrance.</content>
+        </fragment>
+        <verse num="1">
             <content kind="EM">Make haste</content>
             <content>, O God, to deliver me; make haste to help me, O LORD.</content>
         </verse>
@@ -5129,10 +5198,12 @@
         </verse>
     </chapter>
     <chapter num="72">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> for Solomon.) Give the king thy judgments, O God, and thy righteousness unto the king's son.</content>
+            <content> for Solomon.</content>
+        </fragment>
+        <verse num="1">
+            <content>Give the king thy judgments, O God, and thy righteousness unto the king's son.</content>
         </verse>
         <verse num="2">
             <content>He shall judge thy people with righteousness, and thy poor with judgment.</content>
@@ -5210,7 +5281,7 @@
     </chapter>
     <chapter num="73">
         <fragment>
-            <content kind="EM">A Psalm of Asaph.</content>
+            <content>A Psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>Truly God </content>
@@ -5361,7 +5432,7 @@
     </chapter>
     <chapter num="74">
         <fragment>
-            <content kind="EM">Maschil of Asaph.</content>
+            <content>Maschil of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>O God, why hast thou cast </content>
@@ -5473,10 +5544,13 @@
         </verse>
     </chapter>
     <chapter num="75">
-        <verse num="1">
-            <content>(To the chief Musician, Altaschith, A Psalm </content>
+        <fragment>
+            <content>To the chief Musician, Altaschith, A Psalm </content>
             <content kind="EM">or</content>
-            <content> Song of Asaph.) Unto thee, O God, do we give thanks, </content>
+            <content> Song of Asaph.</content>
+        </fragment>
+        <verse num="1">
+            <content>Unto thee, O God, do we give thanks, </content>
             <content kind="EM">unto thee</content>
             <content> do we give thanks: for </content>
             <content kind="EM">that</content>
@@ -5527,10 +5601,13 @@
         </verse>
     </chapter>
     <chapter num="76">
-        <verse num="1">
-            <content>(To the chief Musician on Neginoth, A Psalm </content>
+        <fragment>
+            <content>To the chief Musician on Neginoth, A Psalm </content>
             <content kind="EM">or</content>
-            <content> Song of Asaph.) In Judah </content>
+            <content> Song of Asaph.</content>
+        </fragment>
+        <verse num="1">
+            <content>In Judah </content>
             <content kind="EM">is</content>
             <content> God known: his name </content>
             <content kind="EM">is</content>
@@ -5582,7 +5659,7 @@
     </chapter>
     <chapter num="77">
         <fragment>
-            <content kind="EM">To the chief Musician, to Jeduthun, A Psalm of Asaph.</content>
+            <content>To the chief Musician, to Jeduthun, A Psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>I cried unto God with my voice, </content>
@@ -5669,7 +5746,7 @@
     </chapter>
     <chapter num="78">
         <fragment>
-            <content kind="EM">Maschil of Asaph.</content>
+            <content>Maschil of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>Give ear, O my people, </content>
@@ -5952,7 +6029,7 @@
     </chapter>
     <chapter num="79">
         <fragment>
-            <content kind="EM">A Psalm of Asaph.</content>
+            <content>A Psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>O God, the heathen are come into thine inheritance; thy holy temple have they defiled; they have laid Jerusalem on heaps.</content>
@@ -6008,7 +6085,7 @@
     </chapter>
     <chapter num="80">
         <fragment>
-            <content kind="EM">To the chief Musician upon Shoshannimeduth, A Psalm of Asaph.</content>
+            <content>To the chief Musician upon Shoshannimeduth, A Psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>Give ear, O Shepherd of Israel, thou that leadest Joseph like a flock; thou that dwellest </content>
@@ -6086,10 +6163,13 @@
         </verse>
     </chapter>
     <chapter num="81">
-        <verse num="1">
-            <content>(To the chief Musician upon Gittith, </content>
+        <fragment>
+            <content>To the chief Musician upon Gittith, </content>
             <content kind="EM">A Psalm</content>
-            <content> of Asaph.) Sing aloud unto God our strength: make a joyful noise unto the God of Jacob.</content>
+            <content> of Asaph.</content>
+        </fragment>
+        <verse num="1">
+            <content>Sing aloud unto God our strength: make a joyful noise unto the God of Jacob.</content>
         </verse>
         <verse num="2">
             <content>Take a psalm, and bring hither the timbrel, the pleasant harp with the psaltery.</content>
@@ -6155,7 +6235,7 @@
     </chapter>
     <chapter num="82">
         <fragment>
-            <content kind="EM">A Psalm of Asaph.</content>
+            <content>A Psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>God standeth in the congregation of the mighty; he judgeth among the gods.</content>
@@ -6189,10 +6269,13 @@
         </verse>
     </chapter>
     <chapter num="83">
-        <verse num="1">
-            <content>(A Song </content>
+        <fragment>
+            <content>A Song </content>
             <content kind="EM">or</content>
-            <content> Psalm of Asaph.) Keep not thou silence, O God: hold not thy peace, and be not still, O God.</content>
+            <content> Psalm of Asaph.</content>
+        </fragment>
+        <verse num="1">
+            <content>Keep not thou silence, O God: hold not thy peace, and be not still, O God.</content>
         </verse>
         <verse num="2">
             <content>For, lo, thine enemies make a tumult: and they that hate thee have lifted up the head.</content>
@@ -6265,7 +6348,7 @@
     </chapter>
     <chapter num="84">
         <fragment>
-            <content kind="EM">To the chief Musician upon Gittith, A Psalm for the sons of Korah.</content>
+            <content>To the chief Musician upon Gittith, A Psalm for the sons of Korah.</content>
         </fragment>
         <verse num="1">
             <content>How amiable </content>
@@ -6331,7 +6414,7 @@
     </chapter>
     <chapter num="85">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm for the sons of Korah.</content>
+            <content>To the chief Musician, A Psalm for the sons of Korah.</content>
         </fragment>
         <verse num="1">
             <content>LORD, thou hast been favourable unto thy land: thou hast brought back the captivity of Jacob.</content>
@@ -6385,7 +6468,7 @@
     </chapter>
     <chapter num="86">
         <fragment>
-            <content kind="EM">A Prayer of David.</content>
+            <content>A Prayer of David.</content>
         </fragment>
         <verse num="1">
             <content>Bow down thine ear, O LORD, hear me: for I </content>
@@ -6462,10 +6545,13 @@
         </verse>
     </chapter>
     <chapter num="87">
-        <verse num="1">
-            <content>(A Psalm </content>
+        <fragment>
+            <content>A Psalm </content>
             <content kind="EM">or</content>
-            <content> Song for the sons of Korah.) His foundation </content>
+            <content> Song for the sons of Korah.</content>
+        </fragment>
+        <verse num="1">
+            <content>His foundation </content>
             <content kind="EM">is</content>
             <content> in the holy mountains.</content>
         </verse>
@@ -6499,10 +6585,13 @@
         </verse>
     </chapter>
     <chapter num="88">
-        <verse num="1">
-            <content>(A Song </content>
+        <fragment>
+            <content>A Song </content>
             <content kind="EM">or</content>
-            <content> Psalm for the sons of Korah, to the chief Musician upon Mahalath Leannoth, Maschil of Heman the Ezrahite.) O LORD God of my salvation, I have cried day </content>
+            <content> Psalm for the sons of Korah, to the chief Musician upon Mahalath Leannoth, Maschil of Heman the Ezrahite.</content>
+        </fragment>
+        <verse num="1">
+            <content>O LORD God of my salvation, I have cried day </content>
             <content kind="EM">and</content>
             <content> night before thee:</content>
         </verse>
@@ -6580,7 +6669,7 @@
     </chapter>
     <chapter num="89">
         <fragment>
-            <content kind="EM">Maschil of Ethan the Ezrahite.</content>
+            <content>Maschil of Ethan the Ezrahite.</content>
         </fragment>
         <verse num="1">
             <content>I will sing of the mercies of the LORD for ever: with my mouth will I make known thy faithfulness to all generations.</content>
@@ -6793,7 +6882,7 @@
     </chapter>
     <chapter num="90">
         <fragment>
-            <content kind="EM">A Prayer of Moses the man of God.</content>
+            <content>A Prayer of Moses the man of God.</content>
         </fragment>
         <verse num="1">
             <content>Lord, thou hast been our dwelling place in all generations.</content>
@@ -6959,10 +7048,12 @@
         </verse>
     </chapter>
     <chapter num="92">
-        <verse num="1">
-            <content>(A Psalm </content>
+        <fragment>
+            <content>A Psalm </content>
             <content kind="EM">or</content>
-            <content> Song for the sabbath day.) </content>
+            <content> Song for the sabbath day.</content>
+        </fragment>
+        <verse num="1">
             <content kind="EM">It is a</content>
             <content> good </content>
             <content kind="EM">thing</content>
@@ -7316,7 +7407,7 @@
     </chapter>
     <chapter num="98">
         <fragment>
-            <content kind="EM">A Psalm.</content>
+            <content>A Psalm.</content>
         </fragment>
         <verse num="1">
             <content>O sing unto the LORD a new song; for he hath done marvellous things: his right hand, and his holy arm, hath gotten him the victory.</content>
@@ -7397,7 +7488,7 @@
     </chapter>
     <chapter num="100">
         <fragment>
-            <content kind="EM">A Psalm of praise.</content>
+            <content>A Psalm of praise.</content>
         </fragment>
         <verse num="1">
             <content>Make a joyful noise unto the LORD, all ye lands.</content>
@@ -7435,7 +7526,7 @@
     </chapter>
     <chapter num="101">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>I will sing of mercy and judgment: unto thee, O LORD, will I sing.</content>
@@ -7470,7 +7561,7 @@
     </chapter>
     <chapter num="102">
         <fragment>
-            <content kind="EM">A Prayer of the afflicted, when he is overwhelmed, and poureth out his complaint before the LORD.</content>
+            <content>A Prayer of the afflicted, when he is overwhelmed, and poureth out his complaint before the LORD.</content>
         </fragment>
         <verse num="1">
             <content>Hear my prayer, O LORD, and let my cry come unto thee.</content>
@@ -7574,10 +7665,12 @@
         </verse>
     </chapter>
     <chapter num="103">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Bless the LORD, O my soul: and all that is within me, </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Bless the LORD, O my soul: and all that is within me, </content>
             <content kind="EM">bless</content>
             <content> his holy name.</content>
         </verse>
@@ -8367,10 +8460,13 @@
         </verse>
     </chapter>
     <chapter num="108">
-        <verse num="1">
-            <content>(A Song </content>
+        <fragment>
+            <content>A Song </content>
             <content kind="EM">or</content>
-            <content> Psalm of David.) O God, my heart is fixed; I will sing and give praise, even with my glory.</content>
+            <content> Psalm of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>O God, my heart is fixed; I will sing and give praise, even with my glory.</content>
         </verse>
         <verse num="2">
             <content>Awake, psaltery and harp: I </content>
@@ -8438,7 +8534,7 @@
     </chapter>
     <chapter num="109">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Hold not thy peace, O God of my praise;</content>
@@ -8561,7 +8657,7 @@
     </chapter>
     <chapter num="110">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The LORD said unto my Lord, Sit thou at my right hand, until I make thine enemies thy footstool.</content>
@@ -9890,7 +9986,7 @@
     </chapter>
     <chapter num="120">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>In my distress I cried unto the LORD, and he heard me.</content>
@@ -9924,7 +10020,7 @@
     </chapter>
     <chapter num="121">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>I will lift up mine eyes unto the hills, from whence cometh my help.</content>
@@ -9959,7 +10055,7 @@
     </chapter>
     <chapter num="122">
         <fragment>
-            <content kind="EM">A Song of degrees of David.</content>
+            <content>A Song of degrees of David.</content>
         </fragment>
         <verse num="1">
             <content>I was glad when they said unto me, Let us go into the house of the LORD.</content>
@@ -9995,7 +10091,7 @@
     </chapter>
     <chapter num="123">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>Unto thee lift I up mine eyes, O thou that dwellest in the heavens.</content>
@@ -10020,7 +10116,7 @@
     </chapter>
     <chapter num="124">
         <fragment>
-            <content kind="EM">A Song of degrees of David.</content>
+            <content>A Song of degrees of David.</content>
         </fragment>
         <verse num="1">
             <content>If </content>
@@ -10059,7 +10155,7 @@
     </chapter>
     <chapter num="125">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>They that trust in the LORD </content>
@@ -10097,7 +10193,7 @@
     </chapter>
     <chapter num="126">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>When the LORD turned again the captivity of Zion, we were like them that dream.</content>
@@ -10124,7 +10220,7 @@
     </chapter>
     <chapter num="127">
         <fragment>
-            <content kind="EM">A Song of degrees for Solomon.</content>
+            <content>A Song of degrees for Solomon.</content>
         </fragment>
         <verse num="1">
             <content>Except the LORD build the house, they labour in vain that build it: except the LORD keep the city, the watchman waketh </content>
@@ -10161,7 +10257,7 @@
     </chapter>
     <chapter num="128">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>Blessed </content>
@@ -10196,7 +10292,7 @@
     </chapter>
     <chapter num="129">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>Many a time have they afflicted me from my youth, may Israel now say:</content>
@@ -10231,7 +10327,7 @@
     </chapter>
     <chapter num="130">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>Out of the depths have I cried unto thee, O LORD.</content>
@@ -10270,7 +10366,7 @@
     </chapter>
     <chapter num="131">
         <fragment>
-            <content kind="EM">A Song of degrees of David.</content>
+            <content>A Song of degrees of David.</content>
         </fragment>
         <verse num="1">
             <content>LORD, my heart is not haughty, nor mine eyes lofty: neither do I exercise myself in great matters, or in things too high for me.</content>
@@ -10285,8 +10381,11 @@
         </verse>
     </chapter>
     <chapter num="132">
+        <fragment>
+            <content>A Song of degrees.</content>
+        </fragment>
         <verse num="1">
-            <content>A Song of degrees. LORD, remember David, </content>
+            <content>LORD, remember David, </content>
             <content kind="EM">and</content>
             <content> all his afflictions:</content>
         </verse>
@@ -10358,7 +10457,7 @@
     </chapter>
     <chapter num="133">
         <fragment>
-            <content kind="EM">A Song of degrees of David.</content>
+            <content>A Song of degrees of David.</content>
         </fragment>
         <verse num="1">
             <content>Behold, how good and how pleasant </content>
@@ -10381,7 +10480,7 @@
     </chapter>
     <chapter num="134">
         <fragment>
-            <content kind="EM">A Song of degrees.</content>
+            <content>A Song of degrees.</content>
         </fragment>
         <verse num="1">
             <content>Behold, bless ye the LORD, all </content>
@@ -10672,10 +10771,12 @@
         </verse>
     </chapter>
     <chapter num="138">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) I will praise thee with my whole heart: before the gods will I sing praise unto thee.</content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>I will praise thee with my whole heart: before the gods will I sing praise unto thee.</content>
         </verse>
         <verse num="2">
             <content>I will worship toward thy holy temple, and praise thy name for thy lovingkindness and for thy truth: for thou hast magnified thy word above all thy name.</content>
@@ -10713,7 +10814,7 @@
     </chapter>
     <chapter num="139">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, thou hast searched me, and known </content>
@@ -10835,7 +10936,7 @@
     </chapter>
     <chapter num="140">
         <fragment>
-            <content kind="EM">To the chief Musician, A Psalm of David.</content>
+            <content>To the chief Musician, A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Deliver me, O LORD, from the evil man: preserve me from the violent man;</content>
@@ -10894,7 +10995,7 @@
     </chapter>
     <chapter num="141">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>LORD, I cry unto thee: make haste unto me; give ear unto my voice, when I cry unto thee.</content>
@@ -10951,7 +11052,7 @@
     </chapter>
     <chapter num="142">
         <fragment>
-            <content kind="EM">Maschil of David; A Prayer when he was in the cave.</content>
+            <content>Maschil of David; A Prayer when he was in the cave.</content>
         </fragment>
         <verse num="1">
             <content>I cried unto the LORD with my voice; with my voice unto the LORD did I make my supplication.</content>
@@ -10985,7 +11086,7 @@
     </chapter>
     <chapter num="143">
         <fragment>
-            <content kind="EM">A Psalm of David.</content>
+            <content>A Psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear my prayer, O LORD, give ear to my supplications: in thy faithfulness answer me, </content>
@@ -11035,10 +11136,12 @@
         </verse>
     </chapter>
     <chapter num="144">
-        <verse num="1">
-            <content>(</content>
+        <fragment>
             <content kind="EM">A Psalm</content>
-            <content> of David.) Blessed </content>
+            <content> of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>Blessed </content>
             <content kind="EM">be</content>
             <content> the LORD my strength, which teacheth my hands to war, </content>
             <content kind="EM">and</content>
@@ -11131,10 +11234,13 @@
         </verse>
     </chapter>
     <chapter num="145">
-        <verse num="1">
-            <content>(David's </content>
+        <fragment>
+            <content>David's </content>
             <content kind="EM">Psalm</content>
-            <content> of praise.) I will extol thee, my God, O king; and I will bless thy name for ever and ever.</content>
+            <content> of praise.</content>
+        </fragment>
+        <verse num="1">
+            <content>I will extol thee, my God, O king; and I will bless thy name for ever and ever.</content>
         </verse>
         <verse num="2">
             <content>Every day will I bless thee; and I will praise thy name for ever and ever.</content>

@@ -176,9 +176,10 @@
         <verse num="18">
             <content>The grace of our Lord Jesus Christ </content>
             <content kind="EM">be</content>
-            <content> with you all. Amen. (</content>
-            <content kind="EM">The second epistle to the Thessalonians was written from Athens.</content>
-            <content>)</content>
+            <content> with you all. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">The second epistle to the Thessalonians was written from Athens.</content>
+        </fragment>
     </chapter>
 </book>

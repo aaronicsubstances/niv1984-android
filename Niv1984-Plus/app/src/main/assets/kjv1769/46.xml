@@ -1840,9 +1840,10 @@
         <verse num="24">
             <content>My love </content>
             <content kind="EM">be</content>
-            <content> with you all in Christ Jesus. Amen. (</content>
-            <content kind="EM">The first epistle to the Corinthians was written from Philippi by Stephanas and Fortunatus and Achaicus and Timotheus.</content>
-            <content>)</content>
+            <content> with you all in Christ Jesus. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">The first epistle to the Corinthians was written from Philippi by Stephanas and Fortunatus and Achaicus and Timotheus.</content>
+        </fragment>
     </chapter>
 </book>

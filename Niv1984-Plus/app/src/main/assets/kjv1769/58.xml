@@ -1251,9 +1251,10 @@
         <verse num="25">
             <content>Grace </content>
             <content kind="EM">be</content>
-            <content> with you all. Amen. (</content>
-            <content kind="EM">Written to the Hebrews from Italy, by Timothy.</content>
-            <content>)</content>
+            <content> with you all. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">Written to the Hebrews from Italy, by Timothy.</content>
+        </fragment>
     </chapter>
 </book>

@@ -438,9 +438,10 @@
         <verse num="21">
             <content>Which some professing have erred concerning the faith. Grace </content>
             <content kind="EM">be</content>
-            <content> with thee. Amen. (</content>
-            <content kind="EM">The first to Timothy was written from Laodicea, which is the chiefest city of Phrygia Pacatiana.</content>
-            <content>)</content>
+            <content> with thee. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">The first to Timothy was written from Laodicea, which is the chiefest city of Phrygia Pacatiana.</content>
+        </fragment>
     </chapter>
 </book>

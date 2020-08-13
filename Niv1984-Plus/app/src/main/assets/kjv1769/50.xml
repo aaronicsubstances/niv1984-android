@@ -422,9 +422,10 @@
         <verse num="23">
             <content>The grace of our Lord Jesus Christ </content>
             <content kind="EM">be</content>
-            <content> with you all. Amen. (</content>
-            <content kind="EM">To the Philippians written from Rome, by Epaphroditus.</content>
-            <content>)</content>
+            <content> with you all. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">To the Philippians written from Rome, by Epaphroditus.</content>
+        </fragment>
     </chapter>
 </book>

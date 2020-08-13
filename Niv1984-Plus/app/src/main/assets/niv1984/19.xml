@@ -103,7 +103,7 @@
     </chapter>
     <chapter num="3">
         <fragment>
-            <content kind="EM"> A psalm of David. When he fled from his son Absalom.</content>
+            <content> A psalm of David. When he fled from his son Absalom.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, how many are my foes! How many rise up against me!</content>
@@ -145,7 +145,7 @@
     </chapter>
     <chapter num="4">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. A psalm of David.</content>
+            <content> For the director of music. With stringed instruments. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Answer me when I call to you, O my righteous God. Give me relief from my distress; be merciful to me and hear my prayer. </content>
@@ -188,7 +188,7 @@
     </chapter>
     <chapter num="5">
         <fragment>
-            <content kind="EM"> For the director of music. For flutes. A psalm of David.</content>
+            <content> For the director of music. For flutes. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Give ear to my words, O LORD, consider my sighing.</content>
@@ -229,9 +229,9 @@
     </chapter>
     <chapter num="6">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. According to sheminith. </content>
+            <content> For the director of music. With stringed instruments. According to sheminith. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, do not rebuke me in your anger or discipline me in your wrath.</content>
@@ -276,9 +276,9 @@
     </chapter>
     <chapter num="7">
         <fragment>
-            <content kind="EM"> A shiggaion </content>
+            <content> A shiggaion </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David, which he sang to the LORD concerning Cush, a Benjamite.</content>
+            <content> of David, which he sang to the LORD concerning Cush, a Benjamite.</content>
         </fragment>
         <verse num="1">
             <content>O LORD my God, I take refuge in you; save and deliver me from all who pursue me,</content>
@@ -351,9 +351,9 @@
     </chapter>
     <chapter num="8">
         <fragment>
-            <content kind="EM"> For the director of music. According to gittith. </content>
+            <content> For the director of music. According to gittith. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, our Lord, how majestic is your name in all the earth! You have set your glory above the heavens.</content>
@@ -402,9 +402,9 @@
     </chapter>
     <chapter num="9">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "The Death of the Son." A psalm of David. </content>
+            <content> For the director of music. To [the tune of] "The Death of the Son." A psalm of David. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>I will praise you, O LORD, with all my heart; I will tell of all your wonders.</content>
@@ -487,9 +487,9 @@
     </chapter>
     <chapter num="10">
         <fragment>
-            <content kind="EM"> </content>
+            <content> </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Why, O LORD, do you stand far off? Why do you hide yourself in times of trouble? </content>
@@ -551,7 +551,7 @@
     </chapter>
     <chapter num="11">
         <fragment>
-            <content kind="EM"> For the director of music. Of David.</content>
+            <content> For the director of music. Of David.</content>
         </fragment>
         <verse num="1">
             <content>In the LORD I take refuge. How then can you say to me: "Flee like a bird to your mountain.</content>
@@ -591,9 +591,9 @@
     </chapter>
     <chapter num="12">
         <fragment>
-            <content kind="EM"> For the director of music. According to sheminith. </content>
+            <content> For the director of music. According to sheminith. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Help, LORD, for the godly are no more; the faithful have vanished from among men.</content>
@@ -632,7 +632,7 @@
     </chapter>
     <chapter num="13">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>How long, O LORD? Will you forget me forever? How long will you hide your face from me?</content>
@@ -655,7 +655,7 @@
     </chapter>
     <chapter num="14">
         <fragment>
-            <content kind="EM"> For the director of music. Of David.</content>
+            <content> For the director of music. Of David.</content>
         </fragment>
         <verse num="1">
             <content>The fool </content>
@@ -689,7 +689,7 @@
     </chapter>
     <chapter num="15">
         <fragment>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>LORD, who may dwell in your sanctuary? Who may live on your holy hill? </content>
@@ -709,9 +709,9 @@
     </chapter>
     <chapter num="16">
         <fragment>
-            <content kind="EM"> A miktam</content>
+            <content> A miktam</content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David.</content>
+            <content> of David.</content>
         </fragment>
         <verse num="1">
             <content>Keep me safe, O God, for in you I take refuge. </content>
@@ -780,7 +780,7 @@
     </chapter>
     <chapter num="17">
         <fragment>
-            <content kind="EM"> A prayer of David.</content>
+            <content> A prayer of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear, O LORD, my righteous plea; listen to my cry. Give ear to my prayer-- it does not rise from deceitful lips.</content>
@@ -830,7 +830,7 @@
     </chapter>
     <chapter num="18">
         <fragment>
-            <content kind="EM"> For the director of music. Of David the servant of the LORD. He sang to the LORD the words of this song when the LORD delivered him from the hand of all his enemies and from the hand of Saul. He said:</content>
+            <content> For the director of music. Of David the servant of the LORD. He sang to the LORD the words of this song when the LORD delivered him from the hand of all his enemies and from the hand of Saul. He said:</content>
         </fragment>
         <verse num="1">
             <content>I love you, O LORD, my strength. </content>
@@ -1014,7 +1014,7 @@
     </chapter>
     <chapter num="19">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The heavens declare the glory of God; the skies proclaim the work of his hands.</content>
@@ -1075,7 +1075,7 @@
     </chapter>
     <chapter num="20">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>May the LORD answer you when you are in distress; may the name of the God of Jacob protect you.</content>
@@ -1114,7 +1114,7 @@
     </chapter>
     <chapter num="21">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, the king rejoices in your strength. How great is his joy in the victories you give!</content>
@@ -1158,7 +1158,7 @@
     </chapter>
     <chapter num="22">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "The Doe of the Morning." A psalm of David.</content>
+            <content> For the director of music. To [the tune of] "The Doe of the Morning." A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>My God, my God, why have you forsaken me? Why are you so far from saving me, so far from the words of my groaning?</content>
@@ -1291,7 +1291,7 @@
     </chapter>
     <chapter num="23">
         <fragment>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>The LORD is my shepherd, I shall not be in want.</content>
@@ -1321,7 +1321,7 @@
     </chapter>
     <chapter num="24">
         <fragment>
-            <content kind="EM"> Of David. A psalm.</content>
+            <content> Of David. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>The earth is the LORD's, and everything in it, the world, and all who live in it;</content>
@@ -1370,9 +1370,9 @@
     </chapter>
     <chapter num="25">
         <fragment>
-            <content kind="EM"> Of David. </content>
+            <content> Of David. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>To you, O LORD, I lift up my soul;</content>
@@ -1446,7 +1446,7 @@
     </chapter>
     <chapter num="26">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>Vindicate me, O LORD, for I have led a blameless life; I have trusted in the LORD without wavering.</content>
@@ -1487,7 +1487,7 @@
     </chapter>
     <chapter num="27">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>The LORD is my light and my salvation-- whom shall I fear? The LORD is the stronghold of my life-- of whom shall I be afraid?</content>
@@ -1548,7 +1548,7 @@
     </chapter>
     <chapter num="28">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>To you I call, O LORD my Rock; do not turn a deaf ear to me. For if you remain silent, I will be like those who have gone down to the pit.</content>
@@ -1580,7 +1580,7 @@
     </chapter>
     <chapter num="29">
         <fragment>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Ascribe to the LORD, O mighty ones, ascribe to the LORD glory and strength.</content>
@@ -1645,9 +1645,9 @@
     </chapter>
     <chapter num="30">
         <fragment>
-            <content kind="EM"> A psalm. A song. For the dedication of the temple. </content>
+            <content> A psalm. A song. For the dedication of the temple. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>I will exalt you, O LORD, for you lifted me out of the depths and did not let my enemies gloat over me.</content>
@@ -1713,7 +1713,7 @@
     </chapter>
     <chapter num="31">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>In you, O LORD, I have taken refuge; let me never be put to shame; deliver me in your righteousness.</content>
@@ -1804,9 +1804,9 @@
     </chapter>
     <chapter num="32">
         <fragment>
-            <content kind="EM"> Of David. A maskil. </content>
+            <content> Of David. A maskil. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Blessed is he whose transgressions are forgiven, whose sins are covered.</content>
@@ -1922,9 +1922,9 @@
     </chapter>
     <chapter num="34">
         <fragment>
-            <content kind="EM"> Of David. When he pretended to be insane before Abimelech, who drove him away, and he left. </content>
+            <content> Of David. When he pretended to be insane before Abimelech, who drove him away, and he left. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>I will extol the LORD at all times; his praise will always be on my lips.</content>
@@ -1998,7 +1998,7 @@
     </chapter>
     <chapter num="35">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>Contend, O LORD, with those who contend with me; fight against those who fight against me.</content>
@@ -2101,7 +2101,7 @@
     </chapter>
     <chapter num="36">
         <fragment>
-            <content kind="EM"> For the director of music. Of David the servant of the LORD.</content>
+            <content> For the director of music. Of David the servant of the LORD.</content>
         </fragment>
         <verse num="1">
             <content>An oracle is within my heart concerning the sinfulness of the wicked: </content>
@@ -2158,9 +2158,9 @@
     </chapter>
     <chapter num="37">
         <fragment>
-            <content kind="EM"> Of David. </content>
+            <content> Of David. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Do not fret because of evil men or be envious of those who do wrong;</content>
@@ -2302,7 +2302,7 @@
     </chapter>
     <chapter num="38">
         <fragment>
-            <content kind="EM"> A psalm of David. A petition.</content>
+            <content> A psalm of David. A petition.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, do not rebuke me in your anger or discipline me in your wrath.</content>
@@ -2373,7 +2373,7 @@
     </chapter>
     <chapter num="39">
         <fragment>
-            <content kind="EM"> For the director of music. For Jeduthun. A psalm of David.</content>
+            <content> For the director of music. For Jeduthun. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>I said, "I will watch my ways and keep my tongue from sin; I will put a muzzle on my mouth as long as the wicked are in my presence."</content>
@@ -2417,7 +2417,7 @@
     </chapter>
     <chapter num="40">
         <fragment>
-            <content kind="EM"> For the director of music. Of David. A psalm.</content>
+            <content> For the director of music. Of David. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>I waited patiently for the LORD; he turned to me and heard my cry.</content>
@@ -2502,7 +2502,7 @@
     </chapter>
     <chapter num="41">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Blessed is he who has regard for the weak; the LORD delivers him in times of trouble.</content>
@@ -2546,11 +2546,11 @@
     </chapter>
     <chapter num="42">
         <fragment>
-            <content kind="EM"> For the director of music. A maskil </content>
+            <content> For the director of music. A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of the Sons of Korah. </content>
+            <content> of the Sons of Korah. </content>
             <note_ref>2</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>As the deer pants for streams of water, so my soul pants for you, O God.</content>
@@ -2603,9 +2603,9 @@
     </chapter>
     <chapter num="43">
         <fragment>
-            <content kind="EM"> </content>
+            <content> </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Vindicate me, O God, and plead my cause against an ungodly nation; rescue me from deceitful and wicked men.</content>
@@ -2628,9 +2628,9 @@
     </chapter>
     <chapter num="44">
         <fragment>
-            <content kind="EM"> For the director of music. Of the Sons of Korah. A maskil. </content>
+            <content> For the director of music. Of the Sons of Korah. A maskil. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>We have heard with our ears, O God; our fathers have told us what you did in their days, in days long ago.</content>
@@ -2723,9 +2723,9 @@
     </chapter>
     <chapter num="45">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "Lilies." Of the Sons of Korah. A maskil. </content>
+            <content> For the director of music. To [the tune of] "Lilies." Of the Sons of Korah. A maskil. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A wedding song.</content>
+            <content> A wedding song.</content>
         </fragment>
         <verse num="1">
             <content>My heart is stirred by a noble theme as I recite my verses for the king; my tongue is the pen of a skillful writer. </content>
@@ -2791,9 +2791,9 @@
     </chapter>
     <chapter num="46">
         <fragment>
-            <content kind="EM"> For the director of music. Of the Sons of Korah. According to alamoth. </content>
+            <content> For the director of music. Of the Sons of Korah. According to alamoth. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A song.</content>
+            <content> A song.</content>
         </fragment>
         <verse num="1">
             <content>God is our refuge and strength, an ever-present help in trouble.</content>
@@ -2841,7 +2841,7 @@
     </chapter>
     <chapter num="47">
         <fragment>
-            <content kind="EM"> For the director of music. Of the Sons of Korah. A psalm.</content>
+            <content> For the director of music. Of the Sons of Korah. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>Clap your hands, all you nations; shout to God with cries of joy.</content>
@@ -2888,7 +2888,7 @@
     </chapter>
     <chapter num="48">
         <fragment>
-            <content kind="EM"> A song. A psalm of the Sons of Korah.</content>
+            <content> A song. A psalm of the Sons of Korah.</content>
         </fragment>
         <verse num="1">
             <content>Great is the LORD, and most worthy of praise, in the city of our God, his holy mountain.</content>
@@ -2950,7 +2950,7 @@
     </chapter>
     <chapter num="49">
         <fragment>
-            <content kind="EM"> For the director of music. Of the Sons of Korah. A psalm.</content>
+            <content> For the director of music. Of the Sons of Korah. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>Hear this, all you peoples; listen, all who live in this world,</content>
@@ -3058,7 +3058,7 @@
     </chapter>
     <chapter num="50">
         <fragment>
-            <content kind="EM"> A psalm of Asaph.</content>
+            <content> A psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>The Mighty One, God, the LORD, speaks and summons the earth from the rising of the sun to the place where it sets.</content>
@@ -3146,7 +3146,7 @@
     </chapter>
     <chapter num="51">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David. When the prophet Nathan came to him after David had committed adultery with Bathsheba.</content>
+            <content> For the director of music. A psalm of David. When the prophet Nathan came to him after David had committed adultery with Bathsheba.</content>
         </fragment>
         <verse num="1">
             <content>Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions.</content>
@@ -3228,9 +3228,9 @@
     </chapter>
     <chapter num="52">
         <fragment>
-            <content kind="EM"> For the director of music. A maskil </content>
+            <content> For the director of music. A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David. When Doeg the Edomite had gone to Saul and told him: "David has gone to the house of Ahimelech."</content>
+            <content> of David. When Doeg the Edomite had gone to Saul and told him: "David has gone to the house of Ahimelech."</content>
         </fragment>
         <verse num="1">
             <content>Why do you boast of evil, you mighty man? Why do you boast all day long, you who are a disgrace in the eyes of God?</content>
@@ -3265,11 +3265,11 @@
     </chapter>
     <chapter num="53">
         <fragment>
-            <content kind="EM"> For the director of music. According to mahalath. </content>
+            <content> For the director of music. According to mahalath. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A maskil </content>
+            <content> A maskil </content>
             <note_ref>2</note_ref>
-            <content kind="EM"> of David.</content>
+            <content> of David.</content>
         </fragment>
         <verse num="1">
             <content>The fool says in his heart, "There is no God." They are corrupt, and their ways are vile; there is no one who does good. </content>
@@ -3298,9 +3298,9 @@
     </chapter>
     <chapter num="54">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. A maskil </content>
+            <content> For the director of music. With stringed instruments. A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David. When the Ziphites had gone to Saul and said, "Is not David hiding among us?"</content>
+            <content> of David. When the Ziphites had gone to Saul and said, "Is not David hiding among us?"</content>
         </fragment>
         <verse num="1">
             <content>Save me, O God, by your name; vindicate me by your might.</content>
@@ -3329,9 +3329,9 @@
     </chapter>
     <chapter num="55">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. A maskil </content>
+            <content> For the director of music. With stringed instruments. A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David.</content>
+            <content> of David.</content>
         </fragment>
         <verse num="1">
             <content>Listen to my prayer, O God, do not ignore my plea;</content>
@@ -3415,9 +3415,9 @@
     </chapter>
     <chapter num="56">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "A Dove on Distant Oaks." Of David. A miktam. </content>
+            <content> For the director of music. To [the tune of] "A Dove on Distant Oaks." Of David. A miktam. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> When the Philistines had seized him in Gath.</content>
+            <content> When the Philistines had seized him in Gath.</content>
         </fragment>
         <verse num="1">
             <content>Be merciful to me, O God, for men hotly pursue me; all day long they press their attack.</content>
@@ -3485,9 +3485,9 @@
     </chapter>
     <chapter num="57">
         <fragment>
-            <content kind="EM"> For the director of music. [To the tune of] "Do Not Destroy." Of David. A miktam. </content>
+            <content> For the director of music. [To the tune of] "Do Not Destroy." Of David. A miktam. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> When he had fled from Saul into the cave.</content>
+            <content> When he had fled from Saul into the cave.</content>
         </fragment>
         <verse num="1">
             <content>Have mercy on me, O God, have mercy on me, for in you my soul takes refuge. I will take refuge in the shadow of your wings until the disaster has passed. </content>
@@ -3528,9 +3528,9 @@
     </chapter>
     <chapter num="58">
         <fragment>
-            <content kind="EM"> For the director of music. [To the tune of] "Do Not Destroy." Of David. A miktam. </content>
+            <content> For the director of music. [To the tune of] "Do Not Destroy." Of David. A miktam. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Do you rulers indeed speak justly? Do you judge uprightly among men?</content>
@@ -3577,9 +3577,9 @@
     </chapter>
     <chapter num="59">
         <fragment>
-            <content kind="EM"> For the director of music. [To the tune of] "Do Not Destroy." Of David. A miktam. </content>
+            <content> For the director of music. [To the tune of] "Do Not Destroy." Of David. A miktam. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> When Saul had sent men to watch David's house in order to kill him.</content>
+            <content> When Saul had sent men to watch David's house in order to kill him.</content>
         </fragment>
         <verse num="1">
             <content>Deliver me from my enemies, O God; protect me from those who rise up against me.</content>
@@ -3645,13 +3645,13 @@
     </chapter>
     <chapter num="60">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "The Lily of the Covenant." A miktam </content>
+            <content> For the director of music. To [the tune of] "The Lily of the Covenant." A miktam </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David. For teaching. When he fought Aram Naharaim </content>
+            <content> of David. For teaching. When he fought Aram Naharaim </content>
             <note_ref>2</note_ref>
-            <content kind="EM"> and Aram Zobah, </content>
+            <content> and Aram Zobah, </content>
             <note_ref>3</note_ref>
-            <content kind="EM"> and when Joab returned and struck down twelve thousand Edomites in the Valley of Salt.</content>
+            <content> and when Joab returned and struck down twelve thousand Edomites in the Valley of Salt.</content>
         </fragment>
         <verse num="1">
             <content>You have rejected us, O God, and burst forth upon us; you have been angry--now restore us!</content>
@@ -3701,7 +3701,7 @@
     </chapter>
     <chapter num="61">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. Of David.</content>
+            <content> For the director of music. With stringed instruments. Of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear my cry, O God; listen to my prayer. </content>
@@ -3730,7 +3730,7 @@
     </chapter>
     <chapter num="62">
         <fragment>
-            <content kind="EM"> For the director of music. For Jeduthun. A psalm of David.</content>
+            <content> For the director of music. For Jeduthun. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>My soul finds rest in God alone; my salvation comes from him.</content>
@@ -3778,7 +3778,7 @@
     </chapter>
     <chapter num="63">
         <fragment>
-            <content kind="EM"> A psalm of David. When he was in the Desert of Judah.</content>
+            <content> A psalm of David. When he was in the Desert of Judah.</content>
         </fragment>
         <verse num="1">
             <content>O God, you are my God, earnestly I seek you; my soul thirsts for you, my body longs for you, in a dry and weary land where there is no water. </content>
@@ -3816,7 +3816,7 @@
     </chapter>
     <chapter num="64">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear me, O God, as I voice my complaint; protect my life from the threat of the enemy.</content>
@@ -3858,7 +3858,7 @@
     </chapter>
     <chapter num="65">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David. A song.</content>
+            <content> For the director of music. A psalm of David. A song.</content>
         </fragment>
         <verse num="1">
             <content>Praise awaits </content>
@@ -3924,7 +3924,7 @@
     </chapter>
     <chapter num="66">
         <fragment>
-            <content kind="EM"> For the director of music. A song. A psalm.</content>
+            <content> For the director of music. A song. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>Shout with joy to God, all the earth!</content>
@@ -3989,7 +3989,7 @@
     </chapter>
     <chapter num="67">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. A psalm. A song.</content>
+            <content> For the director of music. With stringed instruments. A psalm. A song.</content>
         </fragment>
         <verse num="1">
             <content>May God be gracious to us and bless us and make his face shine upon us, Selah</content>
@@ -4015,7 +4015,7 @@
     </chapter>
     <chapter num="68">
         <fragment>
-            <content kind="EM"> For the director of music. Of David. A psalm. A song.</content>
+            <content> For the director of music. Of David. A psalm. A song.</content>
         </fragment>
         <verse num="1">
             <content>May God arise, may his enemies be scattered; may his foes flee before him.</content>
@@ -4180,7 +4180,7 @@
     </chapter>
     <chapter num="69">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "Lilies." Of David.</content>
+            <content> For the director of music. To [the tune of] "Lilies." Of David.</content>
         </fragment>
         <verse num="1">
             <content>Save me, O God, for the waters have come up to my neck.</content>
@@ -4300,7 +4300,7 @@
     </chapter>
     <chapter num="70">
         <fragment>
-            <content kind="EM"> For the director of music. Of David. A petition.</content>
+            <content> For the director of music. Of David. A petition.</content>
         </fragment>
         <verse num="1">
             <content>Hasten, O God, to save me; O LORD, come quickly to help me.</content>
@@ -4394,7 +4394,7 @@
     </chapter>
     <chapter num="72">
         <fragment>
-            <content kind="EM"> Of Solomon.</content>
+            <content> Of Solomon.</content>
         </fragment>
         <verse num="1">
             <content>Endow the king with your justice, O God, the royal son with your righteousness.</content>
@@ -4487,7 +4487,7 @@
     </chapter>
     <chapter num="73">
         <fragment>
-            <content kind="EM"> A psalm of Asaph.</content>
+            <content> A psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>Surely God is good to Israel, to those who are pure in heart. </content>
@@ -4596,9 +4596,9 @@
     </chapter>
     <chapter num="74">
         <fragment>
-            <content kind="EM"> A maskil </content>
+            <content> A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of Asaph.</content>
+            <content> of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>Why have you rejected us forever, O God? Why does your anger smolder against the sheep of your pasture?</content>
@@ -4675,7 +4675,7 @@
     </chapter>
     <chapter num="75">
         <fragment>
-            <content kind="EM"> For the director of music. [To the tune of] "Do Not Destroy." A psalm of Asaph. A song.</content>
+            <content> For the director of music. [To the tune of] "Do Not Destroy." A psalm of Asaph. A song.</content>
         </fragment>
         <verse num="1">
             <content>We give thanks to you, O God, we give thanks, for your Name is near; men tell of your wonderful deeds. </content>
@@ -4710,7 +4710,7 @@
     </chapter>
     <chapter num="76">
         <fragment>
-            <content kind="EM"> For the director of music. With stringed instruments. A psalm of Asaph. A song.</content>
+            <content> For the director of music. With stringed instruments. A psalm of Asaph. A song.</content>
         </fragment>
         <verse num="1">
             <content>In Judah God is known; his name is great in Israel.</content>
@@ -4758,7 +4758,7 @@
     </chapter>
     <chapter num="77">
         <fragment>
-            <content kind="EM"> For the director of music. For Jeduthun. Of Asaph. A psalm.</content>
+            <content> For the director of music. For Jeduthun. Of Asaph. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>I cried out to God for help; I cried out to God to hear me.</content>
@@ -4823,9 +4823,9 @@
     </chapter>
     <chapter num="78">
         <fragment>
-            <content kind="EM"> A maskil </content>
+            <content> A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of Asaph.</content>
+            <content> of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>O my people, hear my teaching; listen to the words of my mouth.</content>
@@ -5049,7 +5049,7 @@
     </chapter>
     <chapter num="79">
         <fragment>
-            <content kind="EM"> A psalm of Asaph.</content>
+            <content> A psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>O God, the nations have invaded your inheritance; they have defiled your holy temple, they have reduced Jerusalem to rubble.</content>
@@ -5093,7 +5093,7 @@
     </chapter>
     <chapter num="80">
         <fragment>
-            <content kind="EM"> For the director of music. To [the tune of] "The Lilies of the Covenant." Of Asaph. A psalm.</content>
+            <content> For the director of music. To [the tune of] "The Lilies of the Covenant." Of Asaph. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>Hear us, O Shepherd of Israel, you who lead Joseph like a flock; you who sit enthroned between the cherubim, shine forth</content>
@@ -5174,9 +5174,9 @@
     </chapter>
     <chapter num="81">
         <fragment>
-            <content kind="EM"> For the director of music. According to gittith. </content>
+            <content> For the director of music. According to gittith. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> Of Asaph.</content>
+            <content> Of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>Sing for joy to God our strength; shout aloud to the God of Jacob!</content>
@@ -5239,7 +5239,7 @@
     </chapter>
     <chapter num="82">
         <fragment>
-            <content kind="EM"> A psalm of Asaph.</content>
+            <content> A psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>God presides in the great assembly; he gives judgment among the "gods": </content>
@@ -5274,7 +5274,7 @@
     </chapter>
     <chapter num="83">
         <fragment>
-            <content kind="EM"> A song. A psalm of Asaph.</content>
+            <content> A song. A psalm of Asaph.</content>
         </fragment>
         <verse num="1">
             <content>O God, do not keep silent; be not quiet, O God, be not still.</content>
@@ -5339,9 +5339,9 @@
     </chapter>
     <chapter num="84">
         <fragment>
-            <content kind="EM"> For the director of music. According to gittith. </content>
+            <content> For the director of music. According to gittith. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> Of the Sons of Korah. A psalm.</content>
+            <content> Of the Sons of Korah. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>How lovely is your dwelling place, O LORD Almighty!</content>
@@ -5399,7 +5399,7 @@
     </chapter>
     <chapter num="85">
         <fragment>
-            <content kind="EM"> For the director of music. Of the Sons of Korah. A psalm.</content>
+            <content> For the director of music. Of the Sons of Korah. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>You showed favor to your land, O LORD; you restored the fortunes of Jacob.</content>
@@ -5443,7 +5443,7 @@
     </chapter>
     <chapter num="86">
         <fragment>
-            <content kind="EM"> A prayer of David.</content>
+            <content> A prayer of David.</content>
         </fragment>
         <verse num="1">
             <content>Hear, O LORD, and answer me, for I am poor and needy.</content>
@@ -5513,7 +5513,7 @@
     </chapter>
     <chapter num="87">
         <fragment>
-            <content kind="EM"> Of the Sons of Korah. A psalm. A song.</content>
+            <content> Of the Sons of Korah. A psalm. A song.</content>
         </fragment>
         <verse num="1">
             <content>He has set his foundation on the holy mountain;</content>
@@ -5558,11 +5558,11 @@
     </chapter>
     <chapter num="88">
         <fragment>
-            <content kind="EM"> A song. A psalm of the Sons of Korah. For the director of music. According to mahalath leannoth. </content>
+            <content> A song. A psalm of the Sons of Korah. For the director of music. According to mahalath leannoth. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> A maskil </content>
+            <content> A maskil </content>
             <note_ref>2</note_ref>
-            <content kind="EM"> of Heman the Ezrahite.</content>
+            <content> of Heman the Ezrahite.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, the God who saves me, day and night I cry out before you.</content>
@@ -5641,9 +5641,9 @@
     </chapter>
     <chapter num="89">
         <fragment>
-            <content kind="EM"> A maskil </content>
+            <content> A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of Ethan the Ezrahite.</content>
+            <content> of Ethan the Ezrahite.</content>
         </fragment>
         <verse num="1">
             <content>I will sing of the LORD's great love forever; with my mouth I will make your faithfulness known through all generations.</content>
@@ -5845,7 +5845,7 @@
     </chapter>
     <chapter num="90">
         <fragment>
-            <content kind="EM"> A prayer of Moses the man of God.</content>
+            <content> A prayer of Moses the man of God.</content>
         </fragment>
         <verse num="1">
             <content>Lord, you have been our dwelling place throughout all generations.</content>
@@ -5979,7 +5979,7 @@
     </chapter>
     <chapter num="92">
         <fragment>
-            <content kind="EM"> A psalm. A song. For the Sabbath day.</content>
+            <content> A psalm. A song. For the Sabbath day.</content>
         </fragment>
         <verse num="1">
             <content>It is good to praise the LORD and make music to your name, O Most High,</content>
@@ -6264,7 +6264,7 @@
     </chapter>
     <chapter num="98">
         <fragment>
-            <content kind="EM"> A psalm.</content>
+            <content> A psalm.</content>
         </fragment>
         <verse num="1">
             <content>Sing to the LORD a new song, for he has done marvelous things; his right hand and his holy arm have worked salvation for him.</content>
@@ -6339,7 +6339,7 @@
     </chapter>
     <chapter num="100">
         <fragment>
-            <content kind="EM"> A psalm. For giving thanks.</content>
+            <content> A psalm. For giving thanks.</content>
         </fragment>
         <verse num="1">
             <content>Shout for joy to the LORD, all the earth.</content>
@@ -6366,7 +6366,7 @@
     </chapter>
     <chapter num="101">
         <fragment>
-            <content kind="EM"> Of David. A psalm.</content>
+            <content> Of David. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>I will sing of your love and justice; to you, O LORD, I will sing praise.</content>
@@ -6395,7 +6395,7 @@
     </chapter>
     <chapter num="102">
         <fragment>
-            <content kind="EM"> A prayer of an afflicted man. When he is faint and pours out his lament before the LORD.</content>
+            <content> A prayer of an afflicted man. When he is faint and pours out his lament before the LORD.</content>
         </fragment>
         <verse num="1">
             <content>Hear my prayer, O LORD; let my cry for help come to you.</content>
@@ -6491,7 +6491,7 @@
     </chapter>
     <chapter num="103">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>Praise the LORD, O my soul; all my inmost being, praise his holy name.</content>
@@ -7141,7 +7141,7 @@
     </chapter>
     <chapter num="108">
         <fragment>
-            <content kind="EM"> A song. A psalm of David.</content>
+            <content> A song. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>My heart is steadfast, O God; I will sing and make music with all my soul.</content>
@@ -7185,7 +7185,7 @@
     </chapter>
     <chapter num="109">
         <fragment>
-            <content kind="EM"> For the director of music. Of David. A psalm.</content>
+            <content> For the director of music. Of David. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>O God, whom I praise, do not remain silent,</content>
@@ -7326,7 +7326,7 @@
     </chapter>
     <chapter num="110">
         <fragment>
-            <content kind="EM"> Of David. A psalm.</content>
+            <content> Of David. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>The LORD says to my Lord: "Sit at my right hand until I make your enemies a footstool for your feet." </content>
@@ -7366,9 +7366,9 @@
     </chapter>
     <chapter num="111">
         <fragment>
-            <content kind="EM"> </content>
+            <content> </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Praise the LORD. </content>
@@ -7413,9 +7413,9 @@
     </chapter>
     <chapter num="112">
         <fragment>
-            <content kind="EM"> </content>
+            <content> </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>Praise the LORD. </content>
@@ -8445,7 +8445,7 @@
     </chapter>
     <chapter num="120">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>I call on the LORD in my distress, and he answers me.</content>
@@ -8471,7 +8471,7 @@
     </chapter>
     <chapter num="121">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>I lift up my eyes to the hills-- where does my help come from?</content>
@@ -8500,7 +8500,7 @@
     </chapter>
     <chapter num="122">
         <fragment>
-            <content kind="EM"> A song of ascents. Of David.</content>
+            <content> A song of ascents. Of David.</content>
         </fragment>
         <verse num="1">
             <content>I rejoiced with those who said to me, "Let us go to the house of the LORD."</content>
@@ -8532,7 +8532,7 @@
     </chapter>
     <chapter num="123">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>I lift up my eyes to you, to you whose throne is in heaven.</content>
@@ -8549,7 +8549,7 @@
     </chapter>
     <chapter num="124">
         <fragment>
-            <content kind="EM"> A song of ascents. Of David.</content>
+            <content> A song of ascents. Of David.</content>
         </fragment>
         <verse num="1">
             <content>If the LORD had not been on our side-- let Israel say--</content>
@@ -8578,7 +8578,7 @@
     </chapter>
     <chapter num="125">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>Those who trust in the LORD are like Mount Zion, which cannot be shaken but endures forever.</content>
@@ -8598,7 +8598,7 @@
     </chapter>
     <chapter num="126">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>When the LORD brought back the captives to </content>
@@ -8642,7 +8642,7 @@
     </chapter>
     <chapter num="127">
         <fragment>
-            <content kind="EM"> A song of ascents. Of Solomon.</content>
+            <content> A song of ascents. Of Solomon.</content>
         </fragment>
         <verse num="1">
             <content>Unless the LORD builds the house, its builders labor in vain. Unless the LORD watches over the city, the watchmen stand guard in vain.</content>
@@ -8669,7 +8669,7 @@
     </chapter>
     <chapter num="128">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>Blessed are all who fear the LORD, who walk in his ways.</content>
@@ -8692,7 +8692,7 @@
     </chapter>
     <chapter num="129">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>They have greatly oppressed me from my youth-- let Israel say--</content>
@@ -8721,7 +8721,7 @@
     </chapter>
     <chapter num="130">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>Out of the depths I cry to you, O LORD;</content>
@@ -8750,7 +8750,7 @@
     </chapter>
     <chapter num="131">
         <fragment>
-            <content kind="EM"> A song of ascents. Of David.</content>
+            <content> A song of ascents. Of David.</content>
         </fragment>
         <verse num="1">
             <content>My heart is not proud, O LORD, my eyes are not haughty; I do not concern myself with great matters or things too wonderful for me.</content>
@@ -8764,7 +8764,7 @@
     </chapter>
     <chapter num="132">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, remember David and all the hardships he endured. </content>
@@ -8845,7 +8845,7 @@
     </chapter>
     <chapter num="133">
         <fragment>
-            <content kind="EM"> A song of ascents. Of David.</content>
+            <content> A song of ascents. Of David.</content>
         </fragment>
         <verse num="1">
             <content>How good and pleasant it is when brothers live together in unity!</content>
@@ -8859,7 +8859,7 @@
     </chapter>
     <chapter num="134">
         <fragment>
-            <content kind="EM"> A song of ascents.</content>
+            <content> A song of ascents.</content>
         </fragment>
         <verse num="1">
             <content>Praise the LORD, all you servants of the LORD who minister by night in the house of the LORD.</content>
@@ -9063,7 +9063,7 @@
     </chapter>
     <chapter num="138">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>I will praise you, O LORD, with all my heart; before the "gods" I will sing your praise.</content>
@@ -9092,7 +9092,7 @@
     </chapter>
     <chapter num="139">
         <fragment>
-            <content kind="EM"> For the director of music. Of David. A psalm.</content>
+            <content> For the director of music. Of David. A psalm.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, you have searched me and you know me.</content>
@@ -9183,7 +9183,7 @@
     </chapter>
     <chapter num="140">
         <fragment>
-            <content kind="EM"> For the director of music. A psalm of David.</content>
+            <content> For the director of music. A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>Rescue me, O LORD, from evil men; protect me from men of violence,</content>
@@ -9227,7 +9227,7 @@
     </chapter>
     <chapter num="141">
         <fragment>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, I call to you; come quickly to me. Hear my voice when I call to you.</content>
@@ -9276,9 +9276,9 @@
     </chapter>
     <chapter num="142">
         <fragment>
-            <content kind="EM"> A maskil </content>
+            <content> A maskil </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> of David. When he was in the cave. A prayer.</content>
+            <content> of David. When he was in the cave. A prayer.</content>
         </fragment>
         <verse num="1">
             <content>I cry aloud to the LORD; I lift up my voice to the LORD for mercy.</content>
@@ -9307,7 +9307,7 @@
     </chapter>
     <chapter num="143">
         <fragment>
-            <content kind="EM"> A psalm of David.</content>
+            <content> A psalm of David.</content>
         </fragment>
         <verse num="1">
             <content>O LORD, hear my prayer, listen to my cry for mercy; in your faithfulness and righteousness come to my relief.</content>
@@ -9348,7 +9348,7 @@
     </chapter>
     <chapter num="144">
         <fragment>
-            <content kind="EM"> Of David.</content>
+            <content> Of David.</content>
         </fragment>
         <verse num="1">
             <content>Praise be to the LORD my Rock, who trains my hands for war, my fingers for battle.</content>
@@ -9412,9 +9412,9 @@
     </chapter>
     <chapter num="145">
         <fragment>
-            <content kind="EM"> A psalm of praise. Of David. </content>
+            <content> A psalm of praise. Of David. </content>
             <note_ref>1</note_ref>
-            <content kind="EM"> </content>
+            <content> </content>
         </fragment>
         <verse num="1">
             <content>I will exalt you, my God the King; I will praise your name for ever and ever.</content>

@@ -573,9 +573,10 @@
         <verse num="24">
             <content>Grace </content>
             <content kind="EM">be</content>
-            <content> with all them that love our Lord Jesus Christ in sincerity. Amen. (</content>
-            <content kind="EM">To the Ephesians written from Rome, by Tychicus.</content>
-            <content>)</content>
+            <content> with all them that love our Lord Jesus Christ in sincerity. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">To the Ephesians written from Rome, by Tychicus.</content>
+        </fragment>
     </chapter>
 </book>

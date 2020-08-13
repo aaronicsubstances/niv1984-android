@@ -1745,9 +1745,10 @@
         <verse num="27">
             <content>To God only wise, </content>
             <content kind="EM">be</content>
-            <content> glory through Jesus Christ for ever. Amen. (</content>
-            <content kind="EM">Written to the Romans from Corinthus, and sent by Phebe servant of the church at Cenchrea.</content>
-            <content>)</content>
+            <content> glory through Jesus Christ for ever. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">Written to the Romans from Corinthus, and sent by Phebe servant of the church at Cenchrea.</content>
+        </fragment>
     </chapter>
 </book>

@@ -174,9 +174,10 @@
         <verse num="15">
             <content>All that are with me salute thee. Greet them that love us in the faith. Grace </content>
             <content kind="EM">be</content>
-            <content> with you all. Amen. (</content>
-            <content kind="EM">It was written to Titus, ordained the first bishop of the church of the Cretians, from Nicopolis of Macedonia.</content>
-            <content>)</content>
+            <content> with you all. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">It was written to Titus, ordained the first bishop of the church of the Cretians, from Nicopolis of Macedonia.</content>
+        </fragment>
     </chapter>
 </book>

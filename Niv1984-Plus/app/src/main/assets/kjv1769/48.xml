@@ -570,9 +570,10 @@
         <verse num="18">
             <content>Brethren, the grace of our Lord Jesus Christ </content>
             <content kind="EM">be</content>
-            <content> with your spirit. Amen. (</content>
-            <content kind="EM">To the Galatians written from Rome.</content>
-            <content>)</content>
+            <content> with your spirit. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">To the Galatians written from Rome.</content>
+        </fragment>
     </chapter>
 </book>

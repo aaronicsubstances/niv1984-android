@@ -1206,9 +1206,10 @@
         <verse num="14">
             <content>The grace of the Lord Jesus Christ, and the love of God, and the communion of the Holy Ghost, </content>
             <content kind="EM">be</content>
-            <content> with you all. Amen. (</content>
-            <content kind="EM">The second epistle to the Corinthians was written from Philippi, a city of Macedonia, by Titus and Lucas.</content>
-            <content>)</content>
+            <content> with you all. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">The second epistle to the Corinthians was written from Philippi, a city of Macedonia, by Titus and Lucas.</content>
+        </fragment>
     </chapter>
 </book>

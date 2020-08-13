@@ -384,9 +384,10 @@
         <verse num="18">
             <content>The salutation by the hand of me Paul. Remember my bonds. Grace </content>
             <content kind="EM">be</content>
-            <content> with you. Amen. (</content>
-            <content kind="EM">Written from Rome to Colossians by Tychicus and Onesimus.</content>
-            <content>)</content>
+            <content> with you. Amen.</content>
         </verse>
+        <fragment>
+            <content kind="EM">Written from Rome to Colossians by Tychicus and Onesimus.</content>
+        </fragment>
     </chapter>
 </book>

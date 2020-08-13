@@ -21,53 +21,14 @@ class SearchResultDataSource(
     private val selectedBibleVersions: List<String>,
     private val preferredBibleVersions: List<String>,
     private val startBookNumber: Int,
-    private val inclEndBookNumber: Int
+    private val inclEndBookNumber: Int,
+    private val isWordSearch: Boolean
 ): AbstractBatchedDataSourceK<SearchResult>(NEW_BATCH_SIZE, Int.MAX_VALUE),
     UnboundedDataSource<SearchResult> {
 
     companion object {
         private const val CAT_SEARCH = "search"
         const val NEW_BATCH_SIZE = 200
-
-        internal fun splitUserQuery(rawUserQuery: String): List<String> {
-            // Replace all chars which are neither letters nor digits with space.
-            val processed = StringBuilder()
-            for (i in rawUserQuery.indices) {
-                val c = rawUserQuery[i]
-                if (Character.isLetterOrDigit(c)) {
-                    processed.append(c)
-                } else {
-                    processed.append(" ")
-                }
-            }
-            val terms = processed.toString().split(" ").filter { it.isNotEmpty() }
-            return terms
-        }
-
-        internal fun transformUserQuery(
-            terms: List<String>, treatAsExact: Boolean, omittedTermCount: Int
-        ): String {
-            if (treatAsExact) {
-                if (terms.isEmpty()) {
-                    return ""
-                }
-                // use phrase query
-                return "\"" + terms.joinToString(" ") + "\""
-            } else {
-                val nearQueryLen = terms.size - omittedTermCount
-                if (nearQueryLen < 1) {
-                    return ""
-                }
-                val nearQueries = mutableListOf<String>()
-                for (i in 0..omittedTermCount) {
-                    // quote terms as phrases or else lowercase them to prevent clash with keywords
-                    val nearQuery = terms.subList(i, i + nearQueryLen)
-                        .joinToString(" NEAR/3 ") { "\"$it\"" }
-                    nearQueries.add(nearQuery)
-                }
-                return nearQueries.joinToString(" OR ")
-            }
-        }
     }
 
     data class HelperAsyncContext(
@@ -75,10 +36,8 @@ class SearchResultDataSource(
         val ftsDao: BibleIndexRecordDao
     )
 
-    private var lastInitialLoadRequestId: String = ""
-    private var queryTerms = listOf<String>()
-    private var transformedQuery: String = ""
-    private var stage = 0
+    private lateinit var lastInitialLoadRequestId: String
+    private lateinit var queryTransformer: SearchQueryAdvancer
 
     override fun loadInitialData(
         loadRequestId: Int,
@@ -87,10 +46,8 @@ class SearchResultDataSource(
         loadCallback: Consumer<UnboundedDataSource.LoadResult<SearchResult>>
     ) {
         // reset state
-        stage = 0
         lastInitialLoadRequestId = "$loadRequestId"
-        queryTerms = splitUserQuery(query)
-        transformedQuery = transformUserQuery(queryTerms, true, 0)
+        queryTransformer = SearchQueryAdvancer(query, isWordSearch)
 
         coroutineScope.launch(Dispatchers.IO) {
             val db = SearchDatabase.getDatabase(context)
@@ -134,7 +91,7 @@ class SearchResultDataSource(
         val exclusions = mutableListOf<Int>()
         let {
             val result = asyncContext.ftsDao.search(
-                transformedQuery,
+                queryTransformer.currentQuery,
                 selectedBibleVersions,
                 preferredBibleVersions[0], preferredBibleVersions[1],
                 startBookNumber,
@@ -145,18 +102,19 @@ class SearchResultDataSource(
                 batchNumber,
                 batchSize
             )
-            if (result.size == batchSize || stage == queryTerms.size) {
+            if (result.size == batchSize) {
                 return result
             }
             acrossStageResults.addAll(result)
             exclusions.addAll(result.map { it.docId })
         }
-        while (acrossStageResults.size < batchSize && stage < queryTerms.size) {
+        while (acrossStageResults.size < batchSize) {
             // time to advance stage.
-            stage++
-            transformedQuery = transformUserQuery(queryTerms, false, stage - 1)
+            if (!queryTransformer.advance()) {
+                break
+            }
             val rem = asyncContext.ftsDao.search(
-                transformedQuery, selectedBibleVersions,
+                queryTransformer.currentQuery, selectedBibleVersions,
                 preferredBibleVersions[0], preferredBibleVersions[1],
                 startBookNumber, inclEndBookNumber,
                 exclusions, CAT_SEARCH, lastInitialLoadRequestId, batchNumber,

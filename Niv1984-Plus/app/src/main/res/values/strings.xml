@@ -86,4 +86,9 @@
     <string name="version_up_to_date"> (up to date)</string>
     <string name="version_out_of_date_dialog_title">App is outdated</string>
     <string name="copyright_text">\u00A9 %1$s %2$s. All rights reserved.</string>
+    <string name="label_search_kind">How to perform search action?</string>
+    <string name="phraseSearchKind">Search for phrases starting with entire search box contents</string>
+    <string name="wordSearchKind">Search for any of the words in search box</string>
+    <string name="label_word_search_results">Word Search Results for</string>
+    <string name="label_phrase_search_results">Phrase Search Results for</string>
 </resources>

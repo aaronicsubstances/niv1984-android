@@ -30,6 +30,7 @@ class SearchResponseFragment : Fragment() {
     private lateinit var bibleVersions: List<String>
     private var startBookNumber = 0
     private var inclEndBookNumber = 0
+    private var treatAsAlternatives = false
 
     private lateinit var searchResultView: RecyclerView
     private lateinit var queryTextView: TextView
@@ -63,6 +64,7 @@ class SearchResponseFragment : Fragment() {
             bibleVersions = it.getStringArrayList(ARG_BIBLE_VERSIONS)!!
             startBookNumber = it.getInt(ARG_BOOK_RANGE_START)
             inclEndBookNumber = it.getInt(ARG_BOOK_RANGE_END)
+            treatAsAlternatives = it.getBoolean(ARG_TREAT_AS_ALTERNATIVES, false)
         }
     }
 
@@ -87,6 +89,14 @@ class SearchResponseFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
+        val titleView = requireView().findViewById<TextView>(R.id.title)
+        if (treatAsAlternatives) {
+            titleView.setText(R.string.label_word_search_results)
+        }
+        else {
+            titleView.setText(R.string.label_phrase_search_results)
+        }
 
         editOrBackBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
 
@@ -120,7 +130,7 @@ class SearchResponseFragment : Fragment() {
                 }
             })
 
-        viewModel.search(query, bibleVersions, startBookNumber, inclEndBookNumber)
+        viewModel.search(query, bibleVersions, startBookNumber, inclEndBookNumber, treatAsAlternatives)
     }
 
     companion object {
@@ -128,16 +138,19 @@ class SearchResponseFragment : Fragment() {
         private const val ARG_BIBLE_VERSIONS = "bibleVersions"
         private const val ARG_BOOK_RANGE_START = "bookNumberStart"
         private const val ARG_BOOK_RANGE_END = "bookNumberEnd"
+        private const val ARG_TREAT_AS_ALTERNATIVES = "treatAsAlternatives"
 
         @JvmStatic
         fun newInstance(query: String, bibleVersions: ArrayList<String>,
-                        startBookNumber: Int, inclEndBookNumber: Int) =
+                        startBookNumber: Int, inclEndBookNumber: Int,
+                        treatAsAlternatives: Boolean) =
             SearchResponseFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_QUERY, query)
                     putStringArrayList(ARG_BIBLE_VERSIONS, bibleVersions)
                     putInt(ARG_BOOK_RANGE_START, startBookNumber)
                     putInt(ARG_BOOK_RANGE_END, inclEndBookNumber)
+                    putBoolean(ARG_TREAT_AS_ALTERNATIVES, treatAsAlternatives)
                 }
             }
     }

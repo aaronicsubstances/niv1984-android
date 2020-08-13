@@ -30,12 +30,39 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/bibleSearchKindLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_search_kind"
+            app:layout_constraintTop_toBottomOf="@id/advSearch"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <RadioGroup
+            android:id="@+id/bibleSearchKindPanel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/bibleSearchKindLabel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <RadioButton
+                android:id="@+id/phraseSearchKind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/phraseSearchKind"
+                android:checked="true"/>
+            <RadioButton
+                android:id="@+id/wordSearchKind"
+                android:layout_width="wrap_content"
+                android:text="@string/wordSearchKind"
+                android:layout_height="wrap_content"/>
+        </RadioGroup>
+
+        <TextView
             android:id="@+id/labelBibleVersionIncludes"
             android:text="Bible versions to include in search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/formItemLargeSepMargin"
-            app:layout_constraintTop_toBottomOf="@id/advSearch"
+            app:layout_constraintTop_toBottomOf="@id/bibleSearchKindPanel"
             app:layout_constraintStart_toStartOf="parent"/>
         <LinearLayout
             android:id="@+id/bibleVersionCheckBoxes"

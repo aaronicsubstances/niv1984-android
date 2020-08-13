@@ -52,13 +52,14 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
         get() = _searchResultLiveData
 
     fun search(query: String, bibleVersions: List<String>,
-               startBookNumber: Int, inclEndBookNumber: Int) {
+               startBookNumber: Int, inclEndBookNumber: Int,
+               treatAsAlternatives: Boolean) {
         if (_searchResultLiveData.value != null) {
             return
         }
         val dataSource = SearchResultDataSource(context, viewModelScope, query, bibleVersions,
             sharedPrefManager.getPreferredBibleVersions(),
-            startBookNumber, inclEndBookNumber)
+            startBookNumber, inclEndBookNumber, treatAsAlternatives)
         paginator.loadInitialAsync(dataSource, null)
     }
 

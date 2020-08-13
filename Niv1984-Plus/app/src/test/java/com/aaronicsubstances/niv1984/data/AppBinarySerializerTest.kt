@@ -6,7 +6,7 @@ import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class AppBinarySerializerUnitTest {
+class AppBinarySerializerTest {
 
     @Test
     fun testVerseMarkupSerialization() {

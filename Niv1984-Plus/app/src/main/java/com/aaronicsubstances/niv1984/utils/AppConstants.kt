@@ -1,10 +1,7 @@
 package com.aaronicsubstances.niv1984.utils;
 
-import android.content.Context
-import androidx.preference.PreferenceManager
-
 object AppConstants {
-    val BIBLE_BOOK_COUNT = 66
+    const val BIBLE_BOOK_COUNT = 66
     val DEFAULT_BIBLE_VERSIONS = listOf(NivBibleVersion.code, KjvBibleVersion.code)
 
     val BIBLE_BOOK_CHAPTER_COUNT = listOf(
@@ -15,7 +12,7 @@ object AppConstants {
 
     val bibleVersions: Map<String, BibleVersion>
         get() {
-            return mapOf(AsanteTwiBibleVersion.code to AsanteTwiBibleVersion,
+            return mapOf(/*AsanteTwiBibleVersion.code to AsanteTwiBibleVersion,*/
                 KjvBibleVersion.code to KjvBibleVersion,
                 NivBibleVersion.code to NivBibleVersion)
         }

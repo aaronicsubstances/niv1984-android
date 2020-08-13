@@ -118,7 +118,7 @@ def testAssumptions() {
 
 def populateDatabase(db) {
     def startTime = new Date().time
-    def bibleVersions = [ "asante2012", "niv1984", "kjv1769" ]
+    def bibleVersions = [ /*"asante2012",*/ "niv1984", "kjv1769" ]
     for (bibleVersion in bibleVersions) {
         println "Indexing $bibleVersion..."
         def bvStartTime = new Date().time

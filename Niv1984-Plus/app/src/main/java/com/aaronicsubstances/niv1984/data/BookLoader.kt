@@ -7,7 +7,7 @@ import com.aaronicsubstances.niv1984.models.BookDisplay
 import com.aaronicsubstances.niv1984.models.BookDisplayItem
 import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.utils.BookParser
+import com.aaronicsubstances.niv1984.utils.*
 import com.aaronicsubstances.niv1984.utils.BookParser.BlockQuote
 import com.aaronicsubstances.niv1984.utils.BookParser.ChapterFragment
 import com.aaronicsubstances.niv1984.utils.BookParser.ChapterFragmentKind
@@ -19,9 +19,6 @@ import com.aaronicsubstances.niv1984.utils.BookParser.NoteKind
 import com.aaronicsubstances.niv1984.utils.BookParser.NoteRef
 import com.aaronicsubstances.niv1984.utils.BookParser.Verse
 import com.aaronicsubstances.niv1984.utils.BookParser.WordsOfJesus
-import com.aaronicsubstances.niv1984.utils.AppConstants
-import com.aaronicsubstances.niv1984.utils.AppUtils
-import com.aaronicsubstances.niv1984.utils.AsanteTwiBibleVersion
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -148,6 +145,22 @@ class BookLoader(private val context: Context,
             }
 
             vNum++
+        }
+
+        // skip over any item before divider unless item is a verse
+        while (pt1 < dividerIdx1) {
+            val item = displayItems1[pt1]
+            if (item.viewType == BookDisplayItemViewType.VERSE) {
+                break
+            }
+            pt1++
+        }
+        while (pt2 < dividerIdx2) {
+            val item = displayItems2[pt2]
+            if (item.viewType == BookDisplayItemViewType.VERSE) {
+                break
+            }
+            pt2++
         }
 
         if (permitAsymmetricVerseCounts(chapterNumber)) {

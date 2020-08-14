@@ -18,4 +18,6 @@ data class ScrollPosPref(
     @SerializedName("equi")
     var equivalentViewItemType: BookDisplayItemViewType,
     @SerializedName("dis")
-    var displayMultipleSideBySide: Boolean)
+    var displayMultipleSideBySide: Boolean,
+    @SerializedName("eof")
+    var atEndOfChapter: Boolean)

@@ -212,23 +212,11 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     }
 
     private fun updateDefaultViewScrollPos(vNum: Int, bookmarkChapterNumber: Int) {
-        var vNum = vNum
-        var equivalentViewType = BookDisplayItemViewType.VERSE
-        if (vNum < 1) {
-            vNum = 0
-            equivalentViewType = BookDisplayItemViewType.TITLE
-        }
         // debounce
         if (vNum != fragment.viewModel.currLocVerseNumber) {
-            fragment.viewModel.updateSystemBookmarks(
-                bookmarkChapterNumber,
-                vNum, equivalentViewType, -1
-            )
-            val currentLoadResult = fragment.viewModel.lastLoadResult
-            if (currentLoadResult != null) {
-                val particularPos =
-                    fragment.viewModel.updateParticularPos(currentLoadResult)
-                fragment.scrollBook(particularPos)
+            fragment.viewModel.updateSystemBookmarks(bookmarkChapterNumber, vNum)
+            if (fragment.viewModel.currLocViewItemPos != -1) {
+                fragment.scrollBook(fragment.viewModel.currLocViewItemPos)
             }
         }
     }

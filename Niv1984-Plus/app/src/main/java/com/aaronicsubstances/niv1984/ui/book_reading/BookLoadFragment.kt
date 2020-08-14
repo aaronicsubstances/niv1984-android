@@ -300,11 +300,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                 totalItemCount: Int
             ) {
                 val scrollResult = fetchScrollResult(firstVisibleItemPos)
-                val commonVisibleItem = scrollResult.first
-
-                viewModel.updateSystemBookmarks(commonVisibleItem.chapterNumber,
-                    commonVisibleItem.verseNumber, commonVisibleItem.viewType,
-                    scrollResult.second)
+                viewModel.updateSystemBookmarks(scrollResult.first, scrollResult.second)
             }
         })
 
@@ -517,8 +513,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             val chapterStartPos = it.chapterIndices[chapterNumber - 1]
             scrollBook(chapterStartPos)
             syncChapterWidget(chapterNumber - 1, true)
-            viewModel.updateSystemBookmarks(chapterNumber, 0,
-                BookDisplayItemViewType.TITLE, chapterStartPos)
+            viewModel.updateSystemBookmarks(chapterNumber, 0)
             highlightHelper?.onChapterChanged()
         }
     }
@@ -584,8 +579,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         val currentList = bookContentAdapter.currentList
         val commonItemPos = locateParticularVersePos(currentList, verseNumber,
             bookModel.chapterIndices[chapterNumber - 1])
-        viewModel.updateSystemBookmarks(chapterNumber, verseNumber, BookDisplayItemViewType.VERSE,
-            commonItemPos)
+        viewModel.updateSystemBookmarks(currentList[commonItemPos], commonItemPos)
         syncChapterWidget(chapterNumber - 1, false)
         highlightHelper?.enterHighlightMode(bibleVersionIndex)
     }

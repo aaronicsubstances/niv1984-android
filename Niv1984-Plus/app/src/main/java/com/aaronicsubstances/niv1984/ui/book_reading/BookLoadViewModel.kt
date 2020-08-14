@@ -10,10 +10,7 @@ import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.BookHighlighter
 import com.aaronicsubstances.niv1984.data.BookLoader
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
-import com.aaronicsubstances.niv1984.models.BookDisplay
-import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.models.ScrollPosPref
-import com.aaronicsubstances.niv1984.models.VerseBlockHighlightRange
+import com.aaronicsubstances.niv1984.models.*
 import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,7 +31,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     var loadResultValidationCallback: ((BookDisplay?) -> Boolean)? = null
 
     private var systemBookmark = ScrollPosPref(0, 0, 0, 0,
-            listOf(), null, BookDisplayItemViewType.CHAPTER_FRAGMENT, false)
+            listOf(), null, BookDisplayItemViewType.TITLE,
+        false, false)
 
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
@@ -81,7 +79,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         get() = ScrollPosPref(systemBookmark.bookNumber, systemBookmark.chapterNumber,
             systemBookmark.verseNumber, systemBookmark.particularViewItemPos,
             systemBookmark.particularBibleVersions, systemBookmark.particularBibleVersionIndex,
-            systemBookmark.equivalentViewItemType, systemBookmark.displayMultipleSideBySide)
+            systemBookmark.equivalentViewItemType, systemBookmark.displayMultipleSideBySide,
+            systemBookmark.atEndOfChapter)
 
     val currLocChapterNumber: Int
         get() = systemBookmark.chapterNumber
@@ -100,7 +99,8 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             SharedPrefManager.PREF_KEY_SYSTEM_BOOKMARKS +
                     bookNumber, ScrollPosPref::class.java) ?: ScrollPosPref(
                 bookNumber, 1, 0, 0,
-                listOf(), 0, BookDisplayItemViewType.TITLE, false)
+                listOf(), 0, BookDisplayItemViewType.TITLE, false,
+            false)
     }
 
     fun saveSystemBookmarks() {
@@ -159,32 +159,70 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         updateParticularPos(model)
     }
 
-    fun updateSystemBookmarks(chapterNumber: Int, verseNumber: Int,
-                              equivalentViewType: BookDisplayItemViewType,
-                              particularPos: Int) {
+    fun updateSystemBookmarks(equivalentDisplayItem: BookDisplayItem, displayItemPos: Int) {
         systemBookmark.apply {
-            this.equivalentViewItemType = equivalentViewType
-            this.particularViewItemPos = particularPos
-            this.chapterNumber = chapterNumber
-            this.verseNumber = verseNumber
+            this.equivalentViewItemType = equivalentDisplayItem.viewType
+            this.chapterNumber = equivalentDisplayItem.chapterNumber
+            this.verseNumber = equivalentDisplayItem.verseNumber
+            this.particularViewItemPos = displayItemPos
+            this.atEndOfChapter = false
+            if (equivalentDisplayItem.viewType == BookDisplayItemViewType.DIVIDER &&
+                    !equivalentDisplayItem.fullContent.isFirstDivider) {
+                if (particularBibleVersionIndex != null) {
+                    this.atEndOfChapter = true
+                }
+                else {
+                    // check that we are seeing second of two dividers in multiple display mode.
+                    if (equivalentDisplayItem.fullContent.bibleVersionIndex == 1) {
+                        this.atEndOfChapter = true
+                    }
+                }
+            }
         }
     }
 
-    fun updateParticularPos(model: BookDisplay): Int {
-        var pos = model.chapterIndices[systemBookmark.chapterNumber - 1]
+    fun updateSystemBookmarks(chapterNumber: Int, verseNumber: Int) {
+        val model = lastLoadResult ?: return
+        systemBookmark.apply {
+            this.equivalentViewItemType = if (verseNumber > 0) BookDisplayItemViewType.VERSE
+                else BookDisplayItemViewType.TITLE
+            this.chapterNumber = chapterNumber
+            this.verseNumber = verseNumber
+            this.atEndOfChapter = false
+            updateParticularPos(model)
+        }
+    }
+
+    private fun updateParticularPos(model: BookDisplay) {
+        var pos = if (systemBookmark.atEndOfChapter) {
+            if (systemBookmark.chapterNumber == model.chapterIndices.size) {
+                // get ending pos of book
+                model.displayItems.size - 1
+            }
+            else {
+                // get pos just before next chapter.
+                model.chapterIndices[systemBookmark.chapterNumber] - 1
+            }
+        }
+        else {
+            // get beginning chapter pos
+            model.chapterIndices[systemBookmark.chapterNumber - 1]
+        }
         systemBookmark.particularViewItemPos = pos // set by default just in case none is found.
         while (pos < model.displayItems.size) {
             val displayItem = model.displayItems[pos]
+            if (displayItem.chapterNumber != systemBookmark.chapterNumber) {
+                break
+            }
             if (displayItem.viewType == systemBookmark.equivalentViewItemType) {
                 if (displayItem.viewType != BookDisplayItemViewType.VERSE ||
-                    displayItem.verseNumber == systemBookmark.verseNumber) {
+                        displayItem.verseNumber == systemBookmark.verseNumber) {
                     systemBookmark.particularViewItemPos = pos
                     break
                 }
             }
             pos++
         }
-        return systemBookmark.particularViewItemPos
     }
 
     fun updateHighlights(bibleVersionIndex: Int, changes: List<VerseBlockHighlightRange>,

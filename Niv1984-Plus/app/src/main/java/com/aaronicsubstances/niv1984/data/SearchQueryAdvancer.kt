@@ -1,9 +1,6 @@
 package com.aaronicsubstances.niv1984.data
 
-import kotlin.math.ceil
-
-class SearchQueryAdvancer(query: String,
-                          isWordSearch: Boolean) {
+class SearchQueryAdvancer(query: String) {
     private val terms: List<String>
     var currentQuery: String
         private set
@@ -14,14 +11,8 @@ class SearchQueryAdvancer(query: String,
 
     init {
         terms = splitUserQuery(query)
-        if (isWordSearch) {
-            treatAsExact = false
-            omittedTermCount = terms.size - 1
-        }
-        else {
-            treatAsExact = true
-            omittedTermCount = 0
-        }
+        treatAsExact = true
+        omittedTermCount = 0
         currentQuery = transformUserQuery(terms, treatAsExact, omittedTermCount)
     }
 
@@ -32,9 +23,7 @@ class SearchQueryAdvancer(query: String,
         else {
             omittedTermCount++
         }
-        // require more than half of terms to proceed
-        val maxLimit = ceil(terms.size / 2.0)
-        if (omittedTermCount >= maxLimit) {
+        if (omittedTermCount >= terms.size) {
             return false
         }
         currentQuery = transformUserQuery(terms, treatAsExact, omittedTermCount)

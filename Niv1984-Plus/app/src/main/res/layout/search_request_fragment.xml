@@ -12,29 +12,35 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin">
 
-        <EditText
-            android:id="@+id/searchBox"
+        <LinearLayout
+            android:id="@+id/searchBoxPanel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/formItemSepMargin"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/advSearch"
-            app:layout_constraintBottom_toBottomOf="@+id/advSearch"
-            app:layout_constraintTop_toTopOf="parent" />
-        <Button
-            android:id="@+id/advSearch"
-            android:text="@string/label_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+            <EditText
+                android:id="@+id/searchBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/formItemSepMargin"
+                android:layout_weight="1"/>
+            <Button
+                android:id="@+id/advSearch"
+                android:text="@string/label_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
-        <TextView
+        </LinearLayout>
+
+        <!--<TextView
             android:id="@+id/bibleSearchKindLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_search_kind"
-            app:layout_constraintTop_toBottomOf="@id/advSearch"
+            app:layout_constraintTop_toBottomOf="@id/searchBoxPanel"
             app:layout_constraintStart_toStartOf="parent"/>
         <RadioGroup
             android:id="@+id/bibleSearchKindPanel"
@@ -54,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:text="@string/wordSearchKind"
                 android:layout_height="wrap_content"/>
-        </RadioGroup>
+        </RadioGroup>-->
 
         <TextView
             android:id="@+id/labelBibleVersionIncludes"
@@ -62,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/formItemLargeSepMargin"
-            app:layout_constraintTop_toBottomOf="@id/bibleSearchKindPanel"
+            app:layout_constraintTop_toBottomOf="@id/searchBoxPanel"
             app:layout_constraintStart_toStartOf="parent"/>
         <LinearLayout
             android:id="@+id/bibleVersionCheckBoxes"

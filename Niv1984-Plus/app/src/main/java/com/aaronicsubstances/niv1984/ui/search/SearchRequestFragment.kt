@@ -190,11 +190,11 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
             AppUtils.showShortToast(context, "Please select at least one bible version")
             return
         }
-        val treatAsAlternatives = requireView().findViewById<RadioButton>(R.id.wordSearchKind).isChecked
+        //val treatAsAlternatives = requireView().findViewById<RadioButton>(R.id.wordSearchKind).isChecked
         val startBookNumber = bookStartRangeSpinner.selectedItemPosition + 1
         val inclEndBookNumber = bookEndRangeSpinner.selectedItemPosition + 1
         val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
-            inclEndBookNumber, treatAsAlternatives)
+            inclEndBookNumber, false)
         searchRequestListener?.onProcessSearchRequest(f)
     }
 }

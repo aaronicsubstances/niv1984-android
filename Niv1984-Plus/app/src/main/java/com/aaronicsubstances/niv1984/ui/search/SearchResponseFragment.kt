@@ -91,12 +91,12 @@ class SearchResponseFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val titleView = requireView().findViewById<TextView>(R.id.title)
-        if (treatAsAlternatives) {
+        /*if (treatAsAlternatives) {
             titleView.setText(R.string.label_word_search_results)
         }
         else {
             titleView.setText(R.string.label_phrase_search_results)
-        }
+        }*/
 
         editOrBackBtn.setOnClickListener { (activity as MainActivity).onBackPressed() }
 

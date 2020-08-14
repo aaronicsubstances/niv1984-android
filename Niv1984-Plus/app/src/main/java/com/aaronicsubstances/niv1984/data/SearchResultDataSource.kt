@@ -47,7 +47,7 @@ class SearchResultDataSource(
     ) {
         // reset state
         lastInitialLoadRequestId = "$loadRequestId"
-        queryTransformer = SearchQueryAdvancer(query, isWordSearch)
+        queryTransformer = SearchQueryAdvancer(query)
 
         coroutineScope.launch(Dispatchers.IO) {
             val db = SearchDatabase.getDatabase(context)

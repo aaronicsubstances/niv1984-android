@@ -20,10 +20,10 @@ class CommonMenuActionProcessor(private val context: AppCompatActivity,
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         if (!item.isChecked) {
             when (item.itemId) {
-                R.id.nav_home -> AppUtils.showShortToast(context, "Clicked item one")
-                R.id.nav_gallery -> AppUtils.showShortToast(context, "Clicked item two")
-                R.id.nav_slideshow -> AppUtils.showShortToast(context, "Clicked item three")
-                R.id.nav_tools, R.id.action_settings -> {
+                R.id.nav_home -> AppUtils.showShortToast(context, "Clicked home")
+                R.id.nav_bookmarks -> AppUtils.showShortToast(context, "Clicked bookmarks")
+                R.id.nav_comments -> AppUtils.showShortToast(context, "Clicked verse comments")
+                R.id.nav_settings, R.id.action_settings -> {
                     launchSettings(context)
                 }
                 R.id.nav_about -> {

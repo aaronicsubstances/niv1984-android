@@ -130,10 +130,17 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         }
     }
 
-    fun enterHighlightMode(specificBibleVersionIndex: Int) {
+    fun canEnterHighlightMode(): Boolean {
         if (!fragment.viewModel.isLastLoadResultValid()) {
             AppUtils.showShortToast(fragment.context, fragment.getString(
                 R.string.message_highlight_mode_prohibited))
+            return false
+        }
+        return true
+    }
+
+    fun enterHighlightMode(specificBibleVersionIndex: Int) {
+        if (!canEnterHighlightMode()) {
             return
         }
 
@@ -196,7 +203,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
                 initialVerseNumber, selectedChapterContentScroller, selectedChapterContent
             )
 
-            updateDefaultViewScrollPos(initialVerseNumber, sysBookmark.chapterNumber)
+            updateDefaultViewScrollPos(initialVerseNumber, sysBookmark.chapterNumber, false)
 
             selectedChapterContentScroller.viewTreeObserver.addOnScrollChangedListener(this)
         }
@@ -207,13 +214,15 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
         val vNum = htmlViewManager.getVerseNumber(selectedChapterContent, scrollY)
         //android.util.Log.d(TAG, "Scroll pos $scrollY points to verse $vNum")
 
-        val latestSysBookmarkChapterNumber = fragment.viewModel.currLocChapterNumber
-        updateDefaultViewScrollPos(vNum, latestSysBookmarkChapterNumber)
+        if (vNum != -1) {
+            val latestSysBookmarkChapterNumber = fragment.viewModel.currLocChapterNumber
+            updateDefaultViewScrollPos(vNum, latestSysBookmarkChapterNumber, true)
+        }
     }
 
-    private fun updateDefaultViewScrollPos(vNum: Int, bookmarkChapterNumber: Int) {
-        // debounce
-        if (vNum != fragment.viewModel.currLocVerseNumber) {
+    private fun updateDefaultViewScrollPos(vNum: Int, bookmarkChapterNumber: Int,
+                                           debounce: Boolean) {
+        if (!debounce || vNum != fragment.viewModel.currLocVerseNumber) {
             fragment.viewModel.updateSystemBookmarks(bookmarkChapterNumber, vNum)
             if (fragment.viewModel.currLocViewItemPos != -1) {
                 fragment.scrollBook(fragment.viewModel.currLocViewItemPos)

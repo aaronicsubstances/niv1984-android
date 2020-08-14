@@ -391,7 +391,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         return bookDescription
     }
 
-    fun syncViewWithDataContext(loading: Boolean = false) {
+    fun syncViewWithDataContext() {
         // reset book description.
         titleTextView.text = getEffectiveTitle()
 
@@ -400,7 +400,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             if (highlightHelper?.inHighlightMode == true) {
                 i == highlightHelper!!.specificBibleVersionIndex
             }
-            if (defaultReadingMode && bibleVersionIndex != null) {
+            else if (defaultReadingMode && bibleVersionIndex != null) {
                 i == bibleVersionIndex
             } else {
                 true
@@ -525,9 +525,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             .scrollToPositionWithOffset(pos, 0)
     }
 
-    fun enterHighlightModeFromLongClick(bibleVersionIndex: Int, chapterNumber: Int, verseNumber: Int) {
-    }
-
     private fun syncChapterWidget(chapterIdx: Int, scroll: Boolean) {
         chapterAdapter.selectedIndex = chapterIdx
         if (scroll) {
@@ -572,16 +569,16 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
     }
 
     override fun onVerseLongClick(bibleVersionIndex: Int, chapterNumber: Int, verseNumber: Int) {
-        if (!viewModel.isLastLoadResultValid()) {
+        if (highlightHelper?.canEnterHighlightMode() != true) {
             return
         }
         val bookModel = viewModel.lastLoadResult!!
         val currentList = bookContentAdapter.currentList
-        val commonItemPos = locateParticularVersePos(currentList, verseNumber,
+        val commonItemPos = locateParticularVersePos(currentList, bibleVersionIndex, verseNumber,
             bookModel.chapterIndices[chapterNumber - 1])
         viewModel.updateSystemBookmarks(currentList[commonItemPos], commonItemPos)
         syncChapterWidget(chapterNumber - 1, false)
-        highlightHelper?.enterHighlightMode(bibleVersionIndex)
+        highlightHelper!!.enterHighlightMode(bibleVersionIndex)
     }
 
     private fun fetchScrollResult(firstVisibleItemPos: Int): Pair<BookDisplayItem, Int> {
@@ -632,6 +629,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
 
     private fun locateParticularVersePos(
         currentList: List<BookDisplayItem>,
+        specificBibleVersionIndex: Int,
         verseNumber: Int,
         startItemPos: Int
     ): Int {
@@ -643,7 +641,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             if (item.chapterNumber == startItem.chapterNumber &&
                     item.viewType == BookDisplayItemViewType.VERSE &&
                     item.verseNumber == verseNumber) {
-                return i
+                if (displayMultipleSideBySide ||
+                        item.fullContent.bibleVersionIndex == specificBibleVersionIndex) {
+                    return i
+                }
             }
             i++
         }

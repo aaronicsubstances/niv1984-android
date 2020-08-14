@@ -9,6 +9,7 @@
     <color name="dividerColor">#aaaaaa</color>
     <color name="wjColor">#cf352e</color>
     <color name="highlightColor">#FFD300</color>
+    <color name="footnoteLinkColor">#0000ff</color>
     <color name="letterTextColor">@android:color/white</color>
     <color name="letter_00">@android:color/black</color>
     <color name="bibleReadingTextColor">@android:color/black</color>

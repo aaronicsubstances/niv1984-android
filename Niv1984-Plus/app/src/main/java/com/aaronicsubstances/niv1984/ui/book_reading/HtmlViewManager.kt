@@ -115,7 +115,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
                 return getVerseNumber(txtLineInfo)
             }
         }
-        return 0
+        return -1
     }
 
     private fun getVerseNumber(txtLineInfo: TextLineInfo): Int {
@@ -128,7 +128,7 @@ class HtmlViewManager(private val context: Context): Html.TagHandler {
             }
             return Integer.parseInt(e.key.substring(vPrefix.length))
         }
-        return 0
+        return -1
     }
 
     fun initiateVerseSelection(vNum: Int, contentTf: TextView) {

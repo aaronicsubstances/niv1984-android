@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="testColor">#87654321</color>
-    <color name="wjColor">#fbceb1</color>
-    <color name="highlightColor">#f4c430</color>
-    <!--<color name="highlightColor">#c2b280</color>-->
+    <!--<color name="wjColor">#fbceb1</color>
+    <color name="highlightColor">#f4c430</color>-->
     <!--always use white colour
     <color name="letterTextColor">@android:color/black</color>-->
     <color name="letter_00">@android:color/white</color>

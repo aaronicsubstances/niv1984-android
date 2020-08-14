@@ -240,7 +240,7 @@ class BookLoadAdapter(
 
         fun bind(item: BookDisplayItem) {
             textView.setOnLongClickListener {
-                bookReadingEventListener?.onVerseLongClick(item.fullContent.bibleVersionIndex,
+                bookReadingEventListener.onVerseLongClick(item.fullContent.bibleVersionIndex,
                     item.chapterNumber, item.verseNumber)
                 true
             }
@@ -263,19 +263,12 @@ class BookLoadAdapter(
         private val secondSideVerse = itemView.findViewById<ViewGroup>(R.id.secondSideVerse)
 
         fun bind(item: BookDisplayItem) {
-            bindSpecific(item, item.firstPartialContent!!, firstSideVerse)
-            bindSpecific(item, item.secondPartialContent!!, secondSideVerse)
+            bindSpecific(item, item.firstPartialContent!!, firstSideVerse, 0)
+            bindSpecific(item, item.secondPartialContent!!, secondSideVerse, 1)
         }
 
         private fun bindSpecific(item: BookDisplayItem, items: List<BookDisplayItemContent>,
-                                 textViewGroup: ViewGroup) {
-
-            textViewGroup.setOnLongClickListener {
-                bookReadingEventListener.onVerseLongClick(
-                    if (textViewGroup == firstSideVerse) 0 else 1,
-                    item.chapterNumber, item.verseNumber)
-                true
-            }
+                                 textViewGroup: ViewGroup, specificBibleVersionIndex: Int) {
 
             // ensure enough text views.
             while (textViewGroup.childCount < items.size) {
@@ -292,11 +285,21 @@ class BookLoadAdapter(
 
             // reset all views
             (0 until textViewGroup.childCount).forEach {
-                textViewGroup.getChildAt(it).visibility = View.GONE
+                textViewGroup.getChildAt(it).let { tf ->
+                    tf.visibility = View.GONE
+                    tf.setOnClickListener(null)
+                }
             }
 
             items.forEachIndexed { i, itemContent ->
                 val textView = textViewGroup.getChildAt(i) as TextView
+                textView.setOnLongClickListener {
+                    bookReadingEventListener.onVerseLongClick(
+                        specificBibleVersionIndex,
+                        item.chapterNumber, item.verseNumber)
+                    true
+                }
+
                 textView.visibility = View.VISIBLE
                 bindDefault(item, itemContent, textView)
             }

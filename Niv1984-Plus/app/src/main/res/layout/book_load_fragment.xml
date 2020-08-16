@@ -29,17 +29,26 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             app:srcCompat="@drawable/ic_first_page_24dp"/>
-        <TextView
-            android:id="@+id/bookDescription"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center_horizontal"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:gravity="center"/>
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/bookDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"/>
+            <TextView
+                android:id="@+id/modeDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
         <ImageButton
             android:id="@+id/nextBookPresent"
             android:layout_width="wrap_content"
@@ -195,6 +204,7 @@
         <TextView
             android:id="@+id/prefOverlayDescriptionWithSwitchBtn"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:scrollbars="horizontal"

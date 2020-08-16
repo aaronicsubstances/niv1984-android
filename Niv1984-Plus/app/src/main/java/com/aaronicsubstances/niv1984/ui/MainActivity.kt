@@ -18,7 +18,9 @@ import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.LatestVersionCheckResult
+import com.aaronicsubstances.niv1984.models.ScrollPosPref
 import com.aaronicsubstances.niv1984.models.SearchResult
+import com.aaronicsubstances.niv1984.models.UserBookmark
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadRequestListener
@@ -181,6 +183,14 @@ class MainActivity : AppCompatActivity(),
         val ft = supportFragmentManager.beginTransaction()
         supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)?.let { ft.remove(it) }
         val bookLoadFrag = BookLoadFragment.newInstance(bookNumber, chapterNumber, verseNumber)
+        ft.add(R.id.container, bookLoadFrag, FRAG_TAG_BOOK_LOAD)
+        dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
+    }
+
+    override fun onBookLoadRequest(entity: UserBookmark) {
+        val ft = supportFragmentManager.beginTransaction()
+        supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)?.let { ft.remove(it) }
+        val bookLoadFrag = BookLoadFragment.newInstance(entity.title, entity.serializedData)
         ft.add(R.id.container, bookLoadFrag, FRAG_TAG_BOOK_LOAD)
         dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
     }

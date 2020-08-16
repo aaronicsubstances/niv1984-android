@@ -90,6 +90,7 @@ dependencies {
 
     implementation 'com.github.ivbaranov:materiallettericon:0.2.3'
     implementation 'com.afollestad.material-dialogs:core:3.2.1'
+    implementation 'com.afollestad.material-dialogs:input:3.3.0'
     implementation 'me.saket:better-link-movement-method:2.2.0'
 
     implementation 'com.google.code.gson:gson:2.8.6'

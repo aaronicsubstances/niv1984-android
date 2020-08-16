@@ -7,16 +7,19 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.aaronicsubstances.niv1984.models.UserBookmark
+import com.aaronicsubstances.niv1984.models.UserBookmarkDao
 import com.aaronicsubstances.niv1984.models.UserHighlightData
 import com.aaronicsubstances.niv1984.models.UserHighlightDataDao
 
 @TypeConverters( DateTypeConverter::class, TimestampTypeConverter::class,
     UuidTypeConverter::class)
-@Database(entities = [ UserHighlightData::class ],
+@Database(entities = [ UserHighlightData::class, UserBookmark::class ],
     version = 1, exportSchema = true)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userHighlightDataDao(): UserHighlightDataDao
+    abstract fun userBookmarkDao(): UserBookmarkDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the

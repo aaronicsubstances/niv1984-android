@@ -75,7 +75,7 @@ class BookOrChapterSwitchHandler(private val fragment: BookLoadFragment) {
     }
 
     fun startChapterSelection(selectedChapterNumber: Int) {
-        val title = fragment.getEffectiveTitle()
+        val title = fragment.getEffectiveBookTitle()
         val dialog = ChapterSelectionDialog.newInstance(title,
             fragment.bookNumber, selectedChapterNumber)
         dialog.setTargetFragment(fragment, REQUEST_CODE_CHAPTER_SELECTED)

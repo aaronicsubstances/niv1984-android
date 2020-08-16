@@ -1,9 +1,12 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
+import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
+import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 
 object BookReadingEventListenerImpl {
 
@@ -52,6 +55,21 @@ object BookReadingEventListenerImpl {
         MaterialDialog(fragment.requireActivity()).show {
             title(text = dialogTitle)
             message(text = dialogMessage)
+        }
+    }
+
+    fun handleBookmarkCreate(fragment: BookLoadFragment) {
+        if (!fragment.viewModel.isLastLoadResultValid()) {
+            AppUtils.showShortToast(fragment.context, fragment.getString(
+                R.string.message_book_loading_unfinished))
+            return
+        }
+        MaterialDialog(fragment.requireActivity()).show {
+            input() { dialog, text ->
+                fragment.viewModel.createUserBookmark(text.toString())
+            }
+            title(R.string.action_bookmark_create)
+            positiveButton(R.string.action_create)
         }
     }
 }

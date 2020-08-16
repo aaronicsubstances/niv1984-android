@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.ui.about.AboutActivity
+import com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListActivity
 import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.google.android.material.navigation.NavigationView
@@ -21,7 +22,10 @@ class CommonMenuActionProcessor(private val context: AppCompatActivity,
         if (!item.isChecked) {
             when (item.itemId) {
                 R.id.nav_home -> AppUtils.showShortToast(context, "Clicked home")
-                R.id.nav_bookmarks -> AppUtils.showShortToast(context, "Clicked bookmarks")
+                R.id.nav_bookmarks -> {
+                    val intent = Intent(context, BookmarkListActivity::class.java)
+                    context.startActivity(intent)
+                }
                 R.id.nav_comments -> AppUtils.showShortToast(context, "Clicked verse comments")
                 R.id.nav_settings, R.id.action_settings -> {
                     launchSettings(context)

@@ -16,6 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ui.bookmarks.BookmarkListActivity"
+            android:label="@string/title_bookmark_list"
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aaronicsubstances.niv1984.ui.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ui.bookmarks.BookmarkDetailActivity"
+            android:label="@string/title_bookmark_detail"
+            android:parentActivityName=".ui.bookmarks.BookmarkListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListActivity" />
+        </activity>
+        <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">

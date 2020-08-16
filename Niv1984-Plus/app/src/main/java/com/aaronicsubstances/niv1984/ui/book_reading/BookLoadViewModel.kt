@@ -7,12 +7,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.AppDatabase
 import com.aaronicsubstances.niv1984.data.BookHighlighter
 import com.aaronicsubstances.niv1984.data.BookLoader
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.*
+import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.LiveDataEvent
+import com.google.firebase.firestore.auth.User
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
 import javax.inject.Inject
 
 class BookLoadViewModel(application: Application): AndroidViewModel(application) {
@@ -27,6 +31,10 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     private val _loadProgressLiveData: MutableLiveData<LiveDataEvent<Boolean>> = MutableLiveData()
     val loadProgressLiveData: LiveData<LiveDataEvent<Boolean>>
         get() = _loadProgressLiveData
+
+    private val _newBookmarkLiveData: MutableLiveData<LiveDataEvent<UserBookmark>> = MutableLiveData()
+    val newBookmarkLiveData: LiveData<LiveDataEvent<UserBookmark>>
+        get() = _newBookmarkLiveData
 
     var loadResultValidationCallback: ((BookDisplay?) -> Boolean)? = null
 
@@ -244,5 +252,26 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     fun notifyUserOfOngoingLoadProgress() {
         _loadProgressLiveData.postValue(LiveDataEvent(true))
+    }
+
+    fun createUserBookmark(title: String) {
+        val temp = lastLoadResult!!
+        val bookmarkData = systemBookmark
+        bookmarkData.particularBibleVersionIndex?.let {
+            bookmarkData.particularBibleVersions = listOf(bookmarkData.particularBibleVersions[it])
+            bookmarkData.particularBibleVersionIndex = 0
+        }
+        viewModelScope.launch {
+            val db = AppDatabase.getDatabase(context)
+            val currTime = System.currentTimeMillis()
+            val newEntity = UserBookmark(0, title, Timestamp(currTime),
+                Timestamp(currTime), AppUtils.serializeAsJson(bookmarkData))
+            db.userBookmarkDao().insert(newEntity)
+
+            AppUtils.showShortToast(context, "Bookmark created")
+            if (loadResultValidationCallback?.invoke(temp) == true) {
+                _newBookmarkLiveData.value = LiveDataEvent(newEntity)
+            }
+        }
     }
 }

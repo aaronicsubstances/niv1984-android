@@ -2,6 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/action_bookmark_create"
+        android:title="@string/action_bookmark_create"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/action_enter_copy_mode"
         android:title="@string/action_enter_copy_mode"
         app:showAsAction="never"/>

@@ -49,6 +49,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
     private lateinit var bookContentView: RecyclerView
     private lateinit var chapterView: RecyclerView
     private lateinit var titleTextView: TextView
+    private lateinit var modeDescriptionTextView: TextView
 
     private lateinit var bottomPanel: ViewGroup
     private lateinit var bookVersionSelectionPanel: View
@@ -100,10 +101,9 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             }
         }
 
-        fun newInstance(bookmark: ScrollPosPref, title: String) = BookLoadFragment().apply {
+        fun newInstance(title: String, serializedBookmark: String) = BookLoadFragment().apply {
             arguments = Bundle().apply {
-                putInt(ARG_BOOK_NUMBER, bookmark.bookNumber)
-                putString(ARG_USER_BOOKMARK, AppUtils.serializeAsJson(bookmark))
+                putString(ARG_USER_BOOKMARK, serializedBookmark)
                 putString(ARG_USER_BOOKMARK_TITLE, title)
                 putBoolean(ARG_DEFAULT_READING_MODE, false)
             }
@@ -116,7 +116,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         requireArguments().let {
             defaultReadingMode = it.getBoolean(ARG_DEFAULT_READING_MODE, true)
             searchResultBibleVersion = it.getString(ARG_SEARCH_RESULT_BIBLE_VERSION, "")
-            bookNumber = it.getInt(ARG_BOOK_NUMBER)
+            bookNumber = it.getInt(ARG_BOOK_NUMBER, 0)
             initialLoc = it.getString(ARG_INITIAL_LOC)?.let {
                 val parts = it.split(":")
                 val p1 = Integer.parseInt(parts[0])
@@ -126,7 +126,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             userBookmark = it.getString(ARG_USER_BOOKMARK)?.let {
                 AppUtils.deserializeFromJson(it, ScrollPosPref::class.java)
             }
-            userBookmarkTitle = it.getString(ARG_USER_BOOKMARK_TITLE)
+            if (userBookmark != null) {
+                bookNumber = userBookmark!!.bookNumber
+                userBookmarkTitle = it.getString(ARG_USER_BOOKMARK_TITLE)
+            }
         }
     }
 
@@ -169,6 +172,12 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                         itemIdsToRemove.add(menuItem.itemId)
                     }
                 }
+                R.id.action_bookmark_create -> {
+                    if (userBookmark != null ||
+                            highlightHelper?.inHighlightMode == true) {
+                        itemIdsToRemove.add(menuItem.itemId)
+                    }
+                }
             }
         }
         itemIdsToRemove.forEach { menu.removeItem(it) }
@@ -176,6 +185,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            R.id.action_bookmark_create -> {
+                BookReadingEventListenerImpl.handleBookmarkCreate(this)
+                true
+            }
             R.id.action_enter_copy_mode -> {
                 highlightHelper?.enterHighlightMode(bibleVersionIndex ?: 0)
                 true
@@ -211,6 +224,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         val root = inflater.inflate(R.layout.book_load_fragment, container, false)
 
         titleTextView = root.findViewById(R.id.bookDescription)
+        modeDescriptionTextView = root.findViewById(R.id.modeDescription)
         bookContentView = root.findViewById(R.id.bookReadView)
         chapterView = root.findViewById(R.id.chapterView)
 
@@ -291,6 +305,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
 
         viewModel.loadProgressLiveData.observeProperAsEvent(viewLifecycleOwner,
                 Observer<Boolean> { syncViewWithDataContext() })
+        viewModel.newBookmarkLiveData.observeProperAsEvent(viewLifecycleOwner,
+                Observer<UserBookmark> {
+                    bookLoadRequestListener?.onBookLoadRequest(it)
+                })
 
         bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {
             override fun listScrolled(
@@ -378,7 +396,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         screenAwakeHelper?.onResume()
     }
 
-    fun getEffectiveTitle(): String {
+    fun getEffectiveBookTitle(): String {
         val bibleVersionIndexToUse = if (highlightHelper?.inHighlightMode == true) {
             highlightHelper!!.specificBibleVersionIndex
         } else if (bibleVersionIndex == 1) {
@@ -391,9 +409,35 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         return bookDescription
     }
 
+    private fun getModeTitle() =
+        if (highlightHelper?.inHighlightMode == true) {
+            getString(R.string.highlight_mode_title)
+        }
+        else if (defaultReadingMode) {
+            ""
+        }
+        else {
+            if (userBookmarkTitle != null) {
+                val maxModeTitleLen = 50
+                val trimmed = if (userBookmarkTitle!!.length <= maxModeTitleLen) {
+                    userBookmarkTitle
+                }
+                else {
+                    userBookmarkTitle!!.substring(0, maxModeTitleLen) + "&hellip;"
+                }
+                AppUtils.parseHtml(
+                    getString(R.string.bookmark_mode_title, trimmed))
+            } else {
+                getString(R.string.search_result_mode_title)
+            }
+        }
+
     fun syncViewWithDataContext() {
         // reset book description.
-        titleTextView.text = getEffectiveTitle()
+        titleTextView.text = getEffectiveBookTitle() + " "
+        var modeTitle = getModeTitle()
+        if (modeTitle.isNotEmpty()) modeTitle = " ($modeTitle)"
+        modeDescriptionTextView.text = modeTitle
 
         // now reset overlay panel
         val pinnedVersions = bibleVersions.filterIndexed { i, _ ->
@@ -418,15 +462,14 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             listOf(prefOverlayDescriptionStandalone, prefOverlayProgressBar).forEach {
                 it.visibility = View.VISIBLE
             }
-            prefOverlayDescriptionStandalone.text = AppUtils.parseHtml(
-                    getString(R.string.message_loading_in_progress, pinnedVersions))
+            prefOverlayDescriptionStandalone.text =
+                    getString(R.string.message_loading_in_progress, pinnedVersions)
         }
         else if (highlightHelper?.inHighlightMode == true) {
             listOf(prefOverlayDescriptionStandalone).forEach {
                 it.visibility = View.VISIBLE
             }
-            prefOverlayDescriptionStandalone.text = AppUtils.parseHtml(
-                    getString(R.string.highlight_mode_title, pinnedVersions))
+            prefOverlayDescriptionStandalone.text = pinnedVersions
         }
         else if (defaultReadingMode) {
             listOf(bookVersionSelectionPanel).forEach {
@@ -442,13 +485,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             listOf(prefOverlayDescriptionWithSwitchBtn, switchToPrefBtn).forEach {
                 it.visibility = View.VISIBLE
             }
-            prefOverlayDescriptionWithSwitchBtn.text = if (userBookmarkTitle != null) {
-                AppUtils.parseHtml(
-                        getString(R.string.bookmark_mode_title, userBookmarkTitle, pinnedVersions))
-            } else {
-                AppUtils.parseHtml(
-                        getString(R.string.search_result_mode_title, pinnedVersions))
-            }
+            prefOverlayDescriptionWithSwitchBtn.text = pinnedVersions
         }
     }
 
@@ -485,7 +522,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             }
         }
         else {
-            if (bookContentAdapter.bibleVersions.size > 1) null else 0
+            if (bibleVersions.size > 1) null else 0
         }
 
         viewModel.loadBook(bookNumber, bibleVersions,

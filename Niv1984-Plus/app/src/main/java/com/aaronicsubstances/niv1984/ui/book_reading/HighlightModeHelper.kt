@@ -133,7 +133,7 @@ class HighlightModeHelper(private val fragment: BookLoadFragment,
     fun canEnterHighlightMode(): Boolean {
         if (!fragment.viewModel.isLastLoadResultValid()) {
             AppUtils.showShortToast(fragment.context, fragment.getString(
-                R.string.message_highlight_mode_prohibited))
+                R.string.message_book_loading_unfinished))
             return false
         }
         return true

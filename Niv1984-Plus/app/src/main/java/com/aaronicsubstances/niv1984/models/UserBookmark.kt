@@ -31,24 +31,20 @@ interface UserBookmarkDao {
 
     @Query(
         """SELECT * from UserBookmark
-        WHERE dateUpdated < :maxDateUpdated OR (dateUpdated = :maxDateUpdated AND id > :minId)
         ORDER BY dateUpdated DESC, id
-        LIMIT :pageSize"""
+        LIMIT :pageSize OFFSET :skipCount"""
     )
-    suspend fun getNextPageSortedByDate(
-        maxDateUpdated: Timestamp, minId: Int,
-        pageSize: Int
+    suspend fun getPageSortedByDate(
+        skipCount: Int, pageSize: Int
     ): List<UserBookmark>
 
     @Query(
         """SELECT * from UserBookmark
-        WHERE title > :beginTitle OR (title = :beginTitle AND id > :minId)
         ORDER BY title, id
-        LIMIT :pageSize"""
+        LIMIT :pageSize OFFSET :skipCount"""
     )
-    suspend fun getNextPageSortedByTitle(
-        beginTitle: String, minId: Int,
-        pageSize: Int
+    suspend fun getPageSortedByTitle(
+        skipCount: Int, pageSize: Int
     ): List<UserBookmark>
 
     @Query(

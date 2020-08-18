@@ -94,4 +94,7 @@
     <string name="title_bookmark_detail">Bookmark Detail</string>
     <string name="action_bookmark_create">Create Bookmark</string>
     <string name="action_create">Create</string>
+    <string name="action_bookmark_open">Open</string>
+    <string name="message_loading">Loading...</string>
+    <string name="message_bookmark_count">%d bookmark(s) found.</string>
 </resources>

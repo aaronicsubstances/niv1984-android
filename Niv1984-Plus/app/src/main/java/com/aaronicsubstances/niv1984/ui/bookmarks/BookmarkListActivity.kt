@@ -2,22 +2,23 @@ package com.aaronicsubstances.niv1984.ui.bookmarks
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
-import androidx.appcompat.app.ActionBar
-import android.view.MenuItem
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.niv1984.R
-
 import com.aaronicsubstances.niv1984.ui.bookmarks.dummy.DummyContent
-import kotlinx.android.synthetic.main.activity_bookmark_list.*
-import kotlinx.android.synthetic.main.bookmark_list_content.view.*
-import kotlinx.android.synthetic.main.bookmark_list.*
+import com.aaronicsubstances.niv1984.ui.view_adapters.BookmarkAdapter
+import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 
 /**
  * An activity representing a list of Pings. This activity
@@ -29,6 +30,10 @@ import kotlinx.android.synthetic.main.bookmark_list.*
  */
 class BookmarkListActivity : AppCompatActivity() {
 
+    private var lastOnScrollListener: RecyclerView.OnScrollListener? = null
+
+    private lateinit var viewModel: BookmarkListViewModel
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
@@ -39,17 +44,12 @@ class BookmarkListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookmark_list)
 
-        setSupportActionBar(toolbar)
-        toolbar.title = title
+        setSupportActionBar(findViewById(R.id.toolbar))
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        if (bookmark_detail_container != null) {
+        if (findViewById<View>(R.id.bookmark_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
             // If this view is present, then the
@@ -57,7 +57,9 @@ class BookmarkListActivity : AppCompatActivity() {
             twoPane = true
         }
 
-        setupRecyclerView(bookmark_list)
+        viewModel = ViewModelProvider(this).get(BookmarkListViewModel::class.java)
+
+        setupRecyclerView(findViewById(R.id.bookmark_list))
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
@@ -76,7 +78,29 @@ class BookmarkListActivity : AppCompatActivity() {
         }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        //recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        val adapter = BookmarkAdapter()
+        val listLayout = LinearLayoutManager(this)
+        recyclerView.layoutManager = listLayout
+        recyclerView.addItemDecoration(DividerItemDecoration(this, listLayout.orientation))
+        recyclerView.adapter = adapter
+
+        val totalCountView = findViewById<TextView>(R.id.totalCountView)
+
+        viewModel.paginatorLiveData.observeProperAsEvent(this,
+            Observer { paginator ->
+                lastOnScrollListener?.let { recyclerView.removeOnScrollListener(it) }
+                recyclerView.addOnScrollListener(paginator)
+                lastOnScrollListener = paginator
+                // clear list view.
+                adapter.submitList(listOf())
+                totalCountView.text = getString(R.string.message_bookmark_count, paginator.totalCount)
+            })
+        viewModel.bookmarkLiveData.observe(this,
+            Observer { data ->
+                adapter.submitList(data)
+            })
+        viewModel.loadBookmarks()
     }
 
     class SimpleItemRecyclerViewAdapter(
@@ -130,8 +154,8 @@ class BookmarkListActivity : AppCompatActivity() {
         override fun getItemCount() = values.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.id_text
-            val contentView: TextView = view.content
+            val idView: TextView = view.findViewById(R.id.id_text)
+            val contentView: TextView = view.findViewById(R.id.content)
         }
     }
 }

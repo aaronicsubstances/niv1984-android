@@ -17,17 +17,28 @@
     
     -->
 
-    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/bookmark_list"
-        android:name="com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListFragment"
+    <LinearLayout
         android:layout_width="@dimen/item_width"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layoutManager="LinearLayoutManager"
-        tools:context="com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListActivity"
-        tools:listitem="@layout/bookmark_list_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/totalCountView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/bookmark_list"
+            android:name="com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListActivity"
+            tools:listitem="@layout/bookmark_list_item" />
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/bookmark_detail_container"

@@ -97,4 +97,5 @@
     <string name="action_bookmark_open">Open</string>
     <string name="message_loading">Loading...</string>
     <string name="message_bookmark_count">%d bookmark(s) found.</string>
+    <string name="empty_bookmarks">No bookmarks found.\nCreated bookmarks will appear here.</string>
 </resources>

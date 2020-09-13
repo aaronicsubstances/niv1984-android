@@ -13,7 +13,7 @@ import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
 class BookmarkAdapter
-        : FiniteListAdapter<BookmarkAdapterItem?, BookmarkAdapter.ViewHolder>(null) {
+        : FiniteListAdapter<BookmarkAdapterItem, BookmarkAdapter.ViewHolder>(null) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.bookmark_list_item,
@@ -28,29 +28,34 @@ class BookmarkAdapter
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val descriptionTf = itemView.findViewById<TextView>(R.id.description)
         private val titleTf = itemView.findViewById<TextView>(R.id.title)
+        private val dateTf = itemView.findViewById<TextView>(R.id.date)
+        private val chapterTf = itemView.findViewById<TextView>(R.id.chapter)
         private val goToBtn = itemView.findViewById<Button>(R.id.goToBtn)
 
         fun bind(position: Int) {
             val item = getItem(position)
-            if (item == null) {
-                titleTf.visibility = View.INVISIBLE
-                goToBtn.visibility = View.INVISIBLE
+            titleTf.visibility = View.VISIBLE
+            goToBtn.visibility = View.VISIBLE
 
-                descriptionTf.setText(R.string.message_loading)
+            var titlePrefix = item.title
+            var titleRemainder = ""
+            val maxTitleLen = 20
+            if (titlePrefix.length > maxTitleLen) {
+                titleRemainder = titlePrefix.substring(maxTitleLen)
+                titlePrefix = titlePrefix.substring(0, maxTitleLen)
             }
-            else {
-                titleTf.visibility = View.VISIBLE
-                goToBtn.visibility = View.VISIBLE
+            titleTf.text = titlePrefix
+            descriptionTf.text = titleRemainder
 
-                titleTf.text = item.title
-                val d = AppUtils.formatTimeStamp(item.dateUpdated, "dd MMM yyyy h:mm a")
-                val bv1 = AppConstants.bibleVersions.getValue(item.scrollPosPref.particularBibleVersions[0])
-                val book = bv1.bookNames[item.scrollPosPref.bookNumber - 1]
-                val bv = item.scrollPosPref.particularBibleVersions.map {
-                    AppConstants.bibleVersions.getValue(it).abbreviation
-                }.joinToString("/")
-                descriptionTf.text = "$book ${item.scrollPosPref.chapterNumber} ($bv) - $d"
-            }
+            val bv1 = AppConstants.bibleVersions.getValue(item.scrollPosPref.particularBibleVersions[0])
+            val book = bv1.bookNames[item.scrollPosPref.bookNumber - 1]
+            val bv = item.scrollPosPref.particularBibleVersions.map {
+                AppConstants.bibleVersions.getValue(it).abbreviation
+            }.joinToString("/")
+            chapterTf.text = "$book ${item.scrollPosPref.chapterNumber} $bv"
+
+            val d = AppUtils.formatTimeStamp(item.dateUpdated, "dd MMM yyyy")
+            dateTf.text = "Last accessed on $d"
         }
     }
 }

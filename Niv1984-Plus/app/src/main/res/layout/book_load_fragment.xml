@@ -30,6 +30,7 @@
             android:layout_marginLeft="8dp"
             app:srcCompat="@drawable/ic_first_page_24dp"/>
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

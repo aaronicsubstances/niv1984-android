@@ -72,10 +72,10 @@ class SearchResultAdapter: ListAdapter<SearchResultAdapterItem, RecyclerView.Vie
             val bibleVersion = AppConstants.bibleVersions.getValue(searchResult.bibleVersion)
             var description = bibleVersion.bookNames[searchResult.bookNumber - 1]
             if (searchResult.verseNumber < 1) {
-                description += " ${searchResult.chapterNumber} footnote"
+                description += " ${searchResult.chapterNumber} ${bibleVersion.strFootnote}"
 
             } else {
-                description += " ${searchResult.chapterNumber}:${searchResult.verseNumber} "
+                description += " ${searchResult.chapterNumber}:${searchResult.verseNumber}"
             }
             description += " (${bibleVersion.abbreviation})"
             descriptionView.text = description

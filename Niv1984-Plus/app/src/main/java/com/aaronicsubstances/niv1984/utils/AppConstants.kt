@@ -24,6 +24,7 @@ interface BibleVersion {
     val code: String
     val description: String
     val abbreviation: String
+    val strFootnote: String
     val bookNames: List<String>
 }
 
@@ -40,6 +41,7 @@ object AsanteTwiBibleVersion: BibleVersion {
     override val code = "asante2012"
     override val description = "Asante Twi Bible (2012)"
     override val abbreviation = "TWI"
+    override val strFootnote = "footnote"
     override val bookNames = listOf(
         "Gyenesis", "Eksod\u0254s", "Lewitik\u0254s", "Numeri", "Deuteronomium",
         "Yosua", "Akannifo\u0254", "Rut",
@@ -85,6 +87,7 @@ object KjvBibleVersion: BibleVersion {
     override val code = "kjv1769"
     override val description = "King James Bible (1769)"
     override val abbreviation = "KJV"
+    override val strFootnote = "Footnote"
     override val bookNames = listOf(
         "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
         "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
@@ -113,6 +116,7 @@ object NivBibleVersion: BibleVersion {
     override val code = "niv1984"
     override val description = "New International Version (1984)"
     override val abbreviation = "NIV"
+    override val strFootnote = "Footnote"
     override val bookNames = listOf(
         "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
         "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",

@@ -436,8 +436,13 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         // reset book description.
         titleTextView.text = getEffectiveBookTitle() + " "
         var modeTitle = getModeTitle()
-        if (modeTitle.isNotEmpty()) modeTitle = " ($modeTitle)"
-        modeDescriptionTextView.text = modeTitle
+        if (modeTitle.isEmpty()) {
+            modeDescriptionTextView.visibility = View.GONE
+        }
+        else {
+            modeDescriptionTextView.visibility = View.VISIBLE
+            modeDescriptionTextView.text = modeTitle
+        }
 
         // now reset overlay panel
         val pinnedVersions = bibleVersions.filterIndexed { i, _ ->

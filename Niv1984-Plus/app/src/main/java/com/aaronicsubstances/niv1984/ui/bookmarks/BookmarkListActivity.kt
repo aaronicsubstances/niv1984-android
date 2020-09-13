@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.ui.bookmarks.dummy.DummyContent
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookmarkAdapter
-import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 
 /**
  * An activity representing a list of Pings. This activity
@@ -29,8 +28,6 @@ import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
  * item details side-by-side using two vertical panes.
  */
 class BookmarkListActivity : AppCompatActivity() {
-
-    private var lastOnScrollListener: RecyclerView.OnScrollListener? = null
 
     private lateinit var viewModel: BookmarkListViewModel
 
@@ -85,20 +82,19 @@ class BookmarkListActivity : AppCompatActivity() {
         recyclerView.addItemDecoration(DividerItemDecoration(this, listLayout.orientation))
         recyclerView.adapter = adapter
 
-        val totalCountView = findViewById<TextView>(R.id.totalCountView)
-
-        viewModel.paginatorLiveData.observeProperAsEvent(this,
-            Observer { paginator ->
-                lastOnScrollListener?.let { recyclerView.removeOnScrollListener(it) }
-                recyclerView.addOnScrollListener(paginator)
-                lastOnScrollListener = paginator
-                // clear list view.
-                adapter.submitList(listOf())
-                totalCountView.text = getString(R.string.message_bookmark_count, paginator.totalCount)
-            })
+        val emptyView = findViewById<TextView>(R.id.emptyView)
+        recyclerView.addOnScrollListener(viewModel.paginator)
         viewModel.bookmarkLiveData.observe(this,
             Observer { data ->
                 adapter.submitList(data)
+                if (data.isEmpty()) {
+                    emptyView.visibility = View.VISIBLE
+                    recyclerView.visibility = View.GONE
+                }
+                else {
+                    emptyView.visibility = View.GONE
+                    recyclerView.visibility = View.VISIBLE
+                }
             })
         viewModel.loadBookmarks()
     }

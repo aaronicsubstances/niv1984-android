@@ -31,20 +31,31 @@ interface UserBookmarkDao {
 
     @Query(
         """SELECT * from UserBookmark
-        ORDER BY dateUpdated DESC, id
-        LIMIT :pageSize OFFSET :skipCount"""
+        ORDER BY dateUpdated DESC
+        LIMIT :size"""
     )
-    suspend fun getPageSortedByDate(
-        skipCount: Int, pageSize: Int
+    suspend fun getInitialSortedByDate(
+        size: Int
     ): List<UserBookmark>
 
     @Query(
         """SELECT * from UserBookmark
-        ORDER BY title, id
-        LIMIT :pageSize OFFSET :skipCount"""
+        WHERE dateUpdated <= :maxDateUpdated
+        ORDER BY dateUpdated DESC
+        LIMIT :pageSize"""
     )
-    suspend fun getPageSortedByTitle(
-        skipCount: Int, pageSize: Int
+    suspend fun getNextAfterSortedByDate(
+        maxDateUpdated: Timestamp, pageSize: Int
+    ): List<UserBookmark>
+
+    @Query(
+        """SELECT * from UserBookmark
+            WHERE dateUpdated >= :minDateUpdated
+            ORDER BY dateUpdated ASC
+            LIMIT :pageSize"""
+    )
+    suspend fun getPreviousBeforeSortedByDate(
+        minDateUpdated: Timestamp, pageSize: Int
     ): List<UserBookmark>
 
     @Query(

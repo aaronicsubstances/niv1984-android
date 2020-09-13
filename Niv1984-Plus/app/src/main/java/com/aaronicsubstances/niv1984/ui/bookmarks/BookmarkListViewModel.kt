@@ -10,8 +10,13 @@ import com.aaronicsubstances.largelistpaging.DefaultPaginationEventListener
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
 import com.aaronicsubstances.largelistpaging.UnboundedDataPaginator
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.AppDatabase
 import com.aaronicsubstances.niv1984.data.BookmarkDataSource
 import com.aaronicsubstances.niv1984.models.BookmarkAdapterItem
+import com.aaronicsubstances.niv1984.models.UserBookmarkUpdate
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.sql.Timestamp
 import javax.inject.Inject
 
 class BookmarkListViewModel(application: Application): AndroidViewModel(application) {
@@ -41,7 +46,11 @@ class BookmarkListViewModel(application: Application): AndroidViewModel(applicat
         paginator.loadInitialAsync(ds, null)
     }
 
-    fun reloadBookmarks() {
+    fun updateAccessTime(item: BookmarkAdapterItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val update = UserBookmarkUpdate(item.id, Timestamp(System.currentTimeMillis()))
+            AppDatabase.getDatabase(context).userBookmarkDao().update(update)
+        }
         _bookmarkLiveData.value = null
         loadBookmarks()
     }

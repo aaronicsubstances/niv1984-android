@@ -39,7 +39,7 @@ class BookmarkDataSource(
             for (rawResult in rawResults) {
                 val scrollPosPref = AppUtils.deserializeFromJson(rawResult.serializedData,
                     ScrollPosPref::class.java)
-                results.add(BookmarkAdapterItem(rawResult.title, scrollPosPref,
+                results.add(BookmarkAdapterItem(rawResult.id, rawResult.title, scrollPosPref,
                     rawResult.dateUpdated))
             }
             loadCallback.accept(UnboundedDataSource.LoadResult(results))

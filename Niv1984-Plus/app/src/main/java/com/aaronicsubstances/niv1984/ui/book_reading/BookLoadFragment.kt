@@ -307,7 +307,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                 Observer<Boolean> { syncViewWithDataContext() })
         viewModel.newBookmarkLiveData.observeProperAsEvent(viewLifecycleOwner,
                 Observer<UserBookmark> {
-                    bookLoadRequestListener?.onBookLoadRequest(it)
+                    bookLoadRequestListener?.onBookLoadRequest(it.title, it.serializedData)
                 })
 
         bookContentView.addOnScrollListener(object: LargeListViewScrollListener() {

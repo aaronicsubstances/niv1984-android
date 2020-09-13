@@ -21,14 +21,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <include layout="@layout/bookmark_list" />
-    </FrameLayout>
-
+    <include layout="@layout/content_bookmark_list" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

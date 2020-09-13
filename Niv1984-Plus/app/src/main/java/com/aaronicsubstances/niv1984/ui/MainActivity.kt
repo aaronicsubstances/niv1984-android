@@ -1,8 +1,10 @@
 package com.aaronicsubstances.niv1984.ui
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.SystemClock
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -17,10 +19,9 @@ import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
+import com.aaronicsubstances.niv1984.models.BookmarkAdapterItem
 import com.aaronicsubstances.niv1984.models.LatestVersionCheckResult
-import com.aaronicsubstances.niv1984.models.ScrollPosPref
 import com.aaronicsubstances.niv1984.models.SearchResult
-import com.aaronicsubstances.niv1984.models.UserBookmark
 import com.aaronicsubstances.niv1984.ui.book_reading.BookListFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadFragment
 import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadRequestListener
@@ -48,6 +49,25 @@ class MainActivity : AppCompatActivity(),
         const val FRAG_TAG_CHAPTER_SEL = "MainActivity.bookLoad.chapterSel"
         const val FRAG_TAG_BOOK_SEL = "MainActivity.bookLoad.bookSel"
         private const val STATE_KEY_SELECTED_TAB_POS = "MainActivity.selectedTabPosition"
+        private const val INTENT_ACTION_BOOKMARK = "MainActivity.Action.Bookmark"
+        private const val INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF = INTENT_ACTION_BOOKMARK + ".scrollPref"
+        private const val INTENT_EXTRA_DATA_BOOKMARK_TITLE = INTENT_ACTION_BOOKMARK + ".title"
+        private const val INTENT_EXTRA_DATA_REQUEST_TIME = "MainActivity.Action.Data.RequestTime"
+        private const val INTENT_EXTRA_DATA_REQUEST_TYPE = "MainActivity.Action.Data.RequestType"
+
+        private const val MIN_INTENT_REQUEST_DELAY = 5000L
+        private const val INTENT_REQUEST_TYPE_OPEN_BOOKMARK = 1
+
+        fun newOpenBookmarkRequest(context: AppCompatActivity, record: BookmarkAdapterItem): Intent {
+            val intent = Intent(context, MainActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.putExtra(INTENT_EXTRA_DATA_REQUEST_TYPE, INTENT_REQUEST_TYPE_OPEN_BOOKMARK)
+            intent.putExtra(INTENT_EXTRA_DATA_BOOKMARK_TITLE, record.title)
+            intent.putExtra(INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF,
+                AppUtils.serializeAsJson(record.scrollPosPref))
+            intent.putExtra(INTENT_EXTRA_DATA_REQUEST_TIME, SystemClock.uptimeMillis())
+            return intent
+        }
     }
 
     private lateinit var drawer: DrawerLayout
@@ -112,6 +132,30 @@ class MainActivity : AppCompatActivity(),
         viewModel.startFetchingLatestVersionInfo()
     }
 
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntentRequest(intent)
+    }
+
+    private fun handleIntentRequest(intent: Intent) {
+        val requestType = intent.getIntExtra(INTENT_EXTRA_DATA_REQUEST_TYPE, 0)
+        if (requestType == INTENT_REQUEST_TYPE_OPEN_BOOKMARK) {
+            val timeOfRequest = intent.getLongExtra(INTENT_EXTRA_DATA_REQUEST_TIME, 0L)
+            if (SystemClock.uptimeMillis() - timeOfRequest < MIN_INTENT_REQUEST_DELAY) {
+                val title = intent.getStringExtra(INTENT_EXTRA_DATA_BOOKMARK_TITLE)
+                val serialized = intent.getStringExtra(INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF)
+                onBookLoadRequest(title, serialized)
+            }
+        }
+    }
+
+    private fun selectTabInUIOnly(pos: Int){
+        // select tab, but don't trigger dealWithTabSwitch again.
+        tabs.removeOnTabSelectedListener(tabSelectionListener)
+        tabs.getTabAt(pos)!!.select()
+        tabs.addOnTabSelectedListener(tabSelectionListener)
+    }
+
     private fun createInitialFragments() {
         val ft = supportFragmentManager.beginTransaction()
         val initialHomeFrag = BookListFragment.newInstance()
@@ -174,7 +218,7 @@ class MainActivity : AppCompatActivity(),
                 }
             }
             // commit now rather than later to prevent fragment exit actions
-            // (such as pevious/next book load buttons) being handled more than once.
+            // (such as previous/next book load buttons) being handled more than once.
             commitNow()
         }
     }
@@ -187,12 +231,14 @@ class MainActivity : AppCompatActivity(),
         dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
     }
 
-    override fun onBookLoadRequest(entity: UserBookmark) {
+    override fun onBookLoadRequest(title: String, serializedScrollPosPref: String) {
         val ft = supportFragmentManager.beginTransaction()
         supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD)?.let { ft.remove(it) }
-        val bookLoadFrag = BookLoadFragment.newInstance(entity.title, entity.serializedData)
+        val bookLoadFrag = BookLoadFragment.newInstance(title, serializedScrollPosPref)
         ft.add(R.id.container, bookLoadFrag, FRAG_TAG_BOOK_LOAD)
         dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
+
+        selectTabInUIOnly(0)
     }
 
     override fun onProcessSearchRequest(f: SearchResponseFragment) {
@@ -208,10 +254,7 @@ class MainActivity : AppCompatActivity(),
         ft.add(R.id.container, bookLoadFrag, FRAG_TAG_BOOK_LOAD)
         dealWithTabSwitch(true, ft, mapOf(FRAG_TAG_BOOK_LOAD to bookLoadFrag))
 
-        // select tab, but don't trigger dealWithTabSwitch again.
-        tabs.removeOnTabSelectedListener(tabSelectionListener)
-        tabs.getTabAt(0)!!.select()
-        tabs.addOnTabSelectedListener(tabSelectionListener)
+        selectTabInUIOnly(0)
     }
 
     /**
@@ -243,6 +286,7 @@ class MainActivity : AppCompatActivity(),
                 dealWithTabSwitch(false, ft, mapOf(FRAG_TAG_SEARCH_RESPONSE to null))
             }
             else {
+                // select home tab and trigger tab listener logic
                 tabs.getTabAt(0)!!.select()
             }
             return true
@@ -357,6 +401,7 @@ class MainActivity : AppCompatActivity(),
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         toggle.syncState()
+        handleIntentRequest(intent)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

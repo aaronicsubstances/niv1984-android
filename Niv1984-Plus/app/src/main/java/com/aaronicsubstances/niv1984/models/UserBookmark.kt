@@ -21,8 +21,6 @@ data class UserBookmark(
 data class UserBookmarkUpdate(
     val id: Int,
 
-    val title: String,
-
     val dateUpdated: Timestamp
 )
 

@@ -4,6 +4,7 @@ import com.aaronicsubstances.largelistpaging.LargeListItem
 import java.util.*
 
 class BookmarkAdapterItem(
+    val id: Int,
     val title: String,
     val scrollPosPref: ScrollPosPref,
     val dateUpdated: Date

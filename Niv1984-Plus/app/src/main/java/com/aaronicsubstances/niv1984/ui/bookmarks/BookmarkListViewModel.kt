@@ -15,6 +15,7 @@ import com.aaronicsubstances.niv1984.data.BookmarkDataSource
 import com.aaronicsubstances.niv1984.models.BookmarkAdapterItem
 import com.aaronicsubstances.niv1984.models.UserBookmarkUpdate
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.sql.Timestamp
 import javax.inject.Inject
@@ -46,13 +47,27 @@ class BookmarkListViewModel(application: Application): AndroidViewModel(applicat
         paginator.loadInitialAsync(ds, null)
     }
 
-    fun updateAccessTime(item: BookmarkAdapterItem) {
+    fun updateAccessTime(activity: BookmarkListActivity, item: BookmarkAdapterItem) {
         viewModelScope.launch(Dispatchers.IO) {
             val update = UserBookmarkUpdate(item.id, Timestamp(System.currentTimeMillis()))
             AppDatabase.getDatabase(context).userBookmarkDao().update(update)
+            // delay a bit to make unlikely user seeing update before activity switch
+            delay(1000)
+            activity.runOnUiThread {
+                _bookmarkLiveData.value = null
+                loadBookmarks()
+            }
         }
-        _bookmarkLiveData.value = null
-        loadBookmarks()
+    }
+
+    fun deleteBookmarks(activity: BookmarkListActivity, selectedIds: List<Int>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            AppDatabase.getDatabase(context).userBookmarkDao().delete(selectedIds)
+            activity.runOnUiThread {
+                _bookmarkLiveData.value = null
+                loadBookmarks()
+            }
+        }
     }
 
     inner class BookmarkListHelper : DefaultPaginationEventListener<BookmarkAdapterItem>() {

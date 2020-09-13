@@ -67,6 +67,6 @@ interface UserBookmarkDao {
     @Update(entity = UserBookmark::class)
     suspend fun update(updateData: UserBookmarkUpdate)
 
-    @Delete
-    suspend fun delete(entity: UserBookmark)
+    @Query("DELETE FROM UserBookmark WHERE id IN (:entityIds)")
+    suspend fun delete(entityIds: List<Int>)
 }

@@ -1,10 +1,12 @@
 package com.aaronicsubstances.niv1984.ui.bookmarks
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.view.ActionMode
 import androidx.core.app.NavUtils
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,10 +17,13 @@ import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.models.BookmarkAdapterItem
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookmarkAdapter
+import com.afollestad.materialdialogs.MaterialDialog
 
 class BookmarkListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: BookmarkListViewModel
+    private lateinit var adapter: BookmarkAdapter
+    private var deleteActionMode: ActionMode? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,13 +34,34 @@ class BookmarkListActivity : AppCompatActivity() {
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        adapter = BookmarkAdapter()
+
         viewModel = ViewModelProvider(this).get(BookmarkListViewModel::class.java)
 
         setupRecyclerView(findViewById(R.id.bookmark_list))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.activity_book_list, menu)
+        return true
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
+        super.onPrepareOptionsMenu(menu)
+        val itemIdsToRemove = mutableListOf<Int>()
+        if (adapter.inSelectionMode) {
+            itemIdsToRemove.add(R.id.delete)
+        }
+        itemIdsToRemove.forEach { menu.removeItem(it) }
+        return true
+    }
+
     override fun onOptionsItemSelected(item: MenuItem) =
         when (item.itemId) {
+            R.id.delete -> {
+                startDeletionActionMode(null)
+                true
+            }
             android.R.id.home -> {
                 // This ID represents the Home or Up button. In the case of this
                 // activity, the Up button is shown. Use NavUtils to allow users
@@ -54,13 +80,24 @@ class BookmarkListActivity : AppCompatActivity() {
         recyclerView.layoutManager = listLayout
         recyclerView.addItemDecoration(DividerItemDecoration(this, listLayout.orientation))
 
-        val adapter = BookmarkAdapter()
         recyclerView.adapter = adapter
         val adapterEventListener = object: BookmarkAdapter.AdapterEventListener {
             override fun bookmarkOpenRequested(item: BookmarkAdapterItem) {
-                viewModel.updateAccessTime(item)
+                viewModel.updateAccessTime(this@BookmarkListActivity, item)
                 startActivity(MainActivity.newOpenBookmarkRequest(this@BookmarkListActivity,
                     item))
+            }
+
+            override fun bookmarkDeleteRequested(item: BookmarkAdapterItem) {
+                startDeletionActionMode(item.id)
+            }
+
+            override fun onBookmarkSelectionChanged(
+                item: BookmarkAdapterItem,
+                itemNowSelected: Boolean
+            ) {
+                // update title in contextual overlay bar with selection count
+                deleteActionMode?.invalidate()
             }
         }
         adapter.adapterEventListener = adapterEventListener
@@ -82,5 +119,69 @@ class BookmarkListActivity : AppCompatActivity() {
                 }
             })
         viewModel.loadBookmarks()
+    }
+
+    private fun startDeletionActionMode(initialId: Int?) {
+        adapter.inSelectAllMode = false
+        adapter.selectedIds.clear()
+        initialId?.let { adapter.selectedIds.add(it) }
+        adapter.inSelectionMode = true
+        invalidateOptionsMenu()
+
+        val customSelectionActionModeCallback = object: ActionMode.Callback {
+            private var mode: ActionMode? = null
+
+            override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
+                this.mode = mode
+                mode.menuInflater.inflate(R.menu.activity_book_list_contextual, menu)
+                return true
+            }
+
+            override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
+                mode.title = "${adapter.effectiveSelectionCount} selected"
+                return true
+            }
+
+            override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.selectAll -> {
+                        adapter.inSelectAllMode = true
+                        mode.invalidate()
+                        return true
+                    }
+                    R.id.delete -> {
+                        if (adapter.selectedIds.isNotEmpty()) {
+                            deleteSelections()
+                        }
+                        return true
+                    }
+                }
+                // else let default items be processed.
+                return false
+            }
+
+            override fun onDestroyActionMode(mode: ActionMode) {
+                this.mode = null
+                finishActionMode()
+            }
+
+            fun finishActionMode() {
+                mode?.finish()
+                adapter.inSelectionMode = false
+                invalidateOptionsMenu()
+            }
+        }
+        deleteActionMode = startSupportActionMode(customSelectionActionModeCallback)
+    }
+
+    private fun deleteSelections() {
+        MaterialDialog(this).show {
+            message(R.string.deletion_confirmation)
+            positiveButton(R.string.action_delete) {
+                viewModel.deleteBookmarks(this@BookmarkListActivity, adapter.selectedIds)
+                deleteActionMode?.finish()
+            }
+            negativeButton(R.string.action_cancel)
+        }
     }
 }

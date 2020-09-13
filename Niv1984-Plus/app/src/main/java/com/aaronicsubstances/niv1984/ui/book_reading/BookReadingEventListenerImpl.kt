@@ -1,8 +1,8 @@
 package com.aaronicsubstances.niv1984.ui.book_reading
 
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.data.BookLoader
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
-import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.afollestad.materialdialogs.MaterialDialog
@@ -40,9 +40,7 @@ object BookReadingEventListenerImpl {
         // since adapter already uses html to cache item, we have no choice but to
         // parse html each time over here
         val dialogMessage = run {
-            val lowerA = 'a'.toInt()
-            val charRef = (lowerA + noteRefNumber - 1).toChar()
-            val prefix = "<sup>$charRef</sup>"
+            val prefix = BookLoader.createNoteRefHtml(chapterNumber, noteRefNumber, false).first
             AppUtils.assert(footNoteItem.fullContent.text.trim().startsWith(prefix))
             AppUtils.parseHtml(footNoteItem.fullContent.text.trim().substring(prefix.length))
         }
@@ -65,8 +63,11 @@ object BookReadingEventListenerImpl {
             return
         }
         MaterialDialog(fragment.requireActivity()).show {
-            input() { dialog, text ->
-                fragment.viewModel.createUserBookmark(text.toString())
+            input(maxLength = 250) { dialog, text ->
+                val description = text.toString().trim()
+                if (description.isNotEmpty()) {
+                    fragment.viewModel.createUserBookmark(description)
+                }
             }
             title(R.string.action_bookmark_create)
             positiveButton(R.string.action_create)

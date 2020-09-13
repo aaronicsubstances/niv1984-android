@@ -34,6 +34,22 @@ class BookLoader(private val context: Context,
 
     companion object {
         private val DUMMY_CONTENT = BookDisplayItemContent(-1, "")
+
+        fun createNoteRefHtml(
+                chapterNumber: Int,
+                noteRefNumber: Int,
+                createLink: Boolean
+        ): Pair<String, String> {
+            val lowerA = 'a'.toInt()
+            val charRef = (lowerA + noteRefNumber - 1).toChar()
+            var supEl = charRef.toString()
+            val link = "ft-$chapterNumber-$noteRefNumber"
+            if (createLink) {
+                supEl = "[<a href='$link'> $charRef </a>]"
+            }
+            supEl = "<sup>$supEl</sup>"
+            return Pair(supEl, link)
+        }
     }
 
     suspend fun load(): BookDisplay {
@@ -622,10 +638,7 @@ class BookLoader(private val context: Context,
         rawNoteRef: NoteRef,
         out: Any
     ) {
-        val lowerA = 'a'.toInt()
-        val charRef = (lowerA + rawNoteRef.noteNumber -1).toChar()
-        var text = "<sup><a href='ft-$chapterNumber-${rawNoteRef.noteNumber}'>" +
-            "$charRef</a></sup>"
+        var text = createNoteRefHtml(chapterNumber, rawNoteRef.noteNumber, true).first
         if (out is VerseHighlighter) {
             out.addInitMarkup(VerseHighlighter.Markup(text, removeDuringHighlighting = true))
         }
@@ -648,10 +661,9 @@ class BookLoader(private val context: Context,
         var out = StringBuilder()
         var footNoteId: String? = null
         if (viewType == BookDisplayItemViewType.FOOTNOTE) {
-            val lowerA = 'a'.toInt()
-            val charRef = (lowerA + rawNote.noteNumber - 1).toChar()
-            out.append("<sup>$charRef</sup>")
-            footNoteId = "ft-$chapterNumber-${rawNote.noteNumber}"
+            val noteRefHtml = createNoteRefHtml(chapterNumber, rawNote.noteNumber, false)
+            out.append(noteRefHtml.first)
+            footNoteId = noteRefHtml.second
         }
         for (part in rawNote.parts) {
             val escapedContent = TextUtils.htmlEncode(part.body)

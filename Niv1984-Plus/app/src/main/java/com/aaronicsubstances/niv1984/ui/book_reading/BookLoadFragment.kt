@@ -173,8 +173,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                     }
                 }
                 R.id.action_bookmark_create -> {
-                    if (userBookmark != null ||
-                            highlightHelper?.inHighlightMode == true) {
+                    if (highlightHelper?.inHighlightMode == true) {
                         itemIdsToRemove.add(menuItem.itemId)
                     }
                 }
@@ -544,6 +543,14 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                 (model.bibleVersionIndexInUI != null ||
                         model.displayMultipleSideBySide == displayMultipleSideBySide) &&
                 model.isNightMode == isNightMode
+    }
+
+    fun getCurrLocIfBookmarked(): IntArray? {
+        if (userBookmark == null) {
+            return null
+        }
+        return intArrayOf(bookNumber, viewModel.currLocChapterNumber,
+            viewModel.currLocVerseNumber)
     }
 
     fun goToBook(newBookNumber: Int, chapterNumber: Int, verseNumber: Int) {

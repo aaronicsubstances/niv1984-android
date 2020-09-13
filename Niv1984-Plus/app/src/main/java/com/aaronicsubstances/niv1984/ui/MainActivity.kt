@@ -1,10 +1,8 @@
 package com.aaronicsubstances.niv1984.ui
 
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.content.res.Configuration
 import android.os.Bundle
-import android.os.SystemClock
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -13,8 +11,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.preference.PreferenceManager
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
@@ -28,12 +28,14 @@ import com.aaronicsubstances.niv1984.ui.book_reading.BookLoadRequestListener
 import com.aaronicsubstances.niv1984.ui.search.SearchRequestFragment
 import com.aaronicsubstances.niv1984.ui.search.SearchResponseFragment
 import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.aaronicsubstances.niv1984.utils.LiveDataEvent
 import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onCancel
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.tabs.TabLayout
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity(),
         SharedPreferences.OnSharedPreferenceChangeListener,
@@ -52,23 +54,36 @@ class MainActivity : AppCompatActivity(),
         private const val INTENT_ACTION_BOOKMARK = "MainActivity.Action.Bookmark"
         private const val INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF = INTENT_ACTION_BOOKMARK + ".scrollPref"
         private const val INTENT_EXTRA_DATA_BOOKMARK_TITLE = INTENT_ACTION_BOOKMARK + ".title"
-        private const val INTENT_EXTRA_DATA_REQUEST_TIME = "MainActivity.Action.Data.RequestTime"
         private const val INTENT_EXTRA_DATA_REQUEST_TYPE = "MainActivity.Action.Data.RequestType"
 
-        private const val MIN_INTENT_REQUEST_DELAY = 5000L
         private const val INTENT_REQUEST_TYPE_OPEN_BOOKMARK = 1
+        private const val INTENT_REQUEST_TYPE_RESET_BOOKMARK = 2
+        private const val INTENT_LOCAL_ACTION = "MainActivity.Action"
 
-        fun newOpenBookmarkRequest(context: AppCompatActivity, record: BookmarkAdapterItem): Intent {
+        fun openBookmark(context: AppCompatActivity, record: BookmarkAdapterItem) {
             val intent = Intent(context, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             intent.putExtra(INTENT_EXTRA_DATA_REQUEST_TYPE, INTENT_REQUEST_TYPE_OPEN_BOOKMARK)
             intent.putExtra(INTENT_EXTRA_DATA_BOOKMARK_TITLE, record.title)
             intent.putExtra(INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF,
                 AppUtils.serializeAsJson(record.scrollPosPref))
-            intent.putExtra(INTENT_EXTRA_DATA_REQUEST_TIME, SystemClock.uptimeMillis())
-            return intent
+            context.startActivity(intent)
+        }
+
+        fun clearLoadedBookmarkViews(context: AppCompatActivity) {
+            val intent = Intent(INTENT_LOCAL_ACTION)
+            intent.putExtra(INTENT_EXTRA_DATA_REQUEST_TYPE, INTENT_REQUEST_TYPE_RESET_BOOKMARK)
+            LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
         }
     }
+
+    private val mReceiver: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            handleIntentRequest(intent)
+        }
+    }
+
+    private val loadRequestLiveData: MutableLiveData<LiveDataEvent<IntArray>> = MutableLiveData()
 
     private lateinit var drawer: DrawerLayout
     private lateinit var toggle: ActionBarDrawerToggle
@@ -130,6 +145,14 @@ class MainActivity : AppCompatActivity(),
         viewModel.latestVersionLiveData.observeProperAsEvent(this,
             Observer { recommendOrForceUpgrade(it) })
         viewModel.startFetchingLatestVersionInfo()
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mReceiver,
+            IntentFilter(INTENT_LOCAL_ACTION)
+        );
+        loadRequestLiveData.observeProperAsEvent(this,
+            Observer<IntArray>{loc ->
+                onBookLoadRequest(loc[0], loc[1], loc[2])
+            })
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -140,11 +163,17 @@ class MainActivity : AppCompatActivity(),
     private fun handleIntentRequest(intent: Intent) {
         val requestType = intent.getIntExtra(INTENT_EXTRA_DATA_REQUEST_TYPE, 0)
         if (requestType == INTENT_REQUEST_TYPE_OPEN_BOOKMARK) {
-            val timeOfRequest = intent.getLongExtra(INTENT_EXTRA_DATA_REQUEST_TIME, 0L)
-            if (SystemClock.uptimeMillis() - timeOfRequest < MIN_INTENT_REQUEST_DELAY) {
-                val title = intent.getStringExtra(INTENT_EXTRA_DATA_BOOKMARK_TITLE)
-                val serialized = intent.getStringExtra(INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF)
-                onBookLoadRequest(title, serialized)
+            val title = intent.getStringExtra(INTENT_EXTRA_DATA_BOOKMARK_TITLE)
+            val serialized = intent.getStringExtra(INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF)
+            onBookLoadRequest(title, serialized)
+        }
+        else if (requestType == INTENT_REQUEST_TYPE_RESET_BOOKMARK) {
+            val frag = supportFragmentManager.findFragmentByTag(FRAG_TAG_BOOK_LOAD) as BookLoadFragment?
+            if (frag != null) {
+                val loc = frag.getCurrLocIfBookmarked()
+                if (loc != null) {
+                    loadRequestLiveData.value = LiveDataEvent(loc)
+                }
             }
         }
     }
@@ -305,6 +334,7 @@ class MainActivity : AppCompatActivity(),
         super.onDestroy()
         val preferenceManager = PreferenceManager.getDefaultSharedPreferences(this)
         preferenceManager.unregisterOnSharedPreferenceChangeListener(this)
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mReceiver);
     }
 
     override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {

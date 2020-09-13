@@ -49,7 +49,7 @@ class BookmarkListActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         super.onPrepareOptionsMenu(menu)
         val itemIdsToRemove = mutableListOf<Int>()
-        if (adapter.inSelectionMode) {
+        if (adapter.inSelectionMode || adapter.currentList.isEmpty()) {
             itemIdsToRemove.add(R.id.delete)
         }
         itemIdsToRemove.forEach { menu.removeItem(it) }
@@ -83,9 +83,9 @@ class BookmarkListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         val adapterEventListener = object: BookmarkAdapter.AdapterEventListener {
             override fun bookmarkOpenRequested(item: BookmarkAdapterItem) {
+                MainActivity.openBookmark(this@BookmarkListActivity,
+                    item)
                 viewModel.updateAccessTime(this@BookmarkListActivity, item)
-                startActivity(MainActivity.newOpenBookmarkRequest(this@BookmarkListActivity,
-                    item))
             }
 
             override fun bookmarkDeleteRequested(item: BookmarkAdapterItem) {
@@ -116,6 +116,7 @@ class BookmarkListActivity : AppCompatActivity() {
                         emptyView.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
                     }
+                    invalidateOptionsMenu()
                 }
             })
         viewModel.loadBookmarks()
@@ -150,9 +151,7 @@ class BookmarkListActivity : AppCompatActivity() {
                         return true
                     }
                     R.id.delete -> {
-                        if (adapter.selectedIds.isNotEmpty()) {
-                            deleteSelections()
-                        }
+                        deleteSelections()
                         return true
                     }
                 }
@@ -175,10 +174,14 @@ class BookmarkListActivity : AppCompatActivity() {
     }
 
     private fun deleteSelections() {
+        if (adapter.effectiveSelectionCount == 0) {
+            return
+        }
         MaterialDialog(this).show {
             message(R.string.deletion_confirmation)
             positiveButton(R.string.action_delete) {
-                viewModel.deleteBookmarks(this@BookmarkListActivity, adapter.selectedIds)
+                viewModel.deleteBookmarks(this@BookmarkListActivity, adapter.effectiveSelectedIds)
+                MainActivity.clearLoadedBookmarkViews(this@BookmarkListActivity)
                 deleteActionMode?.finish()
             }
             negativeButton(R.string.action_cancel)

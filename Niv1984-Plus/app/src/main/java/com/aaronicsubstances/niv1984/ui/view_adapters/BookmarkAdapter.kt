@@ -40,6 +40,16 @@ class BookmarkAdapter
             return selectionCount
         }
 
+    val effectiveSelectedIds: List<Int>
+        get() {
+            if (inSelectAllMode) {
+                return currentList.map { it.id }
+            }
+            else {
+                return selectedIds
+            }
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.bookmark_list_item,
             parent,false)

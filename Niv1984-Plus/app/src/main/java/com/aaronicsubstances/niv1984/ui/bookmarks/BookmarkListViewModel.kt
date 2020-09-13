@@ -51,8 +51,6 @@ class BookmarkListViewModel(application: Application): AndroidViewModel(applicat
         viewModelScope.launch(Dispatchers.IO) {
             val update = UserBookmarkUpdate(item.id, Timestamp(System.currentTimeMillis()))
             AppDatabase.getDatabase(context).userBookmarkDao().update(update)
-            // delay a bit to make unlikely user seeing update before activity switch
-            delay(1000)
             activity.runOnUiThread {
                 _bookmarkLiveData.value = null
                 loadBookmarks()

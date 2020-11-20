@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "NIV1984 Plus"><!ENTITY author "Mr. Aaron Baffour-Awuah">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "NIV84 Plus"><!ENTITY author "Mr. Aaron Baffour-Awuah">]>
 <resources>
     <string name="app_name">&appname;</string>
     <string name="title_activity_main">&appname;</string>
@@ -34,8 +34,8 @@
     <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
     <string name="action_move_up">Move Up</string>
     <string name="action_move_down">Move Down</string>
-    <string name="display_book_pref_instruction">Select a book version and use up/down buttons to push
-        the two(2) preferred bible versions to the top.\nThen click OK to confirm.</string>
+    <string name="display_book_pref_instruction">Select a bible version and use up/down buttons to
+        order it by preference, with most preferred at the top.\nThen click OK to confirm.</string>
 
     <string name="tab_text_1">Books</string>
     <string name="tab_text_2">Search</string>

@@ -357,7 +357,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
 
                     // skip scroll if layout is responding to configuration change.
                     val scrollRelatedViews = if (!hasReceivedDataBefore) savedInstanceState == null
-                    else true
+                        else true
                     hasReceivedDataBefore = true
 
                     if (scrollRelatedViews) {

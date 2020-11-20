@@ -2,6 +2,7 @@ package com.aaronicsubstances.niv1984.ui.book_reading
 
 import android.app.Application
 import android.content.Context
+import android.os.SystemClock
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +15,6 @@ import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.*
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.LiveDataEvent
-import com.google.firebase.firestore.auth.User
 import kotlinx.coroutines.launch
 import java.sql.Timestamp
 import javax.inject.Inject
@@ -42,6 +42,9 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             listOf(), null, BookDisplayItemViewType.TITLE,
         false, false)
 
+    private var lastSaveTimeMillis = 0L
+    private val MIN_MILLIS_FOR_SAVE = 5000L
+
     @Inject
     internal lateinit var sharedPrefManager: SharedPrefManager
 
@@ -50,11 +53,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
 
     init {
         (application as MyApplication).appComponent.inject(this)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        saveSystemBookmarks()
     }
 
     fun initCurrLoc(bookNumber: Int, chapterNumber: Int, verseNumber: Int,
@@ -99,7 +97,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
     val currLocViewItemPos: Int
         get() = systemBookmark.particularViewItemPos
 
-    private fun loadSystemBookmarks(bookNumber: Int) {
+    private fun ensureLoadOfSystemBookmarks(bookNumber: Int) {
         if (systemBookmark.bookNumber > 0) {
             return
         }
@@ -109,8 +107,19 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 bookNumber, 1, 0, 0,
                 listOf(), 0, BookDisplayItemViewType.TITLE, false,
             false)
+        lastSaveTimeMillis = SystemClock.uptimeMillis()
     }
 
+    private fun trySavingSystemBookmarks() {
+        val currentTime = SystemClock.uptimeMillis()
+        if (currentTime - lastSaveTimeMillis < MIN_MILLIS_FOR_SAVE) {
+            return
+        }
+        saveSystemBookmarks()
+        lastSaveTimeMillis = currentTime
+    }
+
+    // finally called when book load fragement is detached.
     fun saveSystemBookmarks() {
         if (systemBookmark.bookNumber > 0) {
             sharedPrefManager.savePrefItem(
@@ -141,7 +150,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 return@launch
             }
 
-            loadSystemBookmarks(bookNumber)
+            ensureLoadOfSystemBookmarks(bookNumber)
 
             // update system bookmarks in response to version switch, except
             // if loaded system bookmarks has same version as current request.
@@ -165,6 +174,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
         systemBookmark.displayMultipleSideBySide = model.displayMultipleSideBySide
         systemBookmark.particularBibleVersionIndex = model.bibleVersionIndexInUI
         updateParticularPos(model)
+        trySavingSystemBookmarks()
     }
 
     fun updateSystemBookmarks(equivalentDisplayItem: BookDisplayItem, displayItemPos: Int) {
@@ -187,6 +197,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 }
             }
         }
+        trySavingSystemBookmarks()
     }
 
     fun updateSystemBookmarks(chapterNumber: Int, verseNumber: Int) {
@@ -199,6 +210,7 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
             this.atEndOfChapter = false
             updateParticularPos(model)
         }
+        trySavingSystemBookmarks()
     }
 
     private fun updateParticularPos(model: BookDisplay) {
@@ -268,7 +280,6 @@ class BookLoadViewModel(application: Application): AndroidViewModel(application)
                 Timestamp(currTime), AppUtils.serializeAsJson(bookmarkData))
             db.userBookmarkDao().insert(newEntity)
 
-            AppUtils.showShortToast(context, "Bookmark created")
             if (loadResultValidationCallback?.invoke(temp) == true) {
                 _newBookmarkLiveData.value = LiveDataEvent(newEntity)
             }

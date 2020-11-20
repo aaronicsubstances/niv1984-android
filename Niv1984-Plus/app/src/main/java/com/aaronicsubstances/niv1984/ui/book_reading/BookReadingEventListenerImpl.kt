@@ -7,6 +7,7 @@ import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 
 object BookReadingEventListenerImpl {
 
@@ -31,6 +32,14 @@ object BookReadingEventListenerImpl {
             if (item.fullContent.bibleVersionIndex == bibleVersionIndex &&
                     item.fullContent.footNoteId == url) {
                 break
+            }
+            // once observed idx going all the way to -1, and causing index out of bounds error
+            // in beginning statement of loop. At Mark 4:12 (NIV)
+            // 'cos it is currently not known what caused it, in the mean time exit this method
+            // if something like that is about to occur.
+            if (temp.displayItems[idx].viewType == BookDisplayItemViewType.DIVIDER) {
+                AppUtils.showShortToast(fragment.context, "Error: footnote $url not found")
+                return
             }
             idx--
         }
@@ -71,6 +80,27 @@ object BookReadingEventListenerImpl {
             }
             title(R.string.action_bookmark_create)
             positiveButton(R.string.action_create)
+        }
+    }
+
+    fun handleCopyModeEntryRequest(fragment: BookLoadFragment) {
+        if (!fragment.viewModel.isLastLoadResultValid()) {
+            AppUtils.showShortToast(fragment.context, fragment.getString(
+                R.string.message_book_loading_unfinished))
+            return
+        }
+        if (fragment.bibleVersionIndex != null) {
+            fragment.highlightHelper?.enterHighlightMode(fragment.bibleVersionIndex!!)
+            return
+        }
+        MaterialDialog(fragment.requireActivity()).show {
+            title(R.string.dialog_title_select_bible_version)
+            listItemsSingleChoice(
+                items = fragment.bibleVersions.map { AppConstants.bibleVersions.getValue(it).description }
+            ) { dialog, index, text ->
+                // Invoked when the user taps an item
+                fragment.highlightHelper?.enterHighlightMode(index)
+            }
         }
     }
 }

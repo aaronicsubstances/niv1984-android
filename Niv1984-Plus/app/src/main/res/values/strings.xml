@@ -59,6 +59,7 @@
     <string name="message_no_highlightable_content">No highlightable content found in selection</string>
     <string name="dialog_title_change_chapter">Change Chapter</string>
     <string name="dialog_title_change_book">Change Book</string>
+    <string name="dialog_title_select_bible_version">Select Version</string>
     <string name="message_already_at_first_chapter">Currently in first chapter</string>
     <string name="message_already_at_last_chapter">Currently in last chapter</string>
     <string name="message_already_at_first_book">Currently in first book</string>

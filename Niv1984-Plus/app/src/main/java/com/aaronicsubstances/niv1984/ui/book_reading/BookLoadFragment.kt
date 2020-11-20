@@ -67,7 +67,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
 
     private var bookLoadRequestListener: BookLoadRequestListener? = null
 
-    private var highlightHelper: HighlightModeHelper? = null
+    internal var highlightHelper: HighlightModeHelper? = null
     private var screenAwakeHelper: KeepScreenAwakeHelper? = null
     private var loadProgessReporter: LoadProgressReporter? = null
     private var bookOrChapterSwitchHandler: BookOrChapterSwitchHandler? = null
@@ -189,7 +189,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                 true
             }
             R.id.action_enter_copy_mode -> {
-                highlightHelper?.enterHighlightMode(bibleVersionIndex ?: 0)
+                BookReadingEventListenerImpl.handleCopyModeEntryRequest(this)
                 true
             }
             R.id.action_exit_copy_mode -> {
@@ -617,19 +617,6 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         BookReadingEventListenerImpl.handleUrlClick(this, bibleVersionIndex, url)
     }
 
-    override fun onVerseLongClick(bibleVersionIndex: Int, chapterNumber: Int, verseNumber: Int) {
-        if (highlightHelper?.canEnterHighlightMode() != true) {
-            return
-        }
-        val bookModel = viewModel.lastLoadResult!!
-        val currentList = bookContentAdapter.currentList
-        val commonItemPos = locateParticularVersePos(currentList, bibleVersionIndex, verseNumber,
-            bookModel.chapterIndices[chapterNumber - 1])
-        viewModel.updateSystemBookmarks(currentList[commonItemPos], commonItemPos)
-        syncChapterWidget(chapterNumber - 1, false)
-        highlightHelper!!.enterHighlightMode(bibleVersionIndex)
-    }
-
     private fun fetchScrollResult(firstVisibleItemPos: Int): Pair<BookDisplayItem, Int> {
         val currentList = bookContentAdapter.currentList
         val visibleItemCount = (bookContentView.layoutManager as LinearLayoutManager).childCount
@@ -674,28 +661,5 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             i--
         }
         return i
-    }
-
-    private fun locateParticularVersePos(
-        currentList: List<BookDisplayItem>,
-        specificBibleVersionIndex: Int,
-        verseNumber: Int,
-        startItemPos: Int
-    ): Int {
-        val startItem = currentList[startItemPos]
-        var i = startItemPos
-        // look for verse.
-        while (true) {
-            val item = currentList[i]
-            if (item.chapterNumber == startItem.chapterNumber &&
-                    item.viewType == BookDisplayItemViewType.VERSE &&
-                    item.verseNumber == verseNumber) {
-                if (displayMultipleSideBySide ||
-                        item.fullContent.bibleVersionIndex == specificBibleVersionIndex) {
-                    return i
-                }
-            }
-            i++
-        }
     }
 }

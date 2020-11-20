@@ -10,6 +10,8 @@ import com.aaronicsubstances.niv1984.ui.dialogs.BookSelectionDialog
 import com.aaronicsubstances.niv1984.ui.dialogs.ChapterSelectionDialog
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.list.listItemsSingleChoice
 
 class BookOrChapterSwitchHandler(private val fragment: BookLoadFragment) {
 
@@ -90,13 +92,15 @@ class BookOrChapterSwitchHandler(private val fragment: BookLoadFragment) {
     }
 
     fun startBookSelection() {
+        // Could not use this because it doesn't automatically scroll and expose
+        // selected book.
         /*if (fragment.bookNumber > 0) {
             val bookList = AppConstants.bibleVersions.getValue(fragment.bibleVersions[0]).bookNames
             MaterialDialog(fragment.requireActivity()).show {
                 title(R.string.dialog_title_change_book)
                 listItemsSingleChoice(
                     items = bookList,
-                    initialSelection = fragment.bookNumber -1
+                    initialSelection = fragment.bookNumber - 1
                 ) { dialog, index, text ->
                     // Invoked when the user taps an item
                     if (index + 1 != fragment.bookNumber) {

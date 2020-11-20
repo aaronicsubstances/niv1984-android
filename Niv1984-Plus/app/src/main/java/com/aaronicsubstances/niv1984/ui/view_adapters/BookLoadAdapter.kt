@@ -239,11 +239,6 @@ class BookLoadAdapter(
         private val textView = this.itemView.findViewById<TextView>(R.id.text)
 
         fun bind(item: BookDisplayItem) {
-            textView.setOnLongClickListener {
-                bookReadingEventListener.onVerseLongClick(item.fullContent.bibleVersionIndex,
-                    item.chapterNumber, item.verseNumber)
-                true
-            }
             bindDefault(item, item.fullContent, textView)
         }
     }
@@ -293,13 +288,6 @@ class BookLoadAdapter(
 
             items.forEachIndexed { i, itemContent ->
                 val textView = textViewGroup.getChildAt(i) as TextView
-                textView.setOnLongClickListener {
-                    bookReadingEventListener.onVerseLongClick(
-                        specificBibleVersionIndex,
-                        item.chapterNumber, item.verseNumber)
-                    true
-                }
-
                 textView.visibility = View.VISIBLE
                 bindDefault(item, itemContent, textView)
             }

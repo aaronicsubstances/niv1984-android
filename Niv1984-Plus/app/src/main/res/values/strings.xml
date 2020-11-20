@@ -44,7 +44,7 @@
     <string name="action_reset_to_default">Reset to Default</string>
     <string name="label_search">Search</string>
     <string name="search_pref_bible_label">Bible Version to search: <b>%s</b></string>
-    <string name="switchToPrefText">Switch To Preferred Versions</string>
+    <string name="switchToPrefText">Switch To Normal View</string>
     <string name="highlight_mode_title">Copy/Highlight Mode</string>
     <string name="search_result_mode_title">Search Result</string>
     <string name="bookmark_mode_title">Bookmark: %s</string>

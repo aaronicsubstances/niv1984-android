@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/verse_margin"
     android:layout_marginRight="@dimen/verse_margin"
-    android:layout_marginBottom="@dimen/verse_paddingBottom">
+    android:layout_marginBottom="@dimen/verse_padding">
     <TextView
         android:id="@+id/text"
         android:layout_width="0dp"

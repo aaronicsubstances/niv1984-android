@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/verse_paddingBottom">
+    android:layout_marginBottom="@dimen/verse_padding">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_vertical_line50"

@@ -10,7 +10,6 @@
     <dimen name="book_marginHorizontal">8dp</dimen>
     <dimen name="verse_margin">20dp</dimen>
     <dimen name="verse_marginLeft">40dp</dimen>
-    <dimen name="verse_paddingBottom">8sp</dimen>
     <dimen name="bible_reading_font_size_default">14sp</dimen>
     <dimen name="block_quote_left">16sp</dimen>
     <dimen name="block_quote_left_indent">32sp</dimen>

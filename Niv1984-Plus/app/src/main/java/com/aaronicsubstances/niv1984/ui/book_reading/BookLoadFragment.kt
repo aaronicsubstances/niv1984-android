@@ -29,6 +29,7 @@ import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 import javax.inject.Inject
+import kotlin.math.abs
 
 class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListener {
 
@@ -338,7 +339,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         // kickstart actual bible reading
         // set up load progress reporter early to enable initial reporting setup.
         loadProgessReporter = LoadProgressReporter(this)
-        openBookForReading(null)
+        // force 2 if in single column mode, so that if user switches out of it
+        // he sees the alternative side by side immediately.
+        // negative 2 enables openBookForReading to see it as an initial value.
+        openBookForReading(if (!displayMultipleSideBySide) -2 else null)
 
         screenAwakeHelper = KeepScreenAwakeHelper(this, sharedPrefMgr.getShouldKeepScreenOn())
         bookOrChapterSwitchHandler = BookOrChapterSwitchHandler(this)
@@ -476,14 +480,24 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             prefOverlayDescriptionStandalone.text = pinnedVersions
         }
         else if (defaultReadingMode) {
-            listOf(bookVersionSelectionPanel).forEach {
-                it.visibility = View.VISIBLE
+            // in preparation for always showing multiple bible versions
+            // when setting is set to single column mode, hide radio buttons
+            // in single column mode.
+            if (!displayMultipleSideBySide) {
+                bottomPanel.children.forEach { it.visibility = View.GONE }
             }
-            firstPrefRadio.text = AppConstants.bibleVersions.getValue(
-                    bibleVersions[0]).abbreviation
-            secondPrefRadio.text = AppConstants.bibleVersions.getValue(
-                    bibleVersions[1]).abbreviation
-            bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
+            else {
+                listOf(bookVersionSelectionPanel).forEach {
+                    it.visibility = View.VISIBLE
+                }
+                firstPrefRadio.text = AppConstants.bibleVersions.getValue(
+                    bibleVersions[0]
+                ).abbreviation
+                secondPrefRadio.text = AppConstants.bibleVersions.getValue(
+                    bibleVersions[1]
+                ).abbreviation
+                bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
+            }
         }
         else {
             listOf(prefOverlayDescriptionWithSwitchBtn, switchToPrefBtn).forEach {
@@ -494,34 +508,55 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
     }
 
     private fun openBookForReading(radioIndex: Int?) {
+        //NB: interpret radio index sign as
+        // 1. null => load from prefs, AND set radio button states.
+        // 2. zero/positive => save to prefs, AND do NOT set radio button states.
+        // 3. negative => save to prefs, BUT set radio button states.
         bibleVersionIndex = if (defaultReadingMode) {
-            var index = radioIndex
+            // even if in single column, set these initial prefs and radio button states.
+            // So if we switch out of single column, should point to right state automatically.
+            val index: Int
             if (radioIndex == null) {
                 index = sharedPrefMgr.loadPrefInt(
                         SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION, 0)
             } else {
+                index = abs(radioIndex)
                 sharedPrefMgr.savePrefInt(
                         SharedPrefManager.PREF_KEY_BIBLE_VERSION_COMBINATION,
-                        radioIndex)
+                        index)
             }
             when (index) {
                 2 -> {
-                    if (radioIndex == null) {
+                    if (radioIndex == null || radioIndex < 0) {
                         bothPrefRadio.isChecked = true
                     }
-                    null
                 }
                 1 -> {
-                    if (radioIndex == null) {
+                    if (radioIndex == null || radioIndex < 0) {
                         secondPrefRadio.isChecked = true
                     }
-                    1
                 }
                 else -> {
                     if (radioIndex == null) {
                         firstPrefRadio.isChecked = true
                     }
-                    0
+                }
+            }
+            // Now deal with single column specially.
+            if (!displayMultipleSideBySide) {
+                null
+            }
+            else {
+                when (index) {
+                    2 -> {
+                        null
+                    }
+                    1 -> {
+                        1
+                    }
+                    else -> {
+                        0
+                    }
                 }
             }
         }
@@ -602,8 +637,9 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             return
         }
         this.displayMultipleSideBySide = displayMultipleSideBySide
-        if (bibleVersionIndex == null) {
-            openBookForReading(2)
+        if (!displayMultipleSideBySide || bibleVersionIndex == null) {
+            // negative forces both saving and setting of radio button.
+            openBookForReading(-2)
         }
     }
 

@@ -25,8 +25,11 @@ class AboutActivity : AppCompatActivity() {
 
         val copyrightView = findViewById<TextView>(R.id.copy_right)
         val appCompany = getString(R.string.app_company)
-        val currentYear = AppUtils.formatTimeStamp(Date(), "yyyy")
-        val copyrightText = getString(R.string.copyright_text, currentYear, appCompany)
+        val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+        val currentYearText =  if (currentYear > 2020) {
+            "2020 - $currentYear"
+        } else "2020"
+        val copyrightText = getString(R.string.copyright_text, currentYearText, appCompany)
         copyrightView.text = copyrightText
 
         val viewModel = ViewModelProvider(this).get(AboutViewModel::class.java)

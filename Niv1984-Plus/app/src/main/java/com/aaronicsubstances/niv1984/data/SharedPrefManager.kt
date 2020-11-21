@@ -58,6 +58,12 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         return sharedPref.getBoolean(context.getString(R.string.pref_key_keep_screen_awake), defaultOpt)
     }
 
+    fun getShouldSortBookmarksByAccessDate(): Boolean {
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val defaultOpt = context.resources.getBoolean(R.bool.pref_default_sort_bookmarks_by_date)
+        return sharedPref.getBoolean(context.getString(R.string.pref_key_sort_bookmarks_by_date), defaultOpt)
+    }
+
     fun <T> loadPrefItem(key: String, cls: Class<T>): T? {
         val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
         val serializedStr = sharedPref.getString(key, null) ?: return null

@@ -57,6 +57,35 @@ interface UserBookmarkDao {
     ): List<UserBookmark>
 
     @Query(
+        """SELECT * from UserBookmark
+        ORDER BY title
+        LIMIT :size"""
+    )
+    suspend fun getInitialSortedByTitle(
+        size: Int
+    ): List<UserBookmark>
+
+    @Query(
+        """SELECT * from UserBookmark
+        WHERE title >= :startTitle
+        ORDER BY title
+        LIMIT :pageSize"""
+    )
+    suspend fun getNextAfterSortedByTitle(
+        startTitle: String, pageSize: Int
+    ): List<UserBookmark>
+
+    @Query(
+        """SELECT * from UserBookmark
+            WHERE title <= :endTitle
+            ORDER BY title DESC
+            LIMIT :pageSize"""
+    )
+    suspend fun getPreviousBeforeSortedByTitle(
+        endTitle: String, pageSize: Int
+    ): List<UserBookmark>
+
+    @Query(
         """SELECT COUNT(*) FROM UserBookmark"""
     )
     suspend fun getTotalCount(): Int

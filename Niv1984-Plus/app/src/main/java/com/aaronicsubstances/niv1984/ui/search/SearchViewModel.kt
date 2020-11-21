@@ -9,12 +9,15 @@ import androidx.lifecycle.viewModelScope
 import com.aaronicsubstances.largelistpaging.DefaultPaginationEventListener
 import com.aaronicsubstances.largelistpaging.LargeListPagingConfig
 import com.aaronicsubstances.largelistpaging.UnboundedDataPaginator
+import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.bootstrap.MyApplication
 import com.aaronicsubstances.niv1984.data.SearchResultDataSource
 import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.SearchResult
 import com.aaronicsubstances.niv1984.models.SearchResultAdapterItem
 import com.aaronicsubstances.niv1984.utils.AppUtils
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import javax.inject.Inject
 
 class SearchViewModel(application: Application): AndroidViewModel(application) {
@@ -64,6 +67,15 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
     }
 
     inner class SearchResultHelper : DefaultPaginationEventListener<SearchResult>() {
+
+        override fun onDataLoadError(
+            reqId: Int,
+            error: Throwable?,
+            isScrollInForwardDirection: Boolean
+        ) {
+            LoggerFactory.getLogger(javaClass).error("Search error", error)
+            AppUtils.showLongToast(context, context.getString(R.string.too_many_search_items_error))
+        }
 
         override fun onDataLoaded(
             reqId: Int,

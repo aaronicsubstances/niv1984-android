@@ -25,10 +25,12 @@
     <string name="pref_key_bible_versions">bible_versions</string>
     <string name="pref_key_multiple_version_display">multiple_version_display</string>
     <string name="pref_key_keep_screen_awake">screen_wake_option</string>
+    <string name="pref_key_sort_bookmarks_by_date">bookmark_sort_order</string>
     <string name="pref_default_zoom">100</string>
     <string name="pref_default_bible_versions">niv1984 kjv1769</string>
     <string name="pref_default_multiple_version_display">2</string>
     <bool name="pref_default_keep_screen_awake">true</bool>
+    <bool name="pref_default_sort_bookmarks_by_date">false</bool>
 
     <string name="zoom_title">Bible Reading Text Zoom Level</string>
     <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
@@ -41,6 +43,9 @@
     <string name="tab_text_2">Search</string>
     <string name="screen_wake_option_title">Keep screen on during reading</string>
     <string name="screen_wake_option_summary">Screen will still be turned off after 5 minutes of inactivity</string>
+    <string name="bookmark_sort_option_title">Sort bookmarks by access date</string>
+    <string name="bookmark_sort_option_summary">If set, most recently opened bookmarks will appear at
+        the top. Else bookmarks are sorted by title</string>
     <string name="action_reset_to_default">Reset to Default</string>
     <string name="label_search">Search</string>
     <string name="search_pref_bible_label">Bible Version to search: <b>%s</b></string>
@@ -102,4 +107,6 @@
     <string name="action_delete">Delete</string>
     <string name="action_select_all">Select All</string>
     <string name="deletion_confirmation">The selected items will be deleted.</string>
+    <string name="nothing_selected">No items have been selected</string>
+    <string name="too_many_search_items_error">Failed to continue search with so many words. Please reduce to 10 or less and try again.</string>
 </resources>

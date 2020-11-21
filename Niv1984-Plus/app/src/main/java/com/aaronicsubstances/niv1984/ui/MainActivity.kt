@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity(),
 
         fun openBookmark(context: AppCompatActivity, record: BookmarkAdapterItem) {
             val intent = Intent(context, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.putExtra(INTENT_EXTRA_DATA_REQUEST_TYPE, INTENT_REQUEST_TYPE_OPEN_BOOKMARK)
             intent.putExtra(INTENT_EXTRA_DATA_BOOKMARK_TITLE, record.title)
             intent.putExtra(INTENT_EXTRA_DATA_BOOKMARK_SCROLL_PREF,

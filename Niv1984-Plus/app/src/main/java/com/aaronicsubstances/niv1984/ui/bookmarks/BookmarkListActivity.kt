@@ -1,5 +1,6 @@
 package com.aaronicsubstances.niv1984.ui.bookmarks
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,18 +15,29 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aaronicsubstances.niv1984.R
+import com.aaronicsubstances.niv1984.bootstrap.MyApplication
+import com.aaronicsubstances.niv1984.data.SharedPrefManager
 import com.aaronicsubstances.niv1984.models.BookmarkAdapterItem
 import com.aaronicsubstances.niv1984.ui.MainActivity
 import com.aaronicsubstances.niv1984.ui.view_adapters.BookmarkAdapter
+import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.aaronicsubstances.niv1984.utils.observeProperAsEvent
 import com.afollestad.materialdialogs.MaterialDialog
+import javax.inject.Inject
 
-class BookmarkListActivity : AppCompatActivity() {
+class BookmarkListActivity : AppCompatActivity(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
     private lateinit var viewModel: BookmarkListViewModel
     private lateinit var adapter: BookmarkAdapter
     private var deleteActionMode: ActionMode? = null
 
+    @Inject
+    internal lateinit var sharedPrefMgr: SharedPrefManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        (applicationContext as MyApplication).appComponent.inject(this)
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookmark_list)
 
@@ -83,9 +95,11 @@ class BookmarkListActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         val adapterEventListener = object: BookmarkAdapter.AdapterEventListener {
             override fun bookmarkOpenRequested(item: BookmarkAdapterItem) {
+                // update access time but don't wait for completion, for faster user
+                // experience.
+                viewModel.updateAccessTime(item)
                 MainActivity.openBookmark(this@BookmarkListActivity,
                     item)
-                viewModel.updateAccessTime(this@BookmarkListActivity, item)
             }
 
             override fun bookmarkDeleteRequested(item: BookmarkAdapterItem) {
@@ -119,6 +133,8 @@ class BookmarkListActivity : AppCompatActivity() {
                     invalidateOptionsMenu()
                 }
             })
+
+        viewModel.sortByAccessDate = sharedPrefMgr.getShouldSortBookmarksByAccessDate()
         viewModel.loadBookmarks()
     }
 
@@ -175,6 +191,7 @@ class BookmarkListActivity : AppCompatActivity() {
 
     private fun deleteSelections() {
         if (adapter.effectiveSelectionCount == 0) {
+            AppUtils.showShortToast(this, getString(R.string.nothing_selected))
             return
         }
         MaterialDialog(this).show {
@@ -185,6 +202,21 @@ class BookmarkListActivity : AppCompatActivity() {
                 deleteActionMode?.finish()
             }
             negativeButton(R.string.action_cancel)
+        }
+    }
+
+    override fun onSharedPreferenceChanged(sharedPreferences: SharedPreferences?, key: String?) {
+        // NB: persisting of system bookmarks call this method too.
+        // on configuration change when activity is destroyed, not even fragments we
+        // usually expect to exist will be present, so cater for that.
+        if (isFinishing) {
+            return
+        }
+        when (key) {
+            getString(R.string.pref_key_sort_bookmarks_by_date) -> {
+                viewModel.sortByAccessDate = sharedPrefMgr.getShouldSortBookmarksByAccessDate()
+                viewModel.loadBookmarks()
+            }
         }
     }
 }

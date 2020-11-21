@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:717562782219:android:dabd39b9881d686ad11d0e",
+        "android_client_info": {
+          "package_name": "com.aaronicsubstances.niv1984.beta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "717562782219-hri6jfegt42lis9p3ma2l7m1imlcmko7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsXqR2P2uYbePv0jvrieJva9-kRpi1Xac"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "717562782219-hri6jfegt42lis9p3ma2l7m1imlcmko7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:717562782219:android:80dbcce5b8d4dc8ad11d0e",
         "android_client_info": {
           "package_name": "com.aaronicsubstances.niv1984.debug"

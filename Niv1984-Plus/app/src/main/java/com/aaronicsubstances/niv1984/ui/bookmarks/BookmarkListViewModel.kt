@@ -15,7 +15,7 @@ import com.aaronicsubstances.niv1984.data.BookmarkDataSource
 import com.aaronicsubstances.niv1984.models.BookmarkAdapterItem
 import com.aaronicsubstances.niv1984.models.UserBookmarkUpdate
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.sql.Timestamp
 import javax.inject.Inject
@@ -27,6 +27,16 @@ class BookmarkListViewModel(application: Application): AndroidViewModel(applicat
         get() = _bookmarkLiveData
 
     val paginator: UnboundedDataPaginator<BookmarkAdapterItem>
+
+    private var _sortByAccessDate: Boolean = false
+    var sortByAccessDate: Boolean
+        get() = _sortByAccessDate
+        set(value) {
+            if (value != sortByAccessDate) {
+                _sortByAccessDate = value
+                _bookmarkLiveData.value = null
+            }
+        }
 
     @Inject
     internal lateinit var context: Context
@@ -43,18 +53,15 @@ class BookmarkListViewModel(application: Application): AndroidViewModel(applicat
         if (_bookmarkLiveData.value != null) {
             return
         }
-        val ds = BookmarkDataSource(context, viewModelScope)
+        val ds = BookmarkDataSource(context, viewModelScope, sortByAccessDate)
         paginator.loadInitialAsync(ds, null)
     }
 
-    fun updateAccessTime(activity: BookmarkListActivity, item: BookmarkAdapterItem) {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun updateAccessTime(item: BookmarkAdapterItem) {
+        // use a scope which will survive view model destruction.
+        GlobalScope.launch(Dispatchers.IO) {
             val update = UserBookmarkUpdate(item.id, Timestamp(System.currentTimeMillis()))
             AppDatabase.getDatabase(context).userBookmarkDao().update(update)
-            activity.runOnUiThread {
-                _bookmarkLiveData.value = null
-                loadBookmarks()
-            }
         }
     }
 

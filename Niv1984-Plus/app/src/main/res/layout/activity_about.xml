@@ -15,4 +15,16 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"/>
 
+    <!-- let progress bar show on top.
+        use 4dp instead of wrap_content to prevent default vertical padding
+    -->
+    <ProgressBar
+        android:id="@+id/progress1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

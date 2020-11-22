@@ -2,10 +2,15 @@ package com.aaronicsubstances.niv1984.ui.about
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.util.Base64
+import android.view.View
 import android.webkit.*
+import android.widget.ProgressBar
+import androidx.core.content.ContextCompat.startActivity
 import com.aaronicsubstances.niv1984.data.FirebaseFacade
 import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory
@@ -13,14 +18,16 @@ import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream
 
+
 object BookTextViewUtils {
     const val LAUNCH_URL = "http://localhost"
     const val ASSETS_PREFIX = "assets/"
     private val LOGGER = LoggerFactory.getLogger(BookTextViewUtils::class.java)
 
-    fun configureBrowser(context: Activity, browser: WebView) {
+    fun configureBrowser(context: Activity, browser: WebView, progressBar: ProgressBar?) {
         val webSettings = browser.settings
         webSettings.javaScriptEnabled = true
+        webSettings.javaScriptCanOpenWindowsAutomatically = true
         webSettings.cacheMode = WebSettings.LOAD_NO_CACHE
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             webSettings.layoutAlgorithm = WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING
@@ -34,8 +41,32 @@ object BookTextViewUtils {
                 )
                 return true
             }
+
+            override fun onProgressChanged(view: WebView?, progress: Int) {
+                progressBar?.progress = progress * 100
+            }
         }
         browser.webViewClient = object : WebViewClient() {
+
+            /* This function is strictly not needed in our case, but is
+               kept here to document our findings about it.
+               It is called when links are clicked. Returning true prevents
+               further processing. By default it returns false, which means it
+               will go on to call shouldInterceptRequest.
+             */
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                url: String
+            ): Boolean {
+                if (url.contains("https://mywebsite.domain.com")) {
+                    val i = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                    context.startActivity(i)
+                    return true
+                } else {
+                    return false
+                }
+            }
+
             override fun shouldInterceptRequest(
                 view: WebView,
                 url: String
@@ -47,14 +78,25 @@ object BookTextViewUtils {
                         LOGGER.error("Could not serve $url: ", t)
                     }
                 }
-                return super.shouldInterceptRequest(view, url)
+                // by default null is returned just like the default implementation,
+                // to indicate that the usual process of
+                // making an http request should be followed through.
+                return null
             }
 
-            override fun shouldOverrideUrlLoading(
-                view: WebView,
-                url: String
-            ): Boolean {
-                return !url.startsWith(LAUNCH_URL)
+            override fun onPageStarted(
+                view: WebView?,
+                url: String?,
+                favicon: Bitmap?
+            ) {
+                super.onPageStarted(view, url, favicon)
+                progressBar?.visibility = View.VISIBLE
+                progressBar?.progress = 0
+            }
+
+            override fun onPageFinished(view: WebView?, url: String?) {
+                super.onPageFinished(view, url)
+                progressBar?.visibility = View.GONE
             }
         }
     }

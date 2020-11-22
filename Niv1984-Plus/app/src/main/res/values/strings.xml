@@ -113,4 +113,5 @@
     <string name="deletion_confirmation">The selected items will be deleted.</string>
     <string name="nothing_selected">No items have been selected</string>
     <string name="too_many_search_items_error">Failed to continue search with so many words. Please reduce to 10 or less and try again.</string>
+    <string name="help_to_exit_about_browser">Just in case you want to exit this screen, kindly use the up arrow at the top left corner to do so.</string>
 </resources>

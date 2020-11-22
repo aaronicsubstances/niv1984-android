@@ -55,7 +55,10 @@ class CommonMenuActionProcessor(private val context: AppCompatActivity,
                 }
             }
         }
-        drawer.closeDrawer(GravityCompat.START)
+        // close drawer in next iteration of UI event loop
+        context.runOnUiThread {
+            drawer.closeDrawer(GravityCompat.START)
+        }
         return true
     }
 

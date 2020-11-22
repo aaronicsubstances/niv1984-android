@@ -2,17 +2,35 @@ package com.aaronicsubstances.niv1984.data
 
 import com.aaronicsubstances.niv1984.BuildConfig
 import com.aaronicsubstances.niv1984.models.LatestVersionCheckResult
+import com.aaronicsubstances.niv1984.ui.about.AboutResource
 //import com.aaronicsubstances.niv1984.utils.AppUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 //import com.google.firebase.storage.ktx.storage
 import org.slf4j.LoggerFactory
+import java.io.InputStream
 //import java.nio.charset.Charset
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 object FirebaseFacade {
     private val logger = LoggerFactory.getLogger(javaClass)
+
+    suspend fun fetchAboutResource(relativePath: String): AboutResource? =
+        suspendCoroutine { cont ->
+            val db = Firebase.firestore
+            db.collection("about-${BuildConfig.BUILD_TYPE}")
+                .document(relativePath)
+                .get()
+                .addOnSuccessListener {
+                    val result = it.toObject(AboutResource::class.java)
+                    cont.resume(result)
+                }
+                .addOnFailureListener {ex ->
+                    logger.warn("Error getting about resource at $relativePath: ", ex)
+                    cont.resume(null)
+                }
+        }
 
     suspend fun getConfItems(): LatestVersionCheckResult? =
         suspendCoroutine { cont ->

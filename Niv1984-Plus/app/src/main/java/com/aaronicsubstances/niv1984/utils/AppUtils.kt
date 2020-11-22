@@ -21,6 +21,7 @@ import kotlin.collections.ArrayList
 
 object AppUtils {
     const val VIEW_TYPE_LOADING = -1
+    const val VIEW_TYPE_ERROR = -2
     const val DEFAULT_CHARSET = "utf-8"
     const val APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id="
 

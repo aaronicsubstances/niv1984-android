@@ -28,6 +28,12 @@ class SearchResultAdapter: ListAdapter<SearchResultAdapterItem, RecyclerView.Vie
             )
             return LoadingViewHolder(itemView)
         }
+        else if (viewType == AppUtils.VIEW_TYPE_ERROR) {
+            val itemView = LayoutInflater.from(parent.context).inflate(
+                R.layout.search_result_item, parent, false
+            )
+            return ErrorViewHolder(itemView)
+        }
         else {
             val itemView = LayoutInflater.from(parent.context).inflate(
                 R.layout.search_result_item, parent, false
@@ -55,6 +61,16 @@ class SearchResultAdapter: ListAdapter<SearchResultAdapterItem, RecyclerView.Vie
     }
 
     class LoadingViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
+
+    inner class ErrorViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        private val textView = itemView.findViewById<TextView>(R.id.textView)
+        private val descriptionView = itemView.findViewById<TextView>(R.id.description)
+
+        init {
+            descriptionView.text = "?"
+            textView.text = itemView.context.getString(R.string.too_many_search_items_error)
+        }
+    }
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val textView = itemView.findViewById<TextView>(R.id.textView)

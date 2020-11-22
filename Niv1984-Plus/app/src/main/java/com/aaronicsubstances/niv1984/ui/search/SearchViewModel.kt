@@ -73,8 +73,9 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
             error: Throwable?,
             isScrollInForwardDirection: Boolean
         ) {
-            LoggerFactory.getLogger(javaClass).error("Search error", error)
-            AppUtils.showLongToast(context, context.getString(R.string.too_many_search_items_error))
+            LoggerFactory.getLogger(javaClass).error("Search error: ", error)
+            // send 1 result to abort loading icon.
+            _searchResultLiveData.value = listOf(SearchResultAdapterItem(AppUtils.VIEW_TYPE_ERROR, SearchResult()))
         }
 
         override fun onDataLoaded(

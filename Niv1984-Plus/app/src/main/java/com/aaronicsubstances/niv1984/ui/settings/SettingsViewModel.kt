@@ -1,4 +1,4 @@
-package com.aaronicsubstances.niv1984.ui.about
+package com.aaronicsubstances.niv1984.ui.settings
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,7 +8,7 @@ import com.aaronicsubstances.niv1984.data.FirebaseFacade
 import com.aaronicsubstances.niv1984.models.LatestVersionCheckResult
 import kotlinx.coroutines.launch
 
-class AboutViewModel: ViewModel() {
+class SettingsViewModel: ViewModel() {
     private val _latestVersionLiveData = MutableLiveData<LatestVersionCheckResult>()
     val latestVersionLiveData: LiveData<LatestVersionCheckResult>
         get() = _latestVersionLiveData

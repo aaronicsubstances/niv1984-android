@@ -31,6 +31,9 @@
     <string name="pref_default_multiple_version_display">2</string>
     <bool name="pref_default_keep_screen_awake">true</bool>
     <bool name="pref_default_sort_bookmarks_by_date">false</bool>
+    <string name="pref_key_version_check">About &appname;</string>
+    <string name="sorted_bible_versions_title">Sorted Bible Versions</string>
+    <string name="version_check_summary">Tap to view current version and check for updates</string>
 
     <string name="zoom_title">Bible Reading Text Zoom Level</string>
     <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
@@ -71,6 +74,7 @@
     <string name="message_already_at_last_book">Currently in last book</string>
     <integer name="chapterSelectionGridColumnCount">3</integer>
 
+    <string name="action_ok">OK</string>
     <string name="action_rate">Rate &appname;</string>
     <string name="action_share">Share</string>
     <string name="action_feedback">Your Comment</string>

@@ -32,6 +32,9 @@ class SettingsActivity : AppCompatActivity() {
             if (preference is DisplayBookPreference) {
                 dialogFragment = DisplayBookPreferenceDialogFragment.newInstance(preference.key)
             }
+            if (preference is VersionCheckPreference) {
+                dialogFragment = VersionCheckPreferenceDialogFragment.newInstance(preference.key)
+            }
 
             // If it was one of our custom Preferences, show its dialog
             if (dialogFragment != null) {

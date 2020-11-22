@@ -53,11 +53,16 @@ class SearchResultDataSource(
             val db = SearchDatabase.getDatabase(context)
             val asyncContext =
                 HelperAsyncContext(db.batchedDataSourceDao(), db.bibleIndexRecordDao())
-            val result = loadBatch(
-                true, CAT_SEARCH, lastInitialLoadRequestId, null,
-                true, config.initialLoadSize, asyncContext
-            )
-            loadCallback.accept(result)
+            try {
+                val result = loadBatch(
+                    true, CAT_SEARCH, lastInitialLoadRequestId, null,
+                    true, config.initialLoadSize, asyncContext
+                )
+                loadCallback.accept(result)
+            }
+            catch (searchError: Throwable) {
+                loadCallback.accept(UnboundedDataSource.LoadResult(null, searchError))
+            }
         }
     }
 

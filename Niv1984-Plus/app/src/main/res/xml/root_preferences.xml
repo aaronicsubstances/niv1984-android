@@ -11,10 +11,10 @@
 
     <com.aaronicsubstances.niv1984.ui.settings.DisplayBookPreference
         android:key="@string/pref_key_bible_versions"
-        android:title="Preferred Bible Versions"
+        android:title="@string/sorted_bible_versions_title"
         android:defaultValue="@string/pref_default_bible_versions"
-        android:positiveButtonText="ok"
-        android:negativeButtonText="cancel"
+        android:positiveButtonText="@string/action_ok"
+        android:negativeButtonText="@string/action_cancel"
         app:useSimpleSummaryProvider="true"/>
 
     <ListPreference
@@ -36,4 +36,10 @@
         android:title="@string/bookmark_sort_option_title"
         android:summary="@string/bookmark_sort_option_summary"
         android:defaultValue="@bool/pref_default_sort_bookmarks_by_date"/>
+
+    <com.aaronicsubstances.niv1984.ui.settings.VersionCheckPreference
+        android:key="version_check"
+        android:title="@string/pref_key_version_check"
+        android:summary="@string/version_check_summary"
+        app:useSimpleSummaryProvider="true"/>
 </PreferenceScreen>

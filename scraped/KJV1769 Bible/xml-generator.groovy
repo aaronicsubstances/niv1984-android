@@ -17,7 +17,7 @@ class XmlGenerator {
     static final ATTR_NUMBER = "num"
 
     static final TAG_NOTE = "note"
-    static final TAG_NOTE_REF = "note_ref"        
+    static final TAG_NOTE_REF = "note_ref"
 
     enum ChapterFragmentKind {
         NONE, HEADING

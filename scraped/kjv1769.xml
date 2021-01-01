@@ -1,4 +1,520 @@
 <transferConfig>
 	<patches>
+		<book name="19-psalms">
+			<patch num="85"><![CDATA[            <content>A Psalm of David, when he fled from Absalom his son.</content>]]></patch>
+			<patch num="130"><![CDATA[            <content>To the chief Musician on Neginoth, A Psalm of David.</content>]]></patch>
+			<patch num="172"><![CDATA[            <content>To the chief Musician upon Nehiloth, A Psalm of David.</content>]]></patch>
+			<patch num="229"><![CDATA[            <content>To the chief Musician on Neginoth upon Sheminith, A Psalm of David.</content>]]></patch>
+			<patch num="270"><![CDATA[            <content>Shiggaion of David, which he sang unto the LORD, concerning the words of Cush the Benjamite.</content>]]></patch>
+			<patch num="344"><![CDATA[            <content>To the chief Musician upon Gittith, A Psalm of David.</content>]]></patch>
+			<patch num="384"><![CDATA[            <content>To the chief Musician upon Muthlabben, A Psalm of David.</content>]]></patch>
+			<patch num="559"><![CDATA[    <chapter num="11">
+        <fragment>
+            <content>To the chief Musician, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="561"><![CDATA[            <content>In the LORD put I my trust: how say ye to my soul, Flee </content>]]></patch>
+            <patch num="562" delete="true" />
+            <patch num="563" delete="true" />
+			<patch num="596"><![CDATA[            <content>To the chief Musician upon Sheminith, A Psalm of David.</content>]]></patch>
+            <patch num="643"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="672"><![CDATA[    <chapter num="14">
+        <fragment>
+            <content>To the chief Musician, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="674"><![CDATA[            <content>The fool hath said in his heart, </content>]]></patch>
+            <patch num="675" delete="true" />
+            <patch num="676" delete="true" />
+			<patch num="719"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="747"><![CDATA[            <content>Michtam of David.</content>]]></patch>
+			<patch num="813"><![CDATA[            <content>A Prayer of David.</content>]]></patch>
+			<patch num="898"><![CDATA[        <fragment>
+            <content>To the chief Musician, </content>]]></patch>
+            <patch num="899" delete="true"/>
+			<patch num="903"><![CDATA[            <content> the LORD delivered him from the hand of all his enemies, and from the hand of Saul: And he said,</content>
+        </fragment>
+        <verse num="1">
+            <content>I will love thee, O LORD, my strength.</content>]]></patch>
+			<patch num="1100"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="1182"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="1218"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="1280"><![CDATA[            <content>To the chief Musician upon Aijeleth Shahar, A Psalm of David.</content>]]></patch>
+			<patch num="1420"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="1447"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+            <patch num="1490"><![CDATA[    <chapter num="25">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="1492"><![CDATA[            <content>Unto thee, O LORD, do I lift up my soul.</content>]]></patch>
+            <patch num="1493" delete="true"/>
+            <patch num="1494" delete="true"/>
+            <patch num="1582"><![CDATA[    <chapter num="26">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="1584"><![CDATA[            <content>Judge me, O LORD; for I have walked in mine integrity: I have trusted also in the LORD; </content>]]></patch>
+            <patch num="1585" delete="true"/>
+            <patch num="1586" delete="true"/>
+            <patch num="1628"><![CDATA[    <chapter num="27">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="1630"><![CDATA[            <content>The LORD </content>]]></patch>
+            <patch num="1631" delete="true"/>
+            <patch num="1632" delete="true"/>
+            <patch num="1692"><![CDATA[    <chapter num="28">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="1694"><![CDATA[            <content>Unto thee will I cry, O LORD my rock; be not silent to me: lest, </content>]]></patch>
+            <patch num="1695" delete="true"/>
+            <patch num="1696" delete="true"/>
+			<patch num="1737"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="1784"><![CDATA[        <fragment>
+            <content>A Psalm </content>]]></patch>
+            <patch num="1785" delete="true"/>
+            <patch num="1789"><![CDATA[            <content> the dedication of the house of David.</content>
+        </fragment>
+        <verse num="1">
+            <content>I will extol thee, O LORD; for thou hast lifted me up, and hast not made my foes to rejoice over me.</content>]]></patch>
+			<patch num="1839"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+            <patch num="1937"><![CDATA[    <chapter num="32">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David, Maschil.</content>
+        </fragment>]]></patch>
+			<patch num="1939"><![CDATA[            <content>Blessed </content>]]></patch>
+            <patch num="1940" delete="true"/>
+            <patch num="1941" delete="true"/>
+            <patch num="2090"><![CDATA[    <chapter num="34">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David, when he changed his behaviour before Abimelech; who drove him away, and he departed.</content>
+        </fragment>]]></patch>
+			<patch num="2092"><![CDATA[            <content>I will bless the LORD at all times: his praise </content>]]></patch>
+            <patch num="2093" delete="true"/>
+            <patch num="2094" delete="true"/>
+            <patch num="2195"><![CDATA[    <chapter num="35">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="2197"><![CDATA[            <content>Plead </content>]]></patch>
+            <patch num="2198" delete="true"/>
+            <patch num="2199" delete="true"/>
+            <patch num="2330"><![CDATA[    <chapter num="36">
+        <fragment>
+            <content>To the chief Musician, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David the servant of the LORD.</content>
+        </fragment>]]></patch>
+			<patch num="2332"><![CDATA[            <content>The transgression of the wicked saith within my heart, </content>]]></patch>
+            <patch num="2333" delete="true"/>
+            <patch num="2334" delete="true"/>
+            <patch num="2392"><![CDATA[    <chapter num="37">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="2394"><![CDATA[            <content>Fret not thyself because of evildoers, neither be thou envious against the workers of iniquity.</content>]]></patch>
+            <patch num="2395" delete="true"/>
+            <patch num="2396" delete="true"/>
+			<patch num="2565"><![CDATA[            <content>A Psalm of David, to bring to remembrance.</content>]]></patch>
+            <patch num="2673"><![CDATA[    <chapter num="39">
+        <fragment>
+            <content>To the chief Musician, </content>
+            <content kind="EM">even</content>
+            <content> to Jeduthun, A Psalm of David.</content>
+        </fragment>]]></patch>
+			<patch num="2675"><![CDATA[            <content>I said, I will take heed to my ways, that I sin not with my tongue: I will keep my mouth with a bridle, while the wicked is before me.</content>]]></patch>
+            <patch num="2676" delete="true"/>
+            <patch num="2677" delete="true"/>
+			<patch num="2746"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="2830"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="2892"><![CDATA[            <content>To the chief Musician, Maschil, for the sons of Korah.</content>]]></patch>
+			<patch num="2969"><![CDATA[            <content>To the chief Musician for the sons of Korah, Maschil.</content>]]></patch>
+			<patch num="3067"><![CDATA[            <content>To the chief Musician upon Shoshannim, for the sons of Korah, Maschil, A Song of loves.</content>]]></patch>
+			<patch num="3155"><![CDATA[            <content>To the chief Musician for the sons of Korah, A Song upon Alamoth.</content>]]></patch>
+			<patch num="3217"><![CDATA[            <content>To the chief Musician, A Psalm for the sons of Korah.</content>]]></patch>
+            <patch num="3257"><![CDATA[    <chapter num="48">
+        <fragment>
+            <content>A Song </content>
+            <content kind="EM">and</content>
+            <content> Psalm for the sons of Korah.</content>
+        </fragment>]]></patch>
+			<patch num="3259"><![CDATA[            <content>Great </content>]]></patch>
+            <patch num="3260" delete="true"/>
+            <patch num="3261" delete="true"/>
+			<patch num="3327"><![CDATA[            <content>To the chief Musician, A Psalm for the sons of Korah.</content>]]></patch>
+			<patch num="3428"><![CDATA[            <content>A Psalm of Asaph.</content>]]></patch>
+			<patch num="3542"><![CDATA[            <content>To the chief Musician, A Psalm of David, when Nathan the prophet came unto him, after he had gone in to Bathsheba.</content>]]></patch>
+            <patch num="3623"><![CDATA[    <chapter num="52">
+        <fragment>
+            <content>To the chief Musician, Maschil, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David, when Doeg the Edomite came and told Saul, and said unto him, David is come to the house of Ahimelech.</content>
+        </fragment>]]></patch>
+			<patch num="3625"><![CDATA[            <content>Why boastest thou thyself in mischief, O mighty man? the goodness of God </content>]]></patch>
+            <patch num="3626" delete="true"/>
+            <patch num="3627" delete="true"/>
+			<patch num="3674"><![CDATA[    <chapter num="53">
+        <fragment>
+            <content>To the chief Musician upon Mahalath, Maschil, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="3676"><![CDATA[            <content>The fool hath said in his heart, </content>]]></patch>
+            <patch num="3677" delete="true" />
+            <patch num="3678" delete="true" />
+			<patch num="3716"><![CDATA[    <chapter num="54">
+        <fragment>
+            <content>To the chief Musician on Neginoth, Maschil, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David, when the Ziphims came and said to Saul, Doth not David hide himself with us?</content>
+        </fragment>]]></patch>
+			<patch num="3718"><![CDATA[            <content>Save me, O God, by thy name, and judge me by thy strength.</content>]]></patch>
+            <patch num="3719" delete="true" />
+            <patch num="3720" delete="true" />
+			<patch num="3749"><![CDATA[    <chapter num="55">
+        <fragment>
+            <content>To the chief Musician on Neginoth, Maschil, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="3751"><![CDATA[            <content>Give ear to my prayer, O God; and hide not thyself from my supplication.</content>]]></patch>
+            <patch num="3752" delete="true" />
+            <patch num="3753" delete="true" />
+			<patch num="3867"><![CDATA[            <content>To the chief Musician upon Jonathelemrechokim, Michtam of David, when the Philistines took him in Gath.</content>]]></patch>
+			<patch num="3935"><![CDATA[            <content>To the chief Musician, Altaschith, Michtam of David, when he fled from Saul in the cave.</content>]]></patch>
+			<patch num="4003"><![CDATA[            <content>To the chief Musician, Altaschith, Michtam of David.</content>]]></patch>
+			<patch num="4065"><![CDATA[            <content>To the chief Musician, Altaschith, Michtam of David; when Saul sent, and they watched the house to kill him.</content>]]></patch>
+			<patch num="4155"><![CDATA[            <content>To the chief Musician upon Shushaneduth, Michtam of David, to teach; when he strove with Aramnaharaim and with Aramzobah, when Joab returned, and smote of Edom in the valley of salt twelve thousand.</content>]]></patch>
+			<patch num="4219"><![CDATA[    <chapter num="61">
+        <fragment>
+            <content>To the chief Musician upon Neginah, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="4221"><![CDATA[            <content>Hear my cry, O God; attend unto my prayer.</content>]]></patch>
+            <patch num="4222" delete="true" />
+            <patch num="4223" delete="true" />
+			<patch num="4259"><![CDATA[            <content>To the chief Musician, to Jeduthun, A Psalm of David.</content>]]></patch>
+			<patch num="4342"><![CDATA[            <content>A Psalm of David, when he was in the wilderness of Judah.</content>]]></patch>
+			<patch num="4398"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="4447"><![CDATA[    <chapter num="65">
+        <fragment>
+            <content>To the chief Musician, A Psalm </content>
+            <content kind="EM">and</content>
+            <content> Song of David.</content>
+        </fragment>]]></patch>
+			<patch num="4449"><![CDATA[            <content>Praise waiteth for thee, O God, in Sion: and unto thee shall the vow be performed.</content>]]></patch>
+            <patch num="4450" delete="true" />
+            <patch num="4451" delete="true" />
+			<patch num="4509"><![CDATA[    <chapter num="66">
+        <fragment>
+            <content>To the chief Musician, A Song </content>
+            <content kind="EM">or</content>
+            <content> Psalm.</content>
+        </fragment>]]></patch>
+			<patch num="4511"><![CDATA[            <content>Make a joyful noise unto God, all ye lands:</content>]]></patch>
+            <patch num="4512" delete="true" />
+            <patch num="4513" delete="true" />
+			<patch num="4594"><![CDATA[    <chapter num="67">
+        <fragment>
+            <content>To the chief Musician on Neginoth, A Psalm </content>
+            <content kind="EM">or</content>
+            <content> Song.</content>
+        </fragment>]]></patch>
+			<patch num="4596"><![CDATA[            <content>God be merciful unto us, and bless us; </content>]]></patch>
+            <patch num="4597" delete="true" />
+            <patch num="4598" delete="true" />
+			<patch num="4626"><![CDATA[    <chapter num="68">
+        <fragment>
+            <content>To the chief Musician, A Psalm </content>
+            <content kind="EM">or</content>
+            <content> Song of David.</content>
+        </fragment>]]></patch>
+			<patch num="4628"><![CDATA[            <content>Let God arise, let his enemies be scattered: let them also that hate him flee before him.</content>]]></patch>
+            <patch num="4629" delete="true" />
+            <patch num="4630" delete="true" />
+			<patch num="4836"><![CDATA[    <chapter num="69">
+        <fragment>
+            <content>To the chief Musician upon Shoshannim, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="4838"><![CDATA[            <content>Save me, O God; for the waters are come in unto </content>]]></patch>
+            <patch num="4839" delete="true" />
+            <patch num="4840" delete="true" />
+			<patch num="4991"><![CDATA[    <chapter num="70">
+        <fragment>
+            <content>To the chief Musician, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of David, to bring to remembrance.</content>
+        </fragment>]]></patch>
+			<patch num="4993" delete="true"/>
+            <patch num="4994" delete="true" />
+            <patch num="4995" delete="true" />
+			<patch num="5131"><![CDATA[    <chapter num="72">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> for Solomon.</content>
+        </fragment>]]></patch>
+			<patch num="5133"><![CDATA[            <content>Give the king thy judgments, O God, and thy righteousness unto the king's son.</content>]]></patch>
+            <patch num="5134" delete="true" />
+            <patch num="5135" delete="true" />
+			<patch num="5213"><![CDATA[            <content>A Psalm of Asaph.</content>]]></patch>
+			<patch num="5364"><![CDATA[            <content>Maschil of Asaph.</content>]]></patch>
+			<patch num="5475"><![CDATA[    <chapter num="75">
+        <fragment>
+            <content>To the chief Musician, Altaschith, A Psalm </content>
+            <content kind="EM">or</content>
+            <content> Song of Asaph.</content>
+        </fragment>]]></patch>
+			<patch num="5477"><![CDATA[            <content>Unto thee, O God, do we give thanks, </content>]]></patch>
+            <patch num="5478" delete="true" />
+            <patch num="5479" delete="true" />
+			<patch num="5529"><![CDATA[    <chapter num="76">
+        <fragment>
+            <content>To the chief Musician on Neginoth, A Psalm </content>
+            <content kind="EM">or</content>
+            <content> Song of Asaph.</content>
+        </fragment>]]></patch>
+			<patch num="5531"><![CDATA[            <content>In Judah </content>]]></patch>
+            <patch num="5532" delete="true" />
+            <patch num="5533" delete="true" />
+			<patch num="5585"><![CDATA[            <content>To the chief Musician, to Jeduthun, A Psalm of Asaph.</content>]]></patch>
+			<patch num="5672"><![CDATA[            <content>Maschil of Asaph.</content>]]></patch>
+			<patch num="5955"><![CDATA[            <content>A Psalm of Asaph.</content>]]></patch>
+			<patch num="6011"><![CDATA[            <content>To the chief Musician upon Shoshannimeduth, A Psalm of Asaph.</content>]]></patch>
+			<patch num="6088"><![CDATA[    <chapter num="81">
+        <fragment>
+            <content>To the chief Musician upon Gittith, </content>
+            <content kind="EM">A Psalm</content>
+            <content> of Asaph.</content>
+        </fragment>]]></patch>
+			<patch num="6090"><![CDATA[            <content>Sing aloud unto God our strength: make a joyful noise unto the God of Jacob.</content>]]></patch>
+            <patch num="6091" delete="true" />
+            <patch num="6092" delete="true" />
+			<patch num="6158"><![CDATA[            <content>A Psalm of Asaph.</content>]]></patch>
+			<patch num="6191"><![CDATA[    <chapter num="83">
+        <fragment>
+            <content>A Song </content>
+            <content kind="EM">or</content>
+            <content> Psalm of Asaph.</content>
+        </fragment>]]></patch>
+			<patch num="6193"><![CDATA[            <content>Keep not thou silence, O God: hold not thy peace, and be not still, O God.</content>]]></patch>
+            <patch num="6194" delete="true" />
+            <patch num="6195" delete="true" />
+			<patch num="6268"><![CDATA[            <content>To the chief Musician upon Gittith, A Psalm for the sons of Korah.</content>]]></patch>
+			<patch num="6334"><![CDATA[            <content>To the chief Musician, A Psalm for the sons of Korah.</content>]]></patch>
+			<patch num="6388"><![CDATA[            <content>A Prayer of David.</content>]]></patch>
+			<patch num="6464"><![CDATA[    <chapter num="87">
+        <fragment>
+            <content>A Psalm </content>
+            <content kind="EM">or</content>
+            <content> Song for the sons of Korah.</content>
+        </fragment>]]></patch>
+			<patch num="6466"><![CDATA[            <content>His foundation </content>]]></patch>
+            <patch num="6467" delete="true" />
+            <patch num="6468" delete="true" />
+			<patch num="6501"><![CDATA[    <chapter num="88">
+        <fragment>
+            <content>A Song </content>
+            <content kind="EM">or</content>
+            <content> Psalm for the sons of Korah, to the chief Musician upon Mahalath Leannoth, Maschil of Heman the Ezrahite.</content>
+        </fragment>]]></patch>
+			<patch num="6503"><![CDATA[            <content>O LORD God of my salvation, I have cried day </content>]]></patch>
+            <patch num="6504" delete="true" />
+            <patch num="6505" delete="true" />
+			<patch num="6583"><![CDATA[            <content>Maschil of Ethan the Ezrahite.</content>]]></patch>
+			<patch num="6796"><![CDATA[            <content>A Prayer of Moses the man of God.</content>]]></patch>
+			<patch num="6961"><![CDATA[    <chapter num="92">
+        <fragment>
+            <content>A Psalm </content>
+            <content kind="EM">or</content>
+            <content> Song for the sabbath day.</content>
+        </fragment>]]></patch>
+			<patch num="6963" delete="true"/>
+            <patch num="6964" delete="true" />
+            <patch num="6965" delete="true" />
+			<patch num="7319"><![CDATA[            <content>A Psalm.</content>]]></patch>
+			<patch num="7400"><![CDATA[            <content>A Psalm of praise.</content>]]></patch>
+			<patch num="7438"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="7473"><![CDATA[            <content>A Prayer of the afflicted, when he is overwhelmed, and poureth out his complaint before the LORD.</content>]]></patch>
+			<patch num="7576"><![CDATA[    <chapter num="103">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="7578"><![CDATA[            <content>Bless the LORD, O my soul: and all that is within me, </content>]]></patch>
+            <patch num="7579" delete="true" />
+            <patch num="7580" delete="true" />
+			<patch num="8369"><![CDATA[    <chapter num="108">
+        <fragment>
+            <content>A Song </content>
+            <content kind="EM">or</content>
+            <content> Psalm of David.</content>
+        </fragment>]]></patch>
+			<patch num="8371"><![CDATA[            <content>O God, my heart is fixed; I will sing and give praise, even with my glory.</content>]]></patch>
+            <patch num="8372" delete="true" />
+            <patch num="8373" delete="true" />
+			<patch num="8441"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="8564"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="9893"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="9927"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="9962"><![CDATA[            <content>A Song of degrees of David.</content>]]></patch>
+			<patch num="9998"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10023"><![CDATA[            <content>A Song of degrees of David.</content>]]></patch>
+			<patch num="10062"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10100"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10127"><![CDATA[            <content>A Song of degrees for Solomon.</content>]]></patch>
+			<patch num="10164"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10199"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10234"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10273"><![CDATA[            <content>A Song of degrees of David.</content>]]></patch>
+			<patch num="10287"><![CDATA[    <chapter num="132">
+        <fragment>
+            <content>A Song of degrees.</content>
+        </fragment>]]></patch>
+			<patch num="10289"><![CDATA[            <content>LORD, remember David, </content>]]></patch>
+			<patch num="10361"><![CDATA[            <content>A Song of degrees of David.</content>]]></patch>
+			<patch num="10384"><![CDATA[            <content>A Song of degrees.</content>]]></patch>
+			<patch num="10674"><![CDATA[    <chapter num="138">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="10676"><![CDATA[            <content>I will praise thee with my whole heart: before the gods will I sing praise unto thee.</content>]]></patch>
+            <patch num="10677" delete="true" />
+            <patch num="10678" delete="true" />
+			<patch num="10716"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="10838"><![CDATA[            <content>To the chief Musician, A Psalm of David.</content>]]></patch>
+			<patch num="10897"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="10954"><![CDATA[            <content>Maschil of David; A Prayer when he was in the cave.</content>]]></patch>
+			<patch num="10988"><![CDATA[            <content>A Psalm of David.</content>]]></patch>
+			<patch num="11037"><![CDATA[    <chapter num="144">
+        <fragment>
+            <content kind="EM">A Psalm</content>
+            <content> of David.</content>
+        </fragment>]]></patch>
+			<patch num="11039"><![CDATA[            <content>Blessed </content>]]></patch>
+            <patch num="11040" delete="true" />
+            <patch num="11041" delete="true" />
+			<patch num="11133"><![CDATA[    <chapter num="145">
+        <fragment>
+            <content>David's </content>
+            <content kind="EM">Psalm</content>
+            <content> of praise.</content>
+        </fragment>]]></patch>
+			<patch num="11135"><![CDATA[            <content>I will extol thee, my God, O king; and I will bless thy name for ever and ever.</content>]]></patch>
+            <patch num="11136" delete="true" />
+            <patch num="11137" delete="true" />
+		</book>
+		<book name="45-rom">
+			<patch num="1748"><![CDATA[            <content> glory through Jesus Christ for ever. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="1750"><![CDATA[        </fragment>]]></patch>
+			<patch num="1751" delete="true" />
+		</book>
+		<book name="46-1-cor">
+			<patch num="1843"><![CDATA[            <content> with you all in Christ Jesus. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="1845"><![CDATA[        </fragment>]]></patch>
+			<patch num="1846" delete="true" />
+		</book>
+		<book name="47-2-cor">
+			<patch num="1209"><![CDATA[            <content> with you all. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="1211"><![CDATA[        </fragment>]]></patch>
+			<patch num="1212" delete="true" />
+		</book>
+		<book name="48-gal">
+			<patch num="573"><![CDATA[            <content> with your spirit. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="575"><![CDATA[        </fragment>]]></patch>
+			<patch num="576" delete="true" />
+		</book>
+		<book name="49-eph">
+			<patch num="576"><![CDATA[            <content> with all them that love our Lord Jesus Christ in sincerity. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="578"><![CDATA[        </fragment>]]></patch>
+			<patch num="579" delete="true" />
+		</book>
+		<book name="50-phil">
+			<patch num="425"><![CDATA[            <content> with you all. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="427"><![CDATA[        </fragment>]]></patch>
+			<patch num="428" delete="true" />
+		</book>
+		<book name="51-col">
+			<patch num="387"><![CDATA[            <content> with you. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="389"><![CDATA[        </fragment>]]></patch>
+			<patch num="390" delete="true" />
+		</book>
+		<book name="52-1-thess">
+			<patch num="349"><![CDATA[            <content> with you. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="351"><![CDATA[        </fragment>]]></patch>
+			<patch num="352" delete="true" />
+		</book>
+		<book name="53-2-thess">
+			<patch num="179"><![CDATA[            <content> with you all. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="181"><![CDATA[        </fragment>]]></patch>
+			<patch num="182" delete="true" />
+		</book>
+		<book name="54-1-tim">
+			<patch num="441"><![CDATA[            <content> with thee. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="443"><![CDATA[        </fragment>]]></patch>
+			<patch num="444" delete="true" />
+		</book>
+		<book name="55-2-tim">
+			<patch num="332"><![CDATA[            <content> with you. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="334"><![CDATA[        </fragment>]]></patch>
+			<patch num="335" delete="true" />
+		</book>
+		<book name="56-titus">
+			<patch num="177"><![CDATA[            <content> with you all. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="179"><![CDATA[        </fragment>]]></patch>
+			<patch num="180" delete="true" />
+		</book>
+		<book name="57-philemon">
+			<patch num="91"><![CDATA[            <content> with your spirit. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="93"><![CDATA[        </fragment>]]></patch>
+			<patch num="94" delete="true" />
+		</book>
+		<book name="58-heb">
+			<patch num="1254"><![CDATA[            <content> with you all. Amen.</content>
+        </verse>
+        <fragment>]]></patch>
+			<patch num="1256"><![CDATA[        </fragment>]]></patch>
+			<patch num="1257" delete="true" />
+		</book>
 	</patches>
 </transferConfig>

@@ -74,13 +74,22 @@ class AssetsCreator {
 				srcFile.eachLine('utf-8') { line, oneBasedLineIndex ->
 					// transform line if config says so.
 					for (patch in bookPatch.getChildElements("patch")) {
-						def lineNumber = patch.getAttributeValue("num")
+						def lineNumber = Integer.parseInt(patch.getAttributeValue("num"))
 						if (lineNumber == oneBasedLineIndex) {
 							line = patch.value
+							def deleteLine = Boolean.parseBoolean(patch.getAttributeValue("delete"))
+							if (deleteLine) {
+								line = null
+							}
 							break
 						}
 					}
-					writer.writeLine(line)
+					// only write if not marked as deleted.
+					if (line != null) {
+                        // convert embedded newlines to platform newline since xom seems to normalize them
+						writer.write(line.replace("\n", System.lineSeparator()));
+                        writer.write(System.lineSeparator());
+					}
 				}
 			}
         }

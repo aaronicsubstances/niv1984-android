@@ -5,7 +5,7 @@ import nu.xom.*
 class AssetsCreator {
     
 	public static void main(String[] args) {
-		final scriptDir = new File(AssetsCreator.class.protectionDomain.codeSource.location.path).parentFile
+		final scriptDir = new File(AssetsCreator.class.protectionDomain.codeSource.location.toURI()).parentFile
 		final assetsDir = "../Niv1984-Plus/app/src/main/assets/"
 		
 		def bibleVersionCode = args[0]

@@ -43,15 +43,16 @@ class XmlGenerator {
         5, 5, 3, 5, 1, 1, 1, 22]
 
 	public static void main(String[] args) {
-        new File(".").list().findAll {
-            new File(it).isDirectory()
+		final scriptDir = new File(XmlGenerator.class.protectionDomain.codeSource.location.toURI()).parentFile
+        scriptDir.list().findAll {
+            new File(scriptDir, it).isDirectory()
         }.sort(false).eachWithIndex { n, i ->
-            def destFile = new File(String.format("%02d.xml", i+1))
+            def destFile = new File(scriptDir, String.format("%02d.xml", i+1))
             println "Generating ${destFile}..."
             def root = new nu.xom.Element(TAG_BOOK)
             def chapterCount =  BIBLE_BOOK_CHAPTER_COUNT[i]
             1.upto(chapterCount) { cn ->
-                def chapterEl = processChapter(n, cn)
+                def chapterEl = processChapter(new File(scriptDir, n), cn)
                 root.appendChild(chapterEl)
             }
             def doc = new nu.xom.Document(root)
@@ -106,7 +107,7 @@ class XmlGenerator {
                         
                         outVerseEl.appendChild(createOutContentEl(txt))
                     }
-                    else if (bookDir.startsWith("19") && vNum == 1) {
+                    else if (bookDir.name.startsWith("19") && vNum == 1) {
                         def txt = getText(n)
                         def parenMatcher = txt =~ /^\(([^)]+)\)\s*/
                         if (parenMatcher) {

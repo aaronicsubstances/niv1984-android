@@ -12,7 +12,7 @@ object AppConstants {
 
     val bibleVersions: Map<String, BibleVersion>
         get() {
-            return mapOf(/*AsanteTwiBibleVersion.code to AsanteTwiBibleVersion,*/
+            return mapOf(AsanteTwiBibleVersion.code to AsanteTwiBibleVersion,
                 KjvBibleVersion.code to KjvBibleVersion,
                 NivBibleVersion.code to NivBibleVersion)
         }
@@ -38,10 +38,10 @@ object AsanteTwiBibleVersion: BibleVersion {
         }
     }
 
-    override val code = "asante2012"
-    override val description = "Asante Twi Bible (2012)"
-    override val abbreviation = "TWI"
-    override val strFootnote = "footnote"
+    override val code = "asa_tk2012"
+    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2012)"
+    override val abbreviation = "AsTK"
+    override val strFootnote = "Footnote"
     override val bookNames = listOf(
         "Gyenesis", "Eksod\u0254s", "Lewitik\u0254s", "Numeri", "Deuteronomium",
         "Yosua", "Akannifo\u0254", "Rut",

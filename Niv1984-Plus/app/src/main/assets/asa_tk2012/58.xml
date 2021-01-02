@@ -2,124 +2,127 @@
 <book>
     <chapter num="1">
         <verse num="1">
-            <content>Onyankopɔn a tete no ɔnam mmerɛ ahodoɔ ne akwan ahodoɔ so, nam adiyifoɔ so kasa kyerɛɛ agyanom no, </content>
+            <content>Onyankop&#596;n a tete no &#596;nam mmer&#603; ahodo&#596; ne akwan ahodo&#596; so, nam adiyifo&#596; so kasa kyer&#603;&#603; agyanom no, </content>
         </verse>
         <verse num="2">
-            <content> nna a ɛdi akyire yi mu nso, ɔnam Ɔba no so akasa akyerɛ yɛn. Ɔno na wayɛ no nnoɔma nyinaa ɔdedifoɔ, a ɔnam ne so nso abɔ wiase nyinaa. </content>
+            <content> nna a &#603;di akyire yi mu nso, &#596;nam &#390;ba no so akasa akyer&#603; y&#603;n. &#390;no na way&#603; no nno&#596;ma nyinaa &#596;dedifo&#596;, a &#596;nam ne so nso ab&#596; wiase nyinaa. </content>
         </verse>
         <verse num="3">
-            <content> Ɔno ara a ɔyɛ n’animuonyam no haran ne ne su nsɛsoɔ, na ɔde ne tumi asɛm sɔ nnoɔma nyinaa mu no, ɔde ɔno ara ne ho dwiraa yɛn bɔne no, ɔkɔtenaa animuonyam kɛseɛ no nifa so ɔsorosoro, </content>
+            <content> &#390;no ara a &#596;y&#603; n’animuonyam no haran ne ne su ns&#603;so&#596;, na &#596;de ne tumi as&#603;m s&#596; nno&#596;ma nyinaa mu no, &#596;de &#596;no ara ne ho dwiraa y&#603;n b&#596;ne no, &#596;k&#596;tenaa animuonyam k&#603;se&#603; no nifa so &#596;sorosoro, </content>
         </verse>
         <verse num="4">
-            <content> na wakyɛne abɔfoɔ no mmoroso, sɛdeɛ ne din kunini a wanya no kyɛne wɔn deɛ no.</content>
+            <content> na waky&#603;ne ab&#596;fo&#596; no mmoroso, s&#603;de&#603; ne din kunini a wanya no ky&#603;ne w&#596;n de&#603; no.</content>
             <content> </content>
         </verse>
         <verse num="5">
             <content> </content>
-            <content> Na abɔfoɔ mu hwan na waka akyerɛ no pɛn sɛ:</content>
+            <content> Na ab&#596;fo&#596; mu hwan na waka akyer&#603; no p&#603;n s&#603;:</content>
             <block_quote>
                 <content>Me ba ne wo,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>me na mawo wo nnɛ,</content>
-                <content>na bio:</content>
+                <content>me na mawo wo nn&#603;,</content>
             </block_quote>
+            <content>na bio:</content>
             <block_quote>
-                <content>Mɛyɛ no Agya,</content>
+                <content>M&#603;y&#603; no Agya,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na ɔno nso ayɛ me ɔba?</content>
-                <content> </content>
+                <content>na &#596;no nso ay&#603; me &#596;ba?</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="6">
             <content> </content>
-            <content> Na ɔnya de abakan no ba wiase bio a, ɔse:</content>
+            <content> Na &#596;nya de abakan no ba wiase bio a, &#596;se:</content>
             <block_quote>
-                <content>Ma Nyankopɔn abɔfoɔ nyinaa nsɔre no!</content>
-                <content> </content>
+                <content>Ma Nyankop&#596;n ab&#596;fo&#596; nyinaa ns&#596;re no!</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="7">
             <content> </content>
-            <content> Na abɔfoɔ no ho deɛ, ɔse:</content>
+            <content> Na ab&#596;fo&#596; no ho de&#603;, &#596;se:</content>
             <block_quote>
-                <content>Ɔyɛ n’abɔfoɔ mframa</content>
+                <content>&#390;y&#603; n’ab&#596;fo&#596; mframa</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>ne n’asomfoɔ, ogyaframa,</content>
-                <content> </content>
+                <content>ne n’asomfo&#596;, ogyaframa,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="8">
             <content> </content>
-            <content> na ɔba no ho deɛ, ɔse:</content>
+            <content> na &#596;ba no ho de&#603;, &#596;se:</content>
             <block_quote>
-                <content>Onyankopɔn, w’ahennwa wɔ hɔ daapem daapem,</content>
+                <content>Onyankop&#596;n, w’ahennwa w&#596; h&#596; daapem daapem,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>w’ahennie poma yɛ poma a ɛtene.</content>
+                <content>w’ahennie poma y&#603; poma a &#603;tene.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="9">
             <block_quote>
-                <content>Wodɔ tenenee, na wokyiri amumuyɛ</content>
+                <content>Wod&#596; tenenee, na wokyiri amumuy&#603;</content>
             </block_quote>
             <block_quote>
-                <content>enti na Onyankopɔn, wo Nyankopɔn,</content>
+                <content>enti na Onyankop&#596;n, wo Nyankop&#596;n,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>de ahosan ngo asra woɔ asene wo mfɛfoɔ.</content>
-                <content> </content>
+                <content>de ahosan ngo asra wo&#596; asene wo mf&#603;fo&#596;.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="10">
             <content> </content>
             <content> Na:</content>
             <block_quote>
-                <content>Awurade, mfitiaseɛ no, wotoo asase fapem,</content>
+                <content>Awurade, mfitiase&#603; no, wotoo asase fapem,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na wo nsa ano nnwuma ne ɔsoro.</content>
+                <content>na wo nsa ano nnwuma ne &#596;soro.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="11">
             <block_quote>
-                <content>Yeinom bɛsɛe, nanso wo deɛ, wowɔ hɔ ara,</content>
+                <content>Yeinom b&#603;s&#603;e, nanso wo de&#603;, wow&#596; h&#596; ara,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na ne nyinaa bɛsu sɛ atadeɛ,</content>
+                <content>na ne nyinaa b&#603;su s&#603; atade&#603;,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="12">
             <block_quote>
-                <content>na wobɛbobɔ wɔn sɛ firatam,</content>
+                <content>na wob&#603;bob&#596; w&#596;n s&#603; firatam,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na wɔasakyera wɔn sɛ atadeɛ.</content>
+                <content>na w&#596;asakyera w&#596;n s&#603; atade&#603;.</content>
             </block_quote>
             <block_quote>
-                <content>Na wo deɛ, wote sɛ deɛ wote ara,</content>
+                <content>Na wo de&#603;, wote s&#603; de&#603; wote ara,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na wo mfeɛ renhi da.</content>
-                <content> </content>
+                <content>na wo mfe&#603; renhi da.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="13">
             <content> </content>
-            <content> Na abɔfoɔ no mu hwan ho na waka pɛn sɛ:</content>
+            <content> Na ab&#596;fo&#596; no mu hwan ho na waka p&#603;n s&#603;:</content>
             <block_quote>
                 <content>Tena me nifa so</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>kɔsi sɛ mede w’atamfo bɛyɛ wo nan ase ntiasoɔ?</content>
-                <content> </content>
+                <content>k&#596;si s&#603; mede w’atamfo b&#603;y&#603; wo nan ase ntiaso&#596;?</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="14">
             <content> </content>
-            <content> Wɔn nyinaa nyɛ ahonhom asomfoɔ a, wɔn a, wɔbɛyɛ nkwagyeɛ no adedifoɔ no nti, wɔsoma wɔn sɛ wɔnkɔsom no anaa?</content>
+            <content> W&#596;n nyinaa ny&#603; ahonhom asomfo&#596; a, w&#596;n a, w&#596;b&#603;y&#603; nkwagye&#603; no adedifo&#596; no nti, w&#596;soma w&#596;n s&#603; w&#596;nk&#596;som no anaa?</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">2</content>
@@ -164,98 +167,100 @@
     </chapter>
     <chapter num="2">
         <verse num="1">
-            <content>Yei nti ɛsɛ sɛ yɛsɔ nnoɔma a yɛateɛ no mu den ma no boro soɔ, na yɛamfiri ho da bi. </content>
+            <content>Yei nti &#603;s&#603; s&#603; y&#603;s&#596; nno&#596;ma a y&#603;ate&#603; no mu den ma no boro so&#596;, na y&#603;amfiri ho da bi. </content>
         </verse>
         <verse num="2">
-            <content> Na sɛ asɛm a wɔnam abɔfoɔ so kaeɛ no timii, na mmarato ne asoɔden biara nyaa n’akatua a ɛsɛ a, </content>
+            <content> Na s&#603; as&#603;m a w&#596;nam ab&#596;fo&#596; so kae&#603; no timii, na mmarato ne aso&#596;den biara nyaa n’akatua a &#603;s&#603; a, </content>
         </verse>
         <verse num="3">
-            <content> yɛn nso, sɛ yɛammu nkwagyeɛ kɛseɛ a ɛte sɛ yei a, yɛbɛdwane afiri mu sɛn? Ɛno na Awurade firii aseɛ kaeɛ no, wɔn a wɔteeɛ no hyɛɛ mu den maa yɛn, </content>
+            <content> y&#603;n nso, s&#603; y&#603;ammu nkwagye&#603; k&#603;se&#603; a &#603;te s&#603; yei a, y&#603;b&#603;dwane afiri mu s&#603;n? &#400;no na Awurade firii ase&#603; kae&#603; no, w&#596;n a w&#596;tee&#603; no hy&#603;&#603; mu den maa y&#603;n, </content>
         </verse>
         <verse num="4">
-            <content> na Onyankopɔn nso de nsɛnkyerɛnneɛ ne anwanwadeɛ ne ahoɔdenneɛ ahodoɔ ne Honhom Kronkron a ɔkyekyɛɛ mu sɛ ɔpɛ no dii ho adanseɛ bi.</content>
+            <content> na Onyankop&#596;n nso de ns&#603;nkyer&#603;nne&#603; ne anwanwade&#603; ne aho&#596;denne&#603; ahodo&#596; ne Honhom Kronkron a &#596;kyeky&#603;&#603; mu s&#603; &#596;p&#603; no dii ho adanse&#603; bi.</content>
             <content> </content>
         </verse>
         <verse num="5">
-            <content>Ɛfiri sɛ ɛnyɛ abɔfoɔ ase na ɔde wiase a ɛreba a yɛka ho asɛm no ahyɛ. </content>
+            <content>&#400;firi s&#603; &#603;ny&#603; ab&#596;fo&#596; ase na &#596;de wiase a &#603;reba a y&#603;ka ho as&#603;m no ahy&#603;. </content>
         </verse>
         <verse num="6">
-            <content> Na obi di adanseɛ baabi sɛ:</content>
+            <content> Na obi di adanse&#603; baabi s&#603;:</content>
             <block_quote>
-                <content>Ɔdasani ne hwan a wokae no,</content>
+                <content>&#390;dasani ne hwan a wokae no,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>anaasɛ onipa ba ne hwan a w’ani ku ne ho?</content>
+                <content>anaas&#603; onipa ba ne hwan a w’ani ku ne ho?</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="7">
             <block_quote>
-                <content>Woama no aka kakraa bi na wato abɔfoɔ,</content>
+                <content>Woama no aka kakraa bi na wato ab&#596;fo&#596;,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>wode animuonyam ne anidie abɔ no abotire,</content>
+                <content>wode animuonyam ne anidie ab&#596; no abotire,</content>
             </block_quote>
             <block_quote>
                 <content>[na wode no asi wo nsa ano nnwuma so,]</content>
                 <note_ref>1</note_ref>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="8">
             <block_quote kind="LEFT_INDENTED">
-                <content>wode nnoɔma nyinaa ahyɛ ne nan ase.</content>
-                <content>Na sɛ ɔde nnoɔma nyinaa ahyɛ n’ase yi, wannya biribiara a wamfa anhyɛ n’aseɛ. Na seesei deɛ, yɛnnya nhunuu sɛ wɔde nnoɔma nyinaa ahyɛ n’ase. </content>
+                <content>wode nno&#596;ma nyinaa ahy&#603; ne nan ase.</content>
             </block_quote>
+            <content>Na s&#603; &#596;de nno&#596;ma nyinaa ahy&#603; n’ase yi, wannya biribiara a wamfa anhy&#603; n’ase&#603;. Na seesei de&#603;, y&#603;nnya nhunuu s&#603; w&#596;de nno&#596;ma nyinaa ahy&#603; n’ase. </content>
         </verse>
         <verse num="9">
-            <content> Na mmom, yɛhunu Yesu, deɛ berɛ tiawa bi mu, wɔbrɛɛ no ase senee abɔfoɔ no, sɛdeɛ ɔbɛnam Onyankopɔn adom so bɛka owuo ahwɛ ama nnipa nyinaa. Seesei ɛsiane owuo amanehunu nti, wɔde animuonyam ne anidie abɔ no abotire.</content>
+            <content> Na mmom, y&#603;hunu Yesu, de&#603; ber&#603; tiawa bi mu, w&#596;br&#603;&#603; no ase senee ab&#596;fo&#596; no, s&#603;de&#603; &#596;b&#603;nam Onyankop&#596;n adom so b&#603;ka owuo ahw&#603; ama nnipa nyinaa. Seesei &#603;siane owuo amanehunu nti, w&#596;de animuonyam ne anidie ab&#596; no abotire.</content>
             <content> </content>
         </verse>
         <verse num="10">
             <content> </content>
-            <content> Na ɛfataa deɛ ne nti nnoɔma nyinaa wɔ hɔ na ɛnam ne so na nnoɔma nyinaa wɔ hɔ, deɛ ɔde mma bebree baa animuonyam mu no, sɛ ɔde wɔn nkwagyeɛ safohene nam amanehunu mu bɛkɔ pɛyɛ mu.</content>
+            <content> Na &#603;fataa de&#603; ne nti nno&#596;ma nyinaa w&#596; h&#596; na &#603;nam ne so na nno&#596;ma nyinaa w&#596; h&#596;, de&#603; &#596;de mma bebree baa animuonyam mu no, s&#603; &#596;de w&#596;n nkwagye&#603; safohene nam amanehunu mu b&#603;k&#596; p&#603;y&#603; mu.</content>
             <content> </content>
         </verse>
         <verse num="11">
             <content> </content>
-            <content> Na deɛ ɔte ho ne wɔn a wɔte wɔn ho nyinaa wɔ abɔseɛ baako, ne saa nti ɛnyɛ no aniwu sɛ ɔbɛfrɛ wɔn anuanom, </content>
+            <content> Na de&#603; &#596;te ho ne w&#596;n a w&#596;te w&#596;n ho nyinaa w&#596; ab&#596;se&#603; baako, ne saa nti &#603;ny&#603; no aniwu s&#603; &#596;b&#603;fr&#603; w&#596;n anuanom, </content>
         </verse>
         <verse num="12">
-            <content> sɛ:</content>
+            <content> s&#603;:</content>
             <block_quote>
-                <content>Mɛbɔ wo din makyerɛ me nuanom,</content>
+                <content>M&#603;b&#596; wo din makyer&#603; me nuanom,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>asafo mu na mɛto ayeyie dwom mama woɔ.</content>
-                <content> </content>
+                <content>asafo mu na m&#603;to ayeyie dwom mama wo&#596;.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="13">
             <content> </content>
             <content> Na bio:</content>
             <block_quote>
-                <content>Mede me ho bɛto ne so.</content>
-                <content>Na bio nso:</content>
+                <content>Mede me ho b&#603;to ne so.</content>
             </block_quote>
+            <content>Na bio nso:</content>
             <block_quote>
-                <content>Hwɛ, me ne mma a Onyankopɔn de wɔn ama me no nie.</content>
-                <content> </content>
+                <content>Hw&#603;, me ne mma a Onyankop&#596;n de w&#596;n ama me no nie.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="14">
             <content> </content>
-            <content> Enti sɛ mma no anya honam ne mogya korɔ no bie no, saa ara na ɔno nso faa mu bi, sɛ ɔnam owuo so bɛtu deɛ ɔwɔ owuo tumi a ɔne ɔbonsam no, </content>
+            <content> Enti s&#603; mma no anya honam ne mogya kor&#596; no bie no, saa ara na &#596;no nso faa mu bi, s&#603; &#596;nam owuo so b&#603;tu de&#603; &#596;w&#596; owuo tumi a &#596;ne &#596;bonsam no, </content>
         </verse>
         <verse num="15">
-            <content>na wagye wɔn a anka owuo ho hu nti wɔayɛ nkoa, nna a wɔde te aseɛ nyinaa. </content>
+            <content>na wagye w&#596;n a anka owuo ho hu nti w&#596;ay&#603; nkoa, nna a w&#596;de te ase&#603; nyinaa. </content>
         </verse>
         <verse num="16">
-            <content>Na ampa ara, ɛnyɛ abɔfoɔ na ɔsɔ wɔn mu gye wɔn, na mmom Abraham asefoɔ na ɔsɔ wɔn mu gye wɔn. </content>
+            <content>Na ampa ara, &#603;ny&#603; ab&#596;fo&#596; na &#596;s&#596; w&#596;n mu gye w&#596;n, na mmom Abraham asefo&#596; na &#596;s&#596; w&#596;n mu gye w&#596;n. </content>
         </verse>
         <verse num="17">
-            <content> Enti ɛhiaa no sɛ ɔsɛ ne nuanom nnoɔma nyinaa mu, na wayɛ mmɔborɔhunu ne nokorɛ sɔfo panin, Nyankopɔn fam nnoɔma no mu, na wayɛ ɔman no bɔne ho mpata. </content>
+            <content> Enti &#603;hiaa no s&#603; &#596;s&#603; ne nuanom nno&#596;ma nyinaa mu, na way&#603; mm&#596;bor&#596;hunu ne nokor&#603; s&#596;fo panin, Nyankop&#596;n fam nno&#596;ma no mu, na way&#603; &#596;man no b&#596;ne ho mpata. </content>
         </verse>
         <verse num="18">
-            <content> Na ɛnam sɛ ɔno ara hunuu sɔ a wɔsɔɔ no hwɛeɛ mu amaneɛ nti, ɔtumi boa wɔn a wɔsɔ wɔn hwɛ no.</content>
+            <content> Na &#603;nam s&#603; &#596;no ara hunuu s&#596; a w&#596;s&#596;&#596; no hw&#603;e&#603; mu amane&#603; nti, &#596;tumi boa w&#596;n a w&#596;s&#596; w&#596;n hw&#603; no.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">2</content>
@@ -276,7 +281,7 @@
         <note num="1">
             <content kind="REF_VERSE_START">7</content>
             <content> </content>
-            <content>Tete atwerɛfoɔ a wɔgye wɔn to mu no binom mfa yei nka ho.</content>
+            <content>Tete atwer&#603;fo&#596; a w&#596;gye w&#596;n to mu no binom mfa yei nka ho.</content>
         </note>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">9</content>
@@ -314,105 +319,109 @@
     <chapter num="3">
         <verse num="1">
             <content> </content>
-            <content> Ɛno nti, anuanom akronkronfoɔ a mofra ɔsoro frɛ no mu, monhwɛ yɛn asɛm a yɛgyina so ka no ho Ɔsomafoɔ ne Ɔsɔfo Panin Yesu </content>
+            <content> &#400;no nti, anuanom akronkronfo&#596; a mofra &#596;soro fr&#603; no mu, monhw&#603; y&#603;n as&#603;m a y&#603;gyina so ka no ho &#390;somafo&#596; ne &#390;s&#596;fo Panin Yesu </content>
         </verse>
         <verse num="2">
-            <content> a ɔdi deɛ ɔde no sii hɔ no nokorɛ sɛdeɛ Mose nso dii Nyankopɔn fie nyinaa mu nokorɛ no. </content>
+            <content> a &#596;di de&#603; &#596;de no sii h&#596; no nokor&#603; s&#603;de&#603; Mose nso dii Nyankop&#596;n fie nyinaa mu nokor&#603; no. </content>
         </verse>
         <verse num="3">
-            <content>Na oyi deɛ, wɔabu no sɛ animuonyam bebree sɛ no, sene Mose, te sɛ deɛ ɔsi efie wɔ anidie bebree sene efie no. </content>
+            <content>Na oyi de&#603;, w&#596;abu no s&#603; animuonyam bebree s&#603; no, sene Mose, te s&#603; de&#603; &#596;si efie w&#596; anidie bebree sene efie no. </content>
         </verse>
         <verse num="4">
-            <content>(Ɛfiri sɛ efie biara, obi na ɔsie, na deɛ ɔyɛɛ nnoɔma nyinaa ne Onyankopɔn.)</content>
+            <content>(&#400;firi s&#603; efie biara, obi na &#596;sie, na de&#603; &#596;y&#603;&#603; nno&#596;ma nyinaa ne Onyankop&#596;n.)</content>
             <content> </content>
         </verse>
         <verse num="5">
-            <content>Na Mose deɛ, ɔdii Nyankopɔn fie nyinaa mu nokorɛ sɛ ɔsomfoɔ, sɛ ɔbɛdi nsɛm a wɔrebɛka da bi no ho adanseɛ. </content>
+            <content>Na Mose de&#603;, &#596;dii Nyankop&#596;n fie nyinaa mu nokor&#603; s&#603; &#596;somfo&#596;, s&#603; &#596;b&#603;di ns&#603;m a w&#596;reb&#603;ka da bi no ho adanse&#603;. </content>
         </verse>
         <verse num="6">
-            <content> Na Kristo deɛ, ɔdi ne fie so sɛ ɔba; nso ne fie no ne yɛn, nanso gye sɛ yɛsɔ anidasoɔ no ho nnam ne ahohoahoa mu pintinn kɔsi awieeɛ.</content>
+            <content> Na Kristo de&#603;, &#596;di ne fie so s&#603; &#596;ba; nso ne fie no ne y&#603;n, nanso gye s&#603; y&#603;s&#596; anidaso&#596; no ho nnam ne ahohoahoa mu pintinn k&#596;si awiee&#603;.</content>
             <content> </content>
         </verse>
         <verse num="7">
             <content> </content>
-            <content> Enti, sɛdeɛ Honhom Kronkron ka no:</content>
+            <content> Enti, s&#603;de&#603; Honhom Kronkron ka no:</content>
             <block_quote>
-                <content>Ɛnnɛ, sɛ mote ne nne a,</content>
+                <content>&#400;nn&#603;, s&#603; mote ne nne a,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="8">
             <block_quote>
                 <content> </content>
-                <content> mommpirim mo akoma sɛ atuateɛ no mu,</content>
+                <content> mommpirim mo akoma s&#603; atuate&#603; no mu,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>sɔhwɛ da no wɔ serɛ so hɔ,</content>
+                <content>s&#596;hw&#603; da no w&#596; ser&#603; so h&#596;,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="9">
             <block_quote>
-                <content>deɛ mo agyanom gyegyee me hɔ no de sɔɔ me hwɛeɛ,</content>
+                <content>de&#603; mo agyanom gyegyee me h&#596; no de s&#596;&#596; me hw&#603;e&#603;,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na wɔhunuu me nnwuma mfirinhyia aduanan.</content>
+                <content>na w&#596;hunuu me nnwuma mfirinhyia aduanan.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="10">
             <block_quote>
-                <content>Enti saa awoɔ ntoatoasoɔ yi ho yɛɛ me ahi,</content>
+                <content>Enti saa awo&#596; ntoatoaso&#596; yi ho y&#603;&#603; me ahi,</content>
             </block_quote>
             <block_quote>
-                <content>na mekaa sɛ: Wɔfom daa wɔ wɔn akoma mu.</content>
+                <content>na mekaa s&#603;: W&#596;fom daa w&#596; w&#596;n akoma mu.</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>Nanso wɔn deɛ, wɔanhunu m’akwan;</content>
+                <content>Nanso w&#596;n de&#603;, w&#596;anhunu m’akwan;</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="11">
             <block_quote>
                 <content> </content>
-                <content> sɛdeɛ mekaa ntam wɔ m’abufuo mu no:</content>
+                <content> s&#603;de&#603; mekaa ntam w&#596; m’abufuo mu no:</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>Wɔrenhyɛne me home mu da.</content>
-                <content> </content>
+                <content>W&#596;renhy&#603;ne me home mu da.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="12">
-            <content>Monhwɛ yie, anuanom, na akoma bɔne a ɛnnye nnie amma mo mu biara mu, na wanwae amfiri Onyankopɔn teasefoɔ ho.</content>
+            <content>Monhw&#603; yie, anuanom, na akoma b&#596;ne a &#603;nnye nnie amma mo mu biara mu, na wanwae amfiri Onyankop&#596;n teasefo&#596; ho.</content>
             <content> </content>
         </verse>
         <verse num="13">
             <content> </content>
-            <content> Na mmom montutu mo ho fo da biara a wɔda so bɔ din sɛ “ɛnnɛ” no, na bɔne nnaadaa ampirim mo mu biara akoma. </content>
+            <content> Na mmom montutu mo ho fo da biara a w&#596;da so b&#596; din s&#603; “&#603;nn&#603;” no, na b&#596;ne nnaadaa ampirim mo mu biara akoma. </content>
         </verse>
         <verse num="14">
-            <content> Nanso sɛ deɛ yɛfirii aseɛ de yɛn ho too soɔ no, yɛsɔ mu pintinn kɔsi awieeɛ a, yɛn ne Kristo bɛyɛ baako. </content>
+            <content> Nanso s&#603; de&#603; y&#603;firii ase&#603; de y&#603;n ho too so&#596; no, y&#603;s&#596; mu pintinn k&#596;si awiee&#603; a, y&#603;n ne Kristo b&#603;y&#603; baako. </content>
         </verse>
         <verse num="15">
-            <content> Sɛ wɔka sɛ:</content>
+            <content> S&#603; w&#596;ka s&#603;:</content>
             <block_quote>
-                <content>Ɛnnɛ, sɛ mote ne nne a,</content>
+                <content>&#400;nn&#603;, s&#603; mote ne nne a,</content>
             </block_quote>
             <block_quote>
-                <content>mommpirim mo akoma sɛ ahiyie no mu a,</content>
-                <content> </content>
+                <content>mommpirim mo akoma s&#603; ahiyie no mu a,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="16">
-            <content>na ɛhefoɔ na wɔteeɛ a wɔtee atua no?</content>
-            <content>Ɛnyɛ wɔn a wɔnam Mose so firii Misraim nyinaa no anaa?</content>
+            <content>na &#603;hefo&#596; na w&#596;tee&#603; a w&#596;tee atua no?</content>
+            <content>&#400;ny&#603; w&#596;n a w&#596;nam Mose so firii Misraim nyinaa no anaa?</content>
             <content> </content>
         </verse>
         <verse num="17">
             <content> </content>
-            <content> Na ɛhefoɔ ho na ɛyɛɛ no ahi mfirinhyia aduanan no? Ɛnyɛ wɔn a wɔyɛɛ bɔne a wɔn amu guguu serɛ soɔ no anaa? </content>
+            <content> Na &#603;hefo&#596; ho na &#603;y&#603;&#603; no ahi mfirinhyia aduanan no? &#400;ny&#603; w&#596;n a w&#596;y&#603;&#603; b&#596;ne a w&#596;n amu guguu ser&#603; so&#596; no anaa? </content>
         </verse>
         <verse num="18">
-            <content> Na ɛhefoɔ na ɔkaa wɔn ntam sɛ wɔrenhyɛne n’ahome mu? Ɛnyɛ wɔn a wɔyɛɛ asoɔden no anaa? </content>
+            <content> Na &#603;hefo&#596; na &#596;kaa w&#596;n ntam s&#603; w&#596;renhy&#603;ne n’ahome mu? &#400;ny&#603; w&#596;n a w&#596;y&#603;&#603; aso&#596;den no anaa? </content>
         </verse>
         <verse num="19">
-            <content>Na yɛhunu sɛ ɔgyeɛ a wɔannye annie nti, wɔantumi anhyɛn n’ahomegyeɛ no mu.</content>
+            <content>Na y&#603;hunu s&#603; &#596;gye&#603; a w&#596;annye annie nti, w&#596;antumi anhy&#603;n n’ahomegye&#603; no mu.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">1</content>
@@ -461,73 +470,73 @@
     </chapter>
     <chapter num="4">
         <verse num="1">
-            <content>Saa nti, ɛnam sɛ wɔagya yɛn ne home mu kɔ ho bɔhyɛ nti, momma yɛnsuro, na mo mu biara anyɛ sɛ waka akyi. </content>
+            <content>Saa nti, &#603;nam s&#603; w&#596;agya y&#603;n ne home mu k&#596; ho b&#596;hy&#603; nti, momma y&#603;nsuro, na mo mu biara any&#603; s&#603; waka akyi. </content>
         </verse>
         <verse num="2">
-            <content>Na wɔaka asɛmpa nso akyerɛ yɛn sɛ wɔn ara; nanso wɔannya asɛm a wɔteeɛ no ho mfasoɔ, ɛfiri sɛ ɛne gyidie no annkɔ bɛn korɔ mu, wɔn a wɔteeɛ no mu. </content>
+            <content>Na w&#596;aka as&#603;mpa nso akyer&#603; y&#603;n s&#603; w&#596;n ara; nanso w&#596;annya as&#603;m a w&#596;tee&#603; no ho mfaso&#596;, &#603;firi s&#603; &#603;ne gyidie no annk&#596; b&#603;n kor&#596; mu, w&#596;n a w&#596;tee&#603; no mu. </content>
         </verse>
         <verse num="3">
-            <content> Na yɛn a yɛagye adie no kɔ ɔhome no mu, sɛdeɛ ɔkaa sɛ:</content>
+            <content> Na y&#603;n a y&#603;agye adie no k&#596; &#596;home no mu, s&#603;de&#603; &#596;kaa s&#603;:</content>
             <block_quote>
-                <content>Mekaa ntam m’abufuo mu sɛ:</content>
+                <content>Mekaa ntam m’abufuo mu s&#603;:</content>
             </block_quote>
             <block_quote>
-                <content>Wɔrenhyɛne me home mu.</content>
-                <content>Nanso wɔfiri wiase fapemtoɔ awie nnwuma no dada. </content>
+                <content>W&#596;renhy&#603;ne me home mu.</content>
             </block_quote>
+            <content>Nanso w&#596;firi wiase fapemto&#596; awie nnwuma no dada. </content>
         </verse>
         <verse num="4">
-            <content> Na baabi waka ɛda a ɛtɔ so nson no ho asɛm sɛ: Na Onyankopɔn homee da a ɛtɔ so nson firi ne nnwuma nyinaa mu. </content>
+            <content> Na baabi waka &#603;da a &#603;t&#596; so nson no ho as&#603;m s&#603;: Na Onyankop&#596;n homee da a &#603;t&#596; so nson firi ne nnwuma nyinaa mu. </content>
         </verse>
         <verse num="5">
-            <content>Na ɛhanom ɔka bio sɛ: Wɔrenhyɛne me home mu.</content>
+            <content>Na &#603;hanom &#596;ka bio s&#603;: W&#596;renhy&#603;ne me home mu.</content>
             <content> </content>
         </verse>
         <verse num="6">
-            <content>Enti, sɛ aka sɛ ebinom bɛkɔ mu, na asoɔden nti wɔn a wɔkaa wɔn asɛmpa no kane no ankɔ mu nti, </content>
+            <content>Enti, s&#603; aka s&#603; ebinom b&#603;k&#596; mu, na aso&#596;den nti w&#596;n a w&#596;kaa w&#596;n as&#603;mpa no kane no ank&#596; mu nti, </content>
         </verse>
         <verse num="7">
-            <content> ɔhyɛɛ da bi bio nam Dawid so kaa sɛ: “Ɛnnɛ”, ɛkyɛree saa no, ɔkaa sɛdeɛ yɛabɔ din dada no sɛ:</content>
+            <content> &#596;hy&#603;&#603; da bi bio nam Dawid so kaa s&#603;: “&#400;nn&#603;”, &#603;ky&#603;ree saa no, &#596;kaa s&#603;de&#603; y&#603;ab&#596; din dada no s&#603;:</content>
             <block_quote>
-                <content>Ɛnnɛ, sɛ mote ne nne a,</content>
+                <content>&#400;nn&#603;, s&#603; mote ne nne a,</content>
             </block_quote>
             <block_quote>
                 <content>mommpirim mo akoma!</content>
-                <content> </content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="8">
             <content> </content>
-            <content> Na sɛ na Yosua ama wɔn ahome a, anka akyire yi wammɔ da foforɔ din bio.</content>
+            <content> Na s&#603; na Yosua ama w&#596;n ahome a, anka akyire yi wamm&#596; da fofor&#596; din bio.</content>
             <content> </content>
         </verse>
         <verse num="9">
-            <content>Ɛnneɛ na homedadie da so ara wɔ hɔ ma Nyankopɔn man. </content>
+            <content>&#400;nne&#603; na homedadie da so ara w&#596; h&#596; ma Nyankop&#596;n man. </content>
         </verse>
         <verse num="10">
-            <content> Na deɛ wahyɛne ne home mu no, ɔno nso home firii ne nnwuma ho, sɛdeɛ Onyankopɔn home firii ne deɛ ho no.</content>
+            <content> Na de&#603; wahy&#603;ne ne home mu no, &#596;no nso home firii ne nnwuma ho, s&#603;de&#603; Onyankop&#596;n home firii ne de&#603; ho no.</content>
             <content> </content>
         </verse>
         <verse num="11">
-            <content>Enti momma yɛmmɔ mmɔden nhyɛne ɔhome no mu, na obi anhwe ase anyɛ asoɔden korɔ no ara ho nhwɛsoɔ. </content>
+            <content>Enti momma y&#603;mm&#596; mm&#596;den nhy&#603;ne &#596;home no mu, na obi anhwe ase any&#603; aso&#596;den kor&#596; no ara ho nhw&#603;so&#596;. </content>
         </verse>
         <verse num="12">
-            <content> Na Nyankopɔn asɛm wɔ nkwa, na ahoɔden wɔ mu, na ano yɛ nnam sene nkrantɛ anofanu biara, na ɛhwire mu kɔduru sɛ ɛpaepae ɔkra ne honhom, akwaa ne ekyim mu, na ɛyɛ akoma nsusuiɛ ne adwene temmufoɔ.</content>
+            <content> Na Nyankop&#596;n as&#603;m w&#596; nkwa, na aho&#596;den w&#596; mu, na ano y&#603; nnam sene nkrant&#603; anofanu biara, na &#603;hwire mu k&#596;duru s&#603; &#603;paepae &#596;kra ne honhom, akwaa ne ekyim mu, na &#603;y&#603; akoma nsusui&#603; ne adwene temmufo&#596;.</content>
             <content> </content>
         </verse>
         <verse num="13">
-            <content>Na abɔdeɛ biara nni hɔ a ɛnna adie Nyankopɔn anim, na ade nyinaa ho da hɔ, na ɛso abue, deɛ yɛne no wɔ asɛm no anim.</content>
+            <content>Na ab&#596;de&#603; biara nni h&#596; a &#603;nna adie Nyankop&#596;n anim, na ade nyinaa ho da h&#596;, na &#603;so abue, de&#603; y&#603;ne no w&#596; as&#603;m no anim.</content>
             <content> </content>
         </verse>
         <verse num="14">
             <content> </content>
-            <content> Enti, sɛ yɛwɔ ɔsɔfo panin kɛseɛ a watwa mu ɔsoro, a ɔno ne Yesu, Nyankopɔn Ba no yi, momma yɛnsɔ yɛn gyidie asɛm a yɛgyina so ka no mu dendeenden. </content>
+            <content> Enti, s&#603; y&#603;w&#596; &#596;s&#596;fo panin k&#603;se&#603; a watwa mu &#596;soro, a &#596;no ne Yesu, Nyankop&#596;n Ba no yi, momma y&#603;ns&#596; y&#603;n gyidie as&#603;m a y&#603;gyina so ka no mu dendeenden. </content>
         </verse>
         <verse num="15">
-            <content> Na yɛnni ɔsɔfo panin a ɔnnim yɛn mmerɛyɛ na ɔnni tema mma yɛn, na mmom deɛ wɔasɔ no ahwɛ adeɛ nyinaa mu sɛ yɛn ara, nso wannyɛ bɔne. </content>
+            <content> Na y&#603;nni &#596;s&#596;fo panin a &#596;nnim y&#603;n mmer&#603;y&#603; na &#596;nni tema mma y&#603;n, na mmom de&#603; w&#596;as&#596; no ahw&#603; ade&#603; nyinaa mu s&#603; y&#603;n ara, nso wanny&#603; b&#596;ne. </content>
         </verse>
         <verse num="16">
-            <content> Enti momma yɛmfa nnam mmra adom ahennwa no anim, na yɛanya mmɔborɔhunu, na yɛahunu adom, na ɛberɛ a ɛsɛ mu aboa yɛn.</content>
+            <content> Enti momma y&#603;mfa nnam mmra adom ahennwa no anim, na y&#603;anya mm&#596;bor&#596;hunu, na y&#603;ahunu adom, na &#603;ber&#603; a &#603;s&#603; mu aboa y&#603;n.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">3</content>
@@ -568,59 +577,59 @@
     </chapter>
     <chapter num="5">
         <verse num="1">
-            <content>Na ɔsɔfo panin biara, wɔyi no firi nnipa mu hyɛ no sɔfoɔ ma nnipa, Nyankopɔn fam nnoɔma ho, na bɔne nti, ɔde ayɛyɛdeɛ ne afɔdeɛ ama, </content>
+            <content>Na &#596;s&#596;fo panin biara, w&#596;yi no firi nnipa mu hy&#603; no s&#596;fo&#596; ma nnipa, Nyankop&#596;n fam nno&#596;ma ho, na b&#596;ne nti, &#596;de ay&#603;y&#603;de&#603; ne af&#596;de&#603; ama, </content>
         </verse>
         <verse num="2">
-            <content> sɛ obi a ɔbɛtumi ahunu ama wɔn a wɔnnim na wɔfom no, ɛsiane sɛ mmerɛyɛ atwa ɔno nso ho ahyia. </content>
+            <content> s&#603; obi a &#596;b&#603;tumi ahunu ama w&#596;n a w&#596;nnim na w&#596;fom no, &#603;siane s&#603; mmer&#603;y&#603; atwa &#596;no nso ho ahyia. </content>
         </verse>
         <verse num="3">
-            <content> Na ɛno nti, ɛsɛ sɛ ɔbɔ bɔne ho afɔdeɛ ma ne ho, sɛdeɛ ɔbɔ ma ɔman no.</content>
+            <content> Na &#603;no nti, &#603;s&#603; s&#603; &#596;b&#596; b&#596;ne ho af&#596;de&#603; ma ne ho, s&#603;de&#603; &#596;b&#596; ma &#596;man no.</content>
             <content> </content>
         </verse>
         <verse num="4">
             <content> </content>
-            <content> Na obi mfa saa anidie no mma ne ho, gye sɛ deɛ Onyankopɔn afrɛ no te sɛ Aaron no. </content>
+            <content> Na obi mfa saa anidie no mma ne ho, gye s&#603; de&#603; Onyankop&#596;n afr&#603; no te s&#603; Aaron no. </content>
         </verse>
         <verse num="5">
-            <content> Saa ara nso na Kristo anhyɛ ne ho animuonyam sɛ ɔbɛyɛ ɔsɔfo panin, na mmom deɛ ɔka kyerɛɛ no sɛ: Me ba ne wo, me na mawo wo nnɛ! </content>
+            <content> Saa ara nso na Kristo anhy&#603; ne ho animuonyam s&#603; &#596;b&#603;y&#603; &#596;s&#596;fo panin, na mmom de&#603; &#596;ka kyer&#603;&#603; no s&#603;: Me ba ne wo, me na mawo wo nn&#603;! </content>
         </verse>
         <verse num="6">
-            <content> Sɛdeɛ ɔkaa no baabi nso sɛ:</content>
+            <content> S&#603;de&#603; &#596;kaa no baabi nso s&#603;:</content>
             <block_quote>
-                <content>Woyɛ daa sɔfo,</content>
+                <content>Woy&#603; daa s&#596;fo,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>wɔ Melkisedek kwan so.</content>
-                <content> </content>
+                <content>w&#596; Melkisedek kwan so.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="7">
             <content> </content>
-            <content> Ɔno a ne honam nna no mu ɔde mpaebɔ ne nkotosrɛ brɛɛ deɛ ɔbɛtumi agye no afiri owuo mu wɔ nteamu a emu yɛ den ne nisuo mu, na ahobrɛaseɛ suro nti wɔtiee no. </content>
+            <content> &#390;no a ne honam nna no mu &#596;de mpaeb&#596; ne nkotosr&#603; br&#603;&#603; de&#603; &#596;b&#603;tumi agye no afiri owuo mu w&#596; nteamu a emu y&#603; den ne nisuo mu, na ahobr&#603;ase&#603; suro nti w&#596;tiee no. </content>
         </verse>
         <verse num="8">
-            <content> Ɔyɛ Ɔba deɛ, nanso ɔsuaa amaneɛ a ɔhunuiɛ no mu setie, </content>
+            <content> &#390;y&#603; &#390;ba de&#603;, nanso &#596;suaa amane&#603; a &#596;hunui&#603; no mu setie, </content>
         </verse>
         <verse num="9">
-            <content> na ɔnya dii mu no, ɔyɛɛ wɔn a wɔyɛ setie ma no no nyinaa daa nkwagyeɛ farebae, </content>
+            <content> na &#596;nya dii mu no, &#596;y&#603;&#603; w&#596;n a w&#596;y&#603; setie ma no no nyinaa daa nkwagye&#603; farebae, </content>
         </verse>
         <verse num="10">
-            <content>a Onyankopɔn bɔ ne din frɛ no ɔsɔfo panin wɔ Melkisedek kwan so.</content>
+            <content>a Onyankop&#596;n b&#596; ne din fr&#603; no &#596;s&#596;fo panin w&#596; Melkisedek kwan so.</content>
             <content> </content>
         </verse>
         <verse num="11">
-            <content>Ɛno ho na yɛwɔ nsɛm pii a asekyerɛ yɛ den, nanso mo aso asisi. </content>
+            <content>&#400;no ho na y&#603;w&#596; ns&#603;m pii a asekyer&#603; y&#603; den, nanso mo aso asisi. </content>
         </verse>
         <verse num="12">
-            <content> Na ɛberɛ a anka ɛsɛ sɛ moyɛ akyerɛkyerɛfoɔ no, ɛhia mo bio sɛ wɔkyerɛkyerɛ mo Nyankopɔn nsɛm mu mfitiasesɛm, na moayɛ sɛ wɔn a ɛhia wɔn nufosuo, na ɛnyɛ aduane a ɛyɛ den. </content>
+            <content> Na &#603;ber&#603; a anka &#603;s&#603; s&#603; moy&#603; akyer&#603;kyer&#603;fo&#596; no, &#603;hia mo bio s&#603; w&#596;kyer&#603;kyer&#603; mo Nyankop&#596;n ns&#603;m mu mfitiases&#603;m, na moay&#603; s&#603; w&#596;n a &#603;hia w&#596;n nufosuo, na &#603;ny&#603; aduane a &#603;y&#603; den. </content>
         </verse>
         <verse num="13">
-            <content> Na obiara a ɔnum nufoɔ no nhunuu tenenee asɛm no mu, na ɔyɛ akɔkoaa. </content>
+            <content> Na obiara a &#596;num nufo&#596; no nhunuu tenenee as&#603;m no mu, na &#596;y&#603; ak&#596;koaa. </content>
         </verse>
         <verse num="14">
-            <content> Na aduane a ɛyɛ den no fata wɔn a wɔanyini</content>
+            <content> Na aduane a &#603;y&#603; den no fata w&#596;n a w&#596;anyini</content>
             <note_ref>1</note_ref>
-            <content> a ɛnam daa daa adeyɛ nti wɔn adwene tumi hunu papa ne bɔne mu.</content>
+            <content> a &#603;nam daa daa adey&#603; nti w&#596;n adwene tumi hunu papa ne b&#596;ne mu.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">2</content>
@@ -669,75 +678,75 @@
         <note num="1">
             <content kind="REF_VERSE_START">14</content>
             <content> </content>
-            <content kind="STRONG_EM">WƆANYINI: </content>
-            <content>Yei rekyerɛ wɔn a wɔanyini wɔ honhom mu.</content>
+            <content kind="STRONG_EM">W&#390;ANYINI: </content>
+            <content>Yei rekyer&#603; w&#596;n a w&#596;anyini w&#596; honhom mu.</content>
         </note>
     </chapter>
     <chapter num="6">
         <verse num="1">
-            <content>Enti momma yɛmfa mfitiaseɛ nkyerɛkyerɛ a ɛfa Kristo ho no nto nkyɛn, na yɛmpere nkɔ deɛ ɛyɛ pɛ no mu, na yɛamfa nnwuma funu mu adwensakyera ne Nyankopɔn ho gyidie </content>
+            <content>Enti momma y&#603;mfa mfitiase&#603; nkyer&#603;kyer&#603; a &#603;fa Kristo ho no nto nky&#603;n, na y&#603;mpere nk&#596; de&#603; &#603;y&#603; p&#603; no mu, na y&#603;amfa nnwuma funu mu adwensakyera ne Nyankop&#596;n ho gyidie </content>
         </verse>
         <verse num="2">
-            <content>ne asubɔ ahodoɔ ho nkyerɛkyerɛ ne nsagusoɔ ne awufoɔ sɔreɛ ne daa atemmuo anto fapem bio. </content>
+            <content>ne asub&#596; ahodo&#596; ho nkyer&#603;kyer&#603; ne nsaguso&#596; ne awufo&#596; s&#596;re&#603; ne daa atemmuo anto fapem bio. </content>
         </verse>
         <verse num="3">
-            <content>Yei na sɛ Onyankopɔn ma ho kwan a, yɛbɛyɛ.</content>
+            <content>Yei na s&#603; Onyankop&#596;n ma ho kwan a, y&#603;b&#603;y&#603;.</content>
             <content> </content>
         </verse>
         <verse num="4">
             <content> </content>
-            <content> Na ɛntumi mma sɛ, wɔn a wɔanya hann pɛn, na wɔaka ɔsoro akyɛdeɛ no ahwɛ, na wɔanya Honhom Kronkron no bie, </content>
+            <content> Na &#603;ntumi mma s&#603;, w&#596;n a w&#596;anya hann p&#603;n, na w&#596;aka &#596;soro aky&#603;de&#603; no ahw&#603;, na w&#596;anya Honhom Kronkron no bie, </content>
         </verse>
         <verse num="5">
-            <content>na wɔaka Nyankopɔn asɛm a ɛyɛ ne wiase a ɛrebɛba no ahoɔden ahodoɔ ahwɛ, </content>
+            <content>na w&#596;aka Nyankop&#596;n as&#603;m a &#603;y&#603; ne wiase a &#603;reb&#603;ba no aho&#596;den ahodo&#596; ahw&#603;, </content>
         </verse>
         <verse num="6">
-            <content>na wɔafiri ho ahwe aseɛ no, wɔbɛdane wɔn foforɔ akɔ adwensakyera mu, wɔn a wɔsɛne Nyankopɔn Ba no bio ma wɔn ho na wɔde no kɔ animguaseɛ mu. </content>
+            <content>na w&#596;afiri ho ahwe ase&#603; no, w&#596;b&#603;dane w&#596;n fofor&#596; ak&#596; adwensakyera mu, w&#596;n a w&#596;s&#603;ne Nyankop&#596;n Ba no bio ma w&#596;n ho na w&#596;de no k&#596; animguase&#603; mu. </content>
         </verse>
         <verse num="7">
-            <content>Na asase a ɛnom osuo a ɛtaa tɔ gu soɔ na ɛfifiri aduane a ɛyɛ ma wɔn a wɔn nti wɔdɔ no, nya Nyankopɔn hɔ nhyira no bi. </content>
+            <content>Na asase a &#603;nom osuo a &#603;taa t&#596; gu so&#596; na &#603;fifiri aduane a &#603;y&#603; ma w&#596;n a w&#596;n nti w&#596;d&#596; no, nya Nyankop&#596;n h&#596; nhyira no bi. </content>
         </verse>
         <verse num="8">
-            <content>Na deɛ ɛfifiri nkasɛɛ ne hwerɛmo no, ɛmfra, na ɛbɛn nnuabɔ a n’awieeɛ ne ɔhyeɛ.</content>
+            <content>Na de&#603; &#603;fifiri nkas&#603;&#603; ne hwer&#603;mo no, &#603;mfra, na &#603;b&#603;n nnuab&#596; a n’awiee&#603; ne &#596;hye&#603;.</content>
             <content> </content>
         </verse>
         <verse num="9">
-            <content>Na sɛ yɛka saa nso a, adɔfo, mo fam deɛ, yɛn ani da deɛ ɛyɛ sene saa a ɛbata nkwagyeɛ ho so. </content>
+            <content>Na s&#603; y&#603;ka saa nso a, ad&#596;fo, mo fam de&#603;, y&#603;n ani da de&#603; &#603;y&#603; sene saa a &#603;bata nkwagye&#603; ho so. </content>
         </verse>
         <verse num="10">
-            <content> Ɛfiri sɛ Onyankopɔn nyɛ deɛ ɔntene, a ne werɛ bɛfiri mo adwuma ne mo dɔ mmɔden a mobɔɔ no ne din mu, sɛ mosomm ahotefoɔ na moda so som wɔn. </content>
+            <content> &#400;firi s&#603; Onyankop&#596;n ny&#603; de&#603; &#596;ntene, a ne wer&#603; b&#603;firi mo adwuma ne mo d&#596; mm&#596;den a mob&#596;&#596; no ne din mu, s&#603; mosomm ahotefo&#596; na moda so som w&#596;n. </content>
         </verse>
         <verse num="11">
-            <content> Na yɛyi yɛn yam pɛ sɛ mo nyinaa mmaako mmaako yi saa mmɔdemmɔ yi adi kyerɛ wɔ anidasoɔ a akyinnyeɛ nni mu koraa mu de kɔduru awieeɛ, </content>
+            <content> Na y&#603;yi y&#603;n yam p&#603; s&#603; mo nyinaa mmaako mmaako yi saa mm&#596;demm&#596; yi adi kyer&#603; w&#596; anidaso&#596; a akyinnye&#603; nni mu koraa mu de k&#596;duru awiee&#603;, </content>
         </verse>
         <verse num="12">
-            <content>na moanyɛ nyaa, na mmom moayɛ wɔn a wɔnam gyidie ne abodwokyɛre so nyaa bɔhyɛ no asuafoɔ.</content>
+            <content>na moany&#603; nyaa, na mmom moay&#603; w&#596;n a w&#596;nam gyidie ne abodwoky&#603;re so nyaa b&#596;hy&#603; no asuafo&#596;.</content>
             <content> </content>
         </verse>
         <verse num="13">
             <content> </content>
-            <content> Na Onyankopɔn hyɛɛ Abraham bɔ no, na ɔnni deɛ ɔso sene no a ɔbɛka ne ntam nti, ɔkaa ɔno ara ne ho ntam </content>
+            <content> Na Onyankop&#596;n hy&#603;&#603; Abraham b&#596; no, na &#596;nni de&#603; &#596;so sene no a &#596;b&#603;ka ne ntam nti, &#596;kaa &#596;no ara ne ho ntam </content>
         </verse>
         <verse num="14">
-            <content>sɛ: Ampa ara, nhyira na mɛhyira woɔ, na dɔre na mɛma woadɔre. </content>
+            <content>s&#603;: Ampa ara, nhyira na m&#603;hyira wo&#596;, na d&#596;re na m&#603;ma woad&#596;re. </content>
         </verse>
         <verse num="15">
-            <content>Na ɔtɔɔ ne bo ase twɛnee saa no, ne nsa kaa bɔhyɛ no. </content>
+            <content>Na &#596;t&#596;&#596; ne bo ase tw&#603;nee saa no, ne nsa kaa b&#596;hy&#603; no. </content>
         </verse>
         <verse num="16">
-            <content> Ɛfiri sɛ nnipa ka deɛ ɔso sene wɔn ntam, na ntuatuaano nyinaa to twa ne ntanka a wɔde hyɛ asɛm mu den. </content>
+            <content> &#400;firi s&#603; nnipa ka de&#603; &#596;so sene w&#596;n ntam, na ntuatuaano nyinaa to twa ne ntanka a w&#596;de hy&#603; as&#603;m mu den. </content>
         </verse>
         <verse num="17">
-            <content>Ɛno nti na Onyankopɔn pɛɛ sɛ ɔyi n’atirimusɛm a ɛnsakyera kyerɛ bɔhyɛ no adedifoɔ pefee no, ɔde ntam gyinaa mu, </content>
+            <content>&#400;no nti na Onyankop&#596;n p&#603;&#603; s&#603; &#596;yi n’atirimus&#603;m a &#603;nsakyera kyer&#603; b&#596;hy&#603; no adedifo&#596; pefee no, &#596;de ntam gyinaa mu, </content>
         </verse>
         <verse num="18">
-            <content>na yɛafa nnoɔma mmienu a ɛnsakyera, a ɛkyerɛ sɛ Onyankopɔn nni atorɔ wɔ biribiara mu no so anya awerɛhyɛmu a emu yɛ den, na yɛn a yɛadwane repɛ hintabea no bɛsɔ anidasoɔ a ɛda yɛn anim no mu. </content>
+            <content>na y&#603;afa nno&#596;ma mmienu a &#603;nsakyera, a &#603;kyer&#603; s&#603; Onyankop&#596;n nni ator&#596; w&#596; biribiara mu no so anya awer&#603;hy&#603;mu a emu y&#603; den, na y&#603;n a y&#603;adwane rep&#603; hintabea no b&#603;s&#596; anidaso&#596; a &#603;da y&#603;n anim no mu. </content>
         </verse>
         <verse num="19">
-            <content>Ɛno na yɛwɔ sɛ ɔkra sɛkyɛ a ɛnteɛ, na ɛtim hɔ a ɛhyɛne mu de kɔsi ntwamutam no mu, </content>
+            <content>&#400;no na y&#603;w&#596; s&#603; &#596;kra s&#603;ky&#603; a &#603;nte&#603;, na &#603;tim h&#596; a &#603;hy&#603;ne mu de k&#596;si ntwamutam no mu, </content>
         </verse>
         <verse num="20">
-            <content> deɛ odikanfoɔ bi hyɛnee hɔ maa yɛn no, ɔno ne Yesu a wayɛ Melkisedek kwan so daa sɔfo panin.</content>
+            <content> de&#603; odikanfo&#596; bi hy&#603;nee h&#596; maa y&#603;n no, &#596;no ne Yesu a way&#603; Melkisedek kwan so daa s&#596;fo panin.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">4</content>
@@ -767,115 +776,115 @@
     <chapter num="7">
         <verse num="1">
             <content> </content>
-            <content> Na saa Melkisedek yi, Salem hene, Ɔsorosoro Nyankopɔn sɔfoɔ, Abraham kɔkumm ahene no na ɔresane aba no, ɔkɔhyiaa no hyiraa no. </content>
+            <content> Na saa Melkisedek yi, Salem hene, &#390;sorosoro Nyankop&#596;n s&#596;fo&#596;, Abraham k&#596;kumm ahene no na &#596;resane aba no, &#596;k&#596;hyiaa no hyiraa no. </content>
         </verse>
         <verse num="2">
-            <content>Nso Abraham maa no ade nyinaa so ntotosoɔ du du, ɛkyerɛ sɛ ɔyɛ tenenee hene kane, na ɛno akyiri nso, ɔyɛ Salem hene, ɛne asomdwoeɛ hene, </content>
+            <content>Nso Abraham maa no ade nyinaa so ntotoso&#596; du du, &#603;kyer&#603; s&#603; &#596;y&#603; tenenee hene kane, na &#603;no akyiri nso, &#596;y&#603; Salem hene, &#603;ne asomdwoe&#603; hene, </content>
         </verse>
         <verse num="3">
-            <content>ɔnni agya nni na nni awoɔ ntoatoasoɔ, ɔnni nna mfitiaseɛ anaa nkwa awieeɛ, na wɔde no toto Nyankopɔn Ba no ho a, ɔyɛ ɔsɔfoɔ afebɔɔ.</content>
+            <content>&#596;nni agya nni na nni awo&#596; ntoatoaso&#596;, &#596;nni nna mfitiase&#603; anaa nkwa awiee&#603;, na w&#596;de no toto Nyankop&#596;n Ba no ho a, &#596;y&#603; &#596;s&#596;fo&#596; afeb&#596;&#596;.</content>
             <content> </content>
         </verse>
         <verse num="4">
-            <content>Na monhwɛ onipa yi a agya panin Abraham maa no asadeɛ no so ntotosoɔ du du no so a ɔso! </content>
+            <content>Na monhw&#603; onipa yi a agya panin Abraham maa no asade&#603; no so ntotoso&#596; du du no so a &#596;so! </content>
         </verse>
         <verse num="5">
-            <content> Na wɔn a wɔfiri Lewi mma mu nya asɔfodwuma no nso wɔ ahyɛdeɛ bi sɛ wɔnnye ntotosoɔ du du, sɛdeɛ mmara no teɛ, wɔ ɔman no mu, ɛne sɛ, wɔn nuanom a wɔn nso wɔfiri Abraham asene mu no, nkyɛn, </content>
+            <content> Na w&#596;n a w&#596;firi Lewi mma mu nya as&#596;fodwuma no nso w&#596; ahy&#603;de&#603; bi s&#603; w&#596;nnye ntotoso&#596; du du, s&#603;de&#603; mmara no te&#603;, w&#596; &#596;man no mu, &#603;ne s&#603;, w&#596;n nuanom a w&#596;n nso w&#596;firi Abraham asene mu no, nky&#603;n, </content>
         </verse>
         <verse num="6">
-            <content>nanso deɛ n’abusua mfiri wɔn mu no gyee Abraham hɔ ntotosoɔ du du, na ɔhyiraa deɛ ɔwɔ bɔhyɛ no. </content>
+            <content>nanso de&#603; n’abusua mfiri w&#596;n mu no gyee Abraham h&#596; ntotoso&#596; du du, na &#596;hyiraa de&#603; &#596;w&#596; b&#596;hy&#603; no. </content>
         </verse>
         <verse num="7">
-            <content>Nso akyinnyeɛ biara nni mu sɛ deɛ ɔkyɛne soɔ no na ɔhyira akumaa.</content>
+            <content>Nso akyinnye&#603; biara nni mu s&#603; de&#603; &#596;ky&#603;ne so&#596; no na &#596;hyira akumaa.</content>
             <content> </content>
         </verse>
         <verse num="8">
-            <content>Na ɛha, nnipa a wɔwuo na wɔgye ntotosoɔ du du, na ɛhɔ deɛ, deɛ wɔdi ne ho adanseɛ sɛ ɔte aseɛ no. </content>
+            <content>Na &#603;ha, nnipa a w&#596;wuo na w&#596;gye ntotoso&#596; du du, na &#603;h&#596; de&#603;, de&#603; w&#596;di ne ho adanse&#603; s&#603; &#596;te ase&#603; no. </content>
         </verse>
         <verse num="9">
-            <content>Na yɛbɛtumi aka sɛ, Lewi nso a ɔgye ntotosoɔ du du no nam Abraham so maa ntotosoɔ du du no bi, </content>
+            <content>Na y&#603;b&#603;tumi aka s&#603;, Lewi nso a &#596;gye ntotoso&#596; du du no nam Abraham so maa ntotoso&#596; du du no bi, </content>
         </verse>
         <verse num="10">
-            <content>ɛfiri sɛ berɛ a Melkisedek bɛhyiaa no no, na ɔda so wɔ n’agya asene mu.</content>
+            <content>&#603;firi s&#603; ber&#603; a Melkisedek b&#603;hyiaa no no, na &#596;da so w&#596; n’agya asene mu.</content>
             <content> </content>
         </verse>
         <verse num="11">
             <content> </content>
-            <content> Na afei sɛ pɛyɛ nam Lewifoɔ asɔfodie so ba a, (ɛfiri sɛ ɛno so na ɔman no nyaa mmara no,) anka ɛdeɛn hia na ɛhia bio sɛ Melkisedek akwan so sɔfoɔ foforɔ bɛsɔreɛ na wɔnka no sɛ Aaron kwan soɔ? </content>
+            <content> Na afei s&#603; p&#603;y&#603; nam Lewifo&#596; as&#596;fodie so ba a, (&#603;firi s&#603; &#603;no so na &#596;man no nyaa mmara no,) anka &#603;de&#603;n hia na &#603;hia bio s&#603; Melkisedek akwan so s&#596;fo&#596; fofor&#596; b&#603;s&#596;re&#603; na w&#596;nka no s&#603; Aaron kwan so&#596;? </content>
         </verse>
         <verse num="12">
-            <content>Na sɛ wɔsakyeraa asɔfodie no a, ɛtwa sɛ wɔsakyera mmara no nso.</content>
+            <content>Na s&#603; w&#596;sakyeraa as&#596;fodie no a, &#603;twa s&#603; w&#596;sakyera mmara no nso.</content>
             <content> </content>
         </verse>
         <verse num="13">
-            <content>Na deɛ wɔbɔ ne din ka nsɛm yi firi abusuakuo foforɔ a obi mfiri mu mmɛyɛɛ afɔrebukyia ho adwuma pɛn mu. </content>
+            <content>Na de&#603; w&#596;b&#596; ne din ka ns&#603;m yi firi abusuakuo fofor&#596; a obi mfiri mu mm&#603;y&#603;&#603; af&#596;rebukyia ho adwuma p&#603;n mu. </content>
         </verse>
         <verse num="14">
-            <content> Ɛfiri sɛ ɛda adi pefee sɛ, Yuda mu na yɛn Awurade pueeɛ, nso saa abusuakuo yi, Mose ammɔ din anka asɔfodie ho hwee. </content>
+            <content> &#400;firi s&#603; &#603;da adi pefee s&#603;, Yuda mu na y&#603;n Awurade puee&#603;, nso saa abusuakuo yi, Mose amm&#596; din anka as&#596;fodie ho hwee. </content>
         </verse>
         <verse num="15">
-            <content>Na deɛ ɛma asɛm no da adi pefee koraa ne sɛ, ɔsɔfoɔ foforɔ sɔre Melkisedek nsɛsoɔ so </content>
+            <content>Na de&#603; &#603;ma as&#603;m no da adi pefee koraa ne s&#603;, &#596;s&#596;fo&#596; fofor&#596; s&#596;re Melkisedek ns&#603;so&#596; so </content>
         </verse>
         <verse num="16">
-            <content>a wɔamfa honam ahyɛdeɛ mmara so, na mmom wɔnam nkwa a ɛnsɛeɛ ahoɔden so ayɛ no ɔsɔfoɔ. </content>
+            <content>a w&#596;amfa honam ahy&#603;de&#603; mmara so, na mmom w&#596;nam nkwa a &#603;ns&#603;e&#603; aho&#596;den so ay&#603; no &#596;s&#596;fo&#596;. </content>
         </verse>
         <verse num="17">
-            <content> Na wɔdi ne ho adanseɛ sɛ:</content>
+            <content> Na w&#596;di ne ho adanse&#603; s&#603;:</content>
             <block_quote>
-                <content>Woyɛ Melkisedek kwan so</content>
+                <content>Woy&#603; Melkisedek kwan so</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>sɔfoɔ daa.</content>
-                <content> </content>
+                <content>s&#596;fo&#596; daa.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="18">
-            <content>Na wɔgu ahyɛdeɛ bi a ɛdi kan wɔ emu adeɛ a ɛyɛ mmerɛ na ɛho nni mfasoɔ nti, </content>
+            <content>Na w&#596;gu ahy&#603;de&#603; bi a &#603;di kan w&#596; emu ade&#603; a &#603;y&#603; mmer&#603; na &#603;ho nni mfaso&#596; nti, </content>
         </verse>
         <verse num="19">
-            <content> (ɛfiri sɛ mmara no amma biribiara anni mu), nanso wɔde anidasoɔ a ɛyɛ kyɛne soɔ a yɛnam so bɛn Onyankopɔn ba mu, de si ananmu.</content>
+            <content> (&#603;firi s&#603; mmara no amma biribiara anni mu), nanso w&#596;de anidaso&#596; a &#603;y&#603; ky&#603;ne so&#596; a y&#603;nam so b&#603;n Onyankop&#596;n ba mu, de si ananmu.</content>
             <content> </content>
         </verse>
         <verse num="20">
-            <content>Na sɛdeɛ wɔankwati ntanka anyɛ yei no, ɛwom sɛ wɔn deɛ, wɔkwatii ntanka yɛɛ asɔfoɔ, </content>
+            <content>Na s&#603;de&#603; w&#596;ankwati ntanka any&#603; yei no, &#603;wom s&#603; w&#596;n de&#603;, w&#596;kwatii ntanka y&#603;&#603; as&#596;fo&#596;, </content>
         </verse>
         <verse num="21">
-            <content> nanso oyi deɛ, deɛ ɔka kyerɛɛ no sɛ:</content>
+            <content> nanso oyi de&#603;, de&#603; &#596;ka kyer&#603;&#603; no s&#603;:</content>
             <block_quote>
-                <content>Awurade aka ntam na ɔrennu ne ho sɛ:</content>
+                <content>Awurade aka ntam na &#596;rennu ne ho s&#603;:</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>Woyɛ ɔsɔfoɔ daa no, de</content>
+                <content>Woy&#603; &#596;s&#596;fo&#596; daa no, de</content>
             </block_quote>
             <block_quote>
-                <content>ntanka ahyɛ no sɔfoɔ,</content>
-                <content> </content>
+                <content>ntanka ahy&#603; no s&#596;fo&#596;,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="22">
             <content> </content>
-            <content> sɛdeɛ apam a Yesu adi mu agyinamu yi yɛ kyɛne soɔ ne no.</content>
+            <content> s&#603;de&#603; apam a Yesu adi mu agyinamu yi y&#603; ky&#603;ne so&#596; ne no.</content>
             <content> </content>
         </verse>
         <verse num="23">
-            <content>Na wɔn deɛ, ɛsiane sɛ owuo amma wɔantena hɔ nti, wɔyɛɛ asɔfoɔ a wɔdɔɔso, </content>
+            <content>Na w&#596;n de&#603;, &#603;siane s&#603; owuo amma w&#596;antena h&#596; nti, w&#596;y&#603;&#603; as&#596;fo&#596; a w&#596;d&#596;&#596;so, </content>
         </verse>
         <verse num="24">
-            <content>nanso oyi deɛ, ɛnam sɛ ɔte hɔ daa nti, ɔdi sɔfoɔ afebɔɔ. </content>
+            <content>nanso oyi de&#603;, &#603;nam s&#603; &#596;te h&#596; daa nti, &#596;di s&#596;fo&#596; afeb&#596;&#596;. </content>
         </verse>
         <verse num="25">
-            <content> Saa nti, ɔbɛtumi agye wɔn a wɔnam ne so ba Nyankopɔn nkyɛn no koraa, ɛfiri sɛ ɔte ase daa sɛ ɔbɛdi ama wɔn.</content>
+            <content> Saa nti, &#596;b&#603;tumi agye w&#596;n a w&#596;nam ne so ba Nyankop&#596;n nky&#603;n no koraa, &#603;firi s&#603; &#596;te ase daa s&#603; &#596;b&#603;di ama w&#596;n.</content>
             <content> </content>
         </verse>
         <verse num="26">
             <content> </content>
-            <content> Na ɔsɔfo panin a ɔfata yɛn ne saa ɔsɔfo panin yi a ne ho teɛ, ɔnni bɔne, ne ho nni nkekaeɛ, wɔayi no afiri nnebɔneyɛfoɔ ho, na wɔama no so akyɛne soro. </content>
+            <content> Na &#596;s&#596;fo panin a &#596;fata y&#603;n ne saa &#596;s&#596;fo panin yi a ne ho te&#603;, &#596;nni b&#596;ne, ne ho nni nkekae&#603;, w&#596;ayi no afiri nneb&#596;ney&#603;fo&#596; ho, na w&#596;ama no so aky&#603;ne soro. </content>
         </verse>
         <verse num="27">
-            <content> Ɔno na ɛnhia no daa, sɛ asɔfoɔ mpanimfoɔ no, sɛ ɔbɔ ɔno ara ne bɔne ho afɔdeɛ kane ansa na wabɔ ɔman no deɛ, na mmom ɔde ne ho bɔɔ afɔdeɛ no, ɔyɛɛ yei prɛko pɛ. </content>
+            <content> &#390;no na &#603;nhia no daa, s&#603; as&#596;fo&#596; mpanimfo&#596; no, s&#603; &#596;b&#596; &#596;no ara ne b&#596;ne ho af&#596;de&#603; kane ansa na wab&#596; &#596;man no de&#603;, na mmom &#596;de ne ho b&#596;&#596; af&#596;de&#603; no, &#596;y&#603;&#603; yei pr&#603;ko p&#603;. </content>
         </verse>
         <verse num="28">
-            <content> Na mmara no deɛ, ɛhyɛ nnipa a wɔyɛ mmerɛ asɔfoɔ mpanin, nanso mmara no akyiri ntanka asɛm no hyɛ ɔba a wawie pɛyɛ daa no sɔfo panin.</content>
+            <content> Na mmara no de&#603;, &#603;hy&#603; nnipa a w&#596;y&#603; mmer&#603; as&#596;fo&#596; mpanin, nanso mmara no akyiri ntanka as&#603;m no hy&#603; &#596;ba a wawie p&#603;y&#603; daa no s&#596;fo panin.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">1</content>
@@ -929,104 +938,108 @@
     <chapter num="8">
         <verse num="1">
             <content> </content>
-            <content> Na nsɛm a yɛreka yi mu titire nie: Yɛwɔ saa ɔsɔfo panin a wakɔtena tumi kɛseɛ ahennwa no nifa, ɔsoro </content>
+            <content> Na ns&#603;m a y&#603;reka yi mu titire nie: Y&#603;w&#596; saa &#596;s&#596;fo panin a wak&#596;tena tumi k&#603;se&#603; ahennwa no nifa, &#596;soro </content>
         </verse>
         <verse num="2">
-            <content>sɛ kronkronbea ne nokorɛ ntomadan a Awurade no ara, na ɛnyɛ onipa, pameeɛ no mu sɔfoɔ.</content>
+            <content>s&#603; kronkronbea ne nokor&#603; ntomadan a Awurade no ara, na &#603;ny&#603; onipa, pamee&#603; no mu s&#596;fo&#596;.</content>
             <content> </content>
         </verse>
         <verse num="3">
             <content> </content>
-            <content> Na ɔsɔfo panin biara wɔhyɛ no sɛ ɔmfa ayɛyɛdeɛ ne afɔdeɛ mma, enti ɛsɛ sɛ oyi nso nya biribi a ɔde bɛma. </content>
+            <content> Na &#596;s&#596;fo panin biara w&#596;hy&#603; no s&#603; &#596;mfa ay&#603;y&#603;de&#603; ne af&#596;de&#603; mma, enti &#603;s&#603; s&#603; oyi nso nya biribi a &#596;de b&#603;ma. </content>
         </verse>
         <verse num="4">
-            <content>Na sɛ ɔwɔ asase so deɛ a, anka ɔnyɛ ɔsɔfoɔ mpo, ɛfiri sɛ asɔfoɔ a wɔde ayɛyɛdeɛ ma, sɛdeɛ mmara no teɛ, wɔ hɔ dada. </content>
+            <content>Na s&#603; &#596;w&#596; asase so de&#603; a, anka &#596;ny&#603; &#596;s&#596;fo&#596; mpo, &#603;firi s&#603; as&#596;fo&#596; a w&#596;de ay&#603;y&#603;de&#603; ma, s&#603;de&#603; mmara no te&#603;, w&#596; h&#596; dada. </content>
         </verse>
         <verse num="5">
-            <content> Wɔn na wɔsom ɔsoro nnoɔma nhwɛsoɔ ne mfonini, te sɛdeɛ asɛm a berɛ a Mose rebɛsiesie ntomadan no, ɛbaa ne nkyɛn a ɛse: Hwɛ, yɛ ade nyinaa sɛdeɛ nsususoɔ a wɔkyerɛɛ wo bepɔ no soɔ no teɛ.</content>
+            <content> W&#596;n na w&#596;som &#596;soro nno&#596;ma nhw&#603;so&#596; ne mfonini, te s&#603;de&#603; as&#603;m a ber&#603; a Mose reb&#603;siesie ntomadan no, &#603;baa ne nky&#603;n a &#603;se: Hw&#603;, y&#603; ade nyinaa s&#603;de&#603; nsususo&#596; a w&#596;kyer&#603;&#603; wo bep&#596; no so&#596; no te&#603;.</content>
             <content> </content>
         </verse>
         <verse num="6">
             <content> </content>
-            <content> Na afei ne nsa aka asɔfodwuma a ɛkyɛne soɔ, sɛ wayɛ apam a ɛkyɛne soɔ a wɔgyina bɔhyɛ a ɛkyɛne soɔ so hyɛɛ ho mmara no ntamgyinafoɔ.</content>
+            <content> Na afei ne nsa aka as&#596;fodwuma a &#603;ky&#603;ne so&#596;, s&#603; way&#603; apam a &#603;ky&#603;ne so&#596; a w&#596;gyina b&#596;hy&#603; a &#603;ky&#603;ne so&#596; so hy&#603;&#603; ho mmara no ntamgyinafo&#596;.</content>
             <content> </content>
         </verse>
         <verse num="7">
-            <content>Na sɛ kane apam no ho nni asɛm a, anka wɔrenhwehwɛ deɛ ɛtɔ so mmienu toberɛ. </content>
+            <content>Na s&#603; kane apam no ho nni as&#603;m a, anka w&#596;renhwehw&#603; de&#603; &#603;t&#596; so mmienu tober&#603;. </content>
         </verse>
         <verse num="8">
-            <content> Na ɔnunu wɔn sɛ:</content>
+            <content> Na &#596;nunu w&#596;n s&#603;:</content>
             <block_quote>
-                <content>Hwɛ, nna bi reba, Awurade na ɔseɛ,</content>
+                <content>Hw&#603;, nna bi reba, Awurade na &#596;se&#603;,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>sɛ me ne Israel fie</content>
+                <content>s&#603; me ne Israel fie</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>ne Yuda fie bɛpam apam foforɔ,</content>
+                <content>ne Yuda fie b&#603;pam apam fofor&#596;,</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="9">
             <block_quote>
                 <content> </content>
-                <content> ɛnte sɛ apam a me ne wɔn agyanom pameeɛ</content>
+                <content> &#603;nte s&#603; apam a me ne w&#596;n agyanom pamee&#603;</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>da a mesosɔɔ wɔn nsa meyii wɔn mefirii Misraim asase soɔ no;</content>
+                <content>da a mesos&#596;&#596; w&#596;n nsa meyii w&#596;n mefirii Misraim asase so&#596; no;</content>
             </block_quote>
             <block_quote>
-                <content>ɛfiri sɛ wɔn deɛ, wɔantena m’apam mu,</content>
+                <content>&#603;firi s&#603; w&#596;n de&#603;, w&#596;antena m’apam mu,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na me nso mannwene wɔn ho, Awurade na ɔseɛ.</content>
+                <content>na me nso mannwene w&#596;n ho, Awurade na &#596;se&#603;.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="10">
             <block_quote>
                 <content>Na yei ne apam a</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>nna no akyi me ne Israel fie bɛpam no, Awurade na ɔseɛ:</content>
+                <content>nna no akyi me ne Israel fie b&#603;pam no, Awurade na &#596;se&#603;:</content>
             </block_quote>
             <block_quote>
-                <content>Mede me mmara bɛhyɛ wɔn adwene mu,</content>
+                <content>Mede me mmara b&#603;hy&#603; w&#596;n adwene mu,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na matwerɛ no wɔn akoma mu,</content>
+                <content>na matwer&#603; no w&#596;n akoma mu,</content>
             </block_quote>
             <block_quote>
-                <content>na mayɛ wɔn Nyankopɔn,</content>
+                <content>na may&#603; w&#596;n Nyankop&#596;n,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na wɔn nso ayɛ me ɔman.</content>
+                <content>na w&#596;n nso ay&#603; me &#596;man.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="11">
             <block_quote>
-                <content>Na obi renkyerɛkyerɛ ne kuromani,</content>
+                <content>Na obi renkyer&#603;kyer&#603; ne kuromani,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>obi renkyerɛkyerɛ ne nua sɛ: Hunu Awurade!</content>
+                <content>obi renkyer&#603;kyer&#603; ne nua s&#603;: Hunu Awurade!</content>
             </block_quote>
             <block_quote>
-                <content>Na wɔn nyinaa bɛhunu me</content>
+                <content>Na w&#596;n nyinaa b&#603;hunu me</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>afiri wɔn mu akumaa so akɔsi ɔkɛseɛ so.</content>
+                <content>afiri w&#596;n mu akumaa so ak&#596;si &#596;k&#603;se&#603; so.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="12">
             <block_quote>
-                <content>Na mɛdom wɔn amumuyɛ ho,</content>
+                <content>Na m&#603;dom w&#596;n amumuy&#603; ho,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na wɔn bɔne deɛ, merenkae bio.</content>
-                <content> </content>
+                <content>na w&#596;n b&#596;ne de&#603;, merenkae bio.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="13">
             <content> </content>
-            <content> Deɛ ɔka sɛ “foforɔ” yi no, ɔde ayɛ kane deɛ no dada, na deɛ ɛreyɛ dada na ɛretwa mu no, aka kakra na ayera.</content>
+            <content> De&#603; &#596;ka s&#603; “fofor&#596;” yi no, &#596;de ay&#603; kane de&#603; no dada, na de&#603; &#603;rey&#603; dada na &#603;retwa mu no, aka kakra na ayera.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">1</content>
@@ -1059,96 +1072,96 @@
     </chapter>
     <chapter num="9">
         <verse num="1">
-            <content>Na afei, kane apam no nso wɔ ɔsom ho nhyehyɛɛ ne wiase ha kronkronbea deɛ: </content>
+            <content>Na afei, kane apam no nso w&#596; &#596;som ho nhyehy&#603;&#603; ne wiase ha kronkronbea de&#603;: </content>
         </verse>
         <verse num="2">
-            <content> Ɛfiri sɛ, wɔsii ntomadan bi a wɔkɔ mu kane a kaneadua ne ɛpono ne paanoo a ɛgu soɔ wɔ mu a wɔfrɛ hɔ kronkronbea. </content>
+            <content> &#400;firi s&#603;, w&#596;sii ntomadan bi a w&#596;k&#596; mu kane a kaneadua ne &#603;pono ne paanoo a &#603;gu so&#596; w&#596; mu a w&#596;fr&#603; h&#596; kronkronbea. </content>
         </verse>
         <verse num="3">
-            <content> Na ntwamutam a ɛtɔ so mmienu no mu wɔ ntomadan a wɔfrɛ hɔ kronkron mu kronkron. </content>
+            <content> Na ntwamutam a &#603;t&#596; so mmienu no mu w&#596; ntomadan a w&#596;fr&#603; h&#596; kronkron mu kronkron. </content>
         </verse>
         <verse num="4">
-            <content> Ɛwɔ sika aduhwamhyeɛ bukyia ne apam adaka a wɔde sika adura ho nyinaa, a sika pɔre a mana wɔ mu, ne Aaron poma a ɛfefɛeɛ ne apam aboɔpono no wɔ mu. </content>
+            <content> &#400;w&#596; sika aduhwamhye&#603; bukyia ne apam adaka a w&#596;de sika adura ho nyinaa, a sika p&#596;re a mana w&#596; mu, ne Aaron poma a &#603;fef&#603;e&#603; ne apam abo&#596;pono no w&#596; mu. </content>
         </verse>
         <verse num="5">
-            <content> Na ɛso na animuonyam Kerubim a ɛtrɛ mpata adwa no soɔ sie; nso yɛrentumi nka nnoɔma yi ho nsɛm mmaako mmaako seesei.</content>
+            <content> Na &#603;so na animuonyam Kerubim a &#603;tr&#603; mpata adwa no so&#596; sie; nso y&#603;rentumi nka nno&#596;ma yi ho ns&#603;m mmaako mmaako seesei.</content>
             <content> </content>
         </verse>
         <verse num="6">
             <content> </content>
-            <content> Na wɔsiesiee nnoɔma yi saa a, asɔfoɔ no kɔ ntomadan a wɔsi mu kane no mu daa kɔyɛ ɔsom ho nnwuma. </content>
+            <content> Na w&#596;siesiee nno&#596;ma yi saa a, as&#596;fo&#596; no k&#596; ntomadan a w&#596;si mu kane no mu daa k&#596;y&#603; &#596;som ho nnwuma. </content>
         </verse>
         <verse num="7">
-            <content> Na deɛ ɛtɔ so mmienu no deɛ, ɔsɔfo panin nko na afe biara ɔkɔ hɔ prɛko, ɔde mogya a ɔno ara, ne ɔman no mfomsoɔ nti ɔde kɔma. </content>
+            <content> Na de&#603; &#603;t&#596; so mmienu no de&#603;, &#596;s&#596;fo panin nko na afe biara &#596;k&#596; h&#596; pr&#603;ko, &#596;de mogya a &#596;no ara, ne &#596;man no mfomso&#596; nti &#596;de k&#596;ma. </content>
         </verse>
         <verse num="8">
-            <content> Emu na Honhom Kronkron kyerɛ yei pefee sɛ, ɛberɛ a wɔnnya nyii kwan a ɛde kɔ kronkron mu no adi nkyerɛeɛ no, na ntomadan a ɛdi kan no da so si hɔ. </content>
+            <content> Emu na Honhom Kronkron kyer&#603; yei pefee s&#603;, &#603;ber&#603; a w&#596;nnya nyii kwan a &#603;de k&#596; kronkron mu no adi nkyer&#603;e&#603; no, na ntomadan a &#603;di kan no da so si h&#596;. </content>
         </verse>
         <verse num="9">
-            <content> Na ɛno yɛ mfatoho de ma seesei berɛ yi, sɛdeɛ wɔde ayɛyɛdeɛ nso ma, ɛne afɔdeɛ a ɛntumi mma deɛ ɔsom no nni mu n’ahonim fam, </content>
+            <content> Na &#603;no y&#603; mfatoho de ma seesei ber&#603; yi, s&#603;de&#603; w&#596;de ay&#603;y&#603;de&#603; nso ma, &#603;ne af&#596;de&#603; a &#603;ntumi mma de&#603; &#596;som no nni mu n’ahonim fam, </content>
         </verse>
         <verse num="10">
-            <content> na ɛne nnuane ne anonneɛ ne adware ahodoɔ yɛ honam nsiesieeɛ nko a ɛda hɔ sɛ wɔnyɛ nkɔduru berɛ a wɔahyɛ ato hɔ no.</content>
+            <content> na &#603;ne nnuane ne anonne&#603; ne adware ahodo&#596; y&#603; honam nsiesiee&#603; nko a &#603;da h&#596; s&#603; w&#596;ny&#603; nk&#596;duru ber&#603; a w&#596;ahy&#603; ato h&#596; no.</content>
             <content> </content>
         </verse>
         <verse num="11">
             <content> </content>
-            <content> Nanso Kristo a ɔbaa sɛ nnepa a aba dada no ho sɔfo panin, nam ntomadan a ɛso na ɛyɛ pɛ kyɛne soɔ, (a wɔamfa nsa ansie, ɛne sɛ, ɛmfiri adebɔ yi mu mu), </content>
+            <content> Nanso Kristo a &#596;baa s&#603; nnepa a aba dada no ho s&#596;fo panin, nam ntomadan a &#603;so na &#603;y&#603; p&#603; ky&#603;ne so&#596;, (a w&#596;amfa nsa ansie, &#603;ne s&#603;, &#603;mfiri adeb&#596; yi mu mu), </content>
         </verse>
         <verse num="12">
-            <content>nso ɛnyɛ mmirekyie ne anantwie mma mogya, na mmom ɔno ara ne mogya so na ɔnam kɔɔ kronkronbea hɔ prɛko kɔnyaa daa ɔgyeɛ. </content>
+            <content>nso &#603;ny&#603; mmirekyie ne anantwie mma mogya, na mmom &#596;no ara ne mogya so na &#596;nam k&#596;&#596; kronkronbea h&#596; pr&#603;ko k&#596;nyaa daa &#596;gye&#603;. </content>
         </verse>
         <verse num="13">
-            <content> Na sɛ mmirekyie ne anantwinini mogya ne nantwibereɛ nso a wɔde dwira wɔn a wɔn ho agu fi, te wɔn ho kɔ honam ahofire mu a, </content>
+            <content> Na s&#603; mmirekyie ne anantwinini mogya ne nantwibere&#603; nso a w&#596;de dwira w&#596;n a w&#596;n ho agu fi, te w&#596;n ho k&#596; honam ahofire mu a, </content>
         </verse>
         <verse num="14">
-            <content> mprɛ ahe ara na Kristo a ɔnam daa honhom so de ne ho bɔɔ afɔdeɛ, a ɛho nni dɛm maa Onyankopɔn no mogya rente mo ahonim ho mfiri nnwuma funu mu nkɔsom Onyankopɔn a ɔte aseɛ?</content>
+            <content> mpr&#603; ahe ara na Kristo a &#596;nam daa honhom so de ne ho b&#596;&#596; af&#596;de&#603;, a &#603;ho nni d&#603;m maa Onyankop&#596;n no mogya rente mo ahonim ho mfiri nnwuma funu mu nk&#596;som Onyankop&#596;n a &#596;te ase&#603;?</content>
             <content> </content>
         </verse>
         <verse num="15">
             <content> </content>
-            <content> Yei nti na ɔyɛ Apam foforɔ ntamgyinafoɔ, sɛdeɛ ɛbɛyɛ na wɔn a wɔabɔ wɔn din afrɛ wɔn no anya daa agyapadeɛ bɔhyɛ no, ɛsiane owuo a ɔwu de gyee wɔn a wɔyɛɛ kane apam no ho mfomsoɔ no. </content>
+            <content> Yei nti na &#596;y&#603; Apam fofor&#596; ntamgyinafo&#596;, s&#603;de&#603; &#603;b&#603;y&#603; na w&#596;n a w&#596;ab&#596; w&#596;n din afr&#603; w&#596;n no anya daa agyapade&#603; b&#596;hy&#603; no, &#603;siane owuo a &#596;wu de gyee w&#596;n a w&#596;y&#603;&#603; kane apam no ho mfomso&#596; no. </content>
         </verse>
         <verse num="16">
-            <content>Na deɛ samanseɛ wɔ no, ɛhɔ na ɛtwa sɛ wɔkyerɛ sɛ, deɛ ɔhyɛeɛ no awu, </content>
+            <content>Na de&#603; samanse&#603; w&#596; no, &#603;h&#596; na &#603;twa s&#603; w&#596;kyer&#603; s&#603;, de&#603; &#596;hy&#603;e&#603; no awu, </content>
         </verse>
         <verse num="17">
-            <content>na samanseɛ tim wɔ awufoɔ so, na deɛ ɔhyɛeɛ no te ase a, anka emu nyɛ den da. </content>
+            <content>na samanse&#603; tim w&#596; awufo&#596; so, na de&#603; &#596;hy&#603;e&#603; no te ase a, anka emu ny&#603; den da. </content>
         </verse>
         <verse num="18">
-            <content>Ɛno nti na wɔankwati mogya anhyɛ kane apam no nso aseɛ. </content>
+            <content>&#400;no nti na w&#596;ankwati mogya anhy&#603; kane apam no nso ase&#603;. </content>
         </verse>
         <verse num="19">
-            <content>Na Mose kaa ahyɛdeɛ biara kyerɛɛ ɔman mu no nyinaa, sɛdeɛ mmara no teɛ wieeɛ no, ɔfaa anantwie mma ne mmirekyie mogya ne nsuo ne kuntu kɔkɔɔ ne sommɛ na ɔde petee nwoma no ara ne ɔman no nyinaa so </content>
+            <content>Na Mose kaa ahy&#603;de&#603; biara kyer&#603;&#603; &#596;man mu no nyinaa, s&#603;de&#603; mmara no te&#603; wiee&#603; no, &#596;faa anantwie mma ne mmirekyie mogya ne nsuo ne kuntu k&#596;k&#596;&#596; ne somm&#603; na &#596;de petee nwoma no ara ne &#596;man no nyinaa so </content>
         </verse>
         <verse num="20">
-            <content> kaa sɛ: Yei ne apam a Onyankopɔn ahyɛ wɔ mo ho no mogya. </content>
+            <content> kaa s&#603;: Yei ne apam a Onyankop&#596;n ahy&#603; w&#596; mo ho no mogya. </content>
         </verse>
         <verse num="21">
-            <content> Na ntomadan ne asɔfodwuma nnoɔma nyinaa nso, ɔde mogya no petee ho saa ara. </content>
+            <content> Na ntomadan ne as&#596;fodwuma nno&#596;ma nyinaa nso, &#596;de mogya no petee ho saa ara. </content>
         </verse>
         <verse num="22">
-            <content> Ampa ara, wɔde mogya na ɛte nnoɔma nyinaa ho, sɛdeɛ mmara no teɛ, na mogya angu a, bɔne fakyɛ nni hɔ.</content>
+            <content> Ampa ara, w&#596;de mogya na &#603;te nno&#596;ma nyinaa ho, s&#603;de&#603; mmara no te&#603;, na mogya angu a, b&#596;ne faky&#603; nni h&#596;.</content>
             <content> </content>
         </verse>
         <verse num="23">
             <content> </content>
-            <content> Ɛnneɛ na ɛtwa sɛ wɔde yeinom te ɔsoro nnoɔma nhwɛsoɔ no ho. Na ɔsoro nnoɔma no ankasa deɛ, wɔde afɔdeɛ a ɛyɛ kyɛne yeinom na ɛtee ho. </content>
+            <content> &#400;nne&#603; na &#603;twa s&#603; w&#596;de yeinom te &#596;soro nno&#596;ma nhw&#603;so&#596; no ho. Na &#596;soro nno&#596;ma no ankasa de&#603;, w&#596;de af&#596;de&#603; a &#603;y&#603; ky&#603;ne yeinom na &#603;tee ho. </content>
         </verse>
         <verse num="24">
-            <content> Na Kristo anhyɛne kronkronbea a wɔde nsa yɛeɛ, a ɛyɛ kronkronbea pa ara no ho nsɛnkyerɛnneɛ no mu, na mmom ɔhyɛnee ɔsoro ankasa sɛ afei ɔrekɔyi ne ho adi Nyankopɔn anim ama yɛn. </content>
+            <content> Na Kristo anhy&#603;ne kronkronbea a w&#596;de nsa y&#603;e&#603;, a &#603;y&#603; kronkronbea pa ara no ho ns&#603;nkyer&#603;nne&#603; no mu, na mmom &#596;hy&#603;nee &#596;soro ankasa s&#603; afei &#596;rek&#596;yi ne ho adi Nyankop&#596;n anim ama y&#603;n. </content>
         </verse>
         <verse num="25">
-            <content>Nanso wanhyɛne hɔ sɛ ɔde ne ho bɛbɔ afɔdeɛ mprɛ pii, sɛdeɛ ɔsɔfo panin de obi mogya hyɛne kronkronbea daa mfirinhyia no; </content>
+            <content>Nanso wanhy&#603;ne h&#596; s&#603; &#596;de ne ho b&#603;b&#596; af&#596;de&#603; mpr&#603; pii, s&#603;de&#603; &#596;s&#596;fo panin de obi mogya hy&#603;ne kronkronbea daa mfirinhyia no; </content>
         </verse>
         <verse num="26">
-            <content> ɛnneɛ anka ɛsɛ no sɛ ɔtaa hunu amane firi wiase fapem, na afei a wiase mmerɛ rewie duro yi, wayi ne ho adi prɛko sɛ ɔnam afɔdeɛ a ɔde ne ho bɔeɛ so bɛyi bɔne. </content>
+            <content> &#603;nne&#603; anka &#603;s&#603; no s&#603; &#596;taa hunu amane firi wiase fapem, na afei a wiase mmer&#603; rewie duro yi, wayi ne ho adi pr&#603;ko s&#603; &#596;nam af&#596;de&#603; a &#596;de ne ho b&#596;e&#603; so b&#603;yi b&#596;ne. </content>
         </verse>
         <verse num="27">
-            <content> Na sɛdeɛ ɛda hɔ ma nnipa sɛ wɔbɛwu prɛko na ɛno akyi atemmuo bɛba no, </content>
+            <content> Na s&#603;de&#603; &#603;da h&#596; ma nnipa s&#603; w&#596;b&#603;wu pr&#603;ko na &#603;no akyi atemmuo b&#603;ba no, </content>
         </verse>
         <verse num="28">
-            <content> saa ara nso na Kristo a wɔde no bɔɔ afɔdeɛ prɛko sɛ ɔnsoa nnipa bebree bɔne no bɛkwati bɔne ayi ne ho adi ne mprenu soɔ, akyerɛ wɔn a wɔhwɛ no kwan no, de wɔn akɔ nkwagyeɛ mu.</content>
+            <content> saa ara nso na Kristo a w&#596;de no b&#596;&#596; af&#596;de&#603; pr&#603;ko s&#603; &#596;nsoa nnipa bebree b&#596;ne no b&#603;kwati b&#596;ne ayi ne ho adi ne mprenu so&#596;, akyer&#603; w&#596;n a w&#596;hw&#603; no kwan no, de w&#596;n ak&#596; nkwagye&#603; mu.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">2</content>
@@ -1238,60 +1251,62 @@
     <chapter num="10">
         <verse num="1">
             <content> </content>
-            <content> Na ɛnam sɛ mmara no kura nnepa a ɛbɛba no nhwɛsoɔ na ɛnyɛ nnoɔma no suban ankasa nti, ɛntumi mfa afɔdeɛ korɔ no ara a wɔbobɔɔ no afe afe nyɛ wɔn a wɔbɔ no pɛ da; </content>
+            <content> Na &#603;nam s&#603; mmara no kura nnepa a &#603;b&#603;ba no nhw&#603;so&#596; na &#603;ny&#603; nno&#596;ma no suban ankasa nti, &#603;ntumi mfa af&#596;de&#603; kor&#596; no ara a w&#596;bob&#596;&#596; no afe afe ny&#603; w&#596;n a w&#596;b&#596; no p&#603; da; </content>
         </verse>
         <verse num="2">
-            <content>na sɛ asɔrefoɔ a wɔate wɔn ho prɛko nni bɔne ho ahonim bio a, anka wɔannyae afɔrebɔ anaa? </content>
+            <content>na s&#603; as&#596;refo&#596; a w&#596;ate w&#596;n ho pr&#603;ko nni b&#596;ne ho ahonim bio a, anka w&#596;annyae af&#596;reb&#596; anaa? </content>
         </verse>
         <verse num="3">
-            <content> Na mmom bɔne ho nkaeɛ wɔ mu daa afirinhyia, </content>
+            <content> Na mmom b&#596;ne ho nkae&#603; w&#596; mu daa afirinhyia, </content>
         </verse>
         <verse num="4">
-            <content>ɛfiri sɛ anantwinini ne mmirekyie mogya ntumi nyi bɔne mfiri hɔ.</content>
+            <content>&#603;firi s&#603; anantwinini ne mmirekyie mogya ntumi nyi b&#596;ne mfiri h&#596;.</content>
             <content> </content>
         </verse>
         <verse num="5">
             <content> </content>
-            <content> Enti ɔreba wiase no, na ɔkaa sɛ: Afɔdeɛ ne ayɛyɛdeɛ, woampɛ, ɔhonam na woasiesie de ama me. </content>
+            <content> Enti &#596;reba wiase no, na &#596;kaa s&#603;: Af&#596;de&#603; ne ay&#603;y&#603;de&#603;, woamp&#603;, &#596;honam na woasiesie de ama me. </content>
         </verse>
         <verse num="6">
-            <content>Ɔhyeɛ afɔdeɛ ne bɔne ho afɔdeɛ ansɔ w’ani.</content>
+            <content>&#390;hye&#603; af&#596;de&#603; ne b&#596;ne ho af&#596;de&#603; ans&#596; w’ani.</content>
+            <content> </content>
         </verse>
         <verse num="7">
             <block_quote>
-                <content>Ɛno na mekaa sɛ: Hwɛ, mereba,</content>
+                <content>&#400;no na mekaa s&#603;: Hw&#603;, mereba,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>wɔatwerɛ me ho asɛm wɔ nwoma mmobɔeɛ no mu sɛ, merebɛyɛ deɛ wo, Onyankopɔn, wopɛ.</content>
-                <content> </content>
+                <content>w&#596;atwer&#603; me ho as&#603;m w&#596; nwoma mmob&#596;e&#603; no mu s&#603;, mereb&#603;y&#603; de&#603; wo, Onyankop&#596;n, wop&#603;.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="8">
-            <content>Kane no, ɔkaa sɛ: Afɔdeɛ ne ayɛyɛdeɛ ne ɔhyeɛ afɔdeɛ ne bɔne ho afɔdeɛ, woampɛ, nanso ansɔ w’ani, (ɛne deɛ wɔnam mmara so de ma). </content>
+            <content>Kane no, &#596;kaa s&#603;: Af&#596;de&#603; ne ay&#603;y&#603;de&#603; ne &#596;hye&#603; af&#596;de&#603; ne b&#596;ne ho af&#596;de&#603;, woamp&#603;, nanso ans&#596; w’ani, (&#603;ne de&#603; w&#596;nam mmara so de ma). </content>
         </verse>
         <verse num="9">
-            <content>Ɛno na ɔkaa sɛ: Hwɛ, maba sɛ merebɛyɛ deɛ wopɛ; ɔyi deɛ ɛdi kan no hɔ, na ɔde deɛ ɛtɔ so mmienu no asi hɔ. </content>
+            <content>&#400;no na &#596;kaa s&#603;: Hw&#603;, maba s&#603; mereb&#603;y&#603; de&#603; wop&#603;; &#596;yi de&#603; &#603;di kan no h&#596;, na &#596;de de&#603; &#603;t&#596; so mmienu no asi h&#596;. </content>
         </verse>
         <verse num="10">
-            <content> Saa ɔpɛ no mu na wɔnam Yesu Kristo honam a ɔde bɛmaeɛ no soɔ ate yɛn ho prɛko.</content>
+            <content> Saa &#596;p&#603; no mu na w&#596;nam Yesu Kristo honam a &#596;de b&#603;mae&#603; no so&#596; ate y&#603;n ho pr&#603;ko.</content>
             <content> </content>
         </verse>
         <verse num="11">
             <content> </content>
-            <content> Na ɔsɔfoɔ biara gyina hɔ daa resom, na ɔtaa bɔ afɔdeɛ korɔ no ara a ɛntumi nyi bɔne mfiri hɔ da. </content>
+            <content> Na &#596;s&#596;fo&#596; biara gyina h&#596; daa resom, na &#596;taa b&#596; af&#596;de&#603; kor&#596; no ara a &#603;ntumi nyi b&#596;ne mfiri h&#596; da. </content>
         </verse>
         <verse num="12">
-            <content> Na ɔno deɛ, ɔnya bɔɔ daa bɔne ho afɔdeɛ baako no, ɔkɔtenaa Nyankopɔn nifa. </content>
+            <content> Na &#596;no de&#603;, &#596;nya b&#596;&#596; daa b&#596;ne ho af&#596;de&#603; baako no, &#596;k&#596;tenaa Nyankop&#596;n nifa. </content>
         </verse>
         <verse num="13">
-            <content> Na deɛ aka ne sɛ ɔtwɛn kɔduru sɛ wɔde n’atamfo bɛyɛ ne nan ase ntiasoɔ. </content>
+            <content> Na de&#603; aka ne s&#603; &#596;tw&#603;n k&#596;duru s&#603; w&#596;de n’atamfo b&#603;y&#603; ne nan ase ntiaso&#596;. </content>
         </verse>
         <verse num="14">
-            <content> Na ɔde afɔdeɛ korɔ no ara ama wɔn a wɔate wɔn ho no awie pɛyɛ.</content>
+            <content> Na &#596;de af&#596;de&#603; kor&#596; no ara ama w&#596;n a w&#596;ate w&#596;n ho no awie p&#603;y&#603;.</content>
             <content> </content>
         </verse>
         <verse num="15">
-            <content>Na Honhom Kronkron nso di yɛn adanseɛ. Ɛfiri sɛ akane no, ɔkaa sɛ:</content>
+            <content>Na Honhom Kronkron nso di y&#603;n adanse&#603;. &#400;firi s&#603; akane no, &#596;kaa s&#603;:</content>
+            <content> </content>
         </verse>
         <verse num="16">
             <block_quote>
@@ -1299,87 +1314,88 @@
                 <content> Yei ne apam a nna no akyi</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>me ne wɔn bɛpam no, Awurade na ɔseɛ:</content>
+                <content>me ne w&#596;n b&#603;pam no, Awurade na &#596;se&#603;:</content>
             </block_quote>
             <block_quote>
-                <content>Mede me mmara bɛhyɛ wɔn akoma mu,</content>
+                <content>Mede me mmara b&#603;hy&#603; w&#596;n akoma mu,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na matwerɛ wɔ wɔn adwene mu</content>
-                <content> </content>
+                <content>na matwer&#603; w&#596; w&#596;n adwene mu</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="17">
             <content> </content>
-            <content> Ɔka toa so sɛ,</content>
+            <content> &#390;ka toa so s&#603;,</content>
             <block_quote>
-                <content>na wɔn bɔne ne wɔn mmarato nso merenkae bio.</content>
-                <content> </content>
+                <content>na w&#596;n b&#596;ne ne w&#596;n mmarato nso merenkae bio.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="18">
-            <content>Na deɛ yeinom fakyɛ wɔ no, bɔne ho afɔrebɔ nni hɔ bio.</content>
+            <content>Na de&#603; yeinom faky&#603; w&#596; no, b&#596;ne ho af&#596;reb&#596; nni h&#596; bio.</content>
             <content> </content>
         </verse>
         <verse num="19">
             <content> </content>
-            <content> Enti, anuanom, sɛ yɛwɔ Yesu mogya mu nnamyɛ a yɛde bɛkɔ kronkronbea hɔ, </content>
+            <content> Enti, anuanom, s&#603; y&#603;w&#596; Yesu mogya mu nnamy&#603; a y&#603;de b&#603;k&#596; kronkronbea h&#596;, </content>
         </verse>
         <verse num="20">
-            <content> ɛsiane ɔkwan a wɔsiesie ama yɛn, ɔkwan foforɔ a ɛwɔ nkwa a ɛfa ntwamutam, ɛne sɛ ne honam mu, </content>
+            <content> &#603;siane &#596;kwan a w&#596;siesie ama y&#603;n, &#596;kwan fofor&#596; a &#603;w&#596; nkwa a &#603;fa ntwamutam, &#603;ne s&#603; ne honam mu, </content>
         </verse>
         <verse num="21">
-            <content>ne sɛ yɛwɔ Nyankopɔn fie so sɔfoɔ kɛseɛ nti, </content>
+            <content>ne s&#603; y&#603;w&#596; Nyankop&#596;n fie so s&#596;fo&#596; k&#603;se&#603; nti, </content>
         </verse>
         <verse num="22">
-            <content> momma yɛmfa nokorɛ akoma wɔ gyidie a akyinnyeɛ nni mu koraa mmɛn sɛ nnipa a wɔapete wɔn akoma ho afiri ahonim bɔne mu, na wɔde nsuo krɔgyenn adware wɔn nipadua. </content>
+            <content> momma y&#603;mfa nokor&#603; akoma w&#596; gyidie a akyinnye&#603; nni mu koraa mm&#603;n s&#603; nnipa a w&#596;apete w&#596;n akoma ho afiri ahonim b&#596;ne mu, na w&#596;de nsuo kr&#596;gyenn adware w&#596;n nipadua. </content>
         </verse>
         <verse num="23">
-            <content> Momma yɛnsɔ anidasoɔ asɛm a yɛgyina so ka no mu pintinn, ɛfiri sɛ ɔnokwafoɔ ne deɛ ɔhyɛɛ bɔ no, </content>
+            <content> Momma y&#603;ns&#596; anidaso&#596; as&#603;m a y&#603;gyina so ka no mu pintinn, &#603;firi s&#603; &#596;nokwafo&#596; ne de&#603; &#596;hy&#603;&#603; b&#596; no, </content>
         </verse>
         <verse num="24">
-            <content> na momma yɛnhwehwɛ yɛn ho ntwetwe yɛn ho yɛn ho nkɔ ɔdɔ ne nnwuma pa mu. </content>
+            <content> na momma y&#603;nhwehw&#603; y&#603;n ho ntwetwe y&#603;n ho y&#603;n ho nk&#596; &#596;d&#596; ne nnwuma pa mu. </content>
         </verse>
         <verse num="25">
-            <content> Na mommma yɛnnnyae yɛn ho yɛn ho nhyiamu, sɛdeɛ ebinom yɛ no, na mmom momma yɛntutu yɛn ho yɛn ho fo, berɛ dodoɔ a mohunu sɛ Ɛda no rebɛn.</content>
+            <content> Na mommma y&#603;nnnyae y&#603;n ho y&#603;n ho nhyiamu, s&#603;de&#603; ebinom y&#603; no, na mmom momma y&#603;ntutu y&#603;n ho y&#603;n ho fo, ber&#603; dodo&#596; a mohunu s&#603; &#400;da no reb&#603;n.</content>
             <content> </content>
         </verse>
         <verse num="26">
             <content> </content>
-            <content> Na sɛ yɛnya nya nokorɛ no mu nimdeɛ, na akyire yi yɛboapa kɔyɛ bɔne a, na bɔne ho afɔdeɛ biara nni hɔ bio, </content>
+            <content> Na s&#603; y&#603;nya nya nokor&#603; no mu nimde&#603;, na akyire yi y&#603;boapa k&#596;y&#603; b&#596;ne a, na b&#596;ne ho af&#596;de&#603; biara nni h&#596; bio, </content>
         </verse>
         <verse num="27">
-            <content>na mmom deɛ aka ne atemmuo akwanhwɛ a ɛyɛ hu bi, ne ogya a ɛrebɛhye atamfoɔ no pasaa. </content>
+            <content>na mmom de&#603; aka ne atemmuo akwanhw&#603; a &#603;y&#603; hu bi, ne ogya a &#603;reb&#603;hye atamfo&#596; no pasaa. </content>
         </verse>
         <verse num="28">
-            <content> Sɛ obi to Mose mmara a, ɔkwati mmɔborɔhunu gyina adansefoɔ baanu anaa baasa anomu asɛm so wu. </content>
+            <content> S&#603; obi to Mose mmara a, &#596;kwati mm&#596;bor&#596;hunu gyina adansefo&#596; baanu anaa baasa anomu as&#603;m so wu. </content>
         </verse>
         <verse num="29">
-            <content> Akatua a ɛnyɛ koraa bɛn na mususu sɛ ɛsɛ sɛ wɔde bɛtua deɛ watiatia Nyankopɔn Ba no soɔ, na wabu apam mogya a wɔde ate ne ho no ahuhudeɛ, na wasopa adom honhom no? </content>
+            <content> Akatua a &#603;ny&#603; koraa b&#603;n na mususu s&#603; &#603;s&#603; s&#603; w&#596;de b&#603;tua de&#603; watiatia Nyankop&#596;n Ba no so&#596;, na wabu apam mogya a w&#596;de ate ne ho no ahuhude&#603;, na wasopa adom honhom no? </content>
         </verse>
         <verse num="30">
-            <content> Na yɛnim deɛ ɔkaa sɛ: Me na aweretɔ wɔ me, me na mɛtua ka. Na bio: Awurade bɛbu ne man atɛn. </content>
+            <content> Na y&#603;nim de&#603; &#596;kaa s&#603;: Me na aweret&#596; w&#596; me, me na m&#603;tua ka. Na bio: Awurade b&#603;bu ne man at&#603;n. </content>
         </verse>
         <verse num="31">
-            <content>Onyankopɔn a ɔte aseɛ no nsa mu hweɛ yɛ hu.</content>
+            <content>Onyankop&#596;n a &#596;te ase&#603; no nsa mu hwe&#603; y&#603; hu.</content>
             <content> </content>
         </verse>
         <verse num="32">
             <content> </content>
-            <content> Na monkae sɛ kane nna a monyaa hann no, momiaa mo ani hunuu ɔko bebree mu amane. </content>
+            <content> Na monkae s&#603; kane nna a monyaa hann no, momiaa mo ani hunuu &#596;ko bebree mu amane. </content>
         </verse>
         <verse num="33">
-            <content> Ebi ne sɛ, monam ahohora ne ahohia so yɛɛ adwasodeɛ, ebi nso ne sɛ moyɛɛ wɔn a wɔyɛɛ wɔn saa no mfɛfoɔ. </content>
+            <content> Ebi ne s&#603;, monam ahohora ne ahohia so y&#603;&#603; adwasode&#603;, ebi nso ne s&#603; moy&#603;&#603; w&#596;n a w&#596;y&#603;&#603; w&#596;n saa no mf&#603;fo&#596;. </content>
         </verse>
         <verse num="34">
-            <content> Na momaa nneduafoɔ amaneɛ kaa mo, mode anigyeɛ nso penee mo nnoɔma fom sɛ monim sɛ mowɔ ahodeɛ a ɛyɛ kyɛne soɔ ɔsoro a ɛtena hɔ.</content>
+            <content> Na momaa nneduafo&#596; amane&#603; kaa mo, mode anigye&#603; nso penee mo nno&#596;ma fom s&#603; monim s&#603; mow&#596; ahode&#603; a &#603;y&#603; ky&#603;ne so&#596; &#596;soro a &#603;tena h&#596;.</content>
             <content> </content>
         </verse>
         <verse num="35">
-            <content>Enti monnto mo nnamyɛ a ɛwɔ akatua kɛseɛ no nntwene. </content>
+            <content>Enti monnto mo nnamy&#603; a &#603;w&#596; akatua k&#603;se&#603; no nntwene. </content>
         </verse>
         <verse num="36">
-            <content> Na boasetɔ hia mo, na sɛ mowie deɛ Onyankopɔn pɛ no yɛ a, mo nsa aka bɔhyɛ no.</content>
+            <content> Na boaset&#596; hia mo, na s&#603; mowie de&#603; Onyankop&#596;n p&#603; no y&#603; a, mo nsa aka b&#596;hy&#603; no.</content>
+            <content> </content>
         </verse>
         <verse num="37">
             <block_quote>
@@ -1387,21 +1403,22 @@
                 <content> Na aka kakraa bi</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na deɛ ɔbɛba no aba, na ɔrenkyɛ.</content>
+                <content>na de&#603; &#596;b&#603;ba no aba, na &#596;renky&#603;.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="38">
             <block_quote>
                 <content> </content>
-                <content> Na deɛ ɔtene no firi gyidie mu bɛnya nkwa,</content>
+                <content> Na de&#603; &#596;tene no firi gyidie mu b&#603;nya nkwa,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na sɛ ɔtwe ne ho a, me kra ani rensɔ no.</content>
-                <content> </content>
+                <content>na s&#603; &#596;twe ne ho a, me kra ani rens&#596; no.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="39">
-            <content>Na yɛn deɛ, yɛmfra wɔn a wɔtwe wɔn ho kɔ ɔsɛeɛ mu mu, na mmom yɛfra wɔn a wɔgye die na wɔkɔ nkwagyeɛ mu mu.</content>
+            <content>Na y&#603;n de&#603;, y&#603;mfra w&#596;n a w&#596;twe w&#596;n ho k&#596; &#596;s&#603;e&#603; mu mu, na mmom y&#603;fra w&#596;n a w&#596;gye die na w&#596;k&#596; nkwagye&#603; mu mu.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">1</content>
@@ -1511,150 +1528,150 @@
     <chapter num="11">
         <verse num="1">
             <content> </content>
-            <content> Na afei gyidie ne adeɛ a yɛn ani da soɔ ho ahotosoɔ ne nnoɔma a yɛnhunu ho adansegyeɛ. </content>
+            <content> Na afei gyidie ne ade&#603; a y&#603;n ani da so&#596; ho ahotoso&#596; ne nno&#596;ma a y&#603;nhunu ho adansegye&#603;. </content>
         </verse>
         <verse num="2">
-            <content>Na yei mu na tetefoɔ no nyaa adanseɛ pa. </content>
+            <content>Na yei mu na tetefo&#596; no nyaa adanse&#603; pa. </content>
         </verse>
         <verse num="3">
-            <content> Gyidie na yɛde te aseɛ sɛ wiase ahodoɔ wɔde Nyankopɔn asɛm na ɛsiesieeɛ, enti deɛ ani tua firi nnoɔma a ɛnna adie mu na ɛbaeɛ.</content>
+            <content> Gyidie na y&#603;de te ase&#603; s&#603; wiase ahodo&#596; w&#596;de Nyankop&#596;n as&#603;m na &#603;siesiee&#603;, enti de&#603; ani tua firi nno&#596;ma a &#603;nna adie mu na &#603;bae&#603;.</content>
             <content> </content>
         </verse>
         <verse num="4">
             <content> </content>
-            <content> Gyidie na Habel de bɔɔ afɔdeɛ a ɛso kyɛne Kain deɛ maa Onyankopɔn. Ɛno so na ɔnam nyaa adanseɛ sɛ ɔtene, ɛfiri sɛ Onyankopɔn dii n’ayɛyɛdeɛ ho adanseɛ, na ɛno so na sɛ ɔwui mpo a, ɔda so kasa.</content>
+            <content> Gyidie na Habel de b&#596;&#596; af&#596;de&#603; a &#603;so ky&#603;ne Kain de&#603; maa Onyankop&#596;n. &#400;no so na &#596;nam nyaa adanse&#603; s&#603; &#596;tene, &#603;firi s&#603; Onyankop&#596;n dii n’ay&#603;y&#603;de&#603; ho adanse&#603;, na &#603;no so na s&#603; &#596;wui mpo a, &#596;da so kasa.</content>
             <content> </content>
         </verse>
         <verse num="5">
             <content> </content>
-            <content> Gyidie nti na wɔfaa Henok kɔeɛ na wanhunu owuo; na wɔanhu no, ɛfiri sɛ Onyankopɔn bɛfaa no kɔeɛ ntira; na ansa na wɔrebɛfa no akorɔ no, ɔnyaa adanseɛ sɛ ɔsɔ Nyankopɔn ani. </content>
+            <content> Gyidie nti na w&#596;faa Henok k&#596;e&#603; na wanhunu owuo; na w&#596;anhu no, &#603;firi s&#603; Onyankop&#596;n b&#603;faa no k&#596;e&#603; ntira; na ansa na w&#596;reb&#603;fa no akor&#596; no, &#596;nyaa adanse&#603; s&#603; &#596;s&#596; Nyankop&#596;n ani. </content>
         </verse>
         <verse num="6">
-            <content>Na sɛ gyidie nni mu a, obi ntumi nsɔ ani. Na ɛsɛ deɛ ɔba Nyankopɔn nkyɛn no sɛ, ɔgye di sɛ ɔwɔ hɔ, na ɔyɛ wɔn a wɔhwehwɛ n’akyiri kwan no katuafoɔ.</content>
+            <content>Na s&#603; gyidie nni mu a, obi ntumi ns&#596; ani. Na &#603;s&#603; de&#603; &#596;ba Nyankop&#596;n nky&#603;n no s&#603;, &#596;gye di s&#603; &#596;w&#596; h&#596;, na &#596;y&#603; w&#596;n a w&#596;hwehw&#603; n’akyiri kwan no katuafo&#596;.</content>
             <content> </content>
         </verse>
         <verse num="7">
             <content> </content>
-            <content> Gyidie na deɛ wɔnnya nhunuu ɛho nsɛm baa Noa nkyɛn no, ɔde daa ne ho so siesiee adaka maa ne fie nkwagyeɛ, ɛno so na ɔnam buu wiase fɔ, na ɔyɛɛ gyidie ho tenenee ɔdedifoɔ.</content>
+            <content> Gyidie na de&#603; w&#596;nnya nhunuu &#603;ho ns&#603;m baa Noa nky&#603;n no, &#596;de daa ne ho so siesiee adaka maa ne fie nkwagye&#603;, &#603;no so na &#596;nam buu wiase f&#596;, na &#596;y&#603;&#603; gyidie ho tenenee &#596;dedifo&#596;.</content>
             <content> </content>
         </verse>
         <verse num="8">
             <content> </content>
-            <content> Gyidie na wɔfrɛɛ Abraham no, ɔde setie firi kɔɔ baabi a daakye ɔbɛnya hɔ sɛ agyapadeɛ, na ɔfirii adi a na ɔnnim deɛ ɔrekorɔ. </content>
+            <content> Gyidie na w&#596;fr&#603;&#603; Abraham no, &#596;de setie firi k&#596;&#596; baabi a daakye &#596;b&#603;nya h&#596; s&#603; agyapade&#603;, na &#596;firii adi a na &#596;nnim de&#603; &#596;rekor&#596;. </content>
         </verse>
         <verse num="9">
-            <content> Gyidie na ɔde kɔyɛɛ ɔhɔhoɔ bɔhyɛ asase no so, sɛ ananafoɔ deɛ soɔ, na ɔne bɔhyɛ korɔ no ara adedifoɔ Isak ne Yakob tenaa ntomadan mu. </content>
+            <content> Gyidie na &#596;de k&#596;y&#603;&#603; &#596;h&#596;ho&#596; b&#596;hy&#603; asase no so, s&#603; ananafo&#596; de&#603; so&#596;, na &#596;ne b&#596;hy&#603; kor&#596; no ara adedifo&#596; Isak ne Yakob tenaa ntomadan mu. </content>
         </verse>
         <verse num="10">
-            <content>Na ɔtwɛn kuro a ɛwɔ fapem a ne kyekyefoɔ ne yɛfoɔ ne Onyankopɔn.</content>
+            <content>Na &#596;tw&#603;n kuro a &#603;w&#596; fapem a ne kyekyefo&#596; ne y&#603;fo&#596; ne Onyankop&#596;n.</content>
             <content> </content>
         </verse>
         <verse num="11">
             <content> </content>
-            <content> Gyidie na Sara nso de nyaa ahoɔden nyinsɛneeɛ, ɛberɛ a watra ne nyini mu, ɛfiri sɛ ɔbuu deɛ ɔhyɛɛ bɔ no nokwafoɔ. </content>
+            <content> Gyidie na Sara nso de nyaa aho&#596;den nyins&#603;nee&#603;, &#603;ber&#603; a watra ne nyini mu, &#603;firi s&#603; &#596;buu de&#603; &#596;hy&#603;&#603; b&#596; no nokwafo&#596;. </content>
         </verse>
         <verse num="12">
-            <content> Enti nso na ɔbaako a ɔwuiɛ mpo woo nnipa a wɔdɔɔso sɛ ɔsoro nsoromma ne mpoano anwea a wɔntumi nkan.</content>
+            <content> Enti nso na &#596;baako a &#596;wui&#603; mpo woo nnipa a w&#596;d&#596;&#596;so s&#603; &#596;soro nsoromma ne mpoano anwea a w&#596;ntumi nkan.</content>
             <content> </content>
         </verse>
         <verse num="13">
             <content> </content>
-            <content> Gyidie so na yeinom nyinaa wuwuiɛ a wɔn nsa anka bɔhyɛ no, na mmom wɔhunuu akyirikyiri nko gye diiɛ, yɛɛ no atuu kaa sɛ, wɔyɛ ahɔhoɔ ne amamfrafoɔ wɔ asase so. </content>
+            <content> Gyidie so na yeinom nyinaa wuwui&#603; a w&#596;n nsa anka b&#596;hy&#603; no, na mmom w&#596;hunuu akyirikyiri nko gye dii&#603;, y&#603;&#603; no atuu kaa s&#603;, w&#596;y&#603; ah&#596;ho&#596; ne amamfrafo&#596; w&#596; asase so. </content>
         </verse>
         <verse num="14">
-            <content>Na wɔn a wɔka saa no, wɔde kyerɛ sɛ wɔhwehwɛ kuro bi a ɛbɛyɛ wɔn ara wɔn dea. </content>
+            <content>Na w&#596;n a w&#596;ka saa no, w&#596;de kyer&#603; s&#603; w&#596;hwehw&#603; kuro bi a &#603;b&#603;y&#603; w&#596;n ara w&#596;n dea. </content>
         </verse>
         <verse num="15">
-            <content>Na sɛ wɔn akoma da deɛ wɔfiri mu baeɛ no so a, anka wɔwɔ akwannya sɛ wɔbɛsane akɔ hɔ. </content>
+            <content>Na s&#603; w&#596;n akoma da de&#603; w&#596;firi mu bae&#603; no so a, anka w&#596;w&#596; akwannya s&#603; w&#596;b&#603;sane ak&#596; h&#596;. </content>
         </verse>
         <verse num="16">
-            <content> Na afei wɔrehwehwɛ kuro a ɛyɛ kyɛne soɔ a ɛne ɔsoro deɛ. Enti ɛnyɛ Onyankopɔn aniwu sɛ wɔbɛfrɛ no wɔn Nyankopɔn, ɛfiri sɛ wasiesie kuro bi ama wɔn.</content>
+            <content> Na afei w&#596;rehwehw&#603; kuro a &#603;y&#603; ky&#603;ne so&#596; a &#603;ne &#596;soro de&#603;. Enti &#603;ny&#603; Onyankop&#596;n aniwu s&#603; w&#596;b&#603;fr&#603; no w&#596;n Nyankop&#596;n, &#603;firi s&#603; wasiesie kuro bi ama w&#596;n.</content>
             <content> </content>
         </verse>
         <verse num="17">
             <content> </content>
-            <content> Gyidie nti na wɔsɔɔ Abraham hwɛeɛ no, ɔde Isak kɔbɔɔ afɔdeɛ, na deɛ ɔgyee bɔhyɛ no, de ne ba korɔ no kɔmae. </content>
+            <content> Gyidie nti na w&#596;s&#596;&#596; Abraham hw&#603;e&#603; no, &#596;de Isak k&#596;b&#596;&#596; af&#596;de&#603;, na de&#603; &#596;gyee b&#596;hy&#603; no, de ne ba kor&#596; no k&#596;mae. </content>
         </verse>
         <verse num="18">
-            <content> Ɔno na wɔka kyerɛɛ no sɛ: Isak mu na wɔbɛfrɛ w’asefoɔ. </content>
+            <content> &#390;no na w&#596;ka kyer&#603;&#603; no s&#603;: Isak mu na w&#596;b&#603;fr&#603; w’asefo&#596;. </content>
         </verse>
         <verse num="19">
-            <content> Ɔsusuu sɛ Onyankopɔn bɛtumi anyane no afiri awufoɔ mu mpo. Ɛhɔ nso na ɔnyaa no bio, akasabebuo mu.</content>
+            <content> &#390;susuu s&#603; Onyankop&#596;n b&#603;tumi anyane no afiri awufo&#596; mu mpo. &#400;h&#596; nso na &#596;nyaa no bio, akasabebuo mu.</content>
             <content> </content>
         </verse>
         <verse num="20">
             <content> </content>
-            <content> Gyidie na Isak de hyiraa Yakob ne Esau, nnoɔma a ɛbɛba ho. </content>
+            <content> Gyidie na Isak de hyiraa Yakob ne Esau, nno&#596;ma a &#603;b&#603;ba ho. </content>
         </verse>
         <verse num="21">
-            <content> Gyidie na Yakob rebɛwuo no, ɔde hyiraa Yosef mma baanu no, na ɔmiaa ne pomatire so sɔree. </content>
+            <content> Gyidie na Yakob reb&#603;wuo no, &#596;de hyiraa Yosef mma baanu no, na &#596;miaa ne pomatire so s&#596;ree. </content>
         </verse>
         <verse num="22">
-            <content> Gyidie na Yosef regyae ne honhom mu no, ɔde bɔɔ Israel mma fire a wɔrebɛfiri akɔ no din, na ɔhyɛɛ ne nnompe ho samanseɛ.</content>
+            <content> Gyidie na Yosef regyae ne honhom mu no, &#596;de b&#596;&#596; Israel mma fire a w&#596;reb&#603;firi ak&#596; no din, na &#596;hy&#603;&#603; ne nnompe ho samanse&#603;.</content>
             <content> </content>
         </verse>
         <verse num="23">
             <content> </content>
-            <content> Gyidie na wɔwoo Mose no, n’awofoɔ de koraa no abosome mmiɛnsa, ɛfiri sɛ wɔhunuu sɛ abɔfra no ho yɛ fɛ, na wɔansuro ɔhene mmara no.</content>
+            <content> Gyidie na w&#596;woo Mose no, n’awofo&#596; de koraa no abosome mmi&#603;nsa, &#603;firi s&#603; w&#596;hunuu s&#603; ab&#596;fra no ho y&#603; f&#603;, na w&#596;ansuro &#596;hene mmara no.</content>
             <content> </content>
         </verse>
         <verse num="24">
             <content> </content>
-            <content> Gyidie nti na Mose nyiniiɛ no, wampɛ sɛ wɔfrɛ no Farao babaa ba, </content>
+            <content> Gyidie nti na Mose nyinii&#603; no, wamp&#603; s&#603; w&#596;fr&#603; no Farao babaa ba, </content>
         </verse>
         <verse num="25">
-            <content>na ɔyii sɛ ɔne Nyankopɔn man bɛhunu amane mmom kyɛne sɛ ɔbɛte bɔne mu dɛ nna tiaa bie. </content>
+            <content>na &#596;yii s&#603; &#596;ne Nyankop&#596;n man b&#603;hunu amane mmom ky&#603;ne s&#603; &#596;b&#603;te b&#596;ne mu d&#603; nna tiaa bie. </content>
         </verse>
         <verse num="26">
-            <content> Ɔbuu Kristo ahohora sɛ ahonya kɛseɛ senee Misraim ahonyadeɛ, ɛfiri sɛ ɔhwɛɛ akatua no. </content>
+            <content> &#390;buu Kristo ahohora s&#603; ahonya k&#603;se&#603; senee Misraim ahonyade&#603;, &#603;firi s&#603; &#596;hw&#603;&#603; akatua no. </content>
         </verse>
         <verse num="27">
-            <content> Gyidie nti na ɔgyaa Misraim hɔ, na wansuro ɔhene abufuo, na mmom ɔmiaa n’ani tenaa mu sɛdeɛ ɔhunu deɛ wɔnhunuu no no. </content>
+            <content> Gyidie nti na &#596;gyaa Misraim h&#596;, na wansuro &#596;hene abufuo, na mmom &#596;miaa n’ani tenaa mu s&#603;de&#603; &#596;hunu de&#603; w&#596;nhunuu no no. </content>
         </verse>
         <verse num="28">
-            <content> Gyidie na ɔde dii Twam ne mogyapete no, na mmakan no sɛefoɔ no anka wɔn.</content>
+            <content> Gyidie na &#596;de dii Twam ne mogyapete no, na mmakan no s&#603;efo&#596; no anka w&#596;n.</content>
             <content> </content>
         </verse>
         <verse num="29">
             <content> </content>
-            <content> Gyidie na wɔde twaa Mmɛwa Po no sɛ fam a awoɔ. Ɛno na Misraimfoɔ resɔ ahwɛ no, ɛmenee wɔn. </content>
+            <content> Gyidie na w&#596;de twaa Mm&#603;wa Po no s&#603; fam a awo&#596;. &#400;no na Misraimfo&#596; res&#596; ahw&#603; no, &#603;menee w&#596;n. </content>
         </verse>
         <verse num="30">
-            <content> Gyidie nti na Yeriko afasuo a wɔtwaa ho hyiaa nnanson no dwiriiɛ.</content>
+            <content> Gyidie nti na Yeriko afasuo a w&#596;twaa ho hyiaa nnanson no dwirii&#603;.</content>
             <content> </content>
         </verse>
         <verse num="31">
             <content> </content>
-            <content> Gyidie nti na odwamamfoɔ Rahab a ɔgyee akwansrafoɔ no asomdwoeɛ soɔ no ansɛe amfra wɔn a wɔannye annie no mu.</content>
+            <content> Gyidie nti na odwamamfo&#596; Rahab a &#596;gyee akwansrafo&#596; no asomdwoe&#603; so&#596; no ans&#603;e amfra w&#596;n a w&#596;annye annie no mu.</content>
             <content> </content>
         </verse>
         <verse num="32">
             <content> </content>
-            <content> Na ɛdeɛn na menka bio? Na sɛ mereka Gideon, Barak, Samson, Yefta, Dawid ne Samuel ne adiyifoɔ no ho asɛm a, anka adagyeɛ bɛbɔ me. </content>
+            <content> Na &#603;de&#603;n na menka bio? Na s&#603; mereka Gideon, Barak, Samson, Yefta, Dawid ne Samuel ne adiyifo&#596; no ho as&#603;m a, anka adagye&#603; b&#603;b&#596; me. </content>
         </verse>
         <verse num="33">
-            <content> Wɔn na wɔnam gyidie so ko dii ahennie ahodoɔ so nkonim, dii asɛntenenee, nyinyaa bɔhyɛ, sii agyata ano, </content>
+            <content> W&#596;n na w&#596;nam gyidie so ko dii ahennie ahodo&#596; so nkonim, dii as&#603;ntenenee, nyinyaa b&#596;hy&#603;, sii agyata ano, </content>
         </verse>
         <verse num="34">
-            <content> dumm ogya tumi, dwanee nkrantɛ ano, nyaa ahoɔmmerɛ mu ahoɔden, yɛɛ ɔko mu ahoɔdenfoɔ, kaa ananafoɔ mpasua guiɛ. </content>
+            <content> dumm ogya tumi, dwanee nkrant&#603; ano, nyaa aho&#596;mmer&#603; mu aho&#596;den, y&#603;&#603; &#596;ko mu aho&#596;denfo&#596;, kaa ananafo&#596; mpasua gui&#603;. </content>
         </verse>
         <verse num="35">
-            <content> Mmaa nsa kaa wɔn awufoɔ a wɔasɔreɛ; na ebinom nso, wɔde wɔn goroo atɔprɛ, na wɔampɛ ɔgyeɛ, na wɔn nsa aka owusɔreɛ a ɛyɛ kyɛne soɔ. </content>
+            <content> Mmaa nsa kaa w&#596;n awufo&#596; a w&#596;as&#596;re&#603;; na ebinom nso, w&#596;de w&#596;n goroo at&#596;pr&#603;, na w&#596;amp&#603; &#596;gye&#603;, na w&#596;n nsa aka owus&#596;re&#603; a &#603;y&#603; ky&#603;ne so&#596;. </content>
         </verse>
         <verse num="36">
-            <content> Na afoforɔ hunuu animguasedeɛ ne ɔhweɛ, mpokyerɛ ne afiase nna nso. </content>
+            <content> Na afofor&#596; hunuu animguasede&#603; ne &#596;hwe&#603;, mpokyer&#603; ne afiase nna nso. </content>
         </verse>
         <verse num="37">
-            <content> Wɔsii wɔn aboɔ, de sradaa paee wɔn mu, sɔɔ wɔn hwɛɛ, de nkrantɛ kunkumm wɔn. Wɔkyinii nnwanten ne mmirekyie nwoma mu, ɛhiaa wɔn, wɔn ho dwanee wɔn, wɔhunuu amane. </content>
+            <content> W&#596;sii w&#596;n abo&#596;, de sradaa paee w&#596;n mu, s&#596;&#596; w&#596;n hw&#603;&#603;, de nkrant&#603; kunkumm w&#596;n. W&#596;kyinii nnwanten ne mmirekyie nwoma mu, &#603;hiaa w&#596;n, w&#596;n ho dwanee w&#596;n, w&#596;hunuu amane. </content>
         </verse>
         <verse num="38">
-            <content>Wɔn a wɔnsɛ wiase, wɔkyinkyinii ɛserɛ so, ne mmepɔ so, abodan ne asase so abɔn mu. </content>
+            <content>W&#596;n a w&#596;ns&#603; wiase, w&#596;kyinkyinii &#603;ser&#603; so, ne mmep&#596; so, abodan ne asase so ab&#596;n mu. </content>
         </verse>
         <verse num="39">
-            <content>Na yeinom nyinaa a wɔnam gyidie so nyaa adanseɛ pa no, wɔn nsa anka bɔhyɛ no, </content>
+            <content>Na yeinom nyinaa a w&#596;nam gyidie so nyaa adanse&#603; pa no, w&#596;n nsa anka b&#596;hy&#603; no, </content>
         </verse>
         <verse num="40">
-            <content>ɛfiri sɛ Onyankopɔn asiesie biribi a ɛyɛ kyɛne soɔ asie yɛn, na wɔankwati yɛn anyɛ wɔn pɛ.</content>
+            <content>&#603;firi s&#603; Onyankop&#596;n asiesie biribi a &#603;y&#603; ky&#603;ne so&#596; asie y&#603;n, na w&#596;ankwati y&#603;n any&#603; w&#596;n p&#603;.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">1</content>
@@ -1784,116 +1801,117 @@
     <chapter num="12">
         <verse num="1">
             <content> </content>
-            <content> Saa nti yɛn nso, ɛnam sɛ yɛwɔ adansefoɔ pii a ɛte sɛɛ a atwa yɛn ho ahyia yi, momma yɛnto adesoa biara ne bɔne a ɛnkyɛ na ɛtwa yɛn ho hyia si yɛn kwan no ngu, na yɛmfa boasetɔ ntu akansie a ɛda yɛn anim no mu mmirika, </content>
+            <content> Saa nti y&#603;n nso, &#603;nam s&#603; y&#603;w&#596; adansefo&#596; pii a &#603;te s&#603;&#603; a atwa y&#603;n ho ahyia yi, momma y&#603;nto adesoa biara ne b&#596;ne a &#603;nky&#603; na &#603;twa y&#603;n ho hyia si y&#603;n kwan no ngu, na y&#603;mfa boaset&#596; ntu akansie a &#603;da y&#603;n anim no mu mmirika, </content>
         </verse>
         <verse num="2">
-            <content>nhwɛ gyidie mu kannifoɔ ne ne wiefoɔ Yesu a ɔhwɛɛ anigyeɛ a ɛda n’anim too ne bo ase hunuu asɛnnua amaneɛ, na wammu aniwuo, na wakɔtena Nyankopɔn ahennwa nifa.</content>
+            <content>nhw&#603; gyidie mu kannifo&#596; ne ne wiefo&#596; Yesu a &#596;hw&#603;&#603; anigye&#603; a &#603;da n’anim too ne bo ase hunuu as&#603;nnua amane&#603;, na wammu aniwuo, na wak&#596;tena Nyankop&#596;n ahennwa nifa.</content>
             <content> </content>
         </verse>
         <verse num="3">
             <content> </content>
-            <content> Na monsusu deɛ ɔtoo ne bo ase, tiee ntuatuaano a nnebɔneyɛfoɔ de tuaa n’ano bebree no ho yie, na moammrɛ, na mo kra antɔ piti.</content>
+            <content> Na monsusu de&#603; &#596;too ne bo ase, tiee ntuatuaano a nneb&#596;ney&#603;fo&#596; de tuaa n’ano bebree no ho yie, na moammr&#603;, na mo kra ant&#596; piti.</content>
             <content> </content>
         </verse>
         <verse num="4">
-            <content>Mo ne bɔne redi ako yi, monnya nsii ano nkɔduruu mogyahwiegu mu, </content>
+            <content>Mo ne b&#596;ne redi ako yi, monnya nsii ano nk&#596;duruu mogyahwiegu mu, </content>
         </verse>
         <verse num="5">
-            <content> na mo werɛ afi afotuo a ɛkasa kyerɛ mo sɛ mma no, sɛ:</content>
+            <content> na mo wer&#603; afi afotuo a &#603;kasa kyer&#603; mo s&#603; mma no, s&#603;:</content>
             <block_quote>
                 <content>Me ba, mmu Awurade asotwe ade ketewa,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>nanso ɔyi wo atɛn a, mma w’aba mu mmu.</content>
+                <content>nanso &#596;yi wo at&#603;n a, mma w’aba mu mmu.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="6">
             <block_quote>
                 <content> </content>
-                <content> Na deɛ Awurade dɔ no no na ɔtwe n’aso,</content>
+                <content> Na de&#603; Awurade d&#596; no no na &#596;twe n’aso,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
-                <content>na ɔhwe ɔba biara a ɔgye no.</content>
-                <content> </content>
+                <content>na &#596;hwe &#596;ba biara a &#596;gye no.</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="7">
-            <content>Sɛ mohunu asotwe mu amane tena mu a, Onyankopɔn yɛ mo sɛ mma. Na ɔba bɛn na ɔwɔ hɔ a n’agya ntwe n’aso? </content>
+            <content>S&#603; mohunu asotwe mu amane tena mu a, Onyankop&#596;n y&#603; mo s&#603; mma. Na &#596;ba b&#603;n na &#596;w&#596; h&#596; a n’agya ntwe n’aso? </content>
         </verse>
         <verse num="8">
-            <content> Na sɛ monni asotwe a wɔn nyinaa anya bie no bi a, ɛnneɛ na moyɛ adwaman mma, na ɛnyɛ mma mapa. </content>
+            <content> Na s&#603; monni asotwe a w&#596;n nyinaa anya bie no bi a, &#603;nne&#603; na moy&#603; adwaman mma, na &#603;ny&#603; mma mapa. </content>
         </verse>
         <verse num="9">
-            <content> Bio, yɛwɔ yɛn honam fam agyanom sɛ asotwefoɔ na yɛfɛre wɔn. Adɛn nti na yɛmmfa yɛn ho nhyɛ ahonhom Agya no ase, nkyɛne saa pii mmom, na yɛatena ase? </content>
+            <content> Bio, y&#603;w&#596; y&#603;n honam fam agyanom s&#603; asotwefo&#596; na y&#603;f&#603;re w&#596;n. Ad&#603;n nti na y&#603;mmfa y&#603;n ho nhy&#603; ahonhom Agya no ase, nky&#603;ne saa pii mmom, na y&#603;atena ase? </content>
         </verse>
         <verse num="10">
-            <content>Na wɔn deɛ, wɔtwee yɛn aso nna kakraa bi, sɛdeɛ ɛyɛ wɔ wɔn ani soɔ no nko, na ɔno deɛ, yɛn yie nti na ɔtwe yɛn aso, na yɛanya n’ahoteɛ no bi. </content>
+            <content>Na w&#596;n de&#603;, w&#596;twee y&#603;n aso nna kakraa bi, s&#603;de&#603; &#603;y&#603; w&#596; w&#596;n ani so&#596; no nko, na &#596;no de&#603;, y&#603;n yie nti na &#596;twe y&#603;n aso, na y&#603;anya n’ahote&#603; no bi. </content>
         </verse>
         <verse num="11">
-            <content> Na asotwe biara, seesei deɛ, ɛnyɛ yɛn sɛ anigyedeɛ, na mmom awerɛhodeɛ, nanso akyire yi no, ɛso asomdwoeɛ aba a ɛyɛ tenenee ma wɔn a wɔnam so asɔ wɔn ahwɛ no.</content>
+            <content> Na asotwe biara, seesei de&#603;, &#603;ny&#603; y&#603;n s&#603; anigyede&#603;, na mmom awer&#603;hode&#603;, nanso akyire yi no, &#603;so asomdwoe&#603; aba a &#603;y&#603; tenenee ma w&#596;n a w&#596;nam so as&#596; w&#596;n ahw&#603; no.</content>
             <content> </content>
         </verse>
         <verse num="12">
             <content> </content>
-            <content> Enti momma nsa a emu agoɔ ne nkotodwe a ahodwo no mu nyɛ den bio. </content>
+            <content> Enti momma nsa a emu ago&#596; ne nkotodwe a ahodwo no mu ny&#603; den bio. </content>
         </verse>
         <verse num="13">
-            <content> Na monsiesie ɔkwan tenenee mma mo anan, na deɛ atɔ apakye no antere ho, na mmom wɔasa no yadeɛ.</content>
+            <content> Na monsiesie &#596;kwan tenenee mma mo anan, na de&#603; at&#596; apakye no antere ho, na mmom w&#596;asa no yade&#603;.</content>
             <content> </content>
         </verse>
         <verse num="14">
             <content> </content>
-            <content> Monni mo ne nnipa nyinaa ntam asomdwoeɛ ne ahoteɛ a obi kwati a, ɔrenhunu Awurade no akyiri. </content>
+            <content> Monni mo ne nnipa nyinaa ntam asomdwoe&#603; ne ahote&#603; a obi kwati a, &#596;renhunu Awurade no akyiri. </content>
         </verse>
         <verse num="15">
-            <content> Na monhwɛ yie na obi amfiri Nyankopɔn adom no ho anka akyi, na wannyɛ te sɛ nhini nwononwono bi amfiri anyɛ ɔhaw biara, na wamfa nkekaeɛ ammɛkeka nnipa bebree, </content>
+            <content> Na monhw&#603; yie na obi amfiri Nyankop&#596;n adom no ho anka akyi, na wanny&#603; te s&#603; nhini nwononwono bi amfiri any&#603; &#596;haw biara, na wamfa nkekae&#603; amm&#603;keka nnipa bebree, </content>
         </verse>
         <verse num="16">
-            <content> na obi anyɛ odwamamfoɔ anaa ohuhuni sɛ Esau a ɔtɔnn n’abakan gyee aduane korɔ. </content>
+            <content> na obi any&#603; odwamamfo&#596; anaa ohuhuni s&#603; Esau a &#596;t&#596;nn n’abakan gyee aduane kor&#596;. </content>
         </verse>
         <verse num="17">
-            <content> Na monim sɛ, akyire yi nso a ɔpɛɛ sɛ ɔnya nhyira no, wɔpaa no, na ɔde nisuo hwehwɛɛ adwensakyera kwan deɛ, nanso wanhunu.</content>
+            <content> Na monim s&#603;, akyire yi nso a &#596;p&#603;&#603; s&#603; &#596;nya nhyira no, w&#596;paa no, na &#596;de nisuo hwehw&#603;&#603; adwensakyera kwan de&#603;, nanso wanhunu.</content>
             <content> </content>
         </verse>
         <verse num="18">
             <content> </content>
-            <content> Na moamma bepɔ a wɔde nsa ka no ho, ne ogya a ɛrehyeɛ ne mununkum kusuu ne esum ne mframa a ɛbɔ huu </content>
+            <content> Na moamma bep&#596; a w&#596;de nsa ka no ho, ne ogya a &#603;rehye&#603; ne mununkum kusuu ne esum ne mframa a &#603;b&#596; huu </content>
         </verse>
         <verse num="19">
-            <content> ne totorobɛnto gyegyeɛ ne nsɛm nne a wɔn a wɔteeɛ no srɛɛ sɛ wɔmmfa asɛm bi nnka wɔn ho bio no ho. </content>
+            <content> ne totorob&#603;nto gyegye&#603; ne ns&#603;m nne a w&#596;n a w&#596;tee&#603; no sr&#603;&#603; s&#603; w&#596;mmfa as&#603;m bi nnka w&#596;n ho bio no ho. </content>
         </verse>
         <verse num="20">
-            <content> Na wɔantumi deɛ wɔhyɛeɛ a ɛse: Na sɛ aboa bi mpo ho kɔka bepɔ no a, wɔnsi no aboɔ. </content>
+            <content> Na w&#596;antumi de&#603; w&#596;hy&#603;e&#603; a &#603;se: Na s&#603; aboa bi mpo ho k&#596;ka bep&#596; no a, w&#596;nsi no abo&#596;. </content>
         </verse>
         <verse num="21">
-            <content>Na deɛ ɛpueeɛ no yɛ hu pii nti, Mose kaa sɛ: Mesuro, na me ho popo! </content>
+            <content>Na de&#603; &#603;puee&#603; no y&#603; hu pii nti, Mose kaa s&#603;: Mesuro, na me ho popo! </content>
         </verse>
         <verse num="22">
-            <content> Na mmom moaba Sion bepɔ ne Onyankopɔn teasefoɔ kuro, ɔsoro Yerusalem ho, ne abɔfoɔ mpempem nhyiamu, </content>
+            <content> Na mmom moaba Sion bep&#596; ne Onyankop&#596;n teasefo&#596; kuro, &#596;soro Yerusalem ho, ne ab&#596;fo&#596; mpempem nhyiamu, </content>
         </verse>
         <verse num="23">
-            <content> ne mmakan a wɔatwerɛ wɔn din wɔ ɔsoro no badwa, ne Onyankopɔn, nnipa nyinaa temmufoɔ no, ne ateneneefoɔ a wɔayɛ pɛ ahonhom, </content>
+            <content> ne mmakan a w&#596;atwer&#603; w&#596;n din w&#596; &#596;soro no badwa, ne Onyankop&#596;n, nnipa nyinaa temmufo&#596; no, ne ateneneefo&#596; a w&#596;ay&#603; p&#603; ahonhom, </content>
         </verse>
         <verse num="24">
-            <content> ne Apam Foforɔ ntamgyinafoɔ Yesu, ne mogya a wɔpete a ɛkasa yie sene Habel deɛ ho.</content>
+            <content> ne Apam Fofor&#596; ntamgyinafo&#596; Yesu, ne mogya a w&#596;pete a &#603;kasa yie sene Habel de&#603; ho.</content>
             <content> </content>
         </verse>
         <verse num="25">
             <content> </content>
-            <content> Monhwɛ na moampo deɛ ɔkasa no. Na sɛ wɔn a wɔpoo deɛ ɔkasaa asase soɔ no amfiri ne nsa a, ɛbɛyɛ dɛn na yɛn mmom a sɛ yɛdane firi deɛ ɔfiri soro kasa no ho a, yɛbɛdwane? </content>
+            <content> Monhw&#603; na moampo de&#603; &#596;kasa no. Na s&#603; w&#596;n a w&#596;poo de&#603; &#596;kasaa asase so&#596; no amfiri ne nsa a, &#603;b&#603;y&#603; d&#603;n na y&#603;n mmom a s&#603; y&#603;dane firi de&#603; &#596;firi soro kasa no ho a, y&#603;b&#603;dwane? </content>
         </verse>
         <verse num="26">
-            <content> Ɔno na ɛberɛ no mu ne nne wosoo asase, na afei wahyɛ bɔ sɛ: Mɛwoso prɛko bio, ɛnyɛ asase nko, na ɔsoro nso. </content>
+            <content> &#390;no na &#603;ber&#603; no mu ne nne wosoo asase, na afei wahy&#603; b&#596; s&#603;: M&#603;woso pr&#603;ko bio, &#603;ny&#603; asase nko, na &#596;soro nso. </content>
         </verse>
         <verse num="27">
-            <content>Na asɛm “prɛko bio” no kyerɛ nnoɔma a wɔwosoɔ no nsakyeraeɛ, sɛ ɛyɛ adeɛ a wɔayɛ, na nnoɔma a ɛnwosoɔ no atena hɔ.</content>
+            <content>Na as&#603;m “pr&#603;ko bio” no kyer&#603; nno&#596;ma a w&#596;woso&#596; no nsakyerae&#603;, s&#603; &#603;y&#603; ade&#603; a w&#596;ay&#603;, na nno&#596;ma a &#603;nwoso&#596; no atena h&#596;.</content>
             <content> </content>
         </verse>
         <verse num="28">
-            <content>Enti ɛnam sɛ yɛanya ahennie a ɛnwosoɔ yi, momma yɛmfa aseda mmra mfa so nsom Onyankopɔn sɛdeɛ ɛsɔ n’ani wɔ fɛreɛ ne ahodasoɔ mu. </content>
+            <content>Enti &#603;nam s&#603; y&#603;anya ahennie a &#603;nwoso&#596; yi, momma y&#603;mfa aseda mmra mfa so nsom Onyankop&#596;n s&#603;de&#603; &#603;s&#596; n’ani w&#596; f&#603;re&#603; ne ahodaso&#596; mu. </content>
         </verse>
         <verse num="29">
-            <content> Ɛfiri sɛ yɛn Nyankopɔn yɛ ogya a ɛhyeɛ.</content>
+            <content> &#400;firi s&#603; y&#603;n Nyankop&#596;n y&#603; ogya a &#603;hye&#603;.</content>
         </verse>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">1</content>
@@ -1987,98 +2005,98 @@
     <chapter num="13">
         <verse num="1">
             <content> </content>
-            <content> Onuadɔ ntena hɔ daa. </content>
+            <content> Onuad&#596; ntena h&#596; daa. </content>
         </verse>
         <verse num="2">
-            <content> Ahɔhoyɛ nso, mommma mo ani mmpa so; ɛfiri sɛ yei so na ebinom nam yɛɛ abɔfoɔ hɔhoɔ a wɔn ani nni soɔ. </content>
+            <content> Ah&#596;hoy&#603; nso, mommma mo ani mmpa so; &#603;firi s&#603; yei so na ebinom nam y&#603;&#603; ab&#596;fo&#596; h&#596;ho&#596; a w&#596;n ani nni so&#596;. </content>
         </verse>
         <verse num="3">
-            <content> Monkae nneduafoɔ, sɛdeɛ mo ne wɔn na ɛda afiase, ne wɔn a wɔhunu amane biara, sɛ mo ara nso moda so wɔ honam mu yi. </content>
+            <content> Monkae nneduafo&#596;, s&#603;de&#603; mo ne w&#596;n na &#603;da afiase, ne w&#596;n a w&#596;hunu amane biara, s&#603; mo ara nso moda so w&#596; honam mu yi. </content>
         </verse>
         <verse num="4">
-            <content> Wɔnni awadeɛ ni, ade nyinaa mu, na wɔnngu awadeɛ mpa ho fi; ɛfiri sɛ nnwamamfoɔ ne awaresɛefoɔ deɛ, Onyankopɔn bɛbu wɔn atɛn.</content>
+            <content> W&#596;nni awade&#603; ni, ade nyinaa mu, na w&#596;nngu awade&#603; mpa ho fi; &#603;firi s&#603; nnwamamfo&#596; ne awares&#603;efo&#596; de&#603;, Onyankop&#596;n b&#603;bu w&#596;n at&#603;n.</content>
             <content> </content>
         </verse>
         <verse num="5">
             <content> </content>
-            <content> Mommma sikanibereɛ mmma mo abrabɔ mu, na mompene deɛ mowɔ so; ɛfiri sɛ ɔno ara aka sɛ: Merennya wo, nanso merempa wo da. </content>
+            <content> Mommma sikanibere&#603; mmma mo abrab&#596; mu, na mompene de&#603; mow&#596; so; &#603;firi s&#603; &#596;no ara aka s&#603;: Merennya wo, nanso merempa wo da. </content>
         </verse>
         <verse num="6">
-            <content> Na ɛma yɛde nnamyɛ ka sɛ:</content>
+            <content> Na &#603;ma y&#603;de nnamy&#603; ka s&#603;:</content>
             <block_quote>
-                <content>Awurade ne me boafoɔ,</content>
+                <content>Awurade ne me boafo&#596;,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
                 <content>merensuro.</content>
             </block_quote>
             <block_quote>
-                <content>Onipa bɛtumi ayɛ me deɛn?</content>
-                <content> </content>
+                <content>Onipa b&#603;tumi ay&#603; me de&#603;n?</content>
             </block_quote>
+            <content> </content>
         </verse>
         <verse num="7">
             <content> </content>
-            <content> Monkae mo mpanimfoɔ a wɔaka Nyankopɔn asɛm akyerɛ mo. Monhwɛ wɔn abrabɔ awieeɛ nsua wɔn gyidie. </content>
+            <content> Monkae mo mpanimfo&#596; a w&#596;aka Nyankop&#596;n as&#603;m akyer&#603; mo. Monhw&#603; w&#596;n abrab&#596; awiee&#603; nsua w&#596;n gyidie. </content>
         </verse>
         <verse num="8">
-            <content> Yesu Kristo te sɛdeɛ ɔteɛ nnora, ɛnnɛ, ɛne daapem nyinaa. </content>
+            <content> Yesu Kristo te s&#603;de&#603; &#596;te&#603; nnora, &#603;nn&#603;, &#603;ne daapem nyinaa. </content>
         </verse>
         <verse num="9">
-            <content> Mommma nkyerɛkyerɛ ahodoɔ ne nsɛm foforɔ mmfa mo nnkyinkyini, na ɛyɛ sɛ wɔde adom hyɛ akoma den, na ɛnyɛ nnuane a wɔn a wɔdiiɛ no nni ho mfasoɔ biara. </content>
+            <content> Mommma nkyer&#603;kyer&#603; ahodo&#596; ne ns&#603;m fofor&#596; mmfa mo nnkyinkyini, na &#603;y&#603; s&#603; w&#596;de adom hy&#603; akoma den, na &#603;ny&#603; nnuane a w&#596;n a w&#596;dii&#603; no nni ho mfaso&#596; biara. </content>
         </verse>
         <verse num="10">
-            <content> Yɛwɔ afɔrebukyia a wɔn a wɔsom ntomadan no nni ho kwan sɛ wɔdi ho biribie. </content>
+            <content> Y&#603;w&#596; af&#596;rebukyia a w&#596;n a w&#596;som ntomadan no nni ho kwan s&#603; w&#596;di ho biribie. </content>
         </verse>
         <verse num="11">
-            <content> Na mmoa a bɔne nti ɔsɔfo panin de wɔn mogya kɔ kronkron mu no, wɔhye wɔn afunu nsra no akyiri. </content>
+            <content> Na mmoa a b&#596;ne nti &#596;s&#596;fo panin de w&#596;n mogya k&#596; kronkron mu no, w&#596;hye w&#596;n afunu nsra no akyiri. </content>
         </verse>
         <verse num="12">
-            <content> Na Yesu nso, deɛ ɛbɛyɛ na ɔde ɔno ara ne mogya ate ɔman no ho nti, ɔhunuu amane, kuro no pono akyi. </content>
+            <content> Na Yesu nso, de&#603; &#603;b&#603;y&#603; na &#596;de &#596;no ara ne mogya ate &#596;man no ho nti, &#596;hunuu amane, kuro no pono akyi. </content>
         </verse>
         <verse num="13">
-            <content> Ɛno nti momma yɛmfiri adi nkɔ ne nkyɛn nsraban no akyiri nkɔsoa n’ahohora. </content>
+            <content> &#400;no nti momma y&#603;mfiri adi nk&#596; ne nky&#603;n nsraban no akyiri nk&#596;soa n’ahohora. </content>
         </verse>
         <verse num="14">
-            <content> Na yɛnni kuro a ɛwɔ hɔ daa wɔ ha, na mmom deɛ ɛbɛba no akyiri kwan na yɛhwehwɛ.</content>
+            <content> Na y&#603;nni kuro a &#603;w&#596; h&#596; daa w&#596; ha, na mmom de&#603; &#603;b&#603;ba no akyiri kwan na y&#603;hwehw&#603;.</content>
             <content> </content>
         </verse>
         <verse num="15">
             <content> </content>
-            <content> Enti momma yɛmfa ne so mmɔ Nyankopɔn ayeyie afɔdeɛ daa, ɛne anofafa a ɛbɔ no abodin no. </content>
+            <content> Enti momma y&#603;mfa ne so mm&#596; Nyankop&#596;n ayeyie af&#596;de&#603; daa, &#603;ne anofafa a &#603;b&#596; no abodin no. </content>
         </verse>
         <verse num="16">
-            <content> Na yieyɛ ne adekyɛ na mommma mo ani mmpa soɔ, ɛfiri sɛ saa afɔrebɔ no sɔ Nyankopɔn ani.</content>
+            <content> Na yiey&#603; ne adeky&#603; na mommma mo ani mmpa so&#596;, &#603;firi s&#603; saa af&#596;reb&#596; no s&#596; Nyankop&#596;n ani.</content>
             <content> </content>
         </verse>
         <verse num="17">
             <content> </content>
-            <content> Montie mo mpanimfoɔ na mommrɛ mo ho ase mma wɔn, ɛfiri sɛ wɔn na wɔwɛn mo kra sɛ wɔn a wɔbɛbu ho akonta, na wɔde anigyeɛ ayɛ, na ɛnyɛ ahomeguo; ɛfiri sɛ yei nyɛ mfasoɔ biara mma mo.</content>
+            <content> Montie mo mpanimfo&#596; na mommr&#603; mo ho ase mma w&#596;n, &#603;firi s&#603; w&#596;n na w&#596;w&#603;n mo kra s&#603; w&#596;n a w&#596;b&#603;bu ho akonta, na w&#596;de anigye&#603; ay&#603;, na &#603;ny&#603; ahomeguo; &#603;firi s&#603; yei ny&#603; mfaso&#596; biara mma mo.</content>
             <content> </content>
         </verse>
         <verse num="18">
             <content> </content>
-            <content> Mommɔ mpaeɛ mma yɛn; ɛfiri sɛ yɛnim pefee sɛ yɛwɔ ahonim pa, pɛ sɛ yɛbɔ yɛn bra yie nnoɔma nyinaa mu. </content>
+            <content> Momm&#596; mpae&#603; mma y&#603;n; &#603;firi s&#603; y&#603;nim pefee s&#603; y&#603;w&#596; ahonim pa, p&#603; s&#603; y&#603;b&#596; y&#603;n bra yie nno&#596;ma nyinaa mu. </content>
         </verse>
         <verse num="19">
-            <content>Na mesrɛ mo ara yie sɛ monyɛ yei, na wɔagyae me ama mo ntɛm pa.</content>
+            <content>Na mesr&#603; mo ara yie s&#603; mony&#603; yei, na w&#596;agyae me ama mo nt&#603;m pa.</content>
             <content> </content>
         </verse>
         <verse num="20">
             <content> </content>
-            <content> Na asomdwoeɛ Nyankopɔn a ɔnam daa apam no mogya soɔ, ayi nnwan no hwɛfoɔ kɛseɛ a ɔne yɛn Awurade Yesu afiri awufoɔ mu no, </content>
+            <content> Na asomdwoe&#603; Nyankop&#596;n a &#596;nam daa apam no mogya so&#596;, ayi nnwan no hw&#603;fo&#596; k&#603;se&#603; a &#596;ne y&#603;n Awurade Yesu afiri awufo&#596; mu no, </content>
         </verse>
         <verse num="21">
-            <content>ɔnsiesie mo adepa biara mu mma monyɛ deɛ ɔpɛ, na ɔmfa Yesu Kristo so nyɛ mo mu ade a ɛsɔ n’ani. Ɔno na animuonyam nka no daa daa. Amen.</content>
+            <content>&#596;nsiesie mo adepa biara mu mma mony&#603; de&#603; &#596;p&#603;, na &#596;mfa Yesu Kristo so ny&#603; mo mu ade a &#603;s&#596; n’ani. &#390;no na animuonyam nka no daa daa. Amen.</content>
             <content> </content>
         </verse>
         <verse num="22">
-            <content>Anuanom, mesrɛ mo sɛ, montie afotusɛm yi; ɛfiri sɛ matwerɛ no nsɛm tiaa bi mamane mo. </content>
+            <content>Anuanom, mesr&#603; mo s&#603;, montie afotus&#603;m yi; &#603;firi s&#603; matwer&#603; no ns&#603;m tiaa bi mamane mo. </content>
         </verse>
         <verse num="23">
-            <content>Monhunu sɛ wɔagyaa yɛn nua Timoteo; na sɛ ɔba ntɛm pa a, me ne no bɛba abɛhu mo. </content>
+            <content>Monhunu s&#603; w&#596;agyaa y&#603;n nua Timoteo; na s&#603; &#596;ba nt&#603;m pa a, me ne no b&#603;ba ab&#603;hu mo. </content>
         </verse>
         <verse num="24">
-            <content>Monkyea mo mpanimfoɔ nyinaa ne ahotefoɔ nyinaa. Wɔn a wɔfiri Italia kyea mo. </content>
+            <content>Monkyea mo mpanimfo&#596; nyinaa ne ahotefo&#596; nyinaa. W&#596;n a w&#596;firi Italia kyea mo. </content>
         </verse>
         <verse num="25">
             <content>Adom nka mo nyinaa. [Amen.] </content>
@@ -2163,7 +2181,7 @@
         <note num="1">
             <content kind="REF_VERSE_START">25</content>
             <content> </content>
-            <content>Tete atwerɛfoɔ a wɔgye wɔn to mu binom mfa yei nka ho.</content>
+            <content>Tete atwer&#603;fo&#596; a w&#596;gye w&#596;n to mu binom mfa yei nka ho.</content>
         </note>
     </chapter>
 </book>

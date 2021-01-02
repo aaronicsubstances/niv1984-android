@@ -46,13 +46,14 @@ class XmlGenerator {
         31, 12, 8, 66, 52, 5, 48, 12, 14, 3, 9, 1, 4, 7, 3, 3, 3, 2, 14, 4,
         28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13,
         5, 5, 3, 5, 1, 1, 1, 22]
-
+    static GLOBAL_CLS = new HashSet()
 	public static void main(String[] args) {
 		final scriptDir = new File(XmlGenerator.class.protectionDomain.codeSource.location.toURI()).parentFile
+        try {
         scriptDir.list().findAll {
             new File(scriptDir, it).isDirectory()
         }.sort(false).eachWithIndex { n, i ->
-            //if (i == 62-1) return;
+            //if (i != 62-1) return;
             def destFile = new File(scriptDir, String.format("%02d.xml", i+1))
             println "Generating ${destFile}..."
             def root = new nu.xom.Element(TAG_BOOK)
@@ -63,16 +64,25 @@ class XmlGenerator {
             }
             def doc = new nu.xom.Document(root)
             serializeXml(destFile, doc)
-            //System.exit(0)
+        }}
+        finally {
+            println("FOUND ${GLOBAL_CLS.size()} div classes: $GLOBAL_CLS")
         }
 	}
     
     static void serializeXml(destFile, doc) {
-        destFile.withOutputStream {
+        def bout = new ByteArrayOutputStream()
+        bout.withStream {
             def serializer = new nu.xom.Serializer(it, "UTF-8")
             serializer.setIndent(4)
             serializer.write(doc)
         }
+        def str = new String(bout.toByteArray(), "utf-8")
+        def charMap = [ 603, 596, 400, 390]
+        for (c in charMap) {
+            str = str.replace(String.valueOf((char)c), "&#$c;")
+        }
+        destFile.bytes = str.getBytes('utf-8')
     }
     
     static processChapter(bookDir, cn) {
@@ -87,7 +97,7 @@ class XmlGenerator {
         def chapNum = chapterElem.classNames().find { it != "chapter" }
         assert chapNum && chapNum.startsWith("ch")
         chapNum = Integer.parseInt(chapNum.substring(2))
-        def chapDescs = chapterElem.select(".d")
+        def chapDescs = chapterElem.select(">div.d")
         assert chapDescs.size() < 2
         if (chapDescs) {
             processChapDesc(root, chapDescs.get(0))
@@ -98,10 +108,16 @@ class XmlGenerator {
         def noteNumber = 0
         def verseDivs = chapterElem.select(">div")
         for (verseDiv in verseDivs) {
+            GLOBAL_CLS.addAll(verseDiv.classNames())
+            final verses = verseDiv.select(".verse")
+            
+            // identify block quote content
+            // NB: assumption is that block quote content elements don't traverse verseDiv boundaries.
+            // However non block quote content elements can and do traverse verseDiv boundaries.
             def quoteKind = null
             def quoteEl = null
             def quoteVerseNum = null
-            // identify fragments of verses in quotations
+            
             if (verseDiv.classNames().find { it.startsWith("q") }) {
                 assert verseDiv.classNames().size() == 1
                 def divCls = verseDiv.classNames()[0]
@@ -117,7 +133,29 @@ class XmlGenerator {
                     quoteKind = BlockQuoteKind.RIGHT.toString()
                 }
             }
-            def verses = verseDiv.select(".verse")
+            else if (verseDiv.classNames().find { it == "m" || it == "p" }) {
+                // restore dest element for non block quote content
+                if (quoteEl) {
+                    outVerseEl = root.getChild(root.childCount - 1)
+                }
+                // force end of any existing quote.
+                finalizeProcessingOfQuoteEl(root, quoteEl, true)
+                quoteEl = null
+                quoteVerseNum = null
+                quoteKind = null
+            }
+            else {
+                // irrelevant div found. just jump to closing of quote element.
+                assert !verses.size()
+                
+                // so far other classes seem to be used as follows:
+                // .label used for verse number
+                // .s1 used for first chapter heading
+                // .s used for subsequent inside chapter headings. e.g. Hezekiel 12:17
+                // .b used for additional line break. e.g. Genesys 49
+                // .r used for cross reference inside chapter heading - like Genesys 5.
+                // .mr/.ms used for indicating book part ranges in Psalms. - e.g. Nnwom 1
+            }
             for (v in verses) {
                 def vNum = v.classNames().find { it != "verse" }
                 assert vNum && vNum.startsWith("v")
@@ -137,6 +175,8 @@ class XmlGenerator {
                     if (bookDir.name.contains("DAG") && chapNum == 3 && vNum > 23 && vNum < 91) {
                         continue
                     }
+                    // trim around verse before creating another.
+                    //removeEmptySurroundingContent(outVerseEl)
                     outVerseEl = new nu.xom.Element(TAG_VERSE)
                     root.appendChild(outVerseEl)
                     
@@ -173,13 +213,7 @@ class XmlGenerator {
                 }
                 
                 if (quoteKind && quoteVerseNum != vNum) {
-                    if (quoteEl) {
-                        // only add if it has non-ws value.
-                        // add to previous.
-                        if (quoteEl.value.trim()) {
-                            root.getChild(root.childCount - 2).appendChild(quoteEl)
-                        }
-                    }
+                    finalizeProcessingOfQuoteEl(root, quoteEl, false)
                     quoteEl = new nu.xom.Element(TAG_BLOCK_QUOTE)
                     if (quoteKind && quoteKind != BlockQuoteKind.LEFT) {
                         quoteEl.addAttribute(new nu.xom.Attribute(ATTR_KIND, quoteKind))
@@ -231,7 +265,7 @@ class XmlGenerator {
                             }
                             else {
                                 assert elemClasses.contains("f")
-                                processNoteF(cn, outVerseEl, c, currVnum, ++noteNumber, footNoteList)
+                                processNoteF(bookDir, cn, outVerseEl, c, currVnum, ++noteNumber, footNoteList)
                             }
                         }
                         else if (elemClasses.contains("wj")) {
@@ -246,7 +280,7 @@ class XmlGenerator {
                                 }
                                 else {
                                     assertArrayEquals(grandChildHtmlClasses, ['note', 'f'])
-                                    processNoteF(cn, wjEl, grandChild, currVnum, ++noteNumber, footNoteList)
+                                    processNoteF(bookDir, cn, wjEl, grandChild, currVnum, ++noteNumber, footNoteList)
                                 }
                             }
                         }
@@ -256,12 +290,16 @@ class XmlGenerator {
                     }
                 }
             }
+            // restore dest element for non block quote content
             if (quoteEl) {
-                // only add if it has non-ws value.
-                if (quoteEl.value.trim()) {
-                    root.getChild(root.childCount - 1).appendChild(quoteEl)
-                }
+                outVerseEl = root.getChild(root.childCount - 1)
             }
+            
+            // trim ws off last verse
+            //removeEmptySurroundingContent(outVerseEl)
+            
+            // close processing of any unfinished quote.
+            finalizeProcessingOfQuoteEl(root, quoteEl, true)
         }
         footNoteList.each {
             // rewrite
@@ -311,13 +349,44 @@ class XmlGenerator {
         return root
     }
     
+    static finalizeProcessingOfQuoteEl(root, quoteEl, isLastRootChildStillForQuoteEl) {
+        if (!quoteEl) return
+        
+        // NB: add quote element to last but 1 child if verse number change
+        // has resulted in verse of quote no longer to be the last child.
+        final childOffset = isLastRootChildStillForQuoteEl ? 1 : 2
+        final verseEl = root.getChild(root.childCount - childOffset)
+        
+        //removeEmptySurroundingContent(quoteEl)
+        // only add if it has non-ws value.
+        if (quoteEl && quoteEl.value.trim()) {
+            verseEl.appendChild(quoteEl)
+        }
+        else {
+            // replace with empty content
+            verseEl.appendChild(createOutContentEl(' '))
+        }
+    }
+    
+    /*static removeEmptySurroundingContent(el) {
+        if (!el) return        
+        
+        // remove leading and trailing empty content.
+        while (el.childCount && !el.getChild(0).value.trim()) {
+            el.removeChild(0)
+        }
+        while (el.childCount && !el.getChild(el.childCount - 1).value.trim()) {
+            el.removeChild(el.childCount - 1)
+        }
+    }*/
+    
     static processContent(root, c, type=null) {        
         assert c.classNames().size() == 1
         assert !c.children()
         root.appendChild(createOutContentEl(c, type))
     }
     
-    static processNoteF(cn, root, n, vNum, noteNumber, footNoteList) {
+    static processNoteF(bookDir, cn, root, n, vNum, noteNumber, footNoteList) {
         // locate first fr, and only fetch after that.
         boolean skip = true
         def noteEl = null
@@ -329,8 +398,17 @@ class XmlGenerator {
                     noteEl = new nu.xom.Element(TAG_NOTE)
                     noteEl.addAttribute(new nu.xom.Attribute(ATTR_NUMBER, "$noteNumber"))
                     def refTxt = getText(c)
-                    def refTxtMatcher = refTxt =~ "^$cn\\.($vNum(?:\\D+\\d+)*)\\D+\$"
-                    assert refTxtMatcher.find()
+                    def pat = "^$cn\\.($vNum(?:\\D+\\d+)*)\\D+\$"
+                    def refTxtMatcher = refTxt =~ pat
+                    if (!refTxtMatcher.find()) {
+                        if (vNum == 8 && cn == 5 && bookDir.name.startsWith("62-")) {
+                            // manually handle footnote in 1 John 5:7-8
+                            // in fact ignore from Twer#e Kronkron entirely since
+                            // it is not present there
+                            continue
+                        }
+                        assert false, "$refTxt doesn't match: $pat"
+                    }
                     noteEl.appendChild(createOutContentEl("${refTxtMatcher.group(1)}", NoteContentKind.REF_VERSE_START))
                     def sep = refTxt.substring(refTxtMatcher.end())
                     if (!sep) {
@@ -399,3 +477,4 @@ class XmlGenerator {
         return el
     }
 }
+//\S</content>\s*\r\n\s*<content>[^ :]

@@ -34,6 +34,12 @@ class AssetsCreator {
 		
 		def sourceDir
 		switch (bibleVersionCode) {
+			case "asa_tk2012":
+				sourceDir = "Twer#e Kronkron 2012"
+				break
+			case "asa_na2020":
+				sourceDir = "Nkwa As#em 2020"
+				break
 			case "kjv1769":
 				sourceDir = "KJV1769 Bible"
 				break

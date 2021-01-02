@@ -5,30 +5,36 @@ import groovy.io.FileType
 import org.apache.http.client.methods.*
 import org.apache.http.entity.*
 import org.apache.http.impl.client.*
+import org.apache.http.util.EntityUtils
 
 class BiblicaScraper {
 
     public static void main(String[] args) {
         def destDir = new File(args[0])
-        def urlCode
+        def urlCodes
         switch (destDir.name) {
-            case "Asante Twi Bible 2012":
-                urlCode = 1461
+            case "Twer#e Kronkron 2012":
+                urlCodes = [1461, "ASWDC"]
+                break
+            case "Nkwa As#em 2020":
+                urlCodes = [2094, "ASNA"]
                 break
             default:
                 assert false, destDir.name
         }
-        def chapterUrlPrefix = "https://www.bible.com/bible/${urlCode}/"
+        def chapterUrlPrefix = "https://www.bible.com/bible/${urlCodes[0]}/"
         
         def client = HttpClientBuilder.create().disableRedirectHandling().disableCookieManagement().build()
         
         def totalChapterCount = 0
         destDir.eachFile(FileType.DIRECTORIES) { bookDir ->
-            def book = bookDir.name.substring(bookDir.name.indexOf("-") + 1)
+            def bookSepIdx = bookDir.name.indexOf("-")
+            def bookNum = Integer.parseInt(bookDir.name.substring(0, bookSepIdx))
+            def book = bookDir.name.substring(bookSepIdx + 1)
             def chapter = 1
             while (true) {
                 def chapterFile = new File(bookDir, String.format("%03d.html", chapter))
-                def chapterUrl = "${chapterUrlPrefix}${book}.${chapter}.ASWDC"
+                def chapterUrl = "${chapterUrlPrefix}${book}.${chapter}.${urlCodes[1]}"
                 
                 println("Downloading ${bookDir.name}, ${chapterFile.name} from $chapterUrl...")     
                 def res = makeHttpRequest(client, chapterUrl)
@@ -41,11 +47,16 @@ class BiblicaScraper {
                 }
                 
                 chapter++
+                
+                // skip 2 last books of Daniel in Roman Catholic
+                if (bookNum == 27 && chapter == 13) {
+                    break
+                }
             }
             println("Done with ${bookDir.name}.")
         }
         println()
-        assert totalChapterCount == 1189 + 2 // from book of Daniel in Roman Catholic
+        assert totalChapterCount == 1189
     }
     
     static makeHttpRequest(client, url) {

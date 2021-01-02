@@ -1,0 +1,940 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book>
+    <chapter num="1">
+        <verse num="1">
+            <content> </content>
+            <content> AWURADE asɛm a ɛbaa Sefania a ɔyɛ Kusi ba Gedalia ba Amaria ba Hesekia ba nkyɛn, Yudahene Yosia a ɔyɛ Amon ba berɛ soɔ nie.</content>
+        </verse>
+        <verse num="2">
+            <block_quote>
+                <content>Pra na mɛpra ade nyinaa</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>afiri asase ani akorɔ, AWURADE asɛm nie.</content>
+            </block_quote>
+        </verse>
+        <verse num="3">
+            <block_quote>
+                <content> </content>
+                <content> Mɛpra onipa ne aboa akɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mɛpra ewiem nnomaa</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne ɛpo mu mpataa akɔ,</content>
+            </block_quote>
+            <block_quote>
+                <content>ne suntidua ɛne abɔnefoɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na matwitwa nnipa</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>afiri asase ani agu, AWURADE asɛm nie.</content>
+            </block_quote>
+        </verse>
+        <verse num="4">
+            <block_quote>
+                <content> </content>
+                <content> Na mɛtene me nsa, Yuda so</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne Yerusalemfoɔ nyinaa so,</content>
+            </block_quote>
+            <block_quote>
+                <content>na mɛtwa Baal nkaeɛ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne abosomfoɔ asɔfoɔ ne AWURADE asɔfoɔ a wɔapo no no din afiri ha yi agu,</content>
+            </block_quote>
+        </verse>
+        <verse num="5">
+            <block_quote>
+                <content> </content>
+                <content> ne wɔn a wɔsɔre ewiem nnoɔma</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔ adan atifi,</content>
+            </block_quote>
+            <block_quote>
+                <content>ne asɔrefoɔ a wɔkeka AWURADE ntam</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔkeka Milkom ntam</content>
+            </block_quote>
+        </verse>
+        <verse num="6">
+            <block_quote>
+                <content>ne wɔn a wɔsane firi AWURADE akyi</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne wɔn a wɔnhwehwɛɛ AWURADE na wɔmmisaa n’akyiri kwan no.</content>
+            </block_quote>
+        </verse>
+        <verse num="7">
+            <block_quote>
+                <content> </content>
+                <content> Monyɛ komm AWURADE Nyankopɔn anim,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na AWURADE da no abɛn,</content>
+            </block_quote>
+            <block_quote>
+                <content>na AWURADE asiesie okum afɔdeɛ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wadwira wɔn a wafrɛ wɔn no.</content>
+            </block_quote>
+        </verse>
+        <verse num="8">
+            <block_quote>
+                <content>Na AWURADE kum afɔdeɛ da no,</content>
+            </block_quote>
+            <block_quote>
+                <content>mɛtwe mmapɔmma ne ahenemma no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne wɔn a wɔhyɛ ananafoɔ ntadeɛ nyinaa aso.</content>
+            </block_quote>
+        </verse>
+        <verse num="9">
+            <block_quote>
+                <content>Na ɛda no, mɛtwe obiara a ɔhuri tra aponnwa aso,</content>
+            </block_quote>
+            <block_quote>
+                <content>wɔn a wɔde ɔhyɛ ne nsisie hyehyɛ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔn wuranom afie amaama.</content>
+            </block_quote>
+        </verse>
+        <verse num="10">
+            <block_quote>
+                <content>Na ɛda no, AWURADE asɛm nie,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>esu nne bɛfiri Mpataa Pono no ano,</content>
+            </block_quote>
+            <block_quote>
+                <content>na adwotwa afiri Ɔfa a ɛtɔ so Mmienu no mu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na ɔsɛeɛ kɛseɛ afiri nkokoɔ no so aba.</content>
+            </block_quote>
+        </verse>
+        <verse num="11">
+            <block_quote>
+                <content>Montwa adwo, mo a mote Mortar no,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɛfiri sɛ wɔasɛe adwadifoɔ asafo no nyinaa,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔatwitwa wɔn a wɔasoa dwetɛ nyinaa.</content>
+            </block_quote>
+        </verse>
+        <verse num="12">
+            <block_quote>
+                <content>Na ɛberɛ no mu mede nkanea bɛhwehwɛ Yerusalem mu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na matwe nnipa a</content>
+            </block_quote>
+            <block_quote>
+                <content>wɔagya wɔn ho ama bɔne no aso,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔn a wɔse no wɔn akoma mu sɛ:</content>
+            </block_quote>
+            <block_quote>
+                <content>AWURADE renyɛ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ho hwee.</content>
+            </block_quote>
+        </verse>
+        <verse num="13">
+            <block_quote>
+                <content> </content>
+                <content> Na wɔn ahonyadeɛ bɛdane fomfa adeɛ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔn afie adeda mpan.</content>
+            </block_quote>
+            <block_quote>
+                <content>Wɔbɛsisi adan,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔrentena mu,</content>
+            </block_quote>
+            <block_quote>
+                <content>na wɔbɛyɛ bobe nturo,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔrennom mu nsa.</content>
+            </block_quote>
+        </verse>
+        <verse num="14">
+            <block_quote>
+                <content> </content>
+                <content> AWURADE da kɛseɛ no abɛn,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>abɛn na ɛrepɛ ntɛm sɛ;</content>
+            </block_quote>
+            <block_quote>
+                <content>AWURADE da no nne yɛ nwono sɛ!</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɔdɔmmarima team denden wɔ hɔ.</content>
+            </block_quote>
+        </verse>
+        <verse num="15">
+            <block_quote>
+                <content> </content>
+                <content> Ɛda no yɛ anibereɛ da,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ahohiahia ne ahokyere da,</content>
+            </block_quote>
+            <block_quote>
+                <content>ɔsɛeɛ ne amamfoyɛ da,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>esum ne kusuuyɛ da,</content>
+            </block_quote>
+            <block_quote>
+                <content>mununkum ne kusukuukuu da,</content>
+            </block_quote>
+        </verse>
+        <verse num="16">
+            <block_quote kind="LEFT_INDENTED">
+                <content>totorobɛnto ne osebɔ da a ɛreba</content>
+            </block_quote>
+            <block_quote>
+                <content>afasuo mu nkuro</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne aban atentene ano sorɔnsorɔn soɔ.</content>
+            </block_quote>
+        </verse>
+        <verse num="17">
+            <block_quote>
+                <content>Na mɛhiahia nnipa ho</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔanante sɛ anifirafoɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɛfiri sɛ AWURADE na wɔayɛ no bɔne;</content>
+            </block_quote>
+            <block_quote>
+                <content>na wɔn mogya bɛgu sɛ mfuturo,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na mato wɔn honam agu sɛ sɛbeɛ.</content>
+            </block_quote>
+        </verse>
+        <verse num="18">
+            <block_quote>
+                <content>Wɔn sika ne wɔn dwetɛ nso</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>rentumi nnye wɔn</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>AWURADE abufuo da no,</content>
+            </block_quote>
+            <block_quote>
+                <content>na ne ninkuntwe gya no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mu na asase no nyinaa bɛhyeɛ,</content>
+            </block_quote>
+            <block_quote>
+                <content>na ɔdwerɛ a ɛba mpofirim ara</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na ɔde bɛba asase sofoɔ nyinaa soɔ.</content>
+            </block_quote>
+        </verse>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">1</content>
+            <content>: Yer 1.2 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">3</content>
+            <content>: Mat 13.41 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">4</content>
+            <content>: 2 Ah 23.5; Hos 10.5 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">5</content>
+            <content>: Yer 19.13; 49.1 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">7</content>
+            <content>: Hab 2.20 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">13</content>
+            <content>: Amos 5.11; Deut 28.39 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">14</content>
+            <content>: Yoel 1.15 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">15</content>
+            <content>: Yer 13.7 </content>
+        </note>
+    </chapter>
+    <chapter num="2">
+        <verse num="1">
+            <block_quote>
+                <content>Monka mo ho mmoa ano, aane, monka mmoa ano,</content>
+            </block_quote>
+            <block_quote>
+                <content>ɔman a mo ani nwu asɛm!</content>
+            </block_quote>
+        </verse>
+        <verse num="2">
+            <block_quote>
+                <content>Mommma ɔsɛeɛ da no mmma ansa,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>da no resene aba sɛ ntɛtɛ,</content>
+            </block_quote>
+            <block_quote>
+                <content>mommma AWURADE abufuhyeɛ no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mmma mo so ansa,</content>
+            </block_quote>
+            <block_quote>
+                <content>aane, mommma AWURADE abufuo da no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mmma mo so ansa.</content>
+            </block_quote>
+        </verse>
+        <verse num="3">
+            <block_quote>
+                <content>Monhwehwɛ AWURADE, asase sofoɔ a mobrɛ mo ho aseɛ nyinaa</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>a moyɛ n’atemmudeɛ!</content>
+            </block_quote>
+            <block_quote>
+                <content>Monhwehwɛ tenenee, monhwehwɛ ahobrɛaseɛ.</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Ebia wɔbɛkora mo,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>AWURADE abufuo da no.</content>
+            </block_quote>
+        </verse>
+        <verse num="4">
+            <block_quote>
+                <content>Na Gasa bɛyɛ kuro a wɔagya,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na Askelon ayɛ akurofo;</content>
+            </block_quote>
+            <block_quote>
+                <content>Asdod deɛ, wɔbɛtu wɔn awia ketee,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na Ekron ase nso, wɔbɛtutu.</content>
+            </block_quote>
+        </verse>
+        <verse num="5">
+            <block_quote>
+                <content> </content>
+                <content> Monnue, mpoanofoɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Keretifoɔ man!</content>
+            </block_quote>
+            <block_quote>
+                <content>AWURADE asɛm da mo so,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Kanaan a ɛyɛ Filistifoɔ asase.</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Mɛma wɔasɛe wo, na anka wo mufoɔ biara.</content>
+            </block_quote>
+        </verse>
+        <verse num="6">
+            <block_quote>
+                <content>Na mpoano asase bɛdane adidibea</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>a nnwanhwɛfoɔ funi mu</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na nnwammuo sisi hɔ,</content>
+            </block_quote>
+        </verse>
+        <verse num="7">
+            <block_quote>
+                <content> </content>
+                <content> na ayɛ Yuda fie nkaeɛ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>asase a wɔyɛne so mmoa,</content>
+            </block_quote>
+            <block_quote>
+                <content>Askelon afie mu</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔbɛbutubutu anwummerɛ,</content>
+            </block_quote>
+            <block_quote>
+                <content>na AWURADE wɔn Nyankopɔn bɛhwɛ wɔn,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na ɔde wɔn nnommumfa asane aba.</content>
+            </block_quote>
+        </verse>
+        <verse num="8">
+            <block_quote>
+                <content> </content>
+                <content> Mate Moab nsopa</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne Amon mma yea a wɔde asopa me man na wɔama wɔn ho so atia wɔn hyeɛ no.</content>
+            </block_quote>
+        </verse>
+        <verse num="9">
+            <block_quote>
+                <content> </content>
+                <content> Enti, sɛ mete aseɛ yi, asafo AWURADE,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Israel Nyankopɔn asɛm nie,</content>
+            </block_quote>
+            <block_quote>
+                <content>ampa, Moab bɛdane sɛ Sodom,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na Amon mma ayɛ sɛ Gomora,</content>
+            </block_quote>
+            <block_quote>
+                <content>nsansono sisibea ne nkyene amena</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ne daapem amamfo;</content>
+            </block_quote>
+            <block_quote>
+                <content>me man nkaeɛ bɛfom wɔn afa,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na me nkurɔfoɔ a wɔbɛka soɔ no adi wɔn so.</content>
+            </block_quote>
+        </verse>
+        <verse num="10">
+            <block_quote>
+                <content>Wɔn ahantan nti na yei bɛyɛ wɔn,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɛfiri sɛ wɔasopa na wɔama wɔn ho so</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>atia asafo AWURADE man no.</content>
+            </block_quote>
+        </verse>
+        <verse num="11">
+            <block_quote>
+                <content>AWURADE ho bɛyɛ wɔn hu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɛfiri sɛ ɔbɛma asase so anyame nyinaa ayera;</content>
+            </block_quote>
+            <block_quote>
+                <content>na aman no mu biara bɛfiri ne tenabea aba,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>nsuano aman nyinaa,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔabɛsɔre no.</content>
+            </block_quote>
+        </verse>
+        <verse num="12">
+            <block_quote>
+                <content> </content>
+                <content> Mo, Etiopiafoɔ, nso,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>m’afena ano na mobɛtotɔ.</content>
+            </block_quote>
+        </verse>
+        <verse num="13">
+            <block_quote>
+                <content> </content>
+                <content> Na ɔbɛtene ne nsa akyerɛ atifi fam,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wasɛe Asiria,</content>
+            </block_quote>
+            <block_quote>
+                <content>na wadane Ninewe amamfo,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na awo pɛsɛɛ sɛ anwea pradada so,</content>
+            </block_quote>
+        </verse>
+        <verse num="14">
+            <block_quote>
+                <content> </content>
+                <content> na mmoakuo abutubutu mu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mmoadoma nyinaa;</content>
+            </block_quote>
+            <block_quote>
+                <content>nantwinoma ne apɛsɛ nso</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>bɛtena n’adum no so;</content>
+            </block_quote>
+            <block_quote>
+                <content>wɔte nnomaa su mpomma mu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ewira dodoɔ gugu aponnwa ase,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wama ne ntweneduro no ho ada hɔ.</content>
+            </block_quote>
+        </verse>
+        <verse num="15">
+            <block_quote>
+                <content> </content>
+                <content> Yei ne kuro a ɛdi ahurisie</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>a ɛte hɔ anibiannasoɔ soɔ,</content>
+            </block_quote>
+            <block_quote>
+                <content>na ɛse no n’akoma mu sɛ:</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Me ara na obi nni m’akyiri bio.</content>
+            </block_quote>
+            <block_quote>
+                <content>Hwɛ sɛdeɛ wasi adane amamfo,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mmoa abutuiɛ!</content>
+            </block_quote>
+            <block_quote>
+                <content>Obiara a ɔnam ho twam no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>bɛbɔ hwerɛma na wawoso ne tiri.</content>
+            </block_quote>
+        </verse>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">5</content>
+            <content>: 1 Sa 30.14; Yer </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">7</content>
+            <content>: Sef 3.20 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">8</content>
+            <content>: Yer 48; 49.1 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">9</content>
+            <content>: Gye 19.24 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">12</content>
+            <content>: Hes 30.9 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">13</content>
+            <content>: Nah 1.1 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">14</content>
+            <content>: Yes 13.21; 34.11 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">15</content>
+            <content>: Yes 47.8 </content>
+        </note>
+    </chapter>
+    <chapter num="3">
+        <verse num="1">
+            <block_quote>
+                <content>Due, atuateɛ kuro a wɔagu ho fi,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>nhyɛsofoɔ kuro.</content>
+            </block_quote>
+        </verse>
+        <verse num="2">
+            <block_quote>
+                <content>Wantie AWURADE asɛm,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wannye nkyerɛkyerɛ,</content>
+            </block_quote>
+            <block_quote>
+                <content>wamfa ne ho anto AWURADE so,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wammɛn ne Nyankopɔn.</content>
+            </block_quote>
+        </verse>
+        <verse num="3">
+            <block_quote>
+                <content> </content>
+                <content> Emu mmapɔmma</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>yɛ agyata a wɔbobom,</content>
+            </block_quote>
+            <block_quote>
+                <content>n’atemmufoɔ nso yɛ anwummerɛ mpataku,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔnnya biribi nkɔsi anɔpa.</content>
+            </block_quote>
+        </verse>
+        <verse num="4">
+            <block_quote>
+                <content> </content>
+                <content> N’adiyifoɔ yɛ ahohoahoafoɔ, nkɔnkɔnsafoɔ ara nko,</content>
+            </block_quote>
+            <block_quote>
+                <content>n’asɔfoɔ gu kronkronbea ho fi,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔdi mmara ho asɛmmɔne.</content>
+            </block_quote>
+        </verse>
+        <verse num="5">
+            <block_quote>
+                <content>AWURADE a ɔwɔ ne mu no yɛ ɔteneneeni,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɔrenyɛ abusudeɛ;</content>
+            </block_quote>
+            <block_quote>
+                <content>daa n’atemmuo da adi pefee,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɔnnyae da,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>nanso okontonkyini deɛ, ɔnnim aniwuo.</content>
+            </block_quote>
+        </verse>
+        <verse num="6">
+            <block_quote>
+                <content>Matwitwa amanaman agu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔn abantenten atifi adanedane afo,</content>
+            </block_quote>
+            <block_quote>
+                <content>mama wɔn mmorɔno so adeda mpan</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>a obiara ntwam soɔ,</content>
+            </block_quote>
+            <block_quote>
+                <content>wɔasɛesɛe wɔn nkuro</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>a onipa nni mu, na obiara nte mu.</content>
+            </block_quote>
+        </verse>
+        <verse num="7">
+            <block_quote>
+                <content>Mekaa sɛ: Suro me ara,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>gye nkyerɛkyerɛ,</content>
+            </block_quote>
+            <block_quote>
+                <content>na wɔrentwa wo tenabea ntwene,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>deɛ mahyɛ woɔ no nyinaa ho;</content>
+            </block_quote>
+            <block_quote>
+                <content>nanso wotuaa nhema</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>sɛesɛee wo nneyɛeɛ nyinaa.</content>
+            </block_quote>
+        </verse>
+        <verse num="8">
+            <block_quote>
+                <content> </content>
+                <content> Enti monhwɛ me kwan, AWURADE asɛm nie,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>nkɔsi da a mɛsɔre mabɛgye asadeɛ.</content>
+            </block_quote>
+            <block_quote>
+                <content>Na ɛyɛ m’atemmudeɛ sɛ meboa amanaman ano</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na mehyia ahennie aman,</content>
+            </block_quote>
+            <block_quote>
+                <content>na mahwie m’abohuro,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>m’abufuhyeɛ nyinaa, agu wɔn so;</content>
+            </block_quote>
+            <block_quote>
+                <content>na me ninkuntwe gya no mu</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>asase no nyinaa bɛhye.</content>
+            </block_quote>
+        </verse>
+        <verse num="9">
+            <block_quote>
+                <content>Na ɛno ansa na mɛdane amanaman ano</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ayɛ no kronkron,</content>
+            </block_quote>
+            <block_quote>
+                <content>sɛ wɔn nyinaa mmɔ AWURADE din no,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔnyɛ anokorɔ nsom no.</content>
+            </block_quote>
+        </verse>
+        <verse num="10">
+            <block_quote>
+                <content> </content>
+                <content> Etiopia nsubɔntene agya</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>no ho na me nkurɔfoɔ a wɔbɔɔ wɔn peteeɛ no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>bɛfiri de m’aduane ayɛyɛdeɛ abrɛ me.</content>
+            </block_quote>
+        </verse>
+        <verse num="11">
+            <block_quote>
+                <content>Ɛda no mɛyi w’animguaseɛ nneyɛeɛ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>a wode too me mmara no</content>
+            </block_quote>
+            <block_quote>
+                <content>nyinaa afiri hɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na mɛyi wɔn a wɔdi ahantan mu ahurisie no afiri wo mu,</content>
+            </block_quote>
+            <block_quote>
+                <content>na worenkɔ so nkyerɛ wo ho,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>me bepɔ kronkron no so.</content>
+            </block_quote>
+        </verse>
+        <verse num="12">
+            <block_quote>
+                <content> </content>
+                <content> Na mɛma amanehunufoɔ ne mmɔborɔfoɔ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>aka wo mu,</content>
+            </block_quote>
+            <block_quote>
+                <content>na wɔde wɔn ho ato AWURADE din no so.</content>
+            </block_quote>
+        </verse>
+        <verse num="13">
+            <block_quote kind="LEFT_INDENTED">
+                <content>Israel nkaeɛ no</content>
+            </block_quote>
+            <block_quote>
+                <content>renyɛ akontonkyideɛ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na wɔrenka atorosɛm,</content>
+            </block_quote>
+            <block_quote>
+                <content>na wɔrenhunu</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>nsisie tɛkyerɛma wɔn anomu,</content>
+            </block_quote>
+            <block_quote>
+                <content>na wɔn deɛ, wɔbɛyɛne wɔn ho na wɔabutubutu hɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na obiara renyi wɔn hu.</content>
+            </block_quote>
+        </verse>
+        <verse num="14">
+            <block_quote>
+                <content> </content>
+                <content> To ahurisie dwom, Sion babaa;</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>bɔ ose, Israel,</content>
+            </block_quote>
+            <block_quote>
+                <content>ma w’ani nnye, na fa akoma nyinaa di ahurisie,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>Yerusalem babaa.</content>
+            </block_quote>
+        </verse>
+        <verse num="15">
+            <block_quote>
+                <content>AWURADE ayi w’atemmudeɛ no kɔ,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wato w’atamfo agu;</content>
+            </block_quote>
+            <block_quote>
+                <content>AWURADE, Israel hene no wɔ wo mu,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>worenhunu amane bio.</content>
+            </block_quote>
+        </verse>
+        <verse num="16">
+            <block_quote>
+                <content>Ɛda no wɔbɛka akyerɛ Yerusalem sɛ:</content>
+            </block_quote>
+            <block_quote>
+                <content>Nsuro, Sion,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mma wo nsam nnhodwo.</content>
+            </block_quote>
+        </verse>
+        <verse num="17">
+            <block_quote>
+                <content> </content>
+                <content> AWURADE wo Nyankopɔn wɔ wo mu no</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>yɛ ɛdɔnkunini, ɔgyefoɔ;</content>
+            </block_quote>
+            <block_quote>
+                <content>ɔde anigyeɛ bɛdi wo ho ahurisie,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɔde dɔ bɛyɛ wo foforɔ,</content>
+            </block_quote>
+            <block_quote>
+                <content>ɔde nnwom bɛbɔ se wɔ wo ho.</content>
+            </block_quote>
+        </verse>
+        <verse num="18">
+            <block_quote kind="LEFT_INDENTED">
+                <content>Meboaboa mo ano na mo asane adi afahyɛ</content>
+            </block_quote>
+            <block_quote>
+                <content>a modi ho abooboo no bio,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na moansoa ɛho ahohora.</content>
+            </block_quote>
+        </verse>
+        <verse num="19">
+            <block_quote>
+                <content> </content>
+                <content> Hwɛ, me ne w’ahafoɔ nyinaa bɛdi,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>ɛberɛ no mu,</content>
+            </block_quote>
+            <block_quote>
+                <content>na mɛgye asiiɛfoɔ no,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na matase wɔn a wɔapam wɔn no;</content>
+            </block_quote>
+            <block_quote>
+                <content>mɛma wɔanya animuonyam ne din wɔ</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>asase a wɔnanim agu ase nyinaa so.</content>
+            </block_quote>
+        </verse>
+        <verse num="20">
+            <block_quote>
+                <content> </content>
+                <content> Ɛberɛ no mu na mede mo bɛba,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>na ɛberɛ no na mɛboa mo ano.</content>
+            </block_quote>
+            <block_quote>
+                <content>Na mɛma mo animuonyam ne din</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>wɔ asase aman nyinaa so,</content>
+            </block_quote>
+            <block_quote>
+                <content>ɛberɛ a mede mo nkurɔfoɔ a wɔfaa wɔn nnommum bɛsane aba no,</content>
+            </block_quote>
+            <block_quote kind="LEFT_INDENTED">
+                <content>mo ara mo de mo ani bɛhunu, AWURADE na ɔseɛ.</content>
+            </block_quote>
+        </verse>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">3</content>
+            <content>: Hes 22.27 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">4</content>
+            <content>: Mika 3.11 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">8</content>
+            <content>: Yoel 3.2; Dwom 79.6 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">10</content>
+            <content>: Dwom 68.31; Aso 8.27 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">12</content>
+            <content>: Hes 6.8 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">14</content>
+            <content>: Sak 9.9 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">17</content>
+            <content>: Yes 62.5 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">19</content>
+            <content>: Mika 4.7 </content>
+        </note>
+        <note kind="CROSS_REFERENCES">
+            <content kind="REF_VERSE_START">20</content>
+            <content>: Yer 29.14; Sef 2.7 </content>
+        </note>
+    </chapter>
+</book>

@@ -95,5 +95,8 @@
             <patch num="2277"><![CDATA[            <block_quote>
                 <content>Nanso merekyer&#603; wo de&#603; w&#596;akurukyire no nokor&#603; nwoma mu, </content>]]></patch>
         </book>
+        <book name="62-1-john">
+            <patch num="827"><![CDATA[            <content kind="REF_VERSE_START">8</content>]]></patch>
+        </book>
     </patches>
 </transferConfig>

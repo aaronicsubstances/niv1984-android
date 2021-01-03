@@ -7,7 +7,7 @@ import java.io.InputStream
 class BookParser {
 
     enum class BlockQuoteKind {
-        LEFT, LEFT_INDENTED, RIGHT, CENTER
+        NONE, LEFT, LEFT_INDENTED, RIGHT, CENTER
     }
 
     enum class ChapterFragmentKind {
@@ -245,14 +245,14 @@ class BookParser {
             ATTR_KIND
         )
         val quoteKind = if (kindAttr == null) {
-            BlockQuoteKind.LEFT
+            BlockQuoteKind.NONE
         }
         else {
             try {
                 enumValueOf<BlockQuoteKind>(kindAttr.toUpperCase())
             }
             catch (ex: IllegalArgumentException) {
-                BlockQuoteKind.LEFT
+                BlockQuoteKind.NONE
             }
         }
         val parts = mutableListOf<Any>()

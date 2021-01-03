@@ -13,11 +13,11 @@ class BiblicaScraper {
         def destDir = new File(args[0])
         def urlCodes
         switch (destDir.name) {
-            case "Twer#e Kronkron 2012":
+            case "ASW2013 Bible":
                 urlCodes = [1461, "ASWDC"]
                 break
-            case "Nkwa As#em 2020":
-                urlCodes = [2094, "ASNA"]
+            case "ASW2015 Bible":
+                urlCodes = [1861, "ASW"]
                 break
             default:
                 assert false, destDir.name
@@ -80,3 +80,7 @@ class BiblicaScraper {
 //https://www.livelingua.com/course/fsi/Twi(Akan)_Basic_Course
 //https://babel.hathitrust.org/cgi/pt?id=hvd.32044004547915&view=1up&seq=45 - christaller grammar on twi
 //https://babel.hathitrust.org/cgi/pt?id=uc1.31210006441156&view=1up&seq=11 - basic course pdf
+
+//https://www.amazon.com/Twi-Asante-Bible-KRONKRON-Society/dp/9964001452 - 2012
+//https://www.amazon.co.uk/Asante-Bible-Published-Kronkron-Christ/dp/9964001835 - 2013
+//https://www.amazon.co.uk/Revised-Asante-Bible-published-Kronkron/dp/9964001428 - 2015

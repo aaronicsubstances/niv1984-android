@@ -38,9 +38,9 @@ object AsanteTwiBibleVersion: BibleVersion {
         }
     }
 
-    override val code = "asa_tk2012"
-    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2012)"
-    override val abbreviation = "AsTK"
+    override val code = "asw2013"
+    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2013)"
+    override val abbreviation = "AsanteTwi2013"
     override val strFootnote = "Footnote"
     override val bookNames = listOf(
         "Gyenesis", "Eksod\u0254s", "Lewitik\u0254s", "Numeri", "Deuteronomium",

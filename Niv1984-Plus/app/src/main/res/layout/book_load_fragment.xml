@@ -153,37 +153,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <RadioGroup
+        <com.aaronicsubstances.niv1984.ui.book_reading.RecursiveRadioGroup
             android:id="@+id/bookVersionSelectionPanel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <RadioButton
-                android:id="@+id/firstPreferredVersion"
-                android:text="1"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/formItemSepMargin">
 
-            <RadioButton
-                android:id="@+id/secondPreferredVersion"
-                android:text="2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                <RadioButton
+                    android:id="@+id/firstPreferredVersion"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <RadioButton
+                    android:id="@+id/secondPreferredVersion"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
 
             <RadioButton
                 android:id="@+id/bothVersions"
                 android:text="1/2"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
-        </RadioGroup>
+                android:layout_gravity="center" />
+
+        </com.aaronicsubstances.niv1984.ui.book_reading.RecursiveRadioGroup>
 
         <TextView
             android:id="@+id/prefOverlayDescriptionCentered"

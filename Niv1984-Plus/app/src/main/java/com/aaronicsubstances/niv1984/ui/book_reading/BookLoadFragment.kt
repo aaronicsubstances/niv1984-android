@@ -496,7 +496,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                 secondPrefRadio.text = AppConstants.bibleVersions.getValue(
                     bibleVersions[1]
                 ).abbreviation
-                bothPrefRadio.text = "${firstPrefRadio.text}/${secondPrefRadio.text}"
+                bothPrefRadio.text = "${firstPrefRadio.text} / ${secondPrefRadio.text}"
             }
         }
         else {

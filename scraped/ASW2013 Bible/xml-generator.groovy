@@ -48,7 +48,7 @@ class XmlGenerator {
         5, 5, 3, 5, 1, 1, 1, 22]
     static GLOBAL_CLS = new HashSet()
 	public static void main(String[] args) {
-		final scriptDir = new File(XmlGenerator.class.protectionDomain.codeSource.location.toURI()).parentFile
+		final scriptDir = args ? new File(args[0]) : new File(XmlGenerator.class.protectionDomain.codeSource.location.toURI()).parentFile
         try {
         scriptDir.list().findAll {
             new File(scriptDir, it).isDirectory()
@@ -386,12 +386,14 @@ class XmlGenerator {
                     def refTxtMatcher = refTxt =~ pat
                     if (!refTxtMatcher.find()) {
                         if (vNum == 8 && cn == 5 && bookDir.name.startsWith("62-")) {
-                            // manually handle footnote in 1 John 5:7-8
-                            // in fact ignore from Twer#e Kronkron entirely since
-                            // it is not present there
-                            continue
+                            // make correction of footnote in 1 John 5:7-8 for ASW2013
+                            pat = "^$cn\\.(7(?:\\D+\\d+)*)\\D+\$"
+                            refTxtMatcher = refTxt =~ pat
+                            assert refTxtMatcher.find()
                         }
-                        assert false, "$refTxt doesn't match: $pat"
+                        else {
+                            assert false, "$refTxt doesn't match: $pat"
+                        }
                     }
                     noteEl.appendChild(createOutContentEl("${refTxtMatcher.group(1)}", NoteContentKind.REF_VERSE_START))
                     def sep = refTxt.substring(refTxtMatcher.end())

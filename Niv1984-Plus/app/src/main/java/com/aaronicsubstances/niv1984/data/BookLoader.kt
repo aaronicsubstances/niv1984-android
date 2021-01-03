@@ -242,7 +242,7 @@ class BookLoader(private val context: Context,
     }
 
     private fun permitAsymmetricVerseCounts(chapterNumber: Int): Boolean {
-        if (bibleVersions.contains(AsanteTwiBibleVersion.code)) {
+        if (bibleVersions.any { AppConstants.bibleVersions.getValue(it).isAsanteTwiBibleVersion() }) {
             // Revelation 12
             if (bookNumber == 66 && chapterNumber == 12) {
                 return true

@@ -23,7 +23,7 @@
         </verse>
         <verse num="5">
             <block_quote>
-                <content> Na kase&#603; a y&#603;tee no ne nky&#603;n na y&#603;b&#596; mo yi ne s&#603;: Onyankop&#596;n y&#603; hann, na esum biara nni ne mu koraa. </content>
+                <content> Na kase&#603; a y&#603;tee no ne nky&#603;n na y&#603;reb&#596; mo yi ne s&#603;: Onyankop&#596;n y&#603; hann, na esum biara nni ne mu koraa. </content>
             </block_quote>
         </verse>
         <verse num="6">
@@ -165,7 +165,7 @@
             </block_quote>
         </verse>
         <verse num="14">
-            <block_quote>
+            <block_quote kind="LEFT">
                 <content> Agyanom, matwer&#603; mabr&#603; mo s&#603;,</content>
             </block_quote>
             <block_quote kind="LEFT_INDENTED">
@@ -721,19 +721,18 @@
         </verse>
         <verse num="6">
             <block_quote>
-                <content> Oyi ne de&#603; &#596;nam nsuo ne mogya so bae&#603;, Yesu Kristo no, na &#603;ny&#603; nsuo nko mu, na mmom &#603;y&#603; nsuo ne mogya mu. </content>
+                <content> Oyi ne de&#603; &#596;nam nsuo ne mogya so bae&#603;, Yesu Kristo no, na &#603;ny&#603; nsuo nko mu, na mmom &#603;y&#603; nsuo ne mogya mu. Na honhom no na &#603;di adanse&#603;, &#603;firi s&#603; honhom no ne nokor&#603; no. </content>
             </block_quote>
         </verse>
         <verse num="7">
             <block_quote>
-                <content>Na honhom no na &#603;di adanse&#603;, &#603;firi s&#603; honhom no ne nokor&#603; no. </content>
+                <content>Na baasa na &#603;di adanse&#603;:</content>
+                <note_ref>1</note_ref>
             </block_quote>
         </verse>
         <verse num="8">
             <block_quote>
-                <content>Na baasa na &#603;di adanse&#603;:</content>
-                <note_ref>1</note_ref>
-                <content> Honhom, nsuo ne mogya, na baasa yi b&#596; mu y&#603; baako. </content>
+                <content>Honhom, nsuo ne mogya, na baasa yi b&#596; mu y&#603; baako. </content>
             </block_quote>
         </verse>
         <verse num="9">
@@ -826,7 +825,7 @@
         <note num="1">
             <content kind="REF_VERSE_START">7</content>
             <content> </content>
-            <content>Tete atwer&#603; a w&#596;gye tomu binom de ka ho s&#603;: </content>
+            <content>Tete atwer&#603; a w&#596;gye to mu binom de ka ho s&#603;: </content>
             <content kind="EM">Baasa na w&#596;di adanse&#603; w&#596; &#596;soro, Agya, As&#603;m, ne Honhom Kronkron, na w&#596;n baasa no ka bom y&#603; baako. Na baasa di adanse&#603; w&#596; asase so:</content>
         </note>
         <note kind="CROSS_REFERENCES">
@@ -837,7 +836,7 @@
             <content kind="REF_VERSE_START">13</content>
             <content> </content>
             <content>Tete atwer&#603; a w&#596;gye to mu binom de ka ho s&#603;: </content>
-            <content kind="EM">mo a mogye Onyankop&#596;n Ba no din di.</content>
+            <content kind="EM">Mo a mogye Onyankop&#596;n Ba no din di.</content>
         </note>
         <note kind="CROSS_REFERENCES">
             <content kind="REF_VERSE_START">14</content>

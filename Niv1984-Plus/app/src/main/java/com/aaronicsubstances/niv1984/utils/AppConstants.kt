@@ -12,7 +12,8 @@ object AppConstants {
 
     val bibleVersions: Map<String, BibleVersion>
         get() {
-            return mapOf(AsanteTwiBibleVersion.code to AsanteTwiBibleVersion,
+            return mapOf(AsanteTwiBibleVersion2013.code to AsanteTwiBibleVersion2013,
+                AsanteTwiBibleVersion2015.code to AsanteTwiBibleVersion2015,
                 KjvBibleVersion.code to KjvBibleVersion,
                 NivBibleVersion.code to NivBibleVersion)
         }
@@ -20,6 +21,7 @@ object AppConstants {
 
 interface BibleVersion {
     fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String
+    fun isAsanteTwiBibleVersion(): Boolean
 
     val code: String
     val description: String
@@ -28,7 +30,7 @@ interface BibleVersion {
     val bookNames: List<String>
 }
 
-object AsanteTwiBibleVersion: BibleVersion {
+object AsanteTwiBibleVersion2013: BibleVersion {
     override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
         if (bookNumber == 19) {
             return "Nnwom $chapterNumber"
@@ -37,6 +39,8 @@ object AsanteTwiBibleVersion: BibleVersion {
             return "Ti $chapterNumber"
         }
     }
+
+    override fun isAsanteTwiBibleVersion() = true
 
     override val code = "asw2013"
     override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2013)"
@@ -74,6 +78,20 @@ object AsanteTwiBibleVersion: BibleVersion {
         "Yuda", "Yohane Adiyis\u025Bm")
 }
 
+object AsanteTwiBibleVersion2015: BibleVersion {
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
+        return AsanteTwiBibleVersion2013.getChapterTitle(bookNumber, chapterNumber)
+    }
+
+    override fun isAsanteTwiBibleVersion() = true
+
+    override val code = "asw2015"
+    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2015)"
+    override val abbreviation = "AsanteTwi2015"
+    override val strFootnote = AsanteTwiBibleVersion2013.strFootnote
+    override val bookNames = AsanteTwiBibleVersion2013.bookNames
+}
+
 object KjvBibleVersion: BibleVersion {
     override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
         if (bookNumber == 19) {
@@ -83,6 +101,8 @@ object KjvBibleVersion: BibleVersion {
             return "Chapter $chapterNumber"
         }
     }
+
+    override fun isAsanteTwiBibleVersion() = false
 
     override val code = "kjv1769"
     override val description = "King James Bible (1769)"
@@ -112,6 +132,8 @@ object NivBibleVersion: BibleVersion {
             return "Chapter $chapterNumber"
         }
     }
+
+    override fun isAsanteTwiBibleVersion() = false
 
     override val code = "niv1984"
     override val description = "New International Version (1984)"

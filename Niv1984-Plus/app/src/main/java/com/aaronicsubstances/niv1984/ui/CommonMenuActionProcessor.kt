@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.aaronicsubstances.niv1984.R
-import com.aaronicsubstances.niv1984.ui.about.AboutActivity
+import com.aaronicsubstances.niv1984.ui.foreword.ForewordActivity
 import com.aaronicsubstances.niv1984.ui.bookmarks.BookmarkListActivity
 import com.aaronicsubstances.niv1984.ui.settings.SettingsActivity
 import com.aaronicsubstances.niv1984.utils.AppUtils
@@ -29,8 +29,8 @@ class CommonMenuActionProcessor(private val context: AppCompatActivity,
                 R.id.nav_settings, R.id.action_settings -> {
                     launchSettings(context)
                 }
-                R.id.nav_about -> {
-                    val intent = Intent(context, AboutActivity::class.java)
+                R.id.nav_foreword -> {
+                    val intent = Intent(context, ForewordActivity::class.java)
                     context.startActivity(intent)
                 }
                 R.id.nav_rate -> {

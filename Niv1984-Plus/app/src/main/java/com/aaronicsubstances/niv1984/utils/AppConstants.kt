@@ -12,8 +12,7 @@ object AppConstants {
 
     val bibleVersions: Map<String, BibleVersion>
         get() {
-            return mapOf(AsanteTwiBibleVersion2013.code to AsanteTwiBibleVersion2013,
-                AsanteTwiBibleVersion2015.code to AsanteTwiBibleVersion2015,
+            return mapOf(AsanteTwiBibleVersion2015.code to AsanteTwiBibleVersion2015,
                 KjvBibleVersion.code to KjvBibleVersion,
                 NivBibleVersion.code to NivBibleVersion)
         }
@@ -30,7 +29,7 @@ interface BibleVersion {
     val bookNames: List<String>
 }
 
-object AsanteTwiBibleVersion2013: BibleVersion {
+object AsanteTwiBibleVersion2015: BibleVersion {
     override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
         if (bookNumber == 19) {
             return "Nnwom $chapterNumber"
@@ -42,9 +41,9 @@ object AsanteTwiBibleVersion2013: BibleVersion {
 
     override fun isAsanteTwiBibleVersion() = true
 
-    override val code = "asw2013"
-    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2013)"
-    override val abbreviation = "AsanteTwi2013"
+    override val code = "asw2015"
+    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2015)"
+    override val abbreviation = "ASW"
     override val strFootnote = "Footnote"
     override val bookNames = listOf(
         "Gyenesis", "Eksod\u0254s", "Lewitik\u0254s", "Numeri", "Deuteronomium",
@@ -76,20 +75,6 @@ object AsanteTwiBibleVersion2013: BibleVersion {
         "(2 Yo) Yohane nwoma a \u025Bt\u0254 so mmienu",
         "(3 Yo) Yohane nwoma a \u025Bt\u0254 so mmi\u025Bnsa",
         "Yuda", "Yohane Adiyis\u025Bm")
-}
-
-object AsanteTwiBibleVersion2015: BibleVersion {
-    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
-        return AsanteTwiBibleVersion2013.getChapterTitle(bookNumber, chapterNumber)
-    }
-
-    override fun isAsanteTwiBibleVersion() = true
-
-    override val code = "asw2015"
-    override val description = "Twer\u025B Kronkron (Asante Twi Bible, 2015)"
-    override val abbreviation = "AsanteTwi2015"
-    override val strFootnote = AsanteTwiBibleVersion2013.strFootnote
-    override val bookNames = AsanteTwiBibleVersion2013.bookNames
 }
 
 object KjvBibleVersion: BibleVersion {

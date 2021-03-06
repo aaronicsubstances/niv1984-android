@@ -1,4 +1,4 @@
-package com.aaronicsubstances.niv1984.ui.about
+package com.aaronicsubstances.niv1984.ui.foreword
 
 import android.app.Activity
 import android.content.Context
@@ -10,7 +10,6 @@ import android.util.Base64
 import android.view.View
 import android.webkit.*
 import android.widget.ProgressBar
-import androidx.core.content.ContextCompat.startActivity
 import com.aaronicsubstances.niv1984.data.FirebaseFacade
 import kotlinx.coroutines.runBlocking
 import org.slf4j.LoggerFactory

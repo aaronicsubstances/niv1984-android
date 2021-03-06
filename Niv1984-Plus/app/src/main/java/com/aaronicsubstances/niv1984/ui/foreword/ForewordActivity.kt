@@ -1,4 +1,4 @@
-package com.aaronicsubstances.niv1984.ui.about
+package com.aaronicsubstances.niv1984.ui.foreword
 
 import android.os.Bundle
 import android.os.SystemClock
@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.aaronicsubstances.niv1984.R
 import com.aaronicsubstances.niv1984.utils.AppUtils
 
-class AboutActivity : AppCompatActivity() {
+class ForewordActivity : AppCompatActivity() {
     private lateinit var mBrowser: WebView
 
     private val minTimeToForgetBackClicks = 1500L
@@ -16,7 +16,7 @@ class AboutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
+        setContentView(R.layout.activity_foreword)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         mBrowser = findViewById(R.id.browser)

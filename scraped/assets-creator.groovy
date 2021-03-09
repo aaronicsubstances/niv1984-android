@@ -34,12 +34,9 @@ class AssetsCreator {
 		
 		def sourceDir
 		switch (bibleVersionCode) {
-			case "asw2012":
-				sourceDir = "Asante Twi Bible 2012"
-				break
-			case "asw2013":
+			/*case "asw2013":
 				sourceDir = "ASW2013 Bible"
-				break
+				break*/
 			case "asw2015":
 				sourceDir = "ASW2015 Bible"
 				break

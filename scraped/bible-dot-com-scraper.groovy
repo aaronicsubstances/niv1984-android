@@ -13,9 +13,9 @@ class BiblicaScraper {
         def destDir = new File(args[0])
         def urlCodes
         switch (destDir.name) {
-            case "ASW2013 Bible":
+            /*case "ASW2013 Bible":
                 urlCodes = [1461, "ASWDC"]
-                break
+                break*/
             case "ASW2015 Bible":
                 urlCodes = [1861, "ASW"]
                 break

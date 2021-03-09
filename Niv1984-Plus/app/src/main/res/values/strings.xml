@@ -42,6 +42,10 @@
     <string name="display_book_pref_instruction">Select a bible version and use up/down buttons to
         order it by preference, with most preferred at the top.\nThen click OK to confirm.</string>
 
+    <string name="pref_key_single_column_version_count">single_column_count</string>
+    <string name="pref_default_single_column_version_count">2</string>
+    <string name="single_column_version_count_title">Single Column Version Count</string>
+
     <string name="tab_text_1">Books</string>
     <string name="tab_text_2">Search</string>
     <string name="screen_wake_option_title">Keep screen on during reading</string>

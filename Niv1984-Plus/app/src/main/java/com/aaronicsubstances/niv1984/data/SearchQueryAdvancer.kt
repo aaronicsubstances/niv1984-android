@@ -7,13 +7,11 @@ class SearchQueryAdvancer(query: String) {
 
     // state
     private var treatAsExact: Boolean
-    private var omittedTermCount: Int
 
     init {
         terms = splitUserQuery(query)
         treatAsExact = true
-        omittedTermCount = 0
-        currentQuery = transformUserQuery(terms, treatAsExact, omittedTermCount)
+        currentQuery = transformUserQuery(terms, treatAsExact)
     }
 
     fun advance(): Boolean {
@@ -21,12 +19,9 @@ class SearchQueryAdvancer(query: String) {
             treatAsExact = false
         }
         else {
-            omittedTermCount++
-        }
-        if (omittedTermCount >= terms.size) {
             return false
         }
-        currentQuery = transformUserQuery(terms, treatAsExact, omittedTermCount)
+        currentQuery = transformUserQuery(terms, treatAsExact)
         return true
     }
 
@@ -48,26 +43,21 @@ class SearchQueryAdvancer(query: String) {
         }
 
         internal fun transformUserQuery(
-            terms: List<String>, treatAsExact: Boolean, omittedTermCount: Int
+            terms: List<String>, treatAsExact: Boolean
         ): String {
-            val altLen = terms.size - omittedTermCount
-            if (altLen < 1) {
+            if (terms.isEmpty()) {
                 return ""
             }
-            val altQueries = mutableListOf<String>()
-            for (i in 0..omittedTermCount) {
-                // quote terms as phrases or else lowercase them to prevent clash with keywords
-                val altQuery = if (treatAsExact) {
-                    "\"" + terms.subList(i, i + altLen)
-                        .joinToString(" ") + "\""
-                }
-                else {
-                    terms.subList(i, i + altLen)
-                        .joinToString(" NEAR/3 ") { "\"$it\"" }
-                }
-                altQueries.add(altQuery)
+            // quote terms as phrases or else lowercase them to prevent clash with keywords
+            val altQuery = if (treatAsExact) {
+                "\"" + terms
+                    .joinToString(" ") + "\""
             }
-            return altQueries.joinToString(" OR ")
+            else {
+                terms
+                    .joinToString(" NEAR/3 ") { "\"$it\"" }
+            }
+            return altQuery
         }
     }
 }

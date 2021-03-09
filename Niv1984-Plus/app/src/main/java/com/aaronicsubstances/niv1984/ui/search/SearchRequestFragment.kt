@@ -194,7 +194,7 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         val startBookNumber = bookStartRangeSpinner.selectedItemPosition + 1
         val inclEndBookNumber = bookEndRangeSpinner.selectedItemPosition + 1
         val f = SearchResponseFragment.newInstance(q, bibleVersions, startBookNumber,
-            inclEndBookNumber, false)
+            inclEndBookNumber)
         searchRequestListener?.onProcessSearchRequest(f)
     }
 }

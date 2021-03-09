@@ -21,8 +21,7 @@ class SearchResultDataSource(
     private val selectedBibleVersions: List<String>,
     private val preferredBibleVersions: List<String>,
     private val startBookNumber: Int,
-    private val inclEndBookNumber: Int,
-    private val isWordSearch: Boolean
+    private val inclEndBookNumber: Int
 ): AbstractBatchedDataSourceK<SearchResult>(NEW_BATCH_SIZE, Int.MAX_VALUE),
     UnboundedDataSource<SearchResult> {
 

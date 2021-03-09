@@ -17,7 +17,7 @@ class AppUtilsInstrumentedTest {
     @Test
     fun testColorResToString() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        var expected = "#D81B60"
+        var expected = "#FBC040"
         var actual = AppUtils.colorResToString(R.color.colorAccent, appContext)
         assertEquals(expected, actual)
 

@@ -25,6 +25,14 @@
         app:title="@string/multiple_version_display_title"
         app:useSimpleSummaryProvider="true" />
 
+    <!--<ListPreference
+        app:key="@string/pref_key_single_column_version_count"
+        app:defaultValue="@string/pref_default_single_column_version_count"
+        app:entries="@array/single_column_version_count_entries"
+        app:entryValues="@array/single_column_version_count_entries"
+        app:title="@string/single_column_version_count_title"
+        app:useSimpleSummaryProvider="true" />-->
+
     <SwitchPreferenceCompat
         android:key="@string/pref_key_keep_screen_awake"
         android:title="@string/screen_wake_option_title"

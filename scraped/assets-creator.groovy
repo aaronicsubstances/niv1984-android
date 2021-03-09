@@ -46,6 +46,12 @@ class AssetsCreator {
 			case "niv1984":
 				sourceDir = "NIV1984 Bible"
 				break
+            case "asna2020":
+                sourceDir = "ASNA2020 Bible"
+                break
+            case "gnt1992":
+                sourceDir = "GNT1992 Bible"
+                break
 			default:
 				assert false, bibleVersionCode
 		}

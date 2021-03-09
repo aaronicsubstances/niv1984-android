@@ -46,6 +46,18 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         return codes
     }
 
+    fun getSingleColumnBibleVersions(): List<String> {
+        val singleColumnSortedVersions = mutableListOf<String>()
+        singleColumnSortedVersions.addAll(getPreferredBibleVersions())
+        for (b in AppConstants.bibleVersions.keys) {
+            if (singleColumnSortedVersions.contains(b)) {
+                continue
+            }
+            singleColumnSortedVersions.add(b)
+        }
+        return singleColumnSortedVersions
+    }
+
     fun getShouldDisplayMultipleVersionsSideBySide(): Boolean {
         var defaultOpt = context.getString(R.string.pref_default_multiple_version_display)
         var opt = loadPrefString(context.getString(R.string.pref_key_multiple_version_display), defaultOpt)

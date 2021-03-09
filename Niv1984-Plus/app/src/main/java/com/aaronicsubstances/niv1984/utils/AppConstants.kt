@@ -12,9 +12,11 @@ object AppConstants {
 
     val bibleVersions: Map<String, BibleVersion>
         get() {
-            return mapOf(AsanteTwiBibleVersion2015.code to AsanteTwiBibleVersion2015,
+            return mapOf(AsanteTwiTKBibleVersion2015.code to AsanteTwiTKBibleVersion2015,
+                //AsanteTwiNABibleVersion2020.code to AsanteTwiNABibleVersion2020,
                 KjvBibleVersion.code to KjvBibleVersion,
-                NivBibleVersion.code to NivBibleVersion)
+                NivBibleVersion.code to NivBibleVersion/*,
+                GntBibleVersion.code to GntBibleVersion*/)
         }
 }
 
@@ -29,7 +31,7 @@ interface BibleVersion {
     val bookNames: List<String>
 }
 
-object AsanteTwiBibleVersion2015: BibleVersion {
+object AsanteTwiTKBibleVersion2015: BibleVersion {
     override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
         if (bookNumber == 19) {
             return "Nnwom $chapterNumber"
@@ -60,6 +62,45 @@ object AsanteTwiBibleVersion2015: BibleVersion {
         "Mika", "Nahum", "Habakuk", "Sefania", "Hagai", "Sakaria", "Malaki",
         "Mateo As\u025Bmpa", "Marko As\u025Bmpa", "Luka As\u025Bmpa", "Yohane As\u025Bmpa",
         "Asomafo\u0254 no Nnwuma", "Romanfo\u0254 nwoma",
+        "(1 Ko) Korintofo\u0254 nwoma a edi kan",
+        "(2 Ko) Korintofo\u0254 nwoma a \u025Bt\u0254 so mmienu",
+        "Galatifo\u0254 nwoma", "Efesofo\u0254 nwoma",
+        "Filipifo\u0254 nwoma", "Kolosefo\u0254 nwoma",
+        "(1 Te) Tesalonikafo\u0254 nwoma a edi kan",
+        "(2 Te) Tesalonikafo\u0254 nwoma a \u025Bt\u0254 so mmienu",
+        "(1 Ti) Timoteo nwoma a edi kan",
+        "(2 Ti) Timoteo nwoma a \u025Bt\u0254 so mmienu",
+        "Tito nwoma", "Filemon nwoma", "Hebrifo\u0254 nwoma", "Yakobo nwoma",
+        "(1 Pe) Petro nwoma a edi kan",
+        "(2 Pe) Petro nwoma a \u025Bt\u0254 so mmienu",
+        "(1 Yo) Yohane nwoma a edi kan",
+        "(2 Yo) Yohane nwoma a \u025Bt\u0254 so mmienu",
+        "(3 Yo) Yohane nwoma a \u025Bt\u0254 so mmi\u025Bnsa",
+        "Yuda", "Yohane Adiyis\u025Bm")
+}
+
+object AsanteTwiNABibleVersion2020: BibleVersion {
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int) =
+        AsanteTwiTKBibleVersion2015.getChapterTitle(bookNumber, chapterNumber)
+
+    override fun isAsanteTwiBibleVersion() = true
+
+    override val code = "asna2020"
+    override val description = "Nkwa As\u025Bm (Asante Twi Bible, 2020)"
+    override val abbreviation = "ASNA"
+    override val strFootnote = AsanteTwiTKBibleVersion2015.strFootnote
+    override val bookNames = listOf(
+        "1 Mose", "2 Mose", "3 Mose", "4 Mose", "5 Mose",
+        "Yosua", "Akannifo\u0254", "Rut",
+        "1 Samuel", "2 Samuel", "1 Ahemfo", "2 Ahemfo",
+        "1 Ber\u025Bsos\u025Bm", "2 Ber\u025Bsos\u025Bm", "\u0190sra",
+        "Nehemia", "\u0190ster", "Hiob", "Nnwom", "Mm\u025Bbus\u025Bm",
+        "\u0186s\u025Bnkafo\u0254", "Nnwom mu Dwom", "Yesaia", "Yeremia", "Kwadwom",
+        "Hesekiel", "Daniel", "Hosea", "Yo\u025Bl", "Amos", "Obadia", "Yona",
+        "Mika", "Nahum", "Habakuk", "Sefania", "Hagai", "Sakaria", "Malaki",
+        "Mateo As\u025Bmpa No", "Marko As\u025Bmpa No",
+        "Luka As\u025Bmpa No", "Yohane As\u025Bmpa No",
+        "Asomafo\u0254 No Nnwuma", "Romanfo\u0254 nwoma",
         "(1 Ko) Korintofo\u0254 nwoma a edi kan",
         "(2 Ko) Korintofo\u0254 nwoma a \u025Bt\u0254 so mmienu",
         "Galatifo\u0254 nwoma", "Efesofo\u0254 nwoma",
@@ -109,21 +150,15 @@ object KjvBibleVersion: BibleVersion {
 }
 
 object NivBibleVersion: BibleVersion {
-    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int): String {
-        if (bookNumber == 19) {
-            return "Psalm $chapterNumber"
-        }
-        else {
-            return "Chapter $chapterNumber"
-        }
-    }
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int) =
+        KjvBibleVersion.getChapterTitle(bookNumber, chapterNumber)
 
     override fun isAsanteTwiBibleVersion() = false
 
     override val code = "niv1984"
     override val description = "New International Version (1984)"
     override val abbreviation = "NIV"
-    override val strFootnote = "Footnote"
+    override val strFootnote = KjvBibleVersion.strFootnote
     override val bookNames = listOf(
         "Genesis", "Exodus", "Leviticus", "Numbers", "Deuteronomy",
         "Joshua", "Judges", "Ruth", "1 Samuel", "2 Samuel",
@@ -137,4 +172,17 @@ object NivBibleVersion: BibleVersion {
         "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy",
         "Titus", "Philemon", "Hebrews", "James", "1 Peter", "2 Peter",
         "1 John", "2 John", "3 John", "Jude", "Revelation")
+}
+
+object GntBibleVersion: BibleVersion {
+    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int) =
+        KjvBibleVersion.getChapterTitle(bookNumber, chapterNumber)
+
+    override fun isAsanteTwiBibleVersion() = false
+
+    override val code = "gnt1992"
+    override val description = "Good News Translation (1992)"
+    override val abbreviation = "GNT"
+    override val strFootnote = KjvBibleVersion.strFootnote
+    override val bookNames = NivBibleVersion.bookNames
 }

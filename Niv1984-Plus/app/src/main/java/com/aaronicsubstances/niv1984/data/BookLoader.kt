@@ -33,7 +33,7 @@ class BookLoader(private val context: Context,
     private val wjColor = AppUtils.colorResToString(R.color.wjColor, context)
 
     companion object {
-        private val DUMMY_CONTENT = BookDisplayItemContent(-1, "")
+        val DUMMY_CONTENT = BookDisplayItemContent(-1, "")
 
         fun createNoteRefHtml(
                 chapterNumber: Int,
@@ -56,27 +56,58 @@ class BookLoader(private val context: Context,
         return withContext(Dispatchers.IO) {
 
             val book = if (bibleVersionIndexInUI == null) {
-                val chapterIndices = mutableListOf<Int>()
-                val displayItems = loadBibleVersionBook(0, chapterIndices)
-
-                val chapterIndices2 = mutableListOf<Int>()
-                val displayItems2 = loadBibleVersionBook(1, chapterIndices2)
-
+                val merger = MultipleVersionsMerger(bookNumber, bibleVersions,
+                    displayMultipleSideBySide)
                 val totalChapterCount = AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber - 1]
                 val combinedDisplayItems = mutableListOf<BookDisplayItem>()
                 val combinedChapterIndices = mutableListOf<Int>()
-                (0 until totalChapterCount).forEach() {
-                    combinedChapterIndices.add(combinedDisplayItems.size)
-                    val cIdx1 = chapterIndices[it]
-                    val cIdx2 = chapterIndices2[it]
-                    var cEndIdx1 = displayItems.size
-                    var cEndIdx2 = displayItems2.size
-                    if (it < totalChapterCount - 1) {
-                        cEndIdx1 = chapterIndices[it + 1]
-                        cEndIdx2 = chapterIndices2[it + 1]
+                if (displayMultipleSideBySide) {
+                    val chapterIndices = mutableListOf<Int>()
+                    val displayItems = loadBibleVersionBook(0, chapterIndices)
+
+                    val chapterIndices2 = mutableListOf<Int>()
+                    val displayItems2 = loadBibleVersionBook(1, chapterIndices2)
+
+                    (0 until totalChapterCount).forEach {
+                        combinedChapterIndices.add(combinedDisplayItems.size)
+                        val cIdx1 = chapterIndices[it]
+                        val cIdx2 = chapterIndices2[it]
+                        var cEndIdx1 = displayItems.size
+                        var cEndIdx2 = displayItems2.size
+                        if (it < totalChapterCount - 1) {
+                            cEndIdx1 = chapterIndices[it + 1]
+                            cEndIdx2 = chapterIndices2[it + 1]
+                        }
+                        merger.mergeVersionsInTwoColumns(it + 1, combinedDisplayItems, displayItems, cIdx1, cEndIdx1,
+                            displayItems2, cIdx2, cEndIdx2)
                     }
-                    mergeVersions(it + 1, combinedDisplayItems, displayItems, cIdx1, cEndIdx1,
-                        displayItems2, cIdx2, cEndIdx2)
+                }
+                else {
+                    val allChapterIndices = mutableListOf<MutableList<Int>>()
+                    val allDisplayItems = mutableListOf<List<BookDisplayItem>>()
+                    bibleVersions.indices.forEach {
+                        val chapterIndices = mutableListOf<Int>()
+                        val displayItems = loadBibleVersionBook(it, chapterIndices)
+                        allChapterIndices.add(chapterIndices)
+                        allDisplayItems.add(displayItems)
+                    }
+                    (0 until totalChapterCount).forEach { cnMinusOne ->
+                        combinedChapterIndices.add(combinedDisplayItems.size)
+                        val allBeginChapterIndices = mutableListOf<Int>();
+                        val allEndChapterIndices = mutableListOf<Int>();
+                        allDisplayItems.indices.forEach {
+                            val chapterIndices = allChapterIndices[it]
+                            val cIdx = chapterIndices[cnMinusOne]
+                            var cEndIdx = allDisplayItems[it].size
+                            if (cnMinusOne < totalChapterCount - 1) {
+                                cEndIdx = chapterIndices[cnMinusOne + 1]
+                            }
+                            allBeginChapterIndices.add(cIdx)
+                            allEndChapterIndices.add(cEndIdx)
+                        }
+                        merger.mergeVersionsInSingleColumn(cnMinusOne + 1, combinedDisplayItems,
+                            allDisplayItems, allBeginChapterIndices, allEndChapterIndices)
+                    }
                 }
                 BookDisplay(
                     bookNumber,
@@ -95,220 +126,6 @@ class BookLoader(private val context: Context,
             }
             book
         }
-    }
-
-    private fun mergeVersions(
-        chapterNumber: Int,
-        combinedDisplayItems: MutableList<BookDisplayItem>,
-        displayItems1: List<BookDisplayItem>,
-        cIdx1: Int, cEndIdx1: Int,
-        displayItems2: List<BookDisplayItem>,
-        cIdx2: Int, cEndIdx2: Int
-    ) {
-        // skip all but verses, dividers and footnotes
-
-        var locInfo = locateDividersForMerge(cIdx1, cEndIdx1, displayItems1)
-        var pt1 = locInfo[0]
-        val dividerIdx1 = locInfo[1]
-
-        locInfo = locateDividersForMerge(cIdx2, cEndIdx2, displayItems2)
-        var pt2 = locInfo[0]
-        val dividerIdx2 = locInfo[1]
-
-        // set title for combination.
-        if (displayMultipleSideBySide) {
-            val firstPart = displayItems1[pt1 - 1]
-            val secondPart = displayItems2[pt2 - 1]
-            combinedDisplayItems.add(BookDisplayItem(BookDisplayItemViewType.TITLE,
-                chapterNumber, 0, DUMMY_CONTENT,
-                firstPartialContent = listOf(firstPart.fullContent),
-                secondPartialContent = listOf(secondPart.fullContent)))
-        }
-        else {
-            // select title of first bible version to represent combination.
-            combinedDisplayItems.add(displayItems1[pt1 - 1])
-        }
-
-        var vNum = 1
-        while (true) {
-            // copy over items with given verse number for each version
-
-            var verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
-            if (verseRange1 == null) {
-                break
-            }
-
-            var verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
-            if (verseRange2 == null) {
-                break
-            }
-
-            val subList1 = displayItems1.subList(verseRange1[0], verseRange1[1])
-            pt1 = verseRange1[1]
-
-            val subList2 = displayItems2.subList(verseRange2[0], verseRange2[1])
-            pt2 = verseRange2[1]
-
-            if (displayMultipleSideBySide) {
-                combinedDisplayItems.add(BookDisplayItem(BookDisplayItemViewType.VERSE,
-                    chapterNumber, vNum, DUMMY_CONTENT,
-                    firstPartialContent = subList1.map { it.fullContent },
-                    secondPartialContent = subList2.map { it.fullContent }))
-            }
-            else {
-                combinedDisplayItems.addAll(subList1)
-                combinedDisplayItems.addAll(subList2)
-            }
-
-            vNum++
-        }
-
-        // skip over any item before divider unless item is a verse
-        while (pt1 < dividerIdx1) {
-            val item = displayItems1[pt1]
-            if (item.viewType == BookDisplayItemViewType.VERSE) {
-                break
-            }
-            pt1++
-        }
-        while (pt2 < dividerIdx2) {
-            val item = displayItems2[pt2]
-            if (item.viewType == BookDisplayItemViewType.VERSE) {
-                break
-            }
-            pt2++
-        }
-
-        if (permitAsymmetricVerseCounts(chapterNumber)) {
-            while (true) {
-
-                var verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
-                if (verseRange1 == null) {
-                    break
-                }
-
-                val subList1 = displayItems1.subList(verseRange1[0], verseRange1[1])
-                pt1 = verseRange1[1]
-
-                if (displayMultipleSideBySide) {
-                    combinedDisplayItems.add(
-                        BookDisplayItem(BookDisplayItemViewType.VERSE,
-                            chapterNumber, vNum, DUMMY_CONTENT,
-                            firstPartialContent = subList1.map { it.fullContent },
-                            secondPartialContent = subList1.map { BookDisplayItemContent(1, "") })
-                    )
-                } else {
-                    combinedDisplayItems.addAll(subList1)
-                }
-
-                vNum++
-            }
-
-            while (true) {
-
-                var verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
-                if (verseRange2 == null) {
-                    break
-                }
-
-                val subList2 = displayItems2.subList(verseRange2[0], verseRange2[1])
-                pt2 = verseRange2[1]
-
-                if (displayMultipleSideBySide) {
-                    combinedDisplayItems.add(
-                        BookDisplayItem(BookDisplayItemViewType.VERSE,
-                            chapterNumber, vNum, DUMMY_CONTENT,
-                            firstPartialContent = subList2.map { BookDisplayItemContent(0, "") },
-                            secondPartialContent = subList2.map { it.fullContent })
-                    )
-                } else {
-                    combinedDisplayItems.addAll(subList2)
-                }
-
-                vNum++
-
-            }
-        }
-        AppUtils.assert(pt1 == dividerIdx1) {
-            "$chapterNumber.$vNum: $pt1 != $dividerIdx1"
-        }
-        AppUtils.assert(pt2 == dividerIdx2) {
-            "$chapterNumber.$vNum: $pt2 != $dividerIdx2"
-        }
-
-        // add footnotes as one, for each bible version.
-        combinedDisplayItems.addAll(displayItems1.subList(dividerIdx1, cEndIdx1))
-        combinedDisplayItems.addAll(displayItems2.subList(dividerIdx2, cEndIdx2))
-    }
-
-    private fun permitAsymmetricVerseCounts(chapterNumber: Int): Boolean {
-        if (bibleVersions.any { AppConstants.bibleVersions.getValue(it).isAsanteTwiBibleVersion() }) {
-            // Revelation 12
-            if (bookNumber == 66 && chapterNumber == 12) {
-                return true
-            }
-            // 3 John
-            if (bookNumber == 64) {
-                return true
-            }
-        }
-        return false
-    }
-
-    private fun locateDividersForMerge(
-        cIdx: Int, cEndIdx: Int,
-        displayItems: List<BookDisplayItem>
-    ): IntArray {
-        var dividerIdx = cEndIdx - 1
-        AppUtils.assert(displayItems[dividerIdx].viewType == BookDisplayItemViewType.DIVIDER) {
-            "${displayItems[dividerIdx].viewType} != DIVIDER"
-        }
-        dividerIdx--
-        while (true) {
-            if (displayItems[dividerIdx].viewType == BookDisplayItemViewType.DIVIDER) {
-                break
-            }
-            dividerIdx--
-        }
-
-        // deal with verses next.
-
-        var pt = cIdx
-        AppUtils.assert(displayItems[pt].viewType == BookDisplayItemViewType.TITLE) {
-            "${displayItems[pt].viewType} != TITLE"
-        }
-
-        return intArrayOf(pt + 1, dividerIdx)
-    }
-
-    private fun getVerseRange(
-        vNum: Int,
-        initialPt: Int,
-        dividerIdx: Int,
-        displayItems: List<BookDisplayItem>
-    ): IntArray? {
-        var pt = initialPt
-        while (pt < dividerIdx) {
-            val item = displayItems[pt]
-            if (item.viewType == BookDisplayItemViewType.VERSE &&
-                    item.verseNumber == vNum) {
-                break
-            }
-            pt++
-        }
-        if (pt >= dividerIdx) {
-            return null
-        }
-        var retResult = intArrayOf(pt, pt)
-        while (pt < dividerIdx) {
-            val item = displayItems[pt]
-            if (item.verseNumber != vNum) {
-                break
-            }
-            pt++
-        }
-        retResult[1] = pt
-        return retResult
     }
 
     private suspend fun loadBibleVersionBook(bibleVersionIndex: Int,

@@ -89,8 +89,9 @@ object BookReadingEventListenerImpl {
                 R.string.message_book_loading_unfinished))
             return
         }
-        if (fragment.bibleVersionIndex != null) {
-            fragment.highlightHelper?.enterHighlightMode(fragment.bibleVersionIndex!!)
+        if (fragment.bibleVersions.size == 1 || fragment.bibleVersionIndex != null) {
+            fragment.highlightHelper?.enterHighlightMode(
+                fragment.bibleVersionIndex ?: 0)
             return
         }
         MaterialDialog(fragment.requireActivity()).show {

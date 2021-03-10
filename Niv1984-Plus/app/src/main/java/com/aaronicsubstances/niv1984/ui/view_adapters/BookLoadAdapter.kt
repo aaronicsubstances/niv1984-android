@@ -107,7 +107,7 @@ class BookLoadAdapter(
                 }
             }
             BookDisplayItemViewType.DECOR_DIVIDER -> {
-                // do nothing.
+                (holder as DecoratorDividerViewHolder).bind(item)
             }
             BookDisplayItemViewType.DIVIDER -> {
                 (holder as DividerViewHolder).bind(item)
@@ -200,6 +200,14 @@ class BookLoadAdapter(
     }
 
     inner class DecoratorDividerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+        fun bind(item: BookDisplayItem) {
+            if (multipleDisplay) {
+                itemView.visibility = View.VISIBLE
+            }
+            else {
+                itemView.visibility = View.GONE
+            }
+        }
     }
 
     inner class DefaultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

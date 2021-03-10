@@ -361,7 +361,8 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
                     bookContentAdapter.bibleVersions = data.bibleVersions
                     bookContentAdapter.isNightMode = data.isNightMode
                     bookContentAdapter.displayMultipleSideBySide = data.displayMultipleSideBySide
-                    bookContentAdapter.multipleDisplay = data.bibleVersionIndexInUI == null
+                    bookContentAdapter.multipleDisplay = data.bibleVersions.size > 1 &&
+                            data.bibleVersionIndexInUI == null
                     bookContentAdapter.submitList(data.displayItems)
 
                     // skip scroll if layout is responding to configuration change.

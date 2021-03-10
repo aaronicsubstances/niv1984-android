@@ -9,6 +9,12 @@
         app:title="@string/zoom_title"
         app:useSimpleSummaryProvider="true" />
 
+    <CheckBoxPreference
+        app:key="@string/pref_key_two_column_display_enabled"
+        app:title="@string/two_column_display_enabled_title"
+        app:summary="@string/two_column_display_enabled_summary"
+        app:defaultValue="@bool/pref_default_two_column_display_enabled" />
+
     <com.aaronicsubstances.niv1984.ui.settings.DisplayBookPreference
         android:key="@string/pref_key_bible_versions"
         android:title="@string/sorted_bible_versions_title"
@@ -18,20 +24,12 @@
         app:useSimpleSummaryProvider="true"/>
 
     <ListPreference
-        app:key="@string/pref_key_multiple_version_display"
-        app:defaultValue="@string/pref_default_multiple_version_display"
-        app:entries="@array/multiple_version_display_entries"
-        app:entryValues="@array/multiple_version_display_values"
-        app:title="@string/multiple_version_display_title"
-        app:useSimpleSummaryProvider="true" />
-
-    <!--<ListPreference
         app:key="@string/pref_key_single_column_version_count"
         app:defaultValue="@string/pref_default_single_column_version_count"
         app:entries="@array/single_column_version_count_entries"
         app:entryValues="@array/single_column_version_count_entries"
         app:title="@string/single_column_version_count_title"
-        app:useSimpleSummaryProvider="true" />-->
+        app:useSimpleSummaryProvider="true" />
 
     <SwitchPreferenceCompat
         android:key="@string/pref_key_keep_screen_awake"

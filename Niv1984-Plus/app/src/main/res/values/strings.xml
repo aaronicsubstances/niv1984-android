@@ -23,12 +23,16 @@
     <!-- Preferences -->
     <string name="pref_key_zoom">zoomLevel</string>
     <string name="pref_key_bible_versions">bible_versions</string>
-    <string name="pref_key_multiple_version_display">multiple_version_display</string>
+    <string name="pref_key_two_column_display_enabled">two_column_display_enabled</string>
+    <bool name="pref_default_two_column_display_enabled">false</bool>
+    <string name="two_column_display_enabled_title">Read Multiple Versions in Two Columns</string>
+    <string name="two_column_display_enabled_summary">If checked, top two bible versions are
+        displayed for reading side by side. Else, by default, 2 or more bible versions
+        are stacked together in a single column for reading.</string>
     <string name="pref_key_keep_screen_awake">screen_wake_option</string>
     <string name="pref_key_sort_bookmarks_by_date">bookmark_sort_order</string>
     <string name="pref_default_zoom">100</string>
     <string name="pref_default_bible_versions">niv1984 kjv1769</string>
-    <string name="pref_default_multiple_version_display">2</string>
     <bool name="pref_default_keep_screen_awake">true</bool>
     <bool name="pref_default_sort_bookmarks_by_date">false</bool>
     <string name="pref_key_version_check">About &appname;</string>
@@ -36,7 +40,6 @@
     <string name="version_check_summary">Tap to view current version and check for updates</string>
 
     <string name="zoom_title">Bible Reading Text Zoom Level</string>
-    <string name="multiple_version_display_title">Multiple Bible Versions Display Options</string>
     <string name="action_move_up">Move Up</string>
     <string name="action_move_down">Move Down</string>
     <string name="display_book_pref_instruction">Select a bible version and use up/down buttons to
@@ -44,7 +47,7 @@
 
     <string name="pref_key_single_column_version_count">single_column_count</string>
     <string name="pref_default_single_column_version_count">2</string>
-    <string name="single_column_version_count_title">Single Column Version Count</string>
+    <string name="single_column_version_count_title">Maximum Single Column Bible Versions</string>
 
     <string name="tab_text_1">Books</string>
     <string name="tab_text_2">Search</string>

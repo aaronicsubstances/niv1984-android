@@ -369,7 +369,7 @@ class MainActivity : AppCompatActivity(),
                     it.onPrefBibleVersionsChanged(bibleVersions)
                 }
             }
-            getString(R.string.pref_key_multiple_version_display) -> {
+            getString(R.string.pref_key_two_column_display_enabled) -> {
                 val displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
                 interestedFrags.forEach {
                     it.onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide)

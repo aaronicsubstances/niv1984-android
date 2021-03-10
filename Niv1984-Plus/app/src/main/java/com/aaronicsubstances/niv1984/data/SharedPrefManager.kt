@@ -15,10 +15,6 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         // will be up to 66, so use short prefix
         const val PREF_KEY_SYSTEM_BOOKMARKS = "autoSysMark."
         const val PREF_KEY_BIBLE_VERSION_COMBINATION = "bibleVersionCombination"
-        /*const val PREF_KEY_BIBLE_VERSIONS = "bible_versions"
-        const val PREF_KEY_ZOOM = "zoomLevel"
-        const val PREF_KEY_MULTIPLE_DISPLAY_OPTION = "multiple_version_display"
-        const val PREF_KEY_SCREEN_WAKE = "screen_wake_option"*/
         const val WAKE_LOCK_PERIOD = 5 * 60 * 1000L // 5 minutes
     }
 
@@ -59,9 +55,10 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
     }
 
     fun getShouldDisplayMultipleVersionsSideBySide(): Boolean {
-        var defaultOpt = context.getString(R.string.pref_default_multiple_version_display)
-        var opt = loadPrefString(context.getString(R.string.pref_key_multiple_version_display), defaultOpt)
-        return opt == defaultOpt
+        val sharedPref = PreferenceManager.getDefaultSharedPreferences(context)
+        val defaultOpt = context.resources.getBoolean(R.bool.pref_default_two_column_display_enabled)
+        return sharedPref.getBoolean(context.getString(R.string.pref_key_two_column_display_enabled),
+            defaultOpt)
     }
 
     fun getShouldKeepScreenOn(): Boolean {

@@ -157,16 +157,16 @@ class BookLoadAdapter(
                 }
             }
             itemContent.html = AppUtils.parseHtml(prependText + itemContent.text)
-            textView.movementMethod = BetterLinkMovementMethod.newInstance().apply {
-                setOnLinkClickListener { textView, url ->
-                    // Handle click or return false to let the framework handle this link.
-                    bookReadingEventListener.onUrlClick(itemContent.bibleVersionIndex, url)
-                    true
-                }
-                setOnLinkLongClickListener { textView, url ->
-                    // Handle long-click or return false to let the framework handle this link.
-                    false
-                }
+        }
+        textView.movementMethod = BetterLinkMovementMethod.newInstance().apply {
+            setOnLinkClickListener { textView, url ->
+                // Handle click or return false to let the framework handle this link.
+                bookReadingEventListener.onUrlClick(itemContent.bibleVersionIndex, url)
+                true
+            }
+            setOnLinkLongClickListener { textView, url ->
+                // Handle long-click or return false to let the framework handle this link.
+                false
             }
         }
         textView.text = itemContent.html

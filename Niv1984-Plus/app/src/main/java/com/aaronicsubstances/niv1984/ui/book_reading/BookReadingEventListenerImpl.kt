@@ -34,14 +34,9 @@ object BookReadingEventListenerImpl {
                 break
             }
             idx--
-            // once observed idx going all the way to -1, and causing index out of bounds error
-            // in beginning statement of loop. At Mark 4:12 (NIV)
-            // 'cos it is currently not known what caused it, in the mean time exit this method
-            // if something like that is about to occur.
-            if (idx < 0) {
-                AppUtils.showShortToast(fragment.context, "Error: footnote $url not found")
-                return
-            }
+            AppUtils.assert (idx >= 0,  {
+                "Error: footnote $url not found"
+            })
         }
         val footNoteItem = temp.displayItems[idx]
         AppUtils.assert(footNoteItem.viewType == BookDisplayItemViewType.FOOTNOTE)

@@ -12,8 +12,10 @@ import javax.inject.Singleton
 class SharedPrefManager @Inject constructor(private val context: Context) {
     companion object {
         private val JSON_SERIALIZER = GsonBuilder().create()
-        // will be up to 66, so use short prefix
+
+        // NB: will be up to 66, so use short prefix
         const val PREF_KEY_SYSTEM_BOOKMARKS = "autoSysMark."
+
         const val PREF_KEY_BIBLE_VERSION_COMBINATION = "bibleVersionCombination"
         const val WAKE_LOCK_PERIOD = 5 * 60 * 1000L // 5 minutes
     }
@@ -29,29 +31,35 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         }
     }
 
-    fun getPreferredBibleVersions(): List<String> {
-        val defaultOpt = context.getString(R.string.pref_default_bible_versions)
-        val persistedValue = loadPrefString(
-                context.getString(R.string.pref_key_bible_versions), defaultOpt)
-        val codes = persistedValue.splitToSequence(" ").filter {
-            it.isNotEmpty()
-        }.toList()
-        if (codes.isEmpty()) {
-            return AppConstants.DEFAULT_BIBLE_VERSIONS
-        }
-        return codes
-    }
-
-    fun getSingleColumnBibleVersions(): List<String> {
-        val singleColumnSortedVersions = mutableListOf<String>()
-        singleColumnSortedVersions.addAll(getPreferredBibleVersions())
+    fun getSortedBibleVersions(): List<String> {
+        val defaultSortedVersions = mutableListOf<String>()
+        defaultSortedVersions.addAll(AppConstants.DEFAULT_BIBLE_VERSIONS)
         for (b in AppConstants.bibleVersions.keys) {
-            if (singleColumnSortedVersions.contains(b)) {
+            if (defaultSortedVersions.contains(b)) {
                 continue
             }
-            singleColumnSortedVersions.add(b)
+            defaultSortedVersions.add(b)
         }
-        return singleColumnSortedVersions
+
+        val persistedValue = loadPrefString(
+            context.getString(R.string.pref_key_bible_versions), "")
+        val codes = persistedValue.splitToSequence(" ").filter {
+            it.isNotEmpty() && defaultSortedVersions.contains(it)
+        }.toList()
+        if (codes.size == defaultSortedVersions.size) {
+            return codes
+        }
+        return defaultSortedVersions
+    }
+
+    fun getTwoColumnBibleVersions(bibleVersions: List<String>?): List<String> {
+        return (bibleVersions ?: getSortedBibleVersions()).subList(0, 2)
+    }
+
+    fun getSingleColumnBibleVersions(bibleVersions: List<String>?, maxCount: Int): List<String> {
+        val sortedBibleVersions = bibleVersions ?: getSortedBibleVersions()
+        return sortedBibleVersions.subList(0,
+            if (maxCount > 0) maxCount else getSingleColumnVersionCount())
     }
 
     fun getShouldDisplayMultipleVersionsSideBySide(): Boolean {
@@ -59,6 +67,17 @@ class SharedPrefManager @Inject constructor(private val context: Context) {
         val defaultOpt = context.resources.getBoolean(R.bool.pref_default_two_column_display_enabled)
         return sharedPref.getBoolean(context.getString(R.string.pref_key_two_column_display_enabled),
             defaultOpt)
+    }
+
+    fun getSingleColumnVersionCount(): Int {
+        val defaultOpt = context.getString(R.string.pref_default_single_column_version_count)
+        val opt = loadPrefString(context.getString(R.string.pref_key_single_column_version_count), defaultOpt)
+        try {
+            return Integer.parseInt(opt)
+        }
+        catch (ex: NumberFormatException) {
+            return 2
+        }
     }
 
     fun getShouldKeepScreenOn(): Boolean {

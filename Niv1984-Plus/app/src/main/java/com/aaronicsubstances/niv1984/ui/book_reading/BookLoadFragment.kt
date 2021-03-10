@@ -270,10 +270,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         if (defaultReadingMode) {
             displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
             if (displayMultipleSideBySide) {
-                bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+                bibleVersions = sharedPrefMgr.getTwoColumnBibleVersions(null)
             }
             else {
-                bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions()
+                bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions(null, 0)
             }
         } else {
             if (searchResultBibleVersion.isNotEmpty()) {
@@ -633,10 +633,10 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             return
         }
         if (displayMultipleSideBySide) {
-            this.bibleVersions = bibleVersions
+            this.bibleVersions = sharedPrefMgr.getTwoColumnBibleVersions(bibleVersions)
         }
         else {
-            this.bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions()
+            this.bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions(bibleVersions, 0)
         }
         highlightHelper?.exitHighlightMode()
         openBookForReading(null)
@@ -649,11 +649,22 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
         this.displayMultipleSideBySide = displayMultipleSideBySide
         if (!displayMultipleSideBySide || bibleVersionIndex == null) {
             if (displayMultipleSideBySide) {
-                this.bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+                this.bibleVersions = sharedPrefMgr.getTwoColumnBibleVersions(null)
             }
             else {
-                this.bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions()
+                this.bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions(null, 0)
             }
+            // negative forces both saving and setting of radio button.
+            openBookForReading(-2)
+        }
+    }
+
+    override fun onPrefSingleColumnVersionCountChanged(singleColumnCount: Int) {
+        if (!defaultReadingMode) {
+            return
+        }
+        if (!displayMultipleSideBySide) {
+            this.bibleVersions = sharedPrefMgr.getSingleColumnBibleVersions(null, singleColumnCount)
             // negative forces both saving and setting of radio button.
             openBookForReading(-2)
         }

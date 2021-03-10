@@ -82,7 +82,7 @@ object AppUtils {
         Toast.makeText(context, s, Toast.LENGTH_LONG).show()
     }
 
-    fun getAllBooks(topBooks: List<String>): ArrayList<String> {
+    fun getDefaultSortedBibleVersions(topBooks: List<String>): ArrayList<String> {
         val allBooks = ArrayList(AppConstants.bibleVersions.keys)
 
         // Ensure top books appear on top.
@@ -90,6 +90,7 @@ object AppUtils {
             // find ith top book in allBooks and swap it with
             // ith position in allBooks
             val idx = allBooks.indexOf(topBooks[i])
+            if (idx ==- 1) continue // to cater for addition or removal of books during testing
             assert(idx != -1) {
                 "Could not find book ${topBooks[i]}"
             }

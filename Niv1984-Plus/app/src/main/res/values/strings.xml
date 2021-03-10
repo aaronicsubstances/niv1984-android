@@ -24,11 +24,11 @@
     <string name="pref_key_zoom">zoomLevel</string>
     <string name="pref_key_bible_versions">bible_versions</string>
     <string name="pref_key_two_column_display_enabled">two_column_display_enabled</string>
-    <bool name="pref_default_two_column_display_enabled">false</bool>
+    <bool name="pref_default_two_column_display_enabled">true</bool>
     <string name="two_column_display_enabled_title">Read Multiple Versions in Two Columns</string>
-    <string name="two_column_display_enabled_summary">If checked, top two bible versions are
-        displayed for reading side by side. Else, by default, 2 or more bible versions
-        are stacked together in a single column for reading.</string>
+    <string name="two_column_display_enabled_summary">By default, top 2 bible versions are
+        displayed for reading side by side. Uncheck to select "single column mode",
+        in which more than 2 multiple bible versions can be arranged vertically.</string>
     <string name="pref_key_keep_screen_awake">screen_wake_option</string>
     <string name="pref_key_sort_bookmarks_by_date">bookmark_sort_order</string>
     <string name="pref_default_zoom">100</string>
@@ -47,7 +47,7 @@
 
     <string name="pref_key_single_column_version_count">single_column_count</string>
     <string name="pref_default_single_column_version_count">2</string>
-    <string name="single_column_version_count_title">Maximum Single Column Bible Versions</string>
+    <string name="single_column_version_count_title">Single Column Mode Version Display Limit</string>
 
     <string name="tab_text_1">Books</string>
     <string name="tab_text_2">Search</string>

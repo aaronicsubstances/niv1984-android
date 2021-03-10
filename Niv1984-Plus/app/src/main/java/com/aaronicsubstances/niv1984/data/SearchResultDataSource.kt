@@ -19,7 +19,6 @@ class SearchResultDataSource(
     private val coroutineScope: CoroutineScope,
     private val query: String,
     private val selectedBibleVersions: List<String>,
-    private val preferredBibleVersions: List<String>,
     private val startBookNumber: Int,
     private val inclEndBookNumber: Int
 ): AbstractBatchedDataSourceK<SearchResult>(NEW_BATCH_SIZE, Int.MAX_VALUE),
@@ -102,7 +101,6 @@ class SearchResultDataSource(
             val result = asyncContext.ftsDao.search(
                 queryTransformer.currentQuery,
                 selectedBibleVersions,
-                preferredBibleVersions[0], preferredBibleVersions[1],
                 startBookNumber,
                 inclEndBookNumber,
                 exclusions,
@@ -124,7 +122,6 @@ class SearchResultDataSource(
             }
             val rem = asyncContext.ftsDao.search(
                 queryTransformer.currentQuery, selectedBibleVersions,
-                preferredBibleVersions[0], preferredBibleVersions[1],
                 startBookNumber, inclEndBookNumber,
                 exclusions, CAT_SEARCH, lastInitialLoadRequestId, batchNumber,
                 batchSize - acrossStageResults.size)

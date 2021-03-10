@@ -5,4 +5,5 @@ interface PrefListenerFragment {
     fun onPrefZoomLevelChanged(zoomLevel: Int)
     fun onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide: Boolean)
     fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean)
+    fun onPrefSingleColumnVersionCountChanged(singleColumnCount: Int)
 }

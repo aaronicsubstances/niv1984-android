@@ -62,7 +62,7 @@ class BookListFragment : Fragment(), PrefListenerFragment {
 
         mListView = requireView().findViewById(R.id.book_list_view)
 
-        val bibleVersionCode = sharedPrefMgr.getPreferredBibleVersions()[0]
+        val bibleVersionCode = sharedPrefMgr.getSortedBibleVersions()[0]
 
         val onItemClickListenerFactory = object: LargeListEventListenerFactory() {
             override fun <T> create(
@@ -97,5 +97,8 @@ class BookListFragment : Fragment(), PrefListenerFragment {
     }
 
     override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
+    }
+
+    override fun onPrefSingleColumnVersionCountChanged(singleColumnCount: Int) {
     }
 }

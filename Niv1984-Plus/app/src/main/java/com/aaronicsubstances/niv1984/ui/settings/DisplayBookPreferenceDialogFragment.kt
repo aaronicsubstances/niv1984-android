@@ -47,7 +47,7 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
             topBooks = AppConstants.DEFAULT_BIBLE_VERSIONS
         }
 
-        val allBooks = AppUtils.getAllBooks(topBooks)
+        val allBooks = AppUtils.getDefaultSortedBibleVersions(topBooks)
 
         // dynamically add radio buttons
         for (i in allBooks.indices) {
@@ -114,7 +114,8 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
 
     private fun resetToDefault() {
         dialog?.dismiss()
-        val preferredSequence = AppConstants.DEFAULT_BIBLE_VERSIONS.joinToString(" ")
+        val preferredSequence = AppUtils.getDefaultSortedBibleVersions(
+            AppConstants.DEFAULT_BIBLE_VERSIONS).joinToString(" ")
         val preference = preference
         if (preference is DisplayBookPreference) {
             // This allows the client to ignore the user value.
@@ -130,9 +131,13 @@ class DisplayBookPreferenceDialogFragment: PreferenceDialogFragmentCompat(), Vie
             return
         }
 
-        val topBooks = listOf(getBibleVersionCode(mRadioGroup[0]),
-            getBibleVersionCode(mRadioGroup[1]))
-        val preferredSequence = topBooks.joinToString(" ")
+        /*val topBooks = listOf(getBibleVersionCode(mRadioGroup[0]),
+            getBibleVersionCode(mRadioGroup[1]))*/
+        val sortedBooks = mutableListOf<String>()
+        (0 until mRadioGroup.childCount).forEach {
+            sortedBooks.add(getBibleVersionCode(mRadioGroup[it]))
+        }
+        val preferredSequence = sortedBooks.joinToString(" ")
         val preference = preference
         if (preference is DisplayBookPreference) {
             // This allows the client to ignore the user value.

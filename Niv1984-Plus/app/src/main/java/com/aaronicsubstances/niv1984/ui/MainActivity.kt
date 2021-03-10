@@ -364,7 +364,7 @@ class MainActivity : AppCompatActivity(),
 
         when (key) {
             getString(R.string.pref_key_bible_versions) -> {
-                val bibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+                val bibleVersions = sharedPrefMgr.getSortedBibleVersions()
                 interestedFrags.forEach {
                     it.onPrefBibleVersionsChanged(bibleVersions)
                 }
@@ -373,6 +373,12 @@ class MainActivity : AppCompatActivity(),
                 val displayMultipleSideBySide = sharedPrefMgr.getShouldDisplayMultipleVersionsSideBySide()
                 interestedFrags.forEach {
                     it.onPrefMultipleDisplayOptionChanged(displayMultipleSideBySide)
+                }
+            }
+            getString(R.string.pref_key_single_column_version_count) -> {
+                val singleColumnVersionCount = sharedPrefMgr.getSingleColumnVersionCount()
+                interestedFrags.forEach {
+                    it.onPrefSingleColumnVersionCountChanged(singleColumnVersionCount)
                 }
             }
             getString(R.string.pref_key_zoom) -> {

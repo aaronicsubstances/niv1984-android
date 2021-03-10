@@ -60,7 +60,6 @@ class SearchViewModel(application: Application): AndroidViewModel(application) {
             return
         }
         val dataSource = SearchResultDataSource(context, viewModelScope, query, bibleVersions,
-            sharedPrefManager.getPreferredBibleVersions(),
             startBookNumber, inclEndBookNumber)
         paginator.loadInitialAsync(dataSource, null)
     }

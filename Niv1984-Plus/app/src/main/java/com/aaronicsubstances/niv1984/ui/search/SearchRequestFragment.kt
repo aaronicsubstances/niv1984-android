@@ -78,7 +78,7 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        val topBibleVersions = sharedPrefMgr.getPreferredBibleVersions()
+        val sortedBibleVersions = sharedPrefMgr.getSortedBibleVersions()
         val initialVersionRadioStates = if (savedInstanceState != null) {
             savedInstanceState.getBooleanArray(STATE_KEY_VERSION_RADIO_STATES)!!
         } else {
@@ -86,10 +86,11 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
             defaultStates[0] = true
             defaultStates
         }
-        resetAdvancedViewsRelatedToBibleVersions(topBibleVersions, initialVersionRadioStates)
+        resetAdvancedViewsRelatedToBibleVersions(sortedBibleVersions, initialVersionRadioStates)
 
-        val startRangeAdapter = createBookSpinnerAdapter(topBibleVersions[0])
-        val endRangeAdapter = createBookSpinnerAdapter(topBibleVersions[0])
+        val topBibleVersion = sortedBibleVersions[0]
+        val startRangeAdapter = createBookSpinnerAdapter(topBibleVersion)
+        val endRangeAdapter = createBookSpinnerAdapter(topBibleVersion)
         bookStartRangeSpinner.adapter = startRangeAdapter
         bookEndRangeSpinner.adapter = endRangeAdapter
         bookEndRangeSpinner.setSelection(AppConstants.BIBLE_BOOK_COUNT - 1)
@@ -111,18 +112,16 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
         return checkedStates
     }
 
-    private fun resetAdvancedViewsRelatedToBibleVersions(topBibleVersions: List<String>,
+    private fun resetAdvancedViewsRelatedToBibleVersions(sortedBibleVersions: List<String>,
                                                          checkedStates: BooleanArray) {
-        val allBooks = AppUtils.getAllBooks(topBibleVersions)
-
         // dynamically add check boxes for each supported bible version
         // after clearing it.
         bibleVersionCheckBoxes.removeAllViews()
-        for (i in allBooks.indices) {
+        for (i in sortedBibleVersions.indices) {
             val checkBox = CheckBox(context)
             checkBox.isChecked = checkedStates[i]
-            checkBox.tag = allBooks[i]
-            checkBox.text = AppConstants.bibleVersions.getValue(allBooks[i]).description
+            checkBox.tag = sortedBibleVersions[i]
+            checkBox.text = AppConstants.bibleVersions.getValue(sortedBibleVersions[i]).description
             checkBox.id = View.generateViewId()
             val prms = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
@@ -166,6 +165,9 @@ class SearchRequestFragment : Fragment(), PrefListenerFragment {
     }
 
     override fun onPrefKeepScreenOnDuringReadingChanged(keepScreenOn: Boolean) {
+    }
+
+    override fun onPrefSingleColumnVersionCountChanged(singleColumnCount: Int) {
     }
 
     private fun startSearch() {

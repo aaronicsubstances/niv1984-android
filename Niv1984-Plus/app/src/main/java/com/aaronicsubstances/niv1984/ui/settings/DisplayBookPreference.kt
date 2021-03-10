@@ -62,7 +62,8 @@ class DisplayBookPreference: DialogPreference, Preference.OnPreferenceChangeList
             summary = "Not set"
         }
         else {
-            val codes = t.splitToSequence(" ").toList()
+            // use the topmost two for summary display
+            val codes = t.splitToSequence(" ").take(2).toList()
             summary = codes.map {
                 AppConstants.bibleVersions[it]?.description
             }.joinToString(", ")

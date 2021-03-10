@@ -31,5 +31,5 @@ data class BookDisplayItemContent(var bibleVersionIndex: Int,
                                   val highlightModeRemovableMarkups: List<VerseHighlighter.Markup>? = null)
 
 enum class BookDisplayItemViewType {
-    TITLE, VERSE, HEADER, FOOTNOTE, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES
+    TITLE, VERSE, HEADER, FOOTNOTE, DECOR_DIVIDER, DIVIDER, CHAPTER_FRAGMENT, CROSS_REFERENCES
 }

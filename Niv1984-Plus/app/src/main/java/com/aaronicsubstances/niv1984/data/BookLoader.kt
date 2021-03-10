@@ -158,10 +158,28 @@ class BookLoader(private val context: Context,
 
         // Getting here means there are missing chapters,
         // so load book in raw XML
-        val assetPath = String.format("%s/%02d.xml", bibleVersionCode, bookNumber)
-        val rawChapters = context.assets.open(assetPath).use {
-            val parser = BookParser()
-            parser.parse(it, cachedChapterNumbers)
+        var rawChapters = listOf<BookParser.Chapter>()
+        var skipNormalValidation = false
+        if (bibleVersions[bibleVersionIndex] == AsanteTwiNABibleVersion2020.code) {
+            // currently Old Testament, Mark and Revelation are not included.
+            // Old Testament has tables in it (e.g. Ezra), Mark has combined
+            // verses somewhere
+            if (bookNumber < 40 || bookNumber == 41 || bookNumber == 66) {
+                val temp = mutableListOf<BookParser.Chapter>()
+                repeat(AppConstants.BIBLE_BOOK_CHAPTER_COUNT[bookNumber-1]) {
+                    val rawChapter = BookParser.Chapter(it+1, listOf())
+                    temp.add(rawChapter)
+                }
+                rawChapters = temp
+                skipNormalValidation = true
+            }
+        }
+        if (!skipNormalValidation) {
+            val assetPath = String.format("%s/%02d.xml", bibleVersionCode, bookNumber)
+            rawChapters = context.assets.open(assetPath).use {
+                val parser = BookParser()
+                parser.parse(it, cachedChapterNumbers)
+            }
         }
 
         // load verse highlights from SQLite.
@@ -191,13 +209,16 @@ class BookLoader(private val context: Context,
                 continue
             }
 
-            AppUtils.assert(rawChapter.parts.isNotEmpty())
+            if (!skipNormalValidation) {
+                AppUtils.assert(rawChapter.parts.isNotEmpty())
+            }
+
             val chapterHasHighlights = bookHighlighter.loadChapterHighlights(rawChapter.chapterNumber)
 
             // add title item
             val bibleVersionInst = AppConstants.bibleVersions.getValue(
                 bibleVersions[bibleVersionIndex])
-            var titleText = bibleVersionInst.getChapterTitle(bookNumber, rawChapter.chapterNumber)
+            val titleText = bibleVersionInst.getChapterTitle(bookNumber, rawChapter.chapterNumber)
             displayItems.add(
                 BookDisplayItem(BookDisplayItemViewType.TITLE,
                     rawChapter.chapterNumber, 0,

@@ -5,6 +5,7 @@ import com.aaronicsubstances.niv1984.models.BookDisplayItemContent
 import com.aaronicsubstances.niv1984.models.BookDisplayItemViewType
 import com.aaronicsubstances.niv1984.utils.AppConstants
 import com.aaronicsubstances.niv1984.utils.AppUtils
+import com.aaronicsubstances.niv1984.utils.AsanteTwiNABibleVersion2020
 
 class MultipleVersionsMerger(
     private val bookNumber: Int,
@@ -27,8 +28,8 @@ class MultipleVersionsMerger(
             val displayItems = allDisplayItems[it]
             val cIdx = allBeginChapterIndices[it]
             val cEndIdx = allEndChapterIndices[it]
-            var locInfo = locateDividersForMerge(cIdx, cEndIdx, displayItems)
-            var pt = locInfo[0]
+            val locInfo = locateDividersForMerge(cIdx, cEndIdx, displayItems)
+            val pt = locInfo[0]
             val dividerIdx = locInfo[1]
             allPts.add(pt)
             allDividers.add(dividerIdx)
@@ -41,7 +42,7 @@ class MultipleVersionsMerger(
         while (true) {
             // copy over items with given verse number for each version
 
-            var allVerseRanges = mutableListOf<IntArray>()
+            val allVerseRanges = mutableListOf<IntArray>()
             allDisplayItems.indices.forEach {
                 val displayItems = allDisplayItems[it]
                 val pt = allPts[it]
@@ -56,6 +57,16 @@ class MultipleVersionsMerger(
 
             if (allVerseRanges.size < allDisplayItems.size) {
                 break
+            }
+
+            // add intervening divider elements.
+            if (vNum > 1) {
+                combinedDisplayItems.add(
+                    BookDisplayItem(BookDisplayItemViewType.DECOR_DIVIDER,
+                        chapterNumber,vNum,
+                        BookDisplayItemContent(0, "")
+                    )
+                )
             }
 
             allVerseRanges.indices.forEach {
@@ -85,24 +96,37 @@ class MultipleVersionsMerger(
         }
 
         if (permitAsymmetricVerseCounts(chapterNumber)) {
-            allDisplayItems.indices.forEach {
-                val displayItems = allDisplayItems[it]
-                val dividerIdx = allDividers[it]
-                var pt = allPts[it]
-                while (true) {
-                    var verseRange = getVerseRange(vNum, pt, dividerIdx, displayItems)
-                    if (verseRange == null) {
-                        break
-                    }
-
-                    val subList = displayItems.subList(verseRange[0], verseRange[1])
-                    pt = verseRange[1]
-
-                    combinedDisplayItems.addAll(subList)
-
-                    vNum++
+            while (true) {
+                val allVerseRanges = mutableListOf<IntArray?>()
+                allDisplayItems.indices.forEach {
+                    val displayItems = allDisplayItems[it]
+                    val pt = allPts[it]
+                    val dividerIdx = allDividers[it]
+                    val verseRange = getVerseRange(vNum, pt, dividerIdx, displayItems)
+                    allVerseRanges.add(verseRange)
                 }
-                allPts[it] = pt
+                if (allVerseRanges.filterNotNull().isEmpty()) {
+                    break
+                }
+                if (vNum > 1) {
+                    combinedDisplayItems.add(
+                        BookDisplayItem(
+                            BookDisplayItemViewType.DECOR_DIVIDER,
+                            chapterNumber, vNum,
+                            BookDisplayItemContent(0, "")
+                        )
+                    )
+                }
+                allDisplayItems.indices.forEach {
+                    val displayItems = allDisplayItems[it]
+                    val verseRange = allVerseRanges[it]
+                    if (verseRange != null) {
+                        allPts[it] = verseRange[1]
+                        val subList = displayItems.subList(verseRange[0], verseRange[1])
+                        combinedDisplayItems.addAll(subList)
+                    }
+                }
+                vNum++
             }
         }
 
@@ -159,12 +183,12 @@ class MultipleVersionsMerger(
         while (true) {
             // copy over items with given verse number for each version
 
-            var verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
+            val verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
             if (verseRange1 == null) {
                 break
             }
 
-            var verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
+            val verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
             if (verseRange2 == null) {
                 break
             }
@@ -209,54 +233,55 @@ class MultipleVersionsMerger(
 
         if (permitAsymmetricVerseCounts(chapterNumber)) {
             while (true) {
-
-                var verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
-                if (verseRange1 == null) {
+                val verseRange1 = getVerseRange(vNum, pt1, dividerIdx1, displayItems1)
+                val verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
+                if (verseRange1 == null && verseRange2 == null) {
                     break
                 }
+                if (verseRange1 != null) {
+                    val subList1 = displayItems1.subList(verseRange1[0], verseRange1[1])
+                    pt1 = verseRange1[1]
 
-                val subList1 = displayItems1.subList(verseRange1[0], verseRange1[1])
-                pt1 = verseRange1[1]
+                    if (displayMultipleSideBySide) {
+                        combinedDisplayItems.add(
+                            BookDisplayItem(
+                                BookDisplayItemViewType.VERSE,
+                                chapterNumber, vNum, BookLoader.DUMMY_CONTENT,
+                                firstPartialContent = subList1.map { it.fullContent },
+                                secondPartialContent = subList1.map {
+                                    BookDisplayItemContent(
+                                        1,
+                                        ""
+                                    )
+                                })
+                        )
+                    } else {
+                        combinedDisplayItems.addAll(subList1)
+                    }
+                }
+                if (verseRange2 != null) {
+                    val subList2 = displayItems2.subList(verseRange2[0], verseRange2[1])
+                    pt2 = verseRange2[1]
 
-                if (displayMultipleSideBySide) {
-                    combinedDisplayItems.add(
-                        BookDisplayItem(
-                            BookDisplayItemViewType.VERSE,
-                            chapterNumber, vNum, BookLoader.DUMMY_CONTENT,
-                            firstPartialContent = subList1.map { it.fullContent },
-                            secondPartialContent = subList1.map { BookDisplayItemContent(1, "") })
-                    )
-                } else {
-                    combinedDisplayItems.addAll(subList1)
+                    if (displayMultipleSideBySide) {
+                        combinedDisplayItems.add(
+                            BookDisplayItem(
+                                BookDisplayItemViewType.VERSE,
+                                chapterNumber, vNum, BookLoader.DUMMY_CONTENT,
+                                firstPartialContent = subList2.map {
+                                    BookDisplayItemContent(
+                                        0,
+                                        ""
+                                    )
+                                },
+                                secondPartialContent = subList2.map { it.fullContent })
+                        )
+                    } else {
+                        combinedDisplayItems.addAll(subList2)
+                    }
                 }
 
                 vNum++
-            }
-
-            while (true) {
-
-                var verseRange2 = getVerseRange(vNum, pt2, dividerIdx2, displayItems2)
-                if (verseRange2 == null) {
-                    break
-                }
-
-                val subList2 = displayItems2.subList(verseRange2[0], verseRange2[1])
-                pt2 = verseRange2[1]
-
-                if (displayMultipleSideBySide) {
-                    combinedDisplayItems.add(
-                        BookDisplayItem(
-                            BookDisplayItemViewType.VERSE,
-                            chapterNumber, vNum, BookLoader.DUMMY_CONTENT,
-                            firstPartialContent = subList2.map { BookDisplayItemContent(0, "") },
-                            secondPartialContent = subList2.map { it.fullContent })
-                    )
-                } else {
-                    combinedDisplayItems.addAll(subList2)
-                }
-
-                vNum++
-
             }
         }
         AppUtils.assert(pt1 == dividerIdx1) {
@@ -280,6 +305,14 @@ class MultipleVersionsMerger(
             // 3 John
             if (bookNumber == 64) {
                 return true
+            }
+        }
+        if (bibleVersions.contains(AsanteTwiNABibleVersion2020.code)) {
+            // currently Old Testament, Mark and Revelation are not included.
+            // Old Testament has tables in it (e.g. Ezra), Mark has combined
+            // verses somewhere
+            if (bookNumber < 40 || bookNumber == 41 || bookNumber == 66) {
+                return true;
             }
         }
         return false

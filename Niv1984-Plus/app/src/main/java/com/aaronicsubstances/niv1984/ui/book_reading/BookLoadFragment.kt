@@ -464,7 +464,7 @@ class BookLoadFragment : Fragment(), PrefListenerFragment, BookReadingEventListe
             }
         }.map {
             AppConstants.bibleVersions.getValue(it).abbreviation
-        }.joinToString("/")
+        }.joinToString(" / ")
 
         // use invisible instead of gone to prevent "jumping effect" upon book content panel
         // at bottom

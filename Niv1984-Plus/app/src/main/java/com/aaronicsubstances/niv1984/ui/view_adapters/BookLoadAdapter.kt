@@ -74,6 +74,11 @@ class BookLoadAdapter(
                     R.layout.book_load_item_divider, parent, false)
                 return DividerViewHolder(itemView)
             }
+            BookDisplayItemViewType.DECOR_DIVIDER.ordinal -> {
+                val itemView = LayoutInflater.from(parent.context).inflate(
+                    R.layout.book_load_item_decor_divider, parent, false)
+                return DecoratorDividerViewHolder(itemView)
+            }
             else -> {
                 val itemView = LayoutInflater.from(parent.context).inflate(
                     R.layout.book_load_item_default, parent, false)
@@ -100,6 +105,9 @@ class BookLoadAdapter(
                 else {
                     (holder as VerseViewHolder).bind(item)
                 }
+            }
+            BookDisplayItemViewType.DECOR_DIVIDER -> {
+                // do nothing.
             }
             BookDisplayItemViewType.DIVIDER -> {
                 (holder as DividerViewHolder).bind(item)
@@ -189,6 +197,9 @@ class BookLoadAdapter(
                 }
             }
         }
+    }
+
+    inner class DecoratorDividerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     }
 
     inner class DefaultViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

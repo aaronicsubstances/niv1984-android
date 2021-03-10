@@ -22,9 +22,6 @@ class BiblicaScraper {
             case "ASNA2020 Bible":
                 urlCodes = [2094, "ASNA"]
                 break
-            case "GNT1992 Bible":
-                urlCodes = [68, "GNT"]
-                break
             default:
                 assert false, destDir.name
         }

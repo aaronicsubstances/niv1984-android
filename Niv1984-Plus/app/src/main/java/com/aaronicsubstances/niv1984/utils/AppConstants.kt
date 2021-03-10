@@ -13,10 +13,9 @@ object AppConstants {
     val bibleVersions: Map<String, BibleVersion>
         get() {
             return mapOf(AsanteTwiTKBibleVersion2015.code to AsanteTwiTKBibleVersion2015,
-                //AsanteTwiNABibleVersion2020.code to AsanteTwiNABibleVersion2020,
+                AsanteTwiNABibleVersion2020.code to AsanteTwiNABibleVersion2020,
                 KjvBibleVersion.code to KjvBibleVersion,
-                NivBibleVersion.code to NivBibleVersion/*,
-                GntBibleVersion.code to GntBibleVersion*/)
+                NivBibleVersion.code to NivBibleVersion)
         }
 }
 
@@ -172,17 +171,4 @@ object NivBibleVersion: BibleVersion {
         "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy",
         "Titus", "Philemon", "Hebrews", "James", "1 Peter", "2 Peter",
         "1 John", "2 John", "3 John", "Jude", "Revelation")
-}
-
-object GntBibleVersion: BibleVersion {
-    override fun getChapterTitle(bookNumber: Int, chapterNumber: Int) =
-        KjvBibleVersion.getChapterTitle(bookNumber, chapterNumber)
-
-    override fun isAsanteTwiBibleVersion() = false
-
-    override val code = "gnt1992"
-    override val description = "Good News Translation (1992)"
-    override val abbreviation = "GNT"
-    override val strFootnote = KjvBibleVersion.strFootnote
-    override val bookNames = NivBibleVersion.bookNames
 }

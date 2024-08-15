@@ -27,7 +27,7 @@
     <string name="latest_version_unknown">(version check failed)</string>
     <string name="copyright_text">\u00A9 %1$s %2$s. All rights reserved.</string>
     <string name="message_update_required">This version of &appname; is outdated. Please update to latest version.</string>
-    <string name="credits"><i>Credit to "Mono" (uncrebo@gmail.com) for the logo and app theme.</i></string>
+    <string name="credits">Find Privacy Policy <a href="https://doc-hosting.flycricket.io/com-aaronicsubstances-niv1984-privacy-policy/a14ffad8-3574-4df7-81dc-70ad951bc09c/privacy">here</a>.</string>
 
     <string-array name="books">
         <item>Genesis</item>
@@ -95,7 +95,7 @@
         <item>2 John</item>
         <item>3 John</item>
         <item>Jude</item>
-        <item>Revelations</item>
+        <item>Revelation</item>
     </string-array>
 
     <string-array name="book_keys">

@@ -1,7 +1,9 @@
 package com.aaronicsubstances.niv1984.activities;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
+
+import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import com.aaronicsubstances.niv1984.R;
@@ -37,10 +39,8 @@ public class AboutActivity extends BaseActivity {
         String copyrightText = getString(R.string.copyright_text, currentYear, appCompany);
         copyrightView.setText(copyrightText);
 
-        /*TextView t2 = (TextView)findViewById(R.id.external_link);
-        String appSite = getString(R.string.app_site);
-        t2.setText(Html.fromHtml(String.format("<a href='http://%1$s'>%1$s</a>", appSite)));
-        t2.setMovementMethod(LinkMovementMethod.getInstance());*/
+        TextView t2 = (TextView) findViewById(R.id.credits);
+        t2.setMovementMethod(LinkMovementMethod.getInstance());
 
         updateLatestVersionView();
     }

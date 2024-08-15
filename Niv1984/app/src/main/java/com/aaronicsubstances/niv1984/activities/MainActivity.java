@@ -2,11 +2,11 @@ package com.aaronicsubstances.niv1984.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
-import android.support.v7.widget.AppCompatSpinner;
-import android.support.v7.widget.Toolbar;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.core.app.ShareCompat;
+import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -194,6 +194,10 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void checkForLatestVersionAsync() throws Exception {
+        if (Utils.API_BASE_URL.contains("example.com")) {
+            LOGGER.warn("Version check not configured");
+            return;
+        }
         // Set up http api client for use as needed.
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Utils.API_BASE_URL)
@@ -250,33 +254,35 @@ public class MainActivity extends BaseActivity implements
         String appPackageName = getPackageName();
         String appUrl = String.format("%s%s", Utils.APP_PLAY_STORE_URL_PREFIX, appPackageName);
         int id = item.getItemId();
-        switch ( id ) {
-            case R.id.action_about:
-                startActivity(new Intent(this, AboutActivity.class));
-                return true;
-            case R.id.action_rate:
-                Utils.openAppOnPlayStore(this);
-                return true;
-            case R.id.action_share:
-                Intent shareIntent = new Intent();
-                shareIntent.setAction(Intent.ACTION_SEND);
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, appUrl));
-                shareIntent.setType("text/plain");
-                startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share)));
-                return true;
-            case R.id.action_feedback:
-                ShareCompat.IntentBuilder.from(this)
-                        .setType("message/rfc822")
-                        .addEmailTo(getResources().getText(R.string.feedback_email).toString())
-                        .setSubject(getResources().getText(R.string.feedback_subject).toString())
-                        .setChooserTitle(getString(R.string.feedback_title))
-                        .startChooser();
-                return true;
-            case android.R.id.home:
-                mBookNumber = 0;
-                updateFragments();
-                return true;
-
+        if ( id == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        }
+        else if (id == R.id.action_rate) {
+            Utils.openAppOnPlayStore(this);
+            return true;
+        }
+        else if (id == R.id.action_share) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_message, appUrl));
+            shareIntent.setType("text/plain");
+            startActivity(Intent.createChooser(shareIntent, getResources().getText(R.string.share)));
+            return true;
+        }
+        else if (id == R.id.action_feedback) {
+            ShareCompat.IntentBuilder.from(this)
+                    .setType("message/rfc822")
+                    .addEmailTo(getResources().getText(R.string.feedback_email).toString())
+                    .setSubject(getResources().getText(R.string.feedback_subject).toString())
+                    .setChooserTitle(getString(R.string.feedback_title))
+                    .startChooser();
+            return true;
+        }
+        else if (id == android.R.id.home) {
+            mBookNumber = 0;
+            updateFragments();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

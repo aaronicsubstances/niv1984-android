@@ -1,2 +1,0 @@
-include ':app', ':largelistpaging'
-rootProject.name='Niv1984'

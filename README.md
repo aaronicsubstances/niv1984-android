@@ -2,10 +2,10 @@
 
 Repository for NIV1984 Android app on Google Play Store: https://play.google.com/store/apps/details?id=com.aaronicsubstances.niv1984&hl=en
 
-The text for the Holy Scriptures in NIV were taken from links similar to the one below for Paul's second letter to Timothy: 
+The text for the Holy Scriptures in NIV 1984 version were taken from links similar to the one below for Paul's second letter to Timothy: 
 http://web.mit.edu/jywang/www/cef/Bible/NIV/NIV_Bible/2TIM+1.html
+Also see http://web.mit.edu/jywang/www/cef/Bible/NIV/NIV_Bible/bookindex.html and http://web.mit.edu/jywang/www/cef/Bible/NIV/NIV_Bible/index.htm
 
-The text for the Holy Scriptures in KJV were taken from the mcb-kjv distribution used in MySQL Cookbook 3.0: http://www.kitebird.com/mysql-cookbook/
 
 ## Building Android App
 
@@ -25,12 +25,4 @@ For release builds also create a **keystore.properties** file inside *Niv1984* f
 
 ### Build Environment
 
-* NetBeans 8.2
-
-* Android Studio 2.3.3
-
-* Apache Maven 3.5.0
-
-* JDK 1.8 (Oracle VM)
-
-* Windows 8.1
+* Android Studio Koala

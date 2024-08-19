@@ -209,7 +209,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 suffix = "kjv";
                 break;
             case SharedPrefsManager.BOOK_MODE_KJV_NIV:
-                suffix = "kjv-niv";
+                suffix = "niv-kjv";
                 break;
             default:
                 suffix = "niv";

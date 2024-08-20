@@ -102,6 +102,16 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        int lastZoomLevelIdx = mPrefMgr.getLastZoomLevelIndex();
+        if (lastZoomLevelIdx >= 0 && lastZoomLevelIdx != mZoomSpinner.getSelectedItemPosition()) {
+            refreshView();
+            mZoomSpinner.setSelection(lastZoomLevelIdx, false);
+        }
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
 
@@ -198,10 +208,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     private void reloadBookUrl(int cnum) {
-        reloadBookUrl(cnum, false);
-    }
-
-    private void reloadBookUrl(int cnum, boolean forceReload) {
         if (mBookNumber < 1) return;
 
         int lastBookMode = mPrefMgr.getLastBookMode();
@@ -225,9 +231,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         // as such artificial url change is introduced in url to force reload.
         // only zooming requires this so far. in particular performance of
         // chapter scrolling depends on maintaining the url during reload.
-        if (forceReload) {
-            mDiffSuffix++;
-        }
+        mDiffSuffix++;
         String bookUrl = BookTextViewUtils.resolveUrl(
                 String.format("kjv-niv/%02d-%s.html%s",
                 mBookNumber, suffix, mDiffSuffix), null);
@@ -286,7 +290,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         else if (parent == mZoomSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mZoomSpinner");
             mPrefMgr.setLastZoomLevelIndex(position);
-            reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber), true);
+            reloadBookUrl(mPrefMgr.getLastChapter(mBookNumber));
         }
         else {
             LOGGER.error("onItemSelected didn't match any spinner.");

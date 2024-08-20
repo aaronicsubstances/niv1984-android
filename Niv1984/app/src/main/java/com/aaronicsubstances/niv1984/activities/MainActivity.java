@@ -62,12 +62,16 @@ public class MainActivity extends BaseActivity implements
     private AppCompatSpinner mBookDropDown;
 
     private SharedPrefsManager mPrefM;
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    Handler handler = new Handler(Looper.getMainLooper());
+    static ExecutorService executor = Executors.newSingleThreadExecutor();
+    static Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPrefM = new SharedPrefsManager(this);
+        AppCompatDelegate.setDefaultNightMode(mPrefM.isNightModeOn() ?
+                AppCompatDelegate.MODE_NIGHT_YES :
+                AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -96,14 +100,6 @@ public class MainActivity extends BaseActivity implements
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, mBookListFrag, FRAG_BOOK_LIST)
                     .commit();
-        }
-
-        mPrefM = new SharedPrefsManager(this);
-        if (mPrefM.isNightModeOn() && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES ||
-                !mPrefM.isNightModeOn() && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
-            AppCompatDelegate.setDefaultNightMode(mPrefM.isNightModeOn() ?
-                    AppCompatDelegate.MODE_NIGHT_YES :
-                    AppCompatDelegate.MODE_NIGHT_NO);
         }
 
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
@@ -143,7 +139,7 @@ public class MainActivity extends BaseActivity implements
             getSupportActionBar().setTitle(null);
             mBookDropDown.setVisibility(View.VISIBLE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if (mPrefM.getkeepUserScreenOn()) {
+            if (mPrefM.getKeepUserScreenOn()) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
             else {
@@ -170,16 +166,17 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void requireUpdateIfNecessary() {
-        String[] temp = new String[3];
-        int latestVersionCode = mPrefM.getCachedLatestVersion(temp);
-        String latestVersion = temp[0], latestVersionUpgradeRequired = temp[1],
-                latestVersionUpgradeRecommended = temp[2];
+        VersionCheckResponse latestVersionCheck = mPrefM.getCachedLatestVersion();
 
         // Don't require update if installed version is not lower than latest version.
         // This solves potential problem after upgrade where upgrade required indicators
         // are no longer meant for the now upgraded app version.
-        if (latestVersion == null ||
-                Utils.getAppVersionCode(this) >= latestVersionCode) {
+        if (latestVersionCheck.getVersionName() == null ||
+                Utils.getAppVersionCode(this) >= latestVersionCheck.getVersionCode()) {
+            LOGGER.debug("Aborting require update {}, {} vrs {}",
+                    latestVersionCheck.getVersionName(),
+                    latestVersionCheck.getVersionCode(),
+                    Utils.getAppVersionCode(this));
             return;
         }
 
@@ -187,8 +184,8 @@ public class MainActivity extends BaseActivity implements
 
         String updateAction = getResources().getString(R.string.action_update);
         String cancelAction = getResources().getString(R.string.action_cancel);
-        if (!TextUtils.isEmpty(latestVersionUpgradeRequired)) {
-            String message = latestVersionUpgradeRequired;
+        if (!TextUtils.isEmpty(latestVersionCheck.getForceUpgrade())) {
+            String message = latestVersionCheck.getForceUpgrade();
             DialogFragment dialogFragment = AppDialogFragment.newInstance(message, updateAction,
                     cancelAction);
             dialogFragment.setCancelable(false);
@@ -207,8 +204,8 @@ public class MainActivity extends BaseActivity implements
             getSupportFragmentManager().executePendingTransactions();
         }
 
-        else if (!TextUtils.isEmpty(latestVersionUpgradeRecommended)) {
-            String message = latestVersionUpgradeRecommended;
+        else if (!TextUtils.isEmpty(latestVersionCheck.getRecommendUpgrade())) {
+            String message = latestVersionCheck.getRecommendUpgrade();
             DialogFragment newFragment = AppDialogFragment.newInstance(message, updateAction,
                     cancelAction);
             showAppDialog(newFragment, new AppDialogFragment.NoticeDialogListener() {
@@ -231,7 +228,6 @@ public class MainActivity extends BaseActivity implements
 
         executor.execute(() -> {
             //Background work here
-            VersionCheckResponse versionCheckResponse;
             try {
                 String effectiveUrl = Utils.API_BASE_URL + "latest-version-info.json";
                 LOGGER.debug("Downloading latest version information from {}...", effectiveUrl);
@@ -240,26 +236,23 @@ public class MainActivity extends BaseActivity implements
                 if (responseStatus != 200) {
                     throw new RuntimeException("Got unexpected status code of " + responseStatus);
                 }
+                VersionCheckResponse versionCheckResponse;
                 try (InputStream downloadStream = urlConnection.getInputStream()) {
                     String serializedRes = Utils.toString(downloadStream);
                     LOGGER.debug("Received from api: {}", serializedRes);
                     versionCheckResponse = GSON_INSTANCE.fromJson(serializedRes, VersionCheckResponse.class);
                 }
+                LOGGER.info("Successfully retrieved latest version information: {}",
+                        versionCheckResponse);
+                mPrefM.cacheLatestVersion(versionCheckResponse);
             }
             catch (Exception ex) {
                 LOGGER.error("Failed to download latest version information\n", ex);
                 return;
             }
-            handler.post(() -> {
+            /*handler.post(() -> {
                 //UI Thread work here
-                LOGGER.info("Successfully retrieved latest version information: {}",
-                    versionCheckResponse);
-
-                mPrefM.cacheLatestVersion(versionCheckResponse.getVersionName(),
-                    versionCheckResponse.getVersionCode(),
-                    versionCheckResponse.getForceUpgrade(),
-                    versionCheckResponse.getRecommendUpgrade());
-            });
+            });*/
         });
     }
 

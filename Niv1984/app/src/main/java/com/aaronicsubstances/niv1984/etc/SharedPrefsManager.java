@@ -3,6 +3,8 @@ package com.aaronicsubstances.niv1984.etc;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.gson.Gson;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,6 +18,7 @@ public class SharedPrefsManager {
     public static final int BOOK_MODE_NIV_KJV = 2;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
+    private static final Gson GSON_INSTANCE = new Gson();
 
     private final Context mContext;
 
@@ -24,13 +27,10 @@ public class SharedPrefsManager {
     private static final String SHARED_PREF_KEY_BOOK_MARK_PREFIX = "bsel_";
 
     public static final String SHARED_PREF_NAME = "prefs";
-    private static final String SHARED_PREF_KEY_ZOOM = "zoom";
+    public static final String SHARED_PREF_KEY_ZOOM = "zoom";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
-    private static final String SHARED_PREF_KEY_LATEST_VERSION = "latest_version";
-    private static final String SHARED_PREF_KEY_LATEST_VERSION_CODE = "latest_version_code";
-    private static final String SHARED_PREF_KEY_UPDATE_REQUIRED = "update_required";
-    private static final String SHARED_PREF_KEY_UPDATE_RECOMMENDED = "update_recommended";
+    private static final String SHARED_PREF_KEY_LATEST_VERSION_CHECK = "latest_version_check";
 
     public SharedPrefsManager(Context context) {
         this.mContext = context;
@@ -61,18 +61,15 @@ public class SharedPrefsManager {
     }
 
     public int getLastZoomLevelIndex() {
-        String strVal = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getString(
-                SHARED_PREF_KEY_ZOOM, null
-        );
-        if (strVal == null) {
-            return -1;
-        }
         try {
+            String strVal = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getString(
+                    SHARED_PREF_KEY_ZOOM, null
+            );
             return Integer.parseInt(strVal);
         }
-        catch (NumberFormatException ex) {
-            LOGGER.warn("Found invalid zoom level in shared prefs: {}", strVal);
-            return -1;
+        catch (Exception ex) {
+            setLastZoomLevelIndex(-1);
+            throw ex;
         }
     }
 
@@ -82,7 +79,7 @@ public class SharedPrefsManager {
         ed.commit();
     }
 
-    public boolean getkeepUserScreenOn() {
+    public boolean getKeepUserScreenOn() {
         return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
                 SHARED_PREF_KEY_KEEP_SCREEN_ON, false
         );
@@ -94,26 +91,26 @@ public class SharedPrefsManager {
         );
     }
 
-    public int getCachedLatestVersion(String[] ret) {
-        SharedPreferences sharedPrefs = mContext.getSharedPreferences(SHARED_PREF_NAME, 0);
-        ret[0] = sharedPrefs.getString(SHARED_PREF_KEY_LATEST_VERSION, null);
-        // used to be bool.
+    public VersionCheckResponse getCachedLatestVersion() {
+        // used to be bool, and then string.
         try {
-            ret[1] = sharedPrefs.getString(SHARED_PREF_KEY_UPDATE_REQUIRED, null);
+            SharedPreferences sharedPrefs = mContext.getSharedPreferences(SHARED_PREF_NAME, 0);
+            String serialized = sharedPrefs.getString(SHARED_PREF_KEY_LATEST_VERSION_CHECK, null);
+            if (serialized == null) {
+                return new VersionCheckResponse();
+            }
+            return GSON_INSTANCE.fromJson(serialized, VersionCheckResponse.class);
         }
-        catch (Exception ignore) {}
-        ret[2] = sharedPrefs.getString(SHARED_PREF_KEY_UPDATE_RECOMMENDED, null);
-        return sharedPrefs.getInt(SHARED_PREF_KEY_LATEST_VERSION_CODE, 0);
+        catch (Exception ex) {
+            cacheLatestVersion(null);
+            throw ex;
+        }
     }
 
-    public void cacheLatestVersion(String latestVersion, int latestVersionCode,
-                                   String forceUpdate, String recommendUpdate) {
+    public void cacheLatestVersion(VersionCheckResponse latestVersion) {
         SharedPreferences sharedPrefs = mContext.getSharedPreferences(SHARED_PREF_NAME, 0);
         SharedPreferences.Editor editor = sharedPrefs.edit();
-        editor.putString(SHARED_PREF_KEY_LATEST_VERSION, latestVersion);
-        editor.putInt(SHARED_PREF_KEY_LATEST_VERSION_CODE, latestVersionCode);
-        editor.putString(SHARED_PREF_KEY_UPDATE_REQUIRED, forceUpdate);
-        editor.putString(SHARED_PREF_KEY_UPDATE_RECOMMENDED, recommendUpdate);
+        editor.putString(SHARED_PREF_KEY_LATEST_VERSION_CHECK, latestVersion != null ? GSON_INSTANCE.toJson(latestVersion) : null);
         editor.commit();
     }
 }

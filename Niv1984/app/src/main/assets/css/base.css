@@ -18,3 +18,9 @@
 .wj {
     color: red
 }
+
+@media (prefers-color-scheme : dark) {
+ .wj {
+      color: #f88
+  }
+}

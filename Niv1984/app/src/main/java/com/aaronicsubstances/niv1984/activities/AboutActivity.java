@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.aaronicsubstances.niv1984.R;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
+import com.aaronicsubstances.niv1984.etc.VersionCheckResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,13 +48,11 @@ public class AboutActivity extends BaseActivity {
 
     private void updateLatestVersionView() {
         SharedPrefsManager sharedPrefsManager = new SharedPrefsManager(this);
-        String[] temp = new String[3];
-        int latestVersionCode = sharedPrefsManager.getCachedLatestVersion(temp);
+        VersionCheckResponse latestVersionCheck = sharedPrefsManager.getCachedLatestVersion();
         int currentVersionCode = Utils.getAppVersionCode(this);
-        String latestVersion = temp[0];
-        if (latestVersion != null && currentVersionCode < latestVersionCode) {
+        if (latestVersionCheck.getVersionName() != null && currentVersionCode < latestVersionCheck.getVersionCode()) {
             mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion) + ' ' +
-                getString(R.string.latest_version, latestVersion));
+                getString(R.string.latest_version, latestVersionCheck.getVersionName()));
         }
     }
 }

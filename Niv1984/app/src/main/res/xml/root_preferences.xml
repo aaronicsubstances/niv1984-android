@@ -14,6 +14,10 @@
             app:key="@string/shared_pref_keep_screen_on"
             app:title="@string/pref_screen_title_keep_screen_on" />
 
+        <SwitchPreferenceCompat
+            app:key="@string/shared_pref_night_mode"
+            app:title="@string/pref_screen_title_night_mode" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

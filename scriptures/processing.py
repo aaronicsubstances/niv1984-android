@@ -17,6 +17,7 @@ def main():
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <meta name="color-scheme" content="dark light">
     <title></title>
     <link href="../css/base.css" rel="stylesheet" type="text/css">
 </head>
@@ -47,6 +48,7 @@ def main2():
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
+    <meta name="color-scheme" content="dark light">
     <title></title>
     <link href="../css/base.css" rel="stylesheet" type="text/css">
 </head>

@@ -164,7 +164,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         mChapterSpinner.setAdapter(adapter);
 
         // Disable listener before setting selection.
-        mChapterSpinner.setOnItemSelectedListener(null);
+        //mChapterSpinner.setOnItemSelectedListener(null);
+        mChapterSpinner.setOnItemSelectedListener(this);
 
         if (selectedCnum > 0) {
             // Pass animate=false to force immediate firing of listeners.
@@ -173,7 +174,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         else {
             mChapterSpinner.setSelection(0, false);
         }
-        mChapterSpinner.setOnItemSelectedListener(this);
+        //mChapterSpinner.setOnItemSelectedListener(this);
     }
 
     private void setUpZoomSpinner() {
@@ -183,7 +184,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mZoomSpinner.setAdapter(adapter);
 
-        mZoomSpinner.setOnItemSelectedListener(null);
+        //mZoomSpinner.setOnItemSelectedListener(null);
+        mZoomSpinner.setOnItemSelectedListener(this);
+
         int zoomLevelIndex = mPrefMgr.getLastZoomLevelIndex();
         if (zoomLevelIndex >= 0) {
             mZoomSpinner.setSelection(zoomLevelIndex, false);
@@ -191,7 +194,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         else {
             mZoomSpinner.setSelection(BookTextViewUtils.DEFAULT_ZOOM_INDEX, false);
         }
-        mZoomSpinner.setOnItemSelectedListener(this);
+        //mZoomSpinner.setOnItemSelectedListener(this);
     }
 
     private void reloadBookUrl(int cnum) {
@@ -216,12 +219,12 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         }
 
         // Android 7 seems to optimize browser reloads if url is the same.
-        // so zooming was taking immediate effect.
+        // so zooming wasn't taking immediate effect.
         // webview.reload didn't help since scrolling would have changed
         // chapter fragment.
         // as such artificial url change is introduced in url to force reload.
         // only zooming requires this so far. in particular performance of
-        // chapter scrolling depends on maintaining the url during reloead.
+        // chapter scrolling depends on maintaining the url during reload.
         if (forceReload) {
             mDiffSuffix++;
         }

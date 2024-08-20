@@ -23,9 +23,10 @@ public class SharedPrefsManager {
     private static final String SHARED_PREF_KEY_BOOK_MODE = "book_mode";
     private static final String SHARED_PREF_KEY_BOOK_MARK_PREFIX = "bsel_";
 
-    private static final String SHARED_PREF_NAME = "prefs";
+    public static final String SHARED_PREF_NAME = "prefs";
     private static final String SHARED_PREF_KEY_ZOOM = "zoom";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
+    public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
     private static final String SHARED_PREF_KEY_LATEST_VERSION = "latest_version";
     private static final String SHARED_PREF_KEY_LATEST_VERSION_CODE = "latest_version_code";
     private static final String SHARED_PREF_KEY_UPDATE_REQUIRED = "update_required";
@@ -60,14 +61,24 @@ public class SharedPrefsManager {
     }
 
     public int getLastZoomLevelIndex() {
-        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getInt(
-                SHARED_PREF_KEY_ZOOM, -1
+        String strVal = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getString(
+                SHARED_PREF_KEY_ZOOM, null
         );
+        if (strVal == null) {
+            return -1;
+        }
+        try {
+            return Integer.parseInt(strVal);
+        }
+        catch (NumberFormatException ex) {
+            LOGGER.warn("Found invalid zoom level in shared prefs: {}", strVal);
+            return -1;
+        }
     }
 
     public void setLastZoomLevelIndex(int lastZoomLevelIndex) {
         SharedPreferences.Editor ed = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).edit();
-        ed.putInt(SHARED_PREF_KEY_ZOOM, lastZoomLevelIndex);
+        ed.putString(SHARED_PREF_KEY_ZOOM, "" + lastZoomLevelIndex);
         ed.commit();
     }
 
@@ -77,10 +88,10 @@ public class SharedPrefsManager {
         );
     }
 
-    public void setkeepScreenOn(boolean keepScreenOn) {
-        SharedPreferences.Editor ed = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).edit();
-        ed.putBoolean(SHARED_PREF_KEY_KEEP_SCREEN_ON, keepScreenOn);
-        ed.commit();
+    public boolean isNightModeOn() {
+        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
+                SHARED_PREF_KEY_NIGHT_MODE, false
+        );
     }
 
     public int getCachedLatestVersion(String[] ret) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.core.app.ShareCompat;
@@ -98,6 +99,12 @@ public class MainActivity extends BaseActivity implements
         }
 
         mPrefM = new SharedPrefsManager(this);
+        if (mPrefM.isNightModeOn() && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES ||
+                !mPrefM.isNightModeOn() && AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO) {
+            AppCompatDelegate.setDefaultNightMode(mPrefM.isNightModeOn() ?
+                    AppCompatDelegate.MODE_NIGHT_YES :
+                    AppCompatDelegate.MODE_NIGHT_NO);
+        }
 
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override

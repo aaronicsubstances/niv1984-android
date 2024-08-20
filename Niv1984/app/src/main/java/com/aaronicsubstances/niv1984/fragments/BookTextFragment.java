@@ -96,7 +96,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         setUpZoomSpinner();
 
         mViewCreated = true;
-        LOGGER.debug("Calling refreshView from onCreateView...");
         refreshView();
 
         return root;
@@ -133,7 +132,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             case SharedPrefsManager.BOOK_MODE_KJV:
                 kjvOnly.setChecked(true);
                 break;
-            case SharedPrefsManager.BOOK_MODE_KJV_NIV:
+            case SharedPrefsManager.BOOK_MODE_NIV_KJV:
                 bothBibles.setChecked(true);
                 break;
             default:
@@ -180,7 +179,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpZoomSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item_2,
-                BookTextViewUtils.ZOOM_LEVELS);
+                getResources().getStringArray(R.array.zoom_entries));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mZoomSpinner.setAdapter(adapter);
 
@@ -208,7 +207,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             case SharedPrefsManager.BOOK_MODE_KJV:
                 suffix = "kjv";
                 break;
-            case SharedPrefsManager.BOOK_MODE_KJV_NIV:
+            case SharedPrefsManager.BOOK_MODE_NIV_KJV:
                 suffix = "niv-kjv";
                 break;
             default:
@@ -245,7 +244,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             if (checked) {
                 int mode = SharedPrefsManager.BOOK_MODE_NIV;
                 if (v == bothBibles) {
-                    mode = SharedPrefsManager.BOOK_MODE_KJV_NIV;
+                    mode = SharedPrefsManager.BOOK_MODE_NIV_KJV;
                 }
                 else if (v == kjvOnly) {
                     mode = SharedPrefsManager.BOOK_MODE_KJV;

@@ -6,8 +6,6 @@ import android.content.SharedPreferences;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.UUID;
-
 /**
  * Created by Aaron on 12/17/2017.
  */
@@ -15,7 +13,7 @@ import java.util.UUID;
 public class SharedPrefsManager {
     public static final int BOOK_MODE_KJV = 0;
     public static final int BOOK_MODE_NIV = 1;
-    public static final int BOOK_MODE_KJV_NIV = 2;
+    public static final int BOOK_MODE_NIV_KJV = 2;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
 
@@ -27,7 +25,7 @@ public class SharedPrefsManager {
 
     private static final String SHARED_PREF_NAME = "prefs";
     private static final String SHARED_PREF_KEY_ZOOM = "zoom";
-    private static final String SHARED_PREF_KEY_UID = "uid";
+    private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     private static final String SHARED_PREF_KEY_LATEST_VERSION = "latest_version";
     private static final String SHARED_PREF_KEY_LATEST_VERSION_CODE = "latest_version_code";
     private static final String SHARED_PREF_KEY_UPDATE_REQUIRED = "update_required";
@@ -73,16 +71,16 @@ public class SharedPrefsManager {
         ed.commit();
     }
 
-    public String getUserUid() {
-        SharedPreferences sharedPrefs = mContext.getSharedPreferences(SHARED_PREF_NAME, 0);
-        String uid = sharedPrefs.getString(SHARED_PREF_KEY_UID, null);
-        if (uid == null) {
-            uid = UUID.randomUUID().toString();
-            SharedPreferences.Editor editor = sharedPrefs.edit();
-            editor.putString(SHARED_PREF_KEY_UID, uid);
-            editor.commit();
-        }
-        return uid;
+    public boolean getkeepUserScreenOn() {
+        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
+                SHARED_PREF_KEY_KEEP_SCREEN_ON, false
+        );
+    }
+
+    public void setkeepScreenOn(boolean keepScreenOn) {
+        SharedPreferences.Editor ed = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).edit();
+        ed.putBoolean(SHARED_PREF_KEY_KEEP_SCREEN_ON, keepScreenOn);
+        ed.commit();
     }
 
     public int getCachedLatestVersion(String[] ret) {

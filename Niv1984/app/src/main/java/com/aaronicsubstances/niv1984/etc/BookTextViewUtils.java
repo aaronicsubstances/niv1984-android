@@ -12,6 +12,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.aaronicsubstances.niv1984.R;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +28,6 @@ import java.util.regex.Pattern;
 
 public class BookTextViewUtils {
     public static final String LAUNCH_URL = "http://localhost";
-    public static final String[] ZOOM_LEVELS = {"70%", "100%", "150%", "200%"};
     public static final int DEFAULT_ZOOM_INDEX = 1;
     private static final Pattern HTML_SUFFIX_PATTERN = Pattern.compile("\\.html\\d*$");
 
@@ -128,7 +129,7 @@ public class BookTextViewUtils {
                 // At the moment base.css doesn't even contain anything.
                 // so don't bother appending.
                 assetStream.close();
-                String zoom = ZOOM_LEVELS[zoomLevelIndex];
+                String zoom = context.getResources().getStringArray(R.array.zoom_entries)[zoomLevelIndex];
                 assetStream = new ByteArrayInputStream(String.format("body { font-size: %s; }",
                         zoom).getBytes());
             }

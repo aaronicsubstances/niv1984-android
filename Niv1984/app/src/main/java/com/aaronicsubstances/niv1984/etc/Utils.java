@@ -11,10 +11,16 @@ import com.aaronicsubstances.niv1984.BuildConfig;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.slf4j.LoggerFactory;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Logger;
 
 /**
  * Created by Aaron on 7/31/2017.
@@ -22,12 +28,28 @@ import java.util.Date;
 
 public class Utils {
     public static final String API_BASE_URL = BuildConfig.API_BASE_URL;
-    public static final String API_CRED = BuildConfig.API_CRED;
 
     public static final String APP_PLAY_STORE_URL_PREFIX = "https://play.google.com/store/apps/details?id=";
     public static final int COPY_BUF_SZ = 8192;
 
     public static final String DEFAULT_CHARSET = "utf-8";
+
+    public static void copy(InputStream ins, OutputStream ous) throws IOException {
+        byte[] buf = new byte[COPY_BUF_SZ];
+        while (true) {
+            int bytesRead = ins.read(buf);
+            if (bytesRead <= 0) break;
+            ous.write(buf, 0, bytesRead);
+            ous.flush();
+        }
+    }
+
+    public static String toString(InputStream ins) throws IOException {
+        ByteArrayOutputStream bous = new ByteArrayOutputStream();
+        copy(ins, bous);
+        byte[] bs = bous.toByteArray();
+        return new String(bs, DEFAULT_CHARSET);
+    }
 
     public static String formatTimeStamp(Date d, String fmt) {
         if (d == null) return null;
@@ -104,12 +126,13 @@ public class Utils {
         }
         scriptBuilder.append(");");
         /*scriptBuilder.append(")}else{console.error('window.");
-        scriptBuilder.append(callback).append(" is not defined.');}");*/
+        scriptBuilder.append(callback).append(" is not defined.');}");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             webView.evaluateJavascript(scriptBuilder.toString(), null);
         }
         else {
             webView.loadUrl("javascript:"+scriptBuilder.toString());
-        }
+        }*/
+        webView.evaluateJavascript(scriptBuilder.toString(), null);
     }
 }

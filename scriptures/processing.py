@@ -25,7 +25,7 @@ def main():
         """)
             work_on_xml(bnum, [version_tag], [f], fout)
             fout.write("""</div>
-    <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-3.7.1.min.js" type="text/javascript"></script>
     <script src="../js/base.js" type="text/javascript"></script>
 </body>
 </html>""")
@@ -59,7 +59,7 @@ def main2():
                 related_f = os.path.join("..", "kjv1769-xml", f)
             work_on_xml(bnum, version_tags, [f, related_f], fout)
             fout.write("""</div>
-    <script src="../js/jquery-3.2.1.min.js" type="text/javascript"></script>
+    <script src="../js/jquery-3.7.1.min.js" type="text/javascript"></script>
     <script src="../js/base.js" type="text/javascript"></script>
 </body>
 </html>""")

@@ -1,0 +1,19 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="@string/pref_screen_header">
+
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/zoom_entries"
+            app:entryValues="@array/zoom_values"
+            app:key="@string/shared_pref_zoom"
+            app:title="@string/pref_screen_title_zoom"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:key="@string/shared_pref_keep_screen_on"
+            app:title="@string/pref_screen_title_keep_screen_on" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

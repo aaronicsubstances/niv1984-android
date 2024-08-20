@@ -2,11 +2,16 @@ package com.aaronicsubstances.niv1984.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.core.app.ShareCompat;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,23 +21,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.aaronicsubstances.niv1984.R;
-import com.aaronicsubstances.niv1984.apis.Api;
-import com.aaronicsubstances.niv1984.apis.DefaultApiRequestModel;
-import com.aaronicsubstances.niv1984.apis.VersionCheckResponse;
+import com.aaronicsubstances.niv1984.etc.VersionCheckResponse;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.fragments.AppDialogFragment;
 import com.aaronicsubstances.niv1984.fragments.BookListFragment;
 import com.aaronicsubstances.niv1984.fragments.BookTextFragment;
+import com.google.gson.Gson;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends BaseActivity implements
         BookListFragment.OnBookSelectionListener,
@@ -40,6 +45,8 @@ public class MainActivity extends BaseActivity implements
         AdapterView.OnItemSelectedListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
+
+    private  static final Gson GSON_INSTANCE = new Gson();
 
     private static final String SAVED_STATE_KEY_BOOK_NUMBER = MainActivity.class +
             ".bnum";
@@ -54,6 +61,8 @@ public class MainActivity extends BaseActivity implements
     private AppCompatSpinner mBookDropDown;
 
     private SharedPrefsManager mPrefM;
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +99,19 @@ public class MainActivity extends BaseActivity implements
 
         mPrefM = new SharedPrefsManager(this);
 
+        getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (mBookNumber > 0) {
+                    mBookNumber = 0;
+                    updateFragments();
+                }
+                else {
+                    finish();
+                }
+            }
+        });
+
         updateFragments();
 
         // Get and cache latest version
@@ -114,7 +136,12 @@ public class MainActivity extends BaseActivity implements
             getSupportActionBar().setTitle(null);
             mBookDropDown.setVisibility(View.VISIBLE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            if (mPrefM.getkeepUserScreenOn()) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+            else {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
         }
         else {
             mBookDropDown.setOnItemSelectedListener(null);
@@ -193,50 +220,39 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    private void checkForLatestVersionAsync() throws Exception {
-        if (Utils.API_BASE_URL.contains("example.com")) {
-            LOGGER.warn("Version check not configured");
-            return;
-        }
-        // Set up http api client for use as needed.
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Utils.API_BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        Api apiService = retrofit.create(Api.class);
+    private void checkForLatestVersionAsync() {
 
-        DefaultApiRequestModel versionCheckRequest = new DefaultApiRequestModel(this);
-        apiService.checkLatestVersion(Utils.API_CRED, versionCheckRequest)
-                .enqueue(new Callback<VersionCheckResponse>() {
-            @Override
-            public void onResponse(Call<VersionCheckResponse> call, Response<VersionCheckResponse> httpResponse) {
-                if (!httpResponse.isSuccessful()) {
-                    try {
-                        LOGGER.warn("Version check returned error response %s %s: %s",
-                                httpResponse.code(), httpResponse.message(),
-                                httpResponse.errorBody() != null ? httpResponse.errorBody().string() : "");
-                    }
-                    catch (Throwable t) {
-                        LOGGER.warn("Failed to fetch version check error response body. ", t);
-                    }
-                    return;
+        executor.execute(() -> {
+            //Background work here
+            VersionCheckResponse versionCheckResponse;
+            try {
+                String effectiveUrl = Utils.API_BASE_URL + "latest-version-info.json";
+                LOGGER.debug("Downloading latest version information from {}...", effectiveUrl);
+                URLConnection urlConnection = new URL(effectiveUrl).openConnection();
+                int responseStatus = ((HttpURLConnection)urlConnection).getResponseCode();
+                if (responseStatus != 200) {
+                    throw new RuntimeException("Got unexpected status code of " + responseStatus);
                 }
-
-                VersionCheckResponse versionCheckResponse = httpResponse.body();
-
-                LOGGER.info("Successfully retrieved latest version as {}",
-                        versionCheckResponse.getVersionName());
+                try (InputStream downloadStream = urlConnection.getInputStream()) {
+                    String serializedRes = Utils.toString(downloadStream);
+                    LOGGER.debug("Received from api: {}", serializedRes);
+                    versionCheckResponse = GSON_INSTANCE.fromJson(serializedRes, VersionCheckResponse.class);
+                }
+            }
+            catch (Exception ex) {
+                LOGGER.error("Failed to download latest version information\n", ex);
+                return;
+            }
+            handler.post(() -> {
+                //UI Thread work here
+                LOGGER.info("Successfully retrieved latest version information: {}",
+                    versionCheckResponse);
 
                 mPrefM.cacheLatestVersion(versionCheckResponse.getVersionName(),
-                        versionCheckResponse.getVersionCode(),
-                        versionCheckResponse.getForceUpgrade(),
-                        versionCheckResponse.getRecommendUpgrade());
-            }
-
-            @Override
-            public void onFailure(Call<VersionCheckResponse> call, Throwable t) {
-                LOGGER.warn("Version check failed. ", t);
-            }
+                    versionCheckResponse.getVersionCode(),
+                    versionCheckResponse.getForceUpgrade(),
+                    versionCheckResponse.getRecommendUpgrade());
+            });
         });
     }
 
@@ -258,6 +274,10 @@ public class MainActivity extends BaseActivity implements
             startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
+        else if (id == R.id.action_settings) {
+            startActivity(new Intent(this, SettingsActivity.class));
+            return true;
+        }
         else if (id == R.id.action_rate) {
             Utils.openAppOnPlayStore(this);
             return true;
@@ -271,7 +291,7 @@ public class MainActivity extends BaseActivity implements
             return true;
         }
         else if (id == R.id.action_feedback) {
-            ShareCompat.IntentBuilder.from(this)
+            new ShareCompat.IntentBuilder(this)
                     .setType("message/rfc822")
                     .addEmailTo(getResources().getText(R.string.feedback_email).toString())
                     .setSubject(getResources().getText(R.string.feedback_subject).toString())
@@ -285,17 +305,6 @@ public class MainActivity extends BaseActivity implements
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mBookNumber > 0) {
-            mBookNumber = 0;
-            updateFragments();
-        }
-        else {
-            finish();
-        }
     }
 
     @Override

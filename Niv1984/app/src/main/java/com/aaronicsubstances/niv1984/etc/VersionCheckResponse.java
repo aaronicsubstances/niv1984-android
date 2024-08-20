@@ -1,7 +1,7 @@
 /*
  *  (c) Aaronic Substances.
  */
-package com.aaronicsubstances.niv1984.apis;
+package com.aaronicsubstances.niv1984.etc;
 
 /**
  *
@@ -43,5 +43,15 @@ public class VersionCheckResponse {
 
     public void setRecommendUpgrade(String recommendUpgrade) {
         this.recommendUpgrade = recommendUpgrade;
+    }
+
+    @Override
+    public String toString() {
+        return "VersionCheckResponse{" +
+                "versionName='" + versionName + '\'' +
+                ", versionCode=" + versionCode +
+                ", forceUpgrade='" + forceUpgrade + '\'' +
+                ", recommendUpgrade='" + recommendUpgrade + '\'' +
+                '}';
     }
 }

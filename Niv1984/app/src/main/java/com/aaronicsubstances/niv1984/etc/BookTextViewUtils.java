@@ -3,10 +3,10 @@ package com.aaronicsubstances.niv1984.etc;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.os.Build;
 import android.webkit.ConsoleMessage;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -39,9 +39,7 @@ public class BookTextViewUtils {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSaveFormData(false);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
-        }
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
 
         browser.setWebChromeClient(new WebChromeClient() {
 
@@ -57,16 +55,16 @@ public class BookTextViewUtils {
         browser.setWebViewClient(new WebViewClient(){
 
             @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-                if (url.startsWith(LAUNCH_URL)) {
+            public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+                if (request.getUrl().getHost().equals("localhost")) {
                     try {
-                        return serve(context, url);
+                        return serve(context, request.getUrl());
                     }
-                    catch (Exception t) {
-                        LOGGER.error("Could not serve " + url + ": ", t);
+                    catch (Exception ex) {
+                        LOGGER.error("Could not serve {}: {}", request.getUrl(), ex);
                     }
                 }
-                return super.shouldInterceptRequest(view, url);
+                return super.shouldInterceptRequest(view, request);
             }
 
             @Override
@@ -86,13 +84,11 @@ public class BookTextViewUtils {
      * Serves static assets at localhost urls.
      *
      * @param context
-     * @param url localhost url
+     * @param uri localhost url
      * @return WebResourceResponse
      * @throws IOException if an error occurs (e.g. url doesn't point to any asset file).
      */
-    public static WebResourceResponse serve(Context context, String url) throws IOException {
-        Uri uri = Uri.parse(url);
-
+    public static WebResourceResponse serve(Context context, Uri uri) throws IOException {
         String assetPath = uri.getPath();
         if (assetPath.startsWith("/")) {
             assetPath = assetPath.substring(1);
@@ -123,15 +119,14 @@ public class BookTextViewUtils {
         // Before serving do something special for css/base.css
         // by appending zoom information.
         if (assetPath.equals("css/base.css")) {
-            LOGGER.debug("Appending text zoom css...");
             int zoomLevelIndex = new SharedPrefsManager(context).getLastZoomLevelIndex();
             if (zoomLevelIndex >= 0 && zoomLevelIndex != DEFAULT_ZOOM_INDEX) {
-                // At the moment base.css doesn't even contain anything.
-                // so don't bother appending.
+                LOGGER.debug("Appending text zoom css...");
+                String originalCss = Utils.toString(assetStream);
                 assetStream.close();
                 String zoom = context.getResources().getStringArray(R.array.zoom_entries)[zoomLevelIndex];
-                assetStream = new ByteArrayInputStream(String.format("body { font-size: %s; }",
-                        zoom).getBytes());
+                assetStream = new ByteArrayInputStream(String.format("%s%nbody { font-size: %s; }",
+                        originalCss, zoom).getBytes());
             }
         }
 
@@ -143,12 +138,12 @@ public class BookTextViewUtils {
     }
 
     public static String resolveUrl(String rootRelativeUrl, String[] queryParams) {
-        if (rootRelativeUrl.startsWith("/")) {
-            rootRelativeUrl.substring(0);
-        }
         StringBuilder launchUrl = new StringBuilder(LAUNCH_URL);
         if (launchUrl.charAt(launchUrl.length() - 1) != '/') {
             launchUrl.append("/");
+        }
+        if (rootRelativeUrl.startsWith("/")) {
+            rootRelativeUrl = rootRelativeUrl.substring(1);
         }
         launchUrl.append(rootRelativeUrl);
         if (queryParams != null) {

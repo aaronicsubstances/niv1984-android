@@ -476,7 +476,7 @@
             <content kind="REF_VERSE_START">9,10</content>
             <content> Hebrew; Septuagint </content>
             <content kind="EM">`You will be ever hearing, but never understanding; you will be ever seeing, but never perceiving.' </content>
-            <content kind="REF_VERSE">10</content>
+            <content kind="EM">[10]</content>
             <content kind="EM"> This people's heart has become calloused; they hardly hear with their ears, and they have closed their eyes</content>
         </note>
     </chapter>
@@ -1788,7 +1788,7 @@
             <content kind="REF_VERSE_START">2,3</content>
             <content> Masoretic Text; one Dead Sea Scroll </content>
             <content kind="EM">Sidon, who cross over the sea; your envoys </content>
-            <content kind="REF_VERSE">3</content>
+            <content kind="EM">[3]</content>
             <content kind="EM"> are on the great waters. The grain of the Shihor, the harvest of the Nile,</content>
         </note>
         <note num="3">
@@ -4137,8 +4137,7 @@
         <note num="5">
             <content kind="REF_VERSE_START">11</content>
             <content> Or (with Masoretic Text) </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">11</content>
+            <content kind="EM">[11]</content>
             <content kind="EM"> He will see the result of the suffering of his soul and be satisfied</content>
         </note>
         <note num="6">

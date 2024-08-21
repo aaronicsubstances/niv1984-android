@@ -943,7 +943,7 @@
             <content kind="REF_VERSE_START">20,21</content>
             <content> Or </content>
             <content kind="EM">subjected it in hope. </content>
-            <content kind="REF_VERSE">21</content>
+            <content kind="EM">[21]</content>
             <content kind="EM"> For</content>
         </note>
         <note num="10">
@@ -1958,7 +1958,7 @@
             <content kind="REF_VERSE_START">23</content>
             <content> Some manuscripts </content>
             <content kind="EM">their greetings. </content>
-            <content kind="REF_VERSE">24</content>
+            <content kind="EM">[24]</content>
             <content kind="EM"> May the grace of our Lord Jesus Christ be with all of you. Amen.</content>
         </note>
     </chapter>

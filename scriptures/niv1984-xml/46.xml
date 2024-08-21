@@ -616,12 +616,11 @@
         <note num="2">
             <content kind="REF_VERSE_START">36-38</content>
             <content> Or </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">36</content>
+            <content kind="EM">[36]</content>
             <content kind="EM"> If anyone thinks he is not treating his daughter properly, and if she is getting along in years, and he feels she ought to marry, he should do as he wants. He is not sinning. He should let her get married. </content>
-            <content kind="REF_VERSE">37</content>
+            <content kind="EM">[37]</content>
             <content kind="EM"> But the man who has settled the matter in his own mind, who is under no compulsion but has control over his own will, and who has made up his mind to keep the virgin unmarried--this man also does the right thing. </content>
-            <content kind="REF_VERSE">38</content>
+            <content kind="EM">[38]</content>
             <content kind="EM"> So then, he who gives his virgin in marriage does right, but he who does not give her in marriage does even better.</content>
         </note>
     </chapter>
@@ -1011,18 +1010,17 @@
         <note num="2">
             <content kind="REF_VERSE_START">4-7</content>
             <content> Or </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">4</content>
+            <content kind="EM">[4]</content>
             <content kind="EM"> Every man who prays or prophesies with long hair dishonors his head. </content>
-            <content kind="REF_VERSE">5</content>
+            <content kind="EM">[5]</content>
             <content kind="EM"> And every woman who prays or prophesies with no covering</content>
             <content> [</content>
             <content kind="EM">of hair</content>
             <content>] </content>
             <content kind="EM">on her head dishonors her head--she is just like one of the "shorn women." </content>
-            <content kind="REF_VERSE">6</content>
+            <content kind="EM">[6]</content>
             <content kind="EM"> If a woman has no covering, let her be for now with short hair, but since it is a disgrace for a woman to have her hair shorn or shaved, she should grow it again. </content>
-            <content kind="REF_VERSE">7</content>
+            <content kind="EM">[7]</content>
             <content kind="EM"> A man ought not to have long hair</content>
         </note>
     </chapter>

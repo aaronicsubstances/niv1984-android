@@ -14,7 +14,9 @@ def main():
         bnum = int(os.path.splitext(os.path.basename(f))[0])
         fgo = f'{f[:-4]}-{version_tag}.html'
         print(f"processing {f} into {fgo}...")
-        with open(fgo, 'w', encoding='utf8') as fout:
+        fout = FoutPhantom()
+        if True:
+        #with open(fgo, 'w', encoding='utf8') as fout:
             fout.write("""<!DOCTYPE html>
 <html>
 <head>
@@ -161,7 +163,9 @@ def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
             text.append(f'<sup>[<a href="#{version_tag}-footnote-{cnum}-{e.text}" id="{version_tag}-verse-{cnum}-{e.text}">{e.text}</a>]</sup>')
             continue
         assert e.tag == 'content', e.tag
-        if not e.text: # could be None
+        if v.tag not in ['verse', 'wj']:
+            assert e.text is not None, f"found empty content el at {cnum}:{vnum}"
+        if not e.text:
             continue
         if not e.text.strip():
             text.append(e.text)
@@ -172,16 +176,20 @@ def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
                 assert cnum == 119
                 assert vnum in [0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168], vnum
                 text.append(f"<span class='pictogram'>{e.text}</span>")
-            elif e.attrib['kind'] in ['REF_VERSE', 'REF_VERSE_START']:
+            elif e.attrib['kind'] == 'REF_VERSE_START':
                 text.append(f"[{e.text}]")
             else:
-                assert e.attrib['kind'] == 'EM', f"at {cnum}:{vnum} e.attrib['kind']"
+                assert e.attrib['kind'] == 'EM', f"at {cnum}:{vnum} {e.attrib['kind']}"
                 text.append(f"<i{clsw}>{e.text}</i>")
         else:
             text.append(f"<span{clsw}>{e.text}</span>")
     if noteref:
         text.insert(0, f"<a id='{version_tag}-footnote-{cnum}-{noteref}' href='#{version_tag}-verse-{cnum}-{noteref}'>{noteref}</a>. ")
     return ''.join(text)
+    
+class FoutPhantom:
+    def write(self, s):
+        pass
 
 if __name__ == '__main__':
     main()

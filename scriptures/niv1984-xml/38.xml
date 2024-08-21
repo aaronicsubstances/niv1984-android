@@ -111,7 +111,7 @@
             <content kind="REF_VERSE_START">8,9</content>
             <content> Or </content>
             <content kind="EM">says after... eye: </content>
-            <content kind="REF_VERSE">9</content>
+            <content kind="EM">[9]</content>
             <content kind="EM"> "I.. . plunder them."</content>
         </note>
     </chapter>
@@ -621,7 +621,7 @@
             <content kind="REF_VERSE_START">4,5</content>
             <content> Or </content>
             <content kind="EM">ruler, all of them together. </content>
-            <content kind="REF_VERSE">5</content>
+            <content kind="EM">[5]</content>
             <content kind="EM"> They</content>
         </note>
     </chapter>

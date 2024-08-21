@@ -694,12 +694,11 @@
         <note num="2">
             <content kind="REF_VERSE_START">13-15</content>
             <content> Or </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">13</content>
+            <content kind="EM">[13]</content>
             <content kind="EM"> We, however, will not boast about things that cannot be measured, but we will boast according to the standard of measurement that the God of measure has assigned us--a measurement that relates even to you. </content>
-            <content kind="REF_VERSE">14</content>
+            <content kind="EM">[14]</content>
             <content kind="EM"> .... </content>
-            <content kind="REF_VERSE">15</content>
+            <content kind="EM">[15]</content>
             <content kind="EM"> Neither do we boast about things that cannot be measured in regard to the work done by others.</content>
         </note>
         <note num="3">

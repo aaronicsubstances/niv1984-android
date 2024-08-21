@@ -508,8 +508,7 @@
         <note num="1">
             <content kind="REF_VERSE_START">4</content>
             <content> See Septuagint; Aramaic </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">4</content>
+            <content kind="EM">[4]</content>
             <content kind="EM"> We told them the names of the men constructing this building.</content>
         </note>
         <note num="2">
@@ -1051,7 +1050,7 @@
             <content kind="REF_VERSE_START">37,38</content>
             <content> See Septuagint (also 1 Esdras 9:34); Hebrew </content>
             <content kind="EM">Jaasu </content>
-            <content kind="REF_VERSE">38</content>
+            <content kind="EM">[38]</content>
             <content kind="EM"> and Bani and Binnui,</content>
         </note>
         <note num="2">

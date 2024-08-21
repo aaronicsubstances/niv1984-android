@@ -882,8 +882,7 @@
             <content> Some less important manuscripts </content>
             <content kind="EM">paralyzed--and they waited for the moving of the waters.</content>
             <content> </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">4</content>
+            <content kind="EM">[4]</content>
             <content kind="EM"> From time to time an angel of the Lord would come down and stir up the waters. The first one into the pool after each such disturbance would be cured of whatever disease he had.</content>
         </note>
         <note num="3">
@@ -1333,7 +1332,7 @@
             <content kind="REF_VERSE_START">37,38</content>
             <content> Or </content>
             <content kind="EM">If anyone is thirsty, let him come to me. And let him drink, </content>
-            <content kind="REF_VERSE">38</content>
+            <content kind="EM">[38]</content>
             <content kind="EM"> who believes in me. As</content>
         </note>
         <note num="4">

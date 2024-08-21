@@ -1246,7 +1246,7 @@
             <content kind="REF_VERSE_START">26</content>
             <content> Some Hebrew manuscripts, Septuagint and Syriac; most Hebrew manuscripts </content>
             <content kind="EM">Ahimoth </content>
-            <content kind="REF_VERSE">26</content>
+            <content kind="EM">[26]</content>
             <content kind="EM"> and Elkanah. The sons of Elkanah:</content>
         </note>
         <note num="3">
@@ -2567,9 +2567,9 @@
             <content kind="REF_VERSE_START">18-20</content>
             <content> One Hebrew manuscript, Septuagint and Vulgate (see also Psalm 105:12); most Hebrew manuscripts </content>
             <content kind="EM">inherit, </content>
-            <content kind="REF_VERSE">19</content>
+            <content kind="EM">[19]</content>
             <content kind="EM"> though you are but few in number, few indeed, and strangers in it." </content>
-            <content kind="REF_VERSE">20</content>
+            <content kind="EM">[20]</content>
             <content kind="EM"> They</content>
         </note>
         <note num="4">

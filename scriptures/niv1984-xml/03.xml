@@ -1516,8 +1516,7 @@
         <note num="5">
             <content kind="REF_VERSE_START">31</content>
             <content> Septuagint and Syriac; Hebrew </content>
-            <content kind="EM"/>
-            <content kind="REF_VERSE">31</content>
+            <content kind="EM">[31]</content>
             <content kind="EM"> such as the person can afford, one</content>
         </note>
     </chapter>

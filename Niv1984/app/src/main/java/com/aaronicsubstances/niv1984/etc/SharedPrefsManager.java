@@ -30,6 +30,7 @@ public class SharedPrefsManager {
     public static final String SHARED_PREF_KEY_ZOOM = "zoom";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
+    private static final String SHARED_PREF_KEY_GRID_MODE = "grid_mode";
     private static final String SHARED_PREF_KEY_LATEST_VERSION_CHECK = "latest_version_check";
 
     public SharedPrefsManager(Context context) {
@@ -69,7 +70,7 @@ public class SharedPrefsManager {
         }
         catch (Exception ex) {
             setLastZoomLevelIndex(-1);
-            throw ex;
+            return -1;
         }
     }
 
@@ -91,6 +92,12 @@ public class SharedPrefsManager {
         );
     }
 
+    public boolean isGridModeOn() {
+        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
+                SHARED_PREF_KEY_GRID_MODE, false
+        );
+    }
+
     public VersionCheckResponse getCachedLatestVersion() {
         // used to be bool, and then string.
         try {
@@ -103,7 +110,7 @@ public class SharedPrefsManager {
         }
         catch (Exception ex) {
             cacheLatestVersion(null);
-            throw ex;
+            return new VersionCheckResponse();
         }
     }
 

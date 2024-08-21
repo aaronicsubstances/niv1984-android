@@ -1,5 +1,6 @@
 #wrapper {
-    /*display: none;*/
+    margin-left: 0.15em;
+    margin-right: 0.15em;
 }
 
 .fragment {
@@ -23,4 +24,19 @@
  .wj {
       color: #f88
   }
+}
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.flex-item {
+    width: 50%;
+}
+
+.flex-item-inner {
+    margin-left: 0.3em;
+    margin-right: 0.3em;
 }

@@ -49,6 +49,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private boolean mViewCreated = false;
     private int mDiffSuffix = 0;
+    private boolean mDualMode, mGridModeOn;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -105,9 +106,16 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     public void onResume() {
         super.onResume();
         int lastZoomLevelIdx = mPrefMgr.getLastZoomLevelIndex();
+        boolean viewOutOfDate = false;
         if (lastZoomLevelIdx >= 0 && lastZoomLevelIdx != mZoomSpinner.getSelectedItemPosition()) {
-            refreshView();
             mZoomSpinner.setSelection(lastZoomLevelIdx, false);
+            viewOutOfDate = true;
+        }
+        if (mDualMode && mGridModeOn != mPrefMgr.isGridModeOn()) {
+            viewOutOfDate = true;
+        }
+        if (viewOutOfDate) {
+            refreshView();
         }
     }
 
@@ -212,12 +220,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         int lastBookMode = mPrefMgr.getLastBookMode();
         String suffix;
+        mDualMode = false;
+        mGridModeOn = mPrefMgr.isGridModeOn();
         switch (lastBookMode) {
             case SharedPrefsManager.BOOK_MODE_KJV:
                 suffix = "kjv";
                 break;
             case SharedPrefsManager.BOOK_MODE_NIV_KJV:
-                suffix = "niv-kjv";
+                suffix = mGridModeOn ? "kjv-niv" : "niv-kjv";
+                mDualMode = true;
                 break;
             default:
                 suffix = "niv";

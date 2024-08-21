@@ -18,6 +18,10 @@
             app:key="@string/shared_pref_night_mode"
             app:title="@string/pref_screen_title_night_mode" />
 
+        <SwitchPreferenceCompat
+            app:key="@string/shared_pref_grid_mode"
+            app:title="@string/pref_screen_title_grid_mode" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

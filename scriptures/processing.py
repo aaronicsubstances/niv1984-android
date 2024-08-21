@@ -1,9 +1,12 @@
 import xml.etree.ElementTree as ET
 import os
 
+GRID_MODE = False
 
 def main():
     version_tag = "kjv" if "kjv" in os.getcwd() else "niv"
+    global GRID_MODE
+    GRID_MODE = True if version_tag == "kjv" else False
     print(f"Generating for {[version_tag]}...")
     for f in os.listdir():
         if not f.endswith(".xml"):
@@ -86,26 +89,24 @@ def work_on_xml(bnum, version_tags, fs, fout):
             vnum = 0
             for verse in chapter:
                 assert verse.tag in ['note', 'fragment', 'verse'], verse.tag
+                gridClsStart, gridClsEnd = '', ''
                 if verse.tag == "verse":
                     vnum = int(verse.attrib["num"])
                     chapterCounts[i][-1] = vnum
-                    if dual_mode:
-                        output_verses[-1].append(f"<div>[{vnum} <b>{version_tag.upper()}</b>] {coalesce_verse(version_tag, verse, cnum, vnum)}</div>")
-                    else:
-                        output_verses[-1].append(f"<div>[{vnum}]")
-                        output_verses[-1].append(coalesce_verse(version_tag, verse, cnum, vnum))
-                        output_verses[-1].append("</div>\n")
+                    if GRID_MODE and dual_mode:
+                        gridClsStart = ' class="flex-item"><div class="flex-item-inner"'
+                        gridClsEnd = '></div'
+                    inserted_version = ''
+                    if dual_mode and not GRID_MODE:
+                        inserted_version = f" <b>{version_tag.upper()}</b>"
+                    output_verses[-1].append(f"<div{gridClsStart}>[{vnum}{inserted_version}] {coalesce_verse(version_tag, verse, cnum, vnum)}</div{gridClsEnd}>\n")
                 elif verse.tag == 'fragment':
                     if not dual_mode:
-                        output_verses[-1].append("<div class='fragment'>")
-                        output_verses[-1].append(coalesce_verse(version_tag, verse, cnum, vnum))
-                        output_verses[-1].append("</div>\n")
+                        output_verses[-1].append(f"<div class='fragment'>[{vnum}] {coalesce_verse(version_tag, verse, cnum, vnum)}</div>\n")
                 else:
                     assert verse.tag == 'note'
                     assert list(verse.attrib.keys()) == ['num'], verse.attrib.keys()
-                    output_notes[-1].append("<div>")
-                    output_notes[-1].append(coalesce_verse(version_tag, verse, cnum, vnum, False, verse.attrib["num"]))
-                    output_notes[-1].append("</div>\n")
+                    output_notes[-1].append(f"<div>{coalesce_verse(version_tag, verse, cnum, vnum, False, verse.attrib['num'])}</div>\n")
             assert chapterCounts[i][-1]
         output[version_tag] = {
             'v': output_verses,
@@ -121,6 +122,8 @@ def work_on_xml(bnum, version_tags, fs, fout):
     for cnum in range(1, len(chapterCounts[0]) + 1):
         fout.write(f"<div id='chapter-{cnum}'>\n")
         fout.write(f"<h2>{'Psalm' if bnum == 19 else 'Chapter'} {cnum}</h2>\n")
+        gridCls = ' class="flex-container"' if GRID_MODE and dual_mode else ''
+        fout.write(f"<div{gridCls}>\n")
         if dual_mode:
             common_count = len(output[version_tags[0]]['v'][cnum-1])
             assert len(output[version_tags[1]]['v'][cnum-1]) == common_count
@@ -130,14 +133,21 @@ def work_on_xml(bnum, version_tags, fs, fout):
         else:
             for item in output[version_tags[0]]['v'][cnum-1]:
                 fout.write(f"{item}\n")
-        fout.write("<hr>\n")
-        for item in output[version_tags[0]]['n'][cnum-1]:
-            fout.write(f"{item}\n")
-        fout.write("<hr>\n")
-        if len(version_tags) > 1:
-            for item in output[version_tags[1]]['n'][cnum-1]:
+        gridClsStart, gridClsEnd = '', ''
+        if GRID_MODE and dual_mode:
+            gridClsStart = ' class="flex-item"><div class="flex-item-inner"'
+            gridClsEnd = '></div'
+        for j in range(len(version_tags)):
+            fout.write(f"<div{gridClsStart}>\n")
+            if not dual_mode or GRID_MODE:
+                fout.write("<hr>\n")
+            elif not j:
+                fout.write("<hr>\n")
+            for item in output[version_tags[j]]['n'][cnum-1]:
                 fout.write(f"{item}\n")
             fout.write("<hr>\n")
+            fout.write(f"</div{gridClsEnd}>\n")
+        fout.write("</div>\n")
         fout.write("</div>\n")
 
 def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):

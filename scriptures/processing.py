@@ -14,9 +14,9 @@ def main():
         bnum = int(os.path.splitext(os.path.basename(f))[0])
         fgo = f'{f[:-4]}-{version_tag}.html'
         print(f"processing {f} into {fgo}...")
-        fout = FoutPhantom()
-        if True:
-        #with open(fgo, 'w', encoding='utf8') as fout:
+        #fout = FoutPhantom()
+        #if True:
+        with open(fgo, 'w', encoding='utf8') as fout:
             fout.write("""<!DOCTYPE html>
 <html>
 <head>
@@ -39,13 +39,15 @@ def main():
 
 def main2():
     version_tag = "kjv" if "kjv" in os.getcwd() else "niv"
-    version_tags = ["kjv", "niv"] if version_tag == "kjv" else ["niv", "kjv"]
+    version_tags = ["niv", "kjv"]
     print(f"Generating for {version_tags}...")
     for f in os.listdir():
         if not f.endswith(".xml"):
             continue
         bnum = int(os.path.splitext(os.path.basename(f))[0])
         fgo = f'{f[:-4]}-{"-".join(version_tags)}.html'
+        if version_tag == "kjv":
+            fgo = f'{f[:-4]}-kjv-niv.html'
         print(f"processing {f} into {fgo}...")
         with open(fgo, 'w', encoding='utf8') as fout:
             fout.write("""<!DOCTYPE html>
@@ -194,4 +196,4 @@ class FoutPhantom:
 if __name__ == '__main__':
     main()
     print("\n")
-    #main2()
+    main2()

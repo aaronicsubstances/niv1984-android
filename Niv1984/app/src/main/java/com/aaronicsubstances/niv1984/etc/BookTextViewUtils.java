@@ -137,7 +137,7 @@ public class BookTextViewUtils {
         return staticResponse;
     }
 
-    public static String resolveUrl(String rootRelativeUrl, String[] queryParams) {
+    public static String resolveUrl(String rootRelativeUrl, String... queryParams) {
         StringBuilder launchUrl = new StringBuilder(LAUNCH_URL);
         if (launchUrl.charAt(launchUrl.length() - 1) != '/') {
             launchUrl.append("/");

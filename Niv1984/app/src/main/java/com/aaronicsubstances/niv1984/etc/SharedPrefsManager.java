@@ -25,12 +25,12 @@ public class SharedPrefsManager {
     private static final String SHARED_PREF_BOOKMARKS = "system_bookmarks";
     private static final String SHARED_PREF_KEY_BOOK_MODE = "book_mode";
     private static final String SHARED_PREF_KEY_BOOK_MARK_PREFIX = "bsel_";
+    private static final String SHARED_PREF_KEY_CHECK_POINT_PREFIX = "csel_";
 
     public static final String SHARED_PREF_NAME = "prefs";
     public static final String SHARED_PREF_KEY_ZOOM = "zoom";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
-    private static final String SHARED_PREF_KEY_GRID_MODE = "grid_mode";
     private static final String SHARED_PREF_KEY_LATEST_VERSION_CHECK = "latest_version_check";
 
     public SharedPrefsManager(Context context) {
@@ -55,9 +55,16 @@ public class SharedPrefsManager {
         );
     }
 
-    public void setLastChapter(int bnum, int cnum) {
+    public int getLastCheckpoint(int bnum) {
+        return mContext.getSharedPreferences(SHARED_PREF_BOOKMARKS, 0).getInt(
+                SHARED_PREF_KEY_CHECK_POINT_PREFIX + bnum, 0
+        );
+    }
+
+    public void setLastChapterAndCheckpoint(int bnum, int cnum, int checkpoint) {
         SharedPreferences.Editor ed = mContext.getSharedPreferences(SHARED_PREF_BOOKMARKS, 0).edit();
         ed.putInt(SHARED_PREF_KEY_BOOK_MARK_PREFIX + bnum, cnum);
+        ed.putInt(SHARED_PREF_KEY_CHECK_POINT_PREFIX + bnum, checkpoint);
         ed.commit();
     }
 
@@ -89,12 +96,6 @@ public class SharedPrefsManager {
     public boolean isNightModeOn() {
         return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
                 SHARED_PREF_KEY_NIGHT_MODE, false
-        );
-    }
-
-    public boolean isGridModeOn() {
-        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
-                SHARED_PREF_KEY_GRID_MODE, false
         );
     }
 

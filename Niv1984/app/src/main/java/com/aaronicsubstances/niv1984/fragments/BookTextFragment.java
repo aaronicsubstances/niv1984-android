@@ -101,8 +101,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         int lastZoomLevelIdx = mPrefMgr.getLastZoomLevelIndex();
         boolean viewOutOfDate = false;
         if (lastZoomLevelIdx >= 0 && lastZoomLevelIdx != mZoomSpinner.getSelectedItemPosition()) {
@@ -134,9 +134,35 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     public void refreshView() {
-        int cnum = mPrefMgr.getLastChapter(mBookNumber);
-        setUpChapterSpinner(cnum);
+        setUpChapterSpinner();
         reloadBookUrl();
+    }
+
+    private void setUpChapterSpinner() {
+        if (mBookNumber < 1) return;
+
+        int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBookNumber-1];
+        String[] chapters = new String[chapterCount];
+        for (int i = 0; i < chapters.length; i++) {
+            // left padding to 3 chars are for chapters in Psalms
+            chapters[i] = String.format("%3d", i + 1);
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+                R.layout.spinner_item_2,
+                chapters);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mChapterSpinner.setAdapter(adapter);
+
+        int selectedCnum = mPrefMgr.getLastChapter(mBookNumber);
+        if (selectedCnum > 0) {
+            // Pass animate=false to force immediate firing of listeners.
+            mChapterSpinner.setSelection(selectedCnum - 1, false);
+        }
+        else {
+            mChapterSpinner.setSelection(0, false);
+        }
+        mChapterSpinner.setOnItemSelectedListener(this);
     }
 
     private void setUpBrowserView() {
@@ -158,32 +184,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         bothBibles.setOnClickListener(this);
 
         BookTextViewUtils.configureBrowser(getActivity(), mBookView, this);
-    }
-
-    private void setUpChapterSpinner(int selectedCnum) {
-        if (mBookNumber < 1) return;
-
-        int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBookNumber-1];
-        String[] chapters = new String[chapterCount];
-        for (int i = 0; i < chapters.length; i++) {
-            // left padding to 3 chars are for chapters in Psalms
-            chapters[i] = String.format("%3d", i + 1);
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
-                R.layout.spinner_item_2,
-                chapters);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mChapterSpinner.setAdapter(adapter);
-
-        if (selectedCnum > 0) {
-            // Pass animate=false to force immediate firing of listeners.
-            mChapterSpinner.setSelection(selectedCnum - 1, false);
-        }
-        else {
-            mChapterSpinner.setSelection(0, false);
-        }
-        mChapterSpinner.setOnItemSelectedListener(this);
     }
 
     private void setUpZoomSpinner() {
@@ -220,24 +220,36 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 break;
         }
 
-        // Android 7 seems to optimize browser reloads if url is the same.
-        // so zooming wasn't taking immediate effect.
-        // webview.reload didn't help since scrolling would have changed
-        // chapter fragment.
-        // as such artificial url change is introduced in url to force reload.
-        // only zooming requires this so far. in particular performance of
-        // chapter scrolling depends on maintaining the url during reload.
+        // For change in text size to take effect,
+        // it has so far been observed that it is not enough
+        // to call loadUrl() on the WebView instance with
+        // the same url, because the WebView does not refetch
+        // the css which contains the changes required for the
+        // new text size.
+        // So a query string parameter is added to force a
+        // refetching of the css.
         String bookUrl = BookTextViewUtils.resolveUrl(
                 String.format("kjv-niv/%02d-%s.html",
                 mBookNumber, suffix),
                 "zoom", "" + mZoomSpinner.getSelectedItemPosition());
 
-        int fragId = mPrefMgr.getLastCheckpoint(mBookNumber);
-        if (fragId > 0) {
-            bookUrl += String.format("#verse-%s", fragId);
+        String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookNumber);
+        if (lastEffectiveBookmark != null) {
+            // ensure bookmark exists in currently selected text.
+            if (lastBookMode != SharedPrefsManager.BOOK_MODE_NIV_KJV &&
+                    !lastEffectiveBookmark.startsWith("chapter-") &&
+                    !lastEffectiveBookmark.contains(suffix)) {
+                int lastChapter = mPrefMgr.getLastChapter(mBookNumber);
+                if (lastChapter > 0) {
+                    lastEffectiveBookmark = "chapter-" + lastChapter;
+                }
+                else {
+                    lastEffectiveBookmark = null;
+                }
+            }
         }
-        else if (fragId < 0) {
-            bookUrl += String.format("#chapter%s", fragId);
+        if (lastEffectiveBookmark != null) {
+            bookUrl += '#' + lastEffectiveBookmark;
         }
 
         LOGGER.info("Loading book url {}", bookUrl);
@@ -284,7 +296,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         if (parent == mChapterSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mChapterSpinner");
             int cnum = position+1;
-            mPrefMgr.setLastChapterAndCheckpoint(mBookNumber, cnum, -cnum);
+            mPrefMgr.setLastInternalBookmarkAndChapter(mBookNumber, "chapter-" + cnum, cnum);
             reloadBookUrl();
         }
         else if (parent == mZoomSpinner.getSpinner()) {

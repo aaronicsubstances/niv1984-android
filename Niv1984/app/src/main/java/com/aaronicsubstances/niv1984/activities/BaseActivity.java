@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.aaronicsubstances.niv1984.fragments.AppDialogFragment;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,8 +16,6 @@ import java.util.Map;
 
 public abstract class BaseActivity extends AppCompatActivity implements
         AppDialogFragment.NoticeDialogListener  {
-    private static final Logger LOGGER = LoggerFactory.getLogger(BaseActivity.class);
-
     private Map<DialogFragment, AppDialogFragment.NoticeDialogListener> mDialogActionMap = new HashMap<>();
 
     public void showAppDialog(DialogFragment dialogFragment, AppDialogFragment.NoticeDialogListener

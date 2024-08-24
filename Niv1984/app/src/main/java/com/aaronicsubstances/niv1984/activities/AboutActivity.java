@@ -11,14 +11,9 @@ import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.etc.VersionCheckResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.Date;
 
 public class AboutActivity extends BaseActivity {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AboutActivity.class);
-
     private String mCurrentVersion;
     private TextView mCurrentVersionView;
 
@@ -26,15 +21,15 @@ public class AboutActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mCurrentVersionView = (TextView)findViewById(R.id.current_version);
+        mCurrentVersionView = findViewById(R.id.current_version);
         mCurrentVersion = Utils.getAppVersion(this);
         mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion));
 
-        TextView copyrightView = (TextView)findViewById(R.id.copy_right);
+        TextView copyrightView = findViewById(R.id.copy_right);
         String appCompany = getString(R.string.app_company);
         String currentYear = Utils.formatTimeStamp(new Date(), "yyyy");
         String copyrightText = getString(R.string.copyright_text, currentYear, appCompany);
@@ -48,7 +43,7 @@ public class AboutActivity extends BaseActivity {
 
     private void updateLatestVersionView() {
         SharedPrefsManager sharedPrefsManager = new SharedPrefsManager(this);
-        VersionCheckResponse latestVersionCheck = sharedPrefsManager.getCachedLatestVersion();
+        VersionCheckResponse latestVersionCheck = sharedPrefsManager.getCachedLatestVersionInfo();
         int currentVersionCode = Utils.getAppVersionCode(this);
         if (latestVersionCheck.getVersionName() != null && currentVersionCode < latestVersionCheck.getVersionCode()) {
             mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion) + ' ' +

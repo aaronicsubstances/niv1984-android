@@ -1,47 +1,60 @@
 $(function(){
     var slashIndex = location.href.lastIndexOf('/');
     var bnum = parseInt(location.href.substring(slashIndex+1, slashIndex+3));
-
+    var sortedBookmarks = []
     var throttleFxn = function() {
+        if (!sortedBookmarks.length) {
+            //NB: BOOKMARKS is a global Map injected into html files
+            sortedBookmarks = identifyAndSortInternalBookmarks(BOOKMARKS);
+        }
         // Get container scroll position
-        var fromTop = $(this).scrollTop();
+        var fromTop = $(window).scrollTop();
 
-        var lastPositiveCheckpoint = 0;
         var lastCnumSeen = 0
-        for (var i = 0; i < checkpoints.length; i++) {
-            var checkpoint = checkpoints[i]
-            if (checkpoint < 0) {
-                lastCnumSeen = -checkpoint;
-                var fragId = "chapter" + checkpoint;
-                var offsetTop = $('#'+fragId).offset().top;
-                if (offsetTop >= fromTop) {
-                    saveCheckpoint(bnum, lastCnumSeen, checkpoint);
+        for (var i = 0; i < sortedBookmarks.length; i++) {
+            var bookmark = sortedBookmarks[i]
+            var bookmarkEl = $('#'+bookmark);
+            var isChapterDiv = false;
+            if (bookmark.startsWith("chapter-")) {
+                lastCnumSeen = parseInt(bookmark.substring("chapter-".length));
+                isChapterDiv = true;
+            }
+            var offsetTop = bookmarkEl.offset().top;
+            if (offsetTop >= fromTop) {
+                saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+                return;
+            }
+            if (!isChapterDiv) {
+                if (offsetTop + bookmarkEl.height() > fromTop) {
+                    saveInternalBookmark(bnum, bookmark, lastCnumSeen);
                     return;
                 }
-            }
-            else {
-                for (var j = lastPositiveCheckpoint + 1; j <= checkpoint; j++) {
-                    var fragId = "verse-" + j;
-                    var offsetTop = $('#'+fragId).offset().top;
-                    if (offsetTop >= fromTop) {
-                        saveCheckpoint(bnum, lastCnumSeen, j);
-                        return;
-                    }
-                    if (offsetTop + $('#'+fragId).height() >= fromTop) {
-                        saveCheckpoint(bnum, lastCnumSeen, j);
-                        return;
-                    }
-                }
-                lastPositiveCheckpoint = checkpoint
             }
         }
     };
     $(window).scroll(throttle(1000, throttleFxn));
 });
 
-function saveCheckpoint(bnum, cnum, checkpoint) {
+function identifyAndSortInternalBookmarks(mapOfBookmarks) {
+    var sortedBookmarks = []
+    mapOfBookmarks.forEach((list, key) => {
+        for (value of list) {
+            var sepIdx = value.indexOf('-')
+            var bmSuffix = value.substring(0, sepIdx);
+            var bmDesc = value.substring(sepIdx+1);
+            if (/^\d+$/.test(bmDesc)) {
+                sortedBookmarks.push(`chapter-${bmDesc}`);
+            }
+            sortedBookmarks.push(`${key}-bookmark-${bmSuffix}`)
+        }
+    });
+    sortedBookmarks.sort((a, b) => $('#'+a).offset().top - $('#'+b).offset().top);
+    return sortedBookmarks
+}
+
+function saveInternalBookmark(bnum, bookmark, cnum) {
     if (window.biblei) {
-        biblei.javaCacheCurrentChapter(bnum, cnum, checkpoint);
+        biblei.javaSaveInternalBookmark(bnum, bookmark, cnum);
     }
 }
 

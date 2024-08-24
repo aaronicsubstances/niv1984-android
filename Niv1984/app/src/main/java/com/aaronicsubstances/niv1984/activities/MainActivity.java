@@ -166,7 +166,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void requireUpdateIfNecessary() {
-        VersionCheckResponse latestVersionCheck = mPrefM.getCachedLatestVersion();
+        VersionCheckResponse latestVersionCheck = mPrefM.getCachedLatestVersionInfo();
 
         // Don't require update if installed version is not lower than latest version.
         // This solves potential problem after upgrade where upgrade required indicators
@@ -244,7 +244,7 @@ public class MainActivity extends BaseActivity implements
                 }
                 LOGGER.info("Successfully retrieved latest version information: {}",
                         versionCheckResponse);
-                mPrefM.cacheLatestVersion(versionCheckResponse);
+                mPrefM.setCachedLatestVersionInfo(versionCheckResponse);
             }
             catch (Exception ex) {
                 LOGGER.error("Failed to download latest version information\n", ex);

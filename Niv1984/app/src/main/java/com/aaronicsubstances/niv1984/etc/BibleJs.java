@@ -27,8 +27,8 @@ public class BibleJs {
     }
 
     @JavascriptInterface
-    public void javaCacheCurrentChapter(final int bnum, final int cnum, final int checkpoint) {
-        LOGGER.debug("Saving book {} chapter {} checkpoint {}...", bnum, cnum, checkpoint);
+    public void javaSaveInternalBookmark(final int bnum, String bookmark, final int cnum) {
+        LOGGER.debug("Saving book {} bookmark {} chapter {}...", bnum, bookmark, cnum);
         if (mListener != null) {
             mContext.runOnUiThread(new Runnable() {
                 @Override
@@ -37,6 +37,6 @@ public class BibleJs {
                 }
             });
         }
-        mPrefMgr.setLastChapterAndCheckpoint(bnum, cnum, checkpoint);
+        mPrefMgr.setLastInternalBookmarkAndChapter(bnum, bookmark, cnum);
     }
 }

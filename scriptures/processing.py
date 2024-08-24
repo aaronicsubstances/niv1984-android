@@ -66,6 +66,8 @@ def main2():
         """)
             if version_tag == 'kjv':
                 related_f = os.path.join("..", "niv1984-xml", f)
+                # swap so niv comes first
+                related_f, f = f, related_f
             else:
                 related_f = os.path.join("..", "kjv1769-xml", f)
             work_on_xml(bnum, version_tags, [f, related_f], fout)
@@ -76,79 +78,95 @@ def main2():
 </html>""")
 
 def work_on_xml(bnum, version_tags, fs, fout):
-    checkpoints = []
     output = {}
-    dual_mode = len(version_tags) > 1
     for i in range(len(version_tags)):
         version_tag = version_tags[i]
         tree = ET.parse(fs[i])
         output_verses = []
         output_notes = []
-        vcnt = 0
         for chapter in tree.getroot():
             assert chapter.tag == 'chapter', chapter.tag
             cnum = int(chapter.attrib["num"])
-            if i == 0:
-                checkpoints.append(-cnum)
             output_verses.append([])
             output_notes.append([])
             vnum = 0
             for verse in chapter:
                 assert verse.tag in ['note', 'fragment', 'verse'], verse.tag
-                gridClsStart, gridClsEnd = '', ''
                 if verse.tag == "verse":
                     vnum = int(verse.attrib["num"])
-                    if dual_mode:
-                        gridClsStart = ' class="flex-item"><div class="flex-item-inner"'
-                        gridClsEnd = '></div'
-                    verse_id = ''
-                    if i == 0:
-                        vcnt += 1
-                        verse_id = f" id='verse-{vcnt}'"
-                    output_verses[-1].append(f"<div{verse_id}{gridClsStart}>[{vnum}] {coalesce_verse(version_tag, verse, cnum, vnum)}</div{gridClsEnd}>\n")
+                    output_verses[-1].append((verse.tag, f"[{vnum}] " + coalesce_verse(version_tag, verse, cnum, vnum)))
                 elif verse.tag == 'fragment':
-                    if not dual_mode:
-                        output_verses[-1].append(f"<div class='fragment'>[{vnum}] {coalesce_verse(version_tag, verse, cnum, vnum)}</div>\n")
+                    heading_present = False
+                    if verse.attrib.keys():
+                        assert list(verse.attrib.keys()) == ['kind'], e.attrib.keys
+                        assert verse.attrib['kind'] == 'HEADING', f"at {cnum}:{vnum} {verse.attrib['kind']}"
+                        heading_present = True
+                    output_verses[-1].append(('fragment-heading' if heading_present else verse.tag, coalesce_verse(version_tag, verse, cnum, vnum)))
                 else:
                     assert verse.tag == 'note'
                     assert list(verse.attrib.keys()) == ['num'], verse.attrib.keys()
-                    output_notes[-1].append(f"<div>{coalesce_verse(version_tag, verse, cnum, vnum, False, verse.attrib['num'])}</div>\n")
-    
-            if i == 0:
-                checkpoints.append(vcnt)
+                    output_notes[-1].append(coalesce_verse(version_tag, verse, cnum, vnum, False, verse.attrib['num']))
         output[version_tag] = {
             'v': output_verses,
             'n': output_notes
         }
 
-    fout.write(f"<script type='text/javascript'>var checkpoints = {checkpoints};</script>\n")
+    gridCls, gridClsStart, gridClsEnd = '', '', ''
+    if len(version_tags) > 1:
+        gridCls = ' class="flex-container"'
+        gridClsStart = ' class="flex-item">\n<div class="flex-item-inner"'
+        gridClsEnd = '>\n</div'
+    bookmark_counts = []
+    for version_tag in version_tags:
+        bookmark_counts.append(version_tag)
+        bookmark_counts.append(BookmarkGen())
     for cnum in range(1, CHAPTER_COUNTS[bnum-1] + 1):
-        fout.write(f"<div id='chapter-{cnum}'>\n")
-        fout.write(f"<h2>{'Psalm' if bnum == 19 else 'Chapter'} {cnum}</h2>\n")
-        gridCls = ' class="flex-container"' if dual_mode else ''
-        fout.write(f"<div{gridCls}>\n")
-        if dual_mode:
-            common_count = len(output[version_tags[0]]['v'][cnum-1])
-            assert len(output[version_tags[1]]['v'][cnum-1]) == common_count
-            for j in range(common_count):
-                fout.write(f"{output[version_tags[0]]['v'][cnum-1][j]}\n")
-                fout.write(f"{output[version_tags[1]]['v'][cnum-1][j]}\n")
-        else:
-            for item in output[version_tags[0]]['v'][cnum-1]:
-                fout.write(f"{item}\n")
-        gridClsStart, gridClsEnd = '', ''
-        if dual_mode:
-            gridClsStart = ' class="flex-item"><div class="flex-item-inner"'
-            gridClsEnd = '></div'
-        for j in range(len(version_tags)):
+        fout.write(f"<div id='chapter-{cnum}'{gridCls}>\n")
+        for version_tag in version_tags:
+            output_verses = output[version_tag]['v']
+            output_notes = output[version_tag]['n']
+            bookmark_counter = None
+            for j in range(len(bookmark_counts)):
+                if bookmark_counts[j] == version_tag:
+                    bookmark_counter = bookmark_counts[j+1]
+                    break
+            assert bookmark_counter
+
             fout.write(f"<div{gridClsStart}>\n")
-            fout.write("<hr>\n")
-            for item in output[version_tags[j]]['n'][cnum-1]:
-                fout.write(f"{item}\n")
-            fout.write("<hr>\n")
+
+            fout.write(f"<h2 id='{version_tag}-bookmark-{bookmark_counter.inc(f"{cnum}")}'>{'Psalm' if bnum == 19 else 'Chapter'} {cnum}</h2>\n")
+            for item in output_verses[cnum-1]:
+                item_attrs = []
+                if item[0] == 'fragment':
+                    bookmark_desc = 'f'
+                    item_attrs.append("class='fragment'")
+                elif item[0] == 'fragment-heading':
+                    bookmark_desc = 'h'
+                    item_attrs.append("class='fragment heading'")
+                else:
+                    assert item[0] == 'verse'
+                    bookmark_desc = f"{cnum}:{item[1][item[1].index('[')+1:item[1].index(']')]}"
+                    item_attrs.append("class='verse'")
+                item_attrs.append(f"id='{version_tag}-bookmark-{bookmark_counter.inc(bookmark_desc)}'")
+                item_attrs = "".join((" " + a) for a in item_attrs)
+                fout.write(f"<div{item_attrs}>{item[1]}</div>\n")
+
+            # add footnotes
+            fout.write(f"<div id='{version_tag}-bookmark-{bookmark_counter.inc('n')}'>\n")
+            fout.write(f"<hr>\n")
+            for item in output_notes[cnum-1]:
+                fout.write(f"<div>{item}</div>\n")
+            fout.write(f"<hr>\n")
+            fout.write("</div>\n")
+
             fout.write(f"</div{gridClsEnd}>\n")
         fout.write("</div>\n")
-        fout.write("</div>\n")
+
+    bookmarks = []
+    for j in range(0, len(bookmark_counts), 2):
+        bookmarks.append([bookmark_counts[j], bookmark_counts[j+1].acc])
+    fout.write(f"<script type='text/javascript'>var BOOKMARKS = new Map({bookmarks});</script>\n")
+
 
 def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
     text = []
@@ -182,6 +200,15 @@ def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
     if noteref:
         text.insert(0, f"<a id='{version_tag}-footnote-{cnum}-{noteref}' href='#{version_tag}-verse-{cnum}-{noteref}'>{chr(int(noteref) + 96)}</a>. ")
     return ''.join(text)
+    
+class BookmarkGen:
+    def __init__(self):
+        self.cnt = 0
+        self.acc = []
+    def inc(self, desc):
+        self.cnt+=1
+        self.acc.append(f"{self.cnt}-{desc}")
+        return self.cnt
     
 class FoutPhantom:
     def write(self, s):

@@ -20,12 +20,12 @@ $(function(){
                 isChapterDiv = true;
             }
             var offsetTop = bookmarkEl.offset().top;
-            if (offsetTop >= fromTop) {
+            if (offsetTop - (isChapterDiv ? 10 : 0) >= fromTop) {
                 saveInternalBookmark(bnum, bookmark, lastCnumSeen);
                 return;
             }
             if (!isChapterDiv) {
-                if (offsetTop + bookmarkEl.height() > fromTop) {
+                if (offsetTop + bookmarkEl.height()- > fromTop) {
                     saveInternalBookmark(bnum, bookmark, lastCnumSeen);
                     return;
                 }

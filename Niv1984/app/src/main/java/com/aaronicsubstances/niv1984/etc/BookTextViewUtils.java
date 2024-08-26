@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 public class BookTextViewUtils {
     public static final String LAUNCH_URL = "http://localhost";
     public static final int DEFAULT_ZOOM_INDEX = 1;
+    public static final int DEFAULT_LINE_HEIGHT_INDEX = 1;
     private static final Pattern HTML_SUFFIX_PATTERN = Pattern.compile("\\.html\\d*$");
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextViewUtils.class);
@@ -40,6 +41,8 @@ public class BookTextViewUtils {
         webSettings.setSaveFormData(false);
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.TEXT_AUTOSIZING);
+
+        final SharedPrefsManager sharedPrefsManager = new SharedPrefsManager(context);
 
         browser.setWebChromeClient(new WebChromeClient() {
 
@@ -58,7 +61,7 @@ public class BookTextViewUtils {
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
                 if (request.getUrl().getHost().equals("localhost")) {
                     try {
-                        return serve(context, request.getUrl());
+                        return serve(context, request.getUrl(), sharedPrefsManager);
                     }
                     catch (Exception ex) {
                         LOGGER.error("Could not serve {}: {}", request.getUrl(), ex);
@@ -85,10 +88,12 @@ public class BookTextViewUtils {
      *
      * @param context
      * @param uri localhost url
+     * @param sharedPrefsManager
      * @return WebResourceResponse
      * @throws IOException if an error occurs (e.g. url doesn't point to any asset file).
      */
-    public static WebResourceResponse serve(Context context, Uri uri) throws IOException {
+    public static WebResourceResponse serve(Context context, Uri uri,
+                                            SharedPrefsManager sharedPrefsManager) throws IOException {
         String assetPath = uri.getPath();
         if (assetPath.startsWith("/")) {
             assetPath = assetPath.substring(1);
@@ -117,17 +122,23 @@ public class BookTextViewUtils {
         }
 
         // Before serving do something special for css/base.css
-        // by appending zoom information.
+        // by appending zoom and line height information.
         if (assetPath.equals("css/base.css")) {
-            int zoomLevelIndex = new SharedPrefsManager(context).getLastZoomLevelIndex();
-            if (zoomLevelIndex >= 0 && zoomLevelIndex != DEFAULT_ZOOM_INDEX) {
-                LOGGER.debug("Appending text zoom css...");
-                String originalCss = Utils.toString(assetStream);
-                assetStream.close();
-                String zoom = context.getResources().getStringArray(R.array.zoom_entries)[zoomLevelIndex];
-                assetStream = new ByteArrayInputStream(String.format("%s%nbody { font-size: %s; }",
-                        originalCss, zoom).getBytes());
+            LOGGER.debug("Appending custom css...");
+            String originalCss = Utils.toString(assetStream);
+            assetStream.close();
+            int zoomLevelIndex = sharedPrefsManager.getZoomLevelIndex();
+            if (zoomLevelIndex < 0) {
+                zoomLevelIndex = DEFAULT_ZOOM_INDEX;
             }
+            String zoom = context.getResources().getStringArray(R.array.zoom_entries_slim)[zoomLevelIndex];
+            int lineHeightIndex = sharedPrefsManager.getLineHeightIndex();
+            if (lineHeightIndex < 0) {
+                lineHeightIndex = DEFAULT_LINE_HEIGHT_INDEX;
+            }
+            String lineHeight = context.getResources().getStringArray(R.array.line_height_entries_slim)[lineHeightIndex];
+            assetStream = new ByteArrayInputStream(String.format("%s%nbody { font-size: %s; line-height: %s; }",
+                    originalCss, zoom, lineHeight).getBytes());
         }
 
         String mimeType = getMimeType(assetPath);

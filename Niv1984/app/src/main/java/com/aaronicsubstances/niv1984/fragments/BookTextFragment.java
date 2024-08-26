@@ -49,6 +49,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private boolean mViewCreated = false;
 
+    private int mLastLineHeightIdx;
+    private boolean mDualModeOn, mReadBothSideBySide;
+
     public BookTextFragment() {
         // Required empty public constructor
     }
@@ -103,13 +106,31 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onStart() {
         super.onStart();
-        int lastZoomLevelIdx = mPrefMgr.getLastZoomLevelIndex();
         boolean viewOutOfDate = false;
-        if (lastZoomLevelIdx >= 0 && lastZoomLevelIdx != mZoomSpinner.getSelectedItemPosition()) {
-            mZoomSpinner.setSelection(lastZoomLevelIdx, false);
-            viewOutOfDate = true;
+        int lastZoomLevelIdx = mPrefMgr.getZoomLevelIndex();
+        if (lastZoomLevelIdx >= 0) {
+            if (lastZoomLevelIdx != mZoomSpinner.getSelectedItemPosition()) {
+                mZoomSpinner.setSelection(lastZoomLevelIdx, false);
+                viewOutOfDate = true;
+            }
+        }
+        if (mLastLineHeightIdx >= 0) {
+            int lineHeightIdx = mPrefMgr.getLineHeightIndex();
+            if (lineHeightIdx < 0) {
+                lineHeightIdx = BookTextViewUtils.DEFAULT_LINE_HEIGHT_INDEX;
+            }
+            if (lineHeightIdx != mLastLineHeightIdx) {
+                viewOutOfDate = true;
+            }
+        }
+        if (mDualModeOn) {
+            boolean readBothSideBySide = mPrefMgr.getReadBothSideBySide();
+            if (readBothSideBySide != mReadBothSideBySide) {
+                viewOutOfDate = true;
+            }
         }
         if (viewOutOfDate) {
+            LOGGER.info("WebView out of date. refreshing...");
             refreshView();
         }
     }
@@ -189,11 +210,11 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpZoomSpinner() {
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item_2,
-                getResources().getStringArray(R.array.zoom_entries));
+                getResources().getStringArray(R.array.zoom_entries_slim));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mZoomSpinner.setAdapter(adapter);
 
-        int zoomLevelIndex = mPrefMgr.getLastZoomLevelIndex();
+        int zoomLevelIndex = mPrefMgr.getZoomLevelIndex();
         if (zoomLevelIndex >= 0) {
             mZoomSpinner.setSelection(zoomLevelIndex, false);
         }
@@ -207,17 +228,25 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         if (mBookNumber < 1) return;
 
         int lastBookMode = mPrefMgr.getLastBookMode();
+        mDualModeOn = false;
+        mReadBothSideBySide = mPrefMgr.getReadBothSideBySide();
         String suffix;
         switch (lastBookMode) {
             case SharedPrefsManager.BOOK_MODE_KJV:
                 suffix = "kjv";
                 break;
             case SharedPrefsManager.BOOK_MODE_NIV_KJV:
-                suffix = "niv-kjv";
+                mDualModeOn = true;
+                suffix = mReadBothSideBySide ? "niv-kjv-alt" : "niv-kjv";
                 break;
             default:
                 suffix = "niv";
                 break;
+        }
+
+        mLastLineHeightIdx = mPrefMgr.getLineHeightIndex();
+        if (mLastLineHeightIdx < 0) {
+            mLastLineHeightIdx = BookTextViewUtils.DEFAULT_LINE_HEIGHT_INDEX;
         }
 
         // For change in text size to take effect,
@@ -231,7 +260,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         String bookUrl = BookTextViewUtils.resolveUrl(
                 String.format("kjv-niv/%02d-%s.html",
                 mBookNumber, suffix),
-                "zoom", "" + mZoomSpinner.getSelectedItemPosition());
+                "zoom", "" + mZoomSpinner.getSelectedItemPosition(),
+                            "line-height", "" + mLastLineHeightIdx);
 
         String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookNumber);
         if (lastEffectiveBookmark != null) {
@@ -301,7 +331,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         }
         else if (parent == mZoomSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mZoomSpinner");
-            mPrefMgr.setLastZoomLevelIndex(position);
+            mPrefMgr.setZoomLevelIndex(position);
             reloadBookUrl();
         }
         else {

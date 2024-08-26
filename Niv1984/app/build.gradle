@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 // Create a variable called keystorePropertiesFile, and initialize it to your
@@ -44,8 +45,8 @@ android {
         applicationId "com.aaronicsubstances.niv1984"
         minSdk 21
         targetSdk 34
-        versionCode 216
-        versionName "2.1.6"
+        versionCode 219
+        versionName "2.1.9"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -57,7 +58,7 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
 
-            buildConfigField("String", "API_BASE_URL", "\"${debugProperties['apiBaseUrl']}\"")
+            buildConfigField("String", "API_BASE_URL", "\"${debugProperties['versionCheckUrl']}\"")
         }
         release {
             minifyEnabled true
@@ -65,7 +66,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
 
-            buildConfigField("String", "API_BASE_URL", "\"${releaseProperties['apiBaseUrl']}\"")
+            buildConfigField("String", "API_BASE_URL", "\"${releaseProperties['versionCheckUrl']}\"")
         }
     }
     buildFeatures {
@@ -91,6 +92,10 @@ dependencies {
     implementation 'androidx.preference:preference:1.2.1'
     androidTestImplementation 'androidx.test.ext:junit:1.2.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    implementation platform('com.google.firebase:firebase-bom:33.1.2')
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-firestore'
 
     implementation 'org.slf4j:slf4j-api:2.0.7'
     implementation 'com.github.tony19:logback-android:3.0.0'

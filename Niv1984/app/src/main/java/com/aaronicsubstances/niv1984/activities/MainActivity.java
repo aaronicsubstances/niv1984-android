@@ -11,8 +11,6 @@ import androidx.core.app.ShareCompat;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Handler;
-import android.os.Looper;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,7 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import com.aaronicsubstances.niv1984.R;
-import com.aaronicsubstances.niv1984.etc.VersionCheckResponse;
+import com.aaronicsubstances.niv1984.etc.FirebaseFacade;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.fragments.AppDialogFragment;
@@ -33,21 +31,12 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
 public class MainActivity extends BaseActivity implements
         BookListFragment.OnBookSelectionListener,
         BookTextFragment.OnBookTextFragmentInteractionListener,
         AdapterView.OnItemSelectedListener {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
-
-    private  static final Gson GSON_INSTANCE = new Gson();
 
     private static final String SAVED_STATE_KEY_BOOK_NUMBER = MainActivity.class +
             ".bnum";
@@ -62,8 +51,6 @@ public class MainActivity extends BaseActivity implements
     private AppCompatSpinner mBookDropDown;
 
     private SharedPrefsManager mPrefM;
-    static ExecutorService executor = Executors.newSingleThreadExecutor();
-    static Handler handler = new Handler(Looper.getMainLooper());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +63,7 @@ public class MainActivity extends BaseActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mBookDropDown = (AppCompatSpinner)findViewById(R.id.bookDropDown);
+        mBookDropDown = findViewById(R.id.bookDropDown);
         String[] books = getResources().getStringArray(R.array.books);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -117,14 +104,9 @@ public class MainActivity extends BaseActivity implements
 
         updateFragments();
 
-        // Get and cache latest version
-        try {
-            checkForLatestVersionAsync();
+        if (savedInstanceState == null) {
+            requireUpdateIfNecessary();
         }
-        catch (Throwable ex) {
-            LOGGER.warn("Version check failed.", ex);
-        }
-        requireUpdateIfNecessary();
     }
 
     private void updateFragments() {
@@ -166,93 +148,67 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void requireUpdateIfNecessary() {
-        VersionCheckResponse latestVersionCheck = mPrefM.getCachedLatestVersionInfo();
-
-        // Don't require update if installed version is not lower than latest version.
-        // This solves potential problem after upgrade where upgrade required indicators
-        // are no longer meant for the now upgraded app version.
-        if (latestVersionCheck.getVersionName() == null ||
-                Utils.getAppVersionCode(this) >= latestVersionCheck.getVersionCode()) {
-            LOGGER.debug("Aborting require update {}, {} vrs {}",
-                    latestVersionCheck.getVersionName(),
-                    latestVersionCheck.getVersionCode(),
-                    Utils.getAppVersionCode(this));
-            return;
-        }
-
-        if (isFinishing()) return;
-
-        String updateAction = getResources().getString(R.string.action_update);
-        String cancelAction = getResources().getString(R.string.action_cancel);
-        if (!TextUtils.isEmpty(latestVersionCheck.getForceUpgrade())) {
-            String message = latestVersionCheck.getForceUpgrade();
-            DialogFragment dialogFragment = AppDialogFragment.newInstance(message, updateAction,
-                    cancelAction);
-            dialogFragment.setCancelable(false);
-            showAppDialog(dialogFragment, new AppDialogFragment.NoticeDialogListener() {
-                @Override
-                public void onDialogPositiveClick(DialogFragment dialog) {
-                    Utils.openAppOnPlayStore(MainActivity.this);
-                    finish();
-                }
-
-                @Override
-                public void onDialogNegativeClick(DialogFragment dialog) {
-                    finish();
-                }
-            });
-            getSupportFragmentManager().executePendingTransactions();
-        }
-
-        else if (!TextUtils.isEmpty(latestVersionCheck.getRecommendUpgrade())) {
-            String message = latestVersionCheck.getRecommendUpgrade();
-            DialogFragment newFragment = AppDialogFragment.newInstance(message, updateAction,
-                    cancelAction);
-            showAppDialog(newFragment, new AppDialogFragment.NoticeDialogListener() {
-                @Override
-                public void onDialogPositiveClick(DialogFragment dialog) {
-                    Utils.openAppOnPlayStore(MainActivity.this);
-                    finish();
-                }
-
-                @Override
-                public void onDialogNegativeClick(DialogFragment dialog) {
-                    // do nothing.
-                }
-            });
-            getSupportFragmentManager().executePendingTransactions();
-        }
-    }
-
-    private void checkForLatestVersionAsync() {
-
-        executor.execute(() -> {
-            //Background work here
-            try {
-                String effectiveUrl = Utils.API_BASE_URL + "latest-version-info.json";
-                LOGGER.debug("Downloading latest version information from {}...", effectiveUrl);
-                URLConnection urlConnection = new URL(effectiveUrl).openConnection();
-                int responseStatus = ((HttpURLConnection)urlConnection).getResponseCode();
-                if (responseStatus != 200) {
-                    throw new RuntimeException("Got unexpected status code of " + responseStatus);
-                }
-                VersionCheckResponse versionCheckResponse;
-                try (InputStream downloadStream = urlConnection.getInputStream()) {
-                    String serializedRes = Utils.toString(downloadStream);
-                    LOGGER.debug("Received from api: {}", serializedRes);
-                    versionCheckResponse = GSON_INSTANCE.fromJson(serializedRes, VersionCheckResponse.class);
-                }
-                LOGGER.info("Successfully retrieved latest version information: {}",
-                        versionCheckResponse);
-                mPrefM.setCachedLatestVersionInfo(versionCheckResponse);
-            }
-            catch (Exception ex) {
-                LOGGER.error("Failed to download latest version information\n", ex);
+        FirebaseFacade.getConfItems(latestVersionCheck -> {
+            if (isFinishing()) {
                 return;
             }
-            /*handler.post(() -> {
-                //UI Thread work here
-            });*/
+
+            if (latestVersionCheck == null) {
+                return;
+            }
+
+            // Don't require update if installed version is not lower than latest version.
+            // This solves potential problem after upgrade where upgrade required indicators
+            // are no longer meant for the now upgraded app version.
+            if (latestVersionCheck.getVersionName() == null ||
+                    Utils.getAppVersionCode(this) >= latestVersionCheck.getVersionCode()) {
+                LOGGER.debug("Aborting require update {}, {} vrs {}",
+                        latestVersionCheck.getVersionName(),
+                        latestVersionCheck.getVersionCode(),
+                        Utils.getAppVersionCode(this));
+                return;
+            }
+
+            String updateAction = getResources().getString(R.string.action_update);
+            String cancelAction = getResources().getString(R.string.action_cancel);
+            if (!TextUtils.isEmpty(latestVersionCheck.getForceUpgrade())) {
+                String message = latestVersionCheck.getForceUpgrade();
+                DialogFragment dialogFragment = AppDialogFragment.newInstance(message, updateAction,
+                        cancelAction);
+                dialogFragment.setCancelable(false);
+                showAppDialog(dialogFragment, new AppDialogFragment.NoticeDialogListener() {
+                    @Override
+                    public void onDialogPositiveClick(DialogFragment dialog) {
+                        Utils.openAppOnPlayStore(MainActivity.this);
+                        finish();
+                    }
+
+                    @Override
+                    public void onDialogNegativeClick(DialogFragment dialog) {
+                        finish();
+                    }
+                });
+                getSupportFragmentManager().executePendingTransactions();
+            }
+
+            else if (!TextUtils.isEmpty(latestVersionCheck.getRecommendUpgrade())) {
+                String message = latestVersionCheck.getRecommendUpgrade();
+                DialogFragment newFragment = AppDialogFragment.newInstance(message, updateAction,
+                        cancelAction);
+                showAppDialog(newFragment, new AppDialogFragment.NoticeDialogListener() {
+                    @Override
+                    public void onDialogPositiveClick(DialogFragment dialog) {
+                        Utils.openAppOnPlayStore(MainActivity.this);
+                        finish();
+                    }
+
+                    @Override
+                    public void onDialogNegativeClick(DialogFragment dialog) {
+                        // do nothing.
+                    }
+                });
+                getSupportFragmentManager().executePendingTransactions();
+            }
         });
     }
 

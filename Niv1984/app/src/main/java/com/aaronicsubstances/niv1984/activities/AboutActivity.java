@@ -7,6 +7,7 @@ import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
 
 import com.aaronicsubstances.niv1984.R;
+import com.aaronicsubstances.niv1984.etc.FirebaseFacade;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.etc.VersionCheckResponse;
@@ -35,19 +36,25 @@ public class AboutActivity extends BaseActivity {
         String copyrightText = getString(R.string.copyright_text, currentYear, appCompany);
         copyrightView.setText(copyrightText);
 
-        TextView t2 = (TextView) findViewById(R.id.credits);
+        TextView t2 = findViewById(R.id.credits);
         t2.setMovementMethod(LinkMovementMethod.getInstance());
 
         updateLatestVersionView();
     }
 
     private void updateLatestVersionView() {
-        SharedPrefsManager sharedPrefsManager = new SharedPrefsManager(this);
-        VersionCheckResponse latestVersionCheck = sharedPrefsManager.getCachedLatestVersionInfo();
-        int currentVersionCode = Utils.getAppVersionCode(this);
-        if (latestVersionCheck.getVersionName() != null && currentVersionCode < latestVersionCheck.getVersionCode()) {
-            mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion) + ' ' +
-                getString(R.string.latest_version, latestVersionCheck.getVersionName()));
-        }
+        FirebaseFacade.getConfItems(latestVersionCheck -> {
+            if (isFinishing()) {
+                return;
+            }
+            if (latestVersionCheck == null) {
+                return;
+            }
+            int currentVersionCode = Utils.getAppVersionCode(this);
+            if (latestVersionCheck.getVersionName() != null && currentVersionCode < latestVersionCheck.getVersionCode()) {
+                mCurrentVersionView.setText(getString(R.string.current_version, mCurrentVersion) + ' ' +
+                        getString(R.string.latest_version, latestVersionCheck.getVersionName()));
+            }
+        });
     }
 }

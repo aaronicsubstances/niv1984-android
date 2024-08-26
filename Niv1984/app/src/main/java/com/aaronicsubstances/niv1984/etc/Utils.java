@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
 import android.webkit.WebView;
 
 import com.aaronicsubstances.niv1984.BuildConfig;
@@ -20,6 +22,8 @@ import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 /**
@@ -33,6 +37,9 @@ public class Utils {
     public static final int COPY_BUF_SZ = 8192;
 
     public static final String DEFAULT_CHARSET = "utf-8";
+
+    public static ExecutorService EXECUTOR_INSTANCE = Executors.newSingleThreadExecutor();
+    public static Handler HANDLER_INSTANCE = new Handler(Looper.getMainLooper());
 
     public static void copy(InputStream ins, OutputStream ous) throws IOException {
         byte[] buf = new byte[COPY_BUF_SZ];

@@ -10,9 +10,22 @@
             app:title="@string/pref_screen_title_zoom"
             app:useSimpleSummaryProvider="true" />
 
+        <ListPreference
+            app:defaultValue="1"
+            app:entries="@array/line_height_entries"
+            app:entryValues="@array/line_height_values"
+            app:key="@string/shared_pref_line_height"
+            app:title="@string/pref_screen_title_line_height"
+            app:useSimpleSummaryProvider="true" />
+
         <SwitchPreferenceCompat
             app:key="@string/shared_pref_keep_screen_on"
             app:title="@string/pref_screen_title_keep_screen_on" />
+
+        <SwitchPreferenceCompat
+            app:key="@string/shared_pref_read_both_side_by_side"
+            app:title="@string/pref_screen_title_read_both_side_by_side"
+            app:summary="@string/pref_screen_summary_read_both_side_by_side"/>
 
         <SwitchPreferenceCompat
             app:key="@string/shared_pref_night_mode"

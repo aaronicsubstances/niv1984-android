@@ -20,7 +20,7 @@ public class BibleJs {
     private final Activity mContext;
     private final CurrentChapterChangeListener mListener;
 
-    public BibleJs(Context context,CurrentChapterChangeListener listener ) {
+    public BibleJs(Context context, CurrentChapterChangeListener listener ) {
         mPrefMgr = new SharedPrefsManager(context);
         mContext = (Activity)context;
         mListener = listener;
@@ -38,5 +38,17 @@ public class BibleJs {
             });
         }
         mPrefMgr.setLastInternalBookmarkAndChapter(bnum, bookmark, cnum);
+    }
+
+    @JavascriptInterface
+    public void javaOnPageLoadCompleted() {
+        if (mListener != null) {
+            mContext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mListener.onPageLoadCompleted();
+                }
+            });
+        }
     }
 }

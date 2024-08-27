@@ -2,6 +2,7 @@ package com.aaronicsubstances.niv1984.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 
 import com.aaronicsubstances.niv1984.R;
@@ -44,6 +46,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private SpinnerHelper mChapterSpinner, mZoomSpinner;
     private WebView mBookView;
     private RadioButton nivOnly, kjvOnly, bothBibles;
+    private ProgressBar mWebViewPageLoadIndicator;
 
     private SharedPrefsManager mPrefMgr;
 
@@ -88,6 +91,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         mChapterSpinner = new SpinnerHelper(root.findViewById(R.id.chapterDropDown));
         mZoomSpinner = new SpinnerHelper(root.findViewById(R.id.fontSizes));
         mBookView = root.findViewById(R.id.bookView);
+        mWebViewPageLoadIndicator = root.findViewById(R.id.progressBar1);
         nivOnly = root.findViewById(R.id.nivOnly);
         kjvOnly = root.findViewById(R.id.kjvOnly);
         bothBibles = root.findViewById(R.id.bothOnly);
@@ -124,8 +128,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             }
         }
         if (mDualModeOn) {
-            boolean readBothSideBySide = mPrefMgr.getReadBothSideBySide();
-            if (readBothSideBySide != mReadBothSideBySide) {
+            if (mReadBothSideBySide != mPrefMgr.getReadBothSideBySide()) {
                 viewOutOfDate = true;
             }
         }
@@ -177,7 +180,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         int selectedCnum = mPrefMgr.getLastChapter(mBookNumber);
         if (selectedCnum > 0) {
-            // Pass animate=false to force immediate firing of listeners.
+            // Pass animate=false to avoid unnecessary animation in spinner.
             mChapterSpinner.setSelection(selectedCnum - 1, false);
         }
         else {
@@ -278,12 +281,33 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 }
             }
         }
+        // if url differs only in fragment, don't show progress loading indicator
+        int loadIndicatorVisibility = View.VISIBLE;
+        if (bookUrl.equals(getUrlWithoutFragment())) {
+            loadIndicatorVisibility = View.INVISIBLE;
+        }
         if (lastEffectiveBookmark != null) {
             bookUrl += '#' + lastEffectiveBookmark;
         }
 
         LOGGER.info("Loading book url {}", bookUrl);
+        mWebViewPageLoadIndicator.setVisibility(loadIndicatorVisibility);
+        //mBookView.setVisibility(loadIndicatorVisibility == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
         mBookView.loadUrl(bookUrl);
+    }
+
+    private String getUrlWithoutFragment() {
+        String url = mBookView.getUrl();
+        if (url == null) {
+            return null;
+        }
+        int hashIdx = url.lastIndexOf('#');
+        if (hashIdx < 0) {
+            return url;
+        }
+        else {
+            return url.substring(0, hashIdx);
+        }
     }
 
     @Override
@@ -316,9 +340,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         // Disable listener before setting selection.
         mChapterSpinner.setOnItemSelectedListener(null);
-        // Pass animate=false to force immediate firing of listeners.
+        // Pass animate=false to avoid unnecessary animation in spinner.
         mChapterSpinner.setSelection(cnum > 0 ? cnum - 1 : 0, false);
         mChapterSpinner.setOnItemSelectedListener(this);
+    }
+
+    @Override
+    public void onPageLoadCompleted() {
+        mWebViewPageLoadIndicator.setVisibility(View.INVISIBLE);
+        //mBookView.setVisibility(View.VISIBLE);
     }
 
     @Override

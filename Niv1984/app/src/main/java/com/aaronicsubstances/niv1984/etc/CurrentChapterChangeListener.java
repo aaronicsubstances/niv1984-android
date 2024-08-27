@@ -7,4 +7,5 @@ package com.aaronicsubstances.niv1984.etc;
 
 public interface CurrentChapterChangeListener {
     void onCurrentChapterChanged(int bnum, int cnum);
+    void onPageLoadCompleted();
 }

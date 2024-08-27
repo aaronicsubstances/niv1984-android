@@ -1,12 +1,17 @@
-$(function(){
+$(function() {
     var slashIndex = location.href.lastIndexOf('/');
     var bnum = parseInt(location.href.substring(slashIndex+1, slashIndex+3));
-    var sortedBookmarks = []
+    var initialBookmark = undefined;
+    var hashIndex = location.href.lastIndexOf('#')
+    if (hashIndex >= 0) {
+        initialBookmark = location.href.substring(hashIndex+1);
+    }
+
+    //NB: BOOKMARKS is a global Map injected into html files
+    var sortedBookmarks = identifyAndSortInternalBookmarks(BOOKMARKS);
+    var lastBookmark = sortedBookmarks[sortedBookmarks.length-1];
+
     var throttleFxn = function() {
-        if (!sortedBookmarks.length) {
-            //NB: BOOKMARKS is a global Map injected into html files
-            sortedBookmarks = identifyAndSortInternalBookmarks(BOOKMARKS);
-        }
         // Get container scroll position
         var fromTop = $(window).scrollTop();
 
@@ -20,19 +25,69 @@ $(function(){
                 isChapterDiv = true;
             }
             var offsetTop = bookmarkEl.offset().top;
-            if (offsetTop - (isChapterDiv ? 10 : 0) >= fromTop) {
-                saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+            if (offsetTop >= fromTop) {
+                // this check doesn't only save us unnecessary updates,
+                // but also helps deal with undesirable calls after
+                // initial scrolling is initiated by check() function.
+                if (bookmark != lastBookmark) {
+                    saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+                    lastBookmark = bookmark;
+                }
                 return;
             }
             if (!isChapterDiv) {
-                if (offsetTop + bookmarkEl.height()- > fromTop) {
-                    saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+                if (offsetTop + bookmarkEl.height() / 2 > fromTop) {
+                    // this check doesn't only save us unnecessary updates,
+                    // but also helps deal with undesirable calls after
+                    // initial scrolling is initiated by check() function.
+                    if (bookmark != lastBookmark) {
+                        saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+                        lastBookmark = bookmark;
+                    }
                     return;
                 }
             }
         }
     };
-    $(window).scroll(throttle(1000, throttleFxn));
+    var previousTop = 0;
+    var isPageLoadingInProgress = function() {
+        var elem = document.getElementById(lastBookmark)
+        if (!elem) {
+            return true
+        }
+        var currentTop = elem.getBoundingClientRect().top
+        if (currentTop !== previousTop) {
+            previousTop = currentTop
+            return true
+        }
+        return false
+    };
+    var check = function() {
+        if (isPageLoadingInProgress()) {
+            setTimeout(check, 500);
+            return;
+        }
+
+        // navigate to initial bookmark or scroll to start of document
+        if (initialBookmark) {
+            var elem = document.getElementById(initialBookmark)
+            if (elem) {
+                elem.scrollIntoView()
+            }
+            else {
+                // do nothing
+            }
+        }
+        else {
+            window.scrollTo(0, 0);
+        }
+        lastBookmark = initialBookmark;
+        $(window).scroll(throttle(1000, throttleFxn));
+        fireOnPageLoadCompleted();
+    };
+
+    // don't install scroll listener until page loading completes.
+    check();
 });
 
 function identifyAndSortInternalBookmarks(mapOfBookmarks) {
@@ -50,6 +105,12 @@ function identifyAndSortInternalBookmarks(mapOfBookmarks) {
     });
     sortedBookmarks.sort((a, b) => $('#'+a).offset().top - $('#'+b).offset().top);
     return sortedBookmarks
+}
+
+function fireOnPageLoadCompleted() {
+    if (window.biblei) {
+        biblei.javaOnPageLoadCompleted()
+    }
 }
 
 function saveInternalBookmark(bnum, bookmark, cnum) {

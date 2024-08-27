@@ -1,7 +1,10 @@
+#body {
+    line-height: 1.5;
+}
+
 #wrapper {
     margin-left: 0.15em;
     margin-right: 0.15em;
-    line-height: 1.5;
 }
 
 .fragment {

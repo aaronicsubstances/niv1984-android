@@ -136,7 +136,8 @@ public class BookTextViewUtils {
             if (lineHeightIndex < 0) {
                 lineHeightIndex = DEFAULT_LINE_HEIGHT_INDEX;
             }
-            String lineHeight = context.getResources().getStringArray(R.array.line_height_entries_slim)[lineHeightIndex];
+            // for some reason percentages were not working with line-height, so had to use floating-points.
+            double lineHeight = 1.25 + 0.25 * lineHeightIndex;
             assetStream = new ByteArrayInputStream(String.format("%s%nbody { font-size: %s; line-height: %s; }",
                     originalCss, zoom, lineHeight).getBytes());
         }

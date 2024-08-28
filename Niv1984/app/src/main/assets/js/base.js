@@ -12,6 +12,8 @@ $(function() {
     var lastBookmark = sortedBookmarks[sortedBookmarks.length-1];
 
     var throttleFxn = function() {
+        fireOnPageScrollEvent();
+
         // Get container scroll position
         var fromTop = $(window).scrollTop();
 
@@ -19,6 +21,9 @@ $(function() {
         for (var i = 0; i < sortedBookmarks.length; i++) {
             var bookmark = sortedBookmarks[i]
             var bookmarkEl = $('#'+bookmark);
+            if (!bookmarkEl.offset() || !bookmarkEl.height()) {
+                continue;
+            }
             var isChapterDiv = false;
             if (bookmark.startsWith("chapter-")) {
                 lastCnumSeen = parseInt(bookmark.substring("chapter-".length));
@@ -110,6 +115,12 @@ function identifyAndSortInternalBookmarks(mapOfBookmarks) {
 function fireOnPageLoadCompleted() {
     if (window.biblei) {
         biblei.javaOnPageLoadCompleted()
+    }
+}
+
+function fireOnPageScrollEvent() {
+    if (window.biblei) {
+        biblei.javaOnPageScrollEvent()
     }
 }
 

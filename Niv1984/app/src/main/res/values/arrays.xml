@@ -92,8 +92,8 @@
 
     <string-array name="line_height_entries">
         <item>125%</item>
-        <item>150% (default)</item>
-        <item>175%</item>
+        <item>150%</item>
+        <item>175% (default)</item>
         <item>200%</item>
         <item>225%</item>
         <item>250%</item>
@@ -112,8 +112,8 @@
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
         <item>4</item>
         <item>5</item>
-        <item>6</item>
     </string-array>
 </resources>

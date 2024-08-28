@@ -5,7 +5,8 @@ package com.aaronicsubstances.niv1984.etc;
  * Remove as soon as chapter spinner is removed from UI.
  */
 
-public interface CurrentChapterChangeListener {
-    void onCurrentChapterChanged(int bnum, int cnum);
+public interface CustomWebPageEventListener {
     void onPageLoadCompleted();
+    void onPageScrollEvent();
+    void onPageChapterMayHaveChanged(int bnum, int cnum);
 }

@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,9 +16,10 @@ import android.widget.RadioButton;
 
 import com.aaronicsubstances.niv1984.R;
 import com.aaronicsubstances.niv1984.etc.BookTextViewUtils;
-import com.aaronicsubstances.niv1984.etc.CurrentChapterChangeListener;
+import com.aaronicsubstances.niv1984.etc.CustomWebPageEventListener;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.SpinnerHelper;
+import com.aaronicsubstances.niv1984.etc.Utils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +34,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BookTextFragment extends Fragment implements View.OnClickListener,
         AdapterView.OnItemSelectedListener,
-        CurrentChapterChangeListener {
+        CustomWebPageEventListener {
     private static final String ARG_PARAM1 = "param1";
 
     private String mParam1;
@@ -54,6 +56,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private int mLastLineHeightIdx;
     private boolean mDualModeOn, mReadBothSideBySide;
+
+    private Runnable KEEP_SCREEN_OFF;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -110,6 +114,17 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onStart() {
         super.onStart();
+        KEEP_SCREEN_OFF = () -> {
+            Utils.HANDLER_INSTANCE.removeCallbacks(KEEP_SCREEN_OFF);
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        };
+        if (mPrefMgr.getKeepUserScreenOn()) {
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+        else {
+            getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
+
         boolean viewOutOfDate = false;
         int lastZoomLevelIdx = mPrefMgr.getZoomLevelIndex();
         if (lastZoomLevelIdx >= 0) {
@@ -136,6 +151,21 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             LOGGER.info("WebView out of date. refreshing...");
             refreshView();
         }
+    }
+
+    private void postponeKeepScreenOff() {
+        if (mPrefMgr.getKeepUserScreenOn()) {
+            Utils.HANDLER_INSTANCE.removeCallbacks(KEEP_SCREEN_OFF);
+            getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            Utils.HANDLER_INSTANCE.postDelayed(KEEP_SCREEN_OFF, 5 * 1000 * 60); // 5 minutes
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Utils.HANDLER_INSTANCE.removeCallbacks(KEEP_SCREEN_OFF);
+        getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     @Override
@@ -329,7 +359,19 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onCurrentChapterChanged(int bnum, int cnum) {
+    public void onPageLoadCompleted() {
+        mWebViewPageLoadIndicator.setVisibility(View.INVISIBLE);
+        //mBookView.setVisibility(View.VISIBLE);
+        postponeKeepScreenOff();
+    }
+
+    @Override
+    public void onPageScrollEvent() {
+        postponeKeepScreenOff();
+    }
+
+    @Override
+    public void onPageChapterMayHaveChanged(int bnum, int cnum) {
         if (!mViewCreated) {
             return;
         }
@@ -338,17 +380,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             return;
         }
 
+        if (mChapterSpinner.getSelectedItemPosition() == cnum - 1) {
+            return;
+        }
+
         // Disable listener before setting selection.
         mChapterSpinner.setOnItemSelectedListener(null);
         // Pass animate=false to avoid unnecessary animation in spinner.
         mChapterSpinner.setSelection(cnum > 0 ? cnum - 1 : 0, false);
         mChapterSpinner.setOnItemSelectedListener(this);
-    }
-
-    @Override
-    public void onPageLoadCompleted() {
-        mWebViewPageLoadIndicator.setVisibility(View.INVISIBLE);
-        //mBookView.setVisibility(View.VISIBLE);
     }
 
     @Override

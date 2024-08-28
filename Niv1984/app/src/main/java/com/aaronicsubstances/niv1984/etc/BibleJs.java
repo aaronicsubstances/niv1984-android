@@ -18,26 +18,12 @@ public class BibleJs {
 
     private final SharedPrefsManager mPrefMgr;
     private final Activity mContext;
-    private final CurrentChapterChangeListener mListener;
+    private final CustomWebPageEventListener mListener;
 
-    public BibleJs(Context context, CurrentChapterChangeListener listener ) {
+    public BibleJs(Context context, CustomWebPageEventListener listener ) {
         mPrefMgr = new SharedPrefsManager(context);
         mContext = (Activity)context;
         mListener = listener;
-    }
-
-    @JavascriptInterface
-    public void javaSaveInternalBookmark(final int bnum, String bookmark, final int cnum) {
-        LOGGER.debug("Saving book {} bookmark {} chapter {}...", bnum, bookmark, cnum);
-        if (mListener != null) {
-            mContext.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mListener.onCurrentChapterChanged(bnum, cnum);
-                }
-            });
-        }
-        mPrefMgr.setLastInternalBookmarkAndChapter(bnum, bookmark, cnum);
     }
 
     @JavascriptInterface
@@ -50,5 +36,31 @@ public class BibleJs {
                 }
             });
         }
+    }
+
+    @JavascriptInterface
+    public void javaOnPageScrollEvent() {
+        if (mListener != null) {
+            mContext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mListener.onPageScrollEvent();
+                }
+            });
+        }
+    }
+
+    @JavascriptInterface
+    public void javaSaveInternalBookmark(final int bnum, String bookmark, final int cnum) {
+        LOGGER.debug("Saving book {} bookmark {} chapter {}...", bnum, bookmark, cnum);
+        if (mListener != null) {
+            mContext.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mListener.onPageChapterMayHaveChanged(bnum, cnum);
+                }
+            });
+        }
+        mPrefMgr.setLastInternalBookmarkAndChapter(bnum, bookmark, cnum);
     }
 }

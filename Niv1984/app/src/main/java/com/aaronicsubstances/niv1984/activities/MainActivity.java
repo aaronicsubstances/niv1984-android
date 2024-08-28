@@ -15,7 +15,6 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
@@ -26,7 +25,6 @@ import com.aaronicsubstances.niv1984.etc.Utils;
 import com.aaronicsubstances.niv1984.fragments.AppDialogFragment;
 import com.aaronicsubstances.niv1984.fragments.BookListFragment;
 import com.aaronicsubstances.niv1984.fragments.BookTextFragment;
-import com.google.gson.Gson;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -121,12 +119,6 @@ public class MainActivity extends BaseActivity implements
             getSupportActionBar().setTitle(null);
             mBookDropDown.setVisibility(View.VISIBLE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            if (mPrefM.getKeepUserScreenOn()) {
-                getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-            else {
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
         }
         else {
             mBookDropDown.setOnItemSelectedListener(null);
@@ -136,7 +128,6 @@ public class MainActivity extends BaseActivity implements
             getSupportActionBar().setTitle(R.string.app_name);
             mBookDropDown.setVisibility(View.GONE);
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 

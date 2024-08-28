@@ -45,8 +45,8 @@ android {
         applicationId "com.aaronicsubstances.niv1984"
         minSdk 21
         targetSdk 34
-        versionCode 221
-        versionName "2.2.1"
+        versionCode 222
+        versionName "2.2.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -58,7 +58,7 @@ android {
             applicationIdSuffix '.debug'
             versionNameSuffix '-DEBUG'
 
-            buildConfigField("String", "API_BASE_URL", "\"${debugProperties['versionCheckUrl']}\"")
+            buildConfigField("String", "API_BASE_URL", "\"${debugProperties['API_BASE_URL']}\"")
         }
         release {
             minifyEnabled true
@@ -66,7 +66,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.config
 
-            buildConfigField("String", "API_BASE_URL", "\"${releaseProperties['versionCheckUrl']}\"")
+            buildConfigField("String", "API_BASE_URL", "\"${releaseProperties['API_BASE_URL']}\"")
         }
     }
     buildFeatures {

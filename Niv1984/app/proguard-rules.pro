@@ -23,3 +23,10 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+-keepclassmembers class com.aaronicsubstances.niv1984.etc.BibleJs {
+   public *;
+}
+-keepclassmembers class com.aaronicsubstances.niv1984.etc.VersionCheckResponse {
+   public *;
+}

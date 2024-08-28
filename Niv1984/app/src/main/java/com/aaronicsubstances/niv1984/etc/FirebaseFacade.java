@@ -17,6 +17,8 @@ public class FirebaseFacade {
                     .get()
                     .addOnSuccessListener(result -> {
                         try {
+                            // exempt VersionCheckResponse class from obfuscation to prevent error of
+                            // deserialization not finding any members to deserialize to due to renaming.
                             VersionCheckResponse configValue = result.getDocuments().get(0).toObject(VersionCheckResponse.class);
                             LOGGER.debug("Successfully parsed conf document: {}", configValue);
                             Utils.HANDLER_INSTANCE.post(() -> cb.accept(configValue));
@@ -24,6 +26,9 @@ public class FirebaseFacade {
                         catch (Exception ex) {
                             LOGGER.warn("Error interpreting conf document.", ex);
                             Utils.HANDLER_INSTANCE.post(() -> cb.accept(null));
+                            /*Utils.HANDLER_INSTANCE.post(() -> {
+                                throw new RuntimeException("Error interpreting conf document.", ex);
+                            });*/
                         }
                     })
                     .addOnFailureListener( exception -> {

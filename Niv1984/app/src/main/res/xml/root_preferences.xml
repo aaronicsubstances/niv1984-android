@@ -10,14 +10,6 @@
             app:title="@string/pref_screen_title_zoom"
             app:useSimpleSummaryProvider="true" />
 
-        <ListPreference
-            app:defaultValue="2"
-            app:entries="@array/line_height_entries"
-            app:entryValues="@array/line_height_values"
-            app:key="@string/shared_pref_line_height"
-            app:title="@string/pref_screen_title_line_height"
-            app:useSimpleSummaryProvider="true" />
-
         <SwitchPreferenceCompat
             app:key="@string/shared_pref_keep_screen_on"
             app:title="@string/pref_screen_title_keep_screen_on"

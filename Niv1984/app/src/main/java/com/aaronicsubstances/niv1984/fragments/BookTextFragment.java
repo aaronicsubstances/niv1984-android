@@ -54,7 +54,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private boolean mViewCreated = false;
 
-    private int mLastLineHeightIdx;
     private boolean mDualModeOn, mReadBothSideBySide;
 
     private Runnable KEEP_SCREEN_OFF;
@@ -130,15 +129,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         if (lastZoomLevelIdx >= 0) {
             if (lastZoomLevelIdx != mZoomSpinner.getSelectedItemPosition()) {
                 mZoomSpinner.setSelection(lastZoomLevelIdx, false);
-                viewOutOfDate = true;
-            }
-        }
-        if (mLastLineHeightIdx >= 0) {
-            int lineHeightIdx = mPrefMgr.getLineHeightIndex();
-            if (lineHeightIdx < 0) {
-                lineHeightIdx = BookTextViewUtils.DEFAULT_LINE_HEIGHT_INDEX;
-            }
-            if (lineHeightIdx != mLastLineHeightIdx) {
                 viewOutOfDate = true;
             }
         }
@@ -277,11 +267,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 break;
         }
 
-        mLastLineHeightIdx = mPrefMgr.getLineHeightIndex();
-        if (mLastLineHeightIdx < 0) {
-            mLastLineHeightIdx = BookTextViewUtils.DEFAULT_LINE_HEIGHT_INDEX;
-        }
-
         // For change in text size to take effect,
         // it has so far been observed that it is not enough
         // to call loadUrl() on the WebView instance with
@@ -293,8 +278,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         String bookUrl = BookTextViewUtils.resolveUrl(
                 String.format("kjv-niv/%02d-%s.html",
                 mBookNumber, suffix),
-                "zoom", "" + mZoomSpinner.getSelectedItemPosition(),
-                            "line-height", "" + mLastLineHeightIdx);
+                "zoom", "" + mZoomSpinner.getSelectedItemPosition());
 
         String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookNumber);
         if (lastEffectiveBookmark != null) {
@@ -322,7 +306,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         LOGGER.info("Loading book url {}", bookUrl);
         mWebViewPageLoadIndicator.setVisibility(loadIndicatorVisibility);
-        //mBookView.setVisibility(loadIndicatorVisibility == View.VISIBLE ? View.INVISIBLE : View.VISIBLE);
         mBookView.loadUrl(bookUrl);
     }
 
@@ -361,7 +344,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     @Override
     public void onPageLoadCompleted() {
         mWebViewPageLoadIndicator.setVisibility(View.INVISIBLE);
-        //mBookView.setVisibility(View.VISIBLE);
         postponeKeepScreenOff();
     }
 

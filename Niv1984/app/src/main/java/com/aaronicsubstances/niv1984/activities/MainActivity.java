@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,7 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
 import android.text.TextUtils;
+import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -54,9 +56,12 @@ public class MainActivity extends BaseActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPrefM = new SharedPrefsManager(this);
-        AppCompatDelegate.setDefaultNightMode(mPrefM.isNightModeOn() ?
+        int desiredNightMode = mPrefM.isNightModeOn() ?
                 AppCompatDelegate.MODE_NIGHT_YES :
-                AppCompatDelegate.MODE_NIGHT_NO);
+                AppCompatDelegate.MODE_NIGHT_NO;
+        if (AppCompatDelegate.getDefaultNightMode() != desiredNightMode) {
+            AppCompatDelegate.setDefaultNightMode(desiredNightMode);
+        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

@@ -29,7 +29,6 @@ import java.util.regex.Pattern;
 public class BookTextViewUtils {
     public static final String LAUNCH_URL = "http://localhost";
     public static final int DEFAULT_ZOOM_INDEX = 1;
-    public static final int DEFAULT_LINE_HEIGHT_INDEX = 2;
     private static final Pattern HTML_SUFFIX_PATTERN = Pattern.compile("\\.html\\d*$");
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextViewUtils.class);
@@ -122,26 +121,19 @@ public class BookTextViewUtils {
         }
 
         // Before serving do something special for css/base.css
-        // by appending zoom and line height information.
+        // by appending zoom information.
         if (assetPath.equals("css/base.css")) {
             int zoomLevelIndex = sharedPrefsManager.getZoomLevelIndex();
             if (zoomLevelIndex < 0) {
                 zoomLevelIndex = DEFAULT_ZOOM_INDEX;
             }
-            int lineHeightIndex = sharedPrefsManager.getLineHeightIndex();
-            if (lineHeightIndex < 0) {
-                lineHeightIndex = DEFAULT_LINE_HEIGHT_INDEX;
-            }
-            if (zoomLevelIndex != DEFAULT_ZOOM_INDEX || lineHeightIndex != DEFAULT_LINE_HEIGHT_INDEX) {
+            if (zoomLevelIndex != DEFAULT_ZOOM_INDEX) {
                 LOGGER.debug("Appending custom css...");
                 String originalCss = Utils.toString(assetStream);
                 assetStream.close();
                 String zoom = context.getResources().getStringArray(R.array.zoom_entries_slim)[zoomLevelIndex];
-                // for some reason percentages were not working with line-height of 250% upwards,
-                // so had to use floating-points.
-                double lineHeight = 1.25 + 0.25 * lineHeightIndex;
-                assetStream = new ByteArrayInputStream(String.format("%s%nbody { font-size: %s; line-height: %s; }",
-                        originalCss, zoom, lineHeight).getBytes());
+                assetStream = new ByteArrayInputStream(String.format("%s%nbody { font-size: %s; }",
+                        originalCss, zoom).getBytes());
             }
         }
 

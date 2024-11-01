@@ -27,7 +27,7 @@ public class SharedPrefsManager {
     public static final String SHARED_PREF_NAME = "prefs";
     private static final String SHARED_PREF_KEY_BOOK_MODE = "book_mode";
     public static final String SHARED_PREF_KEY_ZOOM = "zoom";
-    public static final String SHARED_PRF_KEY_LINE_HEIGHT= "line_height";
+    //public static final String SHARED_PRF_KEY_LINE_HEIGHT= "line_height";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
     private static final String SHARED_PREF_KEY_READ_BOTH_SIDE_BY_SIDE = "two_column_mode";
@@ -114,16 +114,6 @@ public class SharedPrefsManager {
         SharedPreferences.Editor ed = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).edit();
         ed.putString(SHARED_PREF_KEY_ZOOM, "" + lastZoomLevelIndex);
         ed.commit();
-    }
-
-    public int getLineHeightIndex() {
-        String strVal = mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getString(
-                SHARED_PRF_KEY_LINE_HEIGHT, null
-        );
-        if (strVal == null) {
-            return -1;
-        }
-        return Integer.parseInt(strVal);
     }
 
     public boolean getKeepUserScreenOn() {

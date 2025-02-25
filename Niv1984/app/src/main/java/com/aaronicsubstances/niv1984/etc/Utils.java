@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -37,6 +38,58 @@ public class Utils {
     public static final int COPY_BUF_SZ = 8192;
 
     public static final String DEFAULT_CHARSET = "utf-8";
+
+    public static final String[] BIBLE_CODES = new String[]{
+            "GEN", "EXO", "LEV", "NUM", "DEU",
+            "JOS", "JDG", "RUT", "1SA", "2SA",
+            "1KI", "2KI", "1CH", "2CH", "EZR",
+            "NEH", "TOB", "JDT", "ESG", "JOB",
+            "PSA", "PRO", "ECC", "SNG", "WIS",
+            "SIR", "ISA", "JER", "LAM", "BAR",
+            "EZK", "DAG", "HOS", "JOL", "AMO",
+            "OBA", "JON", "MIC", "NAM", "HAB",
+            "ZEP", "HAG", "ZEC", "MAL", "1MA",
+            "2MA",
+
+            "MAT", "MRK", "LUK", "JHN", "ACT",
+            "ROM", "1CO", "2CO", "GAL", "EPH",
+            "PHP", "COL", "1TH", "2TH", "1TI",
+            "2TI", "TIT", "PHM", "HEB", "JAS",
+            "1PE", "2PE", "1JN", "2JN", "3JN",
+            "JUD", "REV"
+    };
+
+    public static final int[] CHAPTER_COUNTS = new int[]{
+            50, 40, 27, 36, 34,
+            24, 21, 4, 31, 24,
+            22, 25, 29, 36, 10,
+            13, 14, 16, 15, 42,
+            150, 31, 12, 8, 19,
+            51, 66, 52, 5, 6,
+            48, 14, 14, 3, 9,
+            1, 4, 7, 3, 3,
+            3, 2, 14, 4, 16,
+            15,
+
+            28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13,
+            5, 5, 3, 5, 1, 1, 1, 22
+    };
+
+    public static int[] determineChapterDisplayRange(String bookCode) {
+        int bIdx = -1;
+        for (int i = 0; i < BIBLE_CODES.length; i++) {
+            String item = BIBLE_CODES[i];
+            if (item.equals(bookCode)) {
+                bIdx = i;
+                break;
+            }
+        }
+        int chapterCount = CHAPTER_COUNTS[bIdx];
+        if (Arrays.asList("SIR", "LAM").contains(bookCode)) {
+            return new int[]{ 0, chapterCount - 1 };
+        }
+        return new int[]{ 1, chapterCount };
+    }
 
     public static ExecutorService EXECUTOR_INSTANCE = Executors.newSingleThreadExecutor();
     public static Handler HANDLER_INSTANCE = new Handler(Looper.getMainLooper());

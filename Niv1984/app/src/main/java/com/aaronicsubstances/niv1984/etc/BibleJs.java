@@ -51,16 +51,16 @@ public class BibleJs {
     }
 
     @JavascriptInterface
-    public void javaSaveInternalBookmark(final int bnum, String bookmark, final int cnum) {
-        LOGGER.debug("Saving book {} bookmark {} chapter {}...", bnum, bookmark, cnum);
+    public void javaSaveInternalBookmark(final String bcode, String bookmark, final int cnum) {
+        LOGGER.debug("Saving book {} bookmark {} chapter {}...", bcode, bookmark, cnum);
         if (mListener != null) {
             mContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mListener.onPageChapterMayHaveChanged(bnum, cnum);
+                    mListener.onPageChapterMayHaveChanged(bcode, cnum);
                 }
             });
         }
-        mPrefMgr.setLastInternalBookmarkAndChapter(bnum, bookmark, cnum);
+        mPrefMgr.setLastInternalBookmarkAndChapter(bcode, bookmark, "" + cnum);
     }
 }

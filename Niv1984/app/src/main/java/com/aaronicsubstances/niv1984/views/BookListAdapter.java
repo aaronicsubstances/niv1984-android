@@ -57,7 +57,10 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         // Get the data model based on position
-        final String description = mBooks[position];
+        String bookEntry = mBooks[position];
+        int sepIdx = bookEntry.indexOf("|");
+        final String bookCode = bookEntry.substring(0, sepIdx);
+        final String description = bookEntry.substring(sepIdx+1);
 
         // Set item views based on your views and data model
         holder.nameTextView.setText(description);
@@ -80,9 +83,9 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         if (ch == 'a') {
             resId = R.drawable.ic_subject_a; // used
         }
-        /*else if (ch == 'b') {
+        else if (ch == 'b') {
             resId = R.drawable.ic_subject_b;
-        }*/
+        }
         else if (ch == 'c') {
             resId = R.drawable.ic_subject_c; // used
         }
@@ -142,11 +145,11 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
         }
         else if (ch == 'v') {
             resId = R.drawable.ic_subject_v;
-        }
+        }*/
         else if (ch == 'w') {
             resId = R.drawable.ic_subject_w;
         }
-        else if (ch == 'x') {
+        /*else if (ch == 'x') {
             resId = R.drawable.ic_subject_x;
         }
         else if (ch == 'y') {
@@ -170,7 +173,7 @@ public class BookListAdapter extends RecyclerView.Adapter<BookListAdapter.ViewHo
             public void onClick(View v) {
                 if (mItemClickListener != null) {
                     mItemClickListener.onItemClicked(holder.getAdapterPosition(),
-                            null);
+                            bookCode);
                 }
             }
         });

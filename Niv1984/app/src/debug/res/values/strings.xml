@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "NIV1984">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "Vulgate">]>
 <resources>
     <string name="app_name">(&appname;)</string>
     <string name="title_activity_bible">(&appname;) Bible</string>
+    <string name="action_rate">Rate &appname;</string>
 </resources>

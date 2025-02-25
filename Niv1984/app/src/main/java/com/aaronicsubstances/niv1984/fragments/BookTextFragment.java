@@ -41,22 +41,21 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextFragment.class);
 
-    private int mBookNumber = -1;
+    private String mBookCode = null;
 
     private OnBookTextFragmentInteractionListener mListener;
 
     private SpinnerHelper mChapterSpinner, mZoomSpinner;
     private WebView mBookView;
-    private RadioButton nivOnly, kjvOnly, bothBibles;
+    private RadioButton cpdvOnly, withDra, withNiv;
     private ProgressBar mWebViewPageLoadIndicator;
 
     private SharedPrefsManager mPrefMgr;
 
     private boolean mViewCreated = false;
 
-    private boolean mDualModeOn, mReadBothSideBySide;
-
     private Runnable KEEP_SCREEN_OFF;
+    private String[] mChapters;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -95,9 +94,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         mZoomSpinner = new SpinnerHelper(root.findViewById(R.id.fontSizes));
         mBookView = root.findViewById(R.id.bookView);
         mWebViewPageLoadIndicator = root.findViewById(R.id.progressBar1);
-        nivOnly = root.findViewById(R.id.nivOnly);
-        kjvOnly = root.findViewById(R.id.kjvOnly);
-        bothBibles = root.findViewById(R.id.bothOnly);
+        cpdvOnly = root.findViewById(R.id.cpdvOnly);
+        withDra = root.findViewById(R.id.withDra);
+        withNiv = root.findViewById(R.id.withNiv);
 
         mPrefMgr = new SharedPrefsManager(getContext());
 
@@ -132,11 +131,6 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 viewOutOfDate = true;
             }
         }
-        if (mDualModeOn) {
-            if (mReadBothSideBySide != mPrefMgr.getReadBothSideBySide()) {
-                viewOutOfDate = true;
-            }
-        }
         if (viewOutOfDate) {
             LOGGER.info("WebView out of date. refreshing...");
             refreshView();
@@ -165,12 +159,12 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         mViewCreated = false;
     }
 
-    public void setBookNumber(int bookNumber) {
-        if (mBookNumber == bookNumber) {
-            LOGGER.warn("Book number is already set to {}.", bookNumber);
+    public void setBookCode(String bookCode) {
+        if (bookCode.equals(mBookCode)) {
+            LOGGER.warn("Book code is already set to {}.", bookCode);
             return;
         }
-        mBookNumber = bookNumber;
+        mBookCode = bookCode;
         if (mViewCreated) {
             LOGGER.debug("Calling refreshView from setBookNumber...");
             refreshView();
@@ -183,25 +177,46 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     private void setUpChapterSpinner() {
-        if (mBookNumber < 1) return;
+        if (mBookCode == null) return;
 
-        int chapterCount = getResources().getIntArray(R.array.chapter_count)[mBookNumber-1];
-        String[] chapters = new String[chapterCount];
-        for (int i = 0; i < chapters.length; i++) {
-            // left padding to 3 chars are for chapters in Psalms
-            chapters[i] = String.format("%3d", i + 1);
+        int[] chapterDisplayRange = Utils.determineChapterDisplayRange(mBookCode);
+        int chapterDisplayStart = chapterDisplayRange[0];
+        int chapterDisplayEnd = chapterDisplayRange[1];
+        mChapters = new String[chapterDisplayEnd - chapterDisplayStart + 1];
+        for (int i = 0; i < mChapters.length; i++) {
+            int cnum = chapterDisplayStart + i;
+            String chapterDisplay;
+            if (cnum == 0) {
+                chapterDisplay = "P";
+            }
+            else {
+                // left padding to 3 chars are for chapters in Psalms
+                chapterDisplay = String.format("%3d", cnum);
+            }
+            mChapters[i] = chapterDisplay;
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
                 R.layout.spinner_item_2,
-                chapters);
+                mChapters);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mChapterSpinner.setAdapter(adapter);
 
-        int selectedCnum = mPrefMgr.getLastChapter(mBookNumber);
-        if (selectedCnum > 0) {
+        String selectedCnum = mPrefMgr.getLastChapter(mBookCode);
+        if (selectedCnum != null) {
+            if (selectedCnum.equals("0")) {
+                selectedCnum = "P";
+            }
+            selectedCnum = selectedCnum.trim();
+            int selectedIdx = 0;
+            for (int i = 0; i < mChapters.length; i++) {
+                if (mChapters[i].trim().equals(selectedCnum)) {
+                    selectedIdx = i;
+                    break;
+                }
+            }
             // Pass animate=false to avoid unnecessary animation in spinner.
-            mChapterSpinner.setSelection(selectedCnum - 1, false);
+            mChapterSpinner.setSelection(selectedIdx, false);
         }
         else {
             mChapterSpinner.setSelection(0, false);
@@ -212,20 +227,20 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpBrowserView() {
         int mode = mPrefMgr.getLastBookMode();
         switch (mode) {
-            case SharedPrefsManager.BOOK_MODE_KJV:
-                kjvOnly.setChecked(true);
+            case SharedPrefsManager.BOOK_MODE_WITH_DRA:
+                withDra.setChecked(true);
                 break;
-            case SharedPrefsManager.BOOK_MODE_NIV_KJV:
-                bothBibles.setChecked(true);
+            case SharedPrefsManager.BOOK_MODE_WITH_NIV:
+                withNiv.setChecked(true);
                 break;
             default:
-                nivOnly.setChecked(true);
+                cpdvOnly.setChecked(true);
                 break;
         }
 
-        nivOnly.setOnClickListener(this);
-        kjvOnly.setOnClickListener(this);
-        bothBibles.setOnClickListener(this);
+        cpdvOnly.setOnClickListener(this);
+        withDra.setOnClickListener(this);
+        withNiv.setOnClickListener(this);
 
         BookTextViewUtils.configureBrowser(getActivity(), mBookView, this);
     }
@@ -248,22 +263,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     private void reloadBookUrl() {
-        if (mBookNumber < 1) return;
+        if (mBookCode == null) return;
 
-        int lastBookMode = mPrefMgr.getLastBookMode();
-        mDualModeOn = false;
-        mReadBothSideBySide = mPrefMgr.getReadBothSideBySide();
-        String suffix;
-        switch (lastBookMode) {
-            case SharedPrefsManager.BOOK_MODE_KJV:
-                suffix = "kjv";
+        String additionalBook = "";
+        switch (mPrefMgr.getLastBookMode()) {
+            case SharedPrefsManager.BOOK_MODE_WITH_DRA:
+                additionalBook = "dra";
                 break;
-            case SharedPrefsManager.BOOK_MODE_NIV_KJV:
-                mDualModeOn = true;
-                suffix = mReadBothSideBySide ? "niv-kjv-alt" : "niv-kjv";
-                break;
-            default:
-                suffix = "niv";
+            case SharedPrefsManager.BOOK_MODE_WITH_NIV:
+                additionalBook = "niv";
                 break;
         }
 
@@ -276,25 +284,11 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         // So a query string parameter is added to force a
         // refetching of the css.
         String bookUrl = BookTextViewUtils.resolveUrl(
-                String.format("kjv-niv/%02d-%s.html",
-                mBookNumber, suffix),
+                String.format("html/%s-cpdv.html", mBookCode),
+                "add", additionalBook,
                 "zoom", "" + mZoomSpinner.getSelectedItemPosition());
 
-        String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookNumber);
-        if (lastEffectiveBookmark != null) {
-            // ensure bookmark exists in currently selected text.
-            if (lastBookMode != SharedPrefsManager.BOOK_MODE_NIV_KJV &&
-                    !lastEffectiveBookmark.startsWith("chapter-") &&
-                    !lastEffectiveBookmark.contains(suffix)) {
-                int lastChapter = mPrefMgr.getLastChapter(mBookNumber);
-                if (lastChapter > 0) {
-                    lastEffectiveBookmark = "chapter-" + lastChapter;
-                }
-                else {
-                    lastEffectiveBookmark = null;
-                }
-            }
-        }
+        String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookCode);
         // if url differs only in fragment, don't show progress loading indicator
         int loadIndicatorVisibility = View.VISIBLE;
         if (bookUrl.equals(getUrlWithoutFragment())) {
@@ -325,15 +319,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        if (v == bothBibles || v == nivOnly || v == kjvOnly) {
+        if (v == cpdvOnly || v == withDra || v == withNiv) {
             boolean checked = ((RadioButton)v).isChecked();
             if (checked) {
-                int mode = SharedPrefsManager.BOOK_MODE_NIV;
-                if (v == bothBibles) {
-                    mode = SharedPrefsManager.BOOK_MODE_NIV_KJV;
+                int mode = SharedPrefsManager.BOOK_MODE_CPDV;
+                if (v == withDra) {
+                    mode = SharedPrefsManager.BOOK_MODE_WITH_DRA;
                 }
-                else if (v == kjvOnly) {
-                    mode = SharedPrefsManager.BOOK_MODE_KJV;
+                else if (v == withNiv) {
+                    mode = SharedPrefsManager.BOOK_MODE_WITH_NIV;
                 }
                 mPrefMgr.setLastBookMode(mode);
                 reloadBookUrl();
@@ -353,23 +347,32 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onPageChapterMayHaveChanged(int bnum, int cnum) {
+    public void onPageChapterMayHaveChanged(String bcode, int cnum) {
         if (!mViewCreated) {
             return;
         }
 
-        if (mBookNumber != bnum) {
+        if (!bcode.equals(mBookCode)) {
             return;
         }
 
-        if (mChapterSpinner.getSelectedItemPosition() == cnum - 1) {
+        int cIdx = -1;
+        for (int i = 0; i < mChapters.length; i++) {
+            if (mChapters[i].trim().equals(
+                    cnum == 0 ? "P" : "" + cnum)) {
+                cIdx = i;
+                break;
+            }
+        }
+
+        if (cIdx == -1 || mChapterSpinner.getSelectedItemPosition() == cIdx) {
             return;
         }
 
         // Disable listener before setting selection.
         mChapterSpinner.setOnItemSelectedListener(null);
         // Pass animate=false to avoid unnecessary animation in spinner.
-        mChapterSpinner.setSelection(cnum > 0 ? cnum - 1 : 0, false);
+        mChapterSpinner.setSelection(cIdx, false);
         mChapterSpinner.setOnItemSelectedListener(this);
     }
 
@@ -377,8 +380,11 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         if (parent == mChapterSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mChapterSpinner");
-            int cnum = position+1;
-            mPrefMgr.setLastInternalBookmarkAndChapter(mBookNumber, "chapter-" + cnum, cnum);
+            String cnum = mChapters[position].trim();
+            if (cnum.equals("P")) {
+                cnum = "0";
+            }
+            mPrefMgr.setLastInternalBookmarkAndChapter(mBookCode, "chapter-" + cnum, cnum);
             reloadBookUrl();
         }
         else if (parent == mZoomSpinner.getSpinner()) {

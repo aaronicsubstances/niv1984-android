@@ -39,7 +39,7 @@
             android:minWidth="@dimen/spinner_min_width"
             android:layout_marginBottom="@dimen/activity_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/txt2"
             android:text="@string/action_zoom"
@@ -49,7 +49,7 @@
             android:id="@+id/fontSizes"
             android:layout_marginBottom="@dimen/activity_margin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"/>
 
         <View
             android:layout_width="2dp"
@@ -63,20 +63,20 @@
             android:layout_gravity="bottom">
 
             <RadioButton
-                android:id="@+id/nivOnly"
-                android:text="NIV"
+                android:id="@+id/cpdvOnly"
+                android:text="@string/cpdvOnly"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/kjvOnly"
-                android:text="KJV"
+                android:id="@+id/withDra"
+                android:text="@string/withDra"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <RadioButton
-                android:id="@+id/bothOnly"
-                android:text="NIV/KJV"
+                android:id="@+id/withNiv"
+                android:text="@string/withNiv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

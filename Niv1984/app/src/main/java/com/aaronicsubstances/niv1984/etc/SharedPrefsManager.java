@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
  */
 
 public class SharedPrefsManager {
-    public static final int BOOK_MODE_KJV = 0;
-    public static final int BOOK_MODE_NIV = 1;
-    public static final int BOOK_MODE_NIV_KJV = 2;
+    public static final int BOOK_MODE_CPDV = 0;
+    public static final int BOOK_MODE_WITH_DRA = 1;
+    public static final int BOOK_MODE_WITH_NIV = 2;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
 
@@ -27,14 +27,12 @@ public class SharedPrefsManager {
     public static final String SHARED_PREF_NAME = "prefs";
     private static final String SHARED_PREF_KEY_BOOK_MODE = "book_mode";
     public static final String SHARED_PREF_KEY_ZOOM = "zoom";
-    //public static final String SHARED_PRF_KEY_LINE_HEIGHT= "line_height";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
-    private static final String SHARED_PREF_KEY_READ_BOTH_SIDE_BY_SIDE = "two_column_mode";
 
     public SharedPrefsManager(Context context) {
         this.mContext = context;
-        if (mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).getInt(INTERNAL_SHARED_PREF_KEY_VERSION, 0) < 218) {
+        if (mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).getInt(INTERNAL_SHARED_PREF_KEY_VERSION, 0) < 300) {
             LOGGER.info("Resetting all shared preferences...");
             SharedPreferences.Editor ed = mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).edit();
             ed.putInt(INTERNAL_SHARED_PREF_KEY_VERSION, Utils.getAppVersionCode(mContext));
@@ -49,34 +47,21 @@ public class SharedPrefsManager {
         }
     }
 
-    public int getLastChapter(int bnum) {
-        return mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).getInt(
-                INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bnum, 0
-        );
-    }
-
-    /*public void setLastChapter(int bnum, int cnum) {
-        SharedPreferences.Editor ed = mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).edit();
-        ed.putInt(INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bnum, cnum);
-        ed.commit();
-    }*/
-
-    public String getLastInternalBookmark(int bnum) {
+    public String getLastChapter(String bcode) {
         return mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).getString(
-                INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bnum, null
+                INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bcode, null);
+    }
+
+    public String getLastInternalBookmark(String bcode) {
+        return mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).getString(
+                INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bcode, null
         );
     }
 
-    /*public void setLastInternalBookmark(int bnum, String bookmark) {
+    public void setLastInternalBookmarkAndChapter(String bcode, String bookmark, String cnum) {
         SharedPreferences.Editor ed = mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).edit();
-        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bnum, bookmark);
-        ed.commit();
-    }*/
-
-    public void setLastInternalBookmarkAndChapter(int bnum, String bookmark, int cnum) {
-        SharedPreferences.Editor ed = mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).edit();
-        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bnum, bookmark);
-        ed.putInt(INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bnum, cnum);
+        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bcode, bookmark);
+        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bcode, cnum);
         ed.commit();
     }
 
@@ -125,12 +110,6 @@ public class SharedPrefsManager {
     public boolean isNightModeOn() {
         return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
                 SHARED_PREF_KEY_NIGHT_MODE, false
-        );
-    }
-
-    public boolean getReadBothSideBySide() {
-        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
-                SHARED_PREF_KEY_READ_BOTH_SIDE_BY_SIDE, false
         );
     }
 }

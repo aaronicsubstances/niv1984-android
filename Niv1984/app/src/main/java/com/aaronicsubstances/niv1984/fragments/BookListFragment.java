@@ -106,10 +106,8 @@ public class BookListFragment extends Fragment implements RecyclerViewItemClickL
 
     @Override
     public void onItemClicked(int adapterPosition, Object data) {
-        int bookNumber = adapterPosition+1;
-
         if (mListener != null) {
-            mListener.onBookSelected(bookNumber);
+            mListener.onBookSelected(adapterPosition);
         }
     }
 
@@ -125,6 +123,6 @@ public class BookListFragment extends Fragment implements RecyclerViewItemClickL
      */
     public interface OnBookSelectionListener {
 
-        void onBookSelected(int bookNumber);
+        void onBookSelected(int bookIdx);
     }
 }

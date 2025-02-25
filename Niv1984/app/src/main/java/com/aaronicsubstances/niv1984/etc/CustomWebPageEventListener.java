@@ -8,5 +8,5 @@ package com.aaronicsubstances.niv1984.etc;
 public interface CustomWebPageEventListener {
     void onPageLoadCompleted();
     void onPageScrollEvent();
-    void onPageChapterMayHaveChanged(int bnum, int cnum);
+    void onPageChapterMayHaveChanged(String bcode, int cnum);
 }

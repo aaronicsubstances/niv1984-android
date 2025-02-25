@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "NIV1984">]>
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE resources [<!ENTITY appname "Vulgate">]>
 <resources>
     <string name="app_name">&appname;</string>
     <string name="title_activity_bible">&appname; Bible</string>
@@ -31,141 +31,79 @@
     <string name="credits">Find Privacy Policy <a href="https://doc-hosting.flycricket.io/com-aaronicsubstances-niv1984-privacy-policy/a14ffad8-3574-4df7-81dc-70ad951bc09c/privacy">here</a>.</string>
 
     <string-array name="books">
-        <item>Genesis</item>
-        <item>Exodus</item>
-        <item>Leviticus</item>
-        <item>Numbers</item>
-        <item>Deuteronomy</item>
-        <item>Joshua</item>
-        <item>Judges</item>
-        <item>Ruth</item>
-        <item>1 Samuel</item>
-        <item>2 Samuel</item>
-        <item>1 Kings</item>
-        <item>2 Kings</item>
-        <item>1 Chronicles</item>
-        <item>2 Chronicles</item>
-        <item>Ezra</item>
-        <item>Nehemiah</item>
-        <item>Esther</item>
-        <item>Job</item>
-        <item>Psalms</item>
-        <item>Proverbs</item>
-        <item>Ecclesiastes</item>
-        <item>Songs of Solomon</item>
-        <item>Isaiah</item>
-        <item>Jeremiah</item>
-        <item>Lamentations</item>
-        <item>Ezekiel</item>
-        <item>Daniel</item>
-        <item>Hosea</item>
-        <item>Joel</item>
-        <item>Amos</item>
-        <item>Obadiah</item>
-        <item>Jonah</item>
-        <item>Micah</item>
-        <item>Nahum</item>
-        <item>Habakkuk</item>
-        <item>Zephaniah</item>
-        <item>Haggai</item>
-        <item>Zechariah</item>
-        <item>Malachi</item>
-        <item>Matthew</item>
-        <item>Mark</item>
-        <item>Luke</item>
-        <item>John</item>
-        <item>Acts</item>
-        <item>Romans</item>
-        <item>1 Corinthians</item>
-        <item>2 Corinthians</item>
-        <item>Galatians</item>
-        <item>Ephesians</item>
-        <item>Philippians</item>
-        <item>Colossians</item>
-        <item>1 Thessalonians</item>
-        <item>2 Thessalonians</item>
-        <item>1 Timothy</item>
-        <item>2 Timothy</item>
-        <item>Titus</item>
-        <item>Philemon</item>
-        <item>Hebrews</item>
-        <item>James</item>
-        <item>1 Peter</item>
-        <item>2 Peter</item>
-        <item>1 John</item>
-        <item>2 John</item>
-        <item>3 John</item>
-        <item>Jude</item>
-        <item>Revelation</item>
-    </string-array>
-
-    <string-array name="book_keys">
-        <item>GEN</item>
-        <item>EXOD</item>
-        <item>LEV</item>
-        <item>NUM</item>
-        <item>DEUT</item>
-        <item>JOSH</item>
-        <item>JUDG</item>
-        <item>RUTH</item>
-        <item>1SAM</item>
-        <item>2SAM</item>
-        <item>1KGS</item>
-        <item>2KGS</item>
-        <item>1CHRON</item>
-        <item>2CHRON</item>
-        <item>EZRA</item>
-        <item>NEH</item>
-        <item>ESTH</item>
-        <item>JOB</item>
-        <item>PS</item>
-        <item>PROV</item>
-        <item>ECC</item>
-        <item>SONG</item>
-        <item>ISA</item>
-        <item>JER</item>
-        <item>LAM</item>
-        <item>EZEK</item>
-        <item>DAN</item>
-        <item>HOSEA</item>
-        <item>JOEL</item>
-        <item>AMOS</item>
-        <item>OBAD</item>
-        <item>JONAH</item>
-        <item>MICAH</item>
-        <item>NAHUM</item>
-        <item>HAB</item>
-        <item>ZEPH</item>
-        <item>HAG</item>
-        <item>ZECH</item>
-        <item>MAL</item>
-        <item>MATT</item>
-        <item>MARK</item>
-        <item>LUKE</item>
-        <item>JOHN</item>
-        <item>ACTS</item>
-        <item>ROM</item>
-        <item>1COR</item>
-        <item>2COR</item>
-        <item>GAL</item>
-        <item>EPH</item>
-        <item>PHIL</item>
-        <item>COL</item>
-        <item>1THES</item>
-        <item>2THES</item>
-        <item>1TIM</item>
-        <item>2TIM</item>
-        <item>TIT</item>
-        <item>PHILEM</item>
-        <item>HEB</item>
-        <item>JAS</item>
-        <item>1PET</item>
-        <item>2PET</item>
-        <item>1JOHN</item>
-        <item>2JOHN</item>
-        <item>3JOHN</item>
-        <item>JUDE</item>
-        <item>REV</item>
+        <item>GEN|Genesis</item>
+        <item>EXO|Exodus</item>
+        <item>LEV|Leviticus</item>
+        <item>NUM|Numbers</item>
+        <item>DEU|Deuteronomy</item>
+        <item>JOS|Joshua</item>
+        <item>JDG|Judges</item>
+        <item>RUT|Ruth</item>
+        <item>1SA|1 Samuel</item>
+        <item>2SA|2 Samuel</item>
+        <item>1KI|1 Kings</item>
+        <item>2KI|2 Kings</item>
+        <item>1CH|1 Chronicles</item>
+        <item>2CH|2 Chronicles</item>
+        <item>EZR|Ezra</item>
+        <item>NEH|Nehemiah</item>
+        <item>TOB|Tobit</item>
+        <item>JDT|Judith</item>
+        <item>ESG|Esther</item>
+        <item>JOB|Job</item>
+        <item>PSA|Psalms</item>
+        <item>PRO|Proverbs</item>
+        <item>ECC|Ecclesiastes</item>
+        <item>SNG|Songs of Solomon</item>
+        <item>WIS|Wisdom of Solomon</item>
+        <item>SIR|Ecclesiasticus</item>
+        <item>ISA|Isaiah</item>
+        <item>JER|Jeremiah</item>
+        <item>LAM|Lamentations</item>
+        <item>BAR|Baruch</item>
+        <item>EZK|Ezekiel</item>
+        <item>DAG|Daniel</item>
+        <item>HOS|Hosea</item>
+        <item>JOL|Joel</item>
+        <item>AMO|Amos</item>
+        <item>OBA|Obadiah</item>
+        <item>JON|Jonah</item>
+        <item>MIC|Micah</item>
+        <item>NAM|Nahum</item>
+        <item>HAB|Habakkuk</item>
+        <item>ZEP|Zephaniah</item>
+        <item>HAG|Haggai</item>
+        <item>ZEC|Zechariah</item>
+        <item>MAL|Malachi</item>
+        <item>1MA|1 Maccabees</item>
+        <item>2MA|2 Maccabees</item>
+        <item>MAT|Matthew</item>
+        <item>MRK|Mark</item>
+        <item>LUK|Luke</item>
+        <item>JHN|John</item>
+        <item>ACT|Acts of the Apostles</item>
+        <item>ROM|Romans</item>
+        <item>1CO|1 Corinthians</item>
+        <item>2CO|2 Corinthians</item>
+        <item>GAL|Galatians</item>
+        <item>EPH|Ephesians</item>
+        <item>PHP|Philippians</item>
+        <item>COL|Colossians</item>
+        <item>1TH|1 Thessalonians</item>
+        <item>2TH|2 Thessalonians</item>
+        <item>1TI|1 Timothy</item>
+        <item>2TI|2 Timothy</item>
+        <item>TIT|Titus</item>
+        <item>PHM|Philemon</item>
+        <item>HEB|Hebrews</item>
+        <item>JAS|James</item>
+        <item>1PE|1 Peter</item>
+        <item>2PE|2 Peter</item>
+        <item>1JN|1 John</item>
+        <item>2JN|2 John</item>
+        <item>3JN|3 John</item>
+        <item>JUD|Jude</item>
+        <item>REV|Revelation</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -177,13 +115,13 @@
     <string name="pref_screen_header">Reading Settings</string>
     <string name="shared_pref_zoom">zoom</string>
     <string name="shared_pref_keep_screen_on">keep_screen_on</string>
-    <string name="shared_pref_read_both_side_by_side">two_column_mode</string>
     <string name="shared_pref_night_mode">night_mode</string>
 
     <string name="pref_screen_title_keep_screen_on">Keep Screen On</string>
     <string name="pref_screen_title_zoom">Text Size</string>
     <string name="pref_screen_title_night_mode">Night Mode</string>
-    <string name="pref_screen_title_read_both_side_by_side">Two column mode</string>
-    <string name="pref_screen_summary_read_both_side_by_side">Display both versions in two columns</string>
     <string name="pref_screen_summary_keep_screen_on">Screen will still be turned off after 5 minutes of inactivity</string>
+    <string name="withNiv">+NIV</string>
+    <string name="withDra">+DRA</string>
+    <string name="cpdvOnly">CPDV</string>
 </resources>

@@ -1,6 +1,41 @@
 $(function() {
-    var slashIndex = location.href.lastIndexOf('/');
-    var bnum = parseInt(location.href.substring(slashIndex+1, slashIndex+3));
+    var additionalVersion = getQueryVariable("add");
+    if (!additionalVersion) {
+        return;
+    }
+    var bcode = parseBookCodeFromUrl();
+    if (additionalVersion === "niv") {
+        if (bcode === "ESG") {
+            bcode = "EST";
+        }
+        else if (bcode === "DAG") {
+             bcode = "DAN";
+        }
+    }
+    var urlToLoad = `/html/${bcode}-${additionalVersion}.html`;
+    $('<div id="add" class="booktext"></div>').insertAfter(".booktext");
+    $("#add").load(urlToLoad + ' .booktext', function(responseTxt, statusTxt, xhr) {
+        if (statusTxt !== "success") {
+            var errMsg = `${xhr.status} ${xhr.statusText}`;
+            if (errMsg === "0 error") {
+                errMsg = "NOT AVAILABLE";
+            }
+            $("#add").html(`<h2>${errMsg}</h2>`);
+        }
+        else {
+            $('#add .booktext').removeClass('booktext');
+        }
+        $("#wrapper").css({ display: "flex" });
+        $(".booktext").css({
+            height: "100vh",
+            overflowY: "scroll",
+            width: "50%",
+        });
+     });
+});
+
+$(function() {
+    var bcode = parseBookCodeFromUrl();
     var initialBookmark = undefined;
     var hashIndex = location.href.lastIndexOf('#')
     if (hashIndex >= 0) {
@@ -35,7 +70,7 @@ $(function() {
                 // but also helps deal with undesirable calls after
                 // initial scrolling is initiated by check() function.
                 if (bookmark != lastBookmark) {
-                    saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+                    saveInternalBookmark(bcode, bookmark, lastCnumSeen);
                     lastBookmark = bookmark;
                 }
                 return;
@@ -46,7 +81,7 @@ $(function() {
                     // but also helps deal with undesirable calls after
                     // initial scrolling is initiated by check() function.
                     if (bookmark != lastBookmark) {
-                        saveInternalBookmark(bnum, bookmark, lastCnumSeen);
+                        saveInternalBookmark(bcode, bookmark, lastCnumSeen);
                         lastBookmark = bookmark;
                     }
                     return;
@@ -124,10 +159,16 @@ function fireOnPageScrollEvent() {
     }
 }
 
-function saveInternalBookmark(bnum, bookmark, cnum) {
+function saveInternalBookmark(bcode, bookmark, cnum) {
     if (window.biblei) {
-        biblei.javaSaveInternalBookmark(bnum, bookmark, cnum);
+        biblei.javaSaveInternalBookmark(bcode, bookmark, cnum);
     }
+}
+
+function parseBookCodeFromUrl() {
+    var slashIndex = location.href.lastIndexOf('/');
+    var bcode = location.href.substring(slashIndex+1, slashIndex+4);
+    return bcode;
 }
 
 function getQueryVariable(variable) {

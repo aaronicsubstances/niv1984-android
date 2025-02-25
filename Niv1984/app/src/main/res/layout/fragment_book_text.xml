@@ -22,7 +22,7 @@
             android:minWidth="@dimen/spinner_min_width"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/txt2"
             android:layout_toLeftOf="@id/fontSizes"
@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -64,22 +64,22 @@
         android:layout_margin="@dimen/activity_margin">
 
         <RadioButton
-            android:id="@+id/nivOnly"
-            android:text="NIV"
+            android:id="@+id/cpdvOnly"
+            android:text="@string/cpdvOnly"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <RadioButton
-            android:id="@+id/kjvOnly"
-            android:text="KJV"
+            android:id="@+id/withDra"
+            android:text="@string/withDra"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <RadioButton
-            android:id="@+id/bothOnly"
-            android:text="NIV/KJV"
+            android:id="@+id/withNiv"
+            android:text="@string/withNiv"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />

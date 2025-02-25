@@ -38,14 +38,14 @@ public class MainActivity extends BaseActivity implements
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MainActivity.class);
 
-    private static final String SAVED_STATE_KEY_BOOK_NUMBER = MainActivity.class +
-            ".bnum";
+    private static final String SAVED_STATE_KEY_BOOK_CODE = MainActivity.class +
+            ".bcode";
 
     private static final String FRAG_BOOK_TEXT = MainActivity.class.getName() + ".bookText";
 
     private static final String FRAG_BOOK_LIST = MainActivity.class.getName() + ".bookList";
 
-    private int mBookNumber;
+    private String mBookCode;
     private Fragment mBookListFrag;
     private BookTextFragment mBookTextFrag;
     private AppCompatSpinner mBookDropDown;
@@ -68,15 +68,20 @@ public class MainActivity extends BaseActivity implements
 
         mBookDropDown = findViewById(R.id.bookDropDown);
         String[] books = getResources().getStringArray(R.array.books);
+        String[] bookDescriptions = new String[books.length];
+        for (int i = 0; i < books.length; i++) {
+            String book = books[i];
+            bookDescriptions[i] = book.substring(book.indexOf("|")+1);
+        }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 R.layout.spinner_item,
-                books);
+                bookDescriptions);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mBookDropDown.setAdapter(adapter);
 
         if (savedInstanceState != null) {
-            mBookNumber = savedInstanceState.getInt(SAVED_STATE_KEY_BOOK_NUMBER);
+            mBookCode = savedInstanceState.getString(SAVED_STATE_KEY_BOOK_CODE);
             mBookListFrag = getSupportFragmentManager().findFragmentByTag(FRAG_BOOK_LIST);
             mBookTextFrag = (BookTextFragment) getSupportFragmentManager().findFragmentByTag(
                     FRAG_BOOK_TEXT);
@@ -95,8 +100,8 @@ public class MainActivity extends BaseActivity implements
         getOnBackPressedDispatcher().addCallback(new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if (mBookNumber > 0) {
-                    mBookNumber = 0;
+                if (mBookCode != null) {
+                    mBookCode = null;
                     updateFragments();
                 }
                 else {
@@ -113,10 +118,10 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void updateFragments() {
-        if (mBookNumber > 0) {
-            mBookTextFrag.setBookNumber(mBookNumber);
+        if (mBookCode != null) {
+            mBookTextFrag.setBookCode(mBookCode);
             // set selection before listening to selection events.
-            mBookDropDown.setSelection(mBookNumber - 1,false);
+            mBookDropDown.setSelection(getBookIdx(), false);
             mBookDropDown.setOnItemSelectedListener(this);
             getSupportFragmentManager().beginTransaction().show(mBookTextFrag)
                     .hide(mBookListFrag).commit();
@@ -140,7 +145,7 @@ public class MainActivity extends BaseActivity implements
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        outState.putInt(SAVED_STATE_KEY_BOOK_NUMBER, mBookNumber);
+        outState.putString(SAVED_STATE_KEY_BOOK_CODE, mBookCode);
     }
 
     private void requireUpdateIfNecessary() {
@@ -252,22 +257,37 @@ public class MainActivity extends BaseActivity implements
             return true;
         }
         else if (id == android.R.id.home) {
-            mBookNumber = 0;
+            mBookCode = null;
             updateFragments();
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private int getBookIdx() {
+        if (mBookCode == null) {
+            return -1;
+        }
+        String[] books = getResources().getStringArray(R.array.books);
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].startsWith((mBookCode + "|"))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     @Override
-    public void onBookSelected(int bookNumber) {
-        mBookNumber = bookNumber;
+    public void onBookSelected(int bookIdx) {
+        String book = getResources().getStringArray(R.array.books)[bookIdx];
+        mBookCode = book.substring(0, book.indexOf("|"));
         updateFragments();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-        mBookNumber = position + 1;
+        String book = getResources().getStringArray(R.array.books)[position];
+        mBookCode = book.substring(0, book.indexOf("|"));
         updateFragments();
     }
 

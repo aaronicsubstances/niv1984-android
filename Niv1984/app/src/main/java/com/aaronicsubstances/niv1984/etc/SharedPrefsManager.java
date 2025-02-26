@@ -52,16 +52,18 @@ public class SharedPrefsManager {
                 INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bcode, null);
     }
 
-    public String getLastInternalBookmark(String bcode) {
+    public String getLastInternalBookmark(String bcode, String version) {
         return mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).getString(
-                INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bcode, null
+                INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bcode + version, null
         );
     }
 
-    public void setLastInternalBookmarkAndChapter(String bcode, String bookmark, String cnum) {
+    public void setLastInternalBookmarkAndChapter(String bcode, String version, String bookmark, String cnum) {
         SharedPreferences.Editor ed = mContext.getSharedPreferences(INTERNAL_SHARED_PREF_NAME, 0).edit();
-        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bcode, bookmark);
-        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bcode, cnum);
+        ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_BOOK_MARK_PREFIX + bcode + version, bookmark);
+        if (cnum != null) {
+            ed.putString(INTERNAL_SHARED_PREF_KEY_LAST_CHAPTER_PREFIX + bcode, cnum);
+        }
         ed.commit();
     }
 

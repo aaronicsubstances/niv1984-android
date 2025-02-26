@@ -288,7 +288,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 "add", additionalBook,
                 "zoom", "" + mZoomSpinner.getSelectedItemPosition());
 
-        String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookCode);
+        String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookCode, Utils.DEFAULT_VERSION);
         // if url differs only in fragment, don't show progress loading indicator
         int loadIndicatorVisibility = View.VISIBLE;
         if (bookUrl.equals(getUrlWithoutFragment())) {
@@ -347,7 +347,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     }
 
     @Override
-    public void onPageChapterMayHaveChanged(String bcode, int cnum) {
+    public void onPageChapterMayHaveChanged(String bcode, String cnum) {
         if (!mViewCreated) {
             return;
         }
@@ -359,7 +359,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         int cIdx = -1;
         for (int i = 0; i < mChapters.length; i++) {
             if (mChapters[i].trim().equals(
-                    cnum == 0 ? "P" : "" + cnum)) {
+                    cnum.equals("0") ? "P" : cnum)) {
                 cIdx = i;
                 break;
             }
@@ -384,7 +384,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             if (cnum.equals("P")) {
                 cnum = "0";
             }
-            mPrefMgr.setLastInternalBookmarkAndChapter(mBookCode, "chapter-" + cnum, cnum);
+            mPrefMgr.setLastInternalBookmarkAndChapter(mBookCode, Utils.DEFAULT_VERSION, "chapter-" + cnum, cnum);
             reloadBookUrl();
         }
         else if (parent == mZoomSpinner.getSpinner()) {

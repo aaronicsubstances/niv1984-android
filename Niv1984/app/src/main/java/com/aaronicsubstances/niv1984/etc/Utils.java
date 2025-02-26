@@ -74,6 +74,7 @@ public class Utils {
             28, 16, 24, 21, 28, 16, 16, 13, 6, 6, 4, 4, 5, 3, 6, 4, 3, 1, 13,
             5, 5, 3, 5, 1, 1, 1, 22
     };
+    public static final String DEFAULT_VERSION = "cpdv";
 
     public static int[] determineChapterDisplayRange(String bookCode) {
         int bIdx = -1;

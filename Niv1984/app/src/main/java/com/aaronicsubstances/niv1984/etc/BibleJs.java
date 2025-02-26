@@ -51,9 +51,14 @@ public class BibleJs {
     }
 
     @JavascriptInterface
-    public void javaSaveInternalBookmark(final String bcode, String bookmark, final int cnum) {
+    public String javaGetInternalBookmark(String bcode, String version) {
+        return mPrefMgr.getLastInternalBookmark(bcode, version);
+    }
+
+    @JavascriptInterface
+    public void javaSaveInternalBookmark(final String bcode, String version, String bookmark, final String cnum) {
         LOGGER.debug("Saving book {} bookmark {} chapter {}...", bcode, bookmark, cnum);
-        if (mListener != null) {
+        if (cnum != null && mListener != null) {
             mContext.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -61,6 +66,6 @@ public class BibleJs {
                 }
             });
         }
-        mPrefMgr.setLastInternalBookmarkAndChapter(bcode, bookmark, "" + cnum);
+        mPrefMgr.setLastInternalBookmarkAndChapter(bcode, version, bookmark, cnum);
     }
 }

@@ -1,9 +1,19 @@
+DEFAULT_VERSION = "cpdv"
+
 $(function() {
-    var additionalVersion = getQueryVariable("add");
-    if (!additionalVersion) {
-        return;
+    var initialBookmark = undefined;
+    var hashIndex = location.href.lastIndexOf('#')
+    if (hashIndex >= 0) {
+        initialBookmark = location.href.substring(hashIndex+1);
     }
     var bcode = parseBookCodeFromUrl();
+    var firstBookTextEl = $(".booktext")[0];
+    var additionalVersion = getQueryVariable("add");
+    if (!additionalVersion) {
+        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, window, initialBookmark,
+            fireOnPageLoadCompleted);
+        return;
+    }
     if (additionalVersion === "niv") {
         if (bcode === "ESG") {
             bcode = "EST";
@@ -14,8 +24,17 @@ $(function() {
     }
     var urlToLoad = `/html/${bcode}-${additionalVersion}.html`;
     $('<div id="add" class="booktext"></div>').insertAfter(".booktext");
+    var secondBookTextEl = document.getElementById("add");
     $("#add").load(urlToLoad + ' .booktext', function(responseTxt, statusTxt, xhr) {
+        var doneCbCallCnt = 0;
+        var doneCb = function() {
+            doneCbCallCnt++;
+            if (doneCbCallCnt > 1) {
+                fireOnPageLoadCompleted();
+            }
+        };
         if (statusTxt !== "success") {
+            doneCb = fireOnPageLoadCompleted;
             var errMsg = `${xhr.status} ${xhr.statusText}`;
             if (errMsg === "0 error") {
                 errMsg = "NOT AVAILABLE";
@@ -31,57 +50,55 @@ $(function() {
             overflowY: "scroll",
             width: "50%",
         });
+        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, firstBookTextEl,
+            initialBookmark, doneCb);
+        if (statusTxt === "success") {
+            caterForScrolling(bcode, additionalVersion, secondBookTextEl, secondBookTextEl,
+                fetchInternalBookmark(bcode, additionalVersion), doneCb);
+        }
      });
 });
 
-$(function() {
-    var bcode = parseBookCodeFromUrl();
-    var initialBookmark = undefined;
-    var hashIndex = location.href.lastIndexOf('#')
-    if (hashIndex >= 0) {
-        initialBookmark = location.href.substring(hashIndex+1);
-    }
-
-    //NB: BOOKMARKS is a global Map injected into html files
-    var sortedBookmarks = identifyAndSortInternalBookmarks(BOOKMARKS);
+function caterForScrolling(bcode, version, booktextEl, scrollEl, initialBookmark, doneCb) {
+    var encodedBookmarks = JSON.parse($("span.bookmarks", $(booktextEl)).text());
+    var sortedBookmarks = identifyAndSortInternalBookmarks(version, encodedBookmarks);
+    //console.log(sortedBookmarks);
     var lastBookmark = sortedBookmarks[sortedBookmarks.length-1];
 
     var throttleFxn = function() {
         fireOnPageScrollEvent();
 
-        // Get container scroll position
-        var fromTop = $(window).scrollTop();
-
-        var lastCnumSeen = 0
+        var lastCnumSeen = undefined;
         for (var i = 0; i < sortedBookmarks.length; i++) {
-            var bookmark = sortedBookmarks[i]
+            var bookmark = sortedBookmarks[i];
             var bookmarkEl = $('#'+bookmark);
-            if (!bookmarkEl.offset() || !bookmarkEl.height()) {
+            if (!bookmarkEl.height()) {
                 continue;
             }
             var isChapterDiv = false;
             if (bookmark.startsWith("chapter-")) {
-                lastCnumSeen = parseInt(bookmark.substring("chapter-".length));
+                lastCnumSeen = bookmark.substring("chapter-".length);
                 isChapterDiv = true;
             }
-            var offsetTop = bookmarkEl.offset().top;
-            if (offsetTop >= fromTop) {
+            var offsetTop = betterOffset(false, bookmarkEl,
+                scrollEl !== window ? $(scrollEl) : undefined);
+            if (offsetTop >= 0) {
                 // this check doesn't only save us unnecessary updates,
                 // but also helps deal with undesirable calls after
                 // initial scrolling is initiated by check() function.
-                if (bookmark != lastBookmark) {
-                    saveInternalBookmark(bcode, bookmark, lastCnumSeen);
+                if (bookmark !== lastBookmark) {
+                    saveInternalBookmark(bcode, version, bookmark, lastCnumSeen);
                     lastBookmark = bookmark;
                 }
                 return;
             }
             if (!isChapterDiv) {
-                if (offsetTop + bookmarkEl.height() / 2 > fromTop) {
+                if (offsetTop + bookmarkEl.height() / 2 > 0) {
                     // this check doesn't only save us unnecessary updates,
                     // but also helps deal with undesirable calls after
                     // initial scrolling is initiated by check() function.
-                    if (bookmark != lastBookmark) {
-                        saveInternalBookmark(bcode, bookmark, lastCnumSeen);
+                    if (bookmark !== lastBookmark) {
+                        saveInternalBookmark(bcode, version, bookmark, lastCnumSeen);
                         lastBookmark = bookmark;
                     }
                     return;
@@ -119,30 +136,27 @@ $(function() {
             }
         }
         else {
-            window.scrollTo(0, 0);
+            scrollEl.scrollTo(0, 0);
         }
         lastBookmark = initialBookmark;
-        $(window).scroll(throttle(1000, throttleFxn));
-        fireOnPageLoadCompleted();
+        $(scrollEl).scroll(throttle(1000, throttleFxn));
+        doneCb();
     };
 
     // don't install scroll listener until page loading completes.
     check();
-});
+}
 
-function identifyAndSortInternalBookmarks(mapOfBookmarks) {
+function identifyAndSortInternalBookmarks(version, list) {
     var sortedBookmarks = []
-    mapOfBookmarks.forEach((list, key) => {
-        for (value of list) {
-            var sepIdx = value.indexOf('-')
-            var bmSuffix = value.substring(0, sepIdx);
-            var bmDesc = value.substring(sepIdx+1);
-            if (/^\d+$/.test(bmDesc)) {
-                sortedBookmarks.push(`chapter-${bmDesc}`);
-            }
-            sortedBookmarks.push(`${key}-bookmark-${bmSuffix}`)
+    for (value of list) {
+        var sepIdx = value.indexOf('-')
+        var bmDesc = value.substring(sepIdx+1);
+        if (version === DEFAULT_VERSION && /^\d+$/.test(bmDesc)) {
+            sortedBookmarks.push(`chapter-${bmDesc}`);
         }
-    });
+        sortedBookmarks.push(`${version}-bookmark-${value}`)
+    }
     sortedBookmarks.sort((a, b) => $('#'+a).offset().top - $('#'+b).offset().top);
     return sortedBookmarks
 }
@@ -159,9 +173,15 @@ function fireOnPageScrollEvent() {
     }
 }
 
-function saveInternalBookmark(bcode, bookmark, cnum) {
+function fetchInternalBookmark(bcode, version) {
     if (window.biblei) {
-        biblei.javaSaveInternalBookmark(bcode, bookmark, cnum);
+        return biblei.javaGetInternalBookmark(bcode, version);
+    }
+}
+
+function saveInternalBookmark(bcode, version, bookmark, cnum) {
+    if (window.biblei) {
+        biblei.javaSaveInternalBookmark(bcode, version, bookmark, cnum);
     }
 }
 
@@ -235,4 +255,45 @@ function throttle(delay, callback) {
 
     // Return the wrapper function.
     return wrapper;
+}
+
+/* Copied from https://stackoverflow.com/a/46677056 */
+/*
+function: betterOffset
+hint: Allows you to calculate dynamic and static offset whether they are in a div container with overscroll or not.
+
+            name:           type:               option:         notes:
+@param      s (static)      boolean             required        default: true | set false for dynamic
+@param      e (element)     string or object    required
+@param      v (viewer)      string or object    optional        If you leave this out, it will use $(window) by default. What I am calling the 'viewer' is the thing that scrolls (i.e. The element with "overflow-y:scroll;" style.).
+
+@return                  numeric
+*/
+function betterOffset(s, e, v) {
+    // Set Defaults
+    s = (typeof s === 'boolean') ? s : true;
+    e = (typeof e === 'object') ? e : $(e);
+    if (v !== undefined) {
+        v = (typeof v === 'object') ? v : $(v);
+    }
+    else {
+        v = false;
+    }
+
+    // Set Variables
+    var w = $(window);              // window object
+    var wp = w.scrollTop();         // window position
+    var eo = e.offset().top;        // element offset
+    if (v) {
+        var vo = v.offset().top;    // viewer offset
+        var vp = v.scrollTop();     // viewer position
+    }
+
+    // Calculate
+    if (s) {
+        return (v) ? (eo - vo) + vp : eo;
+    }
+    else {
+        return (v) ? eo - vo : eo - wp;
+    }
 }

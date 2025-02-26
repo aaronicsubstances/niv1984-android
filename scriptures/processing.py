@@ -1,3 +1,5 @@
+import html
+import json
 import xml.etree.ElementTree as ET
 import os
 
@@ -53,7 +55,7 @@ def get_chapter_count(version_tag, bcode):
     return CHAPTER_COUNTS[bidx]
 
 def main(version_tag, xml_dir):
-    print(f"Generating for {[version_tag]}...")
+    print(f"Generating for {version_tag}...")
     for f in os.listdir(xml_dir):
         if not f.endswith(".xml"):
             continue
@@ -124,18 +126,16 @@ def work_on_xml(bcode, version_tag, file_path, fout):
     assert len(preferred_chapter_titles) == chapter_count, preferred_chapter_titles
     assert len(preferred_cnums) == chapter_count, preferred_cnums
 
-    bookmark_counter = None
-    if version_tag == "cpdv":
-        bookmark_counter = BookmarkGen()
+    bookmark_counter = BookmarkGen()
 
     for cidx in range(chapter_count):
         cnum = preferred_cnums[cidx]
-        elem_id = f" id='chapter-{cnum}'" if bookmark_counter else ''
+        elem_id = f" id='chapter-{cnum}'" if version_tag == "cpdv" else ''
         fout.write(f"<div{elem_id}>\n")
 
         fout.write(f"<div>\n")
 
-        elem_id = f" id='{version_tag}-bookmark-{bookmark_counter.inc(f"{cnum}")}'" if bookmark_counter else ''
+        elem_id = f" id='{version_tag}-bookmark-{bookmark_counter.inc(f"{cnum}")}'"
         ch_title = preferred_chapter_titles[cidx]
         fout.write(f"<h2{elem_id}>{ch_title}</h2>\n")
         for item in output_verses[cidx]:
@@ -148,10 +148,9 @@ def work_on_xml(bcode, version_tag, file_path, fout):
                 item_attrs.append("class='fragment heading'")
             else:
                 assert item[0] == 'verse'
-                bookmark_desc = f"{cnum}:{item[2]}"
+                bookmark_desc = f"{cnum}-{item[2]}"
                 item_attrs.append("class='verse'")
-            if bookmark_counter:
-                item_attrs.append(f"id='{version_tag}-bookmark-{bookmark_counter.inc(bookmark_desc)}'")
+            item_attrs.append(f"id='{version_tag}-bookmark-{bookmark_counter.inc(bookmark_desc)}'")
             item_attrs = "".join((" " + a) for a in item_attrs)
             fout.write(f"<div{item_attrs}>{item[1]}</div>\n")
 
@@ -167,9 +166,8 @@ def work_on_xml(bcode, version_tag, file_path, fout):
         fout.write(f"</div>\n")
         fout.write("</div>\n")
 
-    if bookmark_counter:
-        bookmarks = [[version_tag, bookmark_counter.acc]]
-        fout.write(f"<script type='text/javascript'>var BOOKMARKS = new Map({bookmarks});</script>\n")
+    bookmarks = json.dumps(bookmark_counter.acc)
+    fout.write(f"<span class='bookmarks' style='display:none'>{html.escape(bookmarks)}</span>")
     
 def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
     text = []
@@ -211,7 +209,7 @@ class BookmarkGen:
     def inc(self, desc):
         self.cnt+=1
         self.acc.append(f"{self.cnt}-{desc}")
-        return self.cnt
+        return f"{self.cnt}-{desc}"
     
 class FoutPhantom:
     def write(self, s):

@@ -3,6 +3,7 @@ package com.aaronicsubstances.niv1984.etc;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
+import android.text.TextUtils;
 import android.webkit.ConsoleMessage;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebChromeClient;
@@ -13,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.aaronicsubstances.niv1984.R;
+import com.aaronicsubstances.niv1984.data.DBHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -34,7 +37,8 @@ public class BookTextViewUtils {
     private static final Logger LOGGER = LoggerFactory.getLogger(BookTextViewUtils.class);
 
     public static void configureBrowser(final Activity context, WebView browser,
-                                        CustomWebPageEventListener listener) {
+                                        CustomWebPageEventListener listener,
+                                        DBHandler dbHelper) {
         WebSettings webSettings = browser.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webSettings.setSaveFormData(false);
@@ -58,8 +62,13 @@ public class BookTextViewUtils {
 
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                if (request.getUrl().getHost().equals("localhost")) {
+                if ("localhost".equals(request.getUrl().getHost())) {
                     try {
+                        WebResourceResponse dynamicRes = serveDynamically(
+                                context, request, sharedPrefsManager, dbHelper);
+                        if (dynamicRes != null) {
+                            return dynamicRes;
+                        }
                         return serve(context, request.getUrl(), sharedPrefsManager);
                     }
                     catch (Exception ex) {
@@ -80,6 +89,33 @@ public class BookTextViewUtils {
 
         browser.addJavascriptInterface(new BibleJs(context, listener),
                 BibleJs.NAME);
+    }
+
+    public static WebResourceResponse serveDynamically(
+            Context context, WebResourceRequest req,
+            SharedPrefsManager sharedPrefsManager,
+            DBHandler dbHelper) throws IOException {
+        String reqPath = req.getUrl().getPath();
+        if (req.getMethod().equals("POST") && "/footnote-status/toggle".equals(reqPath)) {
+            String bcode = req.getRequestHeaders().get("X-bcode");
+            String href = req.getRequestHeaders().get("X-href");
+            boolean result = dbHelper.toggleFootnoteStatus(bcode, href);
+            String jsonRes = String.format("{ \"ignore\": %s }",
+                    result);
+            return new WebResourceResponse("application/json", "utf8",
+                    new ByteArrayInputStream(jsonRes.getBytes(Utils.DEFAULT_CHARSET)));
+        }
+        if (req.getMethod().equals("GET") && "/footnote-status".equals(reqPath)) {
+            String bcode = req.getUrl().getQueryParameters("bcode").get(0);
+            List<String> results = dbHelper.loadFootnoteStates(bcode);
+            String loadRes = "{ \"hrefs\": \"";
+            loadRes += TextUtils.join(",", results);
+            loadRes += "\" ,\"editEnabled\": " + sharedPrefsManager.isFootnoteEditingEnabled();
+            loadRes += " }";
+            return new WebResourceResponse("application/json", "utf8",
+                    new ByteArrayInputStream(loadRes.getBytes(Utils.DEFAULT_CHARSET)));
+        }
+        return null;
     }
 
     /**

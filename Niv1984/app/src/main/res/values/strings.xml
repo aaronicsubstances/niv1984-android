@@ -111,17 +111,22 @@
     <string name="action_zoom">Text Size:</string>
     <string name="action_chapter_selection">Chapter:</string>
 
+    <string name="withNiv">+NIV</string>
+    <string name="withDra">+DRA</string>
+    <string name="cpdvOnly">CPDV</string>
+
     <!-- Preference Titles -->
     <string name="pref_screen_header">Reading Settings</string>
     <string name="shared_pref_zoom">zoom</string>
     <string name="shared_pref_keep_screen_on">keep_screen_on</string>
     <string name="shared_pref_night_mode">night_mode</string>
+    <string name="shared_pref_footnote_edit_enabled">footnote_edit_enabled</string>
 
     <string name="pref_screen_title_keep_screen_on">Keep Screen On</string>
     <string name="pref_screen_title_zoom">Text Size</string>
     <string name="pref_screen_title_night_mode">Night Mode</string>
     <string name="pref_screen_summary_keep_screen_on">Screen will still be turned off after 5 minutes of inactivity</string>
-    <string name="withNiv">+NIV</string>
-    <string name="withDra">+DRA</string>
-    <string name="cpdvOnly">CPDV</string>
+    <string name="pref_screen_title_footnote_edit_enabled">Enable editing of footnotes</string>
+    <string name="footnotes_sending_start">Footnotes to be sent as attachment now being created. Please wait...</string>
+    <string name="action_send_footnotes">Email footnotes</string>
 </resources>

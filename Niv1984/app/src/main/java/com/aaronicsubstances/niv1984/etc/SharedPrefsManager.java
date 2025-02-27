@@ -29,6 +29,7 @@ public class SharedPrefsManager {
     public static final String SHARED_PREF_KEY_ZOOM = "zoom";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
+    public static final String SHARED_PREF_KEY_ENABLE_FOOTNOTE_EDIT = "footnote_edit_enabled";
 
     public SharedPrefsManager(Context context) {
         this.mContext = context;
@@ -112,6 +113,12 @@ public class SharedPrefsManager {
     public boolean isNightModeOn() {
         return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
                 SHARED_PREF_KEY_NIGHT_MODE, false
+        );
+    }
+
+    public boolean isFootnoteEditingEnabled() {
+        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
+                SHARED_PREF_KEY_ENABLE_FOOTNOTE_EDIT, false
         );
     }
 }

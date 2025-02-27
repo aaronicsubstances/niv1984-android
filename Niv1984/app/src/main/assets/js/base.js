@@ -1,16 +1,11 @@
 DEFAULT_VERSION = "cpdv"
 
 $(function() {
-    var initialBookmark = undefined;
-    var hashIndex = location.href.lastIndexOf('#')
-    if (hashIndex >= 0) {
-        initialBookmark = location.href.substring(hashIndex+1);
-    }
     var bcode = parseBookCodeFromUrl();
     var firstBookTextEl = $(".booktext")[0];
     var additionalVersion = getQueryVariable("add");
     if (!additionalVersion) {
-        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, window, initialBookmark,
+        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, window,
             fireOnPageLoadCompleted);
         return;
     }
@@ -27,22 +22,22 @@ $(function() {
     var secondBookTextEl = document.getElementById("add");
     $("#add").load(urlToLoad + ' .booktext', function(responseTxt, statusTxt, xhr) {
         var doneCbCallCnt = 0;
-        var doneCb = function() {
-            doneCbCallCnt++;
-            if (doneCbCallCnt > 1) {
-                fireOnPageLoadCompleted();
-            }
-        };
-        if (statusTxt !== "success") {
-            doneCb = fireOnPageLoadCompleted;
+        var doneCb = undefined;
+        if (statusTxt === "success") {
+            $('#add .booktext').removeClass('booktext');
+            doneCb = function() {
+                doneCbCallCnt++;
+                if (doneCbCallCnt > 1) {
+                    fireOnPageLoadCompleted();
+                }
+            };
+        }
+        else {
             var errMsg = `${xhr.status} ${xhr.statusText}`;
             if (errMsg === "0 error") {
                 errMsg = "NOT AVAILABLE";
             }
             $("#add").html(`<h2>${errMsg}</h2>`);
-        }
-        else {
-            $('#add .booktext').removeClass('booktext');
         }
         $("#wrapper").css({ display: "flex" });
         $(".booktext").css({
@@ -51,18 +46,28 @@ $(function() {
             width: "50%",
         });
         caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, firstBookTextEl,
-            initialBookmark, doneCb);
-        if (statusTxt === "success") {
+            doneCb ? doneCb : fireOnPageLoadCompleted);
+        if (doneCb) {
             caterForScrolling(bcode, additionalVersion, secondBookTextEl, secondBookTextEl,
-                fetchInternalBookmark(bcode, additionalVersion), doneCb);
+                doneCb);
         }
      });
 });
 
-function caterForScrolling(bcode, version, booktextEl, scrollEl, initialBookmark, doneCb) {
+function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     var encodedBookmarks = JSON.parse($("span.bookmarks", $(booktextEl)).text());
     var sortedBookmarks = identifyAndSortInternalBookmarks(version, encodedBookmarks);
-    //console.log(sortedBookmarks);
+    if (version === DEFAULT_VERSION) {
+        $.get('/footnote-status', { bcode: bcode }, function(data) {
+            var ignoredFootnotes = data.hrefs.split(",");
+            modifyFootnotes(bcode, booktextEl, sortedBookmarks,
+                ignoredFootnotes, data.editEnabled);
+        }).fail(function(jqXHR, textStatus, errorThrown) {
+            console.log("Failed to load footnote states: errorThrown: ", errorThrown,
+                "; textStatus: ", textStatus);
+        });
+    }
+
     var lastBookmark = sortedBookmarks[sortedBookmarks.length-1];
 
     var throttleFxn = function() {
@@ -126,6 +131,7 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, initialBookmark
         }
 
         // navigate to initial bookmark or scroll to start of document
+        var initialBookmark = fetchInternalBookmark(bcode, version)
         if (initialBookmark) {
             var elem = document.getElementById(initialBookmark)
             if (elem) {
@@ -145,6 +151,67 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, initialBookmark
 
     // don't install scroll listener until page loading completes.
     check();
+}
+
+function modifyFootnotes(bcode, booktextEl, sortedBookmarks,
+        ignoredFootnotes, editEnabled) {
+    var regex = new RegExp(`${DEFAULT_VERSION}-bookmark-` + '\\d+' + "-n");
+    for (bookmark of sortedBookmarks) {
+        if (!regex.test(bookmark)) {
+            continue;
+        }
+        $("#" + bookmark + " > div").each(function() {
+            var divEl = this;
+            var firstAnchor = $("a", divEl)[0];
+            var anchorHrefShort = firstAnchor.href.substring(
+                firstAnchor.href.lastIndexOf("#"));
+
+            // set initial value
+            if (ignoredFootnotes.includes(anchorHrefShort)) {
+                $(anchorHrefShort).parent().addClass("ignored-footnote");
+                $(divEl).addClass("ignored-footnote");
+            }
+
+            // insert toggle button if mode suggests so
+            if (!editEnabled) {
+                return;
+            }
+
+            $("<p><button type='button' class='add-remove'>Ignore/Keep</button></p>").appendTo(divEl);
+            $(".add-remove", divEl).click(function() {
+                var that = this;
+                $.ajax({
+                    url: "/footnote-status/toggle",
+                    method: "POST",
+                    headers: {
+                        "X-bcode": bcode,
+                        "X-href": anchorHrefShort,
+                        "X-current": $(divEl).hasClass("ignored-footnote")
+                    },
+                    beforeSend: function() {
+                        $(that).attr('disabled', 'disabled');
+                    },
+                    complete: function() {
+                        $(that).removeAttr('disabled');
+                    },
+                    success: function(data) {
+                        if (data.ignore) {
+                            $(anchorHrefShort).parent().addClass("ignored-footnote");
+                            $(divEl).addClass("ignored-footnote");
+                        }
+                        else {
+                            $(anchorHrefShort).parent().removeClass("ignored-footnote");
+                            $(divEl).removeClass("ignored-footnote");
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log("Failed to toggle footnote status: errorThrown: ", errorThrown,
+                            "; textStatus: ", textStatus);
+                    }
+                });
+            });
+        });
+    }
 }
 
 function identifyAndSortInternalBookmarks(version, list) {

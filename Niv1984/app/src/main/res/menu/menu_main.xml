@@ -27,6 +27,11 @@
         app:showAsAction="never"
         android:icon="@drawable/ic_action_email"/>
 
+    <item android:id="@+id/action_send_footnotes"
+        android:title="@string/action_send_footnotes"
+        android:orderInCategory="65"
+        app:showAsAction="never"/>
+
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
         android:orderInCategory="70"

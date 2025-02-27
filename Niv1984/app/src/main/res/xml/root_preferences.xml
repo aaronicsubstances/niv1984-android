@@ -19,6 +19,10 @@
             app:key="@string/shared_pref_night_mode"
             app:title="@string/pref_screen_title_night_mode" />
 
+        <SwitchPreferenceCompat
+            app:key="@string/shared_pref_footnote_edit_enabled"
+            app:title="@string/pref_screen_title_footnote_edit_enabled" />
+
     </PreferenceCategory>
 
 </PreferenceScreen>

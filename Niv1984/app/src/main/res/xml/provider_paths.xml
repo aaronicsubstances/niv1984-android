@@ -1,0 +1,9 @@
+<paths>
+    <external-path name="external_files" path="." />
+
+    <!-- Used to access into application data files -->
+    <files-path name="files-path" path="." />
+
+    <!-- Used to access files in cache directory -->
+    <cache-path name="cache-path" path="." />
+</paths>

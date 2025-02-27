@@ -32,18 +32,10 @@
     }
 }
 
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+.ignored-footnote {
+    text-decoration: line-through;
 }
 
-.flex-item {
-    width: 50%;
-}
-
-.flex-item-inner {
-    margin-left: 0.3em;
-    margin-right: 0.3em;
-    overflow-wrap: break-word;
+.add-remove {
+    /*text-decoration: none;*/
 }

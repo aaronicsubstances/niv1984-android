@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.RadioButton;
 
 import com.aaronicsubstances.niv1984.R;
+import com.aaronicsubstances.niv1984.activities.MainActivity;
 import com.aaronicsubstances.niv1984.etc.BookTextViewUtils;
 import com.aaronicsubstances.niv1984.etc.CustomWebPageEventListener;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
@@ -56,6 +57,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private Runnable KEEP_SCREEN_OFF;
     private String[] mChapters;
+    private boolean mFootnoteEditingEnabled;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -130,6 +132,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 mZoomSpinner.setSelection(lastZoomLevelIdx, false);
                 viewOutOfDate = true;
             }
+        }
+        if (mFootnoteEditingEnabled != mPrefMgr.isFootnoteEditingEnabled()) {
+            viewOutOfDate = true;
         }
         if (viewOutOfDate) {
             LOGGER.info("WebView out of date. refreshing...");
@@ -242,7 +247,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         withDra.setOnClickListener(this);
         withNiv.setOnClickListener(this);
 
-        BookTextViewUtils.configureBrowser(getActivity(), mBookView, this);
+        BookTextViewUtils.configureBrowser(getActivity(), mBookView, this,
+                ((MainActivity)getActivity()).getDbHelper());
     }
 
     private void setUpZoomSpinner() {
@@ -264,6 +270,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private void reloadBookUrl() {
         if (mBookCode == null) return;
+
+        mFootnoteEditingEnabled = mPrefMgr.isFootnoteEditingEnabled();
 
         String additionalBook = "";
         switch (mPrefMgr.getLastBookMode()) {
@@ -288,14 +296,10 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 "add", additionalBook,
                 "zoom", "" + mZoomSpinner.getSelectedItemPosition());
 
-        String lastEffectiveBookmark = mPrefMgr.getLastInternalBookmark(mBookCode, Utils.DEFAULT_VERSION);
         // if url differs only in fragment, don't show progress loading indicator
         int loadIndicatorVisibility = View.VISIBLE;
         if (bookUrl.equals(getUrlWithoutFragment())) {
             loadIndicatorVisibility = View.INVISIBLE;
-        }
-        if (lastEffectiveBookmark != null) {
-            bookUrl += '#' + lastEffectiveBookmark;
         }
 
         LOGGER.info("Loading book url {}", bookUrl);

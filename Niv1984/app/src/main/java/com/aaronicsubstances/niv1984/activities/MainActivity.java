@@ -1,6 +1,8 @@
 package com.aaronicsubstances.niv1984.activities;
 
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -12,6 +14,8 @@ import androidx.core.app.ShareCompat;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -19,8 +23,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.aaronicsubstances.niv1984.R;
+import com.aaronicsubstances.niv1984.data.DBHandler;
 import com.aaronicsubstances.niv1984.etc.FirebaseFacade;
 import com.aaronicsubstances.niv1984.etc.SharedPrefsManager;
 import com.aaronicsubstances.niv1984.etc.Utils;
@@ -30,6 +36,12 @@ import com.aaronicsubstances.niv1984.fragments.BookTextFragment;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends BaseActivity implements
         BookListFragment.OnBookSelectionListener,
@@ -51,11 +63,22 @@ public class MainActivity extends BaseActivity implements
     private AppCompatSpinner mBookDropDown;
 
     private SharedPrefsManager mPrefM;
+    private DBHandler dbHelper;
+
+    Executor myExecutor = Executors.newSingleThreadExecutor();
+    Handler myHandler = new Handler(Looper.getMainLooper());
+
+    public  DBHandler getDbHelper() {
+        return dbHelper;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPrefM = new SharedPrefsManager(this);
+        // creating a new dbhandler class
+        // and passing our context to it.
+        dbHelper = new DBHandler(this);
         int desiredNightMode = mPrefM.isNightModeOn() ?
                 AppCompatDelegate.MODE_NIGHT_YES :
                 AppCompatDelegate.MODE_NIGHT_NO;
@@ -217,7 +240,6 @@ public class MainActivity extends BaseActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate menu resource file.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         // Return true to display menu
         return true;
     }
@@ -229,6 +251,10 @@ public class MainActivity extends BaseActivity implements
         int id = item.getItemId();
         if ( id == R.id.action_about) {
             startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        }
+        if (id == R.id.action_send_footnotes) {
+            sendFootnotes();
             return true;
         }
         else if (id == R.id.action_settings) {
@@ -262,6 +288,58 @@ public class MainActivity extends BaseActivity implements
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendFootnotes() {
+        MainActivity activity = this;
+        myExecutor.execute(() -> {
+
+            File pathToMyAttachedFile = new File(getCacheDir(),
+                    UUID.randomUUID().toString() + ".csv");
+            Exception serializeError = null;
+            try {
+                dbHelper.serializeFootnotes(pathToMyAttachedFile);
+            }
+            catch (Exception ioe) {
+                serializeError = ioe;
+            }
+            Exception resultErr = serializeError;
+
+            myHandler.post(() -> {
+                // Do something in UI (front-end process)
+                if (activity.isFinishing()) {
+                    return;
+                }
+                Exception finalError = resultErr;
+                if (finalError == null) {
+                    try {
+                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                        emailIntent.setType("text/csv");
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"aaronbaffourawuah@gmail.com"});
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Latest Footnotes");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello Sir,\n\nPlease find attached " +
+                                "the latest footnotes that have been classified as ignored." +
+                                "\n\nRegards,");
+                        Uri fileUri = androidx.core.content.FileProvider.getUriForFile(activity,
+                                activity.getApplicationContext().getPackageName() + ".provider",
+                                pathToMyAttachedFile);
+                        emailIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+                        emailIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        activity.startActivity(Intent.createChooser(emailIntent, "Pick an Email provider"));
+                    }
+                    catch (Exception e) {
+                        finalError = e;
+                    }
+                }
+                if (finalError != null) {
+                    LOGGER.error("Failed to send footnotes: ", finalError);
+                    Toast.makeText(activity, finalError.getMessage(), Toast.LENGTH_LONG);
+                }
+            });
+        });
+
+        Toast.makeText(this, R.string.footnotes_sending_start, Toast.LENGTH_LONG);
+
     }
 
     private int getBookIdx() {
@@ -299,5 +377,11 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onBookTextInteraction() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        dbHelper.close();
+        super.onDestroy();
     }
 }

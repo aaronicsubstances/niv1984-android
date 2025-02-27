@@ -39,6 +39,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -295,7 +297,9 @@ public class MainActivity extends BaseActivity implements
         myExecutor.execute(() -> {
 
             File pathToMyAttachedFile = new File(getCacheDir(),
-                    UUID.randomUUID().toString() + ".csv");
+                    "ignored-footnotes-" + UUID.randomUUID().toString().replace(
+                            "-", "").substring(0, 8) +
+                            ".csv");
             Exception serializeError = null;
             try {
                 dbHelper.serializeFootnotes(pathToMyAttachedFile);
@@ -381,7 +385,9 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     protected void onDestroy() {
-        dbHelper.close();
+        if (dbHelper != null) {
+            dbHelper.close();
+        }
         super.onDestroy();
     }
 }

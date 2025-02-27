@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -32,6 +34,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String ID_COL = "id";
     private static final String BOOK_CODE_COL = "bcode";
     private static final String HREF_COL = "href";
+    private static final String SORT_COL = "rank";
     private static final String DATE_CREATED_COL = "date_created";
 
     public DBHandler(Context context) {
@@ -51,6 +54,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + BOOK_CODE_COL + " TEXT,"
                 + HREF_COL + " TEXT,"
+                + SORT_COL + " INTEGER,"
                 + DATE_CREATED_COL + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
 
         // at last we are calling a exec sql
@@ -112,6 +116,11 @@ public class DBHandler extends SQLiteOpenHelper {
             // as we are writing data in our database.
             db = this.getWritableDatabase();
 
+            Pattern rankRegex = Pattern.compile("\\d+");
+            Matcher m = rankRegex.matcher(href);
+            m.find();
+            values.put(SORT_COL, Integer.parseInt(m.group()));
+
             // after adding all values we are passing
             // content values to our table.
             db.insert(TABLE_NAME, null, values);
@@ -127,9 +136,10 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.query(TABLE_NAME, new String[]{ BOOK_CODE_COL, HREF_COL },
                 null, null, null, null,
-                BOOK_CODE_COL + ", " + HREF_COL);
+                BOOK_CODE_COL + ", " + SORT_COL);
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(destFile)))) {
+            writer.write("bcode,href\n");
             while (c.moveToNext()) {
                 writer.write(c.getString(0) + "," +
                         c.getString(1) + "\n");

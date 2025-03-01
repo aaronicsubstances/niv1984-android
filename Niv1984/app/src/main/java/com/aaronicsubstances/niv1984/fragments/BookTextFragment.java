@@ -48,7 +48,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private SpinnerHelper mChapterSpinner, mZoomSpinner;
     private WebView mBookView;
-    private RadioButton cpdvOnly, withDra, withNiv;
+    private RadioButton cpdvOnly, withDrb, withGnt;
     private ProgressBar mWebViewPageLoadIndicator;
 
     private SharedPrefsManager mPrefMgr;
@@ -97,8 +97,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         mBookView = root.findViewById(R.id.bookView);
         mWebViewPageLoadIndicator = root.findViewById(R.id.progressBar1);
         cpdvOnly = root.findViewById(R.id.cpdvOnly);
-        withDra = root.findViewById(R.id.withDra);
-        withNiv = root.findViewById(R.id.withNiv);
+        withDrb = root.findViewById(R.id.withDra);
+        withGnt = root.findViewById(R.id.withNiv);
 
         mPrefMgr = new SharedPrefsManager(getContext());
 
@@ -232,11 +232,11 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpBrowserView() {
         int mode = mPrefMgr.getLastBookMode();
         switch (mode) {
-            case SharedPrefsManager.BOOK_MODE_WITH_DRA:
-                withDra.setChecked(true);
+            case SharedPrefsManager.BOOK_MODE_WITH_DRB:
+                withDrb.setChecked(true);
                 break;
-            case SharedPrefsManager.BOOK_MODE_WITH_NIV:
-                withNiv.setChecked(true);
+            case SharedPrefsManager.BOOK_MODE_WITH_GNT:
+                withGnt.setChecked(true);
                 break;
             default:
                 cpdvOnly.setChecked(true);
@@ -244,8 +244,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         }
 
         cpdvOnly.setOnClickListener(this);
-        withDra.setOnClickListener(this);
-        withNiv.setOnClickListener(this);
+        withDrb.setOnClickListener(this);
+        withGnt.setOnClickListener(this);
 
         BookTextViewUtils.configureBrowser(getActivity(), mBookView, this,
                 ((MainActivity)getActivity()).getDbHelper());
@@ -275,11 +275,11 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
         String additionalBook = "";
         switch (mPrefMgr.getLastBookMode()) {
-            case SharedPrefsManager.BOOK_MODE_WITH_DRA:
-                additionalBook = "dra";
+            case SharedPrefsManager.BOOK_MODE_WITH_DRB:
+                additionalBook = "drb1899";
                 break;
-            case SharedPrefsManager.BOOK_MODE_WITH_NIV:
-                additionalBook = "niv";
+            case SharedPrefsManager.BOOK_MODE_WITH_GNT:
+                additionalBook = "gnt1992";
                 break;
         }
 
@@ -292,7 +292,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         // So a query string parameter is added to force a
         // refetching of the css.
         String bookUrl = BookTextViewUtils.resolveUrl(
-                String.format("html/%s-cpdv.html", mBookCode),
+                String.format("cpdv/%s.html", mBookCode),
                 "add", additionalBook,
                 "zoom", "" + mZoomSpinner.getSelectedItemPosition());
 
@@ -323,15 +323,15 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        if (v == cpdvOnly || v == withDra || v == withNiv) {
+        if (v == cpdvOnly || v == withDrb || v == withGnt) {
             boolean checked = ((RadioButton)v).isChecked();
             if (checked) {
                 int mode = SharedPrefsManager.BOOK_MODE_CPDV;
-                if (v == withDra) {
-                    mode = SharedPrefsManager.BOOK_MODE_WITH_DRA;
+                if (v == withDrb) {
+                    mode = SharedPrefsManager.BOOK_MODE_WITH_DRB;
                 }
-                else if (v == withNiv) {
-                    mode = SharedPrefsManager.BOOK_MODE_WITH_NIV;
+                else if (v == withGnt) {
+                    mode = SharedPrefsManager.BOOK_MODE_WITH_GNT;
                 }
                 mPrefMgr.setLastBookMode(mode);
                 reloadBookUrl();

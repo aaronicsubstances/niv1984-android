@@ -72,14 +72,14 @@
 
         <RadioButton
             android:id="@+id/withDra"
-            android:text="@string/withDra"
+            android:text="@string/withDrb"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
 
         <RadioButton
             android:id="@+id/withNiv"
-            android:text="@string/withNiv"
+            android:text="@string/withGnt"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />

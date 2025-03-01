@@ -1,7 +1,8 @@
 import html
 import json
-import xml.etree.ElementTree as ET
+import re
 import os
+import xml.etree.ElementTree as ET
 
 CHAPTER_COUNTS = [
     50, 40, 27, 36, 34,
@@ -61,7 +62,7 @@ def main(version_tag, xml_dir):
             continue
         bcode = os.path.splitext(os.path.basename(f))[0]
         bcode = bcode[bcode.index("-")+1:]
-        fgo = f'{bcode}-{version_tag}.html'
+        fgo = f'{bcode}.html'
         print(f"processing {f} into {fgo}...")
         #fout = FoutPhantom()
         #if True:
@@ -166,8 +167,15 @@ def work_on_xml(bcode, version_tag, file_path, fout):
         fout.write(f"</div>\n")
         fout.write("</div>\n")
 
-    bookmarks = json.dumps(bookmark_counter.acc)
-    fout.write(f"<span class='bookmarks' style='display:none'>{html.escape(bookmarks)}</span>")
+    bookmarks = []
+    for value in bookmark_counter.acc:
+        sepIdx = value.index('-')
+        bmDesc = value[sepIdx+1:]
+        if version_tag == "cpdv" and re.fullmatch(r'\d+', bmDesc):
+            bookmarks.append(f'chapter-{bmDesc}')
+        bookmarks.append(f'{version_tag}-bookmark-{value}')
+
+    fout.write(f"<span class='bookmarks' style='display:none'>{html.escape(json.dumps(bookmarks))}</span>")
     
 def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
     text = []
@@ -217,5 +225,4 @@ class FoutPhantom:
 
 if __name__ == '__main__':
     main("cpdv", "cpdv-xml")
-    main("dra", "dra1899-xml")
-    main("niv", "niv1984-xml")
+    main("drb1899", "drb1899-xml")

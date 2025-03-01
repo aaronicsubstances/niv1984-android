@@ -9,7 +9,7 @@ $(function() {
             fireOnPageLoadCompleted);
         return;
     }
-    if (additionalVersion === "niv") {
+    if (additionalVersion === "gnt1992") {
         if (bcode === "ESG") {
             bcode = "EST";
         }
@@ -17,7 +17,7 @@ $(function() {
              bcode = "DAN";
         }
     }
-    var urlToLoad = `/html/${bcode}-${additionalVersion}.html`;
+    var urlToLoad = `/${additionalVersion}/${bcode}.html`;
     $('<div id="add" class="booktext"></div>').insertAfter(".booktext");
     var secondBookTextEl = document.getElementById("add");
     $("#add").load(urlToLoad + ' .booktext', function(responseTxt, statusTxt, xhr) {
@@ -56,7 +56,7 @@ $(function() {
 
 function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     var encodedBookmarks = JSON.parse($("span.bookmarks", $(booktextEl)).text());
-    var sortedBookmarks = identifyAndSortInternalBookmarks(version, encodedBookmarks);
+    var sortedBookmarks = identifyAndSortInternalBookmarks(encodedBookmarks);
     if (version === DEFAULT_VERSION) {
         $.get('/footnote-status', { bcode: bcode }, function(data) {
             var ignoredFootnotes = data.hrefs.split(",");
@@ -214,18 +214,16 @@ function modifyFootnotes(bcode, booktextEl, sortedBookmarks,
     }
 }
 
-function identifyAndSortInternalBookmarks(version, list) {
+function identifyAndSortInternalBookmarks(list) {
     var sortedBookmarks = []
-    for (value of list) {
-        var sepIdx = value.indexOf('-')
-        var bmDesc = value.substring(sepIdx+1);
-        if (version === DEFAULT_VERSION && /^\d+$/.test(bmDesc)) {
-            sortedBookmarks.push(`chapter-${bmDesc}`);
+    for (item of list) {
+        var posInfo = $('#'+item).offset()
+        if (posInfo) {
+            sortedBookmarks.push([item, posInfo.top])
         }
-        sortedBookmarks.push(`${version}-bookmark-${value}`)
     }
-    sortedBookmarks.sort((a, b) => $('#'+a).offset().top - $('#'+b).offset().top);
-    return sortedBookmarks
+    sortedBookmarks.sort((a, b) => a[1] - b[1]);
+    return sortedBookmarks.map(function(x) { return x[0]; });
 }
 
 function fireOnPageLoadCompleted() {

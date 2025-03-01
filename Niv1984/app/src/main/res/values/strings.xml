@@ -111,8 +111,8 @@
     <string name="action_zoom">Text Size:</string>
     <string name="action_chapter_selection">Chapter:</string>
 
-    <string name="withNiv">+NIV</string>
-    <string name="withDra">+DRA</string>
+    <string name="withGnt">+GNT</string>
+    <string name="withDrb">+DRB</string>
     <string name="cpdvOnly">CPDV</string>
 
     <!-- Preference Titles -->

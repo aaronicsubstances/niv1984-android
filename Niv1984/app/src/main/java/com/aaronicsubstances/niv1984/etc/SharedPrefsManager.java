@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 
 public class SharedPrefsManager {
     public static final int BOOK_MODE_CPDV = 0;
-    public static final int BOOK_MODE_WITH_DRA = 1;
-    public static final int BOOK_MODE_WITH_NIV = 2;
+    public static final int BOOK_MODE_WITH_DRB = 1;
+    public static final int BOOK_MODE_WITH_GNT = 2;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
 

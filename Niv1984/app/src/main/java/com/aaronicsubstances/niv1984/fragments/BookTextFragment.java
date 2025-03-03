@@ -294,7 +294,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         String bookUrl = BookTextViewUtils.resolveUrl(
                 String.format("cpdv/%s.html", mBookCode),
                 "add", additionalBook,
-                "zoom", "" + mZoomSpinner.getSelectedItemPosition());
+                "zoom", "" + mZoomSpinner.getSelectedItemPosition(),
+                "fEdit", "" + mFootnoteEditingEnabled);
 
         // if url differs only in fragment, don't show progress loading indicator
         int loadIndicatorVisibility = View.VISIBLE;
@@ -389,7 +390,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 cnum = "0";
             }
             mPrefMgr.setLastInternalBookmarkAndChapter(mBookCode, Utils.DEFAULT_VERSION, "chapter-" + cnum, cnum);
-            reloadBookUrl();
+
+            mBookView.loadUrl(getUrlWithoutFragment() + '#' + "chapter-" + cnum);
+            //reloadBookUrl();
         }
         else if (parent == mZoomSpinner.getSpinner()) {
             LOGGER.debug("onItemSelected for mZoomSpinner");

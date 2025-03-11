@@ -276,7 +276,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         String additionalBook = "";
         switch (mPrefMgr.getLastBookMode()) {
             case SharedPrefsManager.BOOK_MODE_WITH_DRB:
-                additionalBook = "drb1899";
+                additionalBook = "drb1752";
                 break;
             case SharedPrefsManager.BOOK_MODE_WITH_GNT:
                 additionalBook = "gnt1992";

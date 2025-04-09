@@ -113,6 +113,7 @@
 
     <string name="withGnt">+GNT</string>
     <string name="withDrb">+DRB</string>
+    <string name="withBbe">+BBE</string>
     <string name="cpdvOnly">CPDV</string>
 
     <!-- Preference Titles -->

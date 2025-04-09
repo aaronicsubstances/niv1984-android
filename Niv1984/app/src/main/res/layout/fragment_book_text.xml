@@ -57,33 +57,44 @@
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
-    <RadioGroup
-        android:orientation="horizontal"
+    <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin">
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <RadioButton
-            android:id="@+id/cpdvOnly"
-            android:text="@string/cpdvOnly"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/cpdvOnly"
+                android:text="@string/cpdvOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/label_spacing"/>
 
-        <RadioButton
-            android:id="@+id/withDra"
-            android:text="@string/withDrb"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/withDrb"
+                android:text="@string/withDrb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/label_spacing" />
 
-        <RadioButton
-            android:id="@+id/withNiv"
-            android:text="@string/withGnt"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/withGnt"
+                android:text="@string/withGnt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/label_spacing" />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/withBbe"
+                android:text="@string/withBbe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/label_spacing" />
+
+        </RadioGroup>
+    </HorizontalScrollView>
 </LinearLayout>
 

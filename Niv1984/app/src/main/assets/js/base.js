@@ -9,7 +9,7 @@ $(function() {
             fireOnPageLoadCompleted);
         return;
     }
-    if (additionalVersion === "gnt1992") {
+    if (additionalVersion === "gnt1992" || additionalVersion === "bbe1965") {
         if (bcode === "ESG") {
             bcode = "EST";
         }

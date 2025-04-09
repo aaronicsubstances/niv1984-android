@@ -23,64 +23,68 @@
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_margin="@dimen/activity_margin"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/txt1"
-            android:text="@string/action_chapter_selection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Spinner
-            android:id="@+id/chapterDropDown"
-            android:minWidth="@dimen/spinner_min_width"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:id="@+id/txt2"
-            android:text="@string/action_zoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Spinner
-            android:id="@+id/fontSizes"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="2dp"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
-
-        <RadioGroup
-            android:orientation="vertical"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom">
+            android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/cpdvOnly"
-                android:text="@string/cpdvOnly"
+            <TextView
+                android:id="@+id/txt1"
+                android:text="@string/action_chapter_selection"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-            <RadioButton
-                android:id="@+id/withDra"
-                android:text="@string/withDrb"
+            <Spinner
+                android:id="@+id/chapterDropDown"
+                android:minWidth="@dimen/spinner_min_width"
+                android:layout_marginBottom="@dimen/activity_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/txt2"
+                android:text="@string/action_zoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
-            <RadioButton
-                android:id="@+id/withNiv"
-                android:text="@string/withGnt"
+            <Spinner
+                android:id="@+id/fontSizes"
+                android:layout_marginBottom="@dimen/activity_margin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"/>
 
-        </RadioGroup>
-    </LinearLayout>
+            <RadioGroup
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/cpdvOnly"
+                    android:text="@string/cpdvOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/withDrb"
+                    android:text="@string/withDrb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/withGnt"
+                    android:text="@string/withGnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/withBbe"
+                    android:text="@string/withBbe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
 

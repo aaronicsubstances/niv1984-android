@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Nahum">
+  <chapter num="1">
     <verse num="1">
       <content>The word about Nineveh. The book of the vision of Nahum the Elkoshite.</content>
     </verse>
@@ -46,7 +46,7 @@
       <content>See on the mountains the feet of him who comes with good news, giving word of peace! Keep your feasts, O Judah, give effect to your oaths: for the good-for-nothing man will never again go through you; he is completely cut off.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Nahum">
+  <chapter num="2">
     <verse num="1">
       <content>A crusher has come up before your face: keep a good look-out, let the way be watched, make yourself strong, let your power be greatly increased.</content>
     </verse>
@@ -87,7 +87,7 @@
       <content>See, I am against you, says the Lord of armies, and I will have your war-carriages burned in the smoke, and your young lions will be food for the sword: you will no longer get your food by force on the earth, and the voice of your she-lions will be stopped for ever.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Nahum">
+  <chapter num="3">
     <verse num="1">
       <content>A curse is on the town of blood; it is full of deceit and violent acts; and there is no end to the taking of life.</content>
     </verse>

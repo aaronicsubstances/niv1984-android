@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Haggai">
+  <chapter num="1">
     <verse num="1">
       <content>In the second year of Darius the king, in the sixth month, on the first day of the month, came the word of the Lord by Haggai the prophet to Zerubbabel, the son of Shealtiel, ruler of Judah, and to Joshua, the son of Jehozadak, the high priest, saying,</content>
     </verse>
@@ -46,7 +46,7 @@
       <content>On the twenty-fourth day of the month, in the sixth month, in the second year of Darius the king.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Haggai">
+  <chapter num="2">
     <verse num="1">
       <content>In the seventh month, on the twenty-first day of the month, the word of the Lord came by Haggai the prophet, saying,</content>
     </verse>

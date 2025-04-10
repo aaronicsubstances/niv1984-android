@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Ruth">
+  <chapter num="1">
     <verse num="1">
       <content>Now there came a time, in the days of the judges, when there was no food in the land. And a certain man went from Beth-lehem-judah, he and his wife and his two sons, to make a living-place in the country of Moab.</content>
     </verse>
@@ -67,7 +67,7 @@
       <content>So Naomi came back out of the country of Moab, and Ruth the Moabitess, her daughter-in-law, with her; and they came to Beth-lehem in the first days of the grain-cutting.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Ruth">
+  <chapter num="2">
     <verse num="1">
       <content>And Naomi had a relation of her husband, a man of wealth, of the family of Elimelech; and his name was Boaz.</content>
     </verse>
@@ -138,7 +138,7 @@
       <content>So she kept near the servant-girls of Boaz to take up the grain till the cutting of the early grain and the cutting of the late grain were ended; and she went on living with her mother-in-law.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Ruth">
+  <chapter num="3">
     <verse num="1">
       <content>And Naomi, her mother-in-law, said to her, My daughter, am I not to get you a resting-place where you may be in comfort?</content>
     </verse>
@@ -194,7 +194,7 @@
       <content>Then she said, Do nothing now, my daughter, till you see what will come of this; for the man will take no rest till he has put this thing through.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Ruth">
+  <chapter num="4">
     <verse num="1">
       <content>And Boaz went up to the public place of the town, and took his seat there: and the near relation of whom he had been talking came by; and Boaz, crying out to him by name, said, Come and be seated here. And he came and was seated.</content>
     </verse>

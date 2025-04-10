@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Colossians">
+  <chapter num="1">
     <verse num="1">
       <content>Paul, an Apostle of Jesus Christ, by the purpose of God, and Timothy our brother,</content>
     </verse>
@@ -88,7 +88,7 @@
       <content>And for this purpose I am working, using all my strength by the help of his power which is working in me strongly.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Colossians">
+  <chapter num="2">
     <verse num="1">
       <content>For it is my desire to give you news of the great fight I am making for you and for those at Laodicea, and for all who have not seen my face in the flesh;</content>
     </verse>
@@ -159,7 +159,7 @@
       <content>These things seem to have a sort of wisdom in self-ordered worship and making little of oneself, and being cruel to the body, not honouring it by giving it its natural use.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Colossians">
+  <chapter num="3">
     <verse num="1">
       <content>If then you have a new life with Christ, give your attention to the things of heaven, where Christ is seated at the right hand of God.</content>
     </verse>
@@ -236,7 +236,7 @@
       <content>For the wrongdoer will have punishment for the wrong he has done, without respect for any man's position.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Colossians">
+  <chapter num="4">
     <verse num="1">
       <content>Masters, give your servants what is right and equal, conscious that you have a Master in heaven.</content>
     </verse>

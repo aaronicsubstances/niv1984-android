@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="1 Thessalonians">
+  <chapter num="1">
     <verse num="1">
       <content>Paul and Silvanus and Timothy, to the church of the Thessalonians in God the Father and the Lord Jesus Christ: Grace to you and peace.</content>
     </verse>
@@ -31,7 +31,7 @@
       <content>Waiting for his Son from heaven, who came back from the dead, even Jesus, our Saviour from the wrath to come.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="1 Thessalonians">
+  <chapter num="2">
     <verse num="1">
       <content>For you yourselves, brothers, are conscious that our coming among you was not without effect:</content>
     </verse>
@@ -93,7 +93,7 @@
       <content>For you are our glory and our joy.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="1 Thessalonians">
+  <chapter num="3">
     <verse num="1">
       <content>At last our desire to have news of you was so strong that, while we ourselves were waiting at Athens,</content>
     </verse>
@@ -134,7 +134,7 @@
       <content>So that your hearts may be strong and free from all sin before our God and Father, at the coming of our Lord Jesus with all his saints.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="1 Thessalonians">
+  <chapter num="4">
     <verse num="1">
       <content>And last of all, the prayer which we make to you from our heart and in the name of the Lord Jesus, is this: that as we made clear to you what sort of behaviour is pleasing to God, as in fact you are doing now, so you will go on in these ways, but more and more.</content>
     </verse>
@@ -190,7 +190,7 @@
       <content>So then, give comfort to one another with these words.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="1 Thessalonians">
+  <chapter num="5">
     <verse num="1">
       <content>But about the times and their order, my brothers, there is no need for me to say anything to you.</content>
     </verse>

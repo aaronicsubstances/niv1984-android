@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="1 Peter">
+  <chapter num="1">
     <verse num="1">
       <content>Peter, an Apostle of Jesus Christ, to the saints who are living in Pontus, Galatia, Cappadocia, Asia, and Bithynia,</content>
     </verse>
@@ -76,7 +76,7 @@
       <content>But the word of the Lord is eternal. And this is the word of the good news which was given to you.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="1 Peter">
+  <chapter num="2">
     <verse num="1">
       <content>So putting away all wrongdoing, and all tricks and deceits and envies and evil talk,</content>
     </verse>
@@ -153,7 +153,7 @@
       <content>Because, like sheep, you had gone out of the way; but now you have come back to him who keeps watch over your souls.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="1 Peter">
+  <chapter num="3">
     <verse num="1">
       <content>Wives, be ruled by your husbands; so that even if some of them give no attention to the word, their hearts may be changed by the behaviour of their wives,</content>
     </verse>
@@ -221,7 +221,7 @@
       <content>Who has gone into heaven, and is at the right hand of God, angels and authorities and powers having been put under his rule.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="1 Peter">
+  <chapter num="4">
     <verse num="1">
       <content>So that as Jesus was put to death in the flesh, do you yourselves be of the same mind; for the death of the flesh puts an end to sin;</content>
     </verse>
@@ -280,7 +280,7 @@
       <content>For this reason let those who by the purpose of God undergo punishment, keep on in well-doing and put their souls into the safe hands of their Maker.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="1 Peter">
+  <chapter num="5">
     <verse num="1">
       <content>I who am myself one of the rulers of the church, and a witness of the death of Christ, having my part in the coming glory, send this serious request to the chief men among you:</content>
     </verse>

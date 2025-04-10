@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Nehemiah">
+  <chapter num="1">
     <verse num="1">
       <content>The history of Nehemiah, the son of Hacaliah. Now it came about, in the month Chislev, in the twentieth year, when I was in Shushan, the king's town,</content>
     </verse>
@@ -34,7 +34,7 @@
       <content>O Lord, let your ear take note of the prayer of your servant, and of the prayers of your servants, who take delight in worshipping your name: give help, O Lord, to your servant this day, and let him have mercy in the eyes of this man. (Now I was the king's wine-servant.)</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Nehemiah">
+  <chapter num="2">
     <verse num="1">
       <content>And it came about in the month Nisan, in the twentieth year of Artaxerxes the king, when wine was before him, that I took up the wine and gave it to the king. Now I had never before been sad when the king was present.</content>
     </verse>
@@ -96,7 +96,7 @@
       <content>Then answering them I said, The God of heaven, he will be our help; so we his servants will go on with our building: but you have no part or right or any name in Jerusalem.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Nehemiah">
+  <chapter num="3">
     <verse num="1">
       <content>Then Eliashib, the chief priest, got up with his brothers the priests, and took in hand the building of the sheep doorway; they made it holy and put its doors in position; as far as the tower of Hammeah they made it holy, even to the tower of Hananel.</content>
     </verse>
@@ -194,7 +194,7 @@
       <content>And between the way up to the angle and the sheep door, the gold-workers and the traders made good the wall.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Nehemiah">
+  <chapter num="4">
     <verse num="1">
       <content>Now, Sanballat, hearing that we were building the wall, was very angry, and in his wrath made sport of the Jews.</content>
     </verse>
@@ -265,7 +265,7 @@
       <content>So not one of us, I or my brothers or my servants or the watchmen who were with me, took off his clothing, everyone went armed to the water.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Nehemiah">
+  <chapter num="5">
     <verse num="1">
       <content>Then there was a great outcry from the people and their wives against their countrymen the Jews.</content>
     </verse>
@@ -324,7 +324,7 @@
       <content>Keep in mind, O my God, for my good, all I have done for this people.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Nehemiah">
+  <chapter num="6">
     <verse num="1">
       <content>Now when word was given to Sanballat and Tobiah and to Geshem the Arabian and to the rest of our haters, that I had done the building of the wall and that there were no more broken places in it (though even then I had not put up the doors in the doorways);</content>
     </verse>
@@ -383,7 +383,7 @@
       <content>And they said much before me of the good he had done, and gave him accounts of my words. And Tobiah sent letters with the purpose of causing me fear.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Nehemiah">
+  <chapter num="7">
     <verse num="1">
       <content>Now when the building of the wall was complete and I had put up the doors, and the door-keepers and the music-makers and the Levites had been given their places,</content>
     </verse>
@@ -604,7 +604,7 @@
       <content>So the priests and the Levites and the door-keepers and the music-makers and some of the people and the Nethinim, and all Israel, were living in their towns.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Nehemiah">
+  <chapter num="8">
     <verse num="1">
       <content>And when the seventh month came, the children of Israel were in their towns. And all the people came together like one man into the wide place in front of the water-doorway; and they made a request to Ezra the scribe that he would put before them the book of the law of Moses which the Lord had given to Israel.</content>
     </verse>
@@ -660,7 +660,7 @@
       <content>And day by day, from the first day till the last, he was reading from the book of the law of God. And they kept the feast for seven days: and on the eighth day there was a holy meeting, as it is ordered in the law.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Nehemiah">
+  <chapter num="9">
     <verse num="1">
       <content>Now on the twenty-fourth day of this month the children of Israel came together, taking no food and putting haircloth and dust on their bodies.</content>
     </verse>
@@ -776,7 +776,7 @@
       <content>And because of all this we are making an agreement in good faith, and putting it in writing; and our rulers, our Levites, and our priests are putting their names to it.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Nehemiah">
+  <chapter num="10">
     <verse num="1">
       <content>Now those who put down their names were Nehemiah the Tirshatha, the son of Hacaliah, and Zedekiah,</content>
     </verse>
@@ -895,7 +895,7 @@
       <content>For the children of Israel and the children of Levi are to take the lifted offering of the grain and wine and oil into the rooms where the vessels of the holy place are, together with the priests and the door-keepers and the makers of music: and we will not give up caring for the house of our God.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Nehemiah">
+  <chapter num="11">
     <verse num="1">
       <content>And the rulers of the people were living in Jerusalem: the rest of the people made selection, by the decision of chance, of one out of every ten to be living in Jerusalem, the holy town; the other nine to go to the other towns.</content>
     </verse>
@@ -1005,7 +1005,7 @@
       <content>And of the Levites, certain divisions in Judah were joined to Benjamin.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Nehemiah">
+  <chapter num="12">
     <verse num="1">
       <content>Now these are the priests and the Levites who went up with Zerubbabel, the son of Shealtiel, and Jeshua: Seraiah, Jeremiah, Ezra,</content>
     </verse>
@@ -1148,7 +1148,7 @@
       <content>And all Israel in the days of Zerubbabel and in the days of Nehemiah gave what was needed by the music-makers and the door-keepers day by day: and they made the offerings holy for the Levites; and the Levites did the same for the sons of Aaron.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Nehemiah">
+  <chapter num="13">
     <verse num="1">
       <content>On that day there was a reading from the book of Moses in the hearing of the people; and they saw that it said in the book that no Ammonite or Moabite might ever come into the meeting of God;</content>
     </verse>

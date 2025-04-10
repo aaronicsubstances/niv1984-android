@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Jeremiah">
+  <chapter num="1">
     <verse num="1">
       <content>The words of Jeremiah, the son of Hilkiah, of the priests who were in Anathoth in the land of Benjamin:</content>
     </verse>
@@ -58,7 +58,7 @@
       <content>They will be fighting against you, but they will not overcome you: for I am with you, says the Lord, to give you salvation.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Jeremiah">
+  <chapter num="2">
     <verse num="1">
       <content>And the word of the Lord came to me, saying,</content>
     </verse>
@@ -171,7 +171,7 @@
       <content>Truly, you will go out from him with your hands on your head: for the Lord has given up those in whom you have put your faith, and they will be of no help to you.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Jeremiah">
+  <chapter num="3">
     <verse num="1">
       <content>They say, If a man puts away his wife and she goes from him and becomes another man's, will he go back to her again? will not that land have been made unclean? but though you have been acting like a loose woman with a number of lovers, will you now come back to me? says the Lord.</content>
     </verse>
@@ -248,7 +248,7 @@
       <content>Let us be stretched on the earth in our downfall, covering ourselves with our shame: for we have been sinners against the Lord our God, we and our fathers, from our earliest years even till this day: and we have not given ear to the voice of the Lord our God.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Jeremiah">
+  <chapter num="4">
     <verse num="1">
       <content>If you will come back, O Israel, says the Lord, you will come back to me: and if you will put away your disgusting ways, you will not be sent away from before me.</content>
     </verse>
@@ -343,7 +343,7 @@
       <content>A voice has come to my ears like the voice of a woman in birth-pains, the pain of one giving birth to her first child, the voice of the daughter of Zion, fighting for breath, stretching out her hands, saying, Now sorrow is mine! for my strength is gone from me before the takers of life.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Jeremiah">
+  <chapter num="5">
     <verse num="1">
       <content>Go quickly through the streets of Jerusalem, and see now, and get knowledge, and make a search in her wide places if there is a man, if there is one in her who is upright, who keeps faith; and she will have my forgiveness.</content>
     </verse>
@@ -438,7 +438,7 @@
       <content>The prophets give false words and the priests give decisions by their direction; and my people are glad to have it so: and what will you do in the end?</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Jeremiah">
+  <chapter num="6">
     <verse num="1">
       <content>Go in flight out of Jerusalem, so that you may be safe, you children of Benjamin, and let the horn be sounded in Tekoa, and the flag be lifted up on Beth-haccherem: for evil is looking out from the north, and a great destruction.</content>
     </verse>
@@ -530,7 +530,7 @@
       <content>They will be named waste silver, because the Lord has given them up.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Jeremiah">
+  <chapter num="7">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, saying,</content>
     </verse>
@@ -634,7 +634,7 @@
       <content>And in the towns of Judah and in the streets of Jerusalem, I will put an end to the laughing voices, the voice of joy and the voice of the newly-married man and the voice of the bride: for the land will become a waste.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Jeremiah">
+  <chapter num="8">
     <verse num="1">
       <content>At that time, says the Lord, they will take the bones of the kings of Judah, and the bones of his rulers, and the bones of the priests, and the bones of the prophets, and the bones of the people of Jerusalem out of their resting-places:</content>
     </verse>
@@ -702,7 +702,7 @@
       <content>Is there no life-giving oil in Gilead? is there no expert in medical arts? why then have my people not been made well?</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Jeremiah">
+  <chapter num="9">
     <verse num="1">
       <content>If only my head was a stream of waters and my eyes fountains of weeping, so that I might go on weeping day and night for the dead of the daughter of my people!</content>
     </verse>
@@ -782,7 +782,7 @@
       <content>On Egypt and on Judah and on Edom and on the children of Ammon and on Moab and on all who have the ends of their hair cut, who are living in the waste land: for all these nations and all the people of Israel are without circumcision in their hearts.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Jeremiah">
+  <chapter num="10">
     <verse num="1">
       <content>Give ear to the word which the Lord says to you, O people of Israel:</content>
     </verse>
@@ -859,7 +859,7 @@
       <content>Let your wrath be let loose on the nations which have no knowledge of you, and on the families who give no worship to your name: for they have made a meal of Jacob, truly they have made a meal of him and put an end to him and made his fields a waste.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Jeremiah">
+  <chapter num="11">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, saying,</content>
     </verse>
@@ -930,7 +930,7 @@
       <content>Not one of them will keep his life, for I will send evil on the men of Anathoth in the year of their punishment.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Jeremiah">
+  <chapter num="12">
     <verse num="1">
       <content>You are in the right, O Lord, when I put my cause before you: still let me take up with you the question of your decisions: why does the evil-doer do well? why are the workers of deceit living in comfort?</content>
     </verse>
@@ -983,7 +983,7 @@
       <content>But if they will not give ear, then I will have that nation uprooted, and given to destruction, says the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Jeremiah">
+  <chapter num="13">
     <verse num="1">
       <content>This is what the Lord said to me: Go and get yourself a linen band and put it round you and do not put it in water.</content>
     </verse>
@@ -1066,7 +1066,7 @@
       <content>I have seen your disgusting acts, even your false behaviour and your cries of desire and your loose ways on the hills in the field. Unhappy are you, O Jerusalem, you have no desire to be made clean; how long will you be in turning back to me?</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Jeremiah">
+  <chapter num="14">
     <verse num="1">
       <content>The word of the Lord came to Jeremiah when there was no water.</content>
     </verse>
@@ -1134,7 +1134,7 @@
       <content>Are any of the false gods of the nations able to make rain come? are the heavens able to give showers? are you not he, O Lord our God? so we will go on waiting for you, for you have done all these things.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Jeremiah">
+  <chapter num="15">
     <verse num="1">
       <content>Then the Lord said to me, Even if Moses and Samuel came before me, I would have no desire for this people: send them away from before me, and let them go.</content>
     </verse>
@@ -1199,7 +1199,7 @@
       <content>I will keep you safe from the hands of the evil-doers, and I will give you salvation from the hands of the cruel ones.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Jeremiah">
+  <chapter num="16">
     <verse num="1">
       <content>Then again the word of the Lord came to me, saying,</content>
     </verse>
@@ -1264,7 +1264,7 @@
       <content>For this reason, truly, I will make them see, this once I will give them knowledge of my hand and my power; and they will be certain that my name is the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Jeremiah">
+  <chapter num="17">
     <verse num="1">
       <content>The sin of Judah is recorded with a pen of iron, and with the sharp point of a jewel it is cut on their hearts of stone, and on the horns of their altars for a sign to them:</content>
     </verse>
@@ -1347,7 +1347,7 @@
       <content>But if you do not give ear to me, to keep the Sabbath day holy, and to let no weight be lifted and taken through the doors of Jerusalem on the Sabbath day: then I will put a fire in its doorways, burning up the great houses of Jerusalem, and it will never be put out.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Jeremiah">
+  <chapter num="18">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, saying,</content>
     </verse>
@@ -1418,7 +1418,7 @@
       <content>But you, Lord, have knowledge of all the designs which they have made against my life; let not their evil-doing be covered or their sin be washed away from before your eyes: but let it be a cause of falling before you: so do to them in the time of your wrath.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Jeremiah">
+  <chapter num="19">
     <verse num="1">
       <content>This is what the Lord has said: Go and get for money a potter's bottle made of earth, and take with you some of the responsible men of the people and of the priests;</content>
     </verse>
@@ -1465,7 +1465,7 @@
       <content>The Lord of armies, the God of Israel, has said: See, I will send on this town and on all her towns all the evil which I have said; because they made their necks stiff, so that they might not give ear to my words.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Jeremiah">
+  <chapter num="20">
     <verse num="1">
       <content>Now it came to the ears of Pashhur, the son of Immer the priest, who was chief in authority in the house of the Lord, that Jeremiah was saying these things;</content>
     </verse>
@@ -1521,7 +1521,7 @@
       <content>Why did I come from my mother's body to see pain and sorrow, so that my days might be wasted with shame?</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Jeremiah">
+  <chapter num="21">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, when King Zedekiah sent to him Pashhur, the son of Malchiah, and Zephaniah, the son of Maaseiah the priest, saying,</content>
     </verse>
@@ -1565,7 +1565,7 @@
       <content>I will send punishment on you in keeping with the fruit of your doings, says the Lord: and I will put a fire in her woodlands, burning up everything round about her.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Jeremiah">
+  <chapter num="22">
     <verse num="1">
       <content>This is what the Lord has said: Go down to the house of the king of Judah and there give him this word,</content>
     </verse>
@@ -1657,7 +1657,7 @@
       <content>The Lord has said, Let this man be recorded as having no children, a man who will not do well in all his life: for no man of his seed will do well, seated on the seat of the kingdom of David and ruling again in Judah.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Jeremiah">
+  <chapter num="23">
     <verse num="1">
       <content>A curse is on the keepers who are causing the destruction and loss of the sheep of my field, says the Lord.</content>
     </verse>
@@ -1779,7 +1779,7 @@
       <content>And I will give you a name without honour for ever, and unending shame which will never go from the memory of men.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Jeremiah">
+  <chapter num="24">
     <verse num="1">
       <content>The Lord gave me a vision, and I saw two baskets full of figs put in front of the Temple of the Lord, after Nebuchadrezzar, king of Babylon, had taken prisoner Jeconiah, the son of Jehoiakim, king of Judah, and the chiefs of Judah, and the expert workmen and metal-workers from Jerusalem, and had taken them to Babylon.</content>
     </verse>
@@ -1811,7 +1811,7 @@
       <content>And I will send the sword, and need of food, and disease, among them till they are all cut off from the land which I gave to them and to their fathers.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Jeremiah">
+  <chapter num="25">
     <verse num="1">
       <content>The word which came to Jeremiah about all the people of Judah in the fourth year of Jehoiakim, the son of Josiah king of Judah; this was the first year of Nebuchadrezzar, king of Babylon.</content>
     </verse>
@@ -1927,7 +1927,7 @@
       <content>The lion has come out of his secret place, for the land has become a waste because of the cruel sword, and because of the heat of his wrath.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Jeremiah">
+  <chapter num="26">
     <verse num="1">
       <content>When Jehoiakim, the son of Josiah, king of Judah, first became king, this word came from the Lord, saying,</content>
     </verse>
@@ -2001,7 +2001,7 @@
       <content>But Ahikam, the son of Shaphan, gave Jeremiah his help, so that he was not given into the hands of the people to be put to death.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Jeremiah">
+  <chapter num="27">
     <verse num="1">
       <content>When Zedekiah, the son of Josiah, king of Judah, first became king this word came to Jeremiah from the Lord, saying,</content>
     </verse>
@@ -2069,7 +2069,7 @@
       <content>They will be taken away to Babylon, and there they will be till the day when I send their punishment on them, says the Lord. Then I will take them up and put them back in their place.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Jeremiah">
+  <chapter num="28">
     <verse num="1">
       <content>And it came about in that year, when Zedekiah first became king of Judah, in the fourth year, in the fifth month, that Hananiah, the son of Azzur the prophet, who came from Gibeon, said to Jeremiah in the house of the Lord, before the priests and all the people,</content>
     </verse>
@@ -2122,7 +2122,7 @@
       <content>So death came to Hananiah the prophet the same year, in the seventh month.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Jeremiah">
+  <chapter num="29">
     <verse num="1">
       <content>Now these are the words of the letter which Jeremiah the prophet sent from Jerusalem to the responsible men among those who had been taken away, and to the priests and the prophets and to all the rest of the people whom Nebuchadnezzar had taken away prisoners from Jerusalem to Babylon;</content>
     </verse>
@@ -2220,7 +2220,7 @@
       <content>For this cause the Lord has said, Truly I will send punishment on Shemaiah and on his seed; not a man of his family will have a place among this people, and he will not see the good which I am going to do to my people, says the Lord: because he has said words against the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Jeremiah">
+  <chapter num="30">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, saying,</content>
     </verse>
@@ -2294,7 +2294,7 @@
       <content>The wrath of the Lord will not be turned back till he has done, till he has put into effect, the purposes of his heart: in days to come you will have full knowledge of this.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Jeremiah">
+  <chapter num="31">
     <verse num="1">
       <content>At that time, says the Lord, I will be the God of all the families of Israel, and they will be my people.</content>
     </verse>
@@ -2416,7 +2416,7 @@
       <content>And all the valley of the dead bodies, and all the field of death as far as the stream Kidron, up to the angle of the horses' doorway to the east, will be holy to the Lord; it will not again be uprooted or overturned for ever.</content>
     </verse>
   </chapter>
-  <chapter num="32" preferred_title="Jeremiah">
+  <chapter num="32">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord in the tenth year of Zedekiah, king of Judah, which was the eighteenth year of Nebuchadrezzar.</content>
     </verse>
@@ -2550,7 +2550,7 @@
       <content>Men will get fields for money, and put the business in writing, stamping the papers and having them witnessed, in the land of Benjamin and in the country round Jerusalem and in the towns of Judah and in the towns of the hill-country and in the towns of the lowland and in the towns of the South: for I will let their fate be changed, says the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="33" preferred_title="Jeremiah">
+  <chapter num="33">
     <verse num="1">
       <content>Then the word of the Lord came to Jeremiah the second time, while he was still shut up in the place of the armed watchmen, saying,</content>
     </verse>
@@ -2630,7 +2630,7 @@
       <content>Then I will give up caring for the seed of Jacob and of David my servant, so that I will not take of his seed to be rulers over the seed of Abraham, Isaac, and Jacob: for I will let their fate be changed and will have mercy on them.</content>
     </verse>
   </chapter>
-  <chapter num="34" preferred_title="Jeremiah">
+  <chapter num="34">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, when Nebuchadrezzar, king of Babylon, and all his army, and all the kingdoms of the earth which were under his rule, and all the peoples, were fighting against Jerusalem and all its towns, saying,</content>
     </verse>
@@ -2698,7 +2698,7 @@
       <content>See, I will give orders, says the Lord, and make them come back to this town; and they will make war on it and take it and have it burned with fire: and I will make the towns of Judah waste and unpeopled.</content>
     </verse>
   </chapter>
-  <chapter num="35" preferred_title="Jeremiah">
+  <chapter num="35">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, in the days of Jehoiakim, the son of Josiah, king of Judah, saying,</content>
     </verse>
@@ -2757,7 +2757,7 @@
       <content>For this reason the Lord of armies, the God of Israel, has said, Jonadab, the son of Rechab, will never be without a man to take his place before me.</content>
     </verse>
   </chapter>
-  <chapter num="36" preferred_title="Jeremiah">
+  <chapter num="36">
     <verse num="1">
       <content>Now it came about in the fourth year of Jehoiakim, the son of Josiah, king of Judah, that this word came to Jeremiah from the Lord, saying,</content>
     </verse>
@@ -2855,7 +2855,7 @@
       <content>Then Jeremiah took another book, and gave it to Baruch the scribe, the son of Neriah, who put down in it, from the mouth of Jeremiah, all the words of the book which had been burned in the fire by Jehoiakim, king of Judah: and in addition a number of other words of the same sort.</content>
     </verse>
   </chapter>
-  <chapter num="37" preferred_title="Jeremiah">
+  <chapter num="37">
     <verse num="1">
       <content>And Zedekiah, the son of Josiah, became king in place of Coniah, the son of Jehoiakim, whom Nebuchadrezzar, king of Babylon, made king in the land of Judah.</content>
     </verse>
@@ -2920,7 +2920,7 @@
       <content>Then by the order of Zedekiah the king, Jeremiah was put into the place of the armed watchmen, and they gave him every day a cake of bread from the street of the bread-makers, till all the bread in the town was used up. So Jeremiah was kept in the place of the armed watchmen.</content>
     </verse>
   </chapter>
-  <chapter num="38" preferred_title="Jeremiah">
+  <chapter num="38">
     <verse num="1">
       <content>Now it came to the ears of Shephatiah, the son of Mattan, and Gedaliah, the son of Pashhur, and Jucal, the son of Shelemiah, and Pashhur, the son of Malchiah, that Jeremiah had said to all the people,</content>
     </verse>
@@ -3006,7 +3006,7 @@
       <content>So Jeremiah was kept in the place of the armed watchmen till the day when Jerusalem was taken.</content>
     </verse>
   </chapter>
-  <chapter num="39" preferred_title="Jeremiah">
+  <chapter num="39">
     <verse num="1">
       <content>And it came about, that when Jerusalem was taken, (in the ninth year of Zedekiah, king of Judah, in the tenth month, Nebuchadrezzar, king of Babylon, with all his army, came against Jerusalem, shutting it in on every side;</content>
     </verse>
@@ -3062,7 +3062,7 @@
       <content>For I will certainly let you go free, and you will not be put to the sword, but your life will be given to you out of the hands of your attackers: because you have put your faith in me, says the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="40" preferred_title="Jeremiah">
+  <chapter num="40">
     <verse num="1">
       <content>The word which came to Jeremiah from the Lord, after Nebuzaradan, the captain of the armed men, had let him go from Ramah, when he had taken him; for he had been put in chains, among all the prisoners of Jerusalem and Judah who were taken away prisoners to Babylon.</content>
     </verse>
@@ -3112,7 +3112,7 @@
       <content>But Gedaliah, the son of Ahikam, said to Johanan, the son of Kareah, You are not to do this: for what you say about Ishmael is false.</content>
     </verse>
   </chapter>
-  <chapter num="41" preferred_title="Jeremiah">
+  <chapter num="41">
     <verse num="1">
       <content>Now it came about in the seventh month that Ishmael, the son of Nethaniah, the son of Elishama, of the king's seed, having with him ten men, came to Gedaliah, the son of Ahikam, in Mizpah; and they had a meal together in Mizpah.</content>
     </verse>
@@ -3168,7 +3168,7 @@
       <content>Because of the Chaldaeans: for they were in fear of them because Ishmael, the son of Nethaniah, had put to death Gedaliah, the son of Ahikam, whom the king of Babylon had made ruler over the land.</content>
     </verse>
   </chapter>
-  <chapter num="42" preferred_title="Jeremiah">
+  <chapter num="42">
     <verse num="1">
       <content>Then all the captains of the forces, and Johanan, the son of Kareah, and Jezaniah, the son of Hoshaiah, and all the people from the least to the greatest, came near,</content>
     </verse>
@@ -3236,7 +3236,7 @@
       <content>And now be certain that you will come to your end by the sword and by being short of food and by disease, in the place to which you are pleased to go for a living-place.</content>
     </verse>
   </chapter>
-  <chapter num="43" preferred_title="Jeremiah">
+  <chapter num="43">
     <verse num="1">
       <content>And it came about that when Jeremiah had come to the end of giving all the people the words of the Lord their God, which the Lord their God had sent him to say to them, even all these words,</content>
     </verse>
@@ -3277,7 +3277,7 @@
       <content>And the stone pillars of Beth-shemesh in the land of Egypt will be broken by him, and the houses of the gods of Egypt burned with fire.</content>
     </verse>
   </chapter>
-  <chapter num="44" preferred_title="Jeremiah">
+  <chapter num="44">
     <verse num="1">
       <content>The word which came to Jeremiah about all the Jews who were living in the land of Egypt, in Migdol and at Tahpanhes and at Noph and in the country of Pathros, saying,</content>
     </verse>
@@ -3369,7 +3369,7 @@
       <content>The Lord has said, See, I will give up Pharaoh Hophra, king of Egypt, into the hands of those who are fighting against him and desiring to take his life, as I gave Zedekiah, king of Judah, into the hands of Nebuchadrezzar, king of Babylon, his hater, who had designs against his life.</content>
     </verse>
   </chapter>
-  <chapter num="45" preferred_title="Jeremiah">
+  <chapter num="45">
     <verse num="1">
       <content>The words which Jeremiah the prophet said to Baruch, the son of Neriah, when he put these words down in a book from the mouth of Jeremiah, in the fourth year of Jehoiakim, the son of Josiah, king of Judah; he said,</content>
     </verse>
@@ -3386,7 +3386,7 @@
       <content>And as for you, are you looking for great things for yourself? Have no desire for them: for truly I will send evil on all flesh, says the Lord: but your life I will keep safe from attack wherever you go.</content>
     </verse>
   </chapter>
-  <chapter num="46" preferred_title="Jeremiah">
+  <chapter num="46">
     <verse num="1">
       <content>The word of the Lord which came to Jeremiah the prophet about the nations.</content>
     </verse>
@@ -3472,7 +3472,7 @@
       <content>Have no fear, O Jacob, my servant, says the Lord; for I am with you: for I will put an end to all the nations where I have sent you, but I will not put an end to you completely: though with wise purpose I will put right your errors, and will not let you go quite without punishment.</content>
     </verse>
   </chapter>
-  <chapter num="47" preferred_title="Jeremiah">
+  <chapter num="47">
     <verse num="1">
       <content>The word of the Lord which came to Jeremiah the prophet about the Philistines, before Pharaoh's attack on Gaza.</content>
     </verse>
@@ -3495,7 +3495,7 @@
       <content>How is it possible for it to be quiet, seeing that the Lord has given it orders? against Ashkelon and against the sea-land he has given it directions.</content>
     </verse>
   </chapter>
-  <chapter num="48" preferred_title="Jeremiah">
+  <chapter num="48">
     <verse num="1">
       <content>Of Moab. The Lord of armies, the God of Israel, has said: Sorrow on Nebo, for it has been made waste; Kiriathaim has been put to shame and is taken: the strong place is put to shame and broken down.</content>
     </verse>
@@ -3638,7 +3638,7 @@
       <content>But still, I will let the fate of Moab be changed in the last days, says the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="49" preferred_title="Jeremiah">
+  <chapter num="49">
     <verse num="1">
       <content>About the children of Ammon. These are the words of the Lord: Has Israel no sons? has he no one to take the heritage? why then has Milcom taken Gad for himself, putting his people in its towns?</content>
     </verse>
@@ -3757,7 +3757,7 @@
       <content>But it will come about that, in the last days, I will let the fate of Elam be changed, says the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="50" preferred_title="Jeremiah">
+  <chapter num="50">
     <verse num="1">
       <content>The word which the Lord said about Babylon, about the land of the Chaldaeans, by Jeremiah the prophet.</content>
     </verse>
@@ -3897,7 +3897,7 @@
       <content>At the cry, Babylon is taken! the earth is shaking, and the cry comes to the ears of the nations.</content>
     </verse>
   </chapter>
-  <chapter num="51" preferred_title="Jeremiah">
+  <chapter num="51">
     <verse num="1">
       <content>The Lord has said: See, I will make a wind of destruction come up against Babylon and against those who are living in Chaldaea;</content>
     </verse>
@@ -4091,7 +4091,7 @@
       <content>And you are to say, So Babylon will go down, never to be lifted up again, because of the evil which I will send on her: and weariness will overcome them. So far, these are the words of Jeremiah.</content>
     </verse>
   </chapter>
-  <chapter num="52" preferred_title="Jeremiah">
+  <chapter num="52">
     <verse num="1">
       <content>Zedekiah was twenty-one years old when he became king; he was king for eleven years in Jerusalem: and his mother's name was Hamutal, the daughter of Jeremiah of Libnah.</content>
     </verse>

@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="1 Kings">
+  <chapter num="1">
     <verse num="1">
       <content>Now King David was old and far on in years; and though they put covers over him, his body was cold.</content>
     </verse>
@@ -160,7 +160,7 @@
       <content>So King Solomon sent, and they took him down from the altar. And he came and gave honour to King Solomon; and Solomon said to him, Go to your house.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="1 Kings">
+  <chapter num="2">
     <verse num="1">
       <content>Now the time of David's death came near; and he gave orders to Solomon his son, saying,</content>
     </verse>
@@ -300,7 +300,7 @@
       <content>So the king gave orders to Benaiah, the son of Jehoiada; and he went out and, falling on him, put him to death. And Solomon's authority over the kingdom was complete.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="1 Kings">
+  <chapter num="3">
     <verse num="1">
       <content>Solomon became the son-in-law of Pharaoh, king of Egypt, and took Pharaoh's daughter as his wife, keeping her in the town of David, till the house he was building for himself, and the house of the Lord and the wall round Jerusalem, were complete.</content>
     </verse>
@@ -386,7 +386,7 @@
       <content>And news of this decision which the king had made went through all Israel; and they had fear of the king, for they saw that the wisdom of God was in him to give decisions.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="1 Kings">
+  <chapter num="4">
     <verse num="1">
       <content>Now Solomon was king over all Israel.</content>
     </verse>
@@ -490,7 +490,7 @@
       <content>People came from every nation to give ear to the wisdom of Solomon, from all the kings of the earth who had word of his wisdom.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="1 Kings">
+  <chapter num="5">
     <verse num="1">
       <content>Now Hiram, king of Tyre, hearing that Solomon had been made king in place of his father, sent his servants to him; for Hiram had ever been a friend to David.</content>
     </verse>
@@ -546,7 +546,7 @@
       <content>Solomon's builders and Hiram's builders did the work of cutting them, and put edges on them, and got the wood and the stone ready for the building of the house.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="1 Kings">
+  <chapter num="6">
     <verse num="1">
       <content>In the four hundred and eightieth year after the children of Israel came out of the land of Egypt, in the fourth year that Solomon was king of Israel, in the month Ziv, which is the second month, the building of the Lord's house was started.</content>
     </verse>
@@ -662,7 +662,7 @@
       <content>And in the eleventh year, in the month Bul, which is the eighth month, the building of the house was complete in every detail, as it had been designed. So he was seven years building it.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="1 Kings">
+  <chapter num="7">
     <verse num="1">
       <content>Solomon was thirteen years building a house for himself till it was complete.</content>
     </verse>
@@ -817,7 +817,7 @@
       <content>So all the work King Solomon had done in the house of the Lord was complete. Then Solomon took the holy things which David his father had given, the silver and the gold and all the vessels, and put them in the store-houses of the house of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="1 Kings">
+  <chapter num="8">
     <verse num="1">
       <content>Then Solomon sent for all the responsible men of Israel, and all the chiefs of the tribes, and the heads of families of the children of Israel, to come to him in Jerusalem to take the ark of the Lord's agreement up out of the town of David, which is Zion.</content>
     </verse>
@@ -1017,7 +1017,7 @@
       <content>And on the eighth day he sent the people away, and, blessing the king, they went to their tents full of joy and glad in their hearts, because of all the good which the Lord had done to David his servant and to Israel his people.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="1 Kings">
+  <chapter num="9">
     <verse num="1">
       <content>Now when Solomon came to the end of building the house of the Lord and the king's house, and all Solomon's desires, which he had in mind were effected;</content>
     </verse>
@@ -1103,7 +1103,7 @@
       <content>And they came to Ophir, where they got four hundred and twenty talents of gold, and took it back to King Solomon.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="1 Kings">
+  <chapter num="10">
     <verse num="1">
       <content>Now the queen of Sheba, hearing great things of Solomon, came to put his wisdom to the test with hard questions.</content>
     </verse>
@@ -1192,7 +1192,7 @@
       <content>A war-carriage might be got from Egypt for six hundred shekels of silver, and a horse for a hundred and fifty; they got them at the same rate for all the kings of the Hittites and the kings of Aram.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="1 Kings">
+  <chapter num="11">
     <verse num="1">
       <content>Now a number of strange women were loved by Solomon, women of the Moabites, Ammonites, Edomites, Zidonians, and Hittites:</content>
     </verse>
@@ -1323,7 +1323,7 @@
       <content>And Solomon went to rest with his fathers, and was put into the earth in the town of David his father: and Solomon went to rest with his fathers and Rehoboam his son became king in his place.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="1 Kings">
+  <chapter num="12">
     <verse num="1">
       <content>And Rehoboam went to Shechem, where all Israel had come together to make him king,</content>
     </verse>
@@ -1424,7 +1424,7 @@
       <content>He went up to the altar he had made in Beth-el on the fifteenth day of the eighth month, the month fixed by him at his pleasure; and he gave orders for a feast for the people of Israel, and went up to the altar, and there he made the smoke of his offerings go up.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="1 Kings">
+  <chapter num="13">
     <verse num="1">
       <content>Then a man of God came from Judah by the order of the Lord to Beth-el, where Jeroboam was by the altar, burning offerings.</content>
     </verse>
@@ -1528,7 +1528,7 @@
       <content>And this became a sin in the family of Jeroboam, causing it to be cut off and sent to destruction from the face of the earth.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="1 Kings">
+  <chapter num="14">
     <verse num="1">
       <content>At that time Abijah, the son of Jeroboam, became ill.</content>
     </verse>
@@ -1623,7 +1623,7 @@
       <content>And Rehoboam went to rest with his fathers, and was put into the earth with his fathers in the town of David; his mother's name was Naamah, an Ammonite woman. And Abijam his son became king in his place.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="1 Kings">
+  <chapter num="15">
     <verse num="1">
       <content>Now in the eighteenth year of king Jeroboam, the son of Nebat, Abijam became king over Judah.</content>
     </verse>
@@ -1727,7 +1727,7 @@
       <content>He did evil in the eyes of the Lord, copying the evil ways of Jeroboam and the sin which he made Israel do.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="1 Kings">
+  <chapter num="16">
     <verse num="1">
       <content>And the word of the Lord came to Jehu, son of Hanani, protesting against Baasha and saying,</content>
     </verse>
@@ -1831,7 +1831,7 @@
       <content>In his days Hiel made Jericho; he put its base in position at the price of Abiram, his oldest son, and he put its doors in place at the price of his youngest son Segub; even as the Lord had said by Joshua, the son of Nun.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="1 Kings">
+  <chapter num="17">
     <verse num="1">
       <content>And Elijah the Tishbite, of Tishbe in Gilead, said to Ahab, By the living Lord, the God of Israel, whose servant I am, there will be no dew or rain in these years, but only at my word.</content>
     </verse>
@@ -1905,7 +1905,7 @@
       <content>Then the woman said to Elijah, Now I am certain that you are a man of God, and that the word of the Lord in your mouth is true.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="1 Kings">
+  <chapter num="18">
     <verse num="1">
       <content>Now after a long time, the word of the Lord came to Elijah, in the third year, saying, Go and let Ahab see you, so that I may send rain on the earth.</content>
     </verse>
@@ -2045,7 +2045,7 @@
       <content>And the hand of the Lord was on Elijah; and he made himself strong, and went running before Ahab till they came to Jezreel.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="1 Kings">
+  <chapter num="19">
     <verse num="1">
       <content>Ahab gave Jezebel news of all Elijah had done, and how he had put all the prophets to death with the sword.</content>
     </verse>
@@ -2110,7 +2110,7 @@
       <content>And he went back, and took the oxen and put them to death, and cooking their flesh with the yokes of the oxen, he gave the people a feast. Then he got up and went after Elijah and became his servant.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="1 Kings">
+  <chapter num="20">
     <verse num="1">
       <content>Now Ben-hadad, king of Aram, got all his army together, and thirty-two kings with him, and horses and carriages of war; he went up and made war on Samaria, shutting it in.</content>
     </verse>
@@ -2241,7 +2241,7 @@
       <content>Then the king of Israel went back to his house, bitter and angry, and came to Samaria.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="1 Kings">
+  <chapter num="21">
     <verse num="1">
       <content>Now Naboth the Jezreelite had a vine-garden in Jezreel, near the house of Ahab, king of Samaria.</content>
     </verse>
@@ -2330,7 +2330,7 @@
       <content>Do you see how Ahab has made himself low before me? because he has made himself low before me, I will not send the evil in his life-time, but in his son's time I will send the evil on his family.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="1 Kings">
+  <chapter num="22">
     <verse num="1">
       <content>Now for three years there was no war between Aram and Israel.</content>
     </verse>

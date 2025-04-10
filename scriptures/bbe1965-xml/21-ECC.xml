@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Ecclesiastes">
+  <chapter num="1">
     <verse num="1">
       <content>The words of the Preacher, the son of David, king in Jerusalem.</content>
     </verse>
@@ -55,7 +55,7 @@
       <content>Because in much wisdom is much grief, and increase of knowledge is increase of sorrow.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Ecclesiastes">
+  <chapter num="2">
     <verse num="1">
       <content>I said in my heart, I will give you joy for a test; so take your pleasure--but it was to no purpose.</content>
     </verse>
@@ -135,7 +135,7 @@
       <content>To the man with whom he is pleased, God gives wisdom and knowledge and joy; but to the sinner he gives the work of getting goods together and storing up wealth, to give to him in whom God has pleasure. This again is to no purpose and desire for wind.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Ecclesiastes">
+  <chapter num="3">
     <verse num="1">
       <content>For everything there is a fixed time, and a time for every business under the sun.</content>
     </verse>
@@ -203,7 +203,7 @@
       <content>So I saw that there is nothing better than for a man to have joy in his work--because that is his reward. Who will make him see what will come after him?</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Ecclesiastes">
+  <chapter num="4">
     <verse num="1">
       <content>And again I saw all the cruel things which are done under the sun; there was the weeping of those who have evil done to them, and they had no comforter: and from the hands of the evil-doers there went out power, but they had no comforter.</content>
     </verse>
@@ -253,7 +253,7 @@
       <content>There was no end of all the people, of all those whose head he was, but they who come later will have no delight in him. This again is to no purpose and desire for wind.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Ecclesiastes">
+  <chapter num="5">
     <verse num="1">
       <content>Put your feet down with care when you go to the house of God, for it is better to give ear than to make the burned offerings of the foolish, whose knowledge is only of doing evil.</content>
     </verse>
@@ -315,7 +315,7 @@
       <content>He will not give much thought to the days of his life; because God lets him be taken up with the joy of his heart.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Ecclesiastes">
+  <chapter num="6">
     <verse num="1">
       <content>There is an evil which I have seen under the sun, and it is hard on men;</content>
     </verse>
@@ -353,7 +353,7 @@
       <content>Who is able to say what is good for man in life all the days of his foolish life which he goes through like a shade? who will say what is to be after him under the sun?</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Ecclesiastes">
+  <chapter num="7">
     <verse num="1">
       <content>A good name is better than oil of great price, and the day of death than the day of birth.</content>
     </verse>
@@ -442,7 +442,7 @@
       <content>This only have I seen, that God made men upright, but they have been searching out all sorts of inventions.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Ecclesiastes">
+  <chapter num="8">
     <verse num="1">
       <content>Who is like the wise man? and to whom is the sense of anything clear? A man's wisdom makes his face shining, and his hard face will be changed.</content>
     </verse>
@@ -495,7 +495,7 @@
       <content>Then I saw all the work of God, and that man may not get knowledge of the work which is done under the sun; because, if a man gives hard work to the search he will not get knowledge, and even if the wise man seems to be coming to the end of his search, still he will be without knowledge.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Ecclesiastes">
+  <chapter num="9">
     <verse num="1">
       <content>All this I took to heart, and my heart saw it all: that the upright and the wise and their works are in the hand of God; and men may not be certain if it will be love or hate; all is to no purpose before them.</content>
     </verse>
@@ -551,7 +551,7 @@
       <content>Wisdom is better than instruments of war, but one sinner is the destruction of much good.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Ecclesiastes">
+  <chapter num="10">
     <verse num="1">
       <content>Dead flies make the oil of the perfumer give out an evil smell; more valued is a little wisdom than the great glory of the foolish.</content>
     </verse>
@@ -613,7 +613,7 @@
       <content>Say not a curse against the king, even in your thoughts; and even secretly say not a curse against the man of wealth; because a bird of the air will take the voice, and that which has wings will give news of it.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Ecclesiastes">
+  <chapter num="11">
     <verse num="1">
       <content>Put out your bread on the face of the waters; for after a long time it will come back to you again.</content>
     </verse>
@@ -645,7 +645,7 @@
       <content>So put away trouble from your heart, and sorrow from your flesh; because the early years and the best years are to no purpose.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Ecclesiastes">
+  <chapter num="12">
     <verse num="1">
       <content>Let your mind be turned to your Maker in the days of your strength, while the evil days come not, and the years are far away when you will say, I have no pleasure in them;</content>
     </verse>

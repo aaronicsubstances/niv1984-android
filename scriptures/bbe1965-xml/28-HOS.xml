@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Hosea">
+  <chapter num="1">
     <verse num="1">
       <content>The word of the Lord which came to Hosea, the son of Beeri, in the days of Uzziah, Jotham, Ahaz, and Hezekiah, kings of Judah, and in the days of Jeroboam, the son of Joash, king of Israel.</content>
     </verse>
@@ -34,7 +34,7 @@
       <content>And the children of Israel and the children of Judah will come together and take for themselves one head, and will go up from the land, for great will be the day of Jezreel.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Hosea">
+  <chapter num="2">
     <verse num="1">
       <content>Say to your brothers, Ammi; and to your sisters, Ruhamah.</content>
     </verse>
@@ -105,7 +105,7 @@
       <content>And I will put her as seed in the earth, and I will have mercy on her to whom no mercy was given; and I will say to those who were not my people, You are my people, and they will say, My God.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Hosea">
+  <chapter num="3">
     <verse num="1">
       <content>And the Lord said to me, Give your love again to a woman who has a lover and is false to her husband, even as the Lord has love for the children of Israel, though they are turned to other gods and are lovers of grape-cakes.</content>
     </verse>
@@ -122,7 +122,7 @@
       <content>And after that, the children of Israel will come back and go in search of the Lord their God and David their king; and they will come in fear to the Lord and to his mercies in the days to come.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Hosea">
+  <chapter num="4">
     <verse num="1">
       <content>Give ear to the word of the Lord, O children of Israel; for the Lord has a cause against the people of this land, because there is no good faith in it, and no mercy and no knowledge of God in the land.</content>
     </verse>
@@ -181,7 +181,7 @@
       <content>They are folded in the skirts of the wind; they will be shamed because of their offerings.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Hosea">
+  <chapter num="5">
     <verse num="1">
       <content>Give ear to this, O priests; give attention, O Israel, and you, family of the king; for you are to be judged; you have been a deceit at Mizpah and a net stretched out on Tabor.</content>
     </verse>
@@ -228,7 +228,7 @@
       <content>I will go back to my place till they are made waste; in their trouble they will go after me early and will make search for me.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Hosea">
+  <chapter num="6">
     <verse num="1">
       <content>Come, let us go back to the Lord; for he has given us wounds and he will make us well; he has given blows and he will give help.</content>
     </verse>
@@ -263,7 +263,7 @@
       <content>And Judah has put up disgusting images for himself.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Hosea">
+  <chapter num="7">
     <verse num="1">
       <content>When my desire was for the fate of my people to be changed and to make Israel well, then the sin of Ephraim was made clear, and the evil-doing of Samaria; for their ways are false, and the thief comes into the house, while the band of outlaws takes property by force in the streets.</content>
     </verse>
@@ -313,7 +313,7 @@
       <content>They have gone to what is of no value; they are like a false bow; their captains will come to destruction by the sword, and their ruler by my wrath; for this, the land of Egypt will make sport of them.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Hosea">
+  <chapter num="8">
     <verse num="1">
       <content>Put the horn to your mouth. He comes like an eagle against the house of the Lord; because they have gone against my agreement, they have not kept my law.</content>
     </verse>
@@ -357,7 +357,7 @@
       <content>For Israel has no memory of his Maker, and has put up the houses of kings; and Judah has made great the number of his walled towns. But I will send a fire on his towns and put an end to his great houses.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Hosea">
+  <chapter num="9">
     <verse num="1">
       <content>Have no joy, O Israel, and do not be glad like the nations; for you have been untrue to your God; your desire has been for the loose woman's reward on every grain-floor.</content>
     </verse>
@@ -410,7 +410,7 @@
       <content>My God will give them up because they did not give ear to him; they will be wandering among the nations.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Hosea">
+  <chapter num="10">
     <verse num="1">
       <content>Israel is a branching vine, full of fruit; as his fruit is increased, so the number of his altars is increased; as the land is fair, so they have made fair pillars.</content>
     </verse>
@@ -457,7 +457,7 @@
       <content>So will Beth-el do to you because of your evil-doing; at dawn will the king of Israel be cut off completely.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Hosea">
+  <chapter num="11">
     <verse num="1">
       <content>When Israel was a child he was dear to me; and I took my son out of Egypt.</content>
     </verse>
@@ -495,7 +495,7 @@
       <content>The deceit of Ephraim and the false words of Israel are about me on every side. ...</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Hosea">
+  <chapter num="12">
     <verse num="1">
       <content>Ephraim's food is the wind, and he goes after the east wind: deceit and destruction are increasing day by day; they make an agreement with Assyria, and take oil into Egypt.</content>
     </verse>
@@ -539,7 +539,7 @@
       <content>I have been bitterly moved to wrath by Ephraim; so that his blood will be on him, and the Lord will make his shame come back on him.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Hosea">
+  <chapter num="13">
     <verse num="1">
       <content>When the words of my law came from Ephraim, he was lifted up in Israel; but when he did evil through the Baal, death overtook him.</content>
     </verse>
@@ -589,7 +589,7 @@
       <content>Samaria will be made waste, for she has gone against her God: they will be cut down by the sword, their little children will be broken on the rocks, their women who are with child will be cut open.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Hosea">
+  <chapter num="14">
     <verse num="1">
       <content>O Israel, come back to the Lord your God; for your evil-doing has been the cause of your fall.</content>
     </verse>

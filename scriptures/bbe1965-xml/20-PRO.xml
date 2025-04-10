@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Proverbs">
+  <chapter num="1">
     <verse num="1">
       <content>The wise sayings of Solomon, the son of David, king of Israel.</content>
     </verse>
@@ -100,7 +100,7 @@
       <content>But whoever gives ear to me will take his rest safely, living in peace without fear of evil.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Proverbs">
+  <chapter num="2">
     <verse num="1">
       <content>My son, if you will take my words to your heart, storing up my laws in your mind;</content>
     </verse>
@@ -168,7 +168,7 @@
       <content>But sinners will be cut off from the land, and those whose acts are false will be uprooted.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Proverbs">
+  <chapter num="3">
     <verse num="1">
       <content>My son, keep my teaching in your memory, and my rules in your heart:</content>
     </verse>
@@ -275,7 +275,7 @@
       <content>The wise will have glory for their heritage, but shame will be the reward of the foolish.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Proverbs">
+  <chapter num="4">
     <verse num="1">
       <content>Give ear, my sons, to the teaching of a father; give attention so that you may have knowledge:</content>
     </verse>
@@ -358,7 +358,7 @@
       <content>Let there be no turning to the right or to the left, keep your feet from evil.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Proverbs">
+  <chapter num="5">
     <verse num="1">
       <content>My son, give attention to my wisdom; let your ear be turned to my teaching:</content>
     </verse>
@@ -429,7 +429,7 @@
       <content>He will come to his end for need of teaching; he is so foolish that he will go wandering from the right way.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Proverbs">
+  <chapter num="6">
     <verse num="1">
       <content>My son, if you have made yourself responsible for your neighbour, or given your word for another,</content>
     </verse>
@@ -536,7 +536,7 @@
       <content>He will not take any payment; and he will not make peace with you though your money offerings are increased.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Proverbs">
+  <chapter num="7">
     <verse num="1">
       <content>My son, keep my sayings, and let my rules be stored up with you.</content>
     </verse>
@@ -619,7 +619,7 @@
       <content>Her house is the way to the underworld, going down to the rooms of death.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Proverbs">
+  <chapter num="8">
     <verse num="1">
       <content>Is not wisdom crying out, and the voice of knowledge sounding?</content>
     </verse>
@@ -729,7 +729,7 @@
       <content>But he who does evil to me, does wrong to his soul: all my haters are in love with death.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Proverbs">
+  <chapter num="9">
     <verse num="1">
       <content>Wisdom has made her house, putting up her seven pillars.</content>
     </verse>
@@ -785,7 +785,7 @@
       <content>But he does not see that the dead are there, that her guests are in the deep places of the underworld.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Proverbs">
+  <chapter num="10">
     <verse num="1">
       <content>A wise son makes a glad father, but a foolish son is a sorrow to his mother.</content>
     </verse>
@@ -883,7 +883,7 @@
       <content>The lips of the upright man have knowledge of what is pleasing, but twisted are the mouths of evil-doers.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Proverbs">
+  <chapter num="11">
     <verse num="1">
       <content>Scales of deceit are hated by the Lord, but a true weight is his delight.</content>
     </verse>
@@ -978,7 +978,7 @@
       <content>If the upright man is rewarded on earth, how much more the evil-doer and the sinner!</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Proverbs">
+  <chapter num="12">
     <verse num="1">
       <content>A lover of training is a lover of knowledge; but a hater of teaching is like a beast.</content>
     </verse>
@@ -1064,7 +1064,7 @@
       <content>In the road of righteousness is life, but the way of the evil-doer goes to death.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Proverbs">
+  <chapter num="13">
     <verse num="1">
       <content>A wise son is a lover of teaching, but the ears of the haters of authority are shut to sharp words.</content>
     </verse>
@@ -1141,7 +1141,7 @@
       <content>The upright man has food to the full measure of his desire, but there will be no food for the stomach of evil-doers.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Proverbs">
+  <chapter num="14">
     <verse num="1">
       <content>Wisdom is building her house, but the foolish woman is pulling it down with her hands.</content>
     </verse>
@@ -1248,7 +1248,7 @@
       <content>The king has pleasure in a servant who does wisely, but his wrath is against him who is a cause of shame.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Proverbs">
+  <chapter num="15">
     <verse num="1">
       <content>By a soft answer wrath is turned away, but a bitter word is a cause of angry feelings.</content>
     </verse>
@@ -1349,7 +1349,7 @@
       <content>The fear of the Lord is the teaching of wisdom; and a low opinion of oneself goes before honour.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Proverbs">
+  <chapter num="16">
     <verse num="1">
       <content>The designs of the heart are man's, but the answer of the tongue comes from the Lord.</content>
     </verse>
@@ -1450,7 +1450,7 @@
       <content>A thing may be put to the decision of chance, but it comes about through the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Proverbs">
+  <chapter num="17">
     <verse num="1">
       <content>Better a bit of dry bread in peace, than a house full of feasting and violent behaviour.</content>
     </verse>
@@ -1536,7 +1536,7 @@
       <content>Even the foolish man, when he keeps quiet, is taken to be wise: when his lips are shut he is credited with good sense.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Proverbs">
+  <chapter num="18">
     <verse num="1">
       <content>He who keeps himself separate for his private purpose goes against all good sense.</content>
     </verse>
@@ -1610,7 +1610,7 @@
       <content>There are friends who may be a man's destruction, but there is a lover who keeps nearer than a brother.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Proverbs">
+  <chapter num="19">
     <verse num="1">
       <content>Better is the poor man whose ways are upright, than the man of wealth whose ways are twisted.</content>
     </verse>
@@ -1699,7 +1699,7 @@
       <content>Rods are being made ready for the man of pride, and blows for the back of the foolish.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Proverbs">
+  <chapter num="20">
     <verse num="1">
       <content>Wine makes men foolish, and strong drink makes men come to blows; and whoever comes into error through these is not wise.</content>
     </verse>
@@ -1791,7 +1791,7 @@
       <content>By the wounds of the rod evil is taken away, and blows make clean the deepest parts of the body.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Proverbs">
+  <chapter num="21">
     <verse num="1">
       <content>The king's heart in the hands of the Lord is like the water streams, and by him it is turned in any direction at his pleasure.</content>
     </verse>
@@ -1886,7 +1886,7 @@
       <content>The horse is made ready for the day of war, but power to overcome is from the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Proverbs">
+  <chapter num="22">
     <verse num="1">
       <content>A good name is more to be desired than great wealth, and to be respected is better than silver and gold.</content>
     </verse>
@@ -1975,7 +1975,7 @@
       <content>Have you seen a man who is expert in his business? he will take his place before kings; his place will not be among low persons.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Proverbs">
+  <chapter num="23">
     <verse num="1">
       <content>When you take your seat at the feast with a ruler, give thought with care to what is before you;</content>
     </verse>
@@ -2082,7 +2082,7 @@
       <content>They have overcome me, you will say, and I have no pain; they gave me blows without my feeling them: when will I be awake from my wine? I will go after it again.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Proverbs">
+  <chapter num="24">
     <verse num="1">
       <content>Have no envy for evil men, or any desire to be with them:</content>
     </verse>
@@ -2186,7 +2186,7 @@
       <content>So loss will come on you like an outlaw, and your need like an armed man.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Proverbs">
+  <chapter num="25">
     <verse num="1">
       <content>These are more wise sayings of Solomon, copied out by the men of Hezekiah, king of Judah.</content>
     </verse>
@@ -2272,7 +2272,7 @@
       <content>He whose spirit is uncontrolled is like an unwalled town which has been broken into.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Proverbs">
+  <chapter num="26">
     <verse num="1">
       <content>Like snow in summer and rain when the grain is being cut, so honour is not natural for the foolish.</content>
     </verse>
@@ -2358,7 +2358,7 @@
       <content>A false tongue has hate for those who have clean hearts, and a smooth mouth is a cause of falling.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Proverbs">
+  <chapter num="27">
     <verse num="1">
       <content>Do not make a noise about tomorrow, for you are not certain what a day's outcome may be.</content>
     </verse>
@@ -2441,7 +2441,7 @@
       <content>There will be goats' milk enough for your food, and for the support of your servant-girls.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Proverbs">
+  <chapter num="28">
     <verse num="1">
       <content>The evil man goes running away when no man is after him, but the upright are without fear, like the lion.</content>
     </verse>
@@ -2527,7 +2527,7 @@
       <content>When evil-doers are lifted up, men take cover; but when destruction overtakes them, the upright are increased.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Proverbs">
+  <chapter num="29">
     <verse num="1">
       <content>A man hating sharp words and making his heart hard, will suddenly be broken and will not be made well again.</content>
     </verse>
@@ -2610,7 +2610,7 @@
       <content>An evil man is disgusting to the upright, and he who is upright is disgusting to evil-doers.</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Proverbs">
+  <chapter num="30">
     <verse num="1">
       <content>The words of Agur, the son of Jakeh, from Massa. The man says: I am full of weariness, O God, I am full of weariness; O God, I have come to an end:</content>
     </verse>
@@ -2711,7 +2711,7 @@
       <content>The shaking of milk makes butter, and the twisting of the nose makes blood come: so the forcing of wrath is a cause of fighting.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Proverbs">
+  <chapter num="31">
     <verse num="1">
       <content>The words of Lemuel, king of Massa: the teaching which he had from his mother.</content>
     </verse>

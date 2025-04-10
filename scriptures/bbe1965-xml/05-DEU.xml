@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Deuteronomy">
+  <chapter num="1">
     <verse num="1">
       <content>These are the words which Moses said to all Israel on the far side of Jordan, in the waste land in the Arabah opposite Suph, between Paran on the one side, and Tophel, Laban, Hazeroth, and Dizahab on the other.</content>
     </verse>
@@ -139,7 +139,7 @@
       <content>So you were kept waiting in Kadesh for a long time.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Deuteronomy">
+  <chapter num="2">
     <verse num="1">
       <content>Then we went back, journeying into the waste land by the way to the Red Sea, as the Lord had said to me: and we were a long time going round Mount Seir.</content>
     </verse>
@@ -252,7 +252,7 @@
       <content>But you did not go near the land of the children of Ammon, that is, all the side of the river Jabbok or the towns of the hill-country, wherever the Lord our God had said we were not to go.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Deuteronomy">
+  <chapter num="3">
     <verse num="1">
       <content>Then turning we took the road to Bashan: and Og, king of Bashan, came out against us with all his people, and made an attack on us at Edrei.</content>
     </verse>
@@ -341,7 +341,7 @@
       <content>So we were waiting in the valley facing Beth-peor.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Deuteronomy">
+  <chapter num="4">
     <verse num="1">
       <content>And now give ear, O Israel, to the laws and the decisions which I am teaching you, and do them; so that life may be yours, and you may go in and take for yourselves the land which the Lord, the God of your fathers, is giving you.</content>
     </verse>
@@ -490,7 +490,7 @@
       <content>And all the Arabah on the far side of Jordan to the east, as far as the sea of the Arabah under the slopes of Pisgah.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Deuteronomy">
+  <chapter num="5">
     <verse num="1">
       <content>And Moses sent for all Israel, and said to them, Give ear, O Israel, to the laws and the decisions which I give you today, and give attention to them so that you may keep and do them.</content>
     </verse>
@@ -591,7 +591,7 @@
       <content>Go on walking in the way ordered for you by the Lord your God, so that life may be yours and it may be well for you, and your days may be long in the land of your heritage.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Deuteronomy">
+  <chapter num="6">
     <verse num="1">
       <content>Now these are the orders and the laws and the decisions which the Lord your God gave me for your teaching, so that you might do them in the land of your heritage to which you are going:</content>
     </verse>
@@ -668,7 +668,7 @@
       <content>And it will be our righteousness if we take care to keep all this order before the Lord our God as he has given it to us.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Deuteronomy">
+  <chapter num="7">
     <verse num="1">
       <content>When the Lord your God takes you into the land where you are going, which is to be your heritage, and has sent out the nations before you, the Hittites and the Girgashites and the Amorites and the Canaanites and the Perizzites and the Hivites and the Jebusites, seven nations greater and stronger than you;</content>
     </verse>
@@ -748,7 +748,7 @@
       <content>And you may not take a disgusting thing into your house, and so become cursed with its curse: but keep yourselves from it, turning from it with fear and hate, for it is a cursed thing.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Deuteronomy">
+  <chapter num="8">
     <verse num="1">
       <content>Take care to keep all the orders which I give you today, so that you may have life and be increased and go in and take as a heritage the land which the Lord, by his oath to your fathers, undertook to give you.</content>
     </verse>
@@ -810,7 +810,7 @@
       <content>Like the nations which the Lord is cutting off before you, so you will be cut off; because you would not give ear to the voice of the Lord your God.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Deuteronomy">
+  <chapter num="9">
     <verse num="1">
       <content>Give ear, O Israel: today you are to go over Jordan, to take the heritage of nations greater and stronger than yourselves, and towns of great size with walls as high as heaven;</content>
     </verse>
@@ -899,7 +899,7 @@
       <content>But still they are your people and your heritage, whom you took out by your great power and by your stretched-out arm.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Deuteronomy">
+  <chapter num="10">
     <verse num="1">
       <content>At that time the Lord said to me, Make two other stones, cut like the first two, and come up to me on the mountain, and make an ark of wood.</content>
     </verse>
@@ -967,7 +967,7 @@
       <content>Your fathers went down into Egypt with seventy persons; and now the Lord your God has made you like the stars of heaven in number.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Deuteronomy">
+  <chapter num="11">
     <verse num="1">
       <content>So have love for the Lord your God, and give him worship, and keep his laws and his decisions and his orders at all times.</content>
     </verse>
@@ -1065,7 +1065,7 @@
       <content>And you are to take care to keep all the laws and the decisions which I put before you today.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Deuteronomy">
+  <chapter num="12">
     <verse num="1">
       <content>These are the laws and the decisions which you are to keep with care in the land which the Lord, the God of your fathers, has given you to be your heritage all the days of your life on earth.</content>
     </verse>
@@ -1163,7 +1163,7 @@
       <content>You are to keep with care all the words I give you, making no addition to them and taking nothing from them.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Deuteronomy">
+  <chapter num="13">
     <verse num="1">
       <content>If ever you have among you a prophet or a dreamer of dreams and he gives you a sign or a wonder,</content>
     </verse>
@@ -1219,7 +1219,7 @@
       <content>So long as you give ear to the voice of the Lord your God, and keep all his orders which I give you today, and do what is right in the eyes of the Lord your God.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Deuteronomy">
+  <chapter num="14">
     <verse num="1">
       <content>You are the children of the Lord your God: you are not to make cuts on your bodies or take off the hair on your brows in honour of the dead;</content>
     </verse>
@@ -1308,7 +1308,7 @@
       <content>And the Levite, because he has no part or heritage in the land, and the man from a strange country, and the child who has no father, and the widow, who are living among you, will come and take food and have enough; and so the blessing of the Lord your God will be on you in everything you do.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Deuteronomy">
+  <chapter num="15">
     <verse num="1">
       <content>At the end of every seven years there is to be a general forgiveness of debt.</content>
     </verse>
@@ -1379,7 +1379,7 @@
       <content>Only do not take its blood for food, but let it be drained out on the earth like water.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Deuteronomy">
+  <chapter num="16">
     <verse num="1">
       <content>Take note of the month of Abib and keep the Passover to the Lord your God: for in the month of Abib the Lord your God took you out of Egypt by night.</content>
     </verse>
@@ -1447,7 +1447,7 @@
       <content>You are not to put up stone pillars, for they are hated by the Lord your God.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Deuteronomy">
+  <chapter num="17">
     <verse num="1">
       <content>No ox or sheep which has a mark on it or is damaged in any way may be offered to the Lord your God: for that is disgusting to the Lord your God.</content>
     </verse>
@@ -1509,7 +1509,7 @@
       <content>So that his heart may not be lifted up over his countrymen, and he may not be turned away from the orders, to one side or the other: but that his life and the lives of his children may be long in his kingdom in Israel.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Deuteronomy">
+  <chapter num="18">
     <verse num="1">
       <content>The priests, the Levites, that is, all the tribe of Levi, will have no part or heritage with Israel: their food and their heritage will be the offerings of the Lord made by fire.</content>
     </verse>
@@ -1577,7 +1577,7 @@
       <content>When a prophet makes a statement in the name of the Lord, if what he says does not take place and his words do not come true, then his word is not the word of the Lord: the words of the prophet were said in the pride of his heart, and you are to have no fear of him.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Deuteronomy">
+  <chapter num="19">
     <verse num="1">
       <content>When the nations, whose land the Lord your God is giving you, have been cut off by him, and you have taken their place and are living in their towns and in their houses;</content>
     </verse>
@@ -1642,7 +1642,7 @@
       <content>Have no pity; let life be given for life, eye for eye, tooth for tooth, hand for hand, foot for foot.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Deuteronomy">
+  <chapter num="20">
     <verse num="1">
       <content>When you go out to war against other nations, and come face to face with horses and war-carriages and armies greater in number than yourselves, have no fear of them: for the Lord your God is with you, who took you up out of the land of Egypt.</content>
     </verse>
@@ -1704,7 +1704,7 @@
       <content>Only those trees which you are certain are not used for food may be cut down and put to destruction: and you are to make walls of attack against the town till it is taken.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Deuteronomy">
+  <chapter num="21">
     <verse num="1">
       <content>If, in the land which the Lord your God is giving you, you come across the dead body of a man in the open country, and you have no idea who has put him to death:</content>
     </verse>
@@ -1775,7 +1775,7 @@
       <content>Do not let his body be on the tree all night, but put it to rest in the earth the same day; for the man who undergoes hanging is cursed by God; so do not make unclean the land which the Lord your God is giving you for your heritage.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Deuteronomy">
+  <chapter num="22">
     <verse num="1">
       <content>If you see your brother's ox or his sheep wandering, do not go by without helping, but take them back to your brother.</content>
     </verse>
@@ -1867,7 +1867,7 @@
       <content>A man may not take his father's wife or have sex relations with a woman who is his father's.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Deuteronomy">
+  <chapter num="23">
     <verse num="1">
       <content>No man whose private parts have been wounded or cut off may come into the meeting of the Lord's people.</content>
     </verse>
@@ -1944,7 +1944,7 @@
       <content>When you go into your neighbour's field, you may take the heads of grain with your hand; but you may not put your blade to his grain.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Deuteronomy">
+  <chapter num="24">
     <verse num="1">
       <content>If a man takes a wife, and after they are married she is unpleasing to him because of some bad quality in her, let him give her a statement in writing and send her away from his house.</content>
     </verse>
@@ -2012,7 +2012,7 @@
       <content>Keep in mind that you were a servant in the land of Egypt: for this is why I give you orders to do this.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Deuteronomy">
+  <chapter num="25">
     <verse num="1">
       <content>If there is an argument between men and they go to law with one another, let the judges give their decision for the upright, and against the wrongdoer.</content>
     </verse>
@@ -2071,7 +2071,7 @@
       <content>So when the Lord your God has given you rest from all who are against you on every side, in the land which the Lord your God is giving you for your heritage, see to it that the memory of Amalek is cut off from the earth; keep this in mind.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Deuteronomy">
+  <chapter num="26">
     <verse num="1">
       <content>Now when you have come into the land which the Lord is giving you for your heritage, and you have made it yours and are living in it;</content>
     </verse>
@@ -2130,7 +2130,7 @@
       <content>And that he will make you high over all the nations he has made, in praise, in name, and in honour, and that you are to be a holy people to the Lord your God as he has said.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Deuteronomy">
+  <chapter num="27">
     <verse num="1">
       <content>Then Moses and the responsible men of Israel gave the people these orders: Keep all the orders which I have given you this day;</content>
     </verse>
@@ -2210,7 +2210,7 @@
       <content>Cursed is he who does not take this law to heart to do it. And let all the people say, So be it.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Deuteronomy">
+  <chapter num="28">
     <verse num="1">
       <content>Now if you give ear to the voice of the Lord your God, and keep with care all these orders which I have given you today, then the Lord your God will put you high over all the nations of the earth:</content>
     </verse>
@@ -2416,7 +2416,7 @@
       <content>And the Lord will take you back to Egypt again in ships, by the way of which I said to you, You will never see it again: there you will be offering yourselves as men-servants and women-servants to your haters for a price, and no man will take you.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Deuteronomy">
+  <chapter num="29">
     <verse num="1">
       <content>These are the words of the agreement which Moses was ordered by the Lord to make with the children of Israel in the land of Moab, in addition to the agreement which he made with them in Horeb.</content>
     </verse>
@@ -2505,7 +2505,7 @@
       <content>The secret things are the Lord our God's: but the things which have been made clear are ours and our children's for ever, so that we may do all the words of this law.</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Deuteronomy">
+  <chapter num="30">
     <verse num="1">
       <content>Now when all these things have come on you, the blessing and the curse which I have put before you, if the thought of them comes back to your minds, when you are living among the nations where the Lord your God has sent you,</content>
     </verse>
@@ -2567,7 +2567,7 @@
       <content>In loving the Lord your God, hearing his voice and being true to him: for he is your life and by him will your days be long: so that you may go on living in the land which the Lord gave by an oath to your fathers, Abraham, Isaac and Jacob.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Deuteronomy">
+  <chapter num="31">
     <verse num="1">
       <content>So Moses said all these things to Israel.</content>
     </verse>
@@ -2659,7 +2659,7 @@
       <content>Then in the hearing of all the meeting of Israel, Moses said the words of this song, to the end.</content>
     </verse>
   </chapter>
-  <chapter num="32" preferred_title="Deuteronomy">
+  <chapter num="32">
     <verse num="1">
       <content>Give ear, O heavens, to my voice; let the earth take note of the words of my mouth:</content>
     </verse>
@@ -2817,7 +2817,7 @@
       <content>So you will see the land before you, but you will not go into the land which I am giving to the children of Israel.</content>
     </verse>
   </chapter>
-  <chapter num="33" preferred_title="Deuteronomy">
+  <chapter num="33">
     <verse num="1">
       <content>Now this is the blessing which Moses, the man of God, gave to the children of Israel before his death.</content>
     </verse>
@@ -2906,7 +2906,7 @@
       <content>Happy are you, O Israel: who is like you, a people whose saviour is the Lord, whose help is your cover, whose sword is your strength! All those who are against you will put themselves under your rule, and your feet will be planted on their high places.</content>
     </verse>
   </chapter>
-  <chapter num="34" preferred_title="Deuteronomy">
+  <chapter num="34">
     <verse num="1">
       <content>And Moses went up from the table-lands of Moab to Mount Nebo, to the top of Pisgah which is facing Jericho. And the Lord let him see all the land, the land of Gilead as far as Dan;</content>
     </verse>

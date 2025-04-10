@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="James">
+  <chapter num="1">
     <verse num="1">
       <content>James, a servant of God and of the Lord Jesus Christ, sends words of love to the twelve tribes of the Jews living in all parts of the earth.</content>
     </verse>
@@ -82,7 +82,7 @@
       <content>The religion which is holy and free from evil in the eyes of our God and Father is this: to take care of children who have no fathers and of widows who are in trouble, and to keep oneself untouched by the world.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="James">
+  <chapter num="2">
     <verse num="1">
       <content>My brothers, if you have the faith of our Lord Jesus Christ of glory, do not take a man's position into account.</content>
     </verse>
@@ -162,7 +162,7 @@
       <content>For as the body without the spirit is dead even so faith without works is dead.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="James">
+  <chapter num="3">
     <verse num="1">
       <content>Do not all be teachers, my brothers, because we teachers will be judged more hardly than others.</content>
     </verse>
@@ -218,7 +218,7 @@
       <content>And the fruit of righteousness is planted in peace for those who make peace.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="James">
+  <chapter num="4">
     <verse num="1">
       <content>What is the cause of wars and fighting among you? is it not in your desires which are at war in your bodies?</content>
     </verse>
@@ -271,7 +271,7 @@
       <content>The man who has knowledge of how to do good and does not do it, to him it is sin.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="James">
+  <chapter num="5">
     <verse num="1">
       <content>Come now, you men of wealth, give yourselves to weeping and crying because of the bitter troubles which are coming to you.</content>
     </verse>

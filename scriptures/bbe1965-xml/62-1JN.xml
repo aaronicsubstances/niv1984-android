@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="1 John">
+  <chapter num="1">
     <verse num="1">
       <content>That which was from the first, which has come to our ears, and which we have seen with our eyes, looking on it and touching it with our hands, about the Word of life</content>
     </verse>
@@ -31,7 +31,7 @@
       <content>If we say that we have no sin, we make him false and his word is not in us.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="1 John">
+  <chapter num="2">
     <verse num="1">
       <content>My little children, I am writing these things to you so that you may be without sin. And if any man is a sinner, we have a friend and helper with the Father, Jesus Christ, the upright one:</content>
     </verse>
@@ -120,7 +120,7 @@
       <content>If you have knowledge that he is upright, it is clear to you that everyone who does righteousness is his offspring.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="1 John">
+  <chapter num="3">
     <verse num="1">
       <content>See what great love the Father has given us in naming us the children of God; and such we are. For this reason the world does not see who we are, because it did not see who he was.</content>
     </verse>
@@ -194,7 +194,7 @@
       <content>He who keeps his laws is in God and God is in him. And the Spirit which he gave us is our witness that he is in us.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="1 John">
+  <chapter num="4">
     <verse num="1">
       <content>My loved ones, do not put your faith in every spirit, but put them to the test, to see if they are from God: because a great number of false prophets have gone out into the world.</content>
     </verse>
@@ -259,7 +259,7 @@
       <content>And this is the word which we have from him, that he who has love for God is to have the same love for his brother.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="1 John">
+  <chapter num="5">
     <verse num="1">
       <content>Everyone who has faith that Jesus is the Christ is a child of God: and everyone who has love for the Father has love for his child.</content>
     </verse>

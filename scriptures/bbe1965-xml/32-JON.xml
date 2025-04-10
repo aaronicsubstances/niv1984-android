@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Jonah">
+  <chapter num="1">
     <verse num="1">
       <content>And the word of the Lord came to Jonah, the son of Amittai, saying,</content>
     </verse>
@@ -52,7 +52,7 @@
       <content>And the Lord made ready a great fish to take Jonah into its mouth; and Jonah was inside the fish for three days and three nights.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Jonah">
+  <chapter num="2">
     <verse num="1">
       <content>Then Jonah made prayer to the Lord his God from the inside of the fish, and said,</content>
     </verse>
@@ -84,7 +84,7 @@
       <content>And at the Lord's order, the fish sent Jonah out of its mouth on to the dry land.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Jonah">
+  <chapter num="3">
     <verse num="1">
       <content>And the word of the Lord came to Jonah a second time, saying,</content>
     </verse>
@@ -116,7 +116,7 @@
       <content>And God saw what they did, how they were turned from their evil way; and God's purpose was changed as to the evil which he said he would do to them, and he did it not.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Jonah">
+  <chapter num="4">
     <verse num="1">
       <content>But this seemed very wrong to Jonah, and he was angry.</content>
     </verse>

@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Judges">
+  <chapter num="1">
     <verse num="1">
       <content>Now after the death of Joshua, the children of Israel made request to the Lord, saying, Who is to go up first to make war for us against the Canaanites?</content>
     </verse>
@@ -109,7 +109,7 @@
       <content>And the limit of the Edomites went from the slope of Akrabbim from Sela and up.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Judges">
+  <chapter num="2">
     <verse num="1">
       <content>Now the angel of the Lord came up from Gilgal to Bochim. And he said, *** I took you out of Egypt, guiding you into the land which I gave by an oath to your fathers; and I said, My agreement with you will never be broken by me:</content>
     </verse>
@@ -180,7 +180,7 @@
       <content>So the Lord let those nations go on living in the land, not driving them out quickly, and did not give them up into the hands of Joshua.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Judges">
+  <chapter num="3">
     <verse num="1">
       <content>Now these are the nations which the Lord kept in the land for the purpose of testing Israel by them, all those who had had no experience of all the wars of Canaan;</content>
     </verse>
@@ -275,7 +275,7 @@
       <content>And after him came Shamgar, the son of Anath, who put to death six hundred Philistines with an ox-stick; and he was another saviour of Israel.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Judges">
+  <chapter num="4">
     <verse num="1">
       <content>And the children of Israel again did evil in the eyes of the Lord when Ehud was dead.</content>
     </verse>
@@ -349,7 +349,7 @@
       <content>And the power of the children of Israel went on increasing against Jabin, king of Canaan, till he was cut off.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Judges">
+  <chapter num="5">
     <verse num="1">
       <content>At that time Deborah and Barak, the son of Abinoam, made this song, saying:</content>
     </verse>
@@ -444,7 +444,7 @@
       <content>So may destruction come on all your haters, O Lord; but let your lovers be like the sun going out in his strength. And for forty years the land had peace.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Judges">
+  <chapter num="6">
     <verse num="1">
       <content>And the children of Israel did evil in the eyes of the Lord; and the Lord gave them up into the hand of Midian for seven years.</content>
     </verse>
@@ -566,7 +566,7 @@
       <content>And that night God did so; for the wool was dry, and there was dew on all the earth round it.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Judges">
+  <chapter num="7">
     <verse num="1">
       <content>Then Jerubbaal, that is, Gideon, and all the people with him, got up early and put up their tents by the side of the water-spring of Harod; the tents of Midian were on the north side of him, under the hill of Moreh in the valley.</content>
     </verse>
@@ -643,7 +643,7 @@
       <content>And they took the two chiefs of Midian, Oreb and Zeeb; and they put Oreb to death at the rock of Oreb, and Zeeb they put to death at the place of the grape-crushing in Zeeb, and they went after Midian; but the heads of Oreb and Zeeb they took across Jordan to Gideon.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Judges">
+  <chapter num="8">
     <verse num="1">
       <content>And the men of Ephraim came and said to him, Why did you not send for us when you went to war against Midian? And they said sharp and angry words to him.</content>
     </verse>
@@ -750,7 +750,7 @@
       <content>And they were not kind to the house of Jerubbaal, that is, Gideon, in reward for all the good he had done to Israel.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Judges">
+  <chapter num="9">
     <verse num="1">
       <content>Now Abimelech, the son of Jerubbaal, went to Shechem to his mother's family, and said to them and to all the family of his mother's father,</content>
     </verse>
@@ -923,7 +923,7 @@
       <content>And God sent back on to the heads of the men of Shechem all the evil they had done, and the curse of Jotham, the son of Jerubbaal, came on them.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Judges">
+  <chapter num="10">
     <verse num="1">
       <content>Now after Abimelech, Tola, the son of Puah, the son of Dodo, a man of Issachar, became the saviour of Israel; he was living in Shamir in the hill-country of Ephraim.</content>
     </verse>
@@ -979,7 +979,7 @@
       <content>And the people of Israel said to one another, Who will be the first to make an attack on the children of Ammon? We will make him head over all Gilead.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Judges">
+  <chapter num="11">
     <verse num="1">
       <content>Now Jephthah the Gileadite was a great man of war; he was the son of a loose woman, and Gilead was his father.</content>
     </verse>
@@ -1101,7 +1101,7 @@
       <content>For the women to go year by year sorrowing for the daughter of Jephthah the Gileadite, four days in every year.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Judges">
+  <chapter num="12">
     <verse num="1">
       <content>Now the men of Ephraim came together and took up arms and went over to Zaphon; and they said to Jephthah, Why did you go over to make war against the children of Ammon without sending for us to go with you? Now we will put your house on fire over you.</content>
     </verse>
@@ -1148,7 +1148,7 @@
       <content>And Abdon, the son of Hillel, came to his death, and his body was put to rest in Pirathon in the land of Ephraim, in the hill-country of the Amalekites.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Judges">
+  <chapter num="13">
     <verse num="1">
       <content>And the children of Israel again did evil in the eyes of the Lord; and the Lord gave them into the hands of the Philistines for forty years.</content>
     </verse>
@@ -1225,7 +1225,7 @@
       <content>And the spirit of the Lord first came on him in Mahaneh-dan, between Zorah and Eshtaol.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Judges">
+  <chapter num="14">
     <verse num="1">
       <content>Now Samson went down to Timnah, and saw a woman in Timnah, of the daughters of the Philistines;</content>
     </verse>
@@ -1287,7 +1287,7 @@
       <content>But Samson's wife was given to the friend who had been his best man.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Judges">
+  <chapter num="15">
     <verse num="1">
       <content>Now a short time after, at the time of the grain-cutting, Samson, taking with him a young goat, went to see his wife; and he said, I will go in to my wife into the bride's room. But her father would not let him go in.</content>
     </verse>
@@ -1349,7 +1349,7 @@
       <content>And he was judge of Israel in the days of the Philistines for twenty years.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Judges">
+  <chapter num="16">
     <verse num="1">
       <content>Now Samson went to Gaza, and there he saw a loose woman and went in to her.</content>
     </verse>
@@ -1444,7 +1444,7 @@
       <content>Then his brothers and his father's people came down and took him up and put his body to rest in the earth between Zorah and Eshtaol in the resting-place of Manoah his father. And he had been judge of Israel for twenty years.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Judges">
+  <chapter num="17">
     <verse num="1">
       <content>Now there was a man of the hill-country of Ephraim named Micah.</content>
     </verse>
@@ -1485,7 +1485,7 @@
       <content>Then Micah said, Now I am certain that the Lord will do me good, seeing that the Levite has become my priest.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Judges">
+  <chapter num="18">
     <verse num="1">
       <content>In those days there was no king in Israel, and in those days the Danites were looking for a heritage for themselves, to be their living-place; for up to that time no distribution of land had been made to them among the tribes of Israel.</content>
     </verse>
@@ -1580,7 +1580,7 @@
       <content>And they put up for themselves the image which Micah had made, and it was there all the time that the house of God was in Shiloh.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Judges">
+  <chapter num="19">
     <verse num="1">
       <content>Now in those days, when there was no king in Israel, a certain Levite was living in the inmost parts of the hill-country of Ephraim, and he got for himself a servant-wife from Beth-lehem-judah.</content>
     </verse>
@@ -1672,7 +1672,7 @@
       <content>And he gave orders to the men whom he sent, saying, This is what you are to say to all the men of Israel, Has ever an act like this been done from the day when the children of Israel came out of Egypt to this day? Give thought to it, turning it over in your minds, and give your opinion of it.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Judges">
+  <chapter num="20">
     <verse num="1">
       <content>Then all the children of Israel took up arms, and the people came together like one man, from Dan to Beer-sheba, and the land of Gilead, before the Lord at Mizpah.</content>
     </verse>
@@ -1818,7 +1818,7 @@
       <content>And the men of Israel, turning again against the children of Benjamin, put to the sword without mercy all the towns and the cattle and everything there was, burning every town which came into their hands.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Judges">
+  <chapter num="21">
     <verse num="1">
       <content>Now the men of Israel had taken an oath in Mizpah, saying, Not one of us will give his daughter as a wife to Benjamin.</content>
     </verse>

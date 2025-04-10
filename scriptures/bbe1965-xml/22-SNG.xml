@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Song of Solomon">
+  <chapter num="1">
     <verse num="1">
       <content>The song of Songs, which is Solomon's.</content>
     </verse>
@@ -52,7 +52,7 @@
       <content>Cedar-trees are the pillars of our house; and our boards are made of fir-trees.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Song of Solomon">
+  <chapter num="2">
     <verse num="1">
       <content>I am a rose of Sharon, a flower of the valleys.</content>
     </verse>
@@ -105,7 +105,7 @@
       <content>Till the evening comes, and the sky slowly becomes dark, come, my loved one, and be like a roe on the mountains of Bether.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Song of Solomon">
+  <chapter num="3">
     <verse num="1">
       <content>By night on my bed I was looking for him who is the love of my soul: I was looking for him, but I did not see him.</content>
     </verse>
@@ -140,7 +140,7 @@
       <content>Go out, O daughters of Jerusalem, and see King Solomon, with the crown which his mother put on his head on the day when he was married, and on the day of the joy of his heart.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Song of Solomon">
+  <chapter num="4">
     <verse num="1">
       <content>See, you are fair, my love, you are fair; you have the eyes of a dove; your hair is as a flock of goats, which take their rest on the side of Gilead.</content>
     </verse>
@@ -190,7 +190,7 @@
       <content>Be awake, O north wind; and come, O south, blowing on my garden, so that its spices may come out. Let my loved one come into his garden, and take of his good fruits.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Song of Solomon">
+  <chapter num="5">
     <verse num="1">
       <content>I have come into my garden, my sister, my bride; to take my myrrh with my spice; my wax with my honey; my wine with my milk. Take meat, O friends; take wine, yes, be overcome with love.</content>
     </verse>
@@ -240,7 +240,7 @@
       <content>His mouth is most sweet; yes, he is all beautiful. This is my loved one, and this is my friend, O daughters of Jerusalem.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Song of Solomon">
+  <chapter num="6">
     <verse num="1">
       <content>Where is your loved one gone, O most fair among women? Where is your loved one turned away, that we may go looking for him with you?</content>
     </verse>
@@ -281,7 +281,7 @@
       <content>Come back, come back, O Shulammite; come back, come back, so that our eyes may see you. What will you see in the Shulammite? A sword-dance.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Song of Solomon">
+  <chapter num="7">
     <verse num="1">
       <content>How beautiful are your feet in their shoes, O king's daughter! The curves of your legs are like jewels, the work of the hands of a good workman:</content>
     </verse>
@@ -322,7 +322,7 @@
       <content>The mandrakes give out a sweet smell, and at our doors are all sorts of good fruits, new and old, which I have kept for my loved one.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Song of Solomon">
+  <chapter num="8">
     <verse num="1">
       <content>Oh that you were my brother, who took milk from my mother's breasts! When I came to you in the street, I would give you kisses; yes, I would not be looked down on.</content>
     </verse>

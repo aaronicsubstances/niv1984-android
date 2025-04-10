@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Job">
+  <chapter num="1">
     <verse num="1">
       <content>There was a man in the land of Uz whose name was Job. He was without sin and upright, fearing God and keeping himself far from evil.</content>
     </verse>
@@ -67,7 +67,7 @@
       <content>In all this Job did no sin, and did not say that God's acts were foolish.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Job">
+  <chapter num="2">
     <verse num="1">
       <content>And there was a day when the sons of the gods came together before the Lord, and the Satan came with them.</content>
     </verse>
@@ -108,7 +108,7 @@
       <content>And they took their seats on the earth by his side for seven days and seven nights: but no one said a word to him, for they saw that his pain was very great.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Job">
+  <chapter num="3">
     <verse num="1">
       <content>Then, opening his mouth, and cursing the day of his birth,</content>
     </verse>
@@ -188,7 +188,7 @@
       <content>I have no peace, no quiet, and no rest; nothing but pain comes on me.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Job">
+  <chapter num="4">
     <verse num="1">
       <content>And Eliphaz the Temanite made answer and said,</content>
     </verse>
@@ -253,7 +253,7 @@
       <content>If their tent-cord is pulled up, do they not come to an end, and without wisdom?</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Job">
+  <chapter num="5">
     <verse num="1">
       <content>Give now a cry for help; is there anyone who will give you an answer? and to which of the holy ones will you make your prayer?</content>
     </verse>
@@ -336,7 +336,7 @@
       <content>See, we have made search with care, and it is so; it has come to our ears; see that you take note of it for yourself.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Job">
+  <chapter num="6">
     <verse num="1">
       <content>And Job made answer and said,</content>
     </verse>
@@ -428,7 +428,7 @@
       <content>Is there evil in my tongue? is not the cause of my trouble clear to me?</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Job">
+  <chapter num="7">
     <verse num="1">
       <content>Has not man his ordered time of trouble on the earth? and are not his days like the days of a servant working for payment?</content>
     </verse>
@@ -493,7 +493,7 @@
       <content>And why do you not take away my sin, and let my wrongdoing be ended? for now I go down to the dust, and you will be searching for me with care, but I will be gone.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Job">
+  <chapter num="8">
     <verse num="1">
       <content>Then Bildad the Shuhite made answer and said,</content>
     </verse>
@@ -561,7 +561,7 @@
       <content>Your haters will be clothed with shame, and the tent of the sinner will not be seen again.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Job">
+  <chapter num="9">
     <verse num="1">
       <content>And Job made answer and said,</content>
     </verse>
@@ -668,7 +668,7 @@
       <content>Then I would say what is in my mind without fear of him; for there is no cause of fear in myself.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Job">
+  <chapter num="10">
     <verse num="1">
       <content>My soul is tired of life; I will let my sad thoughts go free in words; my soul will make a bitter outcry.</content>
     </verse>
@@ -736,7 +736,7 @@
       <content>A land of thick dark, without order, where the very light is dark.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Job">
+  <chapter num="11">
     <verse num="1">
       <content>Then Zophar the Naamathite made answer and said,</content>
     </verse>
@@ -798,7 +798,7 @@
       <content>But the eyes of the evil-doers will be wasting away; their way of flight is gone, and their only hope is the taking of their last breath.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Job">
+  <chapter num="12">
     <verse num="1">
       <content>And Job made answer and said,</content>
     </verse>
@@ -875,7 +875,7 @@
       <content>They go feeling about in the dark without light, wandering without help like those overcome with wine.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Job">
+  <chapter num="13">
     <verse num="1">
       <content>Truly, my eye has seen all this, word of it has come to my ear, and I have knowledge of it.</content>
     </verse>
@@ -961,7 +961,7 @@
       <content>Though a man comes to nothing like a bit of dead wood, or like a robe which has become food for the worm.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Job">
+  <chapter num="14">
     <verse num="1">
       <content>As for man, the son of woman, his days are short and full of trouble.</content>
     </verse>
@@ -1029,7 +1029,7 @@
       <content>Only his flesh still has pain, and his soul is sad.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Job">
+  <chapter num="15">
     <verse num="1">
       <content>And Eliphaz the Temanite made answer and said,</content>
     </verse>
@@ -1136,7 +1136,7 @@
       <content>Evil has made them with child, and they give birth to trouble; and the fruit of their body is shame for themselves.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Job">
+  <chapter num="16">
     <verse num="1">
       <content>And Job made answer and said,</content>
     </verse>
@@ -1204,7 +1204,7 @@
       <content>For in a short time I will take the journey from which I will not come back.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Job">
+  <chapter num="17">
     <verse num="1">
       <content>My spirit is broken, my days are ended, the last resting-place is ready for me.</content>
     </verse>
@@ -1254,7 +1254,7 @@
       <content>Will they go down with me into the underworld? Will we go down together into the dust?</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Job">
+  <chapter num="18">
     <verse num="1">
       <content>Then Bildad the Shuhite made answer and said,</content>
     </verse>
@@ -1319,7 +1319,7 @@
       <content>Truly, these are the houses of the sinner, and this is the place of him who has no knowledge of God.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Job">
+  <chapter num="19">
     <verse num="1">
       <content>And Job made answer and said,</content>
     </verse>
@@ -1408,7 +1408,7 @@
       <content>Be in fear of the sword, for the sword is the punishment for such things, so that you may be certain that there is a judge.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Job">
+  <chapter num="20">
     <verse num="1">
       <content>Then Zophar the Naamathite made answer and said,</content>
     </verse>
@@ -1497,7 +1497,7 @@
       <content>This is the reward of the evil man, and the heritage given to him by God.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Job">
+  <chapter num="21">
     <verse num="1">
       <content>Then Job made answer and said,</content>
     </verse>
@@ -1601,7 +1601,7 @@
       <content>Why then do you give me comfort with words in which there is no profit, when you see that there is nothing in your answers but deceit?</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Job">
+  <chapter num="22">
     <verse num="1">
       <content>Then Eliphaz the Temanite made answer and said,</content>
     </verse>
@@ -1693,7 +1693,7 @@
       <content>He makes safe the man who is free from sin, and if your hands are clean, salvation will be yours.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Job">
+  <chapter num="23">
     <verse num="1">
       <content>And Job made answer and said,</content>
     </verse>
@@ -1746,7 +1746,7 @@
       <content>For I am overcome by the dark, and by the black night which is covering my face.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Job">
+  <chapter num="24">
     <verse num="1">
       <content>Why are times not stored up by the Ruler of all, and why do those who have knowledge of him not see his days?</content>
     </verse>
@@ -1823,7 +1823,7 @@
       <content>And if it is not so, now, who will make it clear that my words are false, and that what I say is of no value?</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Job">
+  <chapter num="25">
     <verse num="1">
       <content>Then Bildad the Shuhite made answer and said,</content>
     </verse>
@@ -1843,7 +1843,7 @@
       <content>How much less man who is an insect, and the son of man who is a worm!</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Job">
+  <chapter num="26">
     <verse num="1">
       <content>Then Job made answer and said,</content>
     </verse>
@@ -1887,7 +1887,7 @@
       <content>See, these are only the outskirts of his ways; and how small is that which comes to our ears about him! But the thunder of his acts of power is outside all knowledge.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Job">
+  <chapter num="27">
     <verse num="1">
       <content>And Job again took up the word and said,</content>
     </verse>
@@ -1958,7 +1958,7 @@
       <content>Men make signs of joy because of him, driving him from his place with sounds of hissing.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Job">
+  <chapter num="28">
     <verse num="1">
       <content>Truly there is a mine for silver, and a place where gold is washed out.</content>
     </verse>
@@ -2044,7 +2044,7 @@
       <content>And he said to man, Truly the fear of the Lord is wisdom, and to keep from evil is the way to knowledge.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Job">
+  <chapter num="29">
     <verse num="1">
       <content>And Job again took up the word and said,</content>
     </verse>
@@ -2121,7 +2121,7 @@
       <content>I took my place as a chief, guiding them on their way, and I was as a king among his army. ...</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Job">
+  <chapter num="30">
     <verse num="1">
       <content>But now those who are younger than I make sport of me; those whose fathers I would not have put with the dogs of my flocks.</content>
     </verse>
@@ -2216,7 +2216,7 @@
       <content>And my music has been turned to sorrow, and the sound of my pipe into the noise of weeping.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Job">
+  <chapter num="31">
     <verse num="1">
       <content>I made an agreement with my eyes; how then might my eyes be looking on a virgin?</content>
     </verse>
@@ -2338,7 +2338,7 @@
       <content>Then in place of grain let thorns come up, and in place of barley evil-smelling plants.</content>
     </verse>
   </chapter>
-  <chapter num="32" preferred_title="Job">
+  <chapter num="32">
     <verse num="1">
       <content>So these three men gave no more answers to Job, because he seemed to himself to be right.</content>
     </verse>
@@ -2406,7 +2406,7 @@
       <content>For I am not able to give names of honour to any man; and if I did, my Maker would quickly take me away.</content>
     </verse>
   </chapter>
-  <chapter num="33" preferred_title="Job">
+  <chapter num="33">
     <verse num="1">
       <content>And now, O Job, give ear to my words, and take note of all I say.</content>
     </verse>
@@ -2507,7 +2507,7 @@
       <content>If not, give attention to me, and keep quiet, and I will give you wisdom.</content>
     </verse>
   </chapter>
-  <chapter num="34" preferred_title="Job">
+  <chapter num="34">
     <verse num="1">
       <content>And Elihu made answer and said,</content>
     </verse>
@@ -2620,7 +2620,7 @@
       <content>For in addition to his sin, he is uncontrolled in heart; before our eyes he makes sport of God, increasing his words against him.</content>
     </verse>
   </chapter>
-  <chapter num="35" preferred_title="Job">
+  <chapter num="35">
     <verse num="1">
       <content>And Elihu made answer and said,</content>
     </verse>
@@ -2670,7 +2670,7 @@
       <content>And Job's mouth is open wide to give out what is of no profit, increasing words without knowledge.</content>
     </verse>
   </chapter>
-  <chapter num="36" preferred_title="Job">
+  <chapter num="36">
     <verse num="1">
       <content>And Elihu went on to say,</content>
     </verse>
@@ -2771,7 +2771,7 @@
       <content>The thunder makes clear his passion, and the storm gives news of his wrath.</content>
     </verse>
   </chapter>
-  <chapter num="37" preferred_title="Job">
+  <chapter num="37">
     <verse num="1">
       <content>At this my heart is shaking; it is moved out of its place.</content>
     </verse>
@@ -2845,7 +2845,7 @@
       <content>For this cause men go in fear of him; he has no respect for any who are wise in heart.</content>
     </verse>
   </chapter>
-  <chapter num="38" preferred_title="Job">
+  <chapter num="38">
     <verse num="1">
       <content>And the Lord made answer to Job out of the storm-wind, and said,</content>
     </verse>
@@ -2970,7 +2970,7 @@
       <content>Who gives in the evening the meat he is searching for, when his young ones are crying to God; when the young lions with loud noise go wandering after their food?</content>
     </verse>
   </chapter>
-  <chapter num="39" preferred_title="Job">
+  <chapter num="39">
     <verse num="1">
       <content>Have you knowledge of the rock-goats? or do you see the roes giving birth to their young?</content>
     </verse>
@@ -3062,7 +3062,7 @@
       <content>His young have blood for their drink, and where the dead bodies are, there is he to be seen.</content>
     </verse>
   </chapter>
-  <chapter num="40" preferred_title="Job">
+  <chapter num="40">
     <verse num="1">
       <content>...</content>
     </verse>
@@ -3136,7 +3136,7 @@
       <content>Will anyone take him when he is on the watch, or put metal teeth through his nose?</content>
     </verse>
   </chapter>
-  <chapter num="41" preferred_title="Job">
+  <chapter num="41">
     <verse num="1">
       <content>Is it possible for Leviathan to be pulled out with a fish-hook, or for a hook to be put through the bone of his mouth?</content>
     </verse>
@@ -3240,7 +3240,7 @@
       <content>Everything which is high goes in fear of him; he is king over all the sons of pride.</content>
     </verse>
   </chapter>
-  <chapter num="42" preferred_title="Job">
+  <chapter num="42">
     <verse num="1">
       <content>And Job said in answer to the Lord,</content>
     </verse>

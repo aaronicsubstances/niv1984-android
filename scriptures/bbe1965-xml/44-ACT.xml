@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Acts">
+  <chapter num="1">
     <verse num="1">
       <content>I have given an earlier account, O Theophilus, of all the things which Jesus did, and of his teaching from the first,</content>
     </verse>
@@ -79,7 +79,7 @@
       <content>And they put it to the decision of chance, and the decision was given for Matthias, and he was numbered with the eleven Apostles.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Acts">
+  <chapter num="2">
     <verse num="1">
       <content>And when the day of Pentecost was come, they were all together in one place.</content>
     </verse>
@@ -222,7 +222,7 @@
       <content>Giving praise to God, and having the approval of all the people; and every day the number of those who had salvation was increased by the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Acts">
+  <chapter num="3">
     <verse num="1">
       <content>Now Peter and John were going up to the Temple at the ninth hour, the hour of prayer;</content>
     </verse>
@@ -302,7 +302,7 @@
       <content>To you, first, God sent his servant, blessing you by turning every one of you from his sins.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Acts">
+  <chapter num="4">
     <verse num="1">
       <content>And while they were talking to the people, the priests and the captain of the Temple and the Sadducees came up to them,</content>
     </verse>
@@ -415,7 +415,7 @@
       <content>Having a field, got money for it and put the money at the feet of the Apostles.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Acts">
+  <chapter num="5">
     <verse num="1">
       <content>But a certain man named Ananias, with Sapphira his wife, got money for his property,</content>
     </verse>
@@ -543,7 +543,7 @@
       <content>And every day, in the Temple and privately, they went on teaching and preaching Jesus as the Christ.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Acts">
+  <chapter num="6">
     <verse num="1">
       <content>Now in those days, when the number of the disciples was increasing, protests were made by the Greek Jews against the Hebrews, because their widows were not taken care of in the distribution of food every day.</content>
     </verse>
@@ -590,7 +590,7 @@
       <content>And all those who were in the Sanhedrin, looking at him, saw that his face was like the face of an angel.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Acts">
+  <chapter num="7">
     <verse num="1">
       <content>Then the high priest said, Are these things true?</content>
     </verse>
@@ -772,7 +772,7 @@
       <content>And going down on his knees, he said in a loud voice, Lord, do not make them responsible for this sin. And when he had said this, he went to his rest.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Acts">
+  <chapter num="8">
     <verse num="1">
       <content>And Saul gave approval to his death. Now at that time a violent attack was started against the church in Jerusalem; and all but the Apostles went away into all parts of Judaea and Samaria.</content>
     </verse>
@@ -894,7 +894,7 @@
       <content>But Philip came to Azotus, and went through all the towns, preaching the good news, till he came to Caesarea.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Acts">
+  <chapter num="9">
     <verse num="1">
       <content>But Saul, still burning with desire to put to death the disciples of the Lord, went to the high priest,</content>
     </verse>
@@ -1025,7 +1025,7 @@
       <content>And he was living in Joppa for some time with Simon, a leather-worker.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Acts">
+  <chapter num="10">
     <verse num="1">
       <content>Now there was a certain man in Caesarea, named Cornelius, the captain of the Italian band of the army;</content>
     </verse>
@@ -1171,7 +1171,7 @@
       <content>And he gave orders for them to have baptism in the name of Jesus Christ. Then they kept him with them for some days.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Acts">
+  <chapter num="11">
     <verse num="1">
       <content>Now the Apostles and the brothers who were in Judaea had news that the word of God had been given to the Gentiles.</content>
     </verse>
@@ -1263,7 +1263,7 @@
       <content>Which they did, sending it to the rulers of the church by the hand of Barnabas and Saul.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Acts">
+  <chapter num="12">
     <verse num="1">
       <content>Now, about that time, Herod the king made cruel attacks on the Christians.</content>
     </verse>
@@ -1340,7 +1340,7 @@
       <content>And Barnabas and Saul came back from Jerusalem, when their work was ended, taking with them John named Mark.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Acts">
+  <chapter num="13">
     <verse num="1">
       <content>Now there were at Antioch, in the church there, prophets and teachers, Barnabas, and Symeon who was named Niger, and Lucius of Cyrene, and Manaen, a relation of Herod the king, and Saul.</content>
     </verse>
@@ -1498,7 +1498,7 @@
       <content>And the disciples were full of joy and of the Holy Spirit.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Acts">
+  <chapter num="14">
     <verse num="1">
       <content>Now in Iconium they went together to the Synagogue of the Jews and gave such teaching that a great number of Jews and Greeks had faith.</content>
     </verse>
@@ -1584,7 +1584,7 @@
       <content>And they were with the disciples there for a long time.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Acts">
+  <chapter num="15">
     <verse num="1">
       <content>Now certain men came down from Judaea, teaching the brothers and saying that without circumcision, after the rule of Moses, there is no salvation.</content>
     </verse>
@@ -1709,7 +1709,7 @@
       <content>And he went through Syria and Cilicia, making the churches stronger in the faith.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Acts">
+  <chapter num="16">
     <verse num="1">
       <content>And he came to Derbe and Lystra: and there was a certain disciple there named Timothy, whose mother was one of the Jews of the faith, but his father was a Greek;</content>
     </verse>
@@ -1831,7 +1831,7 @@
       <content>And they came out of the prison and went to the house of Lydia: and when they had seen the brothers they gave them comfort and went away.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Acts">
+  <chapter num="17">
     <verse num="1">
       <content>Now when they had gone through Amphipolis and Apollonia they came to Thessalonica, where there was a Synagogue of the Jews:</content>
     </verse>
@@ -1935,7 +1935,7 @@
       <content>But some men gave him their support: among whom was Dionysius the Areopagite, and a woman named Damaris, and others with them.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Acts">
+  <chapter num="18">
     <verse num="1">
       <content>After these things, he went away from Athens, and came to Corinth.</content>
     </verse>
@@ -2021,7 +2021,7 @@
       <content>For he overcame the Jews in public discussion, making clear from the holy Writings that the Christ was Jesus.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Acts">
+  <chapter num="19">
     <verse num="1">
       <content>And it came about that while Apollos was at Corinth, Paul, having gone through the higher country, came to Ephesus, where there were certain disciples:</content>
     </verse>
@@ -2146,7 +2146,7 @@
       <content>And when he had said this, he sent the meeting away.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Acts">
+  <chapter num="20">
     <verse num="1">
       <content>And after the noise had come to an end, Paul, having sent for the disciples and given them comfort, went away from them to Macedonia.</content>
     </verse>
@@ -2262,7 +2262,7 @@
       <content>Being sad most of all because he had said that they would not see his face again. And so they went with him to the ship.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Acts">
+  <chapter num="21">
     <verse num="1">
       <content>And after parting from them, we put out to sea and came straight to Cos, and the day after to Rhodes, and from there to Patara:</content>
     </verse>
@@ -2384,7 +2384,7 @@
       <content>And when he let him do so, Paul, from the steps, made a sign with his hand to the people, and when they were all quiet, he said to them in the Hebrew language,</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Acts">
+  <chapter num="22">
     <verse num="1">
       <content>My brothers and fathers, give ear to the story of my life which I now put before you.</content>
     </verse>
@@ -2476,7 +2476,7 @@
       <content>But on the day after, desiring to have certain knowledge of what the Jews had to say against him, he made him free, and gave orders for the chief priests and all the Sanhedrin to come together, and he took Paul and put him before them.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Acts">
+  <chapter num="23">
     <verse num="1">
       <content>And Paul, looking fixedly at the Sanhedrin, said, My brothers, my life has been upright before God till this day.</content>
     </verse>
@@ -2583,7 +2583,7 @@
       <content>I will give hearing to your cause, he said, when those who are against you have come. And he gave orders for him to be kept in Herod's Praetorium.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Acts">
+  <chapter num="24">
     <verse num="1">
       <content>And after five days, the high priest, Ananias, came with certain of the rulers, and an expert talker, one Tertullus; and they made a statement to Felix against Paul.</content>
     </verse>
@@ -2666,7 +2666,7 @@
       <content>But after two years Porcius Festus took the place of Felix, who, desiring to have the approval of the Jews, kept Paul in chains.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Acts">
+  <chapter num="25">
     <verse num="1">
       <content>So Festus, having come into that part of the country which was under his rule, after three days went up to Jerusalem from Caesarea.</content>
     </verse>
@@ -2749,7 +2749,7 @@
       <content>For it seems to me against reason to send a prisoner without making clear what there is against him.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Acts">
+  <chapter num="26">
     <verse num="1">
       <content>And Agrippa said to Paul, You may put your cause before us. Then Paul, stretching out his hand, made his answer, saying:</content>
     </verse>
@@ -2847,7 +2847,7 @@
       <content>And Agrippa said to Festus, This man might have been made free, if he had not put his cause before Caesar.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Acts">
+  <chapter num="27">
     <verse num="1">
       <content>And when the decision had been made that we were to go by sea to Italy, they gave Paul and certain other prisoners into the care of a captain named Julius, of the Augustan band.</content>
     </verse>
@@ -2981,7 +2981,7 @@
       <content>And the rest, some on boards and some on things from the ship. And so it came about that they all got safe to land.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Acts">
+  <chapter num="28">
     <verse num="1">
       <content>And when we were safe, we made the discovery that the island was named Melita.</content>
     </verse>

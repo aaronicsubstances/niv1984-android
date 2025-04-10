@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Exodus">
+  <chapter num="1">
     <verse num="1">
       <content>Now these are the names of the sons of Israel who came into Egypt; every man and his family came with Jacob.</content>
     </verse>
@@ -67,7 +67,7 @@
       <content>And Pharaoh gave orders to all his people, saying, Every son who comes to birth is to be put into the river, but every daughter may go on living.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Exodus">
+  <chapter num="2">
     <verse num="1">
       <content>Now a man of the house of Levi took as his wife a daughter of Levi.</content>
     </verse>
@@ -144,7 +144,7 @@
       <content>And God's eyes were turned to the children of Israel and he gave them the knowledge of himself.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Exodus">
+  <chapter num="3">
     <verse num="1">
       <content>Now Moses was looking after the flock of Jethro, his father-in-law, the priest of Midian: and he took the flock to the back of the waste land and came to Horeb, the mountain of God.</content>
     </verse>
@@ -212,7 +212,7 @@
       <content>For every woman will get from her neighbour and from the woman living in her house, ornaments of silver and gold, and clothing; and you will put them on your sons and your daughters; you will take the best of their goods from the Egyptians.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Exodus">
+  <chapter num="4">
     <verse num="1">
       <content>And Moses, answering, said, It is certain that they will not have faith in me or give ear to my voice; for they will say, You have not seen the Lord.</content>
     </verse>
@@ -307,7 +307,7 @@
       <content>And the people had faith in them; and hearing that the Lord had taken up the cause of the children of Israel and had seen their troubles, with bent heads they gave him worship.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Exodus">
+  <chapter num="5">
     <verse num="1">
       <content>And after that, Moses and Aaron came to Pharaoh, and said, The Lord, the God of Israel, says, Let my people go so that they may keep a feast to me in the waste land.</content>
     </verse>
@@ -378,7 +378,7 @@
       <content>For from the time when I came to Pharaoh to put your words before him, he has done evil to this people, and you have given them no help.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Exodus">
+  <chapter num="6">
     <verse num="1">
       <content>And the Lord said to Moses, Now you will see what I am about to do to Pharaoh; for by a strong hand he will be forced to let them go, driving them out of his land because of my outstretched arm.</content>
     </verse>
@@ -470,7 +470,7 @@
       <content>And Moses said to the Lord, My lips are unclean; how is it possible that Pharaoh will give me a hearing?</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Exodus">
+  <chapter num="7">
     <verse num="1">
       <content>And the Lord said to Moses, See I have made you a god to Pharaoh, and Aaron your brother will be your prophet.</content>
     </verse>
@@ -547,7 +547,7 @@
       <content>And seven days went past, after the Lord had put his hand on the Nile.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Exodus">
+  <chapter num="8">
     <verse num="1">
       <content>And this is what the Lord said to Moses: Go to Pharaoh and say to him, The Lord says, Let my people go so that they may give me worship.</content>
     </verse>
@@ -645,7 +645,7 @@
       <content>But again Pharaoh made his heart hard and did not let the people go.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Exodus">
+  <chapter num="9">
     <verse num="1">
       <content>Then the Lord said to Moses, Go in to Pharaoh and say to him, This is what the Lord, the God of the Hebrews, says: Let my people go so that they may give me worship.</content>
     </verse>
@@ -752,7 +752,7 @@
       <content>And the heart of Pharaoh was hard, and he did not let the people go, as the Lord had said by the mouth of Moses.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Exodus">
+  <chapter num="10">
     <verse num="1">
       <content>And the Lord said to Moses, Go in to Pharaoh: for I have made his heart and the hearts of his servants hard, so that I may let my signs be seen among them:</content>
     </verse>
@@ -841,7 +841,7 @@
       <content>And Moses said, You say truly; I will not see your face again.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Exodus">
+  <chapter num="11">
     <verse num="1">
       <content>And the Lord said to Moses, I will send one more punishment on Pharaoh and on Egypt; after that he will let you go; and when he does let you go, he will not keep one of you back, but will send you out by force.</content>
     </verse>
@@ -873,7 +873,7 @@
       <content>All these wonders Moses and Aaron did before Pharaoh: but the Lord made Pharaoh's heart hard, and he did not let the children of Israel go out of his land.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Exodus">
+  <chapter num="12">
     <verse num="1">
       <content>And the Lord said to Moses and Aaron in the land of Egypt,</content>
     </verse>
@@ -1028,7 +1028,7 @@
       <content>And on that very day the Lord took the children of Israel out of the land of Egypt by their armies.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Exodus">
+  <chapter num="13">
     <verse num="1">
       <content>And the Lord said to Moses,</content>
     </verse>
@@ -1096,7 +1096,7 @@
       <content>The pillar of cloud went ever before them by day, and the pillar of fire by night.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Exodus">
+  <chapter num="14">
     <verse num="1">
       <content>And the Lord said to Moses,</content>
     </verse>
@@ -1191,7 +1191,7 @@
       <content>And Israel saw the great work which the Lord had done against the Egyptians, and the fear of the Lord came on the people and they had faith in the Lord and in his servant Moses.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Exodus">
+  <chapter num="15">
     <verse num="1">
       <content>Then Moses and the children of Israel made this song to the Lord, and said, I will make a song to the Lord, for he is lifted up in glory: the horse and the horseman he has sent down into the sea.</content>
     </verse>
@@ -1274,7 +1274,7 @@
       <content>And they came to Elim where there were twelve water-springs and seventy palm-trees: and they put up their tents there by the waters.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Exodus">
+  <chapter num="16">
     <verse num="1">
       <content>And they went on their way from Elim, and all the children of Israel came into the waste land of Sin, which is between Elim and Sinai, on the fifteenth day of the second month after they went out of the land of Egypt.</content>
     </verse>
@@ -1384,7 +1384,7 @@
       <content>Now an omer is the tenth part of an ephah.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Exodus">
+  <chapter num="17">
     <verse num="1">
       <content>And the children of Israel went on from the waste land of Sin, by stages as the Lord gave them orders, and put up their tents in Rephidim: and there was no drinking-water for the people.</content>
     </verse>
@@ -1434,7 +1434,7 @@
       <content>For he said, The Lord has taken his oath that there will be war with Amalek from generation to generation.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Exodus">
+  <chapter num="18">
     <verse num="1">
       <content>Now news came to Jethro, the priest of Midian, Moses' father-in-law, of all God had done for Moses and for Israel his people, and how the Lord had taken Israel out of Egypt.</content>
     </verse>
@@ -1517,7 +1517,7 @@
       <content>And Moses let his father-in-law go away, and he went back to his land.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Exodus">
+  <chapter num="19">
     <verse num="1">
       <content>In the third month after the children of Israel went out from Egypt, on the same day, they came into the waste land of Sinai.</content>
     </verse>
@@ -1594,7 +1594,7 @@
       <content>So Moses went down to the people and said this to them.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Exodus">
+  <chapter num="20">
     <verse num="1">
       <content>And God said all these words:</content>
     </verse>
@@ -1674,7 +1674,7 @@
       <content>And do not go up by steps to my altar, for fear that your bodies may be seen uncovered.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Exodus">
+  <chapter num="21">
     <verse num="1">
       <content>Now these are the laws which you are to put before them.</content>
     </verse>
@@ -1784,7 +1784,7 @@
       <content>But if it is common knowledge that the ox has frequently done such damage in the past, and its owner has not kept it under control, he will have to give ox for ox; and the dead beast will be his.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Exodus">
+  <chapter num="22">
     <verse num="1">
       <content>If a man takes without right another man's ox or his sheep, and puts it to death or gets a price for it, he is to give five oxen for an ox, or four sheep for a sheep, in payment: the thief will have to make payment for what he has taken; if he has no money, he himself will have to be exchanged for money, so that payment may be made.</content>
     </verse>
@@ -1879,7 +1879,7 @@
       <content>You are to be holy men to me: the flesh of no animal whose death has been caused by the beasts of the field may be used for your food; it is to be given to the dogs.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Exodus">
+  <chapter num="23">
     <verse num="1">
       <content>Do not let a false statement go further; do not make an agreement with evil-doers to be a false witness.</content>
     </verse>
@@ -1980,7 +1980,7 @@
       <content>Let them not go on living in your land, or they will make you do evil against me: for if you give worship to their gods, it will certainly be a cause of sin to you.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Exodus">
+  <chapter num="24">
     <verse num="1">
       <content>And he said to Moses, Come up to the Lord, you and Aaron, and Nadab and Abihu and seventy of the chiefs of Israel; and give me worship from a distance.</content>
     </verse>
@@ -2036,7 +2036,7 @@
       <content>And Moses went up the mountain, into the cloud, and was there for forty days and forty nights.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Exodus">
+  <chapter num="25">
     <verse num="1">
       <content>And the Lord said to Moses,</content>
     </verse>
@@ -2158,7 +2158,7 @@
       <content>And see that you make them from the design which you saw on the mountain.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Exodus">
+  <chapter num="26">
     <verse num="1">
       <content>And you are to make a House for me, with ten curtains of the best linen, blue and purple and red, worked with designs of winged ones by a good workman.</content>
     </verse>
@@ -2271,7 +2271,7 @@
       <content>And make five pillars for the curtain, of hard wood plated with gold; their hooks are to be of gold and their bases of brass</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Exodus">
+  <chapter num="27">
     <verse num="1">
       <content>And make an altar of hard wood, a square altar, five cubits long, five cubits wide and three cubits high.</content>
     </verse>
@@ -2336,7 +2336,7 @@
       <content>Let Aaron and his sons put this in order, evening and morning, before the Lord, inside the Tent of meeting, outside the veil which is before the ark; this is to be an order for ever, from generation to generation, to be kept by the children of Israel.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Exodus">
+  <chapter num="28">
     <verse num="1">
       <content>Now let Aaron your brother, and his sons with him, come near from among the children of Israel, so that they may be my priests, even Aaron, and Nadab, Abihu, Eleazar, and Ithamar, his sons.</content>
     </verse>
@@ -2467,7 +2467,7 @@
       <content>Aaron and his sons are to put these on whenever they go into the Tent of meeting or come near the altar, when they are doing the work of the holy place, so that they may be free from any sin causing death: this is to be an order for him and his seed after him for ever.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Exodus">
+  <chapter num="29">
     <verse num="1">
       <content>This is what you are to do to make them holy, to do the work of priests to me: Take one young ox and two male sheep, without any mark on them,</content>
     </verse>
@@ -2607,7 +2607,7 @@
       <content>And they will see that I am the Lord their God, who took them out of the land of Egypt, so that I might be ever with them: I am the Lord their God.</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Exodus">
+  <chapter num="30">
     <verse num="1">
       <content>And you are to make an altar for the burning of perfume; of hard wood let it be made.</content>
     </verse>
@@ -2723,7 +2723,7 @@
       <content>Whoever makes any like it, for its sweet smell, will be cut off from his people.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Exodus">
+  <chapter num="31">
     <verse num="1">
       <content>And the Lord said to Moses,</content>
     </verse>
@@ -2779,7 +2779,7 @@
       <content>And when his talk with Moses on Mount Sinai was ended, he gave him the two stones of the law, two stones on which was the writing made by the finger of God.</content>
     </verse>
   </chapter>
-  <chapter num="32" preferred_title="Exodus">
+  <chapter num="32">
     <verse num="1">
       <content>And when the people saw that Moses was a long time coming down from the mountain, they all came to Aaron and said to him, Come, make us a god to go before us: as for this Moses, who took us up out of the land of Egypt, we have no idea what has become of him.</content>
     </verse>
@@ -2886,7 +2886,7 @@
       <content>And the Lord sent punishment on the people because they gave worship to the ox which Aaron made.</content>
     </verse>
   </chapter>
-  <chapter num="33" preferred_title="Exodus">
+  <chapter num="33">
     <verse num="1">
       <content>And the Lord said to Moses, Go forward from this place, you and the people whom you have taken up out of the land of Egypt, to that land about which I made an oath to Abraham, Isaac, and Jacob, saying, To your seed will I give it.</content>
     </verse>
@@ -2957,7 +2957,7 @@
       <content>Then I will take away my hand, and you will see my back: but my face is not to be seen.</content>
     </verse>
   </chapter>
-  <chapter num="34" preferred_title="Exodus">
+  <chapter num="34">
     <verse num="1">
       <content>And the Lord said to Moses, Make two other stones like the first two; and I will put on them the words which were on the first stones, which were broken by you.</content>
     </verse>
@@ -3064,7 +3064,7 @@
       <content>And the children of Israel saw that the face of Moses was shining: so Moses put the veil over his face again till he went to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="35" preferred_title="Exodus">
+  <chapter num="35">
     <verse num="1">
       <content>And Moses sent for all the children of Israel to come together, and said to them, This is what the Lord has said and these are his orders.</content>
     </verse>
@@ -3171,7 +3171,7 @@
       <content>To them he has given knowledge of all the arts of the handworker, of the designer, and the expert workman; of the maker of needlework in blue and purple and red and the best linen, and of the maker of cloth; in all the arts of the designer and the trained workman they are expert.</content>
     </verse>
   </chapter>
-  <chapter num="36" preferred_title="Exodus">
+  <chapter num="36">
     <verse num="1">
       <content>So let Bezalel and Oholiab get to work, with every wise-hearted man to whom the Lord has given wisdom and knowledge, to do whatever is necessary for the ordering of the holy place, as the Lord has given orders.</content>
     </verse>
@@ -3287,7 +3287,7 @@
       <content>And five pillars for the curtain, with their hooks; the heads of the pillars were of gold and they were circled with bands of gold; and their five bases were of brass.</content>
     </verse>
   </chapter>
-  <chapter num="37" preferred_title="Exodus">
+  <chapter num="37">
     <verse num="1">
       <content>And Bezalel made the ark of hard wood, two and a half cubits long, a cubit and a half wide and a cubit and a half high;</content>
     </verse>
@@ -3376,7 +3376,7 @@
       <content>And he made the holy oil and the perfume of sweet spices for burning, after the art of the perfume-maker.</content>
     </verse>
   </chapter>
-  <chapter num="38" preferred_title="Exodus">
+  <chapter num="38">
     <verse num="1">
       <content>The altar of burned offerings he made of hard wood; a square altar, five cubits long, five cubits wide and three cubits high,</content>
     </verse>
@@ -3471,7 +3471,7 @@
       <content>And the bases for the open space all round and for its doorway, and all the nails for the House and for the open space.</content>
     </verse>
   </chapter>
-  <chapter num="39" preferred_title="Exodus">
+  <chapter num="39">
     <verse num="1">
       <content>And from the needlework of blue and purple and red they made the robes used for the work of the holy place, and the holy robes for Aaron, as the Lord had given orders to Moses.</content>
     </verse>
@@ -3602,7 +3602,7 @@
       <content>Then Moses, when he saw all their work and saw that they had done everything as the Lord had said, gave them his blessing.</content>
     </verse>
   </chapter>
-  <chapter num="40" preferred_title="Exodus">
+  <chapter num="40">
     <verse num="1">
       <content>And the Lord said to Moses,</content>
     </verse>

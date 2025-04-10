@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Matthew">
+  <chapter num="1">
     <verse num="1">
       <content>The book of the generations of Jesus Christ, the son of David, the son of Abraham.</content>
     </verse>
@@ -76,7 +76,7 @@
       <content>And he had no connection with her till she had given birth to a son; and he gave him the name Jesus.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Matthew">
+  <chapter num="2">
     <verse num="1">
       <content>Now when the birth of Jesus took place in Beth-lehem of Judaea, in the days of Herod the king, there came wise men from the east to Jerusalem,</content>
     </verse>
@@ -147,7 +147,7 @@
       <content>And he came and was living in a town named Nazareth: so that the word of the prophets might come true, He will be named a Nazarene.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Matthew">
+  <chapter num="3">
     <verse num="1">
       <content>And in those days John the Baptist came preaching in the waste land of Judaea,</content>
     </verse>
@@ -200,7 +200,7 @@
       <content>And a voice came out of heaven, saying, This is my dearly loved Son, with whom I am well pleased.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Matthew">
+  <chapter num="4">
     <verse num="1">
       <content>Then Jesus was sent by the Spirit into the waste land to be tested by the Evil One.</content>
     </verse>
@@ -277,7 +277,7 @@
       <content>And there went after him great numbers from Galilee and Decapolis and Jerusalem and Judaea and from the other side of Jordan.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Matthew">
+  <chapter num="5">
     <verse num="1">
       <content>And seeing great masses of people he went up into the mountain; and when he was seated his disciples came to him.</content>
     </verse>
@@ -423,7 +423,7 @@
       <content>Be then complete in righteousness, even as your Father in heaven is complete.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Matthew">
+  <chapter num="6">
     <verse num="1">
       <content>Take care not to do your good works before men, to be seen by them; or you will have no reward from your Father in heaven.</content>
     </verse>
@@ -527,7 +527,7 @@
       <content>Then have no care for tomorrow: tomorrow will take care of itself. Take the trouble of the day as it comes.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Matthew">
+  <chapter num="7">
     <verse num="1">
       <content>Be not judges of others, and you will not be judged.</content>
     </verse>
@@ -616,7 +616,7 @@
       <content>for he was teaching as one having authority, and not as their scribes.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Matthew">
+  <chapter num="8">
     <verse num="1">
       <content>And when he had come down from the mountain, great numbers of people came after him.</content>
     </verse>
@@ -720,7 +720,7 @@
       <content>And all the town came out to Jesus; and seeing him they made request that he would go away from their part of the country.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Matthew">
+  <chapter num="9">
     <verse num="1">
       <content>And he got into a boat and went across and came to his town.</content>
     </verse>
@@ -836,7 +836,7 @@
       <content>Make prayer, then, to the Lord of the grain-fields, that he may send out workers to get in his grain.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Matthew">
+  <chapter num="10">
     <verse num="1">
       <content>And he got together his twelve disciples and gave them the power of driving out unclean spirits, and of making well all sorts of disease and pain.</content>
     </verse>
@@ -964,7 +964,7 @@
       <content>And whoever gives to one of these little ones a cup of cold water only, in the name of a disciple, truly I say to you, he will not go without his reward.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Matthew">
+  <chapter num="11">
     <verse num="1">
       <content>And it came about that when Jesus had come to the end of giving these orders to his twelve disciples, he went away from there, teaching and preaching in their towns.</content>
     </verse>
@@ -1056,7 +1056,7 @@
       <content>For my yoke is good, and the weight I take up is not hard.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Matthew">
+  <chapter num="12">
     <verse num="1">
       <content>At that time Jesus went through the fields on the Sabbath day; and his disciples, being in need of food, were taking the heads of grain.</content>
     </verse>
@@ -1208,7 +1208,7 @@
       <content>For whoever does the pleasure of my Father in heaven, he is my brother, and sister, and mother.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Matthew">
+  <chapter num="13">
     <verse num="1">
       <content>On that day Jesus went out of the house and was seated by the seaside.</content>
     </verse>
@@ -1384,7 +1384,7 @@
       <content>And the works of power which he did there were small in number because they had no faith.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Matthew">
+  <chapter num="14">
     <verse num="1">
       <content>At that time news of Jesus came to Herod the king;</content>
     </verse>
@@ -1494,7 +1494,7 @@
       <content>With the request that they might only put their hands on the edge of his robe: and all those who did so were made well.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Matthew">
+  <chapter num="15">
     <verse num="1">
       <content>Then there came to Jesus from Jerusalem Pharisees and scribes, saying,</content>
     </verse>
@@ -1613,7 +1613,7 @@
       <content>And when he had sent the people away, he got into the boat, and came into the country of Magadan.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Matthew">
+  <chapter num="16">
     <verse num="1">
       <content>And the Pharisees and Sadducees came and, testing him, made a request to him to give them a sign from heaven.</content>
     </verse>
@@ -1699,7 +1699,7 @@
       <content>Truly I say to you, There are some of those here who will not have a taste of death, till they see the Son of man coming in his kingdom.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Matthew">
+  <chapter num="17">
     <verse num="1">
       <content>And after six days Jesus takes with him Peter, and James, and John, his brother, and makes them go up with him into a high mountain by themselves.</content>
     </verse>
@@ -1782,7 +1782,7 @@
       <content>But, so that we may not be a cause of trouble to them, go to the sea, and let down a hook, and take the first fish which comes up; and in his mouth you will see a bit of money: take that, and give it to them for me and you.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Matthew">
+  <chapter num="18">
     <verse num="1">
       <content>In that hour the disciples came to Jesus, saying, Who is greatest in the kingdom of heaven?</content>
     </verse>
@@ -1889,7 +1889,7 @@
       <content>So will my Father in heaven do to you, if you do not everyone, from your hearts, give forgiveness to his brother.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Matthew">
+  <chapter num="19">
     <verse num="1">
       <content>And it came about that after saying these words, Jesus went away from Galilee, and came into the parts of Judaea on the other side of Jordan.</content>
     </verse>
@@ -1981,7 +1981,7 @@
       <content>But a great number who are first will be last, and some who are last will be first.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Matthew">
+  <chapter num="20">
     <verse num="1">
       <content>For the kingdom of heaven is like the master of a house, who went out early in the morning to get workers into his vine-garden.</content>
     </verse>
@@ -2085,7 +2085,7 @@
       <content>And Jesus, being moved with pity, put his fingers on their eyes: and straight away they were able to see, and went after him.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Matthew">
+  <chapter num="21">
     <verse num="1">
       <content>And when they were near Jerusalem, and had come to Beth-phage, to the Mountain of Olives, Jesus sent two disciples,</content>
     </verse>
@@ -2225,7 +2225,7 @@
       <content>And though they had a desire to take him, they were in fear of the people, because in their eyes he was a prophet.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Matthew">
+  <chapter num="22">
     <verse num="1">
       <content>And Jesus, talking to them again in stories, said:</content>
     </verse>
@@ -2365,7 +2365,7 @@
       <content>And no one was able to give him an answer, and so great was their fear of him, that from that day no one put any more questions to him.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Matthew">
+  <chapter num="23">
     <verse num="1">
       <content>Then Jesus said to the people and to his disciples:</content>
     </verse>
@@ -2484,7 +2484,7 @@
       <content>For I say to you, You will not see me from this time till you say, A blessing on him who comes in the name of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Matthew">
+  <chapter num="24">
     <verse num="1">
       <content>And Jesus went out of the Temple, and on the way his disciples came to him, pointing out the buildings of the Temple.</content>
     </verse>
@@ -2639,7 +2639,7 @@
       <content>And will have him cut in two, and will give him a part in the fate of the false ones: there will be weeping and cries of sorrow.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Matthew">
+  <chapter num="25">
     <verse num="1">
       <content>Then the kingdom of heaven will be like ten virgins, the friends of the bride, who took their lights, and went out with the purpose of meeting the husband.</content>
     </verse>
@@ -2779,7 +2779,7 @@
       <content>And these will go away into eternal punishment; but the upright into eternal life.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Matthew">
+  <chapter num="26">
     <verse num="1">
       <content>And when Jesus had come to the end of all these words, he said to his disciples,</content>
     </verse>
@@ -3006,7 +3006,7 @@
       <content>And the word of Jesus came back to Peter, when he said, Before the hour of the cock's cry, you will say three times that you have no knowledge of me. And he went out, weeping bitterly.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Matthew">
+  <chapter num="27">
     <verse num="1">
       <content>Now when it was morning, all the chief priests and those in authority took thought together with the purpose of putting Jesus to death.</content>
     </verse>
@@ -3206,7 +3206,7 @@
       <content>So they went, and made safe the place where his body was, putting a stamp on the stone, and the watchmen were with them.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Matthew">
+  <chapter num="28">
     <verse num="1">
       <content>Now late on the Sabbath, when the dawn of the first day of the week was near, Mary Magdalene and the other Mary came to see the place where his body was.</content>
     </verse>

@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="2 Thessalonians">
+  <chapter num="1">
     <verse num="1">
       <content>Paul and Silvanus and Timothy, to the church of the Thessalonians in God our Father and the Lord Jesus Christ:</content>
     </verse>
@@ -37,7 +37,7 @@
       <content>So that glory may be given to the name of our Lord Jesus through you, and you may have glory in him, by the grace of our God and the Lord Jesus Christ.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="2 Thessalonians">
+  <chapter num="2">
     <verse num="1">
       <content>Now as to the coming of the Lord Jesus Christ, and our meeting with him, it is our desire, my brothers,</content>
     </verse>
@@ -90,7 +90,7 @@
       <content>Give you comfort and strength in every good work and word.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="2 Thessalonians">
+  <chapter num="3">
     <verse num="1">
       <content>For the rest, my brothers, let there be prayer for us that the word of the Lord may go forward with increasing glory, even as it does with you;</content>
     </verse>

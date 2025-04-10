@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Genesis">
+  <chapter num="1">
     <verse num="1">
       <content>At the first God made the heaven and the earth.</content>
     </verse>
@@ -94,7 +94,7 @@
       <content>And God saw everything which he had made and it was very good. And there was evening and there was morning, the sixth day.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Genesis">
+  <chapter num="2">
     <verse num="1">
       <content>And the heaven and the earth and all things in them were complete.</content>
     </verse>
@@ -171,7 +171,7 @@
       <content>And the man and his wife were without clothing, and they had no sense of shame.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Genesis">
+  <chapter num="3">
     <verse num="1">
       <content>Now the snake was wiser than any beast of the field which the Lord God had made. And he said to the woman, Has God truly said that you may not take of the fruit of any tree in the garden?</content>
     </verse>
@@ -245,7 +245,7 @@
       <content>So he sent the man out; and at the east of the garden of Eden he put winged ones and a flaming sword turning every way to keep the way to the tree of life.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Genesis">
+  <chapter num="4">
     <verse num="1">
       <content>And the man had connection with Eve his wife, and she became with child and gave birth to Cain, and said, I have got a man from the Lord.</content>
     </verse>
@@ -325,7 +325,7 @@
       <content>And Seth had a son, and he gave him the name of Enosh: at this time men first made use of the name of the Lord in worship.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Genesis">
+  <chapter num="5">
     <verse num="1">
       <content>This is the book of the generations of Adam. In the day when God made man, he made him in the image of God;</content>
     </verse>
@@ -423,7 +423,7 @@
       <content>And when Noah was five hundred years old, he became the father of Shem, Ham, and Japheth.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Genesis">
+  <chapter num="6">
     <verse num="1">
       <content>And after a time, when men were increasing on the earth, and had daughters,</content>
     </verse>
@@ -491,7 +491,7 @@
       <content>And all these things Noah did; as God said, so he did.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Genesis">
+  <chapter num="7">
     <verse num="1">
       <content>And the Lord said to Noah, Take all your family and go into the ark, for you only in this generation have I seen to be upright.</content>
     </verse>
@@ -565,7 +565,7 @@
       <content>And the waters were over the earth a hundred and fifty days.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Genesis">
+  <chapter num="8">
     <verse num="1">
       <content>And God kept Noah in mind, and all the living things and the cattle which were with him in the ark: and God sent a wind over the earth, and the waters went down.</content>
     </verse>
@@ -633,7 +633,7 @@
       <content>While the earth goes on, seed time and the getting in of the grain, cold and heat, summer and winter, day and night, will not come to an end.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Genesis">
+  <chapter num="9">
     <verse num="1">
       <content>And God gave his blessing to Noah and his sons, and said, Be fertile, and have increase, and make the earth full.</content>
     </verse>
@@ -722,7 +722,7 @@
       <content>all the years of his life were nine hundred and fifty: and he came to his end.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Genesis">
+  <chapter num="10">
     <verse num="1">
       <content>Now these are the generations of the sons of Noah, Shem, Ham, and Japheth: these are the sons which they had after the great flow of waters</content>
     </verse>
@@ -820,7 +820,7 @@
       <content>These are the families of the sons of Noah, in the order of their generations and their nations: from these came all the nations of the earth after the great flow of waters.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Genesis">
+  <chapter num="11">
     <verse num="1">
       <content>And all the earth had one language and one tongue.</content>
     </verse>
@@ -918,7 +918,7 @@
       <content>And all the years of Terah's life were two hundred and five: and Terah came to his end in Haran.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Genesis">
+  <chapter num="12">
     <verse num="1">
       <content>Now the Lord said to Abram, Go out from your country and from your family and from your father's house, into the land to which I will be your guide:</content>
     </verse>
@@ -980,7 +980,7 @@
       <content>And Pharaoh gave orders to his men, and they sent him on his way, with his wife and all he had.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Genesis">
+  <chapter num="13">
     <verse num="1">
       <content>And Abram went up out of Egypt with his wife and all he had, and Lot with him, and they came in to the South.</content>
     </verse>
@@ -1036,7 +1036,7 @@
       <content>And Abram, moving his tent, came and made his living-place by the holy tree of Mamre, which is in Hebron, and made an altar there to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Genesis">
+  <chapter num="14">
     <verse num="1">
       <content>Now in the days of Amraphel, king of Shinar, Arioch, king of Ellasar, Chedorlaomer, king of Elam, and Tidal, king of Goiim,</content>
     </verse>
@@ -1110,7 +1110,7 @@
       <content>Give me nothing but the food which the fighting-men who went with me have had; but let Aner and Eshcol and Mamre have their part of the goods.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Genesis">
+  <chapter num="15">
     <verse num="1">
       <content>After these things, the word of the Lord came to Abram in a vision, saying, Have no fear, Abram: I will keep you safe, and great will be your reward.</content>
     </verse>
@@ -1175,7 +1175,7 @@
       <content>And the Amorite, and the Canaanite, and the Girgashite, and the Jebusite.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Genesis">
+  <chapter num="16">
     <verse num="1">
       <content>Now Sarai, Abram's wife, had given him no children; and she had a servant, a woman of Egypt whose name was Hagar.</content>
     </verse>
@@ -1225,7 +1225,7 @@
       <content>Abram was eighty-six years old when Hagar gave birth to Ishmael.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Genesis">
+  <chapter num="17">
     <verse num="1">
       <content>When Abram was ninety-nine years old, the Lord came to him, and said, I am God, Ruler of all; go in my ways and be upright in all things,</content>
     </verse>
@@ -1308,7 +1308,7 @@
       <content>And all the men of his house, those whose birth had taken place in the house and those whom he had got for money from men of other lands, underwent circumcision with him.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Genesis">
+  <chapter num="18">
     <verse num="1">
       <content>Now the Lord came to him by the holy tree of Mamre, when he was seated in the doorway of his tent in the middle of the day;</content>
     </verse>
@@ -1409,7 +1409,7 @@
       <content>And the Lord went on his way when his talk with Abraham was ended, and Abraham went back to his place.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Genesis">
+  <chapter num="19">
     <verse num="1">
       <content>And at nightfall the two angels came to Sodom; and Lot was seated at the way into the town: and when he saw them he got up and came before them, falling down on his face to the earth.</content>
     </verse>
@@ -1525,7 +1525,7 @@
       <content>And the younger had a son and gave him the name Ben-ammi: from him come the children of Ammon to this day.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Genesis">
+  <chapter num="20">
     <verse num="1">
       <content>And Abraham went on his way from there to the land of the South, and was living between Kadesh and Shur, in Gerar.</content>
     </verse>
@@ -1581,7 +1581,7 @@
       <content>For the Lord had kept all the women of the house of Abimelech from having children, because of Sarah, Abraham's wife.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Genesis">
+  <chapter num="21">
     <verse num="1">
       <content>And the Lord came to Sarah as he had said and did to her as he had undertaken.</content>
     </verse>
@@ -1685,7 +1685,7 @@
       <content>And Abraham went on living in the land of the Philistines as in a strange country.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Genesis">
+  <chapter num="22">
     <verse num="1">
       <content>Now after these things, God put Abraham to the test, and said to him, Abraham; and he said, Here am I.</content>
     </verse>
@@ -1759,7 +1759,7 @@
       <content>And his servant Reumah gave birth to Tebah and Gaham and Tahash and Maacah.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Genesis">
+  <chapter num="23">
     <verse num="1">
       <content>Now the years of Sarah's life were a hundred and twenty-seven.</content>
     </verse>
@@ -1821,7 +1821,7 @@
       <content>And the field and the hollow rock were handed over to Abraham as his property by the children of Heth.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Genesis">
+  <chapter num="24">
     <verse num="1">
       <content>Now Abraham was old and far on in years: and the Lord had given him everything in full measure.</content>
     </verse>
@@ -2024,7 +2024,7 @@
       <content>And Isaac took Rebekah into his tent and she became his wife; and in his love for her, Isaac was comforted after his father's death.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Genesis">
+  <chapter num="25">
     <verse num="1">
       <content>And Abraham took another wife named Keturah.</content>
     </verse>
@@ -2128,7 +2128,7 @@
       <content>Then Jacob gave him bread and soup; and he took food and drink and went away, caring little for his birthright.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Genesis">
+  <chapter num="26">
     <verse num="1">
       <content>Then came a time of great need in the land, like that which had been before in the days of Abraham. And Isaac went to Abimelech, king of the Philistines, at Gerar.</content>
     </verse>
@@ -2235,7 +2235,7 @@
       <content>And Isaac and Rebekah had grief of mind because of them.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Genesis">
+  <chapter num="27">
     <verse num="1">
       <content>Now when Isaac was old and his eyes had become clouded so that he was not able to see, he sent for Esau, his first son, and said to him, My son: and he said, Here am I.</content>
     </verse>
@@ -2375,7 +2375,7 @@
       <content>Then Rebekah said to Isaac, My life is a weariness to me because of the daughters of Heth: if Jacob takes a wife from among the daughters of Heth, such as these, the women of this land, of what use will my life be to me?</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Genesis">
+  <chapter num="28">
     <verse num="1">
       <content>Then Isaac sent for Jacob, and blessing him, said, Do not take a wife from among the women of Canaan;</content>
     </verse>
@@ -2443,7 +2443,7 @@
       <content>And this stone which I have put up for a pillar will be God's house: and of all you give me, I will give a tenth part to you.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Genesis">
+  <chapter num="29">
     <verse num="1">
       <content>Then Jacob went on his journey till he came to the land of the children of the East.</content>
     </verse>
@@ -2550,7 +2550,7 @@
       <content>And she was with child again, and gave birth to a son: and she said, This time I will give praise to the Lord: so he was named Judah; after this she had no more children for a time.</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Genesis">
+  <chapter num="30">
     <verse num="1">
       <content>Now Rachel, because she had no children, was full of envy of her sister; and she said to Jacob, If you do not give me children I will not go on living.</content>
     </verse>
@@ -2681,7 +2681,7 @@
       <content>So Jacob's wealth was greatly increased; he had great flocks and women-servants and men-servants and camels and asses.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Genesis">
+  <chapter num="31">
     <verse num="1">
       <content>Now it came to the ears of Jacob that Laban's sons were saying, Jacob has taken away all our father's property, and in this way he has got all this wealth.</content>
     </verse>
@@ -2848,7 +2848,7 @@
       <content>And early in the morning Laban, after kissing and blessing his daughters, went on his way back to his country.</content>
     </verse>
   </chapter>
-  <chapter num="32" preferred_title="Genesis">
+  <chapter num="32">
     <verse num="1">
       <content>And on his way Jacob came face to face with the angels of God.</content>
     </verse>
@@ -2946,7 +2946,7 @@
       <content>For this reason the children of Israel, even today, never take that muscle in the hollow of the leg as food, because the hollow of Jacob's leg was touched.</content>
     </verse>
   </chapter>
-  <chapter num="33" preferred_title="Genesis">
+  <chapter num="33">
     <verse num="1">
       <content>Then Jacob, lifting up his eyes, saw Esau coming with his four hundred men. So he made a division of the children between Leah and Rachel and the two women-servants.</content>
     </verse>
@@ -3008,7 +3008,7 @@
       <content>And there he put up an altar, naming it El, the God of Israel.</content>
     </verse>
   </chapter>
-  <chapter num="34" preferred_title="Genesis">
+  <chapter num="34">
     <verse num="1">
       <content>Now Dinah, the daughter whom Leah had by Jacob, went out to see the women of that country.</content>
     </verse>
@@ -3103,7 +3103,7 @@
       <content>But they said, Were we to let him make use of our sister as a loose woman?</content>
     </verse>
   </chapter>
-  <chapter num="35" preferred_title="Genesis">
+  <chapter num="35">
     <verse num="1">
       <content>And God said to Jacob, Go up now to Beth-el and make your living-place there: and put up an altar there to the God who came to you when you were in flight from your brother Esau.</content>
     </verse>
@@ -3192,7 +3192,7 @@
       <content>Then Isaac came to his end and was put to rest with his father's people, an old man after a long life: and Jacob and Esau, his sons, put him in his last resting-place.</content>
     </verse>
   </chapter>
-  <chapter num="36" preferred_title="Genesis">
+  <chapter num="36">
     <verse num="1">
       <content>Now these are the generations of Esau, that is to say, Edom.</content>
     </verse>
@@ -3323,7 +3323,7 @@
       <content>Magdiel, Iram; these are the Edomite chiefs, in their places in their heritage; this is Esau, the father of the Edomites.</content>
     </verse>
   </chapter>
-  <chapter num="37" preferred_title="Genesis">
+  <chapter num="37">
     <verse num="1">
       <content>Now Jacob was living in the land where his father had made a place for himself, in the land of Canaan.</content>
     </verse>
@@ -3433,7 +3433,7 @@
       <content>And in Egypt the men of Midian gave him for a price to Potiphar, a captain of high position in Pharaoh's house.</content>
     </verse>
   </chapter>
-  <chapter num="38" preferred_title="Genesis">
+  <chapter num="38">
     <verse num="1">
       <content>Now at that time, Judah went away from his brothers and became the friend of a man of Adullam named Hirah.</content>
     </verse>
@@ -3525,7 +3525,7 @@
       <content>And then his brother came out, with the red thread round his hand, and he was named Zerah.</content>
     </verse>
   </chapter>
-  <chapter num="39" preferred_title="Genesis">
+  <chapter num="39">
     <verse num="1">
       <content>Now Joseph was taken down to Egypt; and Potiphar the Egyptian, a captain of high position in Pharaoh's house, got him for a price from the Ishmaelites who had taken him there.</content>
     </verse>
@@ -3596,7 +3596,7 @@
       <content>And the keeper of the prison gave no attention to anything which was under his care, because the Lord was with him; and the Lord made everything he did go well.</content>
     </verse>
   </chapter>
-  <chapter num="40" preferred_title="Genesis">
+  <chapter num="40">
     <verse num="1">
       <content>Now after these things the chief servant who had the care of the wine, and the chief bread-maker in Pharaoh's house, did something against Pharaoh's orders;</content>
     </verse>
@@ -3667,7 +3667,7 @@
       <content>But the wine-servant did not keep Joseph in mind or give a thought to him.</content>
     </verse>
   </chapter>
-  <chapter num="41" preferred_title="Genesis">
+  <chapter num="41">
     <verse num="1">
       <content>Now after two years had gone by, Pharaoh had a dream; and in his dream he was by the side of the Nile;</content>
     </verse>
@@ -3840,7 +3840,7 @@
       <content>And all lands sent to Egypt, to Joseph, to get grain, for the need was great over all the earth.</content>
     </verse>
   </chapter>
-  <chapter num="42" preferred_title="Genesis">
+  <chapter num="42">
     <verse num="1">
       <content>Now Jacob, hearing that there was grain in Egypt, said to his sons, Why are you looking at one another?</content>
     </verse>
@@ -3956,7 +3956,7 @@
       <content>And he said, I will not let my son go down with you; for his brother is dead and he is all I have: if evil overtakes him on the journey, then through you will my grey head go down to the underworld in sorrow.</content>
     </verse>
   </chapter>
-  <chapter num="43" preferred_title="Genesis">
+  <chapter num="43">
     <verse num="1">
       <content>Now the land was in bitter need of food.</content>
     </verse>
@@ -4060,7 +4060,7 @@
       <content>And Joseph sent food to them from his table, but he sent five times as much to Benjamin as to any of the others. And they took wine freely with him.</content>
     </verse>
   </chapter>
-  <chapter num="44" preferred_title="Genesis">
+  <chapter num="44">
     <verse num="1">
       <content>Then he gave orders to the servant who was over his house, saying, Put as much food into the men's bags as will go into them, and put every man's money in the mouth of his bag;</content>
     </verse>
@@ -4164,7 +4164,7 @@
       <content>For how may I go back to my father without the boy, and see the evil which will come on my father?</content>
     </verse>
   </chapter>
-  <chapter num="45" preferred_title="Genesis">
+  <chapter num="45">
     <verse num="1">
       <content>Then Joseph, unable to keep back his feelings before those who were with him, gave orders for everyone to be sent away, and no one was present when he made clear to his brothers who he was.</content>
     </verse>
@@ -4250,7 +4250,7 @@
       <content>And Israel said, It is enough: Joseph my son is still living; I will go and see him before my death.</content>
     </verse>
   </chapter>
-  <chapter num="46" preferred_title="Genesis">
+  <chapter num="46">
     <verse num="1">
       <content>And Israel went on his journey with all he had, and came to Beer-sheba, where he made offerings to the God of his father Isaac.</content>
     </verse>
@@ -4354,7 +4354,7 @@
       <content>You are to say, Your servants have been keepers of cattle from our early days up to now, like our fathers; in this way you will be able to have the land of Goshen for yourselves; because keepers of sheep are unclean in the eyes of the Egyptians.</content>
     </verse>
   </chapter>
-  <chapter num="47" preferred_title="Genesis">
+  <chapter num="47">
     <verse num="1">
       <content>Then Joseph went to Pharaoh, and said, My father and my brothers with their flocks and their herds and all they have, are come from Canaan, and are now in the land of Goshen.</content>
     </verse>
@@ -4449,7 +4449,7 @@
       <content>And he said, Take an oath to me; and he took an oath to him: and Israel gave worship on the bed's head.</content>
     </verse>
   </chapter>
-  <chapter num="48" preferred_title="Genesis">
+  <chapter num="48">
     <verse num="1">
       <content>Now after these things, word came to Joseph that his father was ill: and he took with him his sons Manasseh and Ephraim.</content>
     </verse>
@@ -4517,7 +4517,7 @@
       <content>And I have given you more than your brothers, even Shechem as your heritage, which I took from the Amorites with my sword and my bow.</content>
     </verse>
   </chapter>
-  <chapter num="49" preferred_title="Genesis">
+  <chapter num="49">
     <verse num="1">
       <content>And Jacob sent for his sons, and said, Come together, all of you, so that I may give you news of your fate in future times.</content>
     </verse>
@@ -4618,7 +4618,7 @@
       <content>And when Jacob had come to the end of these words to his sons, stretching himself on his bed, he gave up his spirit, and went the way of his people.</content>
     </verse>
   </chapter>
-  <chapter num="50" preferred_title="Genesis">
+  <chapter num="50">
     <verse num="1">
       <content>And Joseph put his head down on his father's face, weeping and kissing him.</content>
     </verse>

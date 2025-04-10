@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Zephaniah">
+  <chapter num="1">
     <verse num="1">
       <content>The word of the Lord which came to Zephaniah, the son of Cushi, the son of Gedaliah, the son of Amariah, the son of Hezekiah, in the days of Josiah, the son of Amon, king of Judah.</content>
     </verse>
@@ -55,7 +55,7 @@
       <content>Even their silver and their gold will not be able to keep them safe in the day of the Lord's wrath; but all the land will be burned up in the fire of his bitter wrath: for he will put an end, even suddenly, to all who are living in the land.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Zephaniah">
+  <chapter num="2">
     <verse num="1">
       <content>Come together, make everyone come together, O nation without shame;</content>
     </verse>
@@ -102,7 +102,7 @@
       <content>This is the town which was full of joy, living without fear of danger, saying in her heart, I am, and there is no other: how has she been made waste, a place for beasts to take their rest in! everyone who goes by her will make hisses, waving his hand.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Zephaniah">
+  <chapter num="3">
     <verse num="1">
       <content>Sorrow to her who is uncontrolled and unclean, the cruel town!</content>
     </verse>

@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Psalms">
+  <chapter num="1">
     <verse num="1">
       <content>Happy is the man who does not go in the company of sinners, or take his place in the way of evil-doers, or in the seat of those who do not give honour to the Lord.</content>
     </verse>
@@ -19,7 +19,7 @@
       <content>Because the Lord sees the way of the upright, but the end of the sinner is destruction.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Psalms">
+  <chapter num="2">
     <verse num="1">
       <content>Why are the nations so violently moved, and why are the thoughts of the people so foolish?</content>
     </verse>
@@ -57,7 +57,7 @@
       <content>For fear that he may be angry, causing destruction to come on you, because he is quickly moved to wrath. Happy are all those who put their faith in him.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Psalms">
+  <chapter num="3">
     <verse num="1">
       <content>&lt;A Psalm. Of David. When he went in flight from Absalom his son.&gt; Lord, how greatly are they increased who make attacks on me! in great numbers they come against me.</content>
     </verse>
@@ -83,7 +83,7 @@
       <content>Salvation comes from the Lord; your blessing is on your people. (Selah.)</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Psalms">
+  <chapter num="4">
     <verse num="1">
       <content>&lt;To the chief music-maker on corded instruments. A Psalm. Of David.&gt; Give answer to my cry, O God of my righteousness; make me free from my troubles; have mercy on me, and give ear to my prayer.</content>
     </verse>
@@ -109,7 +109,7 @@
       <content>I will take my rest on my bed in peace, because you only, Lord, keep me safe.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Psalms">
+  <chapter num="5">
     <verse num="1">
       <content>&lt;To the chief music-maker on wind instruments. A Psalm. Of David.&gt; Give ear to my words, O Lord; give thought to my heart-searchings.</content>
     </verse>
@@ -147,7 +147,7 @@
       <content>For you, Lord, will send a blessing on the upright man; your grace will be round him, and you will be his strength.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Psalms">
+  <chapter num="6">
     <verse num="1">
       <content>&lt;To the chief music-maker on corded instruments, on the Sheminith. A Psalm. Of David.&gt; O Lord, do not be bitter with me in your wrath; do not send punishment on me in the heat of your passion.</content>
     </verse>
@@ -179,7 +179,7 @@
       <content>Let all those who are against me be shamed and deeply troubled; let them be turned back and suddenly put to shame.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Psalms">
+  <chapter num="7">
     <verse num="1">
       <content>&lt;Shiggaion of David; a song which he made to the Lord, about the words of Cush the Benjamite.&gt; O Lord my God, I put my faith in you; take me out of the hands of him who is cruel to me, and make me free;</content>
     </verse>
@@ -232,7 +232,7 @@
       <content>I will give praise to the Lord for his righteousness; I will make a song to the name of the Lord Most High.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Psalms">
+  <chapter num="8">
     <verse num="1">
       <content>&lt;To the chief music-maker on the Gittith. A Psalm. Of David.&gt; O Lord, our Lord, whose glory is higher than the heavens, how noble is your name in all the earth!</content>
     </verse>
@@ -261,7 +261,7 @@
       <content>O Lord, our Lord, how noble is your name in all the earth!</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Psalms">
+  <chapter num="9">
     <verse num="1">
       <content>&lt;To the chief music-maker on Muthlabben. A Psalm. Of David.&gt; I will give you praise, O Lord, with all my heart; I will make clear all the wonder of your works.</content>
     </verse>
@@ -323,7 +323,7 @@
       <content>Put them in fear, O Lord, so that the nations may see that they are only men. (Selah.)</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Psalms">
+  <chapter num="10">
     <verse num="1">
       <content>Why do you keep far away, O Lord? why are you not to be seen in times of trouble?</content>
     </verse>
@@ -379,7 +379,7 @@
       <content>To give decision for the child without a father and for the broken-hearted, so that the man of the earth may no longer be feared.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Psalms">
+  <chapter num="11">
     <verse num="1">
       <content>&lt;For the chief music-maker. Of David.&gt; In the Lord put I my faith; how will you say to my soul, Go in flight like a bird to the mountain?</content>
     </verse>
@@ -402,7 +402,7 @@
       <content>For the Lord is upright; he is a lover of righteousness: the upright will see his face.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Psalms">
+  <chapter num="12">
     <verse num="1">
       <content>&lt;For the chief music-maker on the Sheminith. A Psalm. Of David.&gt; Send help, Lord, for mercy has come to an end; there is no more faith among the children of men.</content>
     </verse>
@@ -428,7 +428,7 @@
       <content>The sinners are walking on every side, and evil is honoured among the children of men.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Psalms">
+  <chapter num="13">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; Will you for ever put me out of your memory, O Lord? will your face for ever be turned away from me?</content>
     </verse>
@@ -448,7 +448,7 @@
       <content>I will make a song to the Lord, because he has given me my reward.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Psalms">
+  <chapter num="14">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of David.&gt; The foolish man has said in his heart, God will not do anything. They are unclean, they have done evil works; there is not one who does good.</content>
     </verse>
@@ -471,7 +471,7 @@
       <content>May the salvation of Israel come out of Zion! when the fate of his people is changed by the Lord, Jacob will have joy and Israel will be glad.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Psalms">
+  <chapter num="15">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; Lord, who may have a resting-place in your tent, a living-place on your holy hill?</content>
     </verse>
@@ -488,7 +488,7 @@
       <content>He who does not put out his money at interest, or for payment give false decisions against men who have done no wrong. He who does these things will never be moved.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Psalms">
+  <chapter num="16">
     <verse num="1">
       <content>&lt;Michtam. Of David.&gt; Keep me safe, O God: for in you I have put my faith.</content>
     </verse>
@@ -523,7 +523,7 @@
       <content>You will make clear to me the way of life; where you are joy is complete; in your right hand there are pleasures for ever and ever.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="Psalms">
+  <chapter num="17">
     <verse num="1">
       <content>&lt;A Prayer. Of David.&gt; Let my cause come to your ears, O Lord, give attention to my cry; give ear to my prayer which goes not out from false lips.</content>
     </verse>
@@ -570,7 +570,7 @@
       <content>As for me, I will see your face in righteousness: when I am awake it will be joy enough for me to see your form.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="Psalms">
+  <chapter num="18">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of the servant of the Lord, of David, who said the words of this song to the Lord on the day when the Lord made him free from the hand of all his haters, and from the hand of Saul; and he said,&gt; I will give you my love, O Lord, my strength.</content>
     </verse>
@@ -722,7 +722,7 @@
       <content>Great salvation does he give to his king; he has mercy on the king of his selection, David, and on his seed for ever.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="Psalms">
+  <chapter num="19">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; The heavens are sounding the glory of God; the arch of the sky makes clear the work of his hands.</content>
     </verse>
@@ -766,7 +766,7 @@
       <content>Let the words of my mouth and the thoughts of my heart be pleasing in your eyes, O Lord, my strength and my salvation.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="Psalms">
+  <chapter num="20">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; May the Lord give ear to you in the day of trouble; may you be placed on high by the name of the God of Jacob;</content>
     </verse>
@@ -795,7 +795,7 @@
       <content>Come to our help, Lord: let the king give ear to our cry.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="Psalms">
+  <chapter num="21">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; The king will be glad in your strength, O Lord; how great will be his delight in your salvation!</content>
     </verse>
@@ -836,7 +836,7 @@
       <content>Be lifted up, O Lord, in your strength; so will we make songs in praise of your power.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="Psalms">
+  <chapter num="22">
     <verse num="1">
       <content>&lt;To the chief music-maker on Aijeleth-hash-shahar. A Psalm. Of David.&gt; My God, my God, why are you turned away from me? why are you so far from helping me, and from the words of my crying?</content>
     </verse>
@@ -931,7 +931,7 @@
       <content>They will come and make his righteousness clear to a people of the future because he has done this.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="Psalms">
+  <chapter num="23">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; The Lord takes care of me as his sheep; I will not be without any good thing.</content>
     </verse>
@@ -951,7 +951,7 @@
       <content>Truly, blessing and mercy will be with me all the days of my life; and I will have a place in the house of the Lord all my days.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="Psalms">
+  <chapter num="24">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; The earth is the Lord's, with all its wealth; the world and all the people living in it.</content>
     </verse>
@@ -983,7 +983,7 @@
       <content>Who is the King of glory? The Lord of armies, he is the King of glory. (Selah.)</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="Psalms">
+  <chapter num="25">
     <verse num="1">
       <content>&lt;Of David.&gt; To you, O Lord, my soul is lifted up.</content>
     </verse>
@@ -1051,7 +1051,7 @@
       <content>Give Israel salvation, O God, out of all his troubles.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="Psalms">
+  <chapter num="26">
     <verse num="1">
       <content>&lt;Of David.&gt; O Lord, be my judge, for my behaviour has been upright: I have put my faith in the Lord, I am not in danger of slipping.</content>
     </verse>
@@ -1089,7 +1089,7 @@
       <content>I have a safe resting-place for my feet; I will give praise to the Lord in the meetings of the people.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="Psalms">
+  <chapter num="27">
     <verse num="1">
       <content>&lt;Of David.&gt; The Lord is my light and my salvation; who is then a cause of fear to me? the Lord is the strength of my life; who is a danger to me?</content>
     </verse>
@@ -1133,7 +1133,7 @@
       <content>Let your hope be in the Lord: take heart and be strong; yes, let your hope be in the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="Psalms">
+  <chapter num="28">
     <verse num="1">
       <content>&lt;Of David.&gt; My cry goes up to you, O Lord, my Rock; do not keep back your answer from me, so that I may not become like those who go down into the underworld.</content>
     </verse>
@@ -1162,7 +1162,7 @@
       <content>Be a saviour to your people, and send a blessing on your heritage: be their guide, and let them be lifted up for ever.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="Psalms">
+  <chapter num="29">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; Give to the Lord, you sons of the gods, give to the Lord glory and strength.</content>
     </verse>
@@ -1197,7 +1197,7 @@
       <content>The Lord will give strength to his people; the Lord will give his people the blessing of peace.</content>
     </verse>
   </chapter>
-  <chapter num="30" preferred_title="Psalms">
+  <chapter num="30">
     <verse num="1">
       <content>&lt;A Psalm. A Song at the blessing of the House. Of David.&gt; I will give you praise and honour, O Lord, because through you I have been lifted up; you have not given my haters cause to be glad over me.</content>
     </verse>
@@ -1235,7 +1235,7 @@
       <content>So that my glory may make songs of praise to you and not be quiet. O Lord my God, I will give you praise for ever.</content>
     </verse>
   </chapter>
-  <chapter num="31" preferred_title="Psalms">
+  <chapter num="31">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; In you, O Lord, have I put my hope; let me never be shamed; keep me safe in your righteousness.</content>
     </verse>
@@ -1309,7 +1309,7 @@
       <content>Put away fear and let your heart be strong, all you whose hope is in the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="32" preferred_title="Psalms">
+  <chapter num="32">
     <verse num="1">
       <content>&lt;Of David. Maschil.&gt; Happy is he who has forgiveness for his wrongdoing, and whose sin is covered.</content>
     </verse>
@@ -1344,7 +1344,7 @@
       <content>Be glad in the Lord with joy, you upright men; give cries of joy, all you whose hearts are true.</content>
     </verse>
   </chapter>
-  <chapter num="33" preferred_title="Psalms">
+  <chapter num="33">
     <verse num="1">
       <content>Be glad in the Lord, O doers of righteousness; for praise is beautiful for the upright.</content>
     </verse>
@@ -1412,7 +1412,7 @@
       <content>Let your mercy be on us, O Lord, as we are waiting for you.</content>
     </verse>
   </chapter>
-  <chapter num="34" preferred_title="Psalms">
+  <chapter num="34">
     <verse num="1">
       <content>&lt;Of David. When he made a change in his behaviour before Abimelech, who sent him away, and he went.&gt; I will be blessing the Lord at all times; his praise will be ever in my mouth.</content>
     </verse>
@@ -1480,7 +1480,7 @@
       <content>The Lord will be the saviour of the souls of his servants, and no one who has faith in him will be put to shame.</content>
     </verse>
   </chapter>
-  <chapter num="35" preferred_title="Psalms">
+  <chapter num="35">
     <verse num="1">
       <content>&lt;Of David.&gt; O Lord, be on my side against those who are judging me; be at war with those who make war against me.</content>
     </verse>
@@ -1566,7 +1566,7 @@
       <content>And my tongue will be talking of your righteousness and of your praise all the day.</content>
     </verse>
   </chapter>
-  <chapter num="36" preferred_title="Psalms">
+  <chapter num="36">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of the servant of the Lord. Of David.&gt; The sin of the evil-doer says in his heart, There is no fear of the Lord before his eyes.</content>
     </verse>
@@ -1604,7 +1604,7 @@
       <content>There the workers of evil have come down: they have been made low, and will not be lifted up.</content>
     </verse>
   </chapter>
-  <chapter num="37" preferred_title="Psalms">
+  <chapter num="37">
     <verse num="1">
       <content>&lt;Of David.&gt; Do not be angry because of the wrongdoers, or have envy of the workers of evil.</content>
     </verse>
@@ -1726,7 +1726,7 @@
       <content>And the Lord will be their help, and keep them safe: he will take them out of the hands of the evil-doers, and be their saviour, because they had faith in him.</content>
     </verse>
   </chapter>
-  <chapter num="38" preferred_title="Psalms">
+  <chapter num="38">
     <verse num="1">
       <content>&lt;A Psalm. Of David. To keep in memory.&gt; O Lord, be not bitter with me in your wrath; let not your hand be on me in the heat of your passion.</content>
     </verse>
@@ -1794,7 +1794,7 @@
       <content>Come quickly to give me help, O Lord, my salvation.</content>
     </verse>
   </chapter>
-  <chapter num="39" preferred_title="Psalms">
+  <chapter num="39">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of Jeduthun. A Psalm. Of David.&gt; I said, I will give attention to my ways, so that my tongue may do no wrong; I will keep my mouth under control, while the sinner is before me.</content>
     </verse>
@@ -1835,7 +1835,7 @@
       <content>Let your wrath be turned away from me, so that I may be comforted, before I go away from here, and become nothing.</content>
     </verse>
   </chapter>
-  <chapter num="40" preferred_title="Psalms">
+  <chapter num="40">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of David. A Psalm.&gt; When I was waiting quietly for the Lord, his heart was turned to me, and he gave ear to my cry.</content>
     </verse>
@@ -1888,7 +1888,7 @@
       <content>Though I am poor and in need, the Lord has me in mind; you are my help and my saviour; let there be no waiting, O my God.</content>
     </verse>
   </chapter>
-  <chapter num="41" preferred_title="Psalms">
+  <chapter num="41">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; Happy is the man who gives thought to the poor; the Lord will be his saviour in the time of trouble.</content>
     </verse>
@@ -1929,7 +1929,7 @@
       <content>May the Lord God of Israel be praised, through eternal days and for ever. So be it. So be it.</content>
     </verse>
   </chapter>
-  <chapter num="42" preferred_title="Psalms">
+  <chapter num="42">
     <verse num="1">
       <content>&lt;To the chief music-maker. Maschil. Of the sons of Korah.&gt; Like the desire of the roe for the water-streams, so is my soul's desire for you, O God.</content>
     </verse>
@@ -1964,7 +1964,7 @@
       <content>Why are you crushed down, O my soul? and why are you troubled in me? put your hope in God; for I will again give him praise who is my help and my God.</content>
     </verse>
   </chapter>
-  <chapter num="43" preferred_title="Psalms">
+  <chapter num="43">
     <verse num="1">
       <content>Be my judge, O God, supporting my cause against a nation without religion; O keep me from the false and evil man.</content>
     </verse>
@@ -1981,7 +1981,7 @@
       <content>Why are you crushed down, O my soul? and why are you troubled in me? put your hope in God, for I will again give him praise who is my help and my God.</content>
     </verse>
   </chapter>
-  <chapter num="44" preferred_title="Psalms">
+  <chapter num="44">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of the sons of Korah Maschil.&gt; It has come to our ears, O God, our fathers have given us the story, of the works which you did in their days, in the old times,</content>
     </verse>
@@ -2061,7 +2061,7 @@
       <content>Up! and come to our help, and give us salvation because of your mercy.</content>
     </verse>
   </chapter>
-  <chapter num="45" preferred_title="Psalms">
+  <chapter num="45">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Shoshannim. Of the sons of Korah. Maschil. A Song of loves.&gt; My heart is flowing over with good things; my words are of that which I have made for a king; my tongue is the pen of a ready writer.</content>
     </verse>
@@ -2114,7 +2114,7 @@
       <content>I will keep the memory of your name living through all generations; and because of this the people will give you praise for ever.</content>
     </verse>
   </chapter>
-  <chapter num="46" preferred_title="Psalms">
+  <chapter num="46">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of the sons of Korah; put to Alamoth. A Song.&gt; God is our harbour and our strength, a very present help in trouble.</content>
     </verse>
@@ -2149,7 +2149,7 @@
       <content>The Lord of armies is with us; the God of Jacob is our high tower. (Selah.)</content>
     </verse>
   </chapter>
-  <chapter num="47" preferred_title="Psalms">
+  <chapter num="47">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of the sons of Korah.&gt; O make a glad noise with your hands, all you peoples; letting your voices go up to God with joy.</content>
     </verse>
@@ -2178,7 +2178,7 @@
       <content>The rulers of the peoples have come together, with the people of the God of Abraham; because the powers of the earth are God's: he is lifted up on high.</content>
     </verse>
   </chapter>
-  <chapter num="48" preferred_title="Psalms">
+  <chapter num="48">
     <verse num="1">
       <content>&lt;A Song. A Psalm. Of the sons of Korah.&gt; Great is the Lord and greatly to be praised, in the town of our God, in his holy mountain.</content>
     </verse>
@@ -2222,7 +2222,7 @@
       <content>Because this God is our God for ever and ever: he will be our guide.</content>
     </verse>
   </chapter>
-  <chapter num="49" preferred_title="Psalms">
+  <chapter num="49">
     <verse num="1">
       <content>&lt;Alamoth. To the chief music-maker. Of the sons of Korah. A Psalm.&gt; Give attention to this, all you peoples; let your ears be open, all you who are living in the world.</content>
     </verse>
@@ -2284,7 +2284,7 @@
       <content>Man, like the animals, does not go on for ever; he comes to an end like the beasts.</content>
     </verse>
   </chapter>
-  <chapter num="50" preferred_title="Psalms">
+  <chapter num="50">
     <verse num="1">
       <content>&lt;A Psalm. Of Asaph.&gt; The God of gods, even the Lord, has sent out his voice, and the earth is full of fear; from the coming up of the sun to its going down.</content>
     </verse>
@@ -2355,7 +2355,7 @@
       <content>Whoever makes an offering of praise gives glory to me; and to him who is upright in his ways I will make clear the salvation of God.</content>
     </verse>
   </chapter>
-  <chapter num="51" preferred_title="Psalms">
+  <chapter num="51">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David. When Nathan the prophet came to him, after he had gone in to Bath-sheba.&gt; Have pity on me, O God, in your mercy; out of a full heart, take away my sin.</content>
     </verse>
@@ -2414,7 +2414,7 @@
       <content>Then you will have delight in the offerings of righteousness, in burned offerings and offerings of beasts; then they will make offerings of oxen on your altar.</content>
     </verse>
   </chapter>
-  <chapter num="52" preferred_title="Psalms">
+  <chapter num="52">
     <verse num="1">
       <content>&lt;To the chief music-maker. Maschil. Of David. When Doeg the Edomite came to Saul saying, David has come to the house of Ahimelech.&gt; Why do you take pride in wrongdoing, lifting yourself up against the upright man all the day?</content>
     </verse>
@@ -2443,7 +2443,7 @@
       <content>I will give you praise without end for what you have done; I will give honour to your name before your saints, for it is good.</content>
     </verse>
   </chapter>
-  <chapter num="53" preferred_title="Psalms">
+  <chapter num="53">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Mahalath. Maschil. Of David.&gt; The foolish man has said in his heart, God will not do anything. They are unclean, they have done evil works; there is not one who does good.</content>
     </verse>
@@ -2463,7 +2463,7 @@
       <content>May the salvation of Israel come out of Zion! When the fate of his people is changed by God, Jacob will have joy, and Israel will be glad.</content>
     </verse>
   </chapter>
-  <chapter num="54" preferred_title="Psalms">
+  <chapter num="54">
     <verse num="1">
       <content>&lt;To the chief music-maker; on Neginoth. Maschil. Of David. When the Ziphites came and said to Saul, Is not David keeping himself secret among us?&gt; Let your name be my salvation, O God; let my cause be judged by your strength.</content>
     </verse>
@@ -2486,7 +2486,7 @@
       <content>Because it has been my saviour from all my trouble; and my eyes have seen the punishment of my haters.</content>
     </verse>
   </chapter>
-  <chapter num="55" preferred_title="Psalms">
+  <chapter num="55">
     <verse num="1">
       <content>&lt;To the chief music-maker, on Neginoth. Maschil. Of David.&gt; Give hearing to my prayer, O God; and let not your ear be shut against my request.</content>
     </verse>
@@ -2557,7 +2557,7 @@
       <content>But you, O God, will send them down into the underworld; the cruel and the false will be cut off before half their days are ended; but I will have faith in you.</content>
     </verse>
   </chapter>
-  <chapter num="56" preferred_title="Psalms">
+  <chapter num="56">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Jonath elem rehokim. Of David. Michtam. When the Philistines took him in Gath.&gt; Have mercy on me, O God, for man is attempting my destruction; every day he makes cruel attacks against me.</content>
     </verse>
@@ -2598,7 +2598,7 @@
       <content>Because you have taken my soul from the power of death; and kept my feet from falling, so that I may be walking before God in the light of life.</content>
     </verse>
   </chapter>
-  <chapter num="57" preferred_title="Psalms">
+  <chapter num="57">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Al-tashheth. Michtam. Of David. When he went in flight from Saul, in the hole of the rock.&gt; Have mercy on me, O God, have mercy on me; for the hope of my soul is in you: I will keep myself safely under the shade of your wings, till these troubles are past.</content>
     </verse>
@@ -2633,7 +2633,7 @@
       <content>Be lifted up, O God, higher than the heavens, let your glory be over all the earth.</content>
     </verse>
   </chapter>
-  <chapter num="58" preferred_title="Psalms">
+  <chapter num="58">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Al-tashheth. Michtam. Of David.&gt; Is there righteousness in your mouths, O you gods? are you upright judges, O you sons of men?</content>
     </verse>
@@ -2668,7 +2668,7 @@
       <content>So that men will say, Truly there is a reward for righteousness; truly there is a God who is judge on the earth.</content>
     </verse>
   </chapter>
-  <chapter num="59" preferred_title="Psalms">
+  <chapter num="59">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to At-tashheth. Michtam. Of David. When Saul sent, and they were watching the house, to put him to death.&gt; Take me out of the hands of the cruel ones, O my God; keep me safe from those who come up against me.</content>
     </verse>
@@ -2721,7 +2721,7 @@
       <content>To you, O my strength, will I make my song: because God is my high tower, even the God of my mercy.</content>
     </verse>
   </chapter>
-  <chapter num="60" preferred_title="Psalms">
+  <chapter num="60">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Shushan-eduth. Michtam. Of David. For teaching. When he was fighting against Aram-naharaim and Aramzobah, when Joab came back, and put twelve thousand of the Edomites to death, in the Valley of Salt.&gt; God, you have put us away from you, you have sent us in all directions, you have been angry; O be turned to us again.</content>
     </verse>
@@ -2759,7 +2759,7 @@
       <content>Through God we will do great things, for through him our haters will be crushed under our feet.</content>
     </verse>
   </chapter>
-  <chapter num="61" preferred_title="Psalms">
+  <chapter num="61">
     <verse num="1">
       <content>&lt;To the chief music-maker. On a corded instrument. Of David.&gt; Let my cry come to you, O God; let your ears be open to my prayer.</content>
     </verse>
@@ -2785,7 +2785,7 @@
       <content>So will I make songs in praise of your name for ever, giving to God that which is right day by day.</content>
     </verse>
   </chapter>
-  <chapter num="62" preferred_title="Psalms">
+  <chapter num="62">
     <verse num="1">
       <content>&lt;To the chief music-maker. After Jeduthun. A Psalm. Of David.&gt; My soul, put all your faith in God; for from him comes my salvation.</content>
     </verse>
@@ -2823,7 +2823,7 @@
       <content>And mercy, O Lord, is yours, for you give to every man the reward of his work.</content>
     </verse>
   </chapter>
-  <chapter num="63" preferred_title="Psalms">
+  <chapter num="63">
     <verse num="1">
       <content>&lt;A Psalm. Of David. When he was in the waste land of Judah.&gt; O God, you are my God; early will I make my search for you: my soul is dry for need of you, my flesh is wasted with desire for you, as a dry and burning land where no water is;</content>
     </verse>
@@ -2858,7 +2858,7 @@
       <content>But the king will have joy in God; everyone who takes an oath by him will have cause for pride; but the false mouth will be stopped.</content>
     </verse>
   </chapter>
-  <chapter num="64" preferred_title="Psalms">
+  <chapter num="64">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; O God, let the voice of my grief come to your ear: keep my life from the fear of those who are against me.</content>
     </verse>
@@ -2890,7 +2890,7 @@
       <content>The upright will be glad in the Lord and have hope in him; and all the lovers of righteousness will give him glory.</content>
     </verse>
   </chapter>
-  <chapter num="65" preferred_title="Psalms">
+  <chapter num="65">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David. A Song.&gt; It is right for you, O God, to have praise in Zion: to you let the offering be made.</content>
     </verse>
@@ -2931,7 +2931,7 @@
       <content>The grass-land is thick with flocks; the valleys are full of grain; they give glad cries and songs of joy.</content>
     </verse>
   </chapter>
-  <chapter num="66" preferred_title="Psalms">
+  <chapter num="66">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Song. A Psalm.&gt; Send up a glad cry to God, all the earth:</content>
     </verse>
@@ -2993,7 +2993,7 @@
       <content>Praise be to God who has not taken away his good faith and his mercy from me.</content>
     </verse>
   </chapter>
-  <chapter num="67" preferred_title="Psalms">
+  <chapter num="67">
     <verse num="1">
       <content>&lt;To the chief music-maker. With corded instruments. A Psalm. A Song.&gt; May God give us mercy and blessing, and let the light of his face be shining on us; (Selah.)</content>
     </verse>
@@ -3016,7 +3016,7 @@
       <content>God will give us his blessing; so let all the ends of the earth be in fear of him.</content>
     </verse>
   </chapter>
-  <chapter num="68" preferred_title="Psalms">
+  <chapter num="68">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of David. A Psalm. A Song.&gt; Let God be seen, and let his haters be put to flight; let those who are against him be turned back before him.</content>
     </verse>
@@ -3123,7 +3123,7 @@
       <content>O God, you are to be feared in your holy place: the God of Israel gives strength and power to his people. Praise be to God.</content>
     </verse>
   </chapter>
-  <chapter num="69" preferred_title="Psalms">
+  <chapter num="69">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Shoshannim. Of David.&gt; Be my saviour, O God; because the waters have come in, even to my neck.</content>
     </verse>
@@ -3233,7 +3233,7 @@
       <content>The seed of his servants will have their part in it, and there the lovers of his name will have rest.</content>
     </verse>
   </chapter>
-  <chapter num="70" preferred_title="Psalms">
+  <chapter num="70">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of David. To keep in memory.&gt; Let your salvation come quickly, O God; come quickly to my help, O Lord.</content>
     </verse>
@@ -3250,7 +3250,7 @@
       <content>But I am poor and in need; come to me quickly, O God; you are my help and my saviour; let there be no waiting, O Lord.</content>
     </verse>
   </chapter>
-  <chapter num="71" preferred_title="Psalms">
+  <chapter num="71">
     <verse num="1">
       <content>In you, O Lord, have I put my hope; let me never be shamed.</content>
     </verse>
@@ -3324,7 +3324,7 @@
       <content>My tongue will be talking of your righteousness all the day; for those whose purpose is to do me evil have been crushed and put to shame.</content>
     </verse>
   </chapter>
-  <chapter num="72" preferred_title="Psalms">
+  <chapter num="72">
     <verse num="1">
       <content>&lt;Of Solomon.&gt; Give the king your authority, O God, and your righteousness to the king's son.</content>
     </verse>
@@ -3386,7 +3386,7 @@
       <content>The prayers of David, the son of Jesse, are ended. &lt;A Psalm. Of Asaph.&gt;</content>
     </verse>
   </chapter>
-  <chapter num="73" preferred_title="Psalms">
+  <chapter num="73">
     <verse num="1">
       <content>Truly, God is good to Israel, even to such as are clean in heart.</content>
     </verse>
@@ -3472,7 +3472,7 @@
       <content>But it is good for me to come near to God: I have put my faith in the Lord God, so that I may make clear all his works.</content>
     </verse>
   </chapter>
-  <chapter num="74" preferred_title="Psalms">
+  <chapter num="74">
     <verse num="1">
       <content>&lt;Maschil. Of Asaph.&gt; Of God, why have you put us away from you for ever? why is the fire of your wrath smoking against the sheep who are your care?</content>
     </verse>
@@ -3543,7 +3543,7 @@
       <content>Keep in mind the voice of your haters; the outcry of those who come against you goes up every day.</content>
     </verse>
   </chapter>
-  <chapter num="75" preferred_title="Psalms">
+  <chapter num="75">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Al-tashheth. A Psalm. Of Asaph. A Song.&gt; To you, O God, we give praise, to you we give praise: and those who give honour to your name make clear your works of power.</content>
     </verse>
@@ -3575,7 +3575,7 @@
       <content>By him will all the horns of the sinners be cut off; but the horns of the upright will be lifted up.</content>
     </verse>
   </chapter>
-  <chapter num="76" preferred_title="Psalms">
+  <chapter num="76">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Neginoth. A Psalm. Of Asaph. A Song.&gt; In Judah is the knowledge of God; his name is great in Israel,</content>
     </verse>
@@ -3613,7 +3613,7 @@
       <content>He puts an end to the wrath of rulers; he is feared by the kings of the earth.</content>
     </verse>
   </chapter>
-  <chapter num="77" preferred_title="Psalms">
+  <chapter num="77">
     <verse num="1">
       <content>&lt;To the chief music-maker. After Jeduthun. Of Asaph. A Psalm.&gt; I was crying to God with my voice; even to God with my voice, and he gave ear to me.</content>
     </verse>
@@ -3675,7 +3675,7 @@
       <content>You were guiding your people like a flock, by the hand of Moses and Aaron.</content>
     </verse>
   </chapter>
-  <chapter num="78" preferred_title="Psalms">
+  <chapter num="78">
     <verse num="1">
       <content>&lt;Maschil. Of Asaph.&gt; Give ear, O my people, to my law; let your ears be bent down to the words of my mouth.</content>
     </verse>
@@ -3893,7 +3893,7 @@
       <content>So he gave them food with an upright heart, guiding them by the wisdom of his hands.</content>
     </verse>
   </chapter>
-  <chapter num="79" preferred_title="Psalms">
+  <chapter num="79">
     <verse num="1">
       <content>&lt;A Psalm. Of Asaph.&gt; O God, the nations have come into your heritage; they have made your holy Temple unclean; they have made Jerusalem a mass of broken walls.</content>
     </verse>
@@ -3934,7 +3934,7 @@
       <content>So we your people, and the sheep of your flock, will give you glory for ever: we will go on praising you through all generations.</content>
     </verse>
   </chapter>
-  <chapter num="80" preferred_title="Psalms">
+  <chapter num="80">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to Shoshannim-eduth. Of Asaph. A Psalm.&gt; Give ear, O Keeper of Israel, guiding Joseph like a flock; you who have your seat on the winged ones, let your glory be seen.</content>
     </verse>
@@ -3993,7 +3993,7 @@
       <content>Take us back, O Lord God of armies; let us see the shining of your face, and let us be safe.</content>
     </verse>
   </chapter>
-  <chapter num="81" preferred_title="Psalms">
+  <chapter num="81">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to the Gittith. Of Asaph.&gt; Make a song to God our strength: make a glad cry to the God of Jacob.</content>
     </verse>
@@ -4043,7 +4043,7 @@
       <content>I would give them the best grain for food; you would be full of honey from the rock.</content>
     </verse>
   </chapter>
-  <chapter num="82" preferred_title="Psalms">
+  <chapter num="82">
     <verse num="1">
       <content>&lt;A Psalm. Of Asaph.&gt; God is in the meeting-place of God; he is judging among the gods.</content>
     </verse>
@@ -4069,7 +4069,7 @@
       <content>Up! O God, come as judge of the earth; for all the nations are your heritage.</content>
     </verse>
   </chapter>
-  <chapter num="83" preferred_title="Psalms">
+  <chapter num="83">
     <verse num="1">
       <content>&lt;A Song. A Psalm. Of Asaph.&gt; O God, do not keep quiet: let your lips be open and take no rest, O God.</content>
     </verse>
@@ -4125,7 +4125,7 @@
       <content>So that men may see that you only, whose name is Yahweh, are Most High over all the earth.</content>
     </verse>
   </chapter>
-  <chapter num="84" preferred_title="Psalms">
+  <chapter num="84">
     <verse num="1">
       <content>&lt;To the chief music-maker; put to the Gittith A Psalm. Of the sons of Korah.&gt; How dear are your tents, O Lord of armies!</content>
     </verse>
@@ -4163,7 +4163,7 @@
       <content>O Lord of armies, happy is the man whose hope is in you.</content>
     </verse>
   </chapter>
-  <chapter num="85" preferred_title="Psalms">
+  <chapter num="85">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of the sons of Korah.&gt; Lord, you were good to your land: changing the fate of Jacob.</content>
     </verse>
@@ -4204,7 +4204,7 @@
       <content>Righteousness will go before him, making a way for his footsteps.</content>
     </verse>
   </chapter>
-  <chapter num="86" preferred_title="Psalms">
+  <chapter num="86">
     <verse num="1">
       <content>&lt;A Prayer. Of David.&gt; Let your ears be open to my voice, O Lord, and give me an answer; for I am poor and in need.</content>
     </verse>
@@ -4257,7 +4257,7 @@
       <content>Give me a sign for good; so that my haters may see it and be shamed; because you, Lord, have been my help and comfort.</content>
     </verse>
   </chapter>
-  <chapter num="87" preferred_title="Psalms">
+  <chapter num="87">
     <verse num="1">
       <content>&lt;Of the sons of Korah. A Psalm. A Song.&gt; This house is resting on the holy mountain.</content>
     </verse>
@@ -4280,7 +4280,7 @@
       <content>The players on instruments will be there, and the dancers will say, All my springs are in you.</content>
     </verse>
   </chapter>
-  <chapter num="88" preferred_title="Psalms">
+  <chapter num="88">
     <verse num="1">
       <content>&lt;A Song. A Psalm. Of the sons of Korah. To the chief music-maker; put to Mahalath Leannoth. Maschil. Of Heman the Ezrahite.&gt; O Lord, God of my salvation, I have been crying to you for help by day and by night:</content>
     </verse>
@@ -4336,7 +4336,7 @@
       <content>You have sent my friends and lovers far from me; I am gone from the memory of those who are dear to me.</content>
     </verse>
   </chapter>
-  <chapter num="89" preferred_title="Psalms">
+  <chapter num="89">
     <verse num="1">
       <content>&lt;Maschil. Of Ethan the Ezrahite.&gt; My song will be of the mercies of the Lord for ever: with my mouth will I make his faith clear to all generations.</content>
     </verse>
@@ -4494,7 +4494,7 @@
       <content>Let the Lord be praised for ever. So be it, So be it.</content>
     </verse>
   </chapter>
-  <chapter num="90" preferred_title="Psalms">
+  <chapter num="90">
     <verse num="1">
       <content>&lt;A Prayer of Moses, the man of God.&gt; Lord, you have been our resting-place in all generations.</content>
     </verse>
@@ -4547,7 +4547,7 @@
       <content>Let the pleasure of the Lord our God be on us: O Lord, give strength to the work of our hands.</content>
     </verse>
   </chapter>
-  <chapter num="91" preferred_title="Psalms">
+  <chapter num="91">
     <verse num="1">
       <content>Happy is he whose resting-place is in the secret of the Lord, and under the shade of the wings of the Most High;</content>
     </verse>
@@ -4597,7 +4597,7 @@
       <content>With long life will he be rewarded; and I will let him see my salvation.</content>
     </verse>
   </chapter>
-  <chapter num="92" preferred_title="Psalms">
+  <chapter num="92">
     <verse num="1">
       <content>&lt;A Psalm. A Song for the Sabbath.&gt; It is a good thing to give praise to the Lord, and to make melody to your name, O Most High;</content>
     </verse>
@@ -4644,7 +4644,7 @@
       <content>For a sign that the Lord is upright; he is my Rock, there is no deceit in him.</content>
     </verse>
   </chapter>
-  <chapter num="93" preferred_title="Psalms">
+  <chapter num="93">
     <verse num="1">
       <content>The Lord is King; he is clothed with glory; the Lord is clothed with strength; power is the cord of his robe; the world is fixed, so that it may not be moved.</content>
     </verse>
@@ -4661,7 +4661,7 @@
       <content>Your witness is most certain; it is right for your house to be holy, O Lord, for ever.</content>
     </verse>
   </chapter>
-  <chapter num="94" preferred_title="Psalms">
+  <chapter num="94">
     <verse num="1">
       <content>O God, in whose hands is punishment, O God of punishment, let your shining face be seen.</content>
     </verse>
@@ -4732,7 +4732,7 @@
       <content>And he has made their evil designs come back on themselves, cutting them off in their sin; the Lord our God will put an end to them.</content>
     </verse>
   </chapter>
-  <chapter num="95" preferred_title="Psalms">
+  <chapter num="95">
     <verse num="1">
       <content>O come, let us make songs to the Lord; sending up glad voices to the Rock of our salvation.</content>
     </verse>
@@ -4767,7 +4767,7 @@
       <content>And I made an oath in my wrath, that they might not come into my place of rest.</content>
     </verse>
   </chapter>
-  <chapter num="96" preferred_title="Psalms">
+  <chapter num="96">
     <verse num="1">
       <content>O make a new song to the Lord; let all the earth make melody to the Lord.</content>
     </verse>
@@ -4808,7 +4808,7 @@
       <content>Before the Lord, for he is come; he is come to be the judge of the earth; the earth will be judged in righteousness, and the peoples with unchanging faith.</content>
     </verse>
   </chapter>
-  <chapter num="97" preferred_title="Psalms">
+  <chapter num="97">
     <verse num="1">
       <content>The Lord is King, let the earth have joy; let all the sea-lands be glad.</content>
     </verse>
@@ -4846,7 +4846,7 @@
       <content>Be glad in the Lord, you upright men; praising the memory of his holy name.</content>
     </verse>
   </chapter>
-  <chapter num="98" preferred_title="Psalms">
+  <chapter num="98">
     <verse num="1">
       <content>&lt;A Psalm.&gt; O make a new song to the Lord, because he has done works of wonder; with his right hand, and with his holy arm, he has overcome.</content>
     </verse>
@@ -4875,7 +4875,7 @@
       <content>Before the Lord, for he has come as judge of the earth; judging the world in righteousness, and giving true decisions for the peoples.</content>
     </verse>
   </chapter>
-  <chapter num="99" preferred_title="Psalms">
+  <chapter num="99">
     <verse num="1">
       <content>The Lord is King; let the peoples be in fear: his seat is on the winged ones; let the earth be moved.</content>
     </verse>
@@ -4904,7 +4904,7 @@
       <content>Give high honour to the Lord our God, worshipping with your faces turned to his holy hill; for the Lord our God is holy.</content>
     </verse>
   </chapter>
-  <chapter num="100" preferred_title="Psalms">
+  <chapter num="100">
     <verse num="1">
       <content>&lt;A Psalm of Praise.&gt; Make a glad sound to the Lord, all the earth.</content>
     </verse>
@@ -4921,7 +4921,7 @@
       <content>For the Lord is good, and his mercy is never-ending; his faith is unchanging through all generations.</content>
     </verse>
   </chapter>
-  <chapter num="101" preferred_title="Psalms">
+  <chapter num="101">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; I will make a song of mercy and righteousness; to you, O Lord, will I make melody.</content>
     </verse>
@@ -4947,7 +4947,7 @@
       <content>Morning by morning will I put to death all the sinners in the land, so that all evil-doers may be cut off from Jerusalem.</content>
     </verse>
   </chapter>
-  <chapter num="102" preferred_title="Psalms">
+  <chapter num="102">
     <verse num="1">
       <content>&lt;A Prayer of the man who is in trouble, when he is overcome, and puts his grief before the Lord.&gt; Give ear to my prayer, O Lord, and let my cry come to you.</content>
     </verse>
@@ -5033,7 +5033,7 @@
       <content>The children of your servants will have a safe resting-place, and their seed will be ever before you.</content>
     </verse>
   </chapter>
-  <chapter num="103" preferred_title="Psalms">
+  <chapter num="103">
     <verse num="1">
       <content>&lt;Of David.&gt; Give praise to the Lord, O my soul; let everything in me give praise to his holy name.</content>
     </verse>
@@ -5101,7 +5101,7 @@
       <content>Give praise to the Lord, all his works, in all places under his rule: give praise to the Lord, O my soul.</content>
     </verse>
   </chapter>
-  <chapter num="104" preferred_title="Psalms">
+  <chapter num="104">
     <verse num="1">
       <content>Give praise to the Lord, O my soul. O Lord my God, you are very great; you are robed with honour and power.</content>
     </verse>
@@ -5208,7 +5208,7 @@
       <content>Let sinners be cut off from the earth, and let all evil-doers come to an end. Give praise to the Lord, O my soul. Give praise to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="105" preferred_title="Psalms">
+  <chapter num="105">
     <verse num="1">
       <content>O give praise to the Lord; give honour to his name, talking of his doings among the peoples.</content>
     </verse>
@@ -5345,7 +5345,7 @@
       <content>So that they might keep his orders, and be true to his laws. Give praise to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="106" preferred_title="Psalms">
+  <chapter num="106">
     <verse num="1">
       <content>Let the Lord be praised. O give praise to the Lord, for he is good: for his mercy is unchanging for ever.</content>
     </verse>
@@ -5491,7 +5491,7 @@
       <content>Praise be to the Lord God of Israel for ever and for ever; and let all the people say, So be it. Give praise to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="107" preferred_title="Psalms">
+  <chapter num="107">
     <verse num="1">
       <content>O give praise to the Lord, for he is good: for his mercy is unchanging for ever.</content>
     </verse>
@@ -5622,7 +5622,7 @@
       <content>Let the wise give thought to these things, and see the mercies of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="108" preferred_title="Psalms">
+  <chapter num="108">
     <verse num="1">
       <content>&lt;A Song. A Psalm. Of David.&gt; O God, my heart is fixed; I will make songs and melody, even with my glory.</content>
     </verse>
@@ -5663,7 +5663,7 @@
       <content>With God we will do great things; for by him will our haters be crushed underfoot.</content>
     </verse>
   </chapter>
-  <chapter num="109" preferred_title="Psalms">
+  <chapter num="109">
     <verse num="1">
       <content>&lt;To the chief music-maker. Of David. A Psalm.&gt; God of my praise, let my prayer be answered;</content>
     </verse>
@@ -5758,7 +5758,7 @@
       <content>For he is ever at the right hand of the poor, to take him out of the hands of those who go after his soul.</content>
     </verse>
   </chapter>
-  <chapter num="110" preferred_title="Psalms">
+  <chapter num="110">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; The Lord said to my lord, Be seated at my right hand, till I put all those who are against you under your feet.</content>
     </verse>
@@ -5781,7 +5781,7 @@
       <content>He will take of the stream by the way; so his head will be lifted up.</content>
     </verse>
   </chapter>
-  <chapter num="111" preferred_title="Psalms">
+  <chapter num="111">
     <verse num="1">
       <content>Let the Lord be praised. I will give praise to the Lord with all my heart, among the upright, and in the meeting of the people.</content>
     </verse>
@@ -5813,7 +5813,7 @@
       <content>The fear of the Lord is the best part of wisdom: all those who keep his laws are wise: his praise is eternal.</content>
     </verse>
   </chapter>
-  <chapter num="112" preferred_title="Psalms">
+  <chapter num="112">
     <verse num="1">
       <content>Let the Lord be praised. Happy is the man who gives honour to the Lord, and has great delight in his laws.</content>
     </verse>
@@ -5845,7 +5845,7 @@
       <content>The sinner will see it with grief; he will be wasted away with envy; the desire of the evil-doers will come to nothing.</content>
     </verse>
   </chapter>
-  <chapter num="113" preferred_title="Psalms">
+  <chapter num="113">
     <verse num="1">
       <content>Let the Lord be praised. O you servants of the Lord, give praise to the name of the Lord.</content>
     </verse>
@@ -5874,7 +5874,7 @@
       <content>He gives the unfertile woman a family, making her a happy mother of children. Give praise to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="114" preferred_title="Psalms">
+  <chapter num="114">
     <verse num="1">
       <content>When Israel came out of Egypt, the children of Jacob from a people whose language was strange to them;</content>
     </verse>
@@ -5900,7 +5900,7 @@
       <content>Who made the rock into a water-spring, and the hard stone into a fountain.</content>
     </verse>
   </chapter>
-  <chapter num="115" preferred_title="Psalms">
+  <chapter num="115">
     <verse num="1">
       <content>Not to us, O Lord, not to us, but to your name let glory be given, because of your mercy and your unchanging faith.</content>
     </verse>
@@ -5956,7 +5956,7 @@
       <content>But we will give praise to the Lord now and for ever. Praise be to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="116" preferred_title="Psalms">
+  <chapter num="116">
     <verse num="1">
       <content>I have given my love to the Lord, because he has given ear to the voice of my cry and my prayer.</content>
     </verse>
@@ -6015,7 +6015,7 @@
       <content>In the Lord's house, even in Jerusalem. Praise be to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="117" preferred_title="Psalms">
+  <chapter num="117">
     <verse num="1">
       <content>Let all the nations give praise to the Lord: let all the people give him praise.</content>
     </verse>
@@ -6023,7 +6023,7 @@
       <content>For great is his mercy to us, and his faith is unchanging for ever. Praise be to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="118" preferred_title="Psalms">
+  <chapter num="118">
     <verse num="1">
       <content>O give praise to the Lord, for he is good: for his mercy is unchanging for ever.</content>
     </verse>
@@ -6112,7 +6112,7 @@
       <content>O give praise to the Lord, for he is good: for his mercy is unchanging for ever.</content>
     </verse>
   </chapter>
-  <chapter num="119" preferred_title="Psalms">
+  <chapter num="119">
     <verse num="1">
       <content>&lt;ALEPH&gt; Happy are they who are without sin in their ways, walking in the law of the Lord.</content>
     </verse>
@@ -6642,7 +6642,7 @@
       <content>I have gone out of the way like a wandering sheep; make search for your servant; for I keep your teachings ever in mind.</content>
     </verse>
   </chapter>
-  <chapter num="120" preferred_title="Psalms">
+  <chapter num="120">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; In my trouble my cry went up to the Lord, and he gave me an answer.</content>
     </verse>
@@ -6665,7 +6665,7 @@
       <content>I am for peace: but when I say so, they are for war.</content>
     </verse>
   </chapter>
-  <chapter num="121" preferred_title="Psalms">
+  <chapter num="121">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; My eyes are lifted up to the hills: O where will my help come from?</content>
     </verse>
@@ -6691,7 +6691,7 @@
       <content>The Lord will keep watch over your going out and your coming in, from this time and for ever.</content>
     </verse>
   </chapter>
-  <chapter num="122" preferred_title="Psalms">
+  <chapter num="122">
     <verse num="1">
       <content>&lt;A Song of the going up. Of David.&gt; I was glad because they said to me, We will go into the house of the Lord.</content>
     </verse>
@@ -6720,7 +6720,7 @@
       <content>Because of the house of the Lord our God, I will be working for your good.</content>
     </verse>
   </chapter>
-  <chapter num="123" preferred_title="Psalms">
+  <chapter num="123">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; To you my eyes are lifted up, even to you whose seat is in the heavens.</content>
     </verse>
@@ -6734,7 +6734,7 @@
       <content>For long enough have men of pride made sport of our soul.</content>
     </verse>
   </chapter>
-  <chapter num="124" preferred_title="Psalms">
+  <chapter num="124">
     <verse num="1">
       <content>&lt;A Song of the going up. Of David.&gt; If it had not been the Lord who was on our side (let Israel now say);</content>
     </verse>
@@ -6760,7 +6760,7 @@
       <content>Our help is in the name of the Lord, the maker of heaven and earth.</content>
     </verse>
   </chapter>
-  <chapter num="125" preferred_title="Psalms">
+  <chapter num="125">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; Those whose hope is in the Lord are like the mountain of Zion, which may not be moved, but keeps its place for ever.</content>
     </verse>
@@ -6777,7 +6777,7 @@
       <content>But as for such as are turned out of the straight way, the Lord will take them away with the workers of evil. Let peace be on Israel.</content>
     </verse>
   </chapter>
-  <chapter num="126" preferred_title="Psalms">
+  <chapter num="126">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; When the Lord made a change in Zion's fate, we were like men in a dream.</content>
     </verse>
@@ -6797,7 +6797,7 @@
       <content>Though a man may go out weeping, taking his vessel of seed with him; he will come again in joy, with the corded stems of grain in his arms.</content>
     </verse>
   </chapter>
-  <chapter num="127" preferred_title="Psalms">
+  <chapter num="127">
     <verse num="1">
       <content>&lt;A Song of the going up. Of Solomon.&gt; If the Lord is not helping the builders, then the building of a house is to no purpose: if the Lord does not keep the town, the watchman keeps his watch for nothing.</content>
     </verse>
@@ -6814,7 +6814,7 @@
       <content>Happy is the man who has a good store of them; he will not be put to shame, but his cause will be supported by them against his haters.</content>
     </verse>
   </chapter>
-  <chapter num="128" preferred_title="Psalms">
+  <chapter num="128">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; Happy is the worshipper of the Lord, who is walking in his ways.</content>
     </verse>
@@ -6834,7 +6834,7 @@
       <content>May you see your children's children. Peace be on Israel.</content>
     </verse>
   </chapter>
-  <chapter num="129" preferred_title="Psalms">
+  <chapter num="129">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; Great have been my troubles from the time when I was young (let Israel now say);</content>
     </verse>
@@ -6860,7 +6860,7 @@
       <content>And those who go by do not say, The blessing of the Lord be on you; we give you blessing in the name of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="130" preferred_title="Psalms">
+  <chapter num="130">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; Out of the deep have I sent up my cry to you, O Lord.</content>
     </verse>
@@ -6886,7 +6886,7 @@
       <content>And he will make Israel free from all his sins.</content>
     </verse>
   </chapter>
-  <chapter num="131" preferred_title="Psalms">
+  <chapter num="131">
     <verse num="1">
       <content>&lt;A Song of the going up. Of David.&gt; Lord, there is no pride in my heart and my eyes are not lifted up; and I have not taken part in great undertakings, or in things over-hard for me.</content>
     </verse>
@@ -6897,7 +6897,7 @@
       <content>O Israel, have hope in the Lord, from this time and for ever.</content>
     </verse>
   </chapter>
-  <chapter num="132" preferred_title="Psalms">
+  <chapter num="132">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; Lord, give thought to David, and to all his troubles;</content>
     </verse>
@@ -6953,7 +6953,7 @@
       <content>His haters will be clothed with shame; but I will make his crown shining.</content>
     </verse>
   </chapter>
-  <chapter num="133" preferred_title="Psalms">
+  <chapter num="133">
     <verse num="1">
       <content>&lt;A Song of the going up. Of David.&gt; See how good and how pleasing it is for brothers to be living together in harmony!</content>
     </verse>
@@ -6964,7 +6964,7 @@
       <content>Like the dew of Hermon, which comes down on the mountains of Zion: for there the Lord gave orders for the blessing, even life for ever.</content>
     </verse>
   </chapter>
-  <chapter num="134" preferred_title="Psalms">
+  <chapter num="134">
     <verse num="1">
       <content>&lt;A Song of the going up.&gt; Give praise to the Lord, all you servants of the Lord, who take your places in the house of the Lord by night.</content>
     </verse>
@@ -6975,7 +6975,7 @@
       <content>May the Lord, who made heaven and earth, send you blessing out of Zion,</content>
     </verse>
   </chapter>
-  <chapter num="135" preferred_title="Psalms">
+  <chapter num="135">
     <verse num="1">
       <content>Let the Lord be praised. O you servants of the Lord, give praise to the name of the Lord.</content>
     </verse>
@@ -7040,7 +7040,7 @@
       <content>Praise be to the Lord out of Zion, even to the Lord whose house is in Jerusalem, Let the Lord be praised.</content>
     </verse>
   </chapter>
-  <chapter num="136" preferred_title="Psalms">
+  <chapter num="136">
     <verse num="1">
       <content>O give praise to the Lord, for he is good: for his mercy is unchanging for ever.</content>
     </verse>
@@ -7120,7 +7120,7 @@
       <content>O give praise to the God of heaven: for his mercy is unchanging for ever.</content>
     </verse>
   </chapter>
-  <chapter num="137" preferred_title="Psalms">
+  <chapter num="137">
     <verse num="1">
       <content>By the rivers of Babylon we were seated, weeping at the memory of Zion,</content>
     </verse>
@@ -7149,7 +7149,7 @@
       <content>Happy is the man who takes your little ones, crushing them against the rocks.</content>
     </verse>
   </chapter>
-  <chapter num="138" preferred_title="Psalms">
+  <chapter num="138">
     <verse num="1">
       <content>&lt;Of David.&gt; I will give you praise with all my heart: I will make melody to you before the gods.</content>
     </verse>
@@ -7175,7 +7175,7 @@
       <content>The Lord will make all things complete for me: O Lord, your mercy is eternal; do not give up the works of your hands.</content>
     </verse>
   </chapter>
-  <chapter num="139" preferred_title="Psalms">
+  <chapter num="139">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; O Lord, you have knowledge of me, searching out all my secrets.</content>
     </verse>
@@ -7249,7 +7249,7 @@
       <content>See if there is any way of sorrow in me, and be my guide in the eternal way.</content>
     </verse>
   </chapter>
-  <chapter num="140" preferred_title="Psalms">
+  <chapter num="140">
     <verse num="1">
       <content>&lt;To the chief music-maker. A Psalm. Of David.&gt; O Lord, take me out of the power of the evil man; keep me safe from the violent man:</content>
     </verse>
@@ -7290,7 +7290,7 @@
       <content>Truly, the upright will give praise to your name: the holy will have a place in your house.</content>
     </verse>
   </chapter>
-  <chapter num="141" preferred_title="Psalms">
+  <chapter num="141">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; Lord, I have made my cry to you; come to me quickly; give ear to my voice, when it goes up to you.</content>
     </verse>
@@ -7322,7 +7322,7 @@
       <content>Let the sinners be taken in the nets which they themselves have put down, while I go free.</content>
     </verse>
   </chapter>
-  <chapter num="142" preferred_title="Psalms">
+  <chapter num="142">
     <verse num="1">
       <content>&lt;Maschil. Of David. A prayer when he was in the hole of the rock.&gt; The sound of my cry went up to the Lord; with my voice I made my prayer for grace to the Lord.</content>
     </verse>
@@ -7345,7 +7345,7 @@
       <content>Take my soul out of prison, so that I may give praise to your name: the upright will give praise because of me; for you have given me a full reward.</content>
     </verse>
   </chapter>
-  <chapter num="143" preferred_title="Psalms">
+  <chapter num="143">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; Let my prayer come to you, O Lord; give ear to my requests for your grace; keep faith with me, and give me an answer in your righteousness;</content>
     </verse>
@@ -7383,7 +7383,7 @@
       <content>And in your mercy put an end to my haters, and send destruction on all those who are against my soul; for I am your servant.</content>
     </verse>
   </chapter>
-  <chapter num="144" preferred_title="Psalms">
+  <chapter num="144">
     <verse num="1">
       <content>&lt;A Psalm. Of David.&gt; Praise be to the God of my strength, teaching my hands the use of the sword, and my fingers the art of fighting:</content>
     </verse>
@@ -7430,7 +7430,7 @@
       <content>Happy is the nation whose ways are so ordered: yes, happy is the nation whose God is the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="145" preferred_title="Psalms">
+  <chapter num="145">
     <verse num="1">
       <content>&lt;A Song of praise. Of David.&gt; Let me give glory to you, O God, my King; and blessing to your name for ever and ever.</content>
     </verse>
@@ -7495,7 +7495,7 @@
       <content>My mouth will give praise to the Lord; let all flesh be blessing his holy name for ever and ever.</content>
     </verse>
   </chapter>
-  <chapter num="146" preferred_title="Psalms">
+  <chapter num="146">
     <verse num="1">
       <content>Let the Lord be praised. Give praise to the Lord, O my soul.</content>
     </verse>
@@ -7527,7 +7527,7 @@
       <content>The Lord will be King for ever; your God, O Zion, will be King through all generations. Praise be to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="147" preferred_title="Psalms">
+  <chapter num="147">
     <verse num="1">
       <content>Give praise to the Lord; for it is good to make melody to our God; praise is pleasing and beautiful.</content>
     </verse>
@@ -7589,7 +7589,7 @@
       <content>He has not done these things for any other nation: and as for his laws, they have no knowledge of them. Let the Lord be praised.</content>
     </verse>
   </chapter>
-  <chapter num="148" preferred_title="Psalms">
+  <chapter num="148">
     <verse num="1">
       <content>Give praise to the Lord. Let the Lord be praised from the heavens: give him praise in the skies.</content>
     </verse>
@@ -7633,7 +7633,7 @@
       <content>He has put on high the horn of his people, for the praise of all his saints; even the children of Israel, a people which is near to him. Let the Lord be praised.</content>
     </verse>
   </chapter>
-  <chapter num="149" preferred_title="Psalms">
+  <chapter num="149">
     <verse num="1">
       <content>Let the Lord be praised. Make a new song to the Lord, let his praise be in the meeting of his saints.</content>
     </verse>
@@ -7662,7 +7662,7 @@
       <content>To give them the punishment which is in the holy writings: this honour is given to all his saints. Praise be to the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="150" preferred_title="Psalms">
+  <chapter num="150">
     <verse num="1">
       <content>Let the Lord be praised. Give praise to God in his holy place: give him praise in the heaven of his power.</content>
     </verse>

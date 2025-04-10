@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Titus">
+  <chapter num="1">
     <verse num="1">
       <content>Paul, a servant of God, and an Apostle of Jesus Christ, in agreement with the faith of the saints of God and the full knowledge of what is true in harmony with religion,</content>
     </verse>
@@ -49,7 +49,7 @@
       <content>They say that they have knowledge of God, while by their acts they are turning their backs on him; they are hated by all, hard-hearted, and judged to be without value for any good work.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Titus">
+  <chapter num="2">
     <verse num="1">
       <content>But let your words be in agreement with true and right teaching:</content>
     </verse>
@@ -96,7 +96,7 @@
       <content>On all these points give teaching and help, and make clear what is right with all authority. Let all men give you honour.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Titus">
+  <chapter num="3">
     <verse num="1">
       <content>Make clear to them that they are to put themselves under rulers and authorities, to do what they are ordered, to be ready for every good work,</content>
     </verse>

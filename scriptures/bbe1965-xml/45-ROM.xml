@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Romans">
+  <chapter num="1">
     <verse num="1">
       <content>Paul, a servant of Jesus Christ, an Apostle by the selection of God, given authority as a preacher of the good news,</content>
     </verse>
@@ -97,7 +97,7 @@
       <content>Who, though they have knowledge of the law of God, that the fate of those who do these things is death, not only go on doing these things themselves, but give approval to those who do them.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Romans">
+  <chapter num="2">
     <verse num="1">
       <content>So you have no reason, whoever you are, for judging: for in judging another you are judging yourself, for you do the same things.</content>
     </verse>
@@ -186,7 +186,7 @@
       <content>But he is a Jew who is a secret one, whose circumcision is of the heart, in the spirit and not in the letter; whose praise is not from men, but from God.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Romans">
+  <chapter num="3">
     <verse num="1">
       <content>How then is the Jew better off? or what profit is there in circumcision?</content>
     </verse>
@@ -281,7 +281,7 @@
       <content>Do we, then, through faith make the law of no effect? in no way: but we make it clear that the law is important.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Romans">
+  <chapter num="4">
     <verse num="1">
       <content>What, then, may we say that Abraham, our father after the flesh, has got?</content>
     </verse>
@@ -358,7 +358,7 @@
       <content>Who was put to death for our evil-doing, and came to life again so that we might have righteousness.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="Romans">
+  <chapter num="5">
     <verse num="1">
       <content>For which reason, because we have righteousness through faith, let us be at peace with God through our Lord Jesus Christ;</content>
     </verse>
@@ -423,7 +423,7 @@
       <content>That, as sin had power in death, so grace might have power through righteousness to eternal life through Jesus Christ our Lord.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="Romans">
+  <chapter num="6">
     <verse num="1">
       <content>What may we say, then? are we to go on in sin so that there may be more grace?</content>
     </verse>
@@ -494,7 +494,7 @@
       <content>For the reward of sin is death; but what God freely gives is eternal life in Jesus Christ our Lord.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="Romans">
+  <chapter num="7">
     <verse num="1">
       <content>Is it not clear, my brothers (I am using an argument to those who have knowledge of the law), that the law has power over a man as long as he is living?</content>
     </verse>
@@ -571,7 +571,7 @@
       <content>I give praise to God through Jesus Christ our Lord. So with my mind I am a servant to the law of God, but with my flesh to the law of sin.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="Romans">
+  <chapter num="8">
     <verse num="1">
       <content>For this cause those who are in Christ Jesus will not be judged as sinners.</content>
     </verse>
@@ -690,7 +690,7 @@
       <content>Or things on high, or things under the earth, or anything which is made, will be able to come between us and the love of God which is in Christ Jesus our Lord.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="Romans">
+  <chapter num="9">
     <verse num="1">
       <content>I say what is true in Christ, and not what is false, my mind giving witness with me in the Holy Spirit,</content>
     </verse>
@@ -791,7 +791,7 @@
       <content>As it is said, See, I am putting in Zion a stone causing a fall, and a rock in the way: but he who has faith in him will not be put to shame.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="Romans">
+  <chapter num="10">
     <verse num="1">
       <content>Brothers, my heart's desire and my prayer to God for them is, that they may get salvation.</content>
     </verse>
@@ -856,7 +856,7 @@
       <content>But about Israel he says; All the day my hands have been stretched out to a people whose hearts were turned away, and who put themselves against my word.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="Romans">
+  <chapter num="11">
     <verse num="1">
       <content>So I say, Has God put his people on one side? Let there be no such thought. For I am of Israel, of the seed of Abraham, of the tribe of Benjamin.</content>
     </verse>
@@ -966,7 +966,7 @@
       <content>For of him, and through him, and to him, are all things. To him be the glory for ever. So be it.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="Romans">
+  <chapter num="12">
     <verse num="1">
       <content>For this reason I make request to you, brothers, by the mercies of God, that you will give your bodies as a living offering, holy, pleasing to God, which is the worship it is right for you to give him.</content>
     </verse>
@@ -1031,7 +1031,7 @@
       <content>Do not let evil overcome you, but overcome evil by good.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="Romans">
+  <chapter num="13">
     <verse num="1">
       <content>Let everyone put himself under the authority of the higher powers, because there is no power which is not of God, and all powers are ordered by God.</content>
     </verse>
@@ -1075,7 +1075,7 @@
       <content>But put on the Lord Jesus Christ, and do not give thought to the flesh to do its desires.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="Romans">
+  <chapter num="14">
     <verse num="1">
       <content>Do not put on one side him who is feeble in faith, and do not put him in doubt by your reasonings.</content>
     </verse>
@@ -1146,7 +1146,7 @@
       <content>But he who is in doubt is judged if he takes food, because he does it not in faith; and whatever is not of faith is sin.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="Romans">
+  <chapter num="15">
     <verse num="1">
       <content>We who are strong have to be a support to the feeble, and not give pleasure to ourselves.</content>
     </verse>
@@ -1247,7 +1247,7 @@
       <content>Now may the God of peace be with you all. So be it.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="Romans">
+  <chapter num="16">
     <verse num="1">
       <content>It is my desire to say a good word for Phoebe, who is a servant of the church in Cenchreae:</content>
     </verse>

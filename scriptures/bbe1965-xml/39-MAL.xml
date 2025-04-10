@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Malachi">
+  <chapter num="1">
     <verse num="1">
       <content>The word of the Lord to Israel by Malachi.</content>
     </verse>
@@ -43,7 +43,7 @@
       <content>A curse on the false man who has a male in his flock, and takes his oath, and gives to the Lord a damaged thing: for I am a great King, says the Lord of armies, and my name is to be feared among the Gentiles.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Malachi">
+  <chapter num="2">
     <verse num="1">
       <content>And now, O you priests, this order is for you.</content>
     </verse>
@@ -96,7 +96,7 @@
       <content>You have made the Lord tired with your words. And still you say, How have we made him tired? By your saying, Everyone who does evil is good in the eyes of the Lord, and he has delight in them; or, Where is God the judge?</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Malachi">
+  <chapter num="3">
     <verse num="1">
       <content>See, I am sending my servant, and he will make ready the way before me; and the Lord, whom you are looking for, will suddenly come to his Temple; and the angel of the agreement, in whom you have delight, see, he is coming, says the Lord of armies.</content>
     </verse>
@@ -152,7 +152,7 @@
       <content>Then you will again see how the upright man is different from the sinner, and the servant of God from him who is not.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="Malachi">
+  <chapter num="4">
     <verse num="1">
       <content>For see, the day is coming, it is burning like an oven; all the men of pride and all who do evil will be dry stems of grass: and in the day which is coming they will be burned up, says the Lord of armies, till they have not a root or a branch.</content>
     </verse>

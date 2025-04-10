@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="2 Peter">
+  <chapter num="1">
     <verse num="1">
       <content>Simon Peter, a servant and Apostle of Jesus Christ, to those who with us have a part in the same holy faith in the righteousness of our God and Saviour Jesus Christ:</content>
     </verse>
@@ -64,7 +64,7 @@
       <content>For these words did not ever come through the impulse of men: but the prophets had them from God, being moved by the Holy Spirit.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="2 Peter">
+  <chapter num="2">
     <verse num="1">
       <content>But there were false prophets among the people, as there will be false teachers among you, who will secretly put forward wrong teachings for your destruction, even turning away from the Lord who gave himself for them; whose destruction will come quickly, and they themselves will be the cause of it.</content>
     </verse>
@@ -132,7 +132,7 @@
       <content>They are an example of that true saying, The dog has gone back to the food it had put out, and the pig which had been washed to its rolling in the dirty earth.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="2 Peter">
+  <chapter num="3">
     <verse num="1">
       <content>My loved ones, this is now my second letter to you, and in this as in the first, I am attempting to keep your true minds awake;</content>
     </verse>

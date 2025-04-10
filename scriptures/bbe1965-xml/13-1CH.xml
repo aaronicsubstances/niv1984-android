@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="1 Chronicles">
+  <chapter num="1">
     <verse num="1">
       <content>Adam, Seth, Enosh;</content>
     </verse>
@@ -163,7 +163,7 @@
       <content>The chief of Magdiel, the chief of Iram. These are the chiefs of Edom.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="1 Chronicles">
+  <chapter num="2">
     <verse num="1">
       <content>These are the sons of Israel: Reuben, Simeon, Levi and Judah, Issachar and Zebulun;</content>
     </verse>
@@ -330,7 +330,7 @@
       <content>And the families of scribes who were living at Jabez: the Tirathites, the Shimeathites, the Sucathites. These are the Kenites, the offspring of Hammath, the father of the family of Rechab.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="1 Chronicles">
+  <chapter num="3">
     <verse num="1">
       <content>Now these were David's sons, whose birth took place in Hebron: the oldest Amnon, by Ahinoam of Jezreel; the second Daniel, by Abigail the Carmelite woman;</content>
     </verse>
@@ -404,7 +404,7 @@
       <content>And the sons of Elioenai: Hodaviah and Eliashib and Pelaiah and Akkub and Johanan and Delaiah and Anani, seven.</content>
     </verse>
   </chapter>
-  <chapter num="4" preferred_title="1 Chronicles">
+  <chapter num="4">
     <verse num="1">
       <content>The sons of Judah: Perez, Hezron and Carmi and Hur and Shobal.</content>
     </verse>
@@ -535,7 +535,7 @@
       <content>And they put to death the rest of the Amalekites who had got away safely, and made it their living-place to this day.</content>
     </verse>
   </chapter>
-  <chapter num="5" preferred_title="1 Chronicles">
+  <chapter num="5">
     <verse num="1">
       <content>And the sons of Reuben, the oldest son of Israel, (for he was the oldest son, but, because he made his father's bride-bed unclean, his birthright was given to the sons of Joseph, the son of Israel; but he is not to be given the place of the oldest.</content>
     </verse>
@@ -615,7 +615,7 @@
       <content>And the God of Israel put an impulse into the heart of Pul, king of Assyria, and of Tiglath-pileser, king of Assyria, who took them away as prisoners, all the Reubenites and the Gadites and the half-tribe of Manasseh, to Halah and Habor and Hara and to the river of Gozan, to this day.</content>
     </verse>
   </chapter>
-  <chapter num="6" preferred_title="1 Chronicles">
+  <chapter num="6">
     <verse num="1">
       <content>The sons of Levi: Gershon, Kohath, and Merari.</content>
     </verse>
@@ -860,7 +860,7 @@
       <content>And Heshbon with its outskirts, and Jazer with its outskirts.</content>
     </verse>
   </chapter>
-  <chapter num="7" preferred_title="1 Chronicles">
+  <chapter num="7">
     <verse num="1">
       <content>And of the sons of Issachar: Tola and Puah, Jashub and Shimron, four.</content>
     </verse>
@@ -982,7 +982,7 @@
       <content>All these were the children of Asher, heads of their families, specially strong men of war, chiefs of the rulers. They were recorded in the army for war, twenty-six thousand men in number.</content>
     </verse>
   </chapter>
-  <chapter num="8" preferred_title="1 Chronicles">
+  <chapter num="8">
     <verse num="1">
       <content>And Benjamin was the father of Bela his oldest son, Ashbel the second, and Aharah the third,</content>
     </verse>
@@ -1104,7 +1104,7 @@
       <content>And the sons of Ulam were men of war, bowmen, and had a great number of sons and sons' sons, a hundred and fifty. All these were the sons of Benjamin.</content>
     </verse>
   </chapter>
-  <chapter num="9" preferred_title="1 Chronicles">
+  <chapter num="9">
     <verse num="1">
       <content>So all Israel was listed by their families; and, truly, they are recorded in the book of the kings of Israel. And Judah was taken away as prisoners to Babylon because of their sin.</content>
     </verse>
@@ -1238,7 +1238,7 @@
       <content>And Azel had five sons, whose names are: Azrikam, his oldest son, and Ishmael and Sheariah and Obadiah and Hanan: these were the sons of Azel.</content>
     </verse>
   </chapter>
-  <chapter num="10" preferred_title="1 Chronicles">
+  <chapter num="10">
     <verse num="1">
       <content>Now the Philistines were fighting against Israel; and the men of Israel went in flight before the Philistines, falling down wounded in Mount Gilboa.</content>
     </verse>
@@ -1282,7 +1282,7 @@
       <content>And not to the Lord: for this reason, he put him to death and gave the kingdom to David, the son of Jesse.</content>
     </verse>
   </chapter>
-  <chapter num="11" preferred_title="1 Chronicles">
+  <chapter num="11">
     <verse num="1">
       <content>Then all Israel came together to David at Hebron, and said, Truly, we are your bone and your flesh.</content>
     </verse>
@@ -1425,7 +1425,7 @@
       <content>Eliel and Obed, and Jaasiel the Mezobaite.</content>
     </verse>
   </chapter>
-  <chapter num="12" preferred_title="1 Chronicles">
+  <chapter num="12">
     <verse num="1">
       <content>Now these are the men who came to David at Ziklag, while he was still shut up, because of Saul, the son of Kish; they were among the strong men, his helpers in war.</content>
     </verse>
@@ -1547,7 +1547,7 @@
       <content>And those who were near, as far as Issachar and Zebulun and Naphtali, came with food on asses and camels and mules and oxen, with meal for food and cakes of figs and masses of grapes, and wine and oil and oxen and sheep in great numbers, for there was joy in Israel.</content>
     </verse>
   </chapter>
-  <chapter num="13" preferred_title="1 Chronicles">
+  <chapter num="13">
     <verse num="1">
       <content>Then David had discussions with the captains of thousands and the captains of hundreds and with every chief.</content>
     </verse>
@@ -1591,7 +1591,7 @@
       <content>And the ark of God was in the house of Obed-edom for three months; and the Lord sent a blessing on the house of Obed-edom and on all he had.</content>
     </verse>
   </chapter>
-  <chapter num="14" preferred_title="1 Chronicles">
+  <chapter num="14">
     <verse num="1">
       <content>And Hiram, king of Tyre, sent men to David with cedar-trees, and stoneworkers and woodworkers for the building of his house.</content>
     </verse>
@@ -1644,7 +1644,7 @@
       <content>And David's name was honoured in all lands; and the Lord put the fear of him on all nations.</content>
     </verse>
   </chapter>
-  <chapter num="15" preferred_title="1 Chronicles">
+  <chapter num="15">
     <verse num="1">
       <content>And David made houses for himself in the town of David; and he got ready a place for the ark of God, and put up a tent for it.</content>
     </verse>
@@ -1733,7 +1733,7 @@
       <content>And when the ark of the agreement of the Lord came into the town of David, Michal, the daughter of Saul, looking out of the window, saw King David dancing and playing; and to her mind he seemed foolish.</content>
     </verse>
   </chapter>
-  <chapter num="16" preferred_title="1 Chronicles">
+  <chapter num="16">
     <verse num="1">
       <content>Then they took in the ark of God and put it inside the tent which David had put up for it; and they made offerings, burned offerings and peace-offerings before God.</content>
     </verse>
@@ -1864,7 +1864,7 @@
       <content>And all the people went away, every man to his house; and David went back to give a blessing to his family.</content>
     </verse>
   </chapter>
-  <chapter num="17" preferred_title="1 Chronicles">
+  <chapter num="17">
     <verse num="1">
       <content>Now when David was living in his house, he said to Nathan the prophet, See, I am living in a house of cedar-wood, but the ark of the Lord's agreement is under the curtains of a tent.</content>
     </verse>
@@ -1947,7 +1947,7 @@
       <content>And now you have been pleased to give your blessing to the family of your servant, so that it may go on for ever before you; you, O Lord, have given your blessing, and a blessing will be on it for ever.</content>
     </verse>
   </chapter>
-  <chapter num="18" preferred_title="1 Chronicles">
+  <chapter num="18">
     <verse num="1">
       <content>And it came about after this that David made an attack on the Philistines and overcame them, and took Gath with its daughter-towns out of the hands of the Philistines.</content>
     </verse>
@@ -2000,7 +2000,7 @@
       <content>And Benaiah, the son of Jehoiada, was over the Cherethites and the Pelethites; and the sons of David were chief of those whose places were at the king's side.</content>
     </verse>
   </chapter>
-  <chapter num="19" preferred_title="1 Chronicles">
+  <chapter num="19">
     <verse num="1">
       <content>Now it came about after this that death came to Nahash, the king of the children of Ammon, and his son became king in his place.</content>
     </verse>
@@ -2059,7 +2059,7 @@
       <content>And when the servants of Hadadezer saw that they were overcome by Israel, they made peace with David and became his servants: and the Aramaeans would give no more help to the children of Ammon.</content>
     </verse>
   </chapter>
-  <chapter num="20" preferred_title="1 Chronicles">
+  <chapter num="20">
     <verse num="1">
       <content>Now in the spring, at the time when kings go out to war, Joab went out at the head of the armed forces and made waste all the land of the Ammonites and put his men in position before Rabbah, shutting it in. But David was still at Jerusalem. And Joab took Rabbah and made it waste.</content>
     </verse>
@@ -2085,7 +2085,7 @@
       <content>These were of the offspring of the Rephaim in Gath; they came to their death by the hands of David and his servants.</content>
     </verse>
   </chapter>
-  <chapter num="21" preferred_title="1 Chronicles">
+  <chapter num="21">
     <verse num="1">
       <content>Now Satan, designing evil against Israel, put into David's mind the impulse to take the number of Israel.</content>
     </verse>
@@ -2177,7 +2177,7 @@
       <content>But David was not able to go before it to get directions from the Lord, so great was his fear of the sword of the angel of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="22" preferred_title="1 Chronicles">
+  <chapter num="22">
     <verse num="1">
       <content>Then David said, This is the house of the Lord God, and this is the altar for Israel's burned offerings.</content>
     </verse>
@@ -2236,7 +2236,7 @@
       <content>Now give your heart and soul to the worship of the Lord your God; and get to work on the building of the holy place of the Lord God, so that you may put the ark of the Lord's agreement and the holy vessels of God in the house which is to be made for the name of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="23" preferred_title="1 Chronicles">
+  <chapter num="23">
     <verse num="1">
       <content>Now David was old and full of days; and he made his son Solomon king over Israel.</content>
     </verse>
@@ -2334,7 +2334,7 @@
       <content>And they had the care of the Tent of meeting and the holy place, under the direction of the sons of Aaron their brothers, for the work of the house of the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="24" preferred_title="1 Chronicles">
+  <chapter num="24">
     <verse num="1">
       <content>Now the divisions into which the sons of Aaron were grouped were these: the sons of Aaron, Nadab and Abihu, Eleazar and Ithamar.</content>
     </verse>
@@ -2429,7 +2429,7 @@
       <content>Selection was made of these in the same way as of their brothers the sons of Aaron, David the king being present, with Zadok, and Ahimelech, and the heads of families of the priests and of the Levites; the families of the chief in the same way as those of his younger brother.</content>
     </verse>
   </chapter>
-  <chapter num="25" preferred_title="1 Chronicles">
+  <chapter num="25">
     <verse num="1">
       <content>Further, David and the chiefs of the servants of the holy place made selection of certain of the sons of Asaph and of Heman and of Jeduthun for the work of prophets, to make melody with corded instruments and brass; and the number of the men for the work they had to do was:</content>
     </verse>
@@ -2524,7 +2524,7 @@
       <content>The twenty-fourth Romamti-ezer, with his sons and his brothers, twelve.</content>
     </verse>
   </chapter>
-  <chapter num="26" preferred_title="1 Chronicles">
+  <chapter num="26">
     <verse num="1">
       <content>For the divisions of the door-keepers: of the Korahites, Meshelemiah, the son of Kore, of the sons of Ebiasaph.</content>
     </verse>
@@ -2622,7 +2622,7 @@
       <content>And his brothers were two thousand, seven hundred able men, heads of families, whom King David made overseers over the Reubenites and the Gadites and the half-tribe of Manasseh, in everything to do with God, and for the king's business.</content>
     </verse>
   </chapter>
-  <chapter num="27" preferred_title="1 Chronicles">
+  <chapter num="27">
     <verse num="1">
       <content>Now the number of the children of Israel, that is, the heads of families, and the captains of thousands and of hundreds, and the men in authority who were servants of the king in anything to do with the divisions which came in and went out month by month through all the months of the year, in every division were twenty-four thousand.</content>
     </verse>
@@ -2726,7 +2726,7 @@
       <content>After Ahithophel was Jehoiada, the son of Benaiah, and Abiathar; and the captain of the king's army was Joab.</content>
     </verse>
   </chapter>
-  <chapter num="28" preferred_title="1 Chronicles">
+  <chapter num="28">
     <verse num="1">
       <content>And David got together at Jerusalem all the rulers of Israel, the chiefs of the tribes and the captains of the divisions waiting on the king in turn, and the captains of thousands and the captains of hundreds and the controllers of all the goods and property of the king and his sons, with the unsexed servants and the great men of war.</content>
     </verse>
@@ -2791,7 +2791,7 @@
       <content>And see, there are the divisions of the priests and Levites for all the work of the house of God; and every trained and expert workman will be ready to do for you whatever is needed; and the captains and the people will be under your orders in everything.</content>
     </verse>
   </chapter>
-  <chapter num="29" preferred_title="1 Chronicles">
+  <chapter num="29">
     <verse num="1">
       <content>And David the king said to all the people, Solomon my son, the only one who has been marked out by God, is still young and untested, and the work is great, for this great house is not for man, but for the Lord God.</content>
     </verse>

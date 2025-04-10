@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Habakkuk">
+  <chapter num="1">
     <verse num="1">
       <content>The word which Habakkuk the prophet saw.</content>
     </verse>
@@ -52,7 +52,7 @@
       <content>For this cause his net is ever open, and there is no end to his destruction of the nations.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Habakkuk">
+  <chapter num="2">
     <verse num="1">
       <content>I will take my position and be on watch, placing myself on my tower, looking out to see what he will say to me, and what answer he will give to my protest.</content>
     </verse>
@@ -114,7 +114,7 @@
       <content>But the Lord is in his holy Temple: let all the earth be quiet before him.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Habakkuk">
+  <chapter num="3">
     <verse num="1">
       <content>A prayer of Habakkuk the prophet, put to Shigionoth.</content>
     </verse>

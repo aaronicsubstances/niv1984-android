@@ -1,5 +1,5 @@
 <book>
-  <chapter num="1" preferred_title="Joel">
+  <chapter num="1">
     <verse num="1">
       <content>The word of the Lord which came to Joel, the son of Pethuel.</content>
     </verse>
@@ -61,7 +61,7 @@
       <content>The beasts of the field are turning to you with desire: for the water-streams are dry and fire has put an end to the grass-lands of the waste.</content>
     </verse>
   </chapter>
-  <chapter num="2" preferred_title="Joel">
+  <chapter num="2">
     <verse num="1">
       <content>Let the horn be sounded in Zion, and a war-cry in my holy mountain; let all the people of the land be troubled: for the day of the Lord is coming;</content>
     </verse>
@@ -159,7 +159,7 @@
       <content>And it will be that whoever makes his prayer to the name of the Lord will be kept safe: for in Mount Zion and in Jerusalem some will be kept safe, as the Lord has said, and will be among the small band marked out by the Lord.</content>
     </verse>
   </chapter>
-  <chapter num="3" preferred_title="Joel">
+  <chapter num="3">
     <verse num="1">
       <content>For in those days and in that time, when I let the fate of Judah and Jerusalem be changed,</content>
     </verse>

@@ -16,6 +16,7 @@ public class SharedPrefsManager {
     public static final int BOOK_MODE_WITH_DRB = 2;
     public static final int BOOK_MODE_WITH_GNT = 3;
     public static final int BOOK_MODE_WITH_BBE = 4;
+    public static final int BOOK_MODE_WITH_THOMSON = 5;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
 

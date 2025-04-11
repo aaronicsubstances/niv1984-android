@@ -102,6 +102,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/label_spacing" />
 
+            <RadioButton
+                android:id="@+id/withThomson"
+                android:text= "@string/withThomson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/label_spacing" />
+
         </RadioGroup>
     </HorizontalScrollView>
 </LinearLayout>

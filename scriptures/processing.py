@@ -227,3 +227,4 @@ if __name__ == '__main__':
     main("cpdv", "cpdv-xml")
     main("drb1899", "drb1899-xml")
     main("bbe1965", "bbe1965-xml")
+    main("thomson1808", "thomson1808-xml")

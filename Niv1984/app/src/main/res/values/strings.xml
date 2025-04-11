@@ -114,6 +114,7 @@
     <string name="withGnt">+GNT</string>
     <string name="withDrb">+DRB</string>
     <string name="withBbe">+BBE</string>
+    <string name="withThomson">+THOMSON</string>
     <string name="cpdvOnly">CPDV</string>
 
     <!-- Preference Titles -->
@@ -122,12 +123,14 @@
     <string name="shared_pref_keep_screen_on">keep_screen_on</string>
     <string name="shared_pref_night_mode">night_mode</string>
     <string name="shared_pref_comment_edit_enabled">comment_edit_enabled</string>
+    <string name="shared_pref_all_exclusions">all_exclusions</string>
 
     <string name="pref_screen_title_keep_screen_on">Keep Screen On</string>
     <string name="pref_screen_title_zoom">Text Size</string>
     <string name="pref_screen_title_night_mode">Night Mode</string>
     <string name="pref_screen_summary_keep_screen_on">Screen will still be turned off after 5 minutes of inactivity</string>
     <string name="pref_screen_title_comment_edit_enabled">Enable editing of comments</string>
+    <string name="pref_screen_title_all_exclusion">Prefixes of Versions to Exclude from Parallel Display (CSV)</string>
     <string name="comments_sending_start">Data to be sent as attachment now being created. Please wait...</string>
     <string name="action_send_comments">Export Data</string>
     <string name="allVersions">All-Excl</string>

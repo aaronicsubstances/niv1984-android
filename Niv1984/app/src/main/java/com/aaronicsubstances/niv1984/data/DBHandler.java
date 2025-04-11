@@ -90,8 +90,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void updateComment(String bcode, String key, String value) {
-        LoggerFactory.getLogger(getClass()).info("update comment: {} {} {}",
-                bcode, key, value);
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

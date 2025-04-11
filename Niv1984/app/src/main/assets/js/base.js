@@ -212,7 +212,7 @@ function insertComments(bcode, booktextEl, sortedBookmarks,
             $("button.cancel", newEl).removeClass("hidden");
             $("button.update", newEl).removeClass("hidden");
 
-            $("textarea", newEl).text(readonlyEl.text());
+            $("textarea", newEl).val(readonlyEl.text());
             $("textarea", newEl).removeClass("hidden");
             $("textarea", newEl).focus();
         });
@@ -220,6 +220,7 @@ function insertComments(bcode, booktextEl, sortedBookmarks,
             $("button.add", newEl).removeClass("hidden");
             $("button.cancel", newEl).addClass("hidden");
             $("button.update", newEl).addClass("hidden");
+            $("textarea", newEl).val(readonlyEl.text());
             $("textarea", newEl).addClass("hidden");
             if (readonlyEl.text()) {
                 readonlyEl.removeClass("hidden");

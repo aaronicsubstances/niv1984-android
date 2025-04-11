@@ -1,69 +1,82 @@
 DEFAULT_VERSION = "cpdv"
 
 $(function() {
-    var bcode = parseBookCodeFromUrl();
-    var firstBookTextEl = $(".booktext")[0];
-    var additionalVersion = getQueryVariable("add");
-    if (!additionalVersion) {
-        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, window,
+    const bcode = parseBookCodeFromUrl();
+    const firstBookTextEl = $(".booktext");
+    let addQuery = getQueryVariable("add");
+    const additionalVersions = [];
+    if (addQuery) {
+        const excludedVersions = getQueryVariable("allExcl").split("").map(function(v) {
+            return v.toLowerCase();
+        });
+        for (const candidate of addQuery.split(",")) {
+            if (!excludedVersions.some(function(v) { return candidate.startsWith(v); })) {
+                additionalVersions.push(candidate);
+            }
+        }
+    }
+    if (!additionalVersions.length) {
+        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl[0], window,
             fireOnPageLoadCompleted);
         return;
     }
-    if (additionalVersion === "gnt1992" || additionalVersion === "bbe1965") {
-        if (bcode === "ESG") {
-            bcode = "EST";
+    let doneCbCallCnt = 0;
+    const doneCb = function() {
+        doneCbCallCnt++;
+        if (doneCbCallCnt === additionalVersions.length) {
+            $("#wrapper").css({ display: "flex", gap: "0.5rem" });
+            $(".booktext").css({
+                height: "100vh",
+                overflowY: "scroll",
+                flex: "1",
+            });
+            caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, firstBookTextEl[0],
+                fireOnPageLoadCompleted);
         }
-        else if (bcode === "DAG") {
-             bcode = "DAN";
-        }
-    }
-    var urlToLoad = `/${additionalVersion}/${bcode}.html`;
-    $('<div id="add" class="booktext"></div>').insertAfter(".booktext");
-    var secondBookTextEl = document.getElementById("add");
-    $("#add").load(urlToLoad + ' .booktext', function(responseTxt, statusTxt, xhr) {
-        var doneCbCallCnt = 0;
-        var doneCb = undefined;
-        if (statusTxt === "success") {
-            $('#add .booktext').removeClass('booktext');
-            doneCb = function() {
-                doneCbCallCnt++;
-                if (doneCbCallCnt > 1) {
-                    fireOnPageLoadCompleted();
-                }
-            };
-        }
-        else {
-            var errMsg = `${xhr.status} ${xhr.statusText}`;
-            if (errMsg === "0 error") {
-                errMsg = "NOT AVAILABLE";
+    };
+    for (const additionalVersion of additionalVersions) {
+        if (additionalVersion === "gnt1992" || additionalVersion === "bbe1965") {
+            if (bcode === "ESG") {
+                bcode = "EST";
             }
-            $("#add").html(`<h2>${errMsg}</h2>`);
+            else if (bcode === "DAG") {
+                 bcode = "DAN";
+            }
         }
-        $("#wrapper").css({ display: "flex" });
-        $(".booktext").css({
-            height: "100vh",
-            overflowY: "scroll",
-            width: "50%",
-        });
-        caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, firstBookTextEl,
-            doneCb ? doneCb : fireOnPageLoadCompleted);
-        if (doneCb) {
-            caterForScrolling(bcode, additionalVersion, secondBookTextEl, secondBookTextEl,
-                doneCb);
-        }
-     });
+        const urlToLoad = `/${additionalVersion}/${bcode}.html`;
+        const nextBookTextEl = $('<div class="booktext"></div>');
+        nextBookTextEl.insertAfter($(".booktext").last());
+        nextBookTextEl.load(urlToLoad + ' .booktext', function(responseTxt, statusTxt, xhr) {
+            if (statusTxt === "success") {
+                $('.booktext', nextBookTextEl).removeClass('booktext');
+                caterForScrolling(bcode, additionalVersion, nextBookTextEl, nextBookTextEl[0],
+                    doneCb);
+            }
+            else {
+                var errMsg = `${xhr.status} ${xhr.statusText}`;
+                if (errMsg === "0 error") {
+                    errMsg = "NOT AVAILABLE";
+                }
+                nextBookTextEl.html(`<h2>${errMsg}</h2>`);
+                doneCb()
+            }
+         });
+     }
 });
 
 function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     var encodedBookmarks = JSON.parse($("span.bookmarks", $(booktextEl)).text());
     var sortedBookmarks = identifyAndSortInternalBookmarks(encodedBookmarks);
     if (version === DEFAULT_VERSION) {
-        $.get('/footnote-status', { bcode: bcode }, function(data) {
-            var ignoredFootnotes = data.hrefs.split(",");
-            modifyFootnotes(bcode, booktextEl, sortedBookmarks,
-                ignoredFootnotes, data.editEnabled);
+        $.get('/comments', { bcode: bcode }, function(data) {
+            var initialComments = new Map();
+            for (const item of data.items) {
+                initialComments.set(item[0], item[1]);
+            }
+            insertComments(bcode, booktextEl, sortedBookmarks,
+                initialComments, data.editEnabled);
         }).fail(function(jqXHR, textStatus, errorThrown) {
-            console.log("Failed to load footnote states: errorThrown: ", errorThrown,
+            console.log("Failed to load comments: errorThrown: ", errorThrown,
                 "; textStatus: ", textStatus);
         });
     }
@@ -153,62 +166,97 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     check();
 }
 
-function modifyFootnotes(bcode, booktextEl, sortedBookmarks,
-        ignoredFootnotes, editEnabled) {
-    var regex = new RegExp(`${DEFAULT_VERSION}-bookmark-` + '\\d+' + "-n");
+function insertComments(bcode, booktextEl, sortedBookmarks,
+                            initialComments, editEnabled) {
+    const verseRegex = new RegExp(`${DEFAULT_VERSION}-bookmark-` + '\\d+-(\\d+)-(\\d+)');
+    const footnotesRegex = new RegExp(`${DEFAULT_VERSION}-bookmark-` + '(\\d+)-n');
     for (bookmark of sortedBookmarks) {
-        if (!regex.test(bookmark)) {
+        let m = verseRegex.exec(bookmark);
+        if (m === null) {
+            m = footnotesRegex.exec(bookmark);
+        }
+        if (m === null) {
             continue;
         }
-        $("#" + bookmark + " > div").each(function() {
-            var divEl = this;
-            var firstAnchor = $("a", divEl)[0];
-            var anchorHrefShort = firstAnchor.href.substring(
-                firstAnchor.href.lastIndexOf("#"));
+        let cnum = m[1], vnum = 'n';
+        if (m.length > 2) {
+            vnum = m[2];
+        }
+        const commentId = `${cnum}:${vnum}`; // use of hyphen caused it to be interpreted as date in CSV export
+        if (!initialComments.has(commentId)) {
+            // add demo data
+            //initialComments.set(commentId, "n/a");
+        }
 
-            // set initial value
-            if (ignoredFootnotes.includes(anchorHrefShort)) {
-                $(anchorHrefShort).parent().addClass("ignored-footnote");
-                $(divEl).addClass("ignored-footnote");
+        const readonlyEl = $(`<div class="comment noEdit"></div>`);
+        if (initialComments.get(commentId)) {
+            readonlyEl.text(initialComments.get(commentId));
+        }
+        else {
+            readonlyEl.addClass("hidden");
+        }
+        readonlyEl.appendTo("#" + bookmark);
+        if (!editEnabled) {
+            continue;
+        }
+        const newEl = $(`<div class="comment edit">
+                <textarea class="hidden" style="width: 90%;" rows="5"></textarea>
+                <button class="add" type="button">Add/Edit</button>
+                <button class="cancel hidden" type="button">Cancel</button>
+                <button class="update hidden" type="button">Update</button>
+            </div>`);
+        newEl.appendTo("#" + bookmark);
+        $("button.add", newEl).click(function() {
+            readonlyEl.addClass("hidden");
+            $("button.add", newEl).addClass("hidden");
+            $("button.cancel", newEl).removeClass("hidden");
+            $("button.update", newEl).removeClass("hidden");
+
+            $("textarea", newEl).text(readonlyEl.text());
+            $("textarea", newEl).removeClass("hidden");
+            $("textarea", newEl).focus();
+        });
+        $("button.cancel", newEl).click(function() {
+            $("button.add", newEl).removeClass("hidden");
+            $("button.cancel", newEl).addClass("hidden");
+            $("button.update", newEl).addClass("hidden");
+            $("textarea", newEl).addClass("hidden");
+            if (readonlyEl.text()) {
+                readonlyEl.removeClass("hidden");
             }
-
-            // insert toggle button if mode suggests so
-            if (!editEnabled) {
-                return;
-            }
-
-            $("<p><button type='button' class='add-remove'>Ignore/Keep</button></p>").appendTo(divEl);
-            $(".add-remove", divEl).click(function() {
-                var that = this;
-                $.ajax({
-                    url: "/footnote-status/toggle",
-                    method: "POST",
-                    headers: {
-                        "X-bcode": bcode,
-                        "X-href": anchorHrefShort,
-                        "X-current": $(divEl).hasClass("ignored-footnote")
-                    },
-                    beforeSend: function() {
-                        $(that).attr('disabled', 'disabled');
-                    },
-                    complete: function() {
-                        $(that).removeAttr('disabled');
-                    },
-                    success: function(data) {
-                        if (data.ignore) {
-                            $(anchorHrefShort).parent().addClass("ignored-footnote");
-                            $(divEl).addClass("ignored-footnote");
-                        }
-                        else {
-                            $(anchorHrefShort).parent().removeClass("ignored-footnote");
-                            $(divEl).removeClass("ignored-footnote");
-                        }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log("Failed to toggle footnote status: errorThrown: ", errorThrown,
-                            "; textStatus: ", textStatus);
+        });
+        $("button.update", newEl).click(function() {
+            var newComment = $("textarea", newEl).val().trim();
+            $.ajax({
+                url: "/comments/update",
+                method: "POST",
+                headers: {
+                    "X-bcode": bcode,
+                    "X-id": commentId,
+                    "X-val": newComment
+                },
+                beforeSend: function() {
+                    $("button.update").attr('disabled', 'disabled');
+                    $("button.cancel").attr('disabled', 'disabled');
+                },
+                complete: function() {
+                    $("button.update").removeAttr('disabled');
+                    $("button.cancel").removeAttr('disabled');
+                },
+                success: function() {
+                    $("button.add", newEl).removeClass("hidden");
+                    $("button.cancel", newEl).addClass("hidden");
+                    $("button.update", newEl).addClass("hidden");
+                    $("textarea", newEl).addClass("hidden");
+                    readonlyEl.text(newComment);
+                    if (newComment) {
+                        readonlyEl.removeClass("hidden");
                     }
-                });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Failed to update comment: errorThrown: ", errorThrown,
+                        "; textStatus: ", textStatus);
+                }
             });
         });
     }

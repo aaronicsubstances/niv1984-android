@@ -35,3 +35,16 @@
 .ignored-footnote {
     text-decoration: line-through;
 }
+
+.hidden {
+    display: none;
+}
+
+.comment {
+    margin-top: 0.5rem;
+}
+
+.comment.noEdit {
+    padding: 0.3125rem;
+    background-color: lightgrey;
+}

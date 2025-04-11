@@ -10,6 +10,7 @@ import android.os.Looper;
 import android.webkit.WebView;
 
 import com.aaronicsubstances.niv1984.BuildConfig;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -23,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
@@ -75,6 +77,7 @@ public class Utils {
             5, 5, 3, 5, 1, 1, 1, 22
     };
     public static final String DEFAULT_VERSION = "cpdv";
+    private static final Gson GSON_INSTANCE = new Gson();
 
     public static int[] determineChapterDisplayRange(String bookCode) {
         int bIdx = -1;
@@ -195,5 +198,13 @@ public class Utils {
             webView.loadUrl("javascript:"+scriptBuilder.toString());
         }*/
         webView.evaluateJavascript(scriptBuilder.toString(), null);
+    }
+
+    public static String jsonify(Object jsonRes) {
+        return GSON_INSTANCE.toJson(jsonRes);
+    }
+
+    public static String escapeCsv(String v) {
+        return '"' + v.replace("\"", "\"\"") + '"';
     }
 }

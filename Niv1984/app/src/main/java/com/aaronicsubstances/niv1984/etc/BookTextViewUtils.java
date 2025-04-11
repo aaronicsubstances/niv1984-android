@@ -3,7 +3,6 @@ package com.aaronicsubstances.niv1984.etc;
 import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.webkit.ConsoleMessage;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebChromeClient;
@@ -22,7 +21,9 @@ import org.slf4j.LoggerFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
@@ -96,22 +97,21 @@ public class BookTextViewUtils {
             SharedPrefsManager sharedPrefsManager,
             DBHandler dbHelper) throws IOException {
         String reqPath = req.getUrl().getPath();
-        if (req.getMethod().equals("POST") && "/footnote-status/toggle".equals(reqPath)) {
+        if (req.getMethod().equals("POST") && "/comments/update".equals(reqPath)) {
             String bcode = req.getRequestHeaders().get("X-bcode");
-            String href = req.getRequestHeaders().get("X-href");
-            boolean result = dbHelper.toggleFootnoteStatus(bcode, href);
-            String jsonRes = String.format("{ \"ignore\": %s }",
-                    result);
+            String id = req.getRequestHeaders().get("X-id");
+            String val = req.getRequestHeaders().get("X-val");
+            dbHelper.updateComment(bcode, id, val);
             return new WebResourceResponse("application/json", "utf8",
-                    new ByteArrayInputStream(jsonRes.getBytes(Utils.DEFAULT_CHARSET)));
+                    new ByteArrayInputStream("{}".getBytes(Utils.DEFAULT_CHARSET)));
         }
-        if (req.getMethod().equals("GET") && "/footnote-status".equals(reqPath)) {
+        if (req.getMethod().equals("GET") && "/comments".equals(reqPath)) {
             String bcode = req.getUrl().getQueryParameters("bcode").get(0);
-            List<String> results = dbHelper.loadFootnoteStates(bcode);
-            String loadRes = "{ \"hrefs\": \"";
-            loadRes += TextUtils.join(",", results);
-            loadRes += "\" ,\"editEnabled\": " + sharedPrefsManager.isFootnoteEditingEnabled();
-            loadRes += " }";
+            List<String[]> results = dbHelper.loadComments(bcode);
+            Map<String, Object> jsonRes = new HashMap<>();
+            jsonRes.put("items", results);
+            jsonRes.put("editEnabled", sharedPrefsManager.isCommentEditingEnabled());
+            String loadRes = Utils.jsonify(jsonRes);
             return new WebResourceResponse("application/json", "utf8",
                     new ByteArrayInputStream(loadRes.getBytes(Utils.DEFAULT_CHARSET)));
         }

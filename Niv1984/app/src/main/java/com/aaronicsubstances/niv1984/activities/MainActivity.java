@@ -2,11 +2,9 @@ package com.aaronicsubstances.niv1984.activities;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -17,7 +15,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,9 +35,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -255,8 +249,8 @@ public class MainActivity extends BaseActivity implements
             startActivity(new Intent(this, AboutActivity.class));
             return true;
         }
-        if (id == R.id.action_send_footnotes) {
-            sendFootnotes();
+        if (id == R.id.action_send_comments) {
+            shareComments();
             return true;
         }
         else if (id == R.id.action_settings) {
@@ -292,17 +286,17 @@ public class MainActivity extends BaseActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    public void sendFootnotes() {
+    public void shareComments() {
         MainActivity activity = this;
         myExecutor.execute(() -> {
 
             File pathToMyAttachedFile = new File(getCacheDir(),
-                    "ignored-footnotes-" + UUID.randomUUID().toString().replace(
+                    "comments-" + UUID.randomUUID().toString().replace(
                             "-", "").substring(0, 8) +
                             ".csv");
             Exception serializeError = null;
             try {
-                dbHelper.serializeFootnotes(pathToMyAttachedFile);
+                dbHelper.serializeComments(pathToMyAttachedFile);
             }
             catch (Exception ioe) {
                 serializeError = ioe;
@@ -314,15 +308,16 @@ public class MainActivity extends BaseActivity implements
                 if (activity.isFinishing()) {
                     return;
                 }
+                Toast.makeText(this, R.string.comments_sending_start, Toast.LENGTH_SHORT);
                 Exception finalError = resultErr;
                 if (finalError == null) {
                     try {
                         Intent emailIntent = new Intent(Intent.ACTION_SEND);
                         emailIntent.setType("text/csv");
                         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"aaronbaffourawuah@gmail.com"});
-                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Latest Footnotes");
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Latest Comments");
                         emailIntent.putExtra(Intent.EXTRA_TEXT, "Hello Sir,\n\nPlease find attached " +
-                                "the latest footnotes that have been classified as ignored." +
+                                "the latest comments." +
                                 "\n\nRegards,");
                         Uri fileUri = androidx.core.content.FileProvider.getUriForFile(activity,
                                 activity.getApplicationContext().getPackageName() + ".provider",
@@ -336,13 +331,12 @@ public class MainActivity extends BaseActivity implements
                     }
                 }
                 if (finalError != null) {
-                    LOGGER.error("Failed to send footnotes: ", finalError);
+                    LOGGER.error("Failed to share comments: ", finalError);
                     Toast.makeText(activity, finalError.getMessage(), Toast.LENGTH_LONG);
                 }
             });
         });
 
-        Toast.makeText(this, R.string.footnotes_sending_start, Toast.LENGTH_LONG);
 
     }
 

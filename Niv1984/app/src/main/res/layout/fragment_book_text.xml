@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context="com.aaronicsubstances.niv1984.fragments.BookTextFragment">
 
     <RelativeLayout
@@ -58,7 +59,7 @@
     </RelativeLayout>
 
     <HorizontalScrollView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/activity_margin">
         <RadioGroup
@@ -69,6 +70,13 @@
             <RadioButton
                 android:id="@+id/cpdvOnly"
                 android:text="@string/cpdvOnly"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/label_spacing"/>
+
+            <RadioButton
+                android:id="@+id/allVersions"
+                android:text="@string/allVersions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/label_spacing"/>

@@ -48,7 +48,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private SpinnerHelper mChapterSpinner, mZoomSpinner;
     private WebView mBookView;
-    private RadioButton cpdvOnly, withDrb, withGnt, withBbe;
+    private RadioButton cpdvOnly, allRadioBtn, withDrb, withGnt, withBbe;
     private ProgressBar mWebViewPageLoadIndicator;
 
     private SharedPrefsManager mPrefMgr;
@@ -57,7 +57,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private Runnable KEEP_SCREEN_OFF;
     private String[] mChapters;
-    private boolean mFootnoteEditingEnabled;
+    private boolean mCommentEditingEnabled;
+    private String mAllExcl;
 
     public BookTextFragment() {
         // Required empty public constructor
@@ -100,6 +101,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         withDrb = root.findViewById(R.id.withDrb);
         withGnt = root.findViewById(R.id.withGnt);
         withBbe = root.findViewById(R.id.withBbe);
+        allRadioBtn = root.findViewById(R.id.allVersions);
 
         mPrefMgr = new SharedPrefsManager(getContext());
 
@@ -134,7 +136,10 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 viewOutOfDate = true;
             }
         }
-        if (mFootnoteEditingEnabled != mPrefMgr.isFootnoteEditingEnabled()) {
+        if (mCommentEditingEnabled != mPrefMgr.isCommentEditingEnabled()) {
+            viewOutOfDate = true;
+        }
+        if (!mPrefMgr.getAllExclusions().equals(mAllExcl)) {
             viewOutOfDate = true;
         }
         if (viewOutOfDate) {
@@ -233,6 +238,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void setUpBrowserView() {
         int mode = mPrefMgr.getLastBookMode();
         switch (mode) {
+            case SharedPrefsManager.BOOK_MODE_ALL:
+                allRadioBtn.setChecked(true);
+                break;
             case SharedPrefsManager.BOOK_MODE_WITH_DRB:
                 withDrb.setChecked(true);
                 break;
@@ -248,6 +256,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         }
 
         cpdvOnly.setOnClickListener(this);
+        allRadioBtn.setOnClickListener(this);
         withDrb.setOnClickListener(this);
         withGnt.setOnClickListener(this);
         withBbe.setOnClickListener(this);
@@ -276,18 +285,22 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
     private void reloadBookUrl() {
         if (mBookCode == null) return;
 
-        mFootnoteEditingEnabled = mPrefMgr.isFootnoteEditingEnabled();
+        mCommentEditingEnabled = mPrefMgr.isCommentEditingEnabled();
+        mAllExcl = mPrefMgr.getAllExclusions();
 
-        String additionalBook = "";
+        String additionalBooks = "";
         switch (mPrefMgr.getLastBookMode()) {
+            case SharedPrefsManager.BOOK_MODE_ALL:
+                additionalBooks = "drb1752,gnt1992,bbe1965";
+                break;
             case SharedPrefsManager.BOOK_MODE_WITH_DRB:
-                additionalBook = "drb1752";
+                additionalBooks = "drb1752";
                 break;
             case SharedPrefsManager.BOOK_MODE_WITH_GNT:
-                additionalBook = "gnt1992";
+                additionalBooks = "gnt1992";
                 break;
             case SharedPrefsManager.BOOK_MODE_WITH_BBE:
-                additionalBook = "bbe1965";
+                additionalBooks = "bbe1965";
                 break;
         }
 
@@ -301,9 +314,10 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         // refetching of the css.
         String bookUrl = BookTextViewUtils.resolveUrl(
                 String.format("cpdv/%s.html", mBookCode),
-                "add", additionalBook,
+                "add", additionalBooks,
                 "zoom", "" + mZoomSpinner.getSelectedItemPosition(),
-                "fEdit", "" + mFootnoteEditingEnabled);
+                "fEdit", "" + mCommentEditingEnabled,
+                "allExcl", mAllExcl);
 
         // if url differs only in fragment, don't show progress loading indicator
         int loadIndicatorVisibility = View.VISIBLE;
@@ -332,7 +346,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        if (v == cpdvOnly || v == withDrb || v == withGnt || v == withBbe) {
+        if (v == cpdvOnly || v == allRadioBtn || v == withDrb || v == withGnt || v == withBbe) {
             boolean checked = ((RadioButton)v).isChecked();
             if (checked) {
                 int mode = SharedPrefsManager.BOOK_MODE_CPDV;
@@ -344,6 +358,9 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 }
                 else if (v == withBbe) {
                     mode = SharedPrefsManager.BOOK_MODE_WITH_BBE;
+                }
+                else if (v == allRadioBtn) {
+                    mode = SharedPrefsManager.BOOK_MODE_ALL;
                 }
                 mPrefMgr.setLastBookMode(mode);
                 reloadBookUrl();

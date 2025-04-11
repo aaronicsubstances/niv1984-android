@@ -16,10 +16,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DBHandler extends SQLiteOpenHelper {
 
@@ -33,9 +32,11 @@ public class DBHandler extends SQLiteOpenHelper {
 
     private static final String ID_COL = "id";
     private static final String BOOK_CODE_COL = "bcode";
-    private static final String HREF_COL = "href";
+    private static final String VALUE_KEY_COL = "comment_key";
+    private static final String VALUE_COL = "value";
     private static final String SORT_COL = "rank";
     private static final String DATE_CREATED_COL = "date_created";
+    private static final String DATE_DELETED_COL = "date_deleted";
 
     public DBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -53,9 +54,11 @@ public class DBHandler extends SQLiteOpenHelper {
         String query = "CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + BOOK_CODE_COL + " TEXT,"
-                + HREF_COL + " TEXT,"
-                + SORT_COL + " INTEGER,"
-                + DATE_CREATED_COL + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP)";
+                + VALUE_KEY_COL + " TEXT,"
+                + VALUE_COL + " TEXT,"
+                + SORT_COL + " INTEGER DEFAULT 0,"
+                + DATE_CREATED_COL + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"
+                + DATE_DELETED_COL + " TIMESTAMP)";
 
         // at last we are calling a exec sql
         // method to execute above sql query
@@ -72,77 +75,66 @@ public class DBHandler extends SQLiteOpenHelper {
         //onCreate(db);
     }
 
-    public List<String> loadFootnoteStates(String bcode) {
+    public List<String[]> loadComments(String bcode) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME, new String[]{ HREF_COL },
-                String.format("%s = ?", BOOK_CODE_COL),
+        Cursor c = db.query(TABLE_NAME, new String[]{VALUE_KEY_COL, VALUE_COL},
+                String.format("%s = ? AND %s IS NULL", BOOK_CODE_COL, DATE_DELETED_COL),
                 new String[]{ bcode }, null, null, null);
-        List<String> results = new ArrayList<>();
+        List<String[]> results = new ArrayList<>();
         while (c.moveToNext()) {
-            results.add(c.getString(0));
+            results.add(new String[]{c.getString(0), c.getString(1)});
         }
         c.close();
         db.close();
         return results;
     }
 
-    public boolean toggleFootnoteStatus(String bcode, String href) {
-        // on below line we are creating a
-        // variable for content values.
+    public void updateComment(String bcode, String key, String value) {
+        LoggerFactory.getLogger(getClass()).info("update comment: {} {} {}",
+                bcode, key, value);
+        SQLiteDatabase db = this.getWritableDatabase();
+
         ContentValues values = new ContentValues();
-
-        // on below line we are passing all values
-        // along with its key and value pair.
         values.put(BOOK_CODE_COL, bcode);
-        values.put(HREF_COL, href);
+        values.put(VALUE_KEY_COL, key);
+        values.put(DATE_DELETED_COL, new Date().getTime());
 
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME, new String[]{ HREF_COL },
-                String.format("%s = ? AND %s = ?", BOOK_CODE_COL, HREF_COL),
-                new String[]{ bcode, href }, null, null, null);
-        if (c.moveToNext()) {
-            c.close();
-            db = this.getWritableDatabase();
-            db.delete(TABLE_NAME,
-                    String.format("%s = ? AND %s = ?", BOOK_CODE_COL, HREF_COL),
-                    new String[]{ bcode, href });
-            db.close();
-            return false;
-        }
-        else {
-            c.close();
-            // on below line we are creating a variable for
-            // our sqlite database and calling writable method
-            // as we are writing data in our database.
-            db = this.getWritableDatabase();
+        // first soft delete any existing entries for book code and
+        // comment key
+        db.update(TABLE_NAME,  values,
+                String.format("%s = ? AND %s = ? AND %s IS NULL",
+                        BOOK_CODE_COL, VALUE_KEY_COL, DATE_DELETED_COL),
+                new String[]{ bcode, key });
 
-            Pattern rankRegex = Pattern.compile("\\d+");
-            Matcher m = rankRegex.matcher(href);
-            m.find();
-            values.put(SORT_COL, Integer.parseInt(m.group()));
+        // then make a new record for new/updated comment text
+        if (value != null && !value.isEmpty()) {
+            values = new ContentValues();
+            values.put(BOOK_CODE_COL, bcode);
+            values.put(VALUE_KEY_COL, key);
+            values.put(VALUE_COL, value);
 
             // after adding all values we are passing
             // content values to our table.
             db.insert(TABLE_NAME, null, values);
-
-            // at last we are closing our
-            // database after adding database.
-            db.close();
-            return true;
         }
+
+        // at last we are closing our
+        // database after addition.
+        db.close();
     }
 
-    public void serializeFootnotes(File destFile) throws IOException {
+    public void serializeComments(File destFile) throws IOException {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME, new String[]{ BOOK_CODE_COL, HREF_COL },
-                null, null, null, null,
+        Cursor c = db.query(TABLE_NAME, new String[]{ BOOK_CODE_COL, VALUE_KEY_COL, VALUE_COL},
+                DATE_DELETED_COL + " IS NULL", null, null, null,
                 BOOK_CODE_COL + ", " + SORT_COL);
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(destFile)))) {
-            writer.write("bcode,href\n");
+            writer.write("book,ref,comment\n");
             while (c.moveToNext()) {
                 writer.write(c.getString(0) + "," +
-                        c.getString(1) + "\n");
+                        c.getString(1) + "," +
+                        Utils.escapeCsv(c.getString(2)) + "\n");
             }
         }
         finally {

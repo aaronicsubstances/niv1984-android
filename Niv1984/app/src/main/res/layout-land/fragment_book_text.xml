@@ -66,6 +66,12 @@
                     android:layout_height="wrap_content" />
 
                 <RadioButton
+                    android:id="@+id/allVersions"
+                    android:text="@string/allVersions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
                     android:id="@+id/withDrb"
                     android:text="@string/withDrb"
                     android:layout_width="wrap_content"

@@ -12,9 +12,10 @@ import org.slf4j.LoggerFactory;
 
 public class SharedPrefsManager {
     public static final int BOOK_MODE_CPDV = 0;
-    public static final int BOOK_MODE_WITH_DRB = 1;
-    public static final int BOOK_MODE_WITH_GNT = 2;
-    public static final int BOOK_MODE_WITH_BBE = 3;
+    public static final int BOOK_MODE_ALL = 1;
+    public static final int BOOK_MODE_WITH_DRB = 2;
+    public static final int BOOK_MODE_WITH_GNT = 3;
+    public static final int BOOK_MODE_WITH_BBE = 4;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SharedPrefsManager.class);
 
@@ -30,7 +31,8 @@ public class SharedPrefsManager {
     public static final String SHARED_PREF_KEY_ZOOM = "zoom";
     private static final String SHARED_PREF_KEY_KEEP_SCREEN_ON = "keep_screen_on";
     public static final String SHARED_PREF_KEY_NIGHT_MODE = "night_mode";
-    public static final String SHARED_PREF_KEY_ENABLE_FOOTNOTE_EDIT = "footnote_edit_enabled";
+    public static final String SHARED_PREF_KEY_ENABLE_COMMENT_EDIT = "comment_edit_enabled";
+    public static final String SHARED_PREF_KEY_ALL_EXCL = "all_exclusions";
 
     public SharedPrefsManager(Context context) {
         this.mContext = context;
@@ -117,9 +119,14 @@ public class SharedPrefsManager {
         );
     }
 
-    public boolean isFootnoteEditingEnabled() {
+    public boolean isCommentEditingEnabled() {
         return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getBoolean(
-                SHARED_PREF_KEY_ENABLE_FOOTNOTE_EDIT, false
+                SHARED_PREF_KEY_ENABLE_COMMENT_EDIT, false
         );
+    }
+
+    public String getAllExclusions() {
+        return mContext.getSharedPreferences(SHARED_PREF_NAME, 0).getString(
+                SHARED_PREF_KEY_ALL_EXCL, "");
     }
 }

@@ -5,8 +5,11 @@ $(function() {
     const firstBookTextEl = $(".booktext");
     let addQuery = getQueryVariable("add");
     const additionalVersions = [];
-    if (addQuery) {
-        const excludedVersions = getQueryVariable("allExcl").split("").map(function(v) {
+    if (addQuery.indexOf(",") === -1) {
+        additionalVersions.push(addQuery);
+    }
+    else {
+        const excludedVersions = getQueryVariable("allExcl").split(",").map(function(v) {
             return v.toLowerCase();
         });
         for (const candidate of addQuery.split(",")) {

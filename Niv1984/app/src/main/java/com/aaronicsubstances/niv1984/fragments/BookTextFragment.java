@@ -141,7 +141,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         if (mCommentEditingEnabled != mPrefMgr.isCommentEditingEnabled()) {
             viewOutOfDate = true;
         }
-        if (!mPrefMgr.getAllExclusions().equals(mAllExcl)) {
+        if (allRadioBtn.isChecked() && !mPrefMgr.getAllExclusions().equals(mAllExcl)) {
             viewOutOfDate = true;
         }
         if (viewOutOfDate) {

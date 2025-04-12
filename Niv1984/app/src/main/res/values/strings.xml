@@ -130,7 +130,7 @@
     <string name="pref_screen_title_night_mode">Night Mode</string>
     <string name="pref_screen_summary_keep_screen_on">Screen will still be turned off after 5 minutes of inactivity</string>
     <string name="pref_screen_title_comment_edit_enabled">Enable editing of comments</string>
-    <string name="pref_screen_title_all_exclusion">Prefixes of Versions to Exclude from Parallel Display (CSV)</string>
+    <string name="pref_screen_title_all_exclusion">Configure all except...</string>
     <string name="comments_sending_start">Data to be sent as attachment now being created. Please wait...</string>
     <string name="action_send_comments">Export Data</string>
     <string name="allVersions">All-Excl</string>

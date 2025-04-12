@@ -25,7 +25,8 @@
 
         <EditTextPreference
             app:key="@string/shared_pref_all_exclusions"
-            app:title="@string/pref_screen_title_all_exclusion"/>
+            app:title="@string/pref_screen_title_all_exclusion"
+            app:useSimpleSummaryProvider="true"/>
 
     </PreferenceCategory>
 

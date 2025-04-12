@@ -96,8 +96,8 @@
                 android:layout_marginHorizontal="@dimen/label_spacing" />
 
             <RadioButton
-                android:id="@+id/withBbe"
-                android:text="@string/withBbe"
+                android:id="@+id/withTcent"
+                android:text="@string/withTcent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/label_spacing" />

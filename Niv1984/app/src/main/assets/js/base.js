@@ -67,13 +67,13 @@ $(function() {
 function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     var encodedBookmarks = JSON.parse($("span.bookmarks", $(booktextEl)).text());
     var sortedBookmarks = identifyAndSortInternalBookmarks(encodedBookmarks);
-    if (version === DEFAULT_VERSION) {
-        $.get('/comments', { bcode: bcode }, function(data) {
+    if ([DEFAULT_VERSION, "thomson1808", "tcent2022"].includes(version)) {
+        $.get('/comments', { bcode, bversion: version }, function(data) {
             var initialComments = new Map();
             for (const item of data.items) {
                 initialComments.set(item[0], item[1]);
             }
-            insertComments(bcode, booktextEl, sortedBookmarks,
+            insertComments(version, bcode, booktextEl, sortedBookmarks,
                 initialComments, data.editEnabled);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.log("Failed to load comments: errorThrown: ", errorThrown,
@@ -166,10 +166,10 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     check();
 }
 
-function insertComments(bcode, booktextEl, sortedBookmarks,
-                            initialComments, editEnabled) {
-    const verseRegex = new RegExp(`${DEFAULT_VERSION}-bookmark-` + '\\d+-(\\d+)-(\\d+)');
-    const footnotesRegex = new RegExp(`${DEFAULT_VERSION}-bookmark-` + '(\\d+)-n');
+function insertComments(version, bcode, booktextEl, sortedBookmarks,
+            initialComments, editEnabled) {
+    const verseRegex = new RegExp(`${version}-bookmark-` + '\\d+-(\\d+)-(\\d+)');
+    const footnotesRegex = new RegExp(`${version}-bookmark-` + '(\\d+)-n');
     for (bookmark of sortedBookmarks) {
         let m = verseRegex.exec(bookmark);
         if (m === null) {
@@ -232,6 +232,7 @@ function insertComments(bcode, booktextEl, sortedBookmarks,
                 url: "/comments/update",
                 method: "POST",
                 headers: {
+                    "X-version": version,
                     "X-bcode": bcode,
                     "X-id": commentId,
                     "X-val": newComment

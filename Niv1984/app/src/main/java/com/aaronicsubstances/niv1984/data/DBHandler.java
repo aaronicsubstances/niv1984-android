@@ -28,10 +28,11 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final int DB_VERSION = 1;
 
     // below variable is for our table name.
-    private static final String TABLE_NAME = "ignored_footnotes";
+    private static final String TABLE_NAME = "comments";
 
     private static final String ID_COL = "id";
     private static final String BOOK_CODE_COL = "bcode";
+    private static final String BOOK_VERSION_COL = "bversion";
     private static final String VALUE_KEY_COL = "comment_key";
     private static final String VALUE_COL = "value";
     private static final String SORT_COL = "rank";
@@ -53,6 +54,7 @@ public class DBHandler extends SQLiteOpenHelper {
         // along with their data types.
         String query = "CREATE TABLE " + TABLE_NAME + " ("
                 + ID_COL + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + BOOK_VERSION_COL + " TEXT,"
                 + BOOK_CODE_COL + " TEXT,"
                 + VALUE_KEY_COL + " TEXT,"
                 + VALUE_COL + " TEXT,"
@@ -75,11 +77,11 @@ public class DBHandler extends SQLiteOpenHelper {
         //onCreate(db);
     }
 
-    public List<String[]> loadComments(String bcode) {
+    public List<String[]> loadComments(String version, String bcode) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.query(TABLE_NAME, new String[]{VALUE_KEY_COL, VALUE_COL},
-                String.format("%s = ? AND %s IS NULL", BOOK_CODE_COL, DATE_DELETED_COL),
-                new String[]{ bcode }, null, null, null);
+                String.format("%s = ? AND %s = ? AND %s IS NULL", BOOK_VERSION_COL, BOOK_CODE_COL, DATE_DELETED_COL),
+                new String[]{ version, bcode }, null, null, null);
         List<String[]> results = new ArrayList<>();
         while (c.moveToNext()) {
             results.add(new String[]{c.getString(0), c.getString(1)});
@@ -89,10 +91,25 @@ public class DBHandler extends SQLiteOpenHelper {
         return results;
     }
 
-    public void updateComment(String bcode, String key, String value) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public void updateComment(String version, String bcode, String key, String value) {
+        // skip update if value exists already.
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.query(TABLE_NAME, new String[]{VALUE_KEY_COL, VALUE_COL},
+                String.format("%s = ? AND %s = ? AND %s IS NULL AND %s = ? AND %s = ?",
+                        BOOK_VERSION_COL, BOOK_CODE_COL, DATE_DELETED_COL,
+                        VALUE_KEY_COL, VALUE_COL),
+                new String[]{ version, bcode, key, value }, null, null, null);
+        if (c.moveToNext()) {
+            c.close();
+            db.close();
+            return;
+        }
+
+        db.close();
+        db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(BOOK_VERSION_COL, version);
         values.put(BOOK_CODE_COL, bcode);
         values.put(VALUE_KEY_COL, key);
         values.put(DATE_DELETED_COL, new Date().getTime());
@@ -100,13 +117,15 @@ public class DBHandler extends SQLiteOpenHelper {
         // first soft delete any existing entries for book code and
         // comment key
         db.update(TABLE_NAME,  values,
-                String.format("%s = ? AND %s = ? AND %s IS NULL",
+                String.format("%s = ? AND %s = ? AND %s = ? AND %s IS NULL",
+                        BOOK_VERSION_COL,
                         BOOK_CODE_COL, VALUE_KEY_COL, DATE_DELETED_COL),
                 new String[]{ bcode, key });
 
         // then make a new record for new/updated comment text
         if (value != null && !value.isEmpty()) {
             values = new ContentValues();
+            values.put(BOOK_VERSION_COL, version);
             values.put(BOOK_CODE_COL, bcode);
             values.put(VALUE_KEY_COL, key);
             values.put(VALUE_COL, value);
@@ -123,16 +142,17 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void serializeComments(File destFile) throws IOException {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME, new String[]{ BOOK_CODE_COL, VALUE_KEY_COL, VALUE_COL},
+        Cursor c = db.query(TABLE_NAME, new String[]{ BOOK_VERSION_COL, BOOK_CODE_COL, VALUE_KEY_COL, VALUE_COL},
                 DATE_DELETED_COL + " IS NULL", null, null, null,
-                BOOK_CODE_COL + ", " + SORT_COL);
+                BOOK_VERSION_COL + ", " + BOOK_CODE_COL + ", " + SORT_COL);
         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(destFile)))) {
-            writer.write("book,ref,comment\n");
+            writer.write("version,book,ref,comment\n");
             while (c.moveToNext()) {
                 writer.write(c.getString(0) + "," +
                         c.getString(1) + "," +
-                        Utils.escapeCsv(c.getString(2)) + "\n");
+                        c.getString(2) + "," +
+                        Utils.escapeCsv(c.getString(3)) + "\n");
             }
         }
         finally {

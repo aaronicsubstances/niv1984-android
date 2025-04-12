@@ -48,7 +48,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     private SpinnerHelper mChapterSpinner, mZoomSpinner;
     private WebView mBookView;
-    private RadioButton cpdvOnly, allRadioBtn, withDrb, withGnt, withBbe,
+    private RadioButton cpdvOnly, allRadioBtn, withDrb, withGnt, withTcent,
             withThomson;
     private ProgressBar mWebViewPageLoadIndicator;
 
@@ -101,7 +101,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         cpdvOnly = root.findViewById(R.id.cpdvOnly);
         withDrb = root.findViewById(R.id.withDrb);
         withGnt = root.findViewById(R.id.withGnt);
-        withBbe = root.findViewById(R.id.withBbe);
+        withTcent = root.findViewById(R.id.withTcent);
         withThomson = root.findViewById(R.id.withThomson);
         allRadioBtn = root.findViewById(R.id.allVersions);
 
@@ -249,8 +249,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             case SharedPrefsManager.BOOK_MODE_WITH_GNT:
                 withGnt.setChecked(true);
                 break;
-            case SharedPrefsManager.BOOK_MODE_WITH_BBE:
-                withBbe.setChecked(true);
+            case SharedPrefsManager.BOOK_MODE_WITH_TCENT:
+                withTcent.setChecked(true);
                 break;
             case SharedPrefsManager.BOOK_MODE_WITH_THOMSON:
                 withThomson.setChecked(true);
@@ -264,7 +264,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         allRadioBtn.setOnClickListener(this);
         withDrb.setOnClickListener(this);
         withGnt.setOnClickListener(this);
-        withBbe.setOnClickListener(this);
+        withTcent.setOnClickListener(this);
         withThomson.setOnClickListener(this);
 
         BookTextViewUtils.configureBrowser(getActivity(), mBookView, this,
@@ -297,7 +297,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
         String additionalBooks = "";
         switch (mPrefMgr.getLastBookMode()) {
             case SharedPrefsManager.BOOK_MODE_ALL:
-                additionalBooks = "drb1752,gnt1992,bbe1965,thomson1808";
+                additionalBooks = "drb1752,gnt1992,tcent2022,thomson1808";
                 break;
             case SharedPrefsManager.BOOK_MODE_WITH_DRB:
                 additionalBooks = "drb1752";
@@ -305,8 +305,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
             case SharedPrefsManager.BOOK_MODE_WITH_GNT:
                 additionalBooks = "gnt1992";
                 break;
-            case SharedPrefsManager.BOOK_MODE_WITH_BBE:
-                additionalBooks = "bbe1965";
+            case SharedPrefsManager.BOOK_MODE_WITH_TCENT:
+                additionalBooks = "tcent2022";
                 break;
             case SharedPrefsManager.BOOK_MODE_WITH_THOMSON:
                 additionalBooks = "thomson1808";
@@ -355,7 +355,7 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
 
     @Override
     public void onClick(View v) {
-        if (v == cpdvOnly || v == allRadioBtn || v == withDrb || v == withGnt || v == withBbe ||
+        if (v == cpdvOnly || v == allRadioBtn || v == withDrb || v == withGnt || v == withTcent ||
                 v == withThomson) {
             boolean checked = ((RadioButton)v).isChecked();
             if (checked) {
@@ -366,8 +366,8 @@ public class BookTextFragment extends Fragment implements View.OnClickListener,
                 else if (v == withGnt) {
                     mode = SharedPrefsManager.BOOK_MODE_WITH_GNT;
                 }
-                else if (v == withBbe) {
-                    mode = SharedPrefsManager.BOOK_MODE_WITH_BBE;
+                else if (v == withTcent) {
+                    mode = SharedPrefsManager.BOOK_MODE_WITH_TCENT;
                 }
                 else if (v == withThomson) {
                     mode = SharedPrefsManager.BOOK_MODE_WITH_THOMSON;

@@ -84,8 +84,8 @@
                     android:layout_height="wrap_content" />
 
                 <RadioButton
-                    android:id="@+id/withBbe"
-                    android:text="@string/withBbe"
+                    android:id="@+id/withTcent"
+                    android:text="@string/withTcent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 

@@ -98,16 +98,18 @@ public class BookTextViewUtils {
             DBHandler dbHelper) throws IOException {
         String reqPath = req.getUrl().getPath();
         if (req.getMethod().equals("POST") && "/comments/update".equals(reqPath)) {
+            String version = req.getRequestHeaders().get("X-version");
             String bcode = req.getRequestHeaders().get("X-bcode");
             String id = req.getRequestHeaders().get("X-id");
             String val = req.getRequestHeaders().get("X-val");
-            dbHelper.updateComment(bcode, id, val);
+            dbHelper.updateComment(version, bcode, id, val);
             return new WebResourceResponse("application/json", "utf8",
                     new ByteArrayInputStream("{}".getBytes(Utils.DEFAULT_CHARSET)));
         }
         if (req.getMethod().equals("GET") && "/comments".equals(reqPath)) {
+            String version = req.getUrl().getQueryParameters("bversion").get(0);
             String bcode = req.getUrl().getQueryParameters("bcode").get(0);
-            List<String[]> results = dbHelper.loadComments(bcode);
+            List<String[]> results = dbHelper.loadComments(version, bcode);
             Map<String, Object> jsonRes = new HashMap<>();
             jsonRes.put("items", results);
             jsonRes.put("editEnabled", sharedPrefsManager.isCommentEditingEnabled());

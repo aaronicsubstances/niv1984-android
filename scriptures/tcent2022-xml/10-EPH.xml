@@ -1,0 +1,525 @@
+<?xml version='1.0' encoding='utf-8'?>
+<book>
+  <chapter num="1">
+    <fragment kind="HEADING">
+      <content>Greeting</content>
+    </fragment>
+    <verse num="1">
+      <content>Paul, an apostle of Jesus Christ through the will of God, to the saints who are in Ephesus, the faithful in Christ Jesus:</content>
+    </verse>
+    <verse num="2">
+      <content>Grace to you and peace from God our Father and the Lord Jesus Christ.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Spiritual Blessings in Christ</content>
+    </fragment>
+    <verse num="3">
+      <content>Blessed be the God and Father of our Lord Jesus Christ, who has blessed us with every spiritual blessing in the heavenly places in Christ,</content>
+    </verse>
+    <verse num="4">
+      <content>just as he chose us in Christ before the foundation of the world to be holy and unblemished before him in love.</content>
+    </verse>
+    <verse num="5">
+      <content>He foreordained us for adoption as his sons through Jesus Christ, according to the good pleasure of his will,</content>
+    </verse>
+    <verse num="6">
+      <content>to the praise of the glory of his grace, by which he bestowed favor upon us in the Beloved.</content>
+    </verse>
+    <verse num="7">
+      <content>In him we have redemption through his blood, the remission of our trespasses, according to the riches of God's grace,</content>
+    </verse>
+    <verse num="8">
+      <content>which he lavished upon us, along with all wisdom and understanding.</content>
+    </verse>
+    <verse num="9">
+      <content>He made known to us the mystery of his will, according to his good pleasure, which he purposed in Christ</content>
+    </verse>
+    <verse num="10">
+      <content>as a plan for the fullness of times, to bring everything together in Christ, things in heaven and things on earth.</content>
+    </verse>
+    <verse num="11">
+      <content>In Christ we have obtained an inheritance, having been foreordained according to the purpose of him who accomplishes all things according to the counsel of his own will,</content>
+    </verse>
+    <verse num="12">
+      <content>so that we who were the first to hope in Christ, might live for the praise of his glory.</content>
+    </verse>
+    <verse num="13">
+      <content>And when you heard the word of the truth, the gospel of your salvation, and believed in Christ, you were also sealed with the promised Holy Spirit,</content>
+    </verse>
+    <verse num="14">
+      <content>who is the guarantee of our inheritance until the redemption of God's own possession, to the praise of his glory.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Paul's Prayer for the Ephesians</content>
+    </fragment>
+    <verse num="15">
+      <content>For this reason, ever since I heard about your faith in the Lord Jesus and your love for all the saints,</content>
+    </verse>
+    <verse num="16">
+      <content>I have not ceased giving thanks for you as I remember you in my prayers.</content>
+    </verse>
+    <verse num="17">
+      <content>I pray that the God of our Lord Jesus Christ, the Father of glory, may give you a spirit of wisdom and revelation as you come to know him.</content>
+    </verse>
+    <verse num="18">
+      <content>I pray that the eyes of your heart may be enlightened, so that you may know what is the hope of his calling, what are the riches of the glory of his inheritance in the saints,</content>
+    </verse>
+    <verse num="19">
+      <content>and what is the surpassing greatness of his power toward us who believe, according to the working of his great power.</content>
+    </verse>
+    <verse num="20">
+      <content>He exercised this power in Christ by raising him from the dead and seating him at his right hand in the heavenly places,</content>
+    </verse>
+    <verse num="21">
+      <content>far above every ruler and authority, power and dominion, and every name that is named, not only in this age but also in the age to come.</content>
+    </verse>
+    <verse num="22">
+      <content>God put all things in subjection under Christ's feet and appointed him as head over all things for the church,</content>
+    </verse>
+    <verse num="23">
+      <content>which is his body, the fullness of him who fills everything in every way.</content>
+    </verse>
+  </chapter>
+  <chapter num="2">
+    <fragment kind="HEADING">
+      <content>Alive with Christ</content>
+    </fragment>
+    <verse num="1">
+      <content>You were dead in the trespasses and sins</content>
+    </verse>
+    <verse num="2">
+      <content>in which you once walked when you followed the ways of this world and the ruler of the realm of the air, the spirit that is now at work in the sons of disobedience.</content>
+    </verse>
+    <verse num="3">
+      <content>Among them we all once lived in the lusts of our flesh, carrying out the desires of our flesh and our impulses, and we were by nature children of wrath, like the rest of mankind.</content>
+    </verse>
+    <verse num="4">
+      <content>Yet God, who is rich in mercy, because of the great love with which he loved us,</content>
+    </verse>
+    <verse num="5">
+      <content>made us alive together with Christ even when we were dead in our trespasses—by grace you have been saved.</content>
+    </verse>
+    <verse num="6">
+      <content>And God raised us up with Christ and seated us with him in the heavenly places in Christ Jesus,</content>
+    </verse>
+    <verse num="7">
+      <content>so that in the ages to come he might show the surpassing riches of his grace through his kindness toward us in Christ Jesus.</content>
+    </verse>
+    <verse num="8">
+      <content>For by grace you have been saved through faith. And this is not of yourselves; it is the gift of God,</content>
+    </verse>
+    <verse num="9">
+      <content>not by works, so that no one may boast.</content>
+    </verse>
+    <verse num="10">
+      <content>For we are his workmanship, created in Christ Jesus for good works, which God prepared beforehand so that we would walk in them.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Unity in Christ</content>
+    </fragment>
+    <verse num="11">
+      <content>Therefore remember that you, once Gentiles in the flesh, who are called “the uncircumcision” by those who call themselves “the circumcision,” which is made in the flesh by hands—</content>
+    </verse>
+    <verse num="12">
+      <content>remember that you were apart from Christ at that time, excluded from the citizenship of Israel and strangers to the covenants of the promise, having no hope and without God in the world.</content>
+    </verse>
+    <verse num="13">
+      <content>But now in Christ Jesus you who were once far away have been brought near by the blood of Christ.</content>
+    </verse>
+    <verse num="14">
+      <content>For he is our peace, who has united both the Jews and Gentiles into one people and has broken down the wall of hostility that divided us.</content>
+    </verse>
+    <verse num="15">
+      <content>He did this by abolishing the law with its commandments and ordinances in order to make peace between the two groups and create in himself one new people.</content>
+    </verse>
+    <verse num="16">
+      <content>He reconciled both groups to God in one body through the cross, by which he put the hostility to death.</content>
+    </verse>
+    <verse num="17">
+      <content>He came and preached the good news of peace to you who were far away and to those who were near.</content>
+    </verse>
+    <verse num="18">
+      <content>For through him we both have access in one Spirit to the Father.</content>
+    </verse>
+    <verse num="19">
+      <content>So then you are no longer strangers and foreigners, but fellow citizens with the saints and members of the household of God,</content>
+    </verse>
+    <verse num="20">
+      <content>built upon the foundation of the apostles and prophets, with Jesus Christ himself being the chief cornerstone.</content>
+    </verse>
+    <verse num="21">
+      <content>In him the whole building is joined together and rises to become a holy temple in the Lord.</content>
+    </verse>
+    <verse num="22">
+      <content>And in him you also are being built together into a dwelling place for God in the Spirit.</content>
+    </verse>
+  </chapter>
+  <chapter num="3">
+    <fragment kind="HEADING">
+      <content>Paul's Ministry to the Gentiles</content>
+    </fragment>
+    <verse num="1">
+      <content>For this reason I, Paul, a prisoner for Christ Jesus for the sake of you Gentiles, bow my knees in prayer.</content>
+    </verse>
+    <verse num="2">
+      <content>Surely you have heard of the stewardship of God's grace that was given to me for you,</content>
+    </verse>
+    <verse num="3">
+      <content>how God made the mystery known to me by revelation, just as I have written above in a few words.</content>
+    </verse>
+    <verse num="4">
+      <content>When you read what I have written, you can understand my insight into the mystery of Christ,</content>
+    </verse>
+    <verse num="5">
+      <content>which in previous generations was not made known to the sons of men as it has now been revealed by the Spirit to his holy apostles and prophets.</content>
+    </verse>
+    <verse num="6">
+      <content>This mystery is that the Gentiles are fellow heirs, fellow members of the body, and fellow partakers of God's promise in Christ through the gospel.</content>
+    </verse>
+    <verse num="7">
+      <content>I became a servant of this gospel according to the gift of God's grace that was given to me by the working of his power.</content>
+    </verse>
+    <verse num="8">
+      <content>This grace was given to me, the very least of all the saints, to preach among the Gentiles the good news of the boundless riches of Christ,</content>
+    </verse>
+    <verse num="9">
+      <content>and to bring to light for everyone the plan of the mystery that has been hidden for ages in God, who created all things through Jesus Christ.</content>
+    </verse>
+    <verse num="10">
+      <content>The purpose of bringing this to light is that, through the church, the manifold wisdom of God might now be made known to the rulers and the authorities in the heavenly realms,</content>
+    </verse>
+    <verse num="11">
+      <content>according to the eternal purpose that God has carried out in Christ Jesus our Lord.</content>
+    </verse>
+    <verse num="12">
+      <content>Because of Christ and our faith in him, we have boldness and confident access to God.</content>
+    </verse>
+    <verse num="13">
+      <content>Therefore I ask you not to lose heart at my tribulations on your behalf, which will bring you glory.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Prayer for the Ephesians to Know the Love of Christ</content>
+    </fragment>
+    <verse num="14">
+      <content>For this reason I bow my knees in prayer before the Father of our Lord Jesus Christ,</content>
+    </verse>
+    <verse num="15">
+      <content>from whom every family in heaven and on earth is named.</content>
+    </verse>
+    <verse num="16">
+      <content>I pray that, according to the riches of his glory, he would grant you to be strengthened with power through his Spirit in your inner being,</content>
+    </verse>
+    <verse num="17">
+      <content>so that Christ may dwell in your hearts through faith,</content>
+    </verse>
+    <verse num="18">
+      <content>as you are being rooted and grounded in love. I pray that you may be able to fully comprehend, together with all the saints, how wide and long and deep and high</content>
+    </verse>
+    <verse num="19">
+      <content>is the love of Christ, and to know this love that surpasses knowledge, so that you may be filled with all the fullness of God.</content>
+    </verse>
+    <verse num="20">
+      <content>Now to him who is able to do immeasurably more than all we could ask or imagine, according to the power at work within us—</content>
+    </verse>
+    <verse num="21">
+      <content>to him be glory in the church in Christ Jesus throughout all generations, forever and ever. Amen.</content>
+    </verse>
+  </chapter>
+  <chapter num="4">
+    <fragment kind="HEADING">
+      <content>Unity in the Body of Christ</content>
+    </fragment>
+    <verse num="1">
+      <content>Therefore I, a prisoner for the Lord, urge you to walk in a manner worthy of the calling you have received,</content>
+    </verse>
+    <verse num="2">
+      <content>with all humility and gentleness, and with patience, bearing with one another in love,</content>
+    </verse>
+    <verse num="3">
+      <content>and being diligent to keep the unity of the Spirit in the bond of peace.</content>
+    </verse>
+    <verse num="4">
+      <content>There is one body and one Spirit (just as you were called to one hope at your calling),</content>
+    </verse>
+    <verse num="5">
+      <content>one Lord, one faith, one baptism,</content>
+    </verse>
+    <verse num="6">
+      <content>one God and Father of all, who is over all and through all and in us all.</content>
+    </verse>
+    <verse num="7">
+      <content>Now each one of us was given grace according to the measure of Christ's gift.</content>
+    </verse>
+    <verse num="8">
+      <content>Therefore it says, “When he ascended on high, he led captivity captive and gave gifts to men.”</content>
+    </verse>
+    <verse num="9">
+      <content>(Now what does “he ascended” mean except that he first also descended into the lower parts of the earth?</content>
+    </verse>
+    <verse num="10">
+      <content>He who descended is the very one who ascended far above all the heavens, so that he might fill all things.)</content>
+    </verse>
+    <verse num="11">
+      <content>It was he who appointed some to be apostles, some to be prophets, some to be evangelists, and some to be pastors and teachers,</content>
+    </verse>
+    <verse num="12">
+      <content>to equip the saints for the work of ministry and to build up the body of Christ,</content>
+    </verse>
+    <verse num="13">
+      <content>until we all reach unity in the faith and in the knowledge of the Son of God, growing into maturity with a stature measured by Christ's fullness.</content>
+    </verse>
+    <verse num="14">
+      <content>So we must no longer be infants, tossed back and forth by waves and carried about by every wind of doctrine, by the trickery of men and their craftiness in deceitful scheming.</content>
+    </verse>
+    <verse num="15">
+      <content>Rather, speaking the truth in love, we must grow up in every way into him who is the head, that is, Christ.</content>
+    </verse>
+    <verse num="16">
+      <content>From him the whole body, joined and held together by every supporting joint, grows and builds itself up in love as each individual part does its work.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Living the New Life</content>
+    </fragment>
+    <verse num="17">
+      <content>Therefore, I solemnly declare in the Lord that you should no longer walk as the rest of the Gentiles do, in the futility of their minds.</content>
+    </verse>
+    <verse num="18">
+      <content>They are darkened in their understanding, being excluded from the life of God because of the ignorance that is in them due to the hardness of their hearts.</content>
+    </verse>
+    <verse num="19">
+      <content>They became callous and gave themselves up to lewd behavior, greedy to engage in every kind of impurity.</content>
+    </verse>
+    <verse num="20">
+      <content>But you did not learn Christ in that way!</content>
+    </verse>
+    <verse num="21">
+      <content>Surely you have heard about him and were taught in him, just as the truth is in Jesus,</content>
+    </verse>
+    <verse num="22">
+      <content>to put off your old self, which belongs to your former way of life and is being corrupted by its deceitful desires,</content>
+    </verse>
+    <verse num="23">
+      <content>to be renewed in the spirit of your minds,</content>
+    </verse>
+    <verse num="24">
+      <content>and to put on the new self, created according to the image of God in true righteousness and holiness.</content>
+    </verse>
+    <verse num="25">
+      <content>Therefore, having laid aside falsehood, each of you must speak the truth with his neighbor, because we are members of one another.</content>
+    </verse>
+    <verse num="26">
+      <content>Do not sin in your anger. Do not let the sun go down while you are still angry,</content>
+    </verse>
+    <verse num="27">
+      <content>and do not give any opportunity to the devil.</content>
+    </verse>
+    <verse num="28">
+      <content>He who steals must no longer steal; rather he must labor, doing honest work with his hands, so that he may have something to contribute to anyone in need.</content>
+    </verse>
+    <verse num="29">
+      <content>Let no foul word come out of your mouth, but only what is good for edification, as fits the occasion, that it may give grace to those who hear.</content>
+    </verse>
+    <verse num="30">
+      <content>And do not grieve the Holy Spirit of God, by whom you were sealed for the day of redemption.</content>
+    </verse>
+    <verse num="31">
+      <content>Put away all bitterness, wrath, anger, outbursts, and slander, together with all malice.</content>
+    </verse>
+    <verse num="32">
+      <content>Be kind and compassionate to one another, forgiving one another, just as God in Christ has forgiven us.</content>
+    </verse>
+  </chapter>
+  <chapter num="5">
+    <verse num="1">
+      <content>Therefore, be imitators of God, as beloved children,</content>
+    </verse>
+    <verse num="2">
+      <content>and walk in love, just as Christ loved us and gave himself up for us as a fragrant offering and sacrifice to God.</content>
+    </verse>
+    <verse num="3">
+      <content>But fornication, impurity of any kind, and covetousness must not even be mentioned among you, because such things are improper for saints.</content>
+    </verse>
+    <verse num="4">
+      <content>Nor should there be any obscenity, foolish talk, or coarse joking, which are not fitting, but there should be thanksgiving instead.</content>
+    </verse>
+    <verse num="5">
+      <content>For you know that no one who is a fornicator, impure, or covetous (that is, an idolater) has any inheritance in the kingdom of Christ and of God.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Walk as Children of Light</content>
+    </fragment>
+    <verse num="6">
+      <content>Let no one deceive you with empty words, for because of these things the wrath of God is coming upon the sons of disobedience.</content>
+    </verse>
+    <verse num="7">
+      <content>Therefore do not be partners with them.</content>
+    </verse>
+    <verse num="8">
+      <content>For you were once darkness, but now you are light in the Lord. Walk as children of light</content>
+    </verse>
+    <verse num="9">
+      <content>(for the fruit of the Spirit is found in all goodness, righteousness, and truth).</content>
+    </verse>
+    <verse num="10">
+      <content>Carefully determine what is pleasing to the Lord.</content>
+    </verse>
+    <verse num="11">
+      <content>Do not participate in the unfruitful works of darkness, but expose them instead.</content>
+    </verse>
+    <verse num="12">
+      <content>For it is shameful even to mention what such people do in secret.</content>
+    </verse>
+    <verse num="13">
+      <content>But everything exposed by the light becomes illuminated, and everything that is illuminated becomes a light.</content>
+    </verse>
+    <verse num="14">
+      <content>Therefore it says, “Awake, O sleeper, and arise from the dead, and Christ will shine upon yoʋ.”</content>
+    </verse>
+    <verse num="15">
+      <content>See then that you walk carefully, not as unwise people but as wise,</content>
+    </verse>
+    <verse num="16">
+      <content>making the best use of the time, because the days are evil.</content>
+    </verse>
+    <verse num="17">
+      <content>Therefore do not be foolish, but understand what the will of the Lord is.</content>
+    </verse>
+    <verse num="18">
+      <content>Do not be drunk with wine, which leads to debauchery, but be filled with the Spirit,</content>
+    </verse>
+    <verse num="19">
+      <content>speaking to one another in psalms, hymns, and spiritual songs, singing and making melody with your hearts to the Lord,</content>
+    </verse>
+    <verse num="20">
+      <content>always giving thanks for everything to our God and Father in the name of our Lord Jesus Christ,</content>
+    </verse>
+    <verse num="21">
+      <content>and submitting to one another in the fear of Christ.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Wives and Husbands</content>
+    </fragment>
+    <verse num="22">
+      <content>Wives, submit to your husbands, as to the Lord.</content>
+    </verse>
+    <verse num="23">
+      <content>For the husband is the head of the wife, just as Christ is the head and Savior of the church, which is his body.</content>
+    </verse>
+    <verse num="24">
+      <content>Just as the church submits to Christ, so wives should submit to their husbands in everything.</content>
+    </verse>
+    <verse num="25">
+      <content>Husbands, love your wives, just as Christ loved the church and gave himself up for her</content>
+    </verse>
+    <verse num="26">
+      <content>to sanctify her by cleansing her with the washing of water by the word,</content>
+    </verse>
+    <verse num="27">
+      <content>so that he might present her to himself as a glorious church, without spot or wrinkle or any such thing, but holy and unblemished.</content>
+    </verse>
+    <verse num="28">
+      <content>In the same way husbands ought to love their wives as their own bodies. He who loves his wife loves himself.</content>
+    </verse>
+    <verse num="29">
+      <content>For no one has ever hated his own flesh, but he nourishes and cares for it, just as the Lord does for the church,</content>
+    </verse>
+    <verse num="30">
+      <content>because we are members of his body, of his flesh and of his bones.</content>
+    </verse>
+    <verse num="31">
+      <content>“For this reason a man will leave his father and mother and be joined to his wife, and the two will become one flesh.”</content>
+    </verse>
+    <verse num="32">
+      <content>This is a profound mystery, but I am talking about Christ and the church.</content>
+    </verse>
+    <verse num="33">
+      <content>Nevertheless, each man among you must love his own wife as he loves himself, and the wife must respect her husband.</content>
+    </verse>
+  </chapter>
+  <chapter num="6">
+    <fragment kind="HEADING">
+      <content>Children and Parents</content>
+    </fragment>
+    <verse num="1">
+      <content>Children, obey your parents in the Lord, for this is right.</content>
+    </verse>
+    <verse num="2">
+      <content>“Honor yoʋr father and mother” (which is the first commandment with a promise),</content>
+    </verse>
+    <verse num="3">
+      <content>“that it may be well with yoʋ and yoʋ may live long on the earth.”</content>
+    </verse>
+    <verse num="4">
+      <content>Fathers, do not provoke your children to anger, but bring them up in the training and admonition of the Lord.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Slaves and Masters</content>
+    </fragment>
+    <verse num="5">
+      <content>Slaves, obey your earthly masters with fear and trembling, and with sincerity of heart, just as you would obey Christ.</content>
+    </verse>
+    <verse num="6">
+      <content>Do not try to please them only when they are watching you, but act like slaves of Christ, doing the will of God from your heart.</content>
+    </verse>
+    <verse num="7">
+      <content>Serve with a good attitude, as serving the Lord and not men,</content>
+    </verse>
+    <verse num="8">
+      <content>knowing that whatever good anyone does he will receive back from the Lord, whether he is a slave or free.</content>
+    </verse>
+    <verse num="9">
+      <content>Masters, do the same for your slaves and stop threatening them, because you know that your own Master is in heaven, and there is no partiality with him.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>The Full Armor of God</content>
+    </fragment>
+    <verse num="10">
+      <content>Finally, my brothers, be strong in the Lord and in the power of his might.</content>
+    </verse>
+    <verse num="11">
+      <content>Put on the full armor of God so that you may be able to stand against the schemes of the devil.</content>
+    </verse>
+    <verse num="12">
+      <content>For we wrestle not against flesh and blood, but against the rulers, against the authorities, against the cosmic powers of the darkness of this age, and against the spiritual forces of evil in the heavenly places.</content>
+    </verse>
+    <verse num="13">
+      <content>Therefore take up the full armor of God so that you may be able to resist the enemy on the day of evil, and after you have done everything, to stand firm.</content>
+    </verse>
+    <verse num="14">
+      <content>Stand firm therefore by fastening the belt of truth around your waist, putting on the breastplate of righteousness,</content>
+    </verse>
+    <verse num="15">
+      <content>and shodding your feet with the readiness of the gospel of peace.</content>
+    </verse>
+    <verse num="16">
+      <content>Above all, take up the shield of faith, with which you will be able to extinguish all the flaming arrows of the evil one.</content>
+    </verse>
+    <verse num="17">
+      <content>Take the helmet of salvation and the sword of the Spirit, which is the word of God.</content>
+    </verse>
+    <verse num="18">
+      <content>Pray in the Spirit at all times, with every prayer and supplication, and to this end, stay alert and be persistent in praying for all the saints.</content>
+    </verse>
+    <verse num="19">
+      <content>Pray also for me, so that when I open my mouth to speak, a message may be given to me to make known with boldness the mystery of the gospel,</content>
+    </verse>
+    <verse num="20">
+      <content>for which I am an ambassador in chains. Pray that I may declare it boldly, as I should.</content>
+    </verse>
+    <fragment kind="HEADING">
+      <content>Final Greetings</content>
+    </fragment>
+    <verse num="21">
+      <content>Tychicus, the beloved brother and faithful servant in the Lord, will give you a full report about how I am doing so that you may be informed.</content>
+    </verse>
+    <verse num="22">
+      <content>I have sent him to you for this very purpose, that you may know how we are doing and that he may encourage your hearts.</content>
+    </verse>
+    <verse num="23">
+      <content>Peace be with the brothers, and love with faith, from God the Father and the Lord Jesus Christ.</content>
+    </verse>
+    <verse num="24">
+      <content>Grace be with all who love our Lord Jesus Christ with an undying love. Amen.</content>
+    </verse>
+  </chapter>
+</book>

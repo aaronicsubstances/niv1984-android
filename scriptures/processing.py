@@ -95,7 +95,7 @@ def work_on_xml(bcode, version_tag, file_path, fout):
     output_notes = []
     for chapter in tree.getroot():
         assert chapter.tag == 'chapter', chapter.tag
-        cnum = int(chapter.attrib["num"])
+        cnum = chapter.attrib["num"]
         preferred_cnums.append(cnum)
         
         if "preferred_title" in chapter.attrib:
@@ -109,7 +109,7 @@ def work_on_xml(bcode, version_tag, file_path, fout):
         for verse in chapter:
             assert verse.tag in ['note', 'fragment', 'verse'], verse.tag
             if verse.tag == "verse":
-                vnum = int(verse.attrib["num"])
+                vnum = verse.attrib["num"]
                 output_verses[-1].append((verse.tag, f"<span class='verse-num'>[{vnum}]</span> " + coalesce_verse(version_tag, verse, cnum, vnum), vnum))
             elif verse.tag == 'fragment':
                 heading_present = False
@@ -196,8 +196,8 @@ def coalesce_verse(version_tag, v, cnum, vnum, wj=False, noteref=None):
         if e.attrib.keys():
             assert list(e.attrib.keys()) == ['kind'], e.attrib.keys()
             if e.attrib['kind'] == 'PICTOGRAM':
-                assert cnum == 119
-                assert vnum in [0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168], vnum
+                assert cnum == '119'
+                assert vnum in ['0', '8', '16', '24', '32', '40', '48', '56', '64', '72', '80', '88', '96', '104', '112', '120', '128', '136', '144', '152', '160', '168'], vnum
                 text.append(f"<span class='pictogram'>{e.text}</span>")
             elif e.attrib['kind'] == 'REF_VERSE_START':
                 text.append(f"[{e.text}]")
@@ -226,5 +226,5 @@ class FoutPhantom:
 if __name__ == '__main__':
     main("cpdv", "cpdv-xml")
     main("drb1899", "drb1899-xml")
-    main("bbe1965", "bbe1965-xml")
+    main("tcent2022", "tcent2022-xml")
     main("thomson1808", "thomson1808-xml")

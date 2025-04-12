@@ -4,15 +4,21 @@ $(function() {
     const bcode = parseBookCodeFromUrl();
     const firstBookTextEl = $(".booktext");
     let addQuery = getQueryVariable("add");
-    const additionalVersions = [];
-    if (addQuery.indexOf(",") === -1) {
-        additionalVersions.push(addQuery);
+    if (addQuery) {
+        addQuery = addQuery.split(",");
     }
-    else {
-        const excludedVersions = getQueryVariable("allExcl").split(",").map(function(v) {
+    let excludedVersions = getQueryVariable("allExcl").trim();
+    if (excludedVersions) {
+        excludedVersions = excludedVersions.split(",").map(function(v) {
             return v.toLowerCase();
         });
-        for (const candidate of addQuery.split(",")) {
+    }
+    let additionalVersions = [];
+    if (!excludedVersions.length || addQuery.length < 2) {
+        additionalVersions = addQuery
+    }
+    else {
+        for (const candidate of addQuery) {
             if (!excludedVersions.some(function(v) { return candidate.startsWith(v); })) {
                 additionalVersions.push(candidate);
             }
@@ -171,7 +177,7 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
 
 function insertComments(version, bcode, booktextEl, sortedBookmarks,
             initialComments, editEnabled) {
-    const verseRegex = new RegExp(`${version}-bookmark-` + '\\d+-(\\d+)-(\\d+)');
+    const verseRegex = new RegExp(`${version}-bookmark-` + '(\\d+)-\\d+-((?:\\d|-)+)');
     const footnotesRegex = new RegExp(`${version}-bookmark-` + '(\\d+)-n');
     for (bookmark of sortedBookmarks) {
         let m = verseRegex.exec(bookmark);

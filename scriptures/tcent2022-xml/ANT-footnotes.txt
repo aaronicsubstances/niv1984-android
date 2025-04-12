@@ -1,0 +1,436 @@
+
+processing 01-MAT.xml...
+3:11 Spirit ¦ Spirit and fire ANT CT TR
+5:27 said ¦ said to those of old ANT TR
+6:4 himself reward yoʋ openly ¦ reward yoʋ openly ANT
+6:18 will reward yoʋ ¦ will reward yoʋ openly ANT TR
+8:25 the disciples ¦ his disciples ANT TR
+9:1 into the ¦ into a ANT CT
+9:36 harassed ¦ faint ANT TR
+10:8 cleanse lepers, ¦ cleanse lepers, raise the dead, ANT TR
+10:10 staffs ¦ staff ANT CT ST
+10:12 there. ¦ there, saying, ‘May peace be upon this house!’ ANT
+11:21 ago ¦ ago, sitting ANT
+12:8 Lord of ¦ Lord even of ANT TR
+12:10 man ¦ man there ANT
+12:23 Son ¦ Christ, the Son ANT PCK
+12:27 do ¦ will ANT
+12:40 Jonah ¦ Jonah the prophet ANT
+12:47 to speak to yoʋ.” ¦ to see yoʋ.” ANT
+13:2 the boat ¦ a boat ANT CT PCK
+13:13 because ‘they see but do not perceive, and they hear but do not listen or understand.’ ¦ so that ‘they may see but not perceive, and hear but not listen or understand, lest they should turn back.’ ANT
+13:14 In them is fulfilled the prophecy of Isaiah ¦ Then the prophecy of Isaiah will be fulfilled in them ANT
+13:19 snatches ¦ takes ANT
+13:20 receives ¦ accepts and receives ANT
+13:32 the other ¦ all the other ANT PCK
+13:34 did not speak ¦ spoke nothing ANT CT
+13:36 the house ¦ his house ANT
+14:22 the disciples ¦ his disciples ANT PCK TR
+15:31 saw ¦ saw the deaf hearing, ANT
+15:36 gave them to the crowd ¦ gave them to the crowds ANT CT
+16:3 cannot discern ¦ cannot recognize ANT
+23:5 They make ¦ For they make ANT CT
+23:8 instructor ¦ teacher ANT CT PCK
+24:49 to eat and drink ¦ eats and drinks ANT CT
+25:44 answer ¦ answer him ANT TR
+27:42 will believe ¦ might believe ANT
+27:55 were there ¦ were also there ANT PCK
+
+processing 02-MRK.xml...
+1:11 Son, in whom ¦ Son; in yoʋ ANT CT
+1:34 who he was ¦ that he was the Christ ANT BYZ PCK WH
+3:31 Jesus' brothers and mother ¦ Jesus' mother and brothers ANT CT 2.7%
+3:32 mother, yoʋr brothers, and yoʋr sisters ¦ mother and yoʋr brothers ANT ECM SBL TH TR WH 28.9%
+4:4 along ¦ on ANT
+4:9 said ¦ said to them ANT TR
+4:11 it has been given to know the mystery of the kingdom of God ¦ it has been given to know the mysteries of the kingdom of God ANT
+4:34 speak ¦ speak the word ANT
+4:36 little boats ¦ boats ANT CT
+4:37 it was nearly swamped ¦ it was already beginning to sink ANT
+5:1 Gadarenes ¦ Gergesenes ANT
+5:5 on the mountains and among the tombs ¦ among the tombs and on the mountains ANT CT PCK
+5:22 And behold, ¦ Then ANT CT
+5:28 said ¦ said to herself ANT
+6:32 the boat ¦ a boat ANT ECM NA SBL WH
+6:33 Jesus ¦ them ANT CT PCK
+6:41 his disciples ¦ the disciples ANT ECM† WH
+6:48 He saw the disciples straining as they rowed, for the wind was against them. About ¦ When he saw the disciples straining as they rowed, for the wind was against them, about ANT CT
+6:52 because ¦ but ANT CT
+7:15 are what defile him. ¦ are what defile him.” ANT
+7:16 If anyone has ears to hear, let him hear.” ¦ — ANT
+7:18 not understand ¦ not yet understand ANT
+7:28 yet ¦ — ANT CT
+7:30 the demon gone and her daughter lying in bed ¦ the child lying in bed and the demon gone ANT CT
+8:1 a very ¦ again a ANT CT
+8:9 men who had eaten. ¦ men. ANT CT
+8:21 How is it that you do not ¦ Do you not yet ANT ECM NA SBL WH
+9:7 cloud: ¦ cloud, saying, ANT TR
+9:16 with them about ¦ about among yourselves ANT SBL
+9:47 be thrown ¦ go away ANT
+10:2 some Pharisees came up to Jesus and tested him ¦ the Pharisees came up to Jesus and tested him ANT BYZ TR
+10:10 Jesus' disciples asked him again about the same ¦ the disciples asked him about this ANT CT
+10:21 Go ¦ If yoʋ wish to be perfect, go ANT
+10:30 mothers ¦ fathers, mothers ANT PCK
+10:46 the blind man Bartimaeus, son of Timaeus, ¦ Bartimaeus the son of Timaeus, a blind man, ANT
+10:49 asked for him to be called over. ¦ said, “Call him over.” ANT CT
+11:3 it.’ Then he will immediately send it here. ¦ it and will send it back here immediately.’ ANT ECM† NA SBL TH WH
+11:4 a colt ¦ the colt ANT BYZ PCK TR
+11:15 came ¦ came again ANT
+11:18 scribes and the chief priests ¦ scribes, the Pharisees, and the chief priests ANT
+11:26 But if you do not forgive, neither will your Father in heaven forgive your trespasses. ¦ But if you do not forgive, neither will your Father forgive your trespasses. ANT
+11:28 And who ¦ Or who ANT CT
+11:32 truly a ¦ a ANT
+12:7 the farmers ¦ when the farmers saw him coming, they ANT
+12:14 Is it ¦ Tell us then, is it ANT
+12:16 said to him ¦ said ANT
+12:23 In the resurrection, when they rise again, ¦ Therefore, in the resurrection, when they rise again, ANT TR
+12:27 the God of the living ¦ of the living ANT CT
+12:28 realized ¦ saw ANT ECM† NA SBL
+12:29 of all the commandments ¦ commandment of all ANT
+13:2 left ¦ left here ANT CT PCK
+13:9 synagogues ¦ their synagogues ANT
+13:21 Christ!’ or, ‘Behold ¦ Christ! Behold ANT CT PCK
+13:25 of heaven will be falling ¦ will be falling from heaven ANT CT
+14:14 the guest room ¦ my guest room ANT CT
+14:33 distressed. ¦ distressed, ANT
+14:34 He said ¦ and to say ANT
+14:35 the ground ¦ his face on the ground ANT
+14:37 Could yoʋ ¦ Could you ANT
+14:40 heavy ¦ very heavy ANT CT PCK
+14:43 Judas arrived, who was ¦ Judas Iscariot arrived, ANT
+14:45 said to him, “Rabbi! ¦ said, “Greetings, ANT
+14:62 with the clouds ¦ on the clouds ANT
+14:64 heard ¦ certainly heard ANT
+14:65 Prophesy!” And the officers kept striking him with the palms of their hands ¦ Prophesy to us! Who is it that struck yoʋ?” And the officers struck him with the palms of their hands ANT
+15:3 things. ¦ things, but he made no answer. ANT SCR
+
+processing 03-LUK.xml...
+1:34 be ¦ happen to me ANT
+2:21 his ¦ the child's ANT TR
+3:14 threats or false accusations ¦ false accusations or threats ANT
+3:24 Matthat, the son of Levi, the son of Melchi, the son of Janna ¦ Matthan, the son of Levi, the son of Melchi, the son of Joanna ANT PCK
+3:25 Esli ¦ Eslim ANT
+3:26 Semei, the son of Joseph, the son of Judah ¦ Semeu, the son of Josech, the son of Joda ANT CT
+3:27 Joanan ¦ Joannan ANT PCK
+3:30 Jonan ¦ Jona ANT
+3:33 Ram, ¦ Ram, the son of Joram, ANT BYZ HF PCK
+4:4 alone, but by every word of God. ¦ alone, but by every word that comes from the mouth of God. ANT
+4:8 It is ¦ For it is ANT TR
+6:10 restored, as sound as the other. ¦ restored like the other. ANT
+6:26 others speak ¦ everyone speaks ANT BYZ CT PCK TR
+7:24 messengers ¦ disciples ANT
+7:45 I came ¦ she came ANT
+8:2 evil spirits ¦ diseases, afflictions, evil spirits, ANT
+8:3 Jesus and his disciples ¦ Jesus ANT PCK TR
+8:26 they ¦ he ANT
+9:1 the twelve ¦ his twelve disciples ANT TR
+9:22 rise again ¦ be raised up ANT BYZ CT HF PCK TR
+9:23 cross ¦ cross daily ANT CT TR
+9:38 yoʋ to ¦ yoʋ, ANT BYZ PCK TR
+9:48 will be ¦ is ANT CT
+9:50 stop him, for whoever is not against us is for us ¦ stop him, for he is not against you. For whoever is not against you is for you ANT
+9:56 For the Son of Man did not come to destroy people's lives but to save them.” ¦ The Son of Man did not come to destroy people's lives but to save them.” ANT
+10:11 clings to us ¦ clings to our feet ANT CT
+11:6 friend ¦ friend of mine ANT CT TR
+11:13 the Holy Spirit ¦ a good spirit ANT
+11:19 whom do ¦ whom will ANT
+11:26 go and ¦ go in and ANT CT TR
+11:29 evil ¦ an evil generation ANT CT
+11:30 be to ¦ be a sign to ANT
+11:37 speaking ¦ saying these things ANT
+12:15 covetousness ¦ all covetousness ANT CT
+12:23 Life is more than food, and the body is more than clothing. ¦ Is not life more than food and the body more than clothing? ANT
+12:28 grass in ¦ grass of ANT
+12:29 eat or ¦ eat and ANT CT
+12:49 fire to ¦ fire on ANT CT
+12:53 Father will be divided ¦ They will be divided, father ANT CT
+12:56 earth and the sky ¦ sky and the earth ANT PCK SCR
+12:58 throw ¦ will throw ANT CT
+13:15 Hypocrites ¦ Hypocrite ANT TR
+14:24 banquet.’ For many are called, but few are chosen. ¦ banquet.’ ANT BYZ CT HF PCK TR
+14:28 you who wants to build a tower ¦ you, when he wants to build a tower, ANT CT TR
+17:1 the disciples ¦ his disciples ANT CT
+17:2 heavy millstone  ¦ millstone ANT CT
+17:4 back ¦ back to yoʋ ANT CT TR
+17:23 here he is!’ or, ‘Behold, there ¦ here he is! Behold, there ANT
+17:30 So will it be ¦ It will be the same ANT NA SBL WH
+#17:35 left.” ¦ left. 36 Two men will be in the field; the one will be taken and the other will be left.” ANT SCR
+>Two women will be grinding grain together; one will be taken and the other will be left.”¦Two women will be grinding grain together; one will be taken and the other will be left.</content></verse><verse num="36"><content>Two men will be in the field; the one will be taken and the other will be left.”
+18:1 need to pray ¦ need for them to pray ANT CT
+19:21 sow. ¦ sow, and yoʋ gather where yoʋ scattered no seed. ANT
+19:22 sow? ¦ sow, and gathering where I scattered no seed? ANT
+19:32 it just ¦ the colt standing there, just ANT
+20:5 Why did ¦ Why then did ANT TR
+20:11 send another ¦ send them another ANT
+20:19 had spoken this parable against them, but they were afraid ¦ was speaking these parables against them, but they were afraid of the people ANT
+20:27 deny that there is a ¦ say there is no ANT TH WH
+21:23 For there ¦ For at that time there ANT
+21:38 in the temple courts ¦ on the mount ANT
+22:4 priests ¦ priests, scribes, ANT
+22:17 a cup ¦ the cup ANT
+22:30 table. And you will ¦ table in my kingdom. And you will ANT BYZ HF NA SBL PCK
+22:34 will certainly ¦ will ANT CT
+22:47 kiss him, ¦ kiss him (for he had given them this sign: “Whomever I kiss, he is the one”), ANT PCK
+22:57 denied him ¦ denied it ANT CT
+23:10 chief priests and the scribes ¦ scribes and the chief priests ANT
+23:12 Pilate and Herod ¦ Herod and Pilate ANT CT
+23:22 no grounds for ¦ nothing that deserves ANT
+23:25 released ¦ released for them Barabbas, ANT
+23:44 hour. ¦ hour, ANT
+23:45 The sun was darkened, and the ¦ because the sun's light failed. The ANT
+
+processing 04-JHN.xml...
+3:23 Salem ¦ Salim ANT BYZ CT TR
+3:28 can testify ¦ can testify to me ANT CT PCK TR
+6:15 withdrew to ¦ withdrew again to ANT CT PCK TR
+6:45 therefore who ¦ who ANT CT
+7:53 And ¦ [[And ANT
+8:2 people came ¦ people came to him ANT BYZ HF
+8:3 brought him ¦ brought ANT BYZ NA WH
+8:4 Jesus, testing him, ¦ Jesus, ANT BYZ HF NA PCK TR
+8:5 the law, Moses commanded us that such women should be stoned ¦ our law, Moses commanded to stone such women ANT
+8:6 something to accuse him of.) But Jesus stooped down and wrote with his finger on the ground, taking no notice. ¦ an accusation against him.) But Jesus stooped down and wrote with his finger on the ground. ANT BYZ HF PCK
+8:7 throw the first ¦ be the first to throw a ANT BYZ HF NA PCK TR WH 89.3%
+8:9 When they heard this, they were convicted by their own consciences and began to go away one by one, starting with the older men. So Jesus was left alone ¦ When they heard this, they began to go away one by one, starting with the older men. So Jesus was left ANT BYZ HF NA WH
+8:10 and saw no one but the woman. So he said to her, “Where are yoʋr accusers ¦ and said to her, “Woman, where are they ANT NA WH
+8:11 pass judgment on yoʋ; go and sin no more.” ¦ condemn yoʋ; go, and from now on sin no more.”]] ANT
+8:54 say, ‘He is our God.’ ¦ say that he is your God. ANT TH TR WH
+10:8 before ¦ before me ANT CT PCK TR
+14:3 So when I go, it is to prepare a place for you. ¦ And if I go and prepare a place for you, ANT BYZ CT HF PCK TR
+14:11 not, believe me ¦ not, believe ANT BYZ HF PCK TR
+15:7 you will ask ¦ ask ANT CT
+19:17 a location ¦ what is ANT CT PCK TR
+19:28 Jesus saw ¦ Jesus realized ANT CT PCK TR
+19:35 so that you ¦ so that you also ANT CT
+
+processing 05-ACT.xml...
+1:23 Barsabas ¦ Barsabbas ANT CT
+3:22 our God ¦ your God ANT ECM NA TH TR
+4:12 name given ¦ name under heaven given ANT BYZ CT HF PCK TR
+4:17 we will ¦ let us ANT BYZ CT HF PCK TR
+4:24 are God, who made the heavens, the earth, the sea, and all that is in them. ¦ who made the heavens, the earth, the sea, and all that is in them, ANT ECM† NA SBL TH WH
+4:25 It is ¦ it is ANT ECM† NA SBL TH WH
+4:32 their belongings ¦ his belongings ANT BYZ CT PCK TR
+5:36 responded to the call to join ¦ joined themselves to ANT CT PCK TR
+5:41 the name of Jesus ¦ his name ANT BYZ TR
+7:37 The Lord our God will raise up for you a prophet like me from among your brothers. ¦ The Lord your God will raise up for you a prophet like me from among your brothers; you must listen to him. ANT TR
+7:38 a living word ¦ living oracles ANT BYZ CT HF PCK TR
+8:10 they paid ¦ they all paid ANT CT TR
+8:16 Christ ¦ the Lord ANT CT TR
+8:24 the Lord ¦ God ANT
+#8:36 baptized?” ¦ baptized?” 37 Philip said, “If yoʋ believe with all yoʋr heart, yoʋ may be baptized.” He answered, “I believe that Jesus Christ is the Son of God.” ANT TR
+>As they were going along the road, they came to some water, and the eunuch said, “Behold, here is water! What prevents me from being baptized?”¦As they were going along the road, they came to some water, and the eunuch said, “Behold, here is water! What prevents me from being baptized?”</content></verse><verse num="37"><content>Philip said, “If yoʋ believe with all yoʋr heart, yoʋ may be baptized.” He answered, “I believe that Jesus Christ is the Son of God.”
+9:17 the Lord ¦ the Lord Jesus ANT CT TR
+9:20 the Christ ¦ Jesus ANT CT PCK
+9:28 into Jerusalem  ¦ in and out of Jerusalem ANT BYZ CT PCK TR
+9:38 sent for ¦ sent two men to ANT CT TR
+10:19 some men ¦ three men ANT ECM NA TH TR
+10:23 Peter went ¦ Peter rose and went ANT CT
+12:23 give glory ¦ give the glory ANT CT TR
+12:25 to Jerusalem ¦ from Jerusalem ANT TR
+13:17 this people ¦ this people Israel ANT CT TR
+13:24 to Israel ¦ to all the people of Israel ANT CT TR
+13:41 in your days ¦ in your days, a work ANT CT TR
+13:48 glorifying ¦ receiving ANT
+14:17 our hearts ¦ your hearts ANT CT
+15:4 through them. ¦ through them, and how he had opened a door of faith to the Gentiles. ANT
+#15:33–34 brothers. ¦ brothers. 34 But it seemed good to Silas to remain there. ANT ECM TR
+>After spending some time there, they were sent off to the apostles in peace by the brothers.¦After spending some time there, they were sent off to the apostles in peace by the brothers.</content></verse><verse num="34"><content>But it seemed good to Silas to remain there.
+15:35 But Paul and Barnabas stayed ¦ And Paul and Barnabas stayed ANT
+16:17 Paul and us ¦ Paul and Silas ANT BYZ PCK
+17:18 philosophers also conversed with him. Some said, “What is this babbler trying to say?” But others said, “He seems to be a proclaimer of foreign deities.” (They said this because he was preaching ¦ philosophers conversed with him. Some said, “What is this babbler trying to say?” But others said, “He seems to be a proclaimer of foreign deities.” (They said this because he was preaching to them ANT TR
+19:4 Christ Jesus ¦ Jesus Christ ANT
+20:13 to the ship ¦ on ahead to the ship ANT ECM† NA SBL TR WH
+20:21 Jesus ¦ Jesus Christ ANT ECM TR
+21:4 some ¦ the ANT CT ST
+21:8 Paul and his companions ¦ we ANT
+21:37 speak to ¦ say something to ANT CT TR
+22:12 dwelling there ¦ dwelling in Damascus ANT HF PCK
+22:20 as I watched ¦ and watching ANT BYZ CT PCK TR
+22:25 as one of the soldiers was stretching ¦ when they had stretched ANT BYZ CT PCK SCR
+23:7 on the part of the Pharisees ¦ between the Pharisees and the Sadducees ANT BYZ HF PCK TR
+23:20 the members of the Sanhedrin would be inquiring ¦ the members of the Sanhedrin would be inquired of ANT
+#24:6–8 him. 8 By 55.3% ¦ him and wanted to judge him according to our own law. 7 But Lysias the commander came and took him out of our hands with much violence,
+>He even tried to desecrate the temple, so we seized him. ¦ He even tried to desecrate the temple, so we seized him and wanted to judge him according to our own law.</content></verse><verse num="7"><content>But Lysias the commander came and took him out of our hands with much violence,
+24:8 By examining him yoʋrself yoʋ ¦ ordering his accusers to come before yoʋ. By examining him yoʋrself yoʋ ANT
+24:11 worship in Jerusalem ¦ Jerusalem to worship ANT CT
+24:13 proof against me ¦ proof ANT CT PCK SCR
+24:14 written throughout the Law and ¦ in accordance with the law and that is written ANT CT
+24:16 strive the way I do, always having ¦ myself strive to always have ANT CT TR
+25:14 the king was staying there for several days, Festus presented Paul's case to him ¦ they were staying there for several days, Festus presented Paul's case to the king ANT BYZ CT PCK TR
+26:18 so that they may turn away ¦ so that they may turn ANT BYZ CT PCK ST
+27:39 if possible ¦ if they could ANT CT TR
+28:28 the salvation ¦ this salvation ANT CT
+
+processing 06-ROM.xml...
+15:9 Gentiles; ¦ Gentiles, O Lord; ANT PCK
+15:14 admonish others ¦ admonish one another ANT CT TR
+16:3 Prisca ¦ Priscilla ANT BYZ TR
+
+processing 07-1CO.xml...
+5:7 Purge ¦ Therefore purge ANT BYZ PCK TR
+6:16 Do you ¦ Or do you ANT BYZ CT PCK TR
+11:15 given ¦ given to her ANT NA TR WH
+11:27 a manner unworthy of the Lord ¦ an unworthy manner ANT CT PCK TR
+12:25 divisions ¦ division ANT CT PCK TR
+15:49 let us ¦ we will ANT NA SBL TR
+
+processing 08-2CO.xml...
+1:11 your behalf ¦ our behalf ANT CT TR
+3:14 read. Only in Christ is this veil ¦ read, because only in Christ is it ANT CT HF PCK
+8:1 Now we ¦ Now I ANT
+11:31 the Lord ¦ our Lord ANT TR
+
+processing 09-GAL.xml...
+2:15 who are Jews by nature and not Gentile sinners ¦ are Jews by nature and not Gentile sinners, ANT
+2:16 know ¦ yet we know ANT CT
+
+processing 10-EPH.xml...
+
+processing 11-PHP.xml...
+1:6 Christ Jesus ¦ Jesus Christ ANT PCK TR WH
+1:23 which is ¦ for that is ANT CT
+3:13 it. ¦ it yet. ANT BYZ PCK WH
+
+processing 12-COL.xml...
+1:12 the Father ¦ our God and Father ANT
+2:20 If you ¦ If then you ANT PCK TR
+
+processing 13-1TH.xml...
+2:19 Jesus ¦ Jesus Christ ANT TR
+5:8 we are of ¦ you are of ANT
+
+processing 14-2TH.xml...
+1:8 Jesus ¦ Jesus Christ ANT BYZ HF PCK TR
+1:12 Jesus will be ¦ Jesus Christ will be ANT BYZ PCK TR
+2:2 any spirit or message or by any ¦ the spirit or by any message or ANT
+
+processing 15-1TI.xml...
+4:8 promise ¦ promises ANT PCK
+5:4 acceptable ¦ good and acceptable ANT TR
+
+processing 16-2TI.xml...
+1:1 Jesus Christ ¦ Christ Jesus ANT CT HF
+
+processing 17-TIT.xml...
+
+processing 18-PHM.xml...
+1:23 Jesus, ¦ Jesus greets yoʋ, ANT CT
+1:24 and Mark, Aristarchus, Demas, and Luke, my fellow workers, greet yoʋ. ¦ and so do Mark, Aristarchus, Demas, and Luke, my fellow workers. ANT CT
+
+processing 19-HEB.xml...
+3:16 some did rebel when they heard God's voice, but not all whom Moses led out of Egypt. ¦ who were those who heard God's voice and yet rebelled? Was it not all whom Moses led out of Egypt? ANT BYZ CT PCK
+3:17 Now ¦ And ANT
+9:1 covenant ¦ tabernacle ANT ST
+10:1 the same sacrifices offered year after year can never ¦ it can never, by the same sacrifices offered year after year, ANT NA PCK SBL TR
+10:34 that you have for yourselves ¦ in yourselves that you have ANT TR
+12:7 For the sake of discipline you must endure. ¦ If you are enduring discipline, ANT BYZ PCK TR
+12:28 It is by our thankfulness that we ¦ And by our thankfulness let us ANT NA SBL TR WH
+
+processing 20-JAS.xml...
+2:11 Yoʋ shall not commit adultery,” also said, “Yoʋ shall ¦ Do not commit adultery,” also said, “Do ANT CT PCK TR
+4:12 lawgiver ¦ lawgiver and judge ANT CT PCK
+4:13 let us ¦ we will ANT CT SCR
+4:15 let us ¦ we will ANT CT SCR
+5:11 Job. Now consider ¦ Job, and you have seen ANT BYZ CT HF PCK TR
+5:11 how he ¦ how the Lord ANT CT TR 11.3%
+
+processing 21-1PE.xml...
+2:2 may grow ¦ may grow into salvation ANT CT PCK
+3:18 bring you ¦ bring us ANT PCK TR
+4:3 we have spent enough of our ¦ you have spent enough of your ANT BYZ HF PCK 41.5%
+4:14 glory ¦ glory and of power ANT 15.7%
+5:10 may the God of all grace, who called you to his eternal glory in Christ Jesus, himself perfect you; he will establish, strengthen, and settle ¦ the God of all grace, who called you to his eternal glory in Christ Jesus, will himself perfect, establish, strengthen, and settle ANT ECM NA SBL TH
+
+processing 22-2PE.xml...
+
+processing 23-1JN.xml...
+1:5 message ¦ promise ANT ST
+2:13 am writing to you, children ¦ have written to you, children ANT CT
+4:2 the Spirit of God is known ¦ you know the Spirit of God ANT CT TR
+4:16 God abides ¦ God ANT BYZ PCK TR
+5:7 that testify: ¦ <who testify in heaven: the Father, the Word, and the Holy Spirit; and these three are one. And there are three that testify on earth>: ANT TR 0.6%
+
+processing 24-2JN.xml...
+1:3 with us ¦ with you ANT PCK SCR
+
+processing 25-3JN.xml...
+
+processing 26-JUD.xml...
+1:4 God, who is our only Master, and also the Lord ¦ our only Master and Lord, ANT CT 12.9%
+
+processing 27-REV.xml...
+1:9 in Christ Jesus ¦ in Jesus Christ ANT 0.4%
+1:18 Amen. I ¦ I ANT CT 18.1%
+2:13 faith in ¦ faith, even in ANT CT TR 8.2%
+2:20 have this ¦ have a few things ANT TR
+3:2 yoʋ were about to throw away ¦ was about to die ANT BYZ CT
+3:5 clothed ¦ clothed like them ANT CT PCK
+3:7 else can open or shut ¦ can shut, and shuts doors that no one can open ANT BYZ CT TR
+3:16 not hot or cold ¦ neither hot nor cold ANT CT
+4:7 the face of ¦ a face like that of ANT CT 1.6%
+4:11 our Lord and God, the Holy One, ¦ our Lord and God, ANT CT
+5:3 heaven above ¦ heaven ANT BYZ CT PCK TR
+5:5 conquered; he is the one who can ¦ conquered so as to ANT BYZ CT PCK TR 53.5%
+5:13 ever! Amen. ¦ ever! ANT CT TR 19.6%
+5:14 I heard the four living creatures ¦ the four living creatures were ANT BYZ CT TR
+6:1 Come and see.” ¦ Come.” ANT BYZ CT PCK
+6:2 And behold ¦ Then I looked, and behold ANT BYZ CT PCK
+6:5 Come and see.” And ¦ Come.” Then I looked, and ANT BYZ CT PCK
+6:6 a voice ¦ something like a voice ANT CT
+6:7 the fourth living creature say, “Come and see.” ¦ the voice of the fourth living creature say, “Come.” ANT CT PCK TR
+6:8 And behold ¦ Then I looked, and behold ANT BYZ CT PCK
+6:11 while ¦ little while ANT CT TR
+7:9 with palm branches ¦ and palm branches were ANT CT TR
+7:17 leads ¦ will lead ANT BYZ CT TR
+8:8 burning mountain ¦ mountain, burning with fire, ANT CT TR
+9:7 golden crowns ¦ crowns resembling gold ANT CT TR
+9:16 ten thousand times ¦ two ten thousands times ANT TR
+10:1 a mighty ¦ another mighty ANT CT TR
+11:10 give each ¦ send each ANT BYZ CT PCK TR
+11:16 sit on their thrones before the throne of God, ¦ are before the throne of God and sit on their thrones, ANT BYZ HF TH
+11:17 who was, ¦ was and who is to come, ANT PCK TR
+11:18 The nations were angry, but yoʋr wrath has come, and the time has come for judging the dead, and for rewarding yoʋr servants the prophets, along with the saints and those who fear yoʋr name, both small and great, and for destroying those who destroy the earth.” ¦ The nations were angry, but yoʋr wrath has come, and the time has come for judging the nations, and for rewarding yoʋr servants the prophets, along with the saints who fear yoʋr name, both small and great, and for destroying those who have destroyed the earth.” ANT
+11:19 thunder, ¦ thunder, an earthquake, ANT BYZ CT TR
+12:9 great dragon was thrown down, the ¦ dragon was thrown down, the great ANT
+13:10 has captivity as his lot, away ¦ leads others away into captivity, into captivity ANT
+13:14 my own people ¦ those ANT BYZ CT TR 50.2%
+14:1 was a multitude numbering ¦ were ANT BYZ CT PCK TR
+14:4 redeemed by Jesus ¦ redeemed ANT BYZ CT TR 35%
+14:6 an angel ¦ another angel ANT BYZ CT PCK TR 31.9%
+14:8 Fallen is Babylon the great! She ¦ Fallen, fallen is Babylon the great, she who ANT
+14:9 a mark ¦ the mark ANT
+14:18 its grapes ¦ the grapes of the earth ANT BYZ HF
+15:2 harps from ¦ the harps of ANT BYZ HF
+15:4 fear yoʋ ¦ fear ANT CT
+16:18 flashes of lightning, peals of thunder, rumblings, and ¦ flashes of lightning, rumblings, and peals of thunder, and there was ANT CT
+17:4 her fornication ¦ the fornication of the earth ANT BYZ HF
+17:6 saints, ¦ saints and ANT BYZ CT PCK TR
+17:8 whose names have ¦ everyone whose name has ANT BYZ CT HF
+17:8 that the beast ¦ the beast, because he ANT BYZ CT PCK TR
+18:2 Fallen is ¦ Fallen, fallen is ANT BYZ CT PCK TR
+18:3 fallen because of ¦ drunk ANT
+18:9 weep and wail ¦ weep for her and wail ANT TR
+18:13 cinnamon, ¦ cinnamon, amomum, ANT CT
+18:13 sheep, cattle ¦ cattle, sheep ANT BYZ CT PCK TR
+18:14 “The ripe fruit that was the desire of yoʋr soul has gone from yoʋ, and all yoʋr delicacies and splendors are lost to yoʋ; yoʋ will never find them again!” ¦ “The ripe fruit that was the desire of yoʋr soul is lost to yoʋ, and all yoʋr delicacies and splendors have gone from yoʋ; yoʋ will never find them again!” ANT
+19:1 power, and glory belong to ¦ glory, and power belong to ANT CT
+19:3 the voice ¦ they ANT CT TR
+19:6 our God ¦ God ANT SBL TR
+19:12 a flame ¦ like a flame ANT NA TR
+20:2 the deceiver of the whole world, ¦ the deceiver of the world, ANT
+20:4 the thousand ¦ a thousand ANT BYZ CT PCK SCR
+20:14 death, the lake of fire. ¦ death. ANT TR
+21:5 words are true and trustworthy ¦ words are trustworthy and true ANT CT
+21:6 I am ¦ It is done! I am ANT
+21:7 He who overcomes will inherit these things ¦ These things will belong to him who overcomes ANT
+21:8 the faithless, the sinful, ¦ the faithless, ANT CT TR
+21:9 wife, the bride of the Lamb ¦ bride, the wife of the Lamb ANT CT
+21:10 great city, the holy ¦ holy city ANT BYZ CT HF
+21:16 equal, each measuring twelve thousand stadia. ¦ equal. ANT BYZ CT TR
+21:24 the glory and honor of the nations into the city to present to God ¦ their glory and honor into the city ANT BYZ PCK TR
+21:27 nothing that ¦ no one who ANT
+22:1 pure river ¦ river ANT BYZ CT HF
+22:5 There will be no night there ¦ Night will be no more ANT CT
+22:18 may God ¦ God will ANT BYZ CT TR
+22:19 may God ¦ God will ANT BYZ CT TR

@@ -101,12 +101,12 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     var sortedBookmarks = identifyAndSortInternalBookmarks(encodedBookmarks);
     if ([DEFAULT_VERSION, "thomson1808", "tcent2022"].includes(version)) {
         $.get('/comments', { bcode, bversion: version }, function(data) {
-            var initialComments = new Map();
+            var commentsCache = new Map();
             for (const item of data.items) {
-                initialComments.set(item[0], item[1]);
+                commentsCache.set(item[0], item[1]);
             }
             insertComments(version, bcode, booktextEl, sortedBookmarks,
-                initialComments, data.editEnabled);
+                commentsCache, data.editEnabled);
         }).fail(function(jqXHR, textStatus, errorThrown) {
             console.log("Failed to load comments: errorThrown: ", errorThrown,
                 "; textStatus: ", textStatus);
@@ -184,7 +184,7 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
 }
 
 function insertComments(version, bcode, booktextEl, sortedBookmarks,
-            initialComments, editEnabled) {
+            commentsCache, editEnabled) {
     const verseRegex = new RegExp(`${version}-bookmark-` + '(\\d+)-\\d+-((?:\\d|-)+)');
     const footnotesRegex = new RegExp(`${version}-bookmark-` + '(\\d+)-n');
     for (bookmark of sortedBookmarks) {
@@ -200,14 +200,10 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
             vnum = m[2];
         }
         const commentId = `${cnum}:${vnum}`; // use of hyphen caused it to be interpreted as date in CSV export
-        if (!initialComments.has(commentId)) {
-            // add demo data
-            //initialComments.set(commentId, "n/a");
-        }
 
-        const readonlyEl = $(`<pre class="comment noEdit"></pre>`);
-        if (initialComments.get(commentId)) {
-            readonlyEl.text(initialComments.get(commentId));
+        const readonlyEl = $(`<div class="comment noEdit"></div>`);
+        if (commentsCache.get(commentId)) {
+            setRichText(readonlyEl, commentsCache.get(commentId));
         }
         else {
             readonlyEl.addClass("hidden");
@@ -229,7 +225,7 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
             $("button.cancel", newEl).removeClass("hidden");
             $("button.update", newEl).removeClass("hidden");
 
-            $("textarea", newEl).val(readonlyEl.text());
+            $("textarea", newEl).val(commentsCache.get(commentId));
             $("textarea", newEl).removeClass("hidden");
             $("textarea", newEl).focus();
         });
@@ -237,9 +233,9 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
             $("button.add", newEl).removeClass("hidden");
             $("button.cancel", newEl).addClass("hidden");
             $("button.update", newEl).addClass("hidden");
-            $("textarea", newEl).val(readonlyEl.text());
+
             $("textarea", newEl).addClass("hidden");
-            if (readonlyEl.text()) {
+            if (commentsCache.get(commentId)) {
                 readonlyEl.removeClass("hidden");
             }
         });
@@ -262,12 +258,13 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
                     $("button.cancel").removeAttr('disabled');
                 },
                 success: function() {
+                    commentsCache.set(commentId, newComment);
                     $("button.add", newEl).removeClass("hidden");
                     $("button.cancel", newEl).addClass("hidden");
                     $("button.update", newEl).addClass("hidden");
                     $("textarea", newEl).addClass("hidden");
-                    readonlyEl.text(newComment);
-                    if (newComment) {
+                    setRichText(readonlyEl, commentsCache.get(commentId));
+                    if (commentsCache.get(commentId)) {
                         readonlyEl.removeClass("hidden");
                     }
                 },
@@ -278,6 +275,25 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
             });
         });
     }
+}
+
+function setRichText(el, text) {
+    el.text(''); // clear
+    const newlineRegex = new RegExp("\r\n|\r|\n", "g");
+    let m;
+    let lastPos = 0;
+    while ((m = newlineRegex.exec(text)) !== null) {
+        const part = text.substring(lastPos, m.index);
+        const span = $("<span></span");
+        span.text(part); // escapes text.
+        span.appendTo(el);
+        $("<br>").appendTo(el);
+        lastPos = m.index + m[0].length;
+    }
+    const lastPart = text.substring(lastPos);
+    const lastSpan = $("<span></span");
+    lastSpan.text(lastPart);
+    lastSpan.appendTo(el);
 }
 
 function identifyAndSortInternalBookmarks(list) {

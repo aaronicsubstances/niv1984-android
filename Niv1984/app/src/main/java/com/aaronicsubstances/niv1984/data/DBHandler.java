@@ -93,19 +93,23 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void updateComment(String version, String bcode, String key, String value) {
         // skip update if value exists already.
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor c = db.query(TABLE_NAME, new String[]{VALUE_KEY_COL, VALUE_COL},
-                String.format("%s = ? AND %s = ? AND %s IS NULL AND %s = ? AND %s = ?",
-                        BOOK_VERSION_COL, BOOK_CODE_COL, DATE_DELETED_COL,
-                        VALUE_KEY_COL, VALUE_COL),
-                new String[]{ version, bcode, key, value }, null, null, null);
-        if (c.moveToNext()) {
+        SQLiteDatabase db;
+        if (value != null && !value.isEmpty()) {
+            db = this.getReadableDatabase();
+            Cursor c = db.query(TABLE_NAME, new String[]{VALUE_KEY_COL, VALUE_COL},
+                    String.format("%s = ? AND %s = ? AND %s IS NULL AND %s = ? AND %s = ?",
+                            BOOK_VERSION_COL, BOOK_CODE_COL, DATE_DELETED_COL,
+                            VALUE_KEY_COL, VALUE_COL),
+                    new String[]{version, bcode, key, value}, null, null, null);
+            boolean exists = c.moveToNext();
             c.close();
             db.close();
-            return;
+
+            if (exists) {
+                return;
+            }
         }
 
-        db.close();
         db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();

@@ -101,7 +101,7 @@ public class BookTextViewUtils {
             String version = req.getRequestHeaders().get("X-version");
             String bcode = req.getRequestHeaders().get("X-bcode");
             String id = req.getRequestHeaders().get("X-id");
-            String val = req.getRequestHeaders().get("X-val");
+            String val = req.getUrl().getQueryParameters("val").get(0);
             dbHelper.updateComment(version, bcode, id, val);
             return new WebResourceResponse("application/json", "utf8",
                     new ByteArrayInputStream("{}".getBytes(Utils.DEFAULT_CHARSET)));

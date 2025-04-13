@@ -197,7 +197,7 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
             //initialComments.set(commentId, "n/a");
         }
 
-        const readonlyEl = $(`<div class="comment noEdit"></div>`);
+        const readonlyEl = $(`<pre class="comment noEdit"></pre>`);
         if (initialComments.get(commentId)) {
             readonlyEl.text(initialComments.get(commentId));
         }
@@ -238,13 +238,12 @@ function insertComments(version, bcode, booktextEl, sortedBookmarks,
         $("button.update", newEl).click(function() {
             var newComment = $("textarea", newEl).val().trim();
             $.ajax({
-                url: "/comments/update",
+                url: "/comments/update?" + $.param({ val: newComment }),
                 method: "POST",
                 headers: {
                     "X-version": version,
                     "X-bcode": bcode,
-                    "X-id": commentId,
-                    "X-val": newComment
+                    "X-id": commentId
                 },
                 beforeSend: function() {
                     $("button.update").attr('disabled', 'disabled');

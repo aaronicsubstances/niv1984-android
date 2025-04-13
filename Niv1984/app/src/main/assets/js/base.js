@@ -26,7 +26,10 @@ $(function() {
     }
     if (!additionalVersions.length) {
         caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl[0], window,
-            fireOnPageLoadCompleted);
+            function() {
+                scrollToInitialBookmark(bcode, DEFAULT_VERSION);
+                fireOnPageLoadCompleted();
+            });
         return;
     }
     let doneCbCallCnt = 0;
@@ -40,7 +43,14 @@ $(function() {
                 flex: "1",
             });
             caterForScrolling(bcode, DEFAULT_VERSION, firstBookTextEl, firstBookTextEl[0],
-                fireOnPageLoadCompleted);
+                doneCb);
+        }
+        if (doneCbCallCnt > additionalVersions.length) {
+            for (const v of additionalVersions) {
+                scrollToInitialBookmark(bcode, v);
+            }
+            scrollToInitialBookmark(bcode, DEFAULT_VERSION);
+            fireOnPageLoadCompleted();
         }
     };
     for (const additionalVersion of additionalVersions) {
@@ -72,6 +82,19 @@ $(function() {
          });
      }
 });
+
+function scrollToInitialBookmark(bcode, version) {
+    var initialBookmark = fetchInternalBookmark(bcode, version)
+    if (initialBookmark) {
+        var elem = document.getElementById(initialBookmark)
+        if (elem) {
+            elem.scrollIntoView()
+        }
+        else {
+            console.log("element not found for", initialBookmark)
+        }
+    }
+}
 
 function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
     var encodedBookmarks = JSON.parse($("span.bookmarks", $(booktextEl)).text());
@@ -151,22 +174,7 @@ function caterForScrolling(bcode, version, booktextEl, scrollEl, doneCb) {
             setTimeout(check, 500);
             return;
         }
-
-        // navigate to initial bookmark or scroll to start of document
-        var initialBookmark = fetchInternalBookmark(bcode, version)
-        if (initialBookmark) {
-            var elem = document.getElementById(initialBookmark)
-            if (elem) {
-                elem.scrollIntoView()
-            }
-            else {
-                // do nothing
-            }
-        }
-        else {
-            scrollEl.scrollTo(0, 0);
-        }
-        lastBookmark = initialBookmark;
+        lastBookmark = fetchInternalBookmark(bcode, version);
         $(scrollEl).scroll(throttle(1000, throttleFxn));
         doneCb();
     };

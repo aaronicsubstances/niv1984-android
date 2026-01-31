@@ -1,3 +1,5 @@
+**NB: The Android app will no longer be supported on the Google Play Store, and hence this repository has been archived.**
+
 # NIV1984
 
 Repository for NIV1984 Android app on Google Play Store: https://play.google.com/store/apps/details?id=com.aaronicsubstances.niv1984&hl=en
